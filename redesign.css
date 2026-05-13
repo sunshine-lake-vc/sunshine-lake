@@ -28,6 +28,66 @@
   position: relative;
   z-index: 2;
 }
+
+/* Second zone darkens further toward the abyss */
+.rd-zone.rd-deep-zone {
+  background: linear-gradient(180deg, #0032A8 0%, #0B1275 38%, #050838 78%, #02041F 100%);
+}
+
+/* ═══ Hero badge — $1M First Check Seed Fund ═══ */
+.hero-badge {
+  position: absolute;
+  top: clamp(20px, 3vw, 48px);
+  right: clamp(20px, 3.2vw, 64px);
+  z-index: 11;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 14px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease;
+}
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F2D831;
+  box-shadow: 0 0 0 4px rgba(242, 216, 49, 0.22), 0 0 12px rgba(242, 216, 49, 0.6);
+  flex-shrink: 0;
+  animation: hero-badge-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hero-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(242, 216, 49, 0.22), 0 0 12px rgba(242, 216, 49, 0.6); }
+  50%      { box-shadow: 0 0 0 7px rgba(242, 216, 49, 0.10), 0 0 20px rgba(242, 216, 49, 0.85); }
+}
+.hero-badge-amount {
+  font-family: 'DomaineDisp', 'Times New Roman', serif;
+  font-size: clamp(20px, 1.8vw, 30px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hero-badge-label {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(9px, 0.65vw, 11px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+@media (max-width: 720px) {
+  .hero-badge { padding: 8px 14px 8px 12px; gap: 8px; }
+  .hero-badge-label { font-size: 8.5px; letter-spacing: 0.14em; }
+  .hero-badge-amount { font-size: 18px; }
+  .hero-badge-dot { width: 7px; height: 7px; }
+}
 .rd-zone *, .rd-zone *::before, .rd-zone *::after { box-sizing: border-box; }
 .rd-zone a { color: inherit; text-decoration: none; }
 
@@ -54,23 +114,23 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
-  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 14px;
 }
 .rd-tier-eyebrow::before {
   content: '';
-  width: 26px;
+  width: 28px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .rd-tier-title {
   font-family: 'DomaineDisp', 'Times New Roman', serif;
-  font-size: clamp(28px, 2.8vw, 44px);
+  font-size: clamp(36px, 3.6vw, 56px);
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -84,11 +144,11 @@
 }
 
 .rd-tier-desc {
-  max-width: 520px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 18px;
   line-height: 1.55;
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 /* ═══ Carousel base ═══ */
@@ -129,14 +189,14 @@
 /* ═══ Exit / Leader card ═══ */
 .rd-card {
   position: relative;
-  width: 360px;
-  height: 190px;
-  border-radius: 16px;
+  width: 400px;
+  height: 220px;
+  border-radius: 18px;
   overflow: hidden;
   flex-shrink: 0;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 32px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 18px 36px -12px rgba(0, 0, 0, 0.5);
 }
 .rd-card:hover {
   transform: translateY(-6px) scale(1.025);
@@ -226,12 +286,12 @@
   align-items: center;
   justify-content: center;
 }
-.rd-card.rd-ipo .rd-name { font-size: 38px; }
+.rd-card.rd-ipo .rd-name { font-size: 46px; }
 
 .rd-name {
   font-family: 'DomaineDisp', 'Times New Roman', serif;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 36px;
   letter-spacing: -0.025em;
   line-height: 1;
   color: #fff;
@@ -240,8 +300,8 @@
   transition: color 0.3s ease;
 }
 a.rd-name:hover { color: var(--rd-yellow); }
-.rd-name.rd-tight   { font-size: 25px; letter-spacing: -0.03em; }
-.rd-name.rd-tighter { font-size: 20px; letter-spacing: -0.035em; }
+.rd-name.rd-tight   { font-size: 30px; letter-spacing: -0.03em; }
+.rd-name.rd-tighter { font-size: 24px; letter-spacing: -0.035em; }
 
 .rd-arrow {
   color: rgba(255, 255, 255, 0.42);
@@ -265,11 +325,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   align-items: baseline;
 }
 .rd-sector, .rd-year {
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* Controls */
@@ -329,7 +389,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .rd-featured-company {
   font-family: 'DomaineDisp', serif;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 38px;
   letter-spacing: -0.025em;
   line-height: 1;
   color: #fff;
@@ -344,8 +404,8 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 .rd-featured-quote {
   font-family: 'DomaineDisp', serif;
-  font-size: 22px;
-  line-height: 1.42;
+  font-size: 26px;
+  line-height: 1.4;
   font-weight: 400;
   letter-spacing: -0.015em;
   color: #fff;
@@ -370,17 +430,17 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 .rd-featured-attr .rd-name-line {
   font-family: 'DomaineDisp', serif;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 400;
   letter-spacing: -0.01em;
   color: #fff;
 }
 .rd-featured-attr .rd-role-line {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.68);
 }
 
 /* ═══ Voices marquee ═══ */
@@ -420,13 +480,13 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .rd-voice {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
-  padding: 22px;
-  width: 420px;
+  border-radius: 18px;
+  padding: 26px;
+  width: 460px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
 }
 .rd-voice:hover {
@@ -436,7 +496,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 .rd-voice-quote {
   font-family: 'DomaineDisp', serif;
-  font-size: 16px;
+  font-size: 17.5px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: -0.005em;
@@ -471,14 +531,14 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 .rd-voice-author { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
 .rd-voice-author .rd-vname {
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 600;
   color: #fff;
   letter-spacing: -0.01em;
 }
 .rd-voice-author .rd-vrole {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.66);
   letter-spacing: 0.01em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -503,13 +563,73 @@ a.rd-name:hover { color: var(--rd-yellow); }
   white-space: nowrap;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER OVERRIDES — "Dive Beneath the Surface"
+   Removes the white card overlay, gives each photo an organic
+   blob shape (varying border-radius), shows a one-liner caption.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Kill the white card — let the photo grid + text breathe directly */
+.footer-photo-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Photo grid: slightly more breathing room between cells */
+.footer-photo-grid {
+  gap: clamp(14px, 1.5vw, 24px) !important;
+  padding: clamp(20px, 3vw, 56px) !important;
+}
+
+/* Each cell becomes an organic blob — different shape per slot,
+   re-cycles every 8 cells (matches the 4×2 grid). */
+.footer-photo-cell {
+  border-radius: 56% 44% 62% 38% / 48% 56% 44% 52% !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+.footer-photo-cell:nth-child(8n+2) { border-radius: 38% 62% 44% 56% / 56% 44% 60% 40% !important; }
+.footer-photo-cell:nth-child(8n+3) { border-radius: 64% 36% 52% 48% / 40% 60% 40% 60% !important; }
+.footer-photo-cell:nth-child(8n+4) { border-radius: 42% 58% 38% 62% / 64% 36% 52% 48% !important; }
+.footer-photo-cell:nth-child(8n+5) { border-radius: 58% 42% 64% 36% / 36% 64% 44% 56% !important; }
+.footer-photo-cell:nth-child(8n+6) { border-radius: 46% 54% 38% 62% / 60% 40% 56% 44% !important; }
+.footer-photo-cell:nth-child(8n+7) { border-radius: 62% 38% 56% 44% / 44% 56% 38% 62% !important; }
+.footer-photo-cell:nth-child(8n+8) { border-radius: 36% 64% 46% 54% / 52% 48% 64% 36% !important; }
+
+/* Caption: one-liner on top of each photo */
+.footer-photo-caption {
+  display: flex !important;
+  position: absolute !important;
+  inset: auto 0 0 0;
+  z-index: 5;
+  padding: 10px 16px 14px;
+  background: linear-gradient(180deg, transparent 0%, rgba(2, 4, 31, 0.78) 100%);
+  font-family: 'DomaineDisp', 'Times New Roman', serif;
+  font-size: clamp(11px, 0.95vw, 14px);
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.005em;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.footer-photo-cell.revealed .footer-photo-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ═══ Responsive ═══ */
 @media (max-width: 1100px) {
   .rd-tier-head { grid-template-columns: 1fr; align-items: start; }
   .rd-featured-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
-  .rd-tier-title { font-size: 26px; }
-  .rd-card { width: 300px; height: 180px; }
-  .rd-voice { width: 320px; }
+  .rd-tier-title { font-size: 30px; }
+  .rd-card { width: 320px; height: 200px; }
+  .rd-name { font-size: 28px; }
+  .rd-card.rd-ipo .rd-name { font-size: 36px; }
+  .rd-voice { width: 340px; padding: 22px; }
+  .rd-voice-quote { font-size: 16px; }
+  .hero-badge { top: 60px; }
 }

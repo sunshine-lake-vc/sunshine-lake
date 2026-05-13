@@ -281,11 +281,82 @@
     prev.addEventListener('click', function () { nudge(-1); });
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     FOOTER PHOTO CAPTIONS — "Dive Beneath the Surface"
+     Maps image filenames to one-liners. Add/edit entries here to
+     fill in real captions. Filenames without a match fall back to
+     the generic placeholder.
+     ═══════════════════════════════════════════════════════════════ */
+  var CAPTIONS = {
+    'snap-1.webp':   'Founders offsite',
+    'snap-2.webp':   'Portfolio gathering',
+    'snap-3.webp':   'SLC dinner',
+    'snap-4.webp':   'Founders summit',
+    'snap-5.webp':   'Demo day',
+    'snap-6.webp':   'Founder coffee',
+    'snap-7.webp':   'Annual offsite',
+    'snap-9.webp':   'Portfolio meeting',
+    'snap-10.webp':  'Founder dinner',
+    'snap-11.webp':  'New York office',
+    'snap-12.webp':  'SF founders night',
+    'snap-13.webp':  'Portfolio review',
+    'snap-14.webp':  'Demo day',
+    'snap-15.webp':  'Founder retreat',
+    'snap-16.webp':  'Investor dinner',
+    'snap-17.webp':  'Founder onboarding',
+    'snap-18.webp':  'Summit, 2024',
+    'snapshot9.webp':  'Team meeting',
+    'snapshot11.webp': 'Founders panel',
+    'snapshot13.webp': 'Annual summit',
+    'snapshot14.webp': 'Founder & GP',
+    'deel.webp':     'Deel — early days',
+    'headway.webp':  'Headway team',
+    'kalshi.webp':   'Kalshi founding'
+  };
+  var FALLBACK_CAPTION = 'Sunshine Lake portfolio';
+
+  function captionFor(src) {
+    if (!src) return FALLBACK_CAPTION;
+    var parts = src.split('/');
+    var file = parts[parts.length - 1];
+    return CAPTIONS[file] || FALLBACK_CAPTION;
+  }
+
+  function addCaption(cell) {
+    if (!cell || cell.querySelector('.footer-photo-caption[data-rd]')) return;
+    var img = cell.querySelector('img.front') || cell.querySelector('img');
+    if (!img) return;
+    var caption = document.createElement('div');
+    caption.className = 'footer-photo-caption';
+    caption.setAttribute('data-rd', 'true');
+    caption.textContent = captionFor(img.getAttribute('src'));
+    cell.appendChild(caption);
+  }
+
+  function wireFooterCaptions() {
+    var grid = document.getElementById('footerPhotoGrid');
+    if (!grid) return;
+    // Tag any cells that are already there
+    grid.querySelectorAll('.footer-photo-cell').forEach(addCaption);
+    // Watch for new cells the host script injects later
+    var mo = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (n) {
+          if (n.nodeType === 1 && n.classList && n.classList.contains('footer-photo-cell')) {
+            addCaption(n);
+          }
+        });
+      });
+    });
+    mo.observe(grid, { childList: true, subtree: false });
+  }
+
   function init() {
     render();
     wireDrag(document.getElementById('rd-leaders-wrap'),   document.getElementById('rd-leaders-track'));
     wireDrag(document.getElementById('rd-portfolio-wrap'), document.getElementById('rd-portfolio-track'));
     wireControls();
+    wireFooterCaptions();
   }
 
   if (document.readyState === 'loading') {
