@@ -572,6 +572,45 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   INTRO LINES — simpler fade pattern
+   Lines 1–3 fade in sequentially and stay. When line 4 appears,
+   lines 1–3 fade away so the final question stands alone.
+   Also disables the per-word "highlight" secondary animation.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Kill the word-by-word highlight animation */
+.content-sticky .hl,
+.content-sticky .hl.active {
+  color: inherit !important;
+  background: transparent !important;
+  font-weight: inherit !important;
+}
+
+/* Stop the paragraph-dim that triggers with .hl-active —
+   keep the text at full blue throughout */
+.content-sticky.hl-active p {
+  color: #155EE8 !important;
+}
+.content-sticky.hl-active p .reveal-line {
+  color: #155EE8 !important;
+}
+
+/* When the 4th reveal-line becomes visible, fade out the first three */
+.content-sticky:has(.reveal-line:nth-child(4).visible) .reveal-line:nth-child(-n+3) {
+  opacity: 0 !important;
+  transform: translateY(-14px) !important;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Fallback for browsers without :has() — use sibling selector approach.
+   This works because reveal-line.visible adds a class we can match. */
+@supports not selector(:has(*)) {
+  /* Last line fades in normally; we can't easily fade prior siblings without :has,
+     so on older browsers the lines just all stay visible. Graceful degradation. */
+}
+
+/* ═══════════════════════════════════════════════════════════════
    FOOTER OVERRIDES — "Dive Beneath the Surface"
    Layout: heading + contact ABOVE, photo grid BELOW.
    Each photo has a blue water overlay; on hover, overlay clears
@@ -620,7 +659,19 @@ a.rd-name:hover { color: var(--rd-yellow); }
   font-size: clamp(48px, 5.5vw, 84px) !important;
   line-height: 1.02 !important;
   letter-spacing: -0.02em !important;
-  color: #fff !important;
+  color: #155EE8 !important;
+  text-shadow: none !important;
+}
+.footer-photo-content .footer-contact a {
+  color: #155EE8 !important;
+  border-bottom-color: rgba(21, 94, 232, 0.3) !important;
+}
+.footer-photo-content .footer-contact a:hover {
+  color: #0032A8 !important;
+  border-bottom-color: #155EE8 !important;
+}
+.footer-photo-content .footer-legal {
+  color: rgba(21, 94, 232, 0.55) !important;
 }
 
 /* Photo grid: below text, simple 4×2 in normal flow */
