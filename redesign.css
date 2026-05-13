@@ -579,55 +579,58 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DIVE LAYER — painterly water transition between hero and thesis
-   The hero card scales down on scroll; once you scroll past it,
-   you "land" in this water section. Surface → deep gradient with
-   slowly drifting colored blobs, dense white sparkles, and a
-   "Dive Deeper" cue that bobs gently. Smooth fade to white at the
-   bottom so the existing thesis section (white) continues cleanly.
+   DIVE INTO HERO WATER — continuous painterly descent
+   The painterly water is now the BACKGROUND of the hero scroll-
+   spacer itself, so as the hero card scales down on scroll, you
+   feel like you're zooming INTO the same water — not landing in
+   a separate dive section. Smooth gradient continues down through
+   the 300vh spacer and fades to white at the very bottom so the
+   existing thesis content picks up cleanly.
    ═══════════════════════════════════════════════════════════════ */
-.rd-dive {
+
+.hero-scroll-spacer.rd-water-extend {
   position: relative;
-  height: 80vh;
-  min-height: 520px;
   overflow: hidden;
-  margin-top: -2px;
   background:
     linear-gradient(180deg,
       #155EE8 0%,
-      #1450C8 20%,
-      #0E45BC 40%,
-      #0A3DAE 60%,
-      #1E68EE 78%,
-      #6DA4F0 92%,
-      #FFFFFF 100%);
-  z-index: 1;
+      #1450C8 22%,
+      #0E45BC 42%,
+      #0A3DAE 58%,
+      #1E68EE 75%,
+      #6DA4F0 90%,
+      #FFFFFF 100%) !important;
 }
 
-.rd-dive-surface {
+/* Drifting painterly blobs — fill the full spacer, sit behind the hero card */
+.hero-scroll-spacer .rd-dive-surface {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 28% 22%, rgba(255, 228, 92, 0.20), transparent 42%),
-    radial-gradient(ellipse at 72% 48%, rgba(122, 204, 255, 0.28), transparent 50%),
-    radial-gradient(ellipse at 48% 12%, rgba(255, 255, 255, 0.24), transparent 36%),
-    radial-gradient(ellipse at 18% 65%, rgba(242, 216, 49, 0.10), transparent 45%);
-  filter: blur(34px);
-  animation: rd-dive-drift 26s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 28% 18%, rgba(255, 228, 92, 0.22), transparent 42%),
+    radial-gradient(ellipse at 72% 38%, rgba(122, 204, 255, 0.28), transparent 50%),
+    radial-gradient(ellipse at 48% 8%,  rgba(255, 255, 255, 0.22), transparent 36%),
+    radial-gradient(ellipse at 18% 55%, rgba(242, 216, 49, 0.12), transparent 45%),
+    radial-gradient(ellipse at 60% 78%, rgba(122, 204, 255, 0.22), transparent 48%);
+  filter: blur(40px);
+  animation: rd-dive-drift 30s ease-in-out infinite alternate;
   pointer-events: none;
   mix-blend-mode: screen;
+  z-index: 0;
 }
 
 @keyframes rd-dive-drift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(2.5vw, 1.5vw, 0) scale(1.04); }
-  100% { transform: translate3d(-1.5vw, 2vw, 0) scale(0.98); }
+  50%  { transform: translate3d(2.5vw, 1.2vh, 0) scale(1.04); }
+  100% { transform: translate3d(-1.5vw, 2.4vh, 0) scale(0.98); }
 }
 
-.rd-dive-particles {
+/* Sparkle particles — distributed across the full spacer height */
+.hero-scroll-spacer .rd-dive-particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .rd-dive-particle {
@@ -644,28 +647,31 @@ a.rd-name:hover { color: var(--rd-yellow); }
   50%      { opacity: 1;    transform: scale(1.3); }
 }
 
-.rd-dive-caption {
+/* "Dive Deeper" cue — placed in the lower portion of the spacer
+   so it surfaces after the hero card has shrunk on scroll */
+.hero-scroll-spacer .rd-dive-caption {
   position: absolute;
-  top: 28%;
+  top: 78%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.92);
   font-family: 'Segoe UI', system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  z-index: 3;
-  text-shadow: 0 1px 12px rgba(11, 18, 117, 0.45);
+  z-index: 2;
+  text-shadow: 0 1px 12px rgba(11, 18, 117, 0.5);
+  pointer-events: none;
 }
 
 .rd-dive-arrow {
   font-family: 'DomaineDisp', 'Times New Roman', serif;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1;
   color: #F2D831;
   text-shadow: 0 2px 16px rgba(242, 216, 49, 0.55), 0 0 24px rgba(242, 216, 49, 0.3);
@@ -677,10 +683,12 @@ a.rd-name:hover { color: var(--rd-yellow); }
   50%      { transform: translateY(10px); }
 }
 
+/* Make sure the hero sticky sits above the painterly water */
+.hero-scroll-spacer .hero-sticky { position: sticky; z-index: 5; }
+
 @media (max-width: 720px) {
-  .rd-dive { height: 70vh; min-height: 440px; }
-  .rd-dive-caption { top: 32%; font-size: 10px; }
-  .rd-dive-arrow { font-size: 22px; }
+  .hero-scroll-spacer .rd-dive-caption { top: 82%; font-size: 10px; }
+  .rd-dive-arrow { font-size: 24px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

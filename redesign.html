@@ -1110,8 +1110,14 @@
     </div>
 
     <main>
-    <!-- Hero with scroll-driven frame effect -->
-    <div class="hero-scroll-spacer">
+    <!-- Hero with scroll-driven frame effect (painterly water continues behind/below) -->
+    <div class="hero-scroll-spacer rd-water-extend">
+        <div class="rd-dive-surface" aria-hidden="true"></div>
+        <div class="rd-dive-particles" id="rd-dive-particles" aria-hidden="true"></div>
+        <div class="rd-dive-caption" aria-hidden="true">
+            <span class="rd-dive-arrow">↓</span>
+            <span class="rd-dive-text">Dive Deeper</span>
+        </div>
         <div class="hero-sticky">
             <div class="hero-card">
                 <!-- 1. The Fluid WebGL Background -->
@@ -1170,17 +1176,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ════════ REDESIGN: Dive layer — painterly water descent ════════ -->
-    <section class="rd-dive">
-        <div class="rd-dive-surface"></div>
-        <div class="rd-dive-particles" id="rd-dive-particles"></div>
-        <div class="rd-dive-caption">
-            <span class="rd-dive-arrow">↓</span>
-            <span class="rd-dive-text">Dive Deeper</span>
-        </div>
-    </section>
-    <!-- ════════ /Dive ════════ -->
 
     <!-- Content below hero — sticky with scroll-driven reveal -->
     <div class="content-spacer">
