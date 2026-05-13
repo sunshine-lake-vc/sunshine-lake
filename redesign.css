@@ -34,6 +34,46 @@
   background: linear-gradient(180deg, #0032A8 0%, #0B1275 38%, #050838 78%, #02041F 100%);
 }
 
+/* ═══ LP Login — fixed pill in the top-right of the page (Valence portal) ═══ */
+.rd-lp-login {
+  position: fixed;
+  top: clamp(18px, 2.4vw, 36px);
+  right: clamp(18px, 2.4vw, 36px);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(8px, 0.85vw, 12px) clamp(14px, 1.3vw, 20px);
+  background: rgba(11, 18, 117, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #FFFFFF;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease,
+              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.3s ease;
+}
+.rd-lp-login:hover {
+  background: #F2D831;
+  border-color: #F2D831;
+  color: #0B1275;
+  transform: translateY(-1px);
+}
+.rd-lp-login svg {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rd-lp-login:hover svg { transform: translate(2px, -2px); }
+@media (max-width: 720px) {
+  .rd-lp-login { padding: 7px 12px; gap: 6px; }
+}
+
 /* ═══ Hero badge — $1M First Check Seed Fund (under the headline, solid yellow for emphasis) ═══ */
 .hero-card .hero-badge {
   position: relative !important;
@@ -593,13 +633,15 @@ a.rd-name:hover { color: var(--rd-yellow); }
   overflow: hidden;
   background:
     linear-gradient(180deg,
-      #155EE8 0%,
-      #1450C8 22%,
-      #0E45BC 42%,
-      #0A3DAE 58%,
-      #2A7CFF 72%,
-      #7AC5EE 85%,
-      #F5EBC0 100%) !important; /* fades into the breakthrough cream of the thesis section */
+      #F5EBC0 0%,     /* warm cream — surface (matches painterly water) */
+      #F0E090 10%,    /* sunlit yellow */
+      #DDD8C0 20%,    /* cream fading toward blue */
+      #B8C8E5 32%,    /* pale tinted blue */
+      #7AC5EE 50%,    /* sky blue */
+      #4A88E5 70%,
+      #2A6CD8 85%,
+      #155EE8 100%    /* royal blue at bottom — continuous handoff to thesis */
+    ) !important;
 }
 
 /* Drifting painterly blobs — fill the full spacer, sit behind the hero card */
@@ -674,54 +716,77 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Fallback in case any section bleeds through */
 body { background: #010210 !important; }
 
-/* Thesis — BREAKTHROUGH (warm cream still carrying sunlight) → sunlit shallows */
+/* Thesis — picks up from the hero spacer (royal blue at bottom)
+   and continues descending into a deeper royal blue */
 .content-spacer {
   background: linear-gradient(180deg,
-    #F5EBC0 0%,    /* breakthrough cream — picks up from the hero spacer bottom */
-    #EBE1B0 18%,
-    #D8DDD8 35%,
-    #C8D6F0 55%,
-    #A8BCE8 78%,
-    #7AA5E0 100%) !important;
+    #155EE8 0%,
+    #1454D0 35%,
+    #0E45BC 70%,
+    #0A3DAE 100%) !important;
 }
 
-/* Team — SUNLIT SHALLOWS to MID-BLUE */
+/* Thesis copy must flip to white on the new dark blue */
+.content-sticky p,
+.content-sticky p .reveal-line {
+  color: #FFFFFF !important;
+}
+.content-sticky.hl-active p,
+.content-sticky.hl-active p .reveal-line {
+  color: #FFFFFF !important;
+}
+
+/* Team — deeper royal → mid navy */
 .team-section {
   background: linear-gradient(180deg,
-    #7AA5E0 0%,
-    #5E8FE0 50%,
-    #3A6BC7 100%) !important;
+    #0A3DAE 0%,
+    #0E2A88 50%,
+    #0032A8 100%) !important;
 }
 
-/* Founders portfolio — MID-BLUE to ROYAL BLUE
+/* Founders portfolio — mid navy → navy
    Drops the duotone-blue filter so photos pop against blue. */
 .founders-scroll-spacer {
   background: linear-gradient(180deg,
-    #3A6BC7 0%,
-    #155EE8 50%,
-    #0E45BC 100%) !important;
+    #0032A8 0%,
+    #0E1F88 50%,
+    #0B1275 100%) !important;
 }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
 
-/* Footer — ABYSS (re-darken now that the descent ends here) */
+/* rd-zone (Category Leaders + Strategic Exits) — navy → trench */
+.rd-zone {
+  background: linear-gradient(180deg,
+    #0B1275 0%,
+    #080C5C 50%,
+    #050838 100%) !important;
+}
+/* rd-deep-zone (Day Zero + Voices) — trench → abyss */
+.rd-zone.rd-deep-zone {
+  background: linear-gradient(180deg,
+    #050838 0%,
+    #030625 50%,
+    #02041F 100%) !important;
+}
+
+/* Footer — ABYSS bottom of the dive */
 .footer-scroll-spacer {
-  background: linear-gradient(180deg, #050838 0%, #02041F 60%, #010210 100%) !important;
+  background: linear-gradient(180deg, #02041F 0%, #010210 100%) !important;
 }
 .footer-sticky { background: transparent !important; }
 
-/* ─── Text contrast overrides for sections that changed background ─── */
+/* ─── Text contrast overrides — everything from thesis down is dark blue, so white type ─── */
 
-/* Team — pale blue → mid blue. Royal-blue text still reads but
-   lift it for legibility on the mid-blue band */
-.team-section .team-desc { color: #0B1275 !important; }
-.team-section .team-intro { color: rgba(11, 18, 117, 0.85) !important; }
-.team-section .team-card-name { color: #0B1275 !important; }
-.team-section .team-card-role { color: rgba(11, 18, 117, 0.6) !important; }
-.team-section .team-card-desc { color: rgba(11, 18, 117, 0.78) !important; }
+/* Team — white type for the dark blue band */
+.team-section .team-desc { color: #FFFFFF !important; }
+.team-section .team-intro { color: rgba(255, 255, 255, 0.85) !important; }
+.team-section .team-card-name { color: #FFFFFF !important; }
+.team-section .team-card-role { color: rgba(255, 255, 255, 0.62) !important; }
+.team-section .team-card-desc { color: rgba(255, 255, 255, 0.8) !important; }
 .team-section .team-bio-btn {
-  color: rgba(11, 18, 117, 0.75) !important;
-  border-color: rgba(11, 18, 117, 0.25) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
 }
 .team-section .team-bio-btn:hover { color: #F2D831 !important; }
 
