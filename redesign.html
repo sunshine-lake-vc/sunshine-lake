@@ -1,0 +1,2811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunshine Lake Capital — Redesign Preview</title>
+    <meta name="description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
+    <meta property="og:title" content="Sunshine Lake Capital">
+    <meta property="og:description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sunshinelake.vc">
+    <meta property="og:image" content="https://sunshinelake.vc/images/og-share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Sunshine Lake Capital">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sunshine Lake Capital">
+    <meta name="twitter:description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
+    <meta name="twitter:image" content="https://sunshinelake.vc/images/og-share.png">
+    <meta name="theme-color" content="#155EE8">
+    <link rel="canonical" href="https://sunshinelake.vc">
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="redesign.css">
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Base Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #ffffff;
+        }
+
+        /* Hero scroll spacer — phase 1: frame appears, phase 2: page scrolls */
+        .hero-scroll-spacer {
+            height: 300vh;
+            position: relative;
+        }
+
+        /* Sticky hero that stays in view during scroll */
+        .hero-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            contain: layout;
+        }
+
+        /* The card scales down on scroll — GPU composited, no layout recalc */
+        .hero-card {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+            will-change: transform, border-radius;
+            transform-origin: center center;
+        }
+
+        /* Fluid Background */
+        #glCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Top Left Logo */
+        .logo-container {
+            position: absolute;
+            top: clamp(16px, 2.4vw, 48px);
+            left: clamp(16px, 3.2vw, 64px);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .logo-img {
+            height: clamp(24px, 2.5vw, 52px);
+            width: auto;
+            aspect-ratio: 1626 / 177;
+            display: block;
+        }
+
+        /* Main Content Overlay (Title) */
+        .main-content {
+            position: absolute;
+            bottom: 0;
+            left: clamp(16px, 3.2vw, 64px);
+            z-index: 10;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            pointer-events: none;
+            max-width: clamp(600px, 50vw, 1200px);
+            will-change: transform;
+        }
+
+        .title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(3rem, 5vw, 7rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin: 0;
+        }
+
+        /* Content section — sticky with scroll-driven line reveal */
+        .content-spacer {
+            height: 250vh;
+            position: relative;
+            z-index: 2;
+            background: #ffffff;
+        }
+
+        .content-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(80px, 8vw, 160px) clamp(20px, 4vw, 80px);
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .content-sticky p {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2rem, 2.88vw, 4rem);
+            line-height: 1.35;
+            color: #155EE8;
+            transition: color 0.5s ease;
+            max-width: clamp(600px, 68vw, 1400px);
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .reveal-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .reveal-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .content-sticky.hl-active p {
+            color: rgba(21, 94, 232, 0.3);
+        }
+        .hl {
+            color: inherit;
+            background: transparent;
+            transition: color 0.4s ease;
+        }
+        .hl.active {
+            color: #155EE8;
+        }
+
+        /* Shared about typography */
+        .about-title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.8rem, 3.8vw, 5.5rem);
+            font-weight: 400;
+            color: #155EE8;
+            margin: 0 0 clamp(24px, 2.5vw, 48px) 0;
+            line-height: 1.1;
+        }
+        .about-subtitle {
+            font-size: clamp(0.85rem, 0.95vw, 1.15rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(21, 94, 232, 0.5);
+            margin: 0 0 clamp(24px, 2.5vw, 48px) 0;
+        }
+        .about-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.6rem);
+            line-height: 1.53;
+            color: #155EE8;
+            margin: 0 0 clamp(16px, 1.5vw, 28px) 0;
+            font-weight: 400;
+        }
+
+        /* Team Section */
+        .team-section {
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: clamp(80px, 8vw, 160px) clamp(40px, 6vw, 120px);
+        }
+        .team-inner {
+            max-width: 1800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Team layout: sticky text left, members right */
+        .team-layout {
+            display: flex;
+            flex-direction: row;
+            gap: clamp(40px, 5vw, 80px);
+            align-items: flex-start;
+        }
+        .team-sticky-text {
+            flex: 0 0 40%;
+            position: sticky;
+            top: clamp(80px, 10vw, 160px);
+        }
+        .team-desc {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.4rem, 3.5vw, 5rem);
+            line-height: 1.05;
+            color: #155EE8;
+            margin: 0;
+            font-weight: 400;
+        }
+        .team-intro {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+            line-height: 1.45;
+            color: #155EE8;
+            margin: clamp(16px, 1.5vw, 24px) 0 0 0;
+            font-weight: 400;
+            max-width: 24em;
+        }
+        .team-subtitle {
+            font-family: 'DomaineDisp', Georgia, serif;
+            font-size: clamp(0.8rem, 0.9vw, 1rem);
+            letter-spacing: 0.02em;
+            color: rgba(21, 94, 232, 0.5);
+            margin: clamp(16px, 1.5vw, 24px) 0 0 0;
+            font-weight: 500;
+        }
+
+        /* Footer photo water ripple overlay (WebGL) */
+        .footer-photo-cell {
+            pointer-events: auto;
+        }
+        .footer-photo-cell canvas.ripple-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+        .footer-photo-cell:hover canvas.ripple-canvas {
+            opacity: 0;
+        }
+        .footer-photo-cell:hover img {
+            filter: none !important;
+        }
+        .team-cards {
+            flex: 1 1 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            contain: layout;
+        }
+
+        /* Team member — no card bg, blue divider between */
+        .team-card {
+            display: flex;
+            flex-direction: row;
+            gap: clamp(20px, 2.5vw, 36px);
+            align-items: flex-start;
+            padding: clamp(28px, 3vw, 48px) 0;
+            border-bottom: 1px solid rgba(21, 94, 232, 0.15);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .team-card:first-child {
+            padding-top: 0;
+        }
+        .team-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .team-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .team-card-photo {
+            flex: 0 0 clamp(180px, 18vw, 300px);
+            width: clamp(180px, 18vw, 300px);
+            aspect-ratio: 3 / 4;
+            border-radius: clamp(8px, 0.8vw, 12px);
+            overflow: hidden;
+            background: #dde4f0;
+        }
+        .team-card-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .team-card-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #c8d6f0 0%, #a8bce8 100%);
+        }
+        .team-card-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(4px, 0.4vw, 8px);
+            padding-top: clamp(4px, 0.5vw, 8px);
+        }
+        .team-card-name-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 0.8vw, 12px);
+        }
+        .team-card-name {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.3rem, 1.6vw, 2rem);
+            color: #155EE8;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .team-card-role {
+            font-size: clamp(0.8rem, 0.9vw, 1rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(21, 94, 232, 0.5);
+            margin: 0;
+        }
+        .team-card-desc {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.9rem, 1vw, 1.2rem);
+            line-height: 1.44;
+            color: #155EE8;
+            margin: clamp(4px, 0.5vw, 8px) 0 0 0;
+            font-weight: 400;
+        }
+
+        /* Bio button on team cards */
+        .team-bio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: clamp(8px, 1vw, 16px);
+            font-size: clamp(0.75rem, 0.85vw, 0.95rem);
+            color: #155EE8;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+            padding: 14px 0;
+        }
+        .team-bio-btn:hover {
+            opacity: 1;
+        }
+
+
+
+        /* Founders scroll-through */
+        /* Founders section — YC-style natural scroll */
+        .founders-scroll-spacer {
+            position: relative;
+            z-index: 2;
+            background: #155EE8;
+            display: flex;
+            padding: 0 clamp(40px, 6vw, 120px);
+        }
+
+        /* Left column — sticky while names scroll */
+        .founders-left {
+            flex: 0 0 42%;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: clamp(40px, 5vw, 80px) clamp(32px, 4vw, 80px) clamp(40px, 5vw, 80px) 0;
+            box-sizing: border-box;
+        }
+        .founders-left-title {
+            position: absolute;
+            top: clamp(40px, 5vw, 80px);
+            left: 0;
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.2rem, 3.2vw, 4.5rem);
+            font-weight: 400;
+            color: #fff;
+            margin: 0;
+            line-height: 1.05;
+        }
+        .founders-photo-stack {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 17px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.06);
+            margin-top: clamp(56px, 5.6vw, 84px);
+        }
+        .founders-mobile-overlay { display: none; }
+        .founders-photo-stack img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .founders-photo-stack img.active { opacity: 1; }
+
+        /* Right column — names scroll naturally */
+        .founders-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 50vh; /* overridden by JS alignFirstCard() */
+            padding-bottom: 50vh;
+        }
+        .founders-right-subtitle {
+            position: absolute;
+            top: clamp(40px, 5vw, 80px);
+            left: calc(100%);
+            width: max(340px, 55vw);
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.3rem, 1.7vw, 2.2rem);
+            color: #fff;
+            line-height: 1.4;
+            font-weight: 400;
+            margin: 0;
+            max-width: 840px;
+            pointer-events: none;
+        }
+        .founders-item {
+            padding: clamp(32px, 4.5vw, 72px) 0;
+            opacity: 0.15;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .founders-item:first-child { padding-top: 0; }
+        .founders-item.active {
+            opacity: 1;
+        }
+
+        /* --- View A: Clean (default) --- */
+        .founders-item-company {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.4rem, 3.5vw, 5rem);
+            color: #fff;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.1;
+        }
+        .founders-item-founders {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1rem, 1.2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            margin: clamp(6px, 0.6vw, 12px) 0 0;
+            line-height: 1.3;
+        }
+
+        /* --- View B: Detailed --- */
+        .founders-item-name {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.76rem, 2.56vw, 3.6rem);
+            color: #fff;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.15;
+        }
+        .founders-item-name .from-label {
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+        }
+        .founders-item-name .card-flag {
+            display: inline;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .founders-item-name .card-flag img {
+            width: clamp(20px, 1.8vw, 28px);
+            height: auto;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+        .founders-item-detail {
+            margin-top: clamp(6px, 0.8vw, 12px);
+        }
+        .founders-item-desc {
+            font-size: clamp(0.95rem, 1.1vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Toggle visibility between views */
+        .founders-item-name,
+        .founders-item-detail { display: none; }
+        .founders-detailed .founders-item-name,
+        .founders-detailed .founders-item-detail { display: block; }
+        .founders-detailed .founders-item-company,
+        .founders-detailed .founders-item-founders { display: none; }
+
+        /* Detailed view: spacing, opacity, dividers */
+        .founders-detailed .founders-item {
+            padding: clamp(29px, 3vw, 48px) 0;
+            opacity: 0.25;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .founders-detailed .founders-item.active { opacity: 1; }
+        .founders-detailed .founders-item:first-child { padding-top: 0; }
+
+        /* Detailed 2: hide flags */
+        .founders-detailed2 .card-flag { display: none; }
+
+        /* Founders view toggle */
+        .founders-toggle {
+            position: absolute;
+            bottom: clamp(40px, 5vw, 80px);
+            left: 0;
+            display: flex;
+            gap: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+        .founders-toggle button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s;
+            letter-spacing: 0.03em;
+        }
+        .founders-toggle button.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        /* Site logo (fixed top-right, scroll-driven) */
+        .site-logo {
+            position: fixed;
+            top: clamp(16px, 2.4vw, 32px);
+            right: clamp(16px, 3.2vw, 64px);
+            z-index: 1000;
+            width: clamp(28px, 3vw, 40px);
+            height: auto;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .site-logo svg path,
+        .site-logo svg polygon {
+            transition: fill 0.4s ease;
+        }
+
+
+        /* ========================== */
+        /* LARGE SCREENS (2000px+)     */
+        /* ========================== */
+        @media (min-width: 2000px) {
+            .founders-left-title { font-size: clamp(2.64rem, 3.84vw, 5.4rem); }
+            .team-desc { font-size: clamp(2.88rem, 4.2vw, 6rem); }
+        }
+
+        /* ========================== */
+        /* TABLET (769–1024px)         */
+        /* ========================== */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .team-layout { gap: clamp(24px, 3vw, 40px); }
+            .team-sticky-text { flex: 0 0 35%; }
+            .team-card-photo { flex: 0 0 clamp(100px, 15vw, 160px); width: clamp(100px, 15vw, 160px); }
+            .team-desc { font-size: clamp(1.8rem, 3vw, 3rem); }
+            .founders-scroll-spacer { padding: 0 clamp(20px, 3vw, 40px); }
+            .founders-left { flex: 0 0 40%; }
+        }
+
+        @media (max-width: 768px) {
+            .founders-scroll-spacer {
+                display: flex;
+                flex-direction: column;
+                padding: 0 clamp(16px, 4vw, 24px);
+            }
+            /* Dissolve left wrapper — children become direct flex items of spacer */
+            .founders-left {
+                display: contents;
+            }
+            /* Title — larger, more space above */
+            .founders-left-title {
+                position: static;
+                order: 1;
+                font-size: clamp(2.2rem, 7vw, 3.2rem);
+                padding: clamp(43px, 8.4vw, 67px) 0 clamp(10px, 2.4vw, 19px);
+            }
+            /* Subtitle — +20% space from title, +30% space to image */
+            .founders-right-subtitle {
+                position: static;
+                left: auto;
+                width: auto;
+                max-width: none;
+                order: 2;
+                font-size: clamp(1rem, 4vw, 1.45rem);
+                padding-bottom: clamp(21px, 4vw, 31px);
+                opacity: 1 !important;
+            }
+            /* Single sticky wrapper for photo + overlay on mobile */
+            .founders-sticky-wrap {
+                position: sticky;
+                top: clamp(12px, 3vw, 20px);
+                order: 3;
+                z-index: 2;
+            }
+            .founders-photo-stack {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                border-radius: 8px;
+            }
+            /* Toggle — static, below photo */
+            .founders-toggle {
+                position: static;
+                order: 4;
+                margin: clamp(8px, 2vw, 12px) 0;
+                align-self: flex-start;
+                z-index: 1;
+            }
+            /* Overlay — inside sticky wrapper, flows below photo */
+            .founders-mobile-overlay {
+                display: block;
+                position: relative;
+                z-index: 3;
+                min-height: 100px;
+                margin-top: 16px;
+                padding-bottom: clamp(40px, 8vw, 80px);
+            }
+            /* Names column — full width below, only provides scroll distance */
+            .founders-right {
+                order: 6;
+                padding-top: 0 !important;
+                padding-bottom: 30vh;
+            }
+            /* Mobile: items are invisible scroll spacers */
+            .founders-item { opacity: 0 !important; min-height: 22vh; }
+            .founders-item:last-child { min-height: 22vh; }
+            .founders-mobile-overlay {
+                position: relative;
+            }
+            .founders-mobile-overlay .mob-title {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                pointer-events: none;
+                visibility: hidden;
+            }
+            .founders-mobile-overlay .mob-title.active {
+                position: relative;
+                opacity: 1;
+                pointer-events: auto;
+                visibility: visible;
+            }
+            .mob-title-company {
+                font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+                font-size: clamp(1.6rem, 5vw, 2.4rem);
+                color: #fff;
+                font-weight: 400;
+                margin: 0;
+                line-height: 1.1;
+            }
+            .mob-title-founders {
+                font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+                font-size: clamp(0.85rem, 3vw, 1.1rem);
+                color: rgba(255,255,255,0.5);
+                margin: clamp(4px, 1vw, 8px) 0 0;
+            }
+            /* Detailed content hidden by default in overlay */
+            .mob-title-detail { display: none; }
+            /* When detailed mode, swap clean → detailed */
+            .founders-detailed .mob-title-company,
+            .founders-detailed .mob-title-founders { display: none; }
+            .founders-detailed .mob-title-detail { display: block; }
+            .mob-title-detail .founders-item-name {
+                font-size: clamp(1.4rem, 5vw, 2rem);
+                color: #fff;
+            }
+            .mob-title-detail .founders-item-desc {
+                font-size: clamp(0.85rem, 3vw, 1.1rem);
+                color: rgba(255,255,255,0.5);
+                margin: clamp(6px, 1.5vw, 10px) 0 0;
+                line-height: 1.4;
+            }
+            /* Detailed 2: hide flags */
+            .founders-detailed2 .mob-title-detail .card-flag { display: none; }
+            .founders-item-company { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+            .founders-item-name { font-size: clamp(1.4rem, 5vw, 2rem); }
+            .site-logo { width: 24px; top: 26px; right: 13px; }
+            /* Founders stepper — full width matching image */
+            .founders-stepper {
+                position: fixed;
+                bottom: 24px;
+                left: clamp(16px, 4vw, 24px);
+                right: clamp(16px, 4vw, 24px);
+                display: flex;
+                gap: 4px;
+                z-index: 10;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+            .founders-stepper.visible { opacity: 1; }
+            .founders-stepper span {
+                flex: 1;
+                height: 2px;
+                background: rgba(255,255,255,0.25);
+                border-radius: 1px;
+                transition: background 0.3s ease;
+            }
+            .founders-stepper span.active {
+                background: rgba(255,255,255,0.85);
+            }
+        }
+
+        /* Footer — white scales down to card, revealing WebGL lake */
+        .footer-scroll-spacer {
+            height: 200vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: clip;
+        }
+
+
+        /* ================================== */
+        /* PHOTO-GRID FOOTER (alt mode)       */
+        /* ================================== */
+        .footer-photo-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0;
+            pointer-events: none;
+        }
+        .footer-photo-cell {
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-photo-cell.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .footer-photo-cell img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .footer-photo-cell img.front {
+            z-index: 1;
+            transition: opacity 0.9s ease;
+        }
+        .footer-photo-cell img.back {
+            z-index: 0;
+        }
+        .footer-photo-grid img {
+            filter: url(#duotone-blue);
+            transition: filter 0.6s ease;
+        }
+        .footer-photo-caption {
+            display: none;
+        }
+        /* Photo-card: empty white box, same sizing as footer-card, scales identically */
+        .footer-photo-card {
+            position: absolute;
+            z-index: 1;
+            width: clamp(400px, 50vw, 760px);
+            height: clamp(340px, 55vh, 560px);
+            background: #fff;
+            border-radius: 0;
+            will-change: transform, border-radius;
+            transform-origin: center center;
+            pointer-events: none;
+        }
+        /* Photo content: separate layer, same size, does NOT scale */
+        .footer-photo-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: clamp(400px, 50vw, 760px);
+            height: clamp(340px, 55vh, 560px);
+            pointer-events: none;
+        }
+        .footer-photo-content a {
+            pointer-events: auto;
+        }
+        .footer-photo-content-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer-photo-content h2 {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.2rem, 3.5vw, 4.5rem);
+            font-weight: 400;
+            color: #155EE8;
+            line-height: 1.1;
+            margin: 0 0 clamp(20px, 2.5vw, 36px) 0;
+        }
+        .footer-contact {
+            display: flex;
+            gap: clamp(16px, 2vw, 32px);
+        }
+        .footer-contact a {
+            font-size: clamp(0.85rem, 1vw, 1.1rem);
+            color: #155EE8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(21, 94, 232, 0.3);
+            padding: 14px 4px 6px;
+            transition: border-color 0.2s ease;
+        }
+        .footer-contact a:hover {
+            border-bottom-color: #155EE8;
+        }
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(10px, 1.5vh, 20px);
+            padding-bottom: clamp(20px, 3vh, 40px);
+        }
+        .footer-legal {
+            font-size: clamp(0.65rem, 0.7vw, 0.8rem);
+            color: rgba(21, 94, 232, 0.4);
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .footer-photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+            .footer-photo-card {
+                width: 80vw;
+                height: 55vh;
+            }
+            .footer-photo-content {
+                width: 80vw;
+                height: 55vh;
+            }
+            .footer-photo-content h2 {
+                font-size: clamp(1.6rem, 6vw, 2.5rem);
+            }
+        }
+
+        /* ================================== */
+        /* FOOTER LAYOUT VARIANTS            */
+        /* ================================== */
+
+        /* Smooth transitions between variants */
+        .footer-scroll-spacer .footer-photo-card {
+            transition: background 0.5s ease, backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease, border-color 0.5s ease;
+        }
+        .footer-scroll-spacer .footer-photo-content h2,
+        .footer-scroll-spacer .footer-contact a,
+        .footer-scroll-spacer .footer-legal,
+        .footer-scroll-spacer .footer-logo {
+            transition: color 0.5s ease, fill 0.5s ease, text-shadow 0.5s ease, border-color 0.5s ease;
+        }
+
+
+        /* ========================== */
+        @media (min-width: 2800px) {
+            .founders-scroll-spacer {
+                padding-left: calc((100vw - 2800px) / 2);
+                padding-right: calc((100vw - 2800px) / 2);
+            }
+        }
+
+        /* --- Mode B: Combined (text over shader) --- */
+        .hero-overlay-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(80px, 8vw, 160px) clamp(20px, 4vw, 80px);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            transition: none;
+        }
+        .hero-overlay-text p {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.68rem, 2.64vw, 3.84rem);
+            line-height: 1.44;
+            color: #ffffff;
+            max-width: clamp(560px, 58vw, 1100px);
+            margin: 0;
+            font-weight: 400;
+        }
+        .hero-overlay-text .reveal-line-b {
+            display: block;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .hero-overlay-text .reveal-line-b.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hide overlay text by default (Mode A) */
+        body:not(.mode-combined) .hero-overlay-text { display: none; }
+
+        /* --- Mode B vignette (dark wash behind thesis text for readability) --- */
+        .hero-overlay-vignette {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 5;
+            background: radial-gradient(
+                ellipse 70% 60% at 50% 50%,
+                rgba(0, 0, 0, 0.55) 0%,
+                rgba(0, 0, 0, 0.25) 50%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            opacity: 0;
+            pointer-events: none;
+        }
+        body:not(.mode-combined) .hero-overlay-vignette { display: none; }
+
+        /* Mode B: hide original white section, extend hero spacer */
+        body.mode-combined .content-spacer { display: none; }
+        body.mode-combined .hero-scroll-spacer { height: 400vh; }
+
+        /* Mode C: gradient bleed from shader into white */
+        body.mode-tight .hero-scroll-spacer { height: 200vh; }
+        body.mode-tight .content-spacer { height: 350vh; background: transparent; }
+        body.mode-tight .content-sticky {
+            background: linear-gradient(to bottom,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.5) 12vh,
+                rgba(255,255,255,0.92) 25vh,
+                rgba(255,255,255,1) 35vh);
+        }
+        body.mode-tight .content-sticky p {
+            text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 60px rgba(255,255,255,0.4);
+        }
+
+        /* Hero loading state */
+        .hero-card { opacity: 0; transition: opacity 0.8s ease; }
+        .hero-card.loaded { opacity: 1; }
+
+        /* Focus styles for keyboard navigation */
+        :focus-visible { outline: 2px solid #155EE8; outline-offset: 3px; }
+
+        @media (max-width: 768px) {
+            /* Thesis: keep reveal animation but disable highlight scroll effect */
+            .content-spacer { height: 85vh; background: transparent; }
+            .content-sticky {
+                height: auto;
+                min-height: 0;
+                background: transparent;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 30vh clamp(20px, 6vw, 40px);
+                pointer-events: none;
+                z-index: 3;
+            }
+            .content-sticky p {
+                font-size: clamp(1.5rem, 6.5vw, 2rem);
+            }
+            .founders-scroll-spacer {
+                margin-top: -50vh;
+                position: relative;
+                z-index: 1;
+            }
+            .content-sticky.hl-active p { color: #155EE8; }
+            .hl { color: #155EE8 !important; }
+            .logo-img { height: clamp(24px, 5vw, 36px); }
+            .logo-container { left: 50%; transform: translateX(-50%); top: clamp(28px, 4vw, 64px); }
+            .main-content { left: 0; right: 0; align-items: center; text-align: center; padding: 0 20px; max-width: 100%; }
+            .title { text-align: center; }
+            /* Content text section — reflow as single block on mobile */
+            .content-sticky p { max-width: 90vw; }
+            .reveal-line { display: inline; }
+            /* About typography */
+            .about-title { font-size: clamp(2rem, 7vw, 3rem); }
+            .about-text { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
+            /* Team section */
+            .team-section { padding-left: 20px; padding-right: 20px; }
+            .team-layout { flex-direction: column; }
+            .team-sticky-text { position: static; flex: unset; margin-bottom: clamp(24px, 4vw, 40px); }
+            .team-desc { font-size: clamp(2.2rem, 7vw, 3.2rem); }
+            .team-cards { flex: unset; }
+            .team-card { flex-direction: column; gap: clamp(12px, 3vw, 20px); }
+            .team-card-photo { flex: none; width: 100%; aspect-ratio: 1 / 1; }
+            /* Companies section */
+            .founders-scroll-spacer { padding: 0 20px; }
+            .founders-photo-stack { aspect-ratio: 1; }
+            .footer-contact { flex-direction: column; gap: 12px; }
+            .footer-bottom { padding-bottom: clamp(30px, 5vh, 60px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG duotone filter: shadows → #155EE8, highlights → white -->
+    <svg style="position:absolute;width:0;height:0;">
+        <defs>
+            <filter id="duotone-blue" color-interpolation-filters="sRGB">
+                <feColorMatrix type="saturate" values="0"/>
+                <feComponentTransfer>
+                    <feFuncR type="table" tableValues="0.082 1"/>
+                    <feFuncG type="table" tableValues="0.369 1"/>
+                    <feFuncB type="table" tableValues="0.910 1"/>
+                </feComponentTransfer>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="site-logo" id="siteLogo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26">
+            <path fill="#155ee8" d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+            <polygon fill="#155ee8" points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+        </svg>
+    </div>
+
+    <main>
+    <!-- Hero with scroll-driven frame effect -->
+    <div class="hero-scroll-spacer">
+        <div class="hero-sticky">
+            <div class="hero-card">
+                <!-- 1. The Fluid WebGL Background -->
+                <canvas id="glCanvas"></canvas>
+
+                <!-- 2. Top Left Logo -->
+                <div class="logo-container">
+                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1626.32 177.05" width="1626" height="177" class="logo-img" fill="#ffffff" aria-label="Sunshine Lake Capital" role="img">
+                      <g>
+                        <path d="M867.39,37.06c8.72,0,15.29-6.56,15.29-15.06s-6.57-15.06-15.29-15.06-15.29,6.56-15.29,15.06,6.57,15.06,15.29,15.06Z"/>
+                        <path d="M604.94,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.89,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.33-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"/>
+                        <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"/>
+                        <path d="M828.84,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4V0h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"/>
+                        <path d="M1288.14,128.8c-6.11,12.22-12.88,21.83-21.29,28.39-8.4,6.55-18.48,10.09-31.28,10.09h-36.77V39.36c0-7.62.52-13.64,2.38-18.3,1.83-4.61,4.99-7.95,10.37-10.19l.44-.18v-1.65h-48.63v1.65l.44.18c5.38,2.24,8.54,5.58,10.37,10.19,1.86,4.66,2.38,10.68,2.38,18.3v105.03c0,7.62-.52,13.64-2.38,18.3-1.83,4.61-4.99,7.95-10.37,10.19l-.44.18v1.65h119.08l7.64-46.31h-1.75l-.19.39h0Z"/>
+                        <path d="M882.02,164.82c-1.82-3.53-2.35-8.4-2.35-16.04V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05h0Z"/>
+                        <path d="M1409.78,166.36v-1.98l-1.09.68c-1.72,1.08-4.13,1.74-6.56,1.74-4.69,0-8.1-1.55-10.36-4.55-2.3-3.03-3.5-7.65-3.5-13.94,0-7.05.17-14.38.34-22.54.18-8.16.35-17.13.35-27.43,0-13.94-4.58-23.94-13.06-30.44-8.45-6.47-20.66-9.37-35.77-9.37-24.02,0-40.74,13.56-40.74,29.17,0,5.49,1.91,9.91,5.11,12.95,3.18,3.04,7.59,4.65,12.49,4.65,3.47,0,6.64-.9,9.1-2.74,2.48-1.85,4.19-4.62,4.79-8.26l.23-1.38-1.25.63c-.82.41-1.86.62-2.69.62-3.04,0-5.5-1.19-7.21-3.19-1.72-2.02-2.72-4.9-2.72-8.36,0-4.94,1.57-9.47,5.15-12.78,3.59-3.31,9.29-5.48,17.74-5.48,9.28,0,15.77,3.5,19.96,9,4.21,5.53,6.16,13.17,6.16,21.52v12.59l-17,3.13c-13.74,2.54-27.27,5.27-37.36,10.51-5.06,2.62-9.29,5.89-12.25,10.12-2.98,4.23-4.65,9.38-4.65,15.71,0,9.91,3.73,17.3,9.84,22.19,6.09,4.87,14.48,7.21,23.73,7.21,17.75,0,33.24-12.32,38.1-26.82.02.36.03.72.05,1.07.12,2.37.23,4.47.23,4.91v.07c.59,6.24,2.66,11.5,6.25,15.21,3.59,3.72,8.65,5.8,15.06,5.8,9.69,0,17.32-4.26,21.4-10.02l.13-.19h0ZM1365.79,131.64h0c-.46,21.18-14.53,33.08-28.67,33.08-5.45,0-10.16-1.36-13.51-4.49-3.34-3.12-5.44-8.11-5.44-15.61,0-8.02,2.7-14,8.16-18.54,5.5-4.57,13.86-7.72,25.27-9.91l14.63-2.84-.44,18.31h0Z"/>
+                        <path d="M1505.79,152.28h0l-34.8-45.33,23.41-25.01h0c9.65-10.11,18.33-16.03,31.58-19.23l.54-.13v-1.74h-43.76v1.68l.47.17c4.89,1.78,7.16,5.03,7.16,8.35s-1.27,5.85-3.97,8.77h0l-19.19,20.81h0c-3.31,3.42-6.12,5.38-8.92,6.48-2.8,1.11-5.64,1.4-9.08,1.4h-6.22V0h-36.14v1.65l.44.18c5.46,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-33.76h3.68c1.89,0,3.26.28,4.48.95,1.23.68,2.37,1.8,3.74,3.62h0l28.69,38.17h0c4.17,5.33,7.78,10.54,9.12,16.39l.13.55h41.08v-1.71l-.51-.15c-11.16-3.42-18.91-9.1-27.63-20.57v.02Z"/>
+                        <path d="M1011.99,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.53-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05v.02Z"/>
+                        <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"/>
+                        <path d="M1125.55,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1079.15,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h-.01Z"/>
+                        <path d="M1623.23,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1576.83,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h0Z"/>
+                      </g>
+                      <g>
+                        <path d="M131.34,137.7c-5.38-2.93-10.46-5.7-16.57-7.69-6.89-2.25-14.34-3.3-23.44-3.3s-16.55,1.05-23.44,3.3c-6.1,1.99-11.19,4.76-16.57,7.69h0c-6.08,3.31-12.37,6.74-20.53,9.4-9.21,3.01-19.27,4.47-30.78,4.47v25.45c13.44,0,25.34-1.75,36.37-5.36,9.73-3.18,17.4-7.35,23.55-10.71,5.04-2.74,9.01-4.91,13.55-6.39,5.03-1.65,10.71-2.41,17.85-2.41s12.82.77,17.85,2.41c4.54,1.48,8.51,3.65,13.55,6.39,6.48,3.53,13.82,7.53,23.55,10.71,11.04,3.61,22.94,5.36,36.37,5.36v-25.45c-11.51,0-21.58-1.46-30.78-4.47-8.16-2.67-14.45-6.09-20.53-9.4Z"/>
+                        <polygon points="108.35 67.9 102.65 9.02 80.01 9.02 74.32 67.9 27.88 36 13.61 53.38 51.4 89.26 0 94.11 0 117.11 182.65 117.11 182.66 117.11 182.66 94.11 131.26 89.26 169.06 53.38 154.78 36 108.35 67.9"/>
+                      </g>
+                      <path d="M701.88,119.47c-6.64-5.93-17.14-10.36-32.56-13.96h0c-11.79-2.78-18.64-5.52-22.54-8.9-3.83-3.31-4.9-7.29-4.9-12.85,0-5.15,1.85-9.93,5.4-13.43,3.55-3.49,8.85-5.75,15.87-5.75,18.07,0,31.54,14.69,39.84,33.12l.19.42h1.64v-39.92h-1.76c-2.36,3.77-6.47,6.53-10.52,6.56-3.78.03-7.39-1.5-12.03-3.08-4.6-1.57-10.07-3.16-17.35-3.16-10.07,0-19.72,2.81-26.86,8.24-7.17,5.45-11.79,13.52-11.79,23.94,0,8.82,2.42,16.13,8.28,22.02,5.83,5.86,15.01,10.24,28.37,13.38h0c10.07,2.32,18.12,4.67,23.64,8.1,2.75,1.71,4.85,3.67,6.26,5.99,1.41,2.32,2.16,5.05,2.16,8.35,0,7.09-2.75,12.67-7.16,16.49-4.42,3.83-10.55,5.93-17.35,5.93-20.83,0-34.31-14.9-44.22-38.89l-.18-.44h-1.7v45.39h3.65l.2-.25c2.78-3.24,5.36-5.77,9.41-5.77,1.7,0,3.58.36,5.73.92,2.16.56,4.51,1.3,7.2,2.06,5.35,1.51,11.84,3.04,19.92,3.04,10.87,0,21.49-2.8,29.42-8.55,7.95-5.77,13.16-14.48,13.16-26.17,0-9.41-2.72-16.85-9.41-22.83h-.01Z"/>
+                      <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"/>
+                      <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"/>
+                    </svg>
+                </div>
+
+                <!-- 3. Title -->
+                <div class="main-content">
+                    <h1 class="title">Global Founders<br>Forge the Future</h1>
+                </div>
+
+                <!-- 4. Dark vignette for text readability (Mode B only) -->
+                <div class="hero-overlay-vignette"></div>
+
+                <!-- 5. Overlay thesis text (Mode B only) -->
+                <div class="hero-overlay-text">
+                    <p>
+                        <span class="reveal-line-b">Sunshine Lake invests in founders forged by</span>
+                        <span class="reveal-line-b">extreme origins with the psychology to see</span>
+                        <span class="reveal-line-b">the shifts that others miss.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content below hero — sticky with scroll-driven reveal -->
+    <div class="content-spacer">
+        <div class="content-sticky">
+            <p>
+                <span class="reveal-line"><mark class="hl" data-hl="0">Sunshine Lake</mark> invests in <mark class="hl" data-hl="1">founders</mark></span>
+                <span class="reveal-line">forged by <mark class="hl" data-hl="2">extreme origins</mark></span>
+                <span class="reveal-line">who see what others miss</span>
+                <span class="reveal-line">and <mark class="hl" data-hl="3">build</mark> what others <mark class="hl" data-hl="4">can't imagine</mark>.</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Founders scroll-through -->
+    <div class="founders-scroll-spacer">
+        <div class="founders-left">
+            <h2 class="founders-left-title">Portfolio</h2>
+            <div class="founders-photo-stack" id="foundersPhotoStack">
+                <!-- Photos injected by JS from FOUNDERS_DATA -->
+            </div>
+            <div class="founders-toggle" id="foundersToggle" style="display:none;"></div>
+            <p class="founders-right-subtitle" id="foundersSubtitle">We operate at the edge of economic, geopolitical, and tech change and defy sector cycles, allowing us to support multiple blockbuster companies a decade.</p>
+        </div>
+        <div class="founders-right" id="foundersRight">
+            <!-- Items injected by JS from FOUNDERS_DATA -->
+        </div>
+    </div>
+
+    <!-- ════════ REDESIGN INJECTION 1: Category Leaders + Strategic Exits ════════ -->
+    <section class="rd-zone">
+        <div class="rd-container rd-tier">
+            <div class="rd-tier-head">
+                <div>
+                    <div class="rd-tier-eyebrow">Tier 01 — Late-Stage Privates</div>
+                    <h2 class="rd-tier-title">Category <em>leaders.</em></h2>
+                </div>
+                <p class="rd-tier-desc">Seed-stage bets now trading at unicorn-and-up valuations.</p>
+            </div>
+        </div>
+        <div class="rd-carousel-wrap rd-leaders-wrap" id="rd-leaders-wrap">
+            <div class="rd-track" id="rd-leaders-track"></div>
+        </div>
+
+        <div class="rd-container rd-tier">
+            <div class="rd-tier-head">
+                <div>
+                    <div class="rd-tier-eyebrow">Tier 02 — Liquidity Events</div>
+                    <h2 class="rd-tier-title">Landscape-shifting <em>exits.</em></h2>
+                    <p class="rd-tier-desc">Public listings and strategic acquisitions — our portfolio companies are consistently acquired by, or listed alongside, the world's leading tech innovators.</p>
+                </div>
+                <div class="rd-controls">
+                    <button class="rd-ctrl" id="rd-prev" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="rd-ctrl" id="rd-pause" aria-label="Pause">
+                        <svg viewBox="0 0 24 24" fill="none" id="rd-pause-icon"><path d="M9 5v14M15 5v14" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <button class="rd-ctrl" id="rd-next" aria-label="Next">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="rd-carousel-wrap" id="rd-portfolio-wrap">
+            <div class="rd-track" id="rd-portfolio-track"></div>
+        </div>
+    </section>
+    <!-- ════════ /REDESIGN INJECTION 1 ════════ -->
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-inner">
+            <div class="team-layout">
+                <!-- Left: Sticky descriptive text -->
+                <div class="team-sticky-text">
+                    <p class="team-desc">Meet<br>Sunshine Lake.</p>
+                    <p class="team-intro">The Sunshine Lake team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($11B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
+                </div>
+
+                <!-- Right: Team members -->
+                <div class="team-cards">
+                    <!-- CONTENT:team -->
+                    <div class="team-card">
+                        <div class="team-card-photo">
+                            <img src="images/team/don.webp" alt="Don Stalter" loading="lazy">
+                        </div>
+                        <div class="team-card-info">
+                            <div class="team-card-name-row">
+                                <span class="team-card-name">Don Stalter</span>
+                            </div>
+                            <p class="team-card-role">General Partner</p>
+                            <p class="team-card-desc">Over two decades of experience across venture capital, operations, and global strategy.</p>
+                            <a class="team-bio-btn" href="don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-card-photo">
+                            <img src="images/team/suhail.webp" alt="Suhail Younus" loading="lazy">
+                        </div>
+                        <div class="team-card-info">
+                            <div class="team-card-name-row">
+                                <span class="team-card-name">Suhail Younus</span>
+                            </div>
+                            <p class="team-card-role">Partner</p>
+                            <p class="team-card-desc">A background spanning venture capital, private equity, and emerging technology research.</p>
+                            <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-card-photo">
+                            <img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval" loading="lazy">
+                        </div>
+                        <div class="team-card-info">
+                            <div class="team-card-name-row">
+                                <span class="team-card-name">Ivan La Frinere-Sandoval</span>
+                            </div>
+                            <p class="team-card-role">Partner, CFO & COO</p>
+                            <p class="team-card-desc">A builder and investor with deep roots in engineering, finance, and entrepreneurship.</p>
+                            <a class="team-bio-btn" href="ivan.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-card-photo">
+                            <div class="team-card-photo-placeholder"></div>
+                        </div>
+                        <div class="team-card-info">
+                            <div class="team-card-name-row">
+                                <span class="team-card-name">Wieger Lamers</span>
+                            </div>
+                            <p class="team-card-role">EMEA & Platforms Lead</p>
+                            <p class="team-card-desc">Raised at the intersection of European tech and entrepreneurship, with experience across venture and early-stage operations.</p>
+                            <a class="team-bio-btn" href="wieger.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        </div>
+                    </div>
+
+                    <!-- /CONTENT:team -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ REDESIGN INJECTION 2: From Day Zero + Founder Voices ════════ -->
+    <section class="rd-zone">
+        <div class="rd-container rd-dayzero">
+            <div class="rd-dayzero-head">
+                <div class="rd-tier-eyebrow">The Approach</div>
+                <h2 class="rd-tier-title">From Day <em>Zero.</em></h2>
+                <p class="rd-tier-desc">Our investments target foundational technical problems in complex, often overlooked markets. We partner from Day Zero — deploying precise operational architecture and non-obvious expertise to translate macro volatility into engineering-led scale.</p>
+            </div>
+            <div class="rd-featured-row" id="rd-featured-row"></div>
+        </div>
+
+        <div class="rd-voices">
+            <div class="rd-container">
+                <div class="rd-voices-head">
+                    <div class="rd-tier-eyebrow">Founder Voices</div>
+                    <h2 class="rd-tier-title">Killers on the <em>business side.</em></h2>
+                </div>
+                <div class="rd-voices-marquee">
+                    <div class="rd-voices-row rd-top" id="rd-voices-top"></div>
+                    <div class="rd-voices-row rd-bot" id="rd-voices-bot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ════════ /REDESIGN INJECTION 2 ════════ -->
+
+    </main>
+
+    <!-- Footer with photo grid -->
+    <footer class="footer-scroll-spacer">
+        <div class="footer-sticky">
+            <div class="footer-photo-grid" id="footerPhotoGrid"></div>
+            <div class="footer-photo-card" id="footerPhotoCard"></div>
+            <div class="footer-photo-content">
+                <div class="footer-photo-content-main">
+                    <h2>Dive Beneath<br>the Surface.</h2>
+                    <div class="footer-contact">
+                        <a href="mailto:hello@sunshinelake.vc">hello@sunshinelake.vc</a>
+                        <a href="https://linkedin.com/company/sunshinelake" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="footer-logo" fill="#155EE8" style="height:clamp(20px,2vw,32px);width:auto;">
+                        <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+                        <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+                    </svg>
+                    <p class="footer-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- WebGL Shaders -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        attribute vec2 a_position;
+        void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        #extension GL_OES_standard_derivatives : enable
+        precision highp float;
+
+        uniform vec2 u_resolution;
+        uniform float u_time;
+
+        uniform vec3 u_c1; uniform vec3 u_c2; uniform vec3 u_c3; uniform vec3 u_c4; uniform vec3 u_c5;
+        uniform float u_color_softness;
+        uniform float u_speed; uniform float u_distortion; uniform float u_zoom;
+        uniform float u_flow_angle; uniform float u_directional; uniform float u_radial_ripple;
+        uniform vec2 u_drop_pos; uniform float u_wave_stretch; uniform float u_scatter; uniform float u_contrast;
+        uniform vec2 u_sun_pos; uniform float u_sun_int; uniform float u_sun_size;
+        uniform float u_sun_streak; uniform float u_sun_flare; uniform float u_sun_warp;
+        uniform float u_sun_edge_glow; uniform float u_sun_glitter; uniform float u_sun_glitter_density; uniform float u_sun_glitter_size;
+
+        // Click ripple
+        uniform vec2 u_click_pos;
+        uniform float u_click_age;
+        uniform float u_click_strength;
+
+        float random(in vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123); }
+        float noise(in vec2 st) {
+            vec2 i = floor(st); vec2 f = fract(st);
+            f = f * f * (3.0 - 2.0 * f);
+            float a = random(i); float b = random(i + vec2(1.0, 0.0));
+            float c = random(i + vec2(0.0, 1.0)); float d = random(i + vec2(1.0, 1.0));
+            return mix(a, b, f.x) + (c - a)* f.y * (1.0 - f.x) + (d - b) * f.x * f.y;
+        }
+        #define OCTAVES 4
+        float fbm(in vec2 st) {
+            float value = 0.0; float amplitude = .5;
+            mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
+            for (int i = 0; i < OCTAVES; i++) {
+                value += amplitude * noise(st);
+                st = rot * st * 2.0 + vec2(100.0, 0.0); amplitude *= .5;
+            }
+            return value;
+        }
+
+        vec3 getRender(vec2 st, vec2 stSurface, float rippleCrest) {
+            vec2 flowDir = vec2(cos(u_flow_angle), sin(u_flow_angle));
+            vec2 q = vec2(0.);
+            q.x = fbm(st + flowDir * 0.1 * u_time * u_speed);
+            q.y = fbm(st + vec2(1.0));
+            vec2 r = vec2(0.);
+            vec2 waveIso = vec2(sin(st.y * 10.0 + u_time * u_speed), cos(st.x * 10.0 + u_time * u_speed)) * 0.05;
+            float proj = dot(st, flowDir);
+            vec2 waveDir = flowDir * sin(proj * 20.0 - u_time * u_speed * 3.0) * 0.08;
+            vec2 wave = mix(waveIso, waveDir, u_directional);
+            if (u_radial_ripple > 0.0) {
+                 vec2 center = vec2(u_drop_pos.x * (u_resolution.x / u_resolution.y) * u_zoom, u_drop_pos.y * u_zoom * u_wave_stretch);
+                vec2 dist = st - center; float len = length(dist);
+                float radWave = sin(len * 60.0 - u_time * 6.0);
+                wave += (dist / len) * radWave * u_radial_ripple * 0.1;
+            }
+            r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + flowDir * 0.15 * u_time * u_speed + wave);
+            r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + flowDir * 0.126 * u_time * u_speed + wave);
+            float f = fbm(st + r * u_distortion);
+
+            float s = max(0.001, u_color_softness * 0.5);
+            vec3 color = u_c1;
+            color = mix(color, u_c2, smoothstep(0.2 - s, 0.2 + s, f));
+            color = mix(color, u_c3, smoothstep(0.4 - s, 0.4 + s, f));
+            color = mix(color, u_c4, smoothstep(0.6 - s, 0.6 + s, f));
+            color = mix(color, u_c5, smoothstep(0.8 - s, 0.8 + s, f));
+            color = pow(max(color, vec3(0.0)), vec3(u_contrast));
+
+            float aspect = u_resolution.x / u_resolution.y;
+            vec2 sunCenter = u_sun_pos; sunCenter.x *= aspect; sunCenter *= u_zoom; sunCenter.y *= u_wave_stretch;
+            vec2 centeredNoise = r - vec2(0.5);
+            vec2 sunCoord = st + (centeredNoise * u_sun_warp);
+            vec2 distVec = sunCoord - sunCenter; distVec.y *= (1.0 - u_sun_streak * 0.8);
+            float d = length(distVec);
+
+            float sunShape = 1.0 - smoothstep(u_sun_size * 0.1, u_sun_size + 0.01, d);
+            float glowRadius = u_sun_size + 0.5 + u_sun_flare * 0.5;
+            float glow = exp(-d * 3.0 / glowRadius);
+            float edgeGlow = smoothstep(u_sun_size - 0.02, u_sun_size, d) * (1.0 - smoothstep(u_sun_size, u_sun_size + 0.05 + u_sun_edge_glow * 0.2, d));
+            float flareX = exp(-abs(distVec.y * 20.0)) * exp(-abs(distVec.x * 0.5));
+            float flareY = exp(-abs(distVec.x * 30.0)) * exp(-abs(distVec.y * 0.8));
+            float flare = (flareX + flareY) * u_sun_flare;
+
+            vec3 sunColor = vec3(1.0);
+            color += sunColor * sunShape * u_sun_int;
+            color += vec3(1.0, 0.95, 0.8) * edgeGlow * u_sun_edge_glow * u_sun_int * 2.0;
+            color += u_c3 * glow * (u_sun_int * 0.3);
+            color += u_c4 * flare * (u_sun_int * 0.5);
+
+            if (u_sun_glitter > 0.0) {
+                // Use undistorted surface coords for glitter grid so sparkles stay "on top"
+                vec2 warped_st = stSurface + r * 0.05 + vec2(noise(stSurface * 3.0 + u_time * 0.2), noise(stSurface * 3.0 - u_time * 0.2)) * 0.1;
+                float grid_scale = mix(20.0, 50.0, u_zoom) / max(0.05, u_sun_glitter_size);
+                vec2 g_st = warped_st * grid_scale;
+                vec2 i_st = floor(g_st); vec2 f_st = fract(g_st);
+                float spawn_chance = mix(0.05, 0.995, u_sun_glitter_density);
+                float total_core = 0.0; float total_glow = 0.0;
+
+                for (int y = -1; y <= 1; y++) {
+                    for (int x = -1; x <= 1; x++) {
+                        vec2 neighbor = vec2(float(x), float(y));
+                        vec2 cell_i = i_st + neighbor;
+                        float rand_val = random(cell_i);
+                        if (rand_val > spawn_chance) {
+                            vec2 rand_offset = vec2(random(cell_i + vec2(12.3, 45.6)), random(cell_i + vec2(78.9, 12.3)));
+                            vec2 offset = 0.5 + 0.4 * vec2(sin(u_time * (1.0 + rand_offset.x) + rand_offset.x * 20.0), cos(u_time * (1.0 + rand_offset.y) + rand_offset.y * 20.0));
+                            vec2 diff = neighbor + offset - f_st;
+                            float size_mod = mix(0.3, 1.8, random(cell_i + 7.77));
+                            float dist_glitter = length(diff) / size_mod;
+
+                            float core = 1.0 - smoothstep(0.02, 0.15, dist_glitter);
+                            float glow_amt = 1.0 - smoothstep(0.0, 1.3, dist_glitter);
+
+                            float freq = mix(0.5, 3.5, random(cell_i + 1.11));
+                            float phase = random(cell_i + 2.22) * 6.28;
+                            float pulse = sin(u_time * freq + phase) * cos(u_time * freq * 0.618 + phase);
+                            float twinkle = pow(max(0.0, pulse), 6.0) * 4.0;
+
+                            total_core += core * twinkle; total_glow += glow_amt * twinkle;
+                        }
+                    }
+                }
+                float ridge = 0.7 + 0.3 * sin(f * 15.0);
+                float sun_reflect = exp(-length(distVec) * 1.5) + (exp(-abs(distVec.x) * 10.0) * exp(-abs(distVec.y) * 1.5) * u_sun_streak);
+                float multiplier = ridge * (1.0 + sun_reflect * 4.0) * u_sun_glitter;
+                // Boost glitter on ripple crests — light catches the wave peaks
+                multiplier *= (1.0 + rippleCrest * 4.0);
+
+                float final_core = clamp(total_core * multiplier * 5.0, 0.0, 1.0);
+                float final_glow = total_glow * multiplier * 6.0;
+
+                color += vec3(1.0, 1.0, 1.0) * final_glow;
+                color = mix(color, vec3(1.2, 1.2, 1.2), final_core);
+            }
+            return color;
+        }
+
+        void main() {
+            vec2 st = gl_FragCoord.xy / u_resolution.xy;
+            st.x *= u_resolution.x / u_resolution.y;
+            if (u_scatter > 0.0) {
+                float rX = random(gl_FragCoord.xy); float rY = random(gl_FragCoord.xy + vec2(5.2, 1.3));
+                vec2 jitter = vec2(rX - 0.5, rY - 0.5);
+                st += jitter * u_scatter * 0.008;
+            }
+            st *= u_zoom; st.y *= u_wave_stretch;
+            vec2 stSurface = st; // pre-ripple coords for glitter
+            float rippleCrest = 0.0;
+
+            // Click ripple distortion
+            if (u_click_age < 4.0) {
+                vec2 clickSt = u_click_pos;
+                clickSt.x *= u_resolution.x / u_resolution.y;
+                clickSt *= u_zoom; clickSt.y *= u_wave_stretch;
+                vec2 delta = st - clickSt;
+                float dist = length(delta);
+                float rippleSpeed = 0.9;
+                float waveLen = 55.0;
+                float rippleFront = u_click_age * rippleSpeed;
+                float rippleWidth = 0.25 + u_click_age * 0.12;
+                float envelope = exp(-pow(dist - rippleFront, 2.0) / (2.0 * rippleWidth * rippleWidth));
+                float decay = exp(-u_click_age * 1.6);
+                float wave = sin(dist * waveLen - u_click_age * 18.0) * envelope * decay * 0.09 * u_click_strength;
+                st += normalize(delta + vec2(0.001)) * wave;
+                // Ripple crest intensity for glitter boost (light catches wave peaks)
+                rippleCrest = abs(wave) * 12.0;
+            }
+
+            vec3 col = getRender(st, stSurface, rippleCrest);
+            // Subtle vignette — darken water behind logo (top) and title (bottom)
+            float uv_y = gl_FragCoord.y / u_resolution.y; // 0 = bottom, 1 = top
+            float topDarken = smoothstep(0.88, 1.0, uv_y) * 0.3;
+            float bottomDarken = (1.0 - smoothstep(0.0, 0.45, uv_y)) * 0.2;
+            col *= 1.0 - topDarken - bottomDarken;
+            gl_FragColor = vec4(col, 1.0);
+        }
+    </script>
+
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <!-- WebGL Engine & Configuration -->
+    <script>
+        const exportedConfigString = "eyJjMSI6IiNlZGVjZTMiLCJjMiI6IiNmMmQ4MzEiLCJjMyI6IiM3YWNjZmYiLCJjNCI6IiMwMDMyYTgiLCJjNSI6IiMwYjEyNzUiLCJjb2xvclNvZnRuZXNzIjoiMC4zMiIsImRpc3RvcnRpb24iOiIyLjciLCJzcGVlZCI6IjAuMSIsImZsb3dBbmdsZSI6IjQ1IiwiZGlyZWN0aW9uYWwiOiIwLjk3IiwicmFkaWFsUmlwcGxlIjoiMSIsImRyb3BQb3NpdGlvbiI6IjAuNSwwLjUiLCJ3YXZlU3RyZXRjaCI6IjIuMiIsInpvb20iOiIyLjYiLCJzY2F0dGVyIjoiMCIsImNvbnRyYXN0IjoiMS4wNiIsInN1blBvcyI6IjAuNSwwLjUiLCJzdW5JbnQiOiIxLjciLCJzdW5TaXplIjoiMCIsInN1bkdsaXR0ZXIiOiIwLjExIiwic3VuR2xpdHRlckRlbnNpdHkiOiIwLjk2Iiwic3VuR2xpdHRlclNpemUiOiIxIiwic3VuV2FycCI6IjEiLCJzdW5TdHJlYWsiOiIwIiwic3VuRWRnZUdsb3ciOiIwLjUiLCJzdW5GbGFyZSI6IjAiLCJhc3BlY3RSYXRpbyI6IjQ6NSJ9";
+
+        let config = {};
+        try { config = JSON.parse(atob(exportedConfigString)); } catch(e) { console.error("Config load failed."); }
+        const getVal = (key, fallback) => config[key] !== undefined ? config[key] : fallback;
+
+        // Scroll-driven shader intensity
+        let shaderIntensity = 0;
+        let targetShaderIntensity = 0;
+
+        // --- Scroll-driven frame effect (GPU-composited) ---
+        const heroSticky = document.querySelector('.hero-sticky');
+        const heroCard = document.querySelector('.hero-card');
+
+        let heroLoaded = false;
+        let currentScale = 1;
+        let currentRadius = 16;
+        let targetScale = 1;
+        let targetRadius = 0;
+
+        // Title slide from center to bottom
+        const mainContent = document.querySelector('.main-content');
+        const initTitleY = window.innerHeight * 0.42;
+        let currentTitleY = initTitleY;
+        let targetTitleY = initTitleY;
+        mainContent.style.transform = `translateY(-${initTitleY}px)`;
+
+        // Footer — scale card from full-screen down to natural size
+        const footerSpacer = document.querySelector('.footer-scroll-spacer');
+        let currentFooterScale = 1;
+        let currentFooterRadius = 0;
+        let targetFooterScale = 1;
+        let targetFooterRadius = 0;
+
+        // --- Cached layout values (recalc on resize only) ---
+        const footerPhotoCardEl = document.getElementById('footerPhotoCard');
+        // Use photo card for dimensions since it's always rendered (photos is default)
+        let cachedFooterCardW = footerPhotoCardEl.offsetWidth;
+        let cachedFooterCardH = footerPhotoCardEl.offsetHeight;
+        let cachedContentHeight = 0;
+        // Cached offsetTop for scroll-position math (avoids getBoundingClientRect)
+        let cachedFooterTop = 0;
+        let cachedContentTop = 0;
+        let cachedFooterHeight = 0;
+        // Cached founders section position for logo color
+        const foundersGridSection = document.querySelector('.founders-scroll-spacer');
+        let cachedFoundersTop = 0;
+        let cachedFoundersHeight = 0;
+        // Cached founder item positions (document-relative top + height)
+        let cachedItemTops = [];
+        let cachedItemHeights = [];
+        let cachedSpacerTop = 0;
+        let cachedTeamSectionTop = 0;
+
+        function cacheLayoutValues() {
+            cachedFooterCardW = footerPhotoCardEl.offsetWidth;
+            cachedFooterCardH = footerPhotoCardEl.offsetHeight;
+            cachedContentHeight = contentSpacer.offsetHeight;
+            // Cache element offsets from document top (replaces getBoundingClientRect in scroll handler)
+            cachedFooterTop = footerSpacer.offsetTop;
+            cachedContentTop = contentSpacer.offsetTop;
+            cachedFooterHeight = footerSpacer.offsetHeight;
+            cachedFoundersTop = foundersGridSection.offsetTop;
+            cachedFoundersHeight = foundersGridSection.offsetHeight;
+            // Cache founder item positions (filled by founders IIFE after DOM ready)
+            var fItems = foundersGridSection.querySelectorAll('.founders-item');
+            if (fItems.length) {
+                var scrollY = window.scrollY;
+                cachedItemTops = [];
+                cachedItemHeights = [];
+                for (var i = 0; i < fItems.length; i++) {
+                    var r = fItems[i].getBoundingClientRect();
+                    cachedItemTops[i] = r.top + scrollY;
+                    cachedItemHeights[i] = r.height;
+                }
+            }
+            // Cache spacer + team section document-top
+            cachedSpacerTop = foundersGridSection.getBoundingClientRect().top + window.scrollY;
+            var ts = document.querySelector('.team-section');
+            if (ts) cachedTeamSectionTop = ts.getBoundingClientRect().top + window.scrollY;
+            // Refresh founders cached styles (avoids getComputedStyle in scroll handler)
+            if (typeof refreshCachedStyles === 'function') refreshCachedStyles();
+        }
+
+        function getFooterFullScale() {
+            const sX = window.innerWidth / cachedFooterCardW;
+            const sY = window.innerHeight / cachedFooterCardH;
+            return Math.max(sX, sY);
+        }
+
+        // Initialize at full-screen scale
+        const initScale = getFooterFullScale();
+        currentFooterScale = initScale;
+        targetFooterScale = initScale;
+        footerPhotoCardEl.style.transform = `scale(${initScale})`;
+
+        // Visibility flags (set in updateTargets, read in tick — no layout thrashing)
+        let heroInView = true;
+        let footerInView = false;
+        // --- Site logo scroll control ---
+        const siteLogo = document.getElementById('siteLogo');
+        const logoSvgPaths = siteLogo.querySelectorAll('path, polygon');
+        let currentLogoState = 'hidden'; // hidden | blue | white | faded
+
+        // --- Line-by-line reveal (merged into updateTargets) ---
+        const contentSpacer = document.querySelector('.content-spacer');
+        const contentSticky = document.querySelector('.content-sticky');
+        const revealLines = document.querySelectorAll('.reveal-line');
+        const totalLines = revealLines.length;
+        const hlMarks = document.querySelectorAll('.hl');
+        const totalHl = hlMarks.length;
+        let hlPeakIdx = -1; // Track highest highlight reached (no going backwards)
+        let prevScrollY = 0; // Track scroll direction
+        // Dirty-check state — avoid redundant classList calls that trigger style recalc
+        const lineVisible = new Array(totalLines).fill(false);
+        const hlActive = new Array(totalHl).fill(false);
+        let wasHlActive = false;
+
+        function updateTargets() {
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+            const vw = window.innerWidth;
+
+            // Frame: scale from 1.0 → slightly smaller card
+            const frameZone = vh;
+            const progress = Math.min(1, scrollY / frameZone);
+            const maxInset = vw <= 768 ? 16 : 68;
+            const scaleX = 1 - (maxInset * 2) / vw;
+            const scaleY = 1 - (maxInset * 2) / vh;
+            const minScale = Math.min(scaleX, scaleY);
+            targetScale = 1 - progress * (1 - minScale);
+            const baseRadius = vw <= 768 ? 11 : 16;
+            const endRadius = vw <= 768 ? 15 : 22;
+            targetRadius = baseRadius + progress * ((endRadius / minScale) - baseRadius);
+
+            // Title: slides from center to bottom of card
+            const titleStartY = vh * 0.42;
+            const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
+            targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
+
+            // Shader intensity over 0 → 150vh
+            targetShaderIntensity = Math.min(1, scrollY / (vh * 1.5));
+
+            // Footer — scroll math from cached offsetTop (no getBoundingClientRect)
+            const footerTop = cachedFooterTop - scrollY;
+            const footerBottom = footerTop + cachedFooterHeight;
+            const footerScrollInto = -footerTop;
+            const footerProgress = Math.max(0, Math.min(1, footerScrollInto / vh));
+            const fullScale = getFooterFullScale();
+            if (!window._footerSkipScale) {
+                targetFooterScale = fullScale - footerProgress * (fullScale - 1);
+                targetFooterRadius = footerProgress * 22;
+            }
+
+            // Visibility flags for tick() — avoids getBoundingClientRect in rAF
+            heroInView = scrollY < vh * 3.5;
+            footerInView = footerTop < vh && footerBottom > 0;
+
+            // Line-by-line reveal — scroll math from cached offsetTop
+            const contentTop = cachedContentTop - scrollY;
+            const revealScroll = -contentTop;
+            const revealTotal = cachedContentHeight - vh;
+            const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
+            const isMobileReveal = window.innerWidth <= 768;
+            const revealEnd = isMobileReveal ? 0.7 : 0.35, hlStart = 0.4, hlEnd = 0.9;
+            for (let i = 0; i < totalLines; i++) {
+                const lineStart = 0.1 + (revealEnd - 0.1) * (i / totalLines);
+                const shouldShow = revealProgress >= lineStart;
+                if (shouldShow !== lineVisible[i]) {
+                    lineVisible[i] = shouldShow;
+                    revealLines[i].classList.toggle('visible', shouldShow);
+                }
+            }
+            // Mobile: fade + slide up thesis text, portfolio slides up from below
+            if (isMobileReveal) {
+                const fadeStart = 0.5, fadeEnd = 0.85;
+                if (revealProgress > fadeStart) {
+                    const t = Math.min(1, (revealProgress - fadeStart) / (fadeEnd - fadeStart));
+                    contentSticky.style.opacity = 1 - t;
+                    contentSticky.style.transform = 'translateY(' + (-t * 12) + 'vh)';
+                } else {
+                    contentSticky.style.opacity = '';
+                    contentSticky.style.transform = '';
+                }
+            }
+            // Sequential word highlights — direction-aware
+            // Scrolling down: dim text + sequential highlights (kept even past last hl)
+            // Scrolling up:   full blue text (no highlights, no dim)
+            const scrollingDown = scrollY >= prevScrollY;
+            prevScrollY = scrollY;
+            let activeIdx = -1;
+            for (let i = totalHl - 1; i >= 0; i--) {
+                const hlThreshold = hlStart + (hlEnd - hlStart) * (i / totalHl);
+                if (revealProgress >= hlThreshold) { activeIdx = i; break; }
+            }
+            // Only advance forward, never go back
+            if (activeIdx > hlPeakIdx) hlPeakIdx = activeIdx;
+            // Reset peak when scrolling back above highlight zone
+            if (revealProgress < hlStart) hlPeakIdx = -1;
+            const inHlZone = hlPeakIdx >= 0 && revealProgress >= hlStart;
+            const shouldHlActive = inHlZone && scrollingDown;
+            if (shouldHlActive !== wasHlActive) {
+                wasHlActive = shouldHlActive;
+                contentSticky.classList.toggle('hl-active', shouldHlActive);
+            }
+            if (shouldHlActive) {
+                for (let i = 0; i < totalHl; i++) {
+                    const shouldMark = i === hlPeakIdx;
+                    if (shouldMark !== hlActive[i]) {
+                        hlActive[i] = shouldMark;
+                        hlMarks[i].classList.toggle('active', shouldMark);
+                    }
+                }
+            } else if (hlActive.some(Boolean)) {
+                for (let i = 0; i < totalHl; i++) {
+                    if (hlActive[i]) {
+                        hlActive[i] = false;
+                        hlMarks[i].classList.remove('active');
+                    }
+                }
+            }
+
+            // --- Site logo: visibility + color based on scroll position ---
+            const foundersTop = cachedFoundersTop - scrollY;
+            const foundersBottom = foundersTop + cachedFoundersHeight;
+            const inBlueSection = foundersTop < vh * 0.5 && foundersBottom > 0;
+            let newLogoState;
+            if (contentTop < vh * 0.5) {
+                if (footerTop < vh) {
+                    newLogoState = 'faded';
+                } else if (inBlueSection) {
+                    newLogoState = 'white';
+                } else {
+                    newLogoState = 'blue';
+                }
+            } else {
+                newLogoState = 'hidden';
+            }
+
+            if (newLogoState !== currentLogoState) {
+                currentLogoState = newLogoState;
+                const fillColor = newLogoState === 'white' ? '#ffffff' : '#155ee8';
+                logoSvgPaths.forEach(p => p.setAttribute('fill', fillColor));
+                siteLogo.style.opacity = newLogoState === 'hidden' ? '0'
+                    : newLogoState === 'faded' ? '0'
+                    : '1';
+            }
+
+            window._footerProgress = footerProgress;
+        }
+
+        // Lenis smooth scroll
+        const isMobile = window.innerWidth <= 768;
+        const lenis = new Lenis({
+            lerp: isMobile ? 0.4 : 0.18,
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: isMobile ? 2.2 : 1.8
+        });
+        window._lenis = lenis;
+        lenis.on('scroll', updateTargets);
+
+        cacheLayoutValues();
+        updateTargets();
+
+        // --- WebGL Setup ---
+        const canvas = document.getElementById('glCanvas');
+        const gl = canvas.getContext('webgl', { alpha: false }) || canvas.getContext('experimental-webgl', { alpha: false });
+        gl.getExtension('OES_standard_derivatives');
+
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(shader));
+            return shader;
+        }
+
+        const program = gl.createProgram();
+        gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, document.getElementById('vertex-shader').text));
+        gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fragment-shader').text));
+        gl.linkProgram(program);
+
+        const posLoc = gl.getAttribLocation(program, 'a_position');
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(posLoc);
+        gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+        gl.useProgram(program);
+
+        const locs = {
+            u_resolution: gl.getUniformLocation(program, 'u_resolution'),
+            u_time: gl.getUniformLocation(program, 'u_time'),
+            u_c1: gl.getUniformLocation(program, 'u_c1'), u_c2: gl.getUniformLocation(program, 'u_c2'),
+            u_c3: gl.getUniformLocation(program, 'u_c3'), u_c4: gl.getUniformLocation(program, 'u_c4'),
+            u_c5: gl.getUniformLocation(program, 'u_c5'), u_color_softness: gl.getUniformLocation(program, 'u_color_softness'),
+            u_speed: gl.getUniformLocation(program, 'u_speed'), u_distortion: gl.getUniformLocation(program, 'u_distortion'),
+            u_zoom: gl.getUniformLocation(program, 'u_zoom'), u_flow_angle: gl.getUniformLocation(program, 'u_flow_angle'),
+            u_directional: gl.getUniformLocation(program, 'u_directional'), u_radial_ripple: gl.getUniformLocation(program, 'u_radial_ripple'),
+            u_drop_pos: gl.getUniformLocation(program, 'u_drop_pos'), u_wave_stretch: gl.getUniformLocation(program, 'u_wave_stretch'),
+            u_scatter: gl.getUniformLocation(program, 'u_scatter'), u_contrast: gl.getUniformLocation(program, 'u_contrast'),
+            u_sun_pos: gl.getUniformLocation(program, 'u_sun_pos'), u_sun_int: gl.getUniformLocation(program, 'u_sun_int'),
+            u_sun_size: gl.getUniformLocation(program, 'u_sun_size'), u_sun_glitter: gl.getUniformLocation(program, 'u_sun_glitter'),
+            u_sun_glitter_density: gl.getUniformLocation(program, 'u_sun_glitter_density'), u_sun_glitter_size: gl.getUniformLocation(program, 'u_sun_glitter_size'),
+            u_sun_streak: gl.getUniformLocation(program, 'u_sun_streak'), u_sun_flare: gl.getUniformLocation(program, 'u_sun_flare'),
+            u_sun_warp: gl.getUniformLocation(program, 'u_sun_warp'), u_sun_edge_glow: gl.getUniformLocation(program, 'u_sun_edge_glow'),
+            u_click_pos: gl.getUniformLocation(program, 'u_click_pos'), u_click_age: gl.getUniformLocation(program, 'u_click_age'),
+            u_click_strength: gl.getUniformLocation(program, 'u_click_strength')
+        };
+
+        function hex2rgb(hex) {
+            const n = parseInt(hex.slice(1), 16);
+            return [(n>>16&255)/255, (n>>8&255)/255, (n&255)/255];
+        }
+
+        // Resize canvas — cap DPR at 1.5 for performance
+        const renderDpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        function resize() {
+            canvas.width = Math.floor(window.innerWidth * renderDpr);
+            canvas.height = Math.floor(window.innerHeight * renderDpr);
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            resize(); // canvas resize is instant, always do it
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(cacheLayoutValues, 150);
+        });
+        resize();
+
+        // --- Set STATIC uniforms once (these never change per frame) ---
+        gl.uniform3fv(locs.u_c1, hex2rgb(getVal('c1', '#edece3')));
+        gl.uniform3fv(locs.u_c2, hex2rgb(getVal('c2', '#f2d831')));
+        gl.uniform3fv(locs.u_c3, hex2rgb(getVal('c3', '#7accff')));
+        gl.uniform3fv(locs.u_c4, hex2rgb(getVal('c4', '#0032a8')));
+        gl.uniform3fv(locs.u_c5, hex2rgb(getVal('c5', '#0b1275')));
+        gl.uniform1f(locs.u_color_softness, parseFloat(getVal('colorSoftness', '0.32')));
+        gl.uniform1f(locs.u_zoom, parseFloat(getVal('zoom', '2.6')));
+        gl.uniform1f(locs.u_flow_angle, parseFloat(getVal('flowAngle', '45')) * (Math.PI/180));
+        gl.uniform1f(locs.u_directional, parseFloat(getVal('directional', '0.97')));
+        // Drop position — set dynamically in render() for toggle support
+        let dropPos = [0.82, 0.18];
+        gl.uniform1f(locs.u_wave_stretch, parseFloat(getVal('waveStretch', '2.2')));
+        gl.uniform1f(locs.u_scatter, parseFloat(getVal('scatter', '0.0')));
+        gl.uniform1f(locs.u_contrast, parseFloat(getVal('contrast', '1.06')));
+        const sp = getVal('sunPos', '0.7,0.3').split(',').map(Number);
+        gl.uniform2f(locs.u_sun_pos, sp[0], sp[1]);
+        gl.uniform1f(locs.u_sun_int, parseFloat(getVal('sunInt', '2.5')));
+        gl.uniform1f(locs.u_sun_size, parseFloat(getVal('sunSize', '0.08')));
+        gl.uniform1f(locs.u_sun_glitter, parseFloat(getVal('sunGlitter', '0.4')));
+        gl.uniform1f(locs.u_sun_glitter_density, parseFloat(getVal('sunGlitterDensity', '0.96')));
+        gl.uniform1f(locs.u_sun_glitter_size, parseFloat(getVal('sunGlitterSize', '1.0')));
+        gl.uniform1f(locs.u_sun_streak, parseFloat(getVal('sunStreak', '0.0')));
+        gl.uniform1f(locs.u_sun_flare, parseFloat(getVal('sunFlare', '0.0')));
+        gl.uniform1f(locs.u_sun_warp, parseFloat(getVal('sunWarp', '1.0')));
+        gl.uniform1f(locs.u_sun_edge_glow, parseFloat(getVal('sunEdgeGlow', '0.5')));
+        // Click ripple state
+        let clickAge = 99.0;
+        let clickStart = 0;
+        canvas.addEventListener('pointerdown', function(e) {
+            var rect = canvas.getBoundingClientRect();
+            var x = (e.clientX - rect.left) / rect.width;
+            var y = 1.0 - (e.clientY - rect.top) / rect.height;
+            gl.uniform2f(locs.u_click_pos, x, y);
+            gl.uniform2f(locs.u_sun_pos, x, y);
+            gl.uniform1f(locs.u_click_strength, 0.3 + Math.random() * 2.7);
+            clickAge = 0;
+            clickStart = globalTime;
+        });
+
+        // Shader intensity constants
+        const baseSpeed = 0.06, maxSpeed = 0.18;
+        const baseDistortion = 1.8, maxDistortion = 3.5;
+        const baseRipple = 0.75, maxRipple = 1.4;
+
+        let globalTime = 0;
+        let lastTime = performance.now();
+
+        function render(now) {
+            globalTime += (now - lastTime);
+            lastTime = now;
+
+            // Only DYNAMIC uniforms updated per frame
+            gl.uniform2f(locs.u_resolution, canvas.width, canvas.height);
+            gl.uniform1f(locs.u_time, globalTime * 0.001);
+            gl.uniform1f(locs.u_speed, baseSpeed + (maxSpeed - baseSpeed) * shaderIntensity);
+            gl.uniform1f(locs.u_distortion, baseDistortion + (maxDistortion - baseDistortion) * shaderIntensity);
+            gl.uniform1f(locs.u_radial_ripple, baseRipple + (maxRipple - baseRipple) * shaderIntensity);
+            gl.uniform2f(locs.u_drop_pos, dropPos[0], dropPos[1]);
+
+            // Click ripple age
+            clickAge = (globalTime - clickStart) * 0.001;
+            gl.uniform1f(locs.u_click_age, clickAge);
+
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            // Fade in hero after first frame
+            if (!heroLoaded) { heroCard.classList.add('loaded'); heroLoaded = true; }
+        }
+
+        // --- SINGLE unified rAF loop ---
+        let rafId;
+        function tick(now) {
+            lenis.raf(now);
+
+            const lerpFrame = 0.14;
+            currentScale += (targetScale - currentScale) * lerpFrame;
+            currentRadius += (targetRadius - currentRadius) * lerpFrame;
+            currentTitleY += (targetTitleY - currentTitleY) * lerpFrame;
+            shaderIntensity += (targetShaderIntensity - shaderIntensity) * 0.10;
+            currentFooterScale += (targetFooterScale - currentFooterScale) * 0.25;
+            currentFooterRadius += (targetFooterRadius - currentFooterRadius) * 0.25;
+
+            // Batch all DOM writes together (no reads between!)
+            heroCard.style.transform = `scale(${currentScale})`;
+            heroCard.style.borderRadius = currentRadius + 'px';
+            mainContent.style.transform = `translateY(-${currentTitleY}px)`;
+            footerPhotoCardEl.style.transform = `scale(${currentFooterScale})`;
+            footerPhotoCardEl.style.borderRadius = currentFooterRadius + 'px';
+
+            // WebGL — use cached visibility flags (no getBoundingClientRect!)
+            if (heroInView) render(now);
+
+            rafId = requestAnimationFrame(tick);
+        }
+        rafId = requestAnimationFrame(tick);
+
+        // Pause when tab is hidden, resume when visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                cancelAnimationFrame(rafId);
+            } else {
+                rafId = requestAnimationFrame(tick);
+            }
+        });
+
+        /* Old founders grid code removed — replaced by initFoundersScroll() IIFE above */
+
+        // About sections scroll animations
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    aboutObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.team-card').forEach(el => {
+            aboutObserver.observe(el);
+        });
+
+        // =======================================
+        // FOOTER PHOTO WATER RIPPLE (shared context, visibility-culled)
+        // =======================================
+        (function() {
+            var vSrc = 'attribute vec2 a_pos;varying vec2 v_uv;void main(){v_uv=a_pos*0.5+0.5;gl_Position=vec4(a_pos,0,1);}';
+            var fSrc = [
+                'precision mediump float;',
+                'uniform sampler2D u_img;uniform float u_time;varying vec2 v_uv;',
+                'float rand(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
+                'float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);',
+                'return mix(mix(rand(i),rand(i+vec2(1,0)),f.x),mix(rand(i+vec2(0,1)),rand(i+vec2(1,1)),f.x),f.y);}',
+                '',
+                'float fbm(vec2 p){',
+                '  float v=0.0; float a=0.5;',
+                '  mat2 r=mat2(0.877,0.479,-0.479,0.877);',
+                '  for(int i=0;i<4;i++){v+=a*noise(p);p=r*p*2.0+vec2(100.0);a*=0.5;}',
+                '  return v;',
+                '}',
+                '',
+                'float rippleWave(vec2 uv, vec2 center, float freq, float speed, float t){',
+                '  float dist=length(uv-center);',
+                '  return sin(dist*freq-t*speed)*exp(-dist*2.5);',
+                '}',
+                '',
+                'void main(){',
+                '  vec2 uv=v_uv;',
+                '  float t=u_time;',
+                '',
+                // Ripple waves — 3 centers (reduced from 5 for perf)
+                '  float waveSum=0.0;',
+                '  waveSum+=rippleWave(uv,vec2(0.3,0.7),40.0,4.0,t);',
+                '  waveSum+=rippleWave(uv,vec2(0.7,0.3),35.0,3.5,t+2.0);',
+                '  waveSum+=rippleWave(uv,vec2(0.5,0.5),45.0,5.0,t+4.5);',
+                '',
+                // Noise + sine wave displacement — visible ripple distortion
+                '  float n1=noise(uv*3.0+t*0.4)*0.035;',
+                '  float n2=noise(uv*5.0-t*0.35)*0.025;',
+                '  float n3=sin(uv.y*18.0+t*1.2)*0.006;',
+                '  float n4=sin(uv.x*14.0-t*0.9)*0.005;',
+                '  uv+=vec2(n1+n3,n2+n4);',
+                '',
+                // Sample photo with displaced UVs
+                '  vec3 photo=texture2D(u_img,uv).rgb;',
+                '',
+                // Water surface with visible crests and troughs
+                '  vec2 st=v_uv*3.0+t*0.15;',
+                '  float f=fbm(st);',
+                '  float rippleLight=waveSum*0.22;',
+                '  float surface=0.9+f*0.08+rippleLight;',
+                '  float caustic=noise(v_uv*14.0+t*0.6)*0.06*smoothstep(0.0,0.5,waveSum+0.3);',
+                '  surface+=caustic;',
+                '',
+                // Blue duotone: desaturate then map dark→brand blue, light→white
+                '  float gray=dot(photo,vec3(0.299,0.587,0.114));',
+                '  vec3 duotone=vec3(mix(0.082,1.0,gray),mix(0.369,1.0,gray),mix(0.910,1.0,gray));',
+                '',
+                // Apply water surface over duotone — visible multiply
+                '  vec3 col=mix(duotone,duotone*vec3(surface),0.6);',
+                '  gl_FragColor=vec4(col,1.0);',
+                '}'
+            ].join('\n');
+
+            // Shared offscreen WebGL context — renders ripple, then copies to per-cell canvases
+            var offscreen = document.createElement('canvas');
+            var rippleSize = window.innerWidth <= 768 ? 200 : 400;
+            offscreen.width = rippleSize; offscreen.height = rippleSize;
+            var gl = offscreen.getContext('webgl', { alpha: false, preserveDrawingBuffer: true }) || offscreen.getContext('experimental-webgl', { alpha: false, preserveDrawingBuffer: true });
+            if (!gl) return;
+
+            function mkShader(type, src) {
+                var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
+            }
+            var prog = gl.createProgram();
+            gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vSrc));
+            gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, fSrc));
+            gl.linkProgram(prog); gl.useProgram(prog);
+
+            var buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+            var aPos = gl.getAttribLocation(prog, 'a_pos');
+            gl.enableVertexAttribArray(aPos);
+            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+            var uTime = gl.getUniformLocation(prog, 'u_time');
+
+            // Track all registered cells for shared draw loop
+            var rippleCells = [];
+            var rippleObservers = [];
+            var rippleRunning = false;
+            var rippleVisible = false;
+            var startTime = performance.now();
+
+            // Visibility culling — only run rAF when footer is in viewport
+            var footerGrid = document.getElementById('footerPhotoGrid');
+            if (footerGrid) {
+                var rippleObserver = new IntersectionObserver(function(entries) {
+                    rippleVisible = entries[0].isIntersecting;
+                    if (rippleVisible && !rippleRunning) drawAll();
+                }, { threshold: 0.01 });
+                rippleObserver.observe(footerGrid.closest('.footer-scroll-spacer') || footerGrid);
+            }
+
+            // Give each cell its own texture so we don't re-upload every frame
+            function drawAll() {
+                if (!rippleVisible) { rippleRunning = false; return; }
+                rippleRunning = true;
+                var t = (performance.now() - startTime) / 1000;
+                gl.viewport(0, 0, offscreen.width, offscreen.height);
+                for (var i = 0; i < rippleCells.length; i++) {
+                    var rc = rippleCells[i];
+                    if (!rc.canvas.isConnected) continue;
+                    if (!rc.img.complete || rc.img.naturalWidth === 0) continue;
+                    // Only upload texture when image actually changed (needsTex flag)
+                    if (rc.needsTex) {
+                        if (!rc.tex) rc.tex = gl.createTexture();
+                        gl.bindTexture(gl.TEXTURE_2D, rc.tex);
+                        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+                        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, rc.img);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                        rc.needsTex = false;
+                    }
+                    if (!rc.tex) continue;
+                    gl.bindTexture(gl.TEXTURE_2D, rc.tex);
+                    gl.uniform1f(uTime, t);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    rc.ctx.drawImage(offscreen, 0, 0);
+                }
+                requestAnimationFrame(drawAll);
+            }
+
+            // Attach ripple to a cell's front image
+            window._initRippleCanvas = function(cell) {
+                var img = cell.querySelector('img.front');
+                if (!img) return;
+                var canvas = document.createElement('canvas');
+                canvas.className = 'ripple-canvas';
+                canvas.width = rippleSize; canvas.height = rippleSize;
+                cell.appendChild(canvas);
+                var ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                var rc = { img: img, canvas: canvas, ctx: ctx, needsTex: true };
+                rippleCells.push(rc);
+
+                // Re-flag texture upload when image src changes (crossfade swap)
+                var observer = new MutationObserver(function() { rc.needsTex = true; });
+                observer.observe(img, { attributes: true, attributeFilter: ['src'] });
+                rippleObservers.push(observer);
+                img.addEventListener('load', function() { rc.needsTex = true; });
+
+                if (rippleVisible && !rippleRunning) drawAll();
+            };
+
+            // Cleanup: delete textures, disconnect observers, free GL resources
+            window._cleanupRipple = function() {
+                rippleVisible = false;
+                rippleObservers.forEach(function(o) { o.disconnect(); });
+                rippleCells.forEach(function(rc) {
+                    if (rc.tex) gl.deleteTexture(rc.tex);
+                });
+                gl.deleteProgram(prog);
+                gl.deleteBuffer(buf);
+                if (rippleObserver) rippleObserver.disconnect();
+            };
+        })();
+
+        // =======================================
+        // FOUNDERS SCROLL-THROUGH
+        // =======================================
+        const FOUNDERS_DATA = [
+            // CONTENT:founders
+                { name: "Niek and Titus", company: "Minimal", desc: "From TU Delft, two Dutch founders saw how messy AI support gets in e-commerce. Minimal AI resolves tickets at human-level quality.", photo: 'images/founders/minimal.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/NL.svg', slug: 'minimal-ai' },
+                { name: "Martin & Zoltán", company: "Blurry", desc: "From Slovakia to Imperial, what started as a hobby is now Blurry, building the backbone for 3D world models.", photo: 'images/founders/blurry.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/GB-UKM.svg', slug: 'blurry' },
+                { name: "Cathy & Windsor", company: "Dedalus Labs", desc: "At Princeton, the founders kept running into the same wall: shipping agents meant wrestling brittle APIs and heavy infra. So they built Dedalus to make it effortless.", photo: 'images/founders/dedalus.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/FR.svg', slug: 'dedalus-labs' },
+                { name: "Samuel", company: "Duranta", desc: "From Kenya to UChicago and Stanford, he built a $4B solar company. Now with Duranta, Sam is building vision systems to better understand the world and shape a more beautiful one.", photo: 'images/founders/duranta.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/BR.svg', slug: 'duranta' },
+                { name: "Thomas", company: "Entire", desc: "From Berlin to GitHub CEO, Thomas Dohmke helped define modern dev tooling. Now he's building Entire, a platform for humans and AI agents to ship together.", photo: 'images/founders/entire.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/DE.svg', slug: 'entire' },
+                { name: "Thomas & Geoff", company: "FullSeam", desc: "From Oxford to selling TaxProper to Opendoor, Thomas and Geoff saw how much manual work finance teams still carry. FullSeam handles the grunt work.", photo: 'images/founders/fullseam.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/AT.svg', slug: 'fullseam' },
+                { name: "Hyde", company: "Fully Parsed", desc: "Markets move on narratives, from press conferences to YouTube clips, but most of it still goes unparsed. Hyde, a Harvard founder with experiences across global markets, built Fully Parsed to make sense of it.", photo: 'images/founders/fullyparsed.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/US.svg', slug: 'fully-parsed' },
+                { name: "Faisal", company: "Pillar", desc: "Monetizing an audience shouldn't be this hard. While at Harvard, Faisal saw how difficult it still is to turn attention into income and built Pillar to fix it for creators everywhere.", photo: 'images/founders/pillar.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/US.svg', slug: 'pillar' },
+                { name: "Udam & Varun", company: "Stitcher", desc: "From India and Sri Lanka to UW and Apptio, they experienced how opaque IT spend can be. StitcherAI brings structure and visibility to it.", photo: 'images/founders/stitcher.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/LK.svg', slug: 'stitcher' }
+            // /CONTENT:founders
+        ];
+
+        (function initFoundersScroll() {
+            const data = FOUNDERS_DATA;
+            const N = data.length;
+            const photoStack = document.getElementById('foundersPhotoStack');
+            const right = document.getElementById('foundersRight');
+
+            // Build photos
+            data.forEach((d, i) => {
+                const img = document.createElement('img');
+                img.src = d.photo;
+                img.alt = d.name;
+                img.loading = (i < 2) ? 'eager' : 'lazy';
+                if (i === 0) img.classList.add('active');
+                photoStack.appendChild(img);
+            });
+
+            // Build list items — both views in each item
+            data.forEach((d, i) => {
+                const item = document.createElement('a');
+                item.className = 'founders-item' + (i === 0 ? ' active' : '');
+                // item.href = 'companies/' + d.slug + '.html'; // temporarily disabled
+                item.style.pointerEvents = 'none';
+                item.innerHTML =
+                    // Clean view
+                    '<div class="founders-item-company">' + d.company + '</div>' +
+                    '<div class="founders-item-founders">' + d.name + '</div>' +
+                    // Detailed view
+                    '<div class="founders-item-name">' + d.name +
+                    '<br><span class="from-label">from</span> ' + d.company +
+                    ' <span class="card-flag"><img src="' + d.flag + '" alt="" loading="lazy"></span></div>' +
+                    '<div class="founders-item-detail">' +
+                    '<p class="founders-item-desc">' + d.desc + '</p>' +
+                    '</div>';
+                right.appendChild(item);
+            });
+
+            // Build mobile overlay (visible only on mobile via CSS)
+            const spacer = document.querySelector('.founders-scroll-spacer');
+            var mobileOverlay = document.createElement('div');
+            mobileOverlay.className = 'founders-mobile-overlay';
+            data.forEach(function(d, i) {
+                var panel = document.createElement('div');
+                panel.className = 'mob-title' + (i === 0 ? ' active' : '');
+                panel.innerHTML =
+                    // Clean view
+                    '<div class="mob-title-company">' + d.company + '</div>' +
+                    '<div class="mob-title-founders">' + d.name + '</div>' +
+                    // Detailed view
+                    '<div class="mob-title-detail">' +
+                        '<div class="founders-item-name">' + d.name +
+                        '<br><span class="from-label">from</span> ' + d.company +
+                        ' <span class="card-flag"><img src="' + d.flag + '" alt="" loading="lazy"></span></div>' +
+                        '<p class="founders-item-desc">' + d.desc + '</p>' +
+                    '</div>';
+                mobileOverlay.appendChild(panel);
+            });
+            spacer.insertBefore(mobileOverlay, right);
+            var mobTitles = mobileOverlay.querySelectorAll('.mob-title');
+
+            // Mobile: wrap photo + overlay in a single sticky container
+            if (window.innerWidth <= 768) {
+                var stickyWrap = document.createElement('div');
+                stickyWrap.className = 'founders-sticky-wrap';
+                photoStack.parentNode.insertBefore(stickyWrap, photoStack);
+                stickyWrap.appendChild(photoStack);
+                stickyWrap.appendChild(mobileOverlay);
+            }
+
+            // Build stepper (mobile only — thin stripes at bottom of viewport)
+            var stepper = document.createElement('div');
+            stepper.className = 'founders-stepper';
+            data.forEach(function(d, i) {
+                var bar = document.createElement('span');
+                if (i === 0) bar.classList.add('active');
+                stepper.appendChild(bar);
+            });
+            document.body.appendChild(stepper);
+            var stepperBars = stepper.querySelectorAll('span');
+            var stepperReady = false;
+            var stepperHidden = false;
+            window.addEventListener('load', function() { stepperReady = true; cacheLayoutValues(); });
+
+            // View toggle
+
+            // Default to Detailed 2 view
+            spacer.classList.add('founders-detailed', 'founders-detailed2');
+
+            // Center first card vertically with photo (desktop) / set sticky top (mobile)
+            function alignFirstCard() {
+                if (window.innerWidth <= 768) {
+                    right.style.paddingTop = '0';
+                    // Items stick just below the sticky photo
+                    var photoH = photoStack.offsetHeight;
+                    var photoStickyTop = parseFloat(getComputedStyle(photoStack).top) || 0;
+                    spacer.style.setProperty('--founders-item-top', (photoStickyTop + photoH + 48) + 'px');
+                    return;
+                }
+                var firstItem = right.querySelector('.founders-item');
+                if (firstItem) {
+                    var h = firstItem.offsetHeight;
+                    right.style.paddingTop = 'calc(50vh - ' + (h / 2) + 'px)';
+                }
+            }
+            alignFirstCard();
+
+            // Cache getComputedStyle values (avoid calling in scroll handler)
+            var cachedPhotoStickyTop = parseFloat(getComputedStyle(photoStack).top) || 0;
+            var cachedFoundersItemTop = parseFloat(getComputedStyle(spacer).getPropertyValue('--founders-item-top')) || 371;
+            function refreshCachedStyles() {
+                cachedPhotoStickyTop = parseFloat(getComputedStyle(photoStack).top) || 0;
+                cachedFoundersItemTop = parseFloat(getComputedStyle(spacer).getPropertyValue('--founders-item-top')) || 371;
+            }
+
+            const toggle = document.getElementById('foundersToggle');
+            toggle.addEventListener('click', function(e) {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                toggle.querySelector('.active').classList.remove('active');
+                btn.classList.add('active');
+                spacer.classList.remove('founders-detailed', 'founders-detailed2');
+                if (btn.dataset.view === 'detailed') {
+                    spacer.classList.add('founders-detailed');
+                } else if (btn.dataset.view === 'detailed2') {
+                    spacer.classList.add('founders-detailed', 'founders-detailed2');
+                }
+                // Recalculate padding for new card height
+                requestAnimationFrame(alignFirstCard);
+            });
+
+            // Scroll handler — find which name is closest to viewport center
+            const photos = photoStack.querySelectorAll('img');
+            const items = right.querySelectorAll('.founders-item');
+            const subtitle = document.getElementById('foundersSubtitle');
+            const teamSection = document.querySelector('.team-section');
+            let currentIndex = 0;
+            function updateFounders() {
+                const vh = window.innerHeight;
+                var isMobile = window.innerWidth <= 768;
+                var center;
+
+                // Stepper visibility: mobile only, after page load, hide during push-up exit
+                var scrollY = window.scrollY;
+                if (isMobile && stepperReady) {
+                    // Use cached spacer position instead of getBoundingClientRect
+                    var spacerViewTop = cachedSpacerTop - scrollY;
+                    var spacerViewBottom = spacerViewTop + cachedFoundersHeight;
+                    var inView = spacerViewTop < vh && spacerViewBottom > 0;
+                    stepper.classList.toggle('visible', inView && !stepperHidden);
+                } else {
+                    stepper.classList.remove('visible');
+                }
+
+                if (isMobile) {
+                    // photoStack is sticky — use cached sticky top + height instead of live rect
+                    var photoStickyTopVal = cachedPhotoStickyTop;
+                    var photoBottom = photoStickyTopVal + photoStack.offsetHeight;
+                    center = photoBottom + vh * 0.1;
+                } else {
+                    center = vh * 0.5;
+                }
+
+                // Use cached item positions (document-relative top → viewport via scrollY)
+                var firstViewTop = cachedItemTops[0] - scrollY;
+                var closest = 0;
+
+                if (firstViewTop + cachedItemHeights[0] * 0.5 <= center) {
+                    // Normal detection — closest to center (no getBoundingClientRect)
+                    var closestDist = Infinity;
+                    for (var i = 0; i < N; i++) {
+                        var itemViewTop = cachedItemTops[i] - scrollY;
+                        var itemCenter = itemViewTop + cachedItemHeights[i] * 0.5;
+                        var dist = Math.abs(itemCenter - center);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closest = i;
+                        }
+                    }
+                }
+
+                if (closest !== currentIndex) {
+                    photos[currentIndex].classList.remove('active');
+                    items[currentIndex].classList.remove('active');
+                    photos[closest].classList.add('active');
+                    items[closest].classList.add('active');
+                    // Mobile overlay cross-fade + stepper update
+                    if (mobTitles.length) {
+                        mobTitles[currentIndex].classList.remove('active');
+                        mobTitles[closest].classList.add('active');
+                    }
+                    if (stepperBars.length) {
+                        stepperBars[currentIndex].classList.remove('active');
+                        stepperBars[closest].classList.add('active');
+                    }
+                    currentIndex = closest;
+                }
+
+                // Fade out subtitle (desktop only — on mobile it scrolls away naturally)
+                if (!isMobile) {
+                    var fadeProgress = Math.max(0, Math.min(1, (center - firstViewTop) / (vh * 0.25)));
+                    subtitle.style.opacity = 1 - fadeProgress;
+                }
+
+                // Mobile: team section pushes photo + title up smoothly
+                if (isMobile && teamSection) {
+                    var teamTop = cachedTeamSectionTop - scrollY;
+                    var overlaySticky = cachedFoundersItemTop;
+                    var photoStickyTopVal = cachedPhotoStickyTop;
+                    var activeMob = mobileOverlay.querySelector('.mob-title.active');
+                    var contentH = activeMob ? activeMob.offsetHeight : 50;
+                    var naturalBottom = overlaySticky + contentH;
+                    var exitGap = 32;
+
+                    // No push-up — let sticky elements scroll out naturally
+                    stepperHidden = teamTop < naturalBottom + exitGap;
+                }
+            }
+
+            lenis.on('scroll', updateFounders);
+            updateFounders();
+
+            // Recache layout values now that founders items + padding are set
+            cacheLayoutValues();
+            // Recache again after a short delay to catch late layout shifts
+            setTimeout(cacheLayoutValues, 500);
+            setTimeout(cacheLayoutValues, 2000);
+        })();
+
+        // =======================================
+        // PHOTO-GRID FOOTER (default mode)
+        // =======================================
+        (function() {
+            const allSnaps = [
+                // CONTENT:snapshots
+                { src: 'images/snapshots/snap-1.webp' },
+                { src: 'images/snapshots/snap-2.webp' },
+                { src: 'images/snapshots/snap-3.webp' },
+                { src: 'images/snapshots/snap-4.webp' },
+                { src: 'images/snapshots/snap-5.webp' },
+                { src: 'images/snapshots/snap-6.webp' },
+                { src: 'images/snapshots/snap-7.webp' },
+                { src: 'images/snapshots/snap-9.webp' },
+                { src: 'images/snapshots/snap-10.webp' },
+                { src: 'images/snapshots/snap-11.webp' },
+                { src: 'images/snapshots/snap-12.webp' },
+                { src: 'images/snapshots/snap-13.webp' },
+                { src: 'images/snapshots/snap-14.webp' },
+                { src: 'images/snapshots/snap-15.webp' },
+                { src: 'images/snapshots/snap-16.webp' },
+                { src: 'images/snapshots/snap-17.webp' },
+                { src: 'images/snapshots/snap-18.webp' },
+                // Additional snapshots
+                { src: 'images/snapshots/snapshot9.webp' },
+                { src: 'images/snapshots/snapshot11.webp' },
+
+                { src: 'images/snapshots/snapshot13.webp' },
+                { src: 'images/snapshots/snapshot14.webp' },
+                // Don bio portraits
+                { src: 'images/logos/deel.webp' },
+                { src: 'images/logos/headway.webp' },
+                { src: 'images/logos/kalshi.webp' }
+                // /CONTENT:snapshots
+            ];
+
+            const COLS = 4, ROWS = 2;
+            const CELL_COUNT = COLS * ROWS;
+            const grid = document.getElementById('footerPhotoGrid');
+            const footer = document.querySelector('.footer-scroll-spacer');
+            function shuffle(arr) {
+                const a = arr.slice();
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            }
+
+            // Build cells
+            const shuffled = shuffle(allSnaps);
+            const visible = shuffled.slice(0, CELL_COUNT);
+            const pool = shuffled.slice(CELL_COUNT);
+            const cells = [];
+
+            for (let i = 0; i < CELL_COUNT; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'footer-photo-cell';
+                const back = document.createElement('img');
+                back.className = 'back';
+                back.src = visible[i].src;
+                back.alt = '';
+                back.loading = i < 5 ? 'eager' : 'lazy';
+                const front = document.createElement('img');
+                front.className = 'front';
+                front.src = visible[i].src;
+                front.alt = '';
+                front.loading = i < 5 ? 'eager' : 'lazy';
+                cell.appendChild(back);
+                cell.appendChild(front);
+                grid.appendChild(cell);
+                if (window._initRippleCanvas) window._initRippleCanvas(cell);
+                cells.push({ el: cell, front: front, back: back, src: visible[i].src });
+            }
+
+            // Crossfade swap — constant rhythm, 1 image every 2.5s
+            let swapInterval = null;
+            let nextCellIdx = 0;
+
+            function startSwapping() {
+                if (swapInterval) return;
+                swapInterval = setInterval(() => {
+                    if (pool.length === 0) return;
+                    // Round-robin through cells for steady rhythm
+                    const cellIdx = nextCellIdx % cells.length;
+                    nextCellIdx++;
+                    const poolIdx = Math.floor(Math.random() * pool.length);
+                    const cell = cells[cellIdx];
+                    const newSnap = pool[poolIdx];
+                    const oldSnap = { src: cell.src };
+                    // Set back image to new photo
+                    cell.back.src = newSnap.src;
+                    // Crossfade: front fades out to reveal back
+                    cell.front.style.opacity = '0';
+                    // After transition, update front to match and reset
+                    setTimeout(() => {
+                        cell.front.src = newSnap.src;
+                        cell.front.style.opacity = '1';
+                    }, 1100);
+                    cell.src = newSnap.src;
+                    pool[poolIdx] = oldSnap;
+                }, 1500);
+            }
+
+            // Staggered reveal on scroll into footer
+            let hasRevealed = false;
+
+            function revealCells() {
+                if (hasRevealed) return;
+                hasRevealed = true;
+                const indices = Array.from({ length: cells.length }, (_, i) => i);
+                for (let i = indices.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [indices[i], indices[j]] = [indices[j], indices[i]];
+                }
+                indices.forEach((cellIdx, i) => {
+                    setTimeout(() => { cells[cellIdx].el.classList.add('revealed'); }, i * 100);
+                });
+                startSwapping();
+            }
+
+            function stopSwapping() {
+                if (swapInterval) {
+                    clearInterval(swapInterval);
+                    swapInterval = null;
+                }
+            }
+
+            // Trigger reveal + start/stop swapping based on viewport visibility
+            const footerObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    revealCells();
+                    startSwapping();
+                } else {
+                    stopSwapping();
+                }
+            }, { threshold: 0.05 });
+            footerObserver.observe(footer);
+
+        })();
+
+
+        // Footer ewok follows mouse
+        (function() {
+            var footerSticky = document.querySelector('.footer-sticky');
+            if (!footerSticky) return;
+
+            // Create a dedicated floating ewok element
+            var ewok = document.createElement('div');
+            var img = document.createElement('img');
+            img.src = 'images/logos/ewoks.webp';
+            img.alt = '';
+            img.style.cssText = 'width:80px;height:auto;display:block;';
+            ewok.appendChild(img);
+            ewok.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:50;opacity:0;transition:opacity 0.3s ease;will-change:transform;';
+            document.body.appendChild(ewok);
+
+            var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+            var prevMx = mx;
+            var cx = mx, cy = my;
+            var visible = false;
+            var raf = null;
+            var facingLeft = false;
+
+            function lerp(a, b, t) { return a + (b - a) * t; }
+
+            function tick() {
+                cx = lerp(cx, mx, 0.1);
+                cy = lerp(cy, my, 0.1);
+                var flip = facingLeft ? ' scaleX(-1)' : '';
+                ewok.style.transform = 'translate(' + (cx - 40) + 'px,' + (cy - 40) + 'px)' + flip;
+                if (visible) raf = requestAnimationFrame(tick);
+            }
+
+            footerSticky.addEventListener('mouseenter', function() {
+                visible = true;
+                ewok.style.opacity = '1';
+                cx = mx; cy = my;
+                tick();
+            });
+            footerSticky.addEventListener('mouseleave', function() {
+                visible = false;
+                ewok.style.opacity = '0';
+                if (raf) cancelAnimationFrame(raf);
+            });
+            footerSticky.addEventListener('mousemove', function(e) {
+                if (e.clientX < mx - 2) facingLeft = true;
+                else if (e.clientX > mx + 2) facingLeft = false;
+                mx = e.clientX;
+                my = e.clientY;
+            });
+
+            // Hide ewok when footer leaves viewport (fixes mobile sticky issue)
+            var ewokObserver = new IntersectionObserver(function(entries) {
+                if (!entries[0].isIntersecting && visible) {
+                    visible = false;
+                    ewok.style.opacity = '0';
+                    if (raf) cancelAnimationFrame(raf);
+                }
+            }, { threshold: 0 });
+            ewokObserver.observe(footerSticky);
+        })();
+
+        // Cleanup Lenis + rAF on page unload
+        window.addEventListener('pagehide', () => {
+            lenis.destroy();
+            cancelAnimationFrame(rafId);
+            if (window._cleanupRipple) window._cleanupRipple();
+        });
+
+        /* ============================================================
+           MODE TOGGLE — A (Original) / B (Combined) / C (Tight)
+           ============================================================ */
+        (function() {
+            const heroOverlay = document.querySelector('.hero-overlay-text');
+            const overlayLines = heroOverlay.querySelectorAll('.reveal-line-b');
+            const totalOverlayLines = overlayLines.length;
+            const heroScrollSpacer = document.querySelector('.hero-scroll-spacer');
+            const vignetteEl = document.querySelector('.hero-overlay-vignette');
+
+            // Store original values
+            const origHeroHeight = '300vh';
+            const origContentHeight = '250vh';
+
+            let currentMode = 'tight';
+            document.body.classList.add('mode-tight');
+            cacheLayoutValues();
+
+            function setMode(mode) {
+                if (mode === currentMode) return;
+                currentMode = mode;
+
+                // Reset classes
+                document.body.classList.remove('mode-combined', 'mode-tight');
+
+                // Reset overlay lines + vignette
+                overlayLines.forEach(l => l.classList.remove('visible'));
+                heroOverlay.style.opacity = '0';
+                vignetteEl.style.opacity = '0';
+                mainContent.style.opacity = '';
+
+                if (mode === 'combined') {
+                    document.body.classList.add('mode-combined');
+                } else if (mode === 'tight') {
+                    document.body.classList.add('mode-tight');
+                }
+
+                // Recache layout values after DOM changes settle
+                requestAnimationFrame(() => {
+                    cacheLayoutValues();
+                    updateTargets();
+                });
+            }
+
+            // Patch updateTargets for mode-specific behavior
+            const origUpdateTargets = updateTargets;
+            function patchedUpdateTargets() {
+                const scrollY = window.scrollY;
+                const vh = window.innerHeight;
+
+                if (currentMode === 'combined') {
+                    // --- MODE B: Combined (refined) ---
+                    // Title fades 1.0vh→1.8vh, thesis reveals 1.4vh→3.0vh — seamless crossfade
+
+                    const frameZone = vh;
+                    const progress = Math.min(1, scrollY / frameZone);
+                    const maxInset = window.innerWidth <= 768 ? 16 : 68;
+                    const scaleX = 1 - (maxInset * 2) / window.innerWidth;
+                    const scaleY = 1 - (maxInset * 2) / vh;
+                    const minSc = Math.min(scaleX, scaleY);
+                    targetScale = 1 - progress * (1 - minSc);
+                    const baseR = window.innerWidth <= 768 ? 11 : 16;
+                    const endR = window.innerWidth <= 768 ? 15 : 22;
+                    targetRadius = baseR + progress * ((endR / minSc) - baseR);
+
+                    const titleStartY = vh * 0.42;
+                    const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
+                    targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
+
+                    // Shader intensity — ramp up, then dim 40% on exit (3.0vh→3.8vh)
+                    const rawIntensity = Math.min(1, scrollY / (vh * 2.0));
+                    const shaderDimProgress = Math.max(0, Math.min(1, (scrollY - vh * 3.0) / (vh * 0.8)));
+                    targetShaderIntensity = rawIntensity * (1 - shaderDimProgress * 0.4);
+
+                    // Title fade out: 1.0vh → 1.8vh (tighter)
+                    const titleFade = 1 - Math.max(0, Math.min(1, (scrollY - vh * 1.0) / (vh * 0.8)));
+                    mainContent.style.opacity = titleFade.toFixed(3);
+
+                    // Overlay text: 1.4vh → 3.0vh (compressed range)
+                    const overlayProgress = Math.max(0, Math.min(1, (scrollY - vh * 1.4) / (vh * 1.6)));
+
+                    // Container + vignette: fast ramp to full opacity over first 15% of progress
+                    const containerOpacity = Math.min(1, overlayProgress / 0.15);
+                    heroOverlay.style.opacity = containerOpacity.toFixed(3);
+                    vignetteEl.style.opacity = containerOpacity.toFixed(3);
+
+                    // Lines reveal earlier: 0.05 → 0.55 of overlayProgress
+                    const oStartAt = 0.05, oEndAt = 0.55;
+                    for (let i = 0; i < totalOverlayLines; i++) {
+                        const lineStart = oStartAt + (oEndAt - oStartAt) * (i / totalOverlayLines);
+                        if (overlayProgress >= lineStart) {
+                            overlayLines[i].classList.add('visible');
+                        } else {
+                            overlayLines[i].classList.remove('visible');
+                        }
+                    }
+
+                    // Hide original reveal lines in combined mode
+                    for (let i = 0; i < totalLines; i++) {
+                        revealLines[i].classList.remove('visible');
+                    }
+
+                    heroInView = scrollY < vh * 4.0;
+
+                    // Footer / logo — still use cached positions
+                    const footerTop = cachedFooterTop - scrollY;
+                    const footerBottom = footerTop + cachedFooterHeight;
+                    const footerScrollInto = -footerTop;
+                    const footerProg = Math.max(0, Math.min(1, footerScrollInto / vh));
+                    const fullScale = getFooterFullScale();
+                    if (!window._footerSkipScale) {
+                        targetFooterScale = fullScale - footerProg * (fullScale - 1);
+                        targetFooterRadius = footerProg * 22;
+                    }
+                    footerInView = footerTop < vh && footerBottom > 0;
+
+                    // Site logo — adjusted thresholds for tighter timing
+                    const foundersTop = cachedFoundersTop - scrollY;
+                    const foundersBottom = foundersTop + cachedFoundersHeight;
+                    const inBlueSection = foundersTop < vh * 0.5 && foundersBottom > 0;
+                    let newLogoState;
+                    if (scrollY > vh * 1.0) {
+                        if (footerTop < vh) {
+                            newLogoState = 'faded';
+                        } else if (inBlueSection) {
+                            newLogoState = 'white';
+                        } else if (scrollY < vh * 4) {
+                            newLogoState = 'white'; // over shader
+                        } else {
+                            newLogoState = 'blue';
+                        }
+                    } else {
+                        newLogoState = 'hidden';
+                    }
+                    if (newLogoState !== currentLogoState) {
+                        currentLogoState = newLogoState;
+                        const fillColor = newLogoState === 'white' ? '#ffffff' : '#155ee8';
+                        logoSvgPaths.forEach(p => p.setAttribute('fill', fillColor));
+                        siteLogo.style.opacity = newLogoState === 'hidden' ? '0' : newLogoState === 'faded' ? '0' : '1';
+                    }
+                    window._footerProgress = footerProg;
+
+                } else if (currentMode === 'tight') {
+                    // --- MODE C: Tight (gradient bleed + earlier reveal) ---
+                    // Run original for frame/footer/logo math
+                    origUpdateTargets();
+
+                    // Override line reveal with tighter thresholds
+                    const contentTop = cachedContentTop - scrollY;
+                    const revealScroll = -contentTop;
+                    const revealTotal = cachedContentHeight - vh;
+                    const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
+                    const startAt = 0.05, endAt = 0.5;
+                    for (let i = 0; i < totalLines; i++) {
+                        const lineStart = startAt + (endAt - startAt) * (i / totalLines);
+                        if (revealProgress >= lineStart) {
+                            revealLines[i].classList.add('visible');
+                        } else {
+                            revealLines[i].classList.remove('visible');
+                        }
+                    }
+                } else {
+                    // --- MODE A: Original ---
+                    origUpdateTargets();
+                }
+            }
+
+            // Replace the lenis scroll handler
+            lenis.off('scroll', updateTargets);
+            lenis.on('scroll', patchedUpdateTargets);
+            // Also re-assign for direct calls
+            window._modeUpdateTargets = patchedUpdateTargets;
+
+
+
+        })();
+
+    </script>
+
+    <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
+    <script src="redesign.js" defer></script>
+
+</body>
+</html>
