@@ -349,6 +349,44 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════
+     DIVE ZOOM — scroll-driven scale on the painterly water and
+     sparkles so the user feels like they're zooming INTO the
+     water as the hero card recedes. Uses the modern CSS `scale`
+     property (independent of transform) so it composes cleanly
+     with the drift animation's translate.
+     ═══════════════════════════════════════════════════════════════ */
+  function setupDiveZoom() {
+    var spacer = document.querySelector('.hero-scroll-spacer.rd-water-extend');
+    if (!spacer) return;
+
+    var rafPending = false;
+    function update() {
+      var rect = spacer.getBoundingClientRect();
+      var spacerH = rect.height;
+      if (spacerH <= 0) return;
+      var raw = -rect.top / spacerH; // 0 at top, 1 at bottom of spacer
+      var progress = Math.max(0, Math.min(1, raw));
+      // Ease the zoom so it accelerates as you go deeper
+      var eased = progress * progress;
+      var zoom = 1 + eased * 2.4; // 1× → 3.4× over the spacer
+      spacer.style.setProperty('--rd-dive-zoom', zoom.toFixed(3));
+    }
+
+    function onScroll() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function () {
+        update();
+        rafPending = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      DIVE PARTICLES — white sparkles drifting through the dive layer
      ═══════════════════════════════════════════════════════════════ */
   function spawnDiveParticles() {
@@ -382,6 +420,7 @@
     wireControls();
     wireFooterCaptions();
     spawnDiveParticles();
+    setupDiveZoom();
   }
 
   if (document.readyState === 'loading') {
