@@ -629,13 +629,10 @@ a.rd-name:hover { color: var(--rd-yellow); }
   background:
     linear-gradient(180deg,
       #FFFFFF 0%,     /* pure white at the surface */
-      #FFFBEB 14%,    /* barely-warm cream */
-      #FFF1B8 28%,    /* light yellow — sun band, softer than #F4E08C */
-      #FCF0CC 42%,    /* yellow fading back to cream */
-      #ECE9DC 58%,    /* warm-cool transition */
-      #D8DEE8 75%,    /* cool cream-blue */
-      #C5D2E8 90%,    /* pale blue */
-      #B8C8E5 100%    /* light blue — handoff to thesis */
+      #FFFBE5 20%,    /* white with hint of warmth */
+      #FFF1B8 40%,    /* light yellow — sun band */
+      #FFF6D8 65%,    /* cream-yellow */
+      #FFFBEB 100%    /* warm white at handoff — stays bright */
     ) !important;
 }
 
@@ -687,16 +684,8 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Make sure the hero sticky sits above the painterly water */
 .hero-scroll-spacer .hero-sticky { position: sticky; z-index: 5; }
 
-/* OPTION 1 — Hero card GROWS on scroll
-   The site's existing JS sets transform: scale(currentScale) where
-   currentScale shrinks 1.0 → ~0.5. We use the modern `scale` property
-   (which composes multiplicatively with the transform's scale) to
-   apply our own grow factor on top. JS updates --rd-card-grow each
-   frame so the net visual scale increases as you scroll. */
-.hero-card {
-  scale: var(--rd-card-grow, 1) !important;
-  transform-origin: center center !important;
-}
+/* (Option 1 hero-card-grow reverted — existing site shrink-on-scroll
+   behavior is restored.) */
 
 /* Scroll-driven zoom: painterly water + sparkles scale up as the
    user scrolls. JS sets --rd-dive-zoom on the spacer (1 → ~2.8).
@@ -722,13 +711,17 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Fallback in case any section bleeds through */
 body { background: #010210 !important; }
 
-/* Thesis — clean two-stop continuation of the descent so it reads
-   as ONE section with the hero spacer above it. Matches the
-   spacer's bottom edge exactly and slides into the team band. */
+/* Thesis — starts white-with-yellow (continues bright zone from
+   the hero spacer) and then plunges dramatically to blue at the
+   bottom. Stops bias the bright portion toward the top so the
+   transition feels sudden, not gradual. */
 .content-spacer {
   background: linear-gradient(180deg,
-    #B8C8E5 0%,    /* matches hero spacer bottom — invisible seam */
-    #4A88E5 100%   /* hands off to the team section */
+    #FFFBEB 0%,    /* warm white — matches hero spacer bottom */
+    #FFEFB8 18%,   /* light yellow */
+    #FFF1C5 35%,   /* yellow-cream — still bright */
+    #C8D5E8 62%,   /* abrupt cool — the plunge begins */
+    #4A88E5 100%   /* royal blue — hands off to team */
   ) !important;
 }
 
@@ -859,16 +852,25 @@ body.mode-tight .content-sticky,
   color: #155EE8 !important;
 }
 
-/* Sequential cinematic fade: each line fades IN, then fades OUT as
-   the next line takes its place. Implemented with :has() — any
-   reveal-line that has a LATER visible sibling fades to 0. */
+/* Sequential clean fade: opacity only, no translate, no glow.
+   Each line fades in, then fades out as the next one arrives. */
+.reveal-line {
+  transform: none !important;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.reveal-line.visible {
+  transform: none !important;
+}
+.content-sticky p,
+.content-sticky.hl-active p,
+body.mode-tight .content-sticky p {
+  text-shadow: none !important;
+}
+
 .content-sticky:has(.reveal-line:nth-child(2).visible) .reveal-line:nth-child(1),
 .content-sticky:has(.reveal-line:nth-child(3).visible) .reveal-line:nth-child(2),
 .content-sticky:has(.reveal-line:nth-child(4).visible) .reveal-line:nth-child(3) {
   opacity: 0 !important;
-  transform: translateY(-20px) !important;
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
