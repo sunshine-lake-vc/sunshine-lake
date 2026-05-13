@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunshine Lake Capital — Global Founders Forge the Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,300;9..144,1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ═══════════════ TOKENS ═══════════════ */
+  :root {
+    --blue: #155EE8;
+    --blue-deep: #0032A8;
+    --blue-navy: #0B1275;
+    --blue-trench: #050838;
+    --blue-abyss: #02041F;
+    --blue-sky: #7ACCFF;
+    --yellow: #F2D831;
+    --yellow-bright: #FFE45C;
+    --cream: #EDECE3;
+    --ink: #0A0E1A;
+    --white: #FFFFFF;
+
+    --max-w: 1280px;
+    --side-pad: clamp(24px, 4vw, 64px);
+    --gutter: max(var(--side-pad), calc((100vw - var(--max-w)) / 2 + var(--side-pad)));
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  a { color: inherit; text-decoration: none; }
+  .inline-link {
+    color: var(--white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    transition: border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+  }
+  .inline-link:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  html, body {
+    color: var(--white);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Surface → abyss gradient (visible BELOW the hero card) */
+  body {
+    background:
+      linear-gradient(180deg,
+        #155EE8 0%,
+        #1450C8 18%,
+        #0A3DAE 32%,
+        #062D8C 50%,
+        #0B1275 68%,
+        #050838 84%,
+        #02041F 96%,
+        #010210 100%);
+    position: relative;
+  }
+
+  /* ═══════════════ HERO CARD ═══════════════ */
+  .hero-card {
+    position: relative;
+    margin: clamp(12px, 1.5vw, 20px);
+    height: calc(100vh - clamp(24px, 3vw, 40px));
+    min-height: 560px;
+    max-height: 940px;
+    border-radius: clamp(12px, 1vw, 18px);
+    overflow: hidden;
+    background: #050838;
+    z-index: 5;
+  }
+
+  .hero-card canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* CSS fallback if WebGL unavailable */
+  .hero-card .fallback {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 25% 30%, #F2D831 0%, transparent 35%),
+      radial-gradient(ellipse at 75% 65%, #FFE45C 0%, transparent 32%),
+      radial-gradient(ellipse at 50% 20%, #7ACCFF 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 30%, #155EE8 0%, transparent 38%),
+      radial-gradient(ellipse at 30% 80%, #0032A8 0%, transparent 45%),
+      linear-gradient(135deg, #0B1275 0%, #050838 100%);
+    filter: blur(2px);
+  }
+
+  .hero-logo {
+    position: absolute;
+    top: clamp(20px, 2.5vw, 44px);
+    left: clamp(20px, 3vw, 56px);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--white);
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 1.8vw, 30px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .hero-logo svg {
+    height: 0.85em;
+    width: auto;
+  }
+
+  .hero-tagline {
+    position: absolute;
+    bottom: clamp(40px, 6vw, 88px);
+    left: clamp(20px, 3vw, 56px);
+    right: clamp(20px, 3vw, 56px);
+    z-index: 10;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 6vw, 108px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--white);
+    max-width: 75%;
+  }
+
+  /* Subtle vignette over canvas for text legibility */
+  .hero-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(11, 18, 117, 0.18) 0%, transparent 25%, transparent 60%, rgba(11, 18, 117, 0.28) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ═══════════════ DEEP OCEAN AMBIENT (below hero) ═══════════════ */
+  .ocean {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.12) 55%, rgba(255,255,255,0.02) 90%);
+    box-shadow: inset 0 -2px 4px rgba(255,255,255,0.18);
+    animation: rise linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes rise {
+    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+    8%   { opacity: var(--op, 0.3); }
+    50%  { transform: translate3d(18px, -50vh, 0); }
+    92%  { opacity: var(--op, 0.3); }
+    100% { transform: translate3d(-12px, -110vh, 0); opacity: 0; }
+  }
+
+  .glow {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 12px var(--yellow), 0 0 24px rgba(242, 216, 49, 0.5);
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.7); }
+    50%      { opacity: 1;    transform: scale(1.35); }
+  }
+
+  /* ═══════════════ CONTAINER ═══════════════ */
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--side-pad);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ═══════════════ MEET SUNSHINE LAKE ═══════════════ */
+  .meet {
+    padding: 64px 0 24px;
+  }
+
+  .meet-head {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .meet-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 5vw, 80px);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--white);
+  }
+
+  .meet-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .meet-body {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+    padding-top: 12px;
+  }
+
+  .meet-body strong { color: var(--white); font-weight: 500; }
+
+  /* ═══════════════ TEAM ═══════════════ */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .team-card { display: flex; flex-direction: column; gap: 12px; }
+
+  .team-portrait {
+    aspect-ratio: 5 / 6;
+    background: linear-gradient(165deg, #1a1f3a 0%, #050838 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .team-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(242, 216, 49, 0.18), transparent 60%);
+    pointer-events: none;
+  }
+
+  .team-portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+  .portrait-initials {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: -0.02em;
+    z-index: 1;
+  }
+
+  .team-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    color: var(--white);
+  }
+
+  .team-role {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+
+  .team-bio {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  /* ═══════════════ TIERS ═══════════════ */
+  section { position: relative; z-index: 2; }
+
+  .tier { padding: 40px 0; }
+
+  .tier-head {
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 32px;
+  }
+
+  .tier-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 12px;
+  }
+
+  .tier-eyebrow::before {
+    content: '';
+    width: 26px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .tier-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 2.8vw, 42px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .tier-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .tier-desc {
+    max-width: 520px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 16px;
+    line-height: 1.55;
+    margin-top: 14px;
+  }
+
+  /* ═══════════════ LEADERS CAROUSEL ═══════════════ */
+  /* Reuses .carousel-wrap + .track from exits, scoped via .leaders-wrap */
+  .leaders-wrap .track {
+    animation-name: scrollLeaders;
+    animation-duration: 70s;
+  }
+
+  @keyframes scrollLeaders {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 8px)); }
+  }
+
+  /* Featured-logo fallback for logo helper used in featured testimonials */
+  .logo-wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--blue-navy);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  /* ═══════════════ EXITS + IPOs CAROUSEL ═══════════════ */
+  .carousel-wrap {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, black 100px, black calc(100% - 100px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, black 100px, black calc(100% - 100px), transparent 100%);
+  }
+
+  .track {
+    display: flex;
+    gap: 16px;
+    padding: 16px var(--gutter);
+    width: max-content;
+    animation: scroll 80s linear infinite;
+    will-change: transform;
+  }
+
+  .carousel-wrap:hover .track,
+  .carousel-wrap.paused .track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 8px)); }
+  }
+
+  .exit-card {
+    position: relative;
+    width: 360px;
+    height: 190px;
+    border-radius: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 32px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .exit-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35), 0 28px 56px -12px rgba(0, 0, 0, 0.65);
+  }
+
+  /* Exit-card variants: deeper ocean tones */
+  .exit-card.ink  { background: linear-gradient(155deg, #0A0E1A 0%, #14182C 100%); }
+  .exit-card.navy { background: linear-gradient(155deg, #0B1275 0%, #050838 100%); }
+  .exit-card.deep { background: linear-gradient(155deg, #0032A8 0%, #0B1275 100%); }
+
+  /* Leader-card variants: brighter royal-blue surface tones */
+  .exit-card.royal  { background: linear-gradient(155deg, #1E68EE 0%, #0838A8 100%); }
+  .exit-card.cobalt { background: linear-gradient(155deg, #2A7CFF 0%, #0B3CB8 100%); }
+  .exit-card.azure  { background: linear-gradient(155deg, #155EE8 0%, #062D8C 100%); }
+
+  /* A subtle inner highlight to set leaders apart from exits */
+  .exit-card.royal::before,
+  .exit-card.cobalt::before,
+  .exit-card.azure::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .yellow-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--yellow);
+    color: var(--ink);
+    z-index: 3;
+    font-family: 'Fraunces', serif;
+    box-shadow: 0 4px 12px rgba(242, 216, 49, 0.3);
+  }
+
+  .yellow-badge.stamp {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1;
+    transform: rotate(-6deg);
+  }
+
+  .yellow-badge.stamp small {
+    font-family: 'Inter', sans-serif;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+
+  .yellow-badge.label {
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .exit-inner {
+    position: absolute;
+    inset: 0;
+    padding: 18px 20px 44px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exit-flow {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* IPO card variant: single centered name */
+  .exit-card.ipo .exit-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exit-card.ipo .company-name {
+    font-size: 38px;
+  }
+
+  .company-name {
+    font-family: 'Fraunces', 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--white);
+    text-align: center;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+  }
+
+  a.company-name:hover { color: var(--yellow); }
+
+  .company-name.tight   { font-size: 25px; letter-spacing: -0.03em; }
+  .company-name.tighter { font-size: 20px; letter-spacing: -0.035em; }
+
+  .exit-arrow {
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease;
+  }
+
+  .exit-card:hover .exit-arrow { transform: translateX(3px); color: var(--yellow); }
+  .exit-arrow svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.8; fill: none; }
+
+  .exit-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .exit-sector,
+  .exit-year {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Controls */
+  .controls { display: flex; gap: 10px; flex-shrink: 0; }
+
+  .ctrl-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ctrl-btn:hover {
+    background: var(--white);
+    color: var(--blue-deep);
+    border-color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .ctrl-btn svg { width: 16px; height: 16px; stroke: currentColor; }
+
+  /* ═══════════════ DAY ZERO — Featured Testimonials ═══════════════ */
+  .day-zero { padding: 48px 0; }
+
+  .day-zero-head {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+
+  .featured-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 48px;
+  }
+
+  .featured-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(242, 216, 49, 0.18);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.5s ease,
+                box-shadow 0.5s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242, 216, 49, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(242, 216, 49, 0.3);
+    box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.45),
+                0 0 80px -20px rgba(242, 216, 49, 0.2);
+  }
+
+  .featured-card:hover::before { opacity: 1; }
+
+  .featured-company {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--white);
+    width: fit-content;
+    transition: color 0.3s ease;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+  }
+
+  .featured-company:hover {
+    color: var(--yellow);
+    border-bottom-color: rgba(242, 216, 49, 0.4);
+  }
+
+  .featured-contributions {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.01em;
+    border-left: 2px solid rgba(242, 216, 49, 0.4);
+    padding-left: 14px;
+  }
+
+  .featured-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--white);
+    margin-top: auto;
+  }
+
+  .featured-quote::before {
+    content: '"';
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    line-height: 0;
+    color: var(--yellow);
+    opacity: 0.55;
+    vertical-align: -16px;
+    margin-right: 4px;
+  }
+
+  .featured-attr {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .featured-attr .name {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .featured-attr .role {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ═══════════════ VOICES MARQUEE ═══════════════ */
+  .voices { padding: 48px 0; }
+
+  .voices-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .voices-head .tier-eyebrow { justify-content: center; }
+  .voices-head .tier-eyebrow::before { display: none; }
+
+  .voices-marquee {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+  }
+
+  .voices-row {
+    display: flex;
+    gap: 18px;
+    padding: 12px var(--gutter);
+    width: max-content;
+    will-change: transform;
+  }
+
+  .voices-row.top { animation: vScrollLeft 80s linear infinite; }
+  .voices-row.bot { animation: vScrollRight 90s linear infinite; margin-top: 14px; }
+  .voices-marquee:hover .voices-row { animation-play-state: paused; }
+
+  @keyframes vScrollLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 9px)); }
+  }
+  @keyframes vScrollRight {
+    from { transform: translateX(calc(-50% - 9px)); }
+    to   { transform: translateX(0); }
+  }
+
+  .voice-card {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    width: 420px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+  }
+
+  .voice-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(242, 216, 49, 0.32);
+    transform: translateY(-2px);
+  }
+
+  .voice-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: -0.005em;
+  }
+
+  .voice-attr {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .voice-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--white);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .voice-mark:hover { transform: scale(1.1); }
+
+  .voice-mark img { max-width: 80%; max-height: 80%; object-fit: contain; }
+  .voice-mark.fallback {
+    background: rgba(242, 216, 49, 0.16);
+    color: var(--yellow);
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .voice-author {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .voice-author .name {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .voice-author .role {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .voice-company {
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .voice-company:hover { color: var(--yellow); border-color: var(--yellow); }
+
+  .voice-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    opacity: 0.8;
+    padding: 3px 8px;
+    border: 1px solid rgba(242, 216, 49, 0.35);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ═══════════════ FOOTER ═══════════════ */
+  .footer {
+    padding: 48px 0 24px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width: 1100px) {
+    .meet-head { grid-template-columns: 1fr; gap: 24px; }
+    .leaders-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-row { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .tier-head { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  @media (max-width: 720px) {
+    .hero-card { min-height: 520px; }
+    .hero-tagline { font-size: clamp(36px, 8vw, 56px); max-width: 90%; }
+    .meet { padding: 48px 0 16px; }
+    .tier, .day-zero, .voices { padding: 36px 0; }
+    .tier-title { font-size: 26px; }
+    .leaders-grid { grid-template-columns: 1fr; }
+    .exit-card { width: 300px; height: 180px; }
+    .voice-card { width: 320px; }
+    .team-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Deep ocean ambient (bubbles + bioluminescence) -->
+<div class="ocean" id="ocean"></div>
+
+<!-- ═══════════ HERO CARD ═══════════ -->
+<section class="hero-card">
+  <canvas id="lakeShader"></canvas>
+  <div class="fallback" aria-hidden="true"></div>
+
+  <a class="hero-logo" href="https://sunshinelake.vc" target="_blank" rel="noopener" aria-label="Sunshine Lake">
+    <svg viewBox="0 0 32 24" fill="none" aria-hidden="true">
+      <path d="M0 8 Q 8 2 16 8 T 32 8" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M0 18 Q 8 12 16 18 T 32 18" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    Sunshine Lake
+  </a>
+
+  <h1 class="hero-tagline">Global Founders<br/>Forge the Future</h1>
+</section>
+
+<!-- ═══════════ MEET SUNSHINE LAKE (intro + team) ═══════════ -->
+<section class="container meet">
+  <div class="meet-head">
+    <h2 class="meet-title">Meet Sunshine <em>Lake.</em></h2>
+    <p class="meet-body">
+      We fund revolutionaries who are reshaping global markets. We are proud to have been
+      <strong>early shareholders</strong> in public companies like
+      <a class="inline-link" href="https://airbnb.com" target="_blank" rel="noopener">Airbnb</a>,
+      <a class="inline-link" href="https://figma.com" target="_blank" rel="noopener">Figma</a>, and
+      <a class="inline-link" href="https://groupon.com" target="_blank" rel="noopener">Groupon</a> —
+      and <strong>substantive seed investors</strong> in startups including
+      <a class="inline-link" href="https://assured.claims" target="_blank" rel="noopener">Assured.claims</a>,
+      <a class="inline-link" href="https://kalshi.com" target="_blank" rel="noopener">Kalshi</a>,
+      <a class="inline-link" href="https://deel.com" target="_blank" rel="noopener">Deel</a>,
+      <a class="inline-link" href="https://checkr.com" target="_blank" rel="noopener">Checkr</a>,
+      <a class="inline-link" href="https://fundamental.tech" target="_blank" rel="noopener">Fundamental.tech</a>, and
+      <a class="inline-link" href="https://headway.co" target="_blank" rel="noopener">Headway</a>.
+    </p>
+  </div>
+  <div class="team-grid" id="teamGrid"></div>
+</section>
+
+<!-- ═══ Category Leaders ═══ -->
+<section class="tier">
+  <div class="container">
+    <div class="tier-head">
+      <div>
+        <div class="tier-eyebrow">Tier 01 — Late-Stage Privates</div>
+        <h2 class="tier-title">Category <em>leaders.</em></h2>
+      </div>
+      <p class="tier-desc">Seed-stage bets now trading at unicorn-and-up valuations.</p>
+    </div>
+  </div>
+  <div class="carousel-wrap leaders-wrap" id="leadersWrap">
+    <div class="track" id="leadersTrack"></div>
+  </div>
+</section>
+
+<!-- ═══ Strategic Exits & IPOs ═══ -->
+<section class="tier">
+  <div class="container">
+    <div class="tier-head">
+      <div>
+        <div class="tier-eyebrow">Tier 02 — Liquidity Events</div>
+        <h2 class="tier-title">Landscape-shifting <em>exits.</em></h2>
+        <p class="tier-desc">Public listings and strategic acquisitions — our portfolio companies are consistently acquired by, or listed alongside, the world's leading tech innovators.</p>
+      </div>
+      <div class="controls">
+        <button class="ctrl-btn" id="prevBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn" id="pauseBtn" aria-label="Pause">
+          <svg viewBox="0 0 24 24" fill="none" id="pauseIcon"><path d="M9 5v14M15 5v14" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button class="ctrl-btn" id="nextBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-wrap" id="carouselWrap">
+    <div class="track" id="track"></div>
+  </div>
+</section>
+
+<!-- ═══ Testimonials (From Day Zero + Voices Marquee) ═══ -->
+<section class="voices">
+  <div class="container">
+    <div class="day-zero-head">
+      <div class="tier-eyebrow">The Approach</div>
+      <h2 class="tier-title">From Day <em>Zero.</em></h2>
+      <p class="tier-desc">Our investments target foundational technical problems in complex, often overlooked markets. We partner from Day Zero — deploying precise operational architecture and non-obvious expertise to translate macro volatility into engineering-led scale.</p>
+    </div>
+    <div class="featured-row" id="featuredRow"></div>
+  </div>
+  <div class="voices-marquee">
+    <div class="voices-row top" id="voicesRowTop"></div>
+    <div class="voices-row bot" id="voicesRowBot"></div>
+  </div>
+</section>
+
+<div class="container footer">Sunshine Lake Capital · Pre-Seed &amp; Seed</div>
+
+<script>
+  /* ═══════════════ LAKE WEBGL SHADER ═══════════════ */
+  function initLakeShader() {
+    const canvas = document.getElementById('lakeShader');
+    if (!canvas) return;
+    const gl = canvas.getContext('webgl', { antialias: false, alpha: false })
+            || canvas.getContext('experimental-webgl');
+    if (!gl) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const vsSource = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.0,1.0);}';
+
+    const fsSource = `
+      precision highp float;
+      uniform vec2 u_res;
+      uniform float u_time;
+
+      vec2 hash(vec2 p) {
+        p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+        return -1.0 + 2.0 * fract(sin(p) * 43758.5453);
+      }
+
+      float noise(vec2 p) {
+        const float K1 = 0.366025404;
+        const float K2 = 0.211324865;
+        vec2 i = floor(p + (p.x + p.y) * K1);
+        vec2 a = p - i + (i.x + i.y) * K2;
+        float m = step(a.y, a.x);
+        vec2 o = vec2(m, 1.0 - m);
+        vec2 b = a - o + K2;
+        vec2 c = a - 1.0 + 2.0 * K2;
+        vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+        vec3 n = h*h*h*h*vec3(dot(a, hash(i)), dot(b, hash(i + o)), dot(c, hash(i + 1.0)));
+        return dot(n, vec3(70.0));
+      }
+
+      float fbm(vec2 p) {
+        float v = 0.0;
+        float a = 0.5;
+        for (int i = 0; i < 4; i++) {
+          v += a * noise(p);
+          p *= 2.0;
+          a *= 0.5;
+        }
+        return v;
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / u_res.xy;
+        vec2 p = uv * 2.6;
+        p.x *= u_res.x / u_res.y;
+
+        float t = u_time * 0.08;
+
+        vec2 q = vec2(fbm(p + t), fbm(p + vec2(5.2, 1.3)));
+        vec2 r = vec2(fbm(p + 4.0*q + vec2(1.7, 9.2) + t * 1.5),
+                       fbm(p + 4.0*q + vec2(8.3, 2.8) + t * 1.2));
+        float f = fbm(p + 4.0*r);
+
+        vec3 cream  = vec3(0.929, 0.925, 0.890);
+        vec3 yellow = vec3(0.949, 0.847, 0.192);
+        vec3 sky    = vec3(0.478, 0.800, 1.000);
+        vec3 deep   = vec3(0.000, 0.196, 0.659);
+        vec3 navy   = vec3(0.043, 0.071, 0.459);
+
+        vec3 col = mix(navy, deep, smoothstep(-0.4, 0.1, f));
+        col = mix(col, sky,    smoothstep(0.05, 0.35, f - r.y * 0.15));
+        col = mix(col, yellow, smoothstep(0.35, 0.62, f - q.x * 0.3));
+        col = mix(col, cream,  smoothstep(0.62, 0.88, f - r.x * 0.45));
+
+        // Bright highlight catching sun
+        float highlight = smoothstep(0.85, 1.0, f + length(q) * 0.3);
+        col = mix(col, vec3(1.0), highlight * 0.4);
+
+        // White sparkles — fixed grid, occasional pop
+        vec2 spk = uv * 90.0 + vec2(t * 6.0, t * 4.0);
+        vec2 spkI = floor(spk);
+        float sparkSeed = fract(sin(dot(spkI, vec2(12.9898, 78.233))) * 43758.5453);
+        float sparkle = step(0.985, sparkSeed) * (0.6 + 0.4 * sin(u_time * 4.0 + sparkSeed * 20.0));
+        col += sparkle * 1.4;
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error('Shader compile error:', gl.getShaderInfoLog(s));
+      }
+      return s;
+    }
+
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vsSource));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fsSource));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error('Program link error:', gl.getProgramInfoLog(program));
+      canvas.style.display = 'none';
+      return;
+    }
+    gl.useProgram(program);
+
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const aLoc = gl.getAttribLocation(program, 'a');
+    gl.enableVertexAttribArray(aLoc);
+    gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes = gl.getUniformLocation(program, 'u_res');
+    const uTime = gl.getUniformLocation(program, 'u_time');
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.max(1, Math.floor(canvas.clientWidth * dpr));
+      canvas.height = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    const start = performance.now();
+    function render() {
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (performance.now() - start) / 1000);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(render);
+    }
+    render();
+
+    // Hide CSS fallback when shader is running
+    const fallback = canvas.parentNode.querySelector('.fallback');
+    if (fallback) fallback.style.display = 'none';
+  }
+  window.addEventListener('load', initLakeShader);
+
+  /* ═══════════════ LOGO HELPER ═══════════════ */
+  function logoTile(name, domain, opts = {}) {
+    const cls = opts.fallbackClass || 'logo-wordmark';
+    const size = opts.size || 200;
+    return `
+      <img src="https://logo.clearbit.com/${domain}?size=${size}" alt="${name}"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div class="${cls}" style="display:none">${name}</div>
+    `;
+  }
+
+  /* ═══ TEAM ═══ */
+  const team = [
+    { name: 'Don Stalter',              role: 'General Partner',
+      bio: 'Over two decades of experience across venture capital, operations, and global strategy.',
+      img: 'https://sunshinelake.vc/new/images/team/don.webp',
+      initials: 'DS' },
+    { name: 'Suhail Younus',            role: 'Partner',
+      bio: 'A background spanning venture capital, private equity, and emerging technology research.',
+      img: 'https://sunshinelake.vc/new/images/team/suhail.webp',
+      initials: 'SY' },
+    { name: 'Ivan La Frinere-Sandoval', role: 'Partner · CFO & COO',
+      bio: 'A builder and investor with expertise in engineering, finance, and entrepreneurship.',
+      img: 'https://sunshinelake.vc/new/images/team/ivan.webp',
+      initials: 'IL' },
+    { name: 'Wieger Lamers',            role: 'EMEA & Platforms Lead',
+      bio: 'At the convergence of European tech and entrepreneurship, with venture and early-stage operations experience.',
+      img: '',
+      initials: 'WL' }
+  ];
+  document.getElementById('teamGrid').innerHTML = team.map(p => `
+    <div class="team-card">
+      <div class="team-portrait">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+             <div class="portrait-initials" style="display:none">${p.initials}</div>`
+          : `<div class="portrait-initials">${p.initials}</div>`}
+      </div>
+      <div>
+        <div class="team-name">${p.name}</div>
+        <div class="team-role">${p.role}</div>
+        <p class="team-bio">${p.bio}</p>
+      </div>
+    </div>
+  `).join('');
+
+  /* ═══ CATEGORY LEADERS — brighter royal-blue variants ═══ */
+  const privates = [
+    { name: 'Assured',          domain: 'assured.claims',   value: '$1B',    sector: 'Claims Tech',         variant: 'royal'  },
+    { name: 'Kalshi',           domain: 'kalshi.com',       value: '$11B',   sector: 'Prediction Markets',  variant: 'cobalt' },
+    { name: 'Deel',             domain: 'deel.com',         value: '$17.3B', sector: 'Global Payroll',      variant: 'azure'  },
+    { name: 'Checkr',           domain: 'checkr.com',       value: '$5B',    sector: 'Background Checks',   variant: 'royal'  },
+    { name: 'Fundamental.tech', domain: 'fundamental.tech', value: '$1.4B',  sector: 'AI Infrastructure',   variant: 'cobalt' },
+    { name: 'Headway',          domain: 'headway.co',       value: '$2.3B',  sector: 'Mental Health',       variant: 'azure'  }
+  ];
+
+  function buildLeader(c) {
+    return `
+      <article class="exit-card ipo ${c.variant}">
+        <div class="yellow-badge stamp"><small>Valued</small>${c.value}</div>
+        <div class="exit-inner">
+          <div class="exit-flow">
+            <a class="company-name ${nameSize(c.name)}" href="https://${c.domain}" target="_blank" rel="noopener">${c.name}</a>
+          </div>
+        </div>
+        <div class="exit-footer">
+          <div class="exit-sector">${c.sector}</div>
+          <div class="exit-year">Private</div>
+        </div>
+      </article>
+    `;
+  }
+
+  const leadersTrack = document.getElementById('leadersTrack');
+  const leaderCards = privates.map(buildLeader).join('');
+  leadersTrack.innerHTML = leaderCards + leaderCards;
+
+  /* ═══ STRATEGIC EXITS + IPOs ═══ */
+  const portfolio = [
+    // IPOs at the front of the line
+    { type: 'ipo',  name: 'Airbnb',   domain: 'airbnb.com',   year: '2020', sector: 'Hospitality',     variant: 'deep' },
+    { type: 'ipo',  name: 'Figma',    domain: 'figma.com',    year: '2025', sector: 'Design Software', variant: 'navy' },
+    { type: 'ipo',  name: 'Groupon',  domain: 'groupon.com',  year: '2011', sector: 'Commerce',        variant: 'ink' },
+
+    // Strategic exits
+    { type: 'exit', acq: 'BitOasis',    acqDomain: 'bitoasis.com',    to: 'Coinbase',      toDomain: 'coinbase.com',   year: '2024', sector: 'Crypto',           variant: 'navy' },
+    { type: 'exit', acq: 'Brex',        acqDomain: 'brex.com',        to: 'Capital One',   toDomain: 'capitalone.com', year: '—',    sector: 'Fintech',          variant: 'deep', value: '$5.15B' },
+    { type: 'exit', acq: 'Datagrid',    acqDomain: 'datagrid.com',    to: 'Procore',       toDomain: 'procore.com',    year: '2024', sector: 'Construction Tech',variant: 'ink' },
+    { type: 'exit', acq: 'Enable',      acqDomain: 'enable.us',       to: 'Mindtickle',    toDomain: 'mindtickle.com', year: '2023', sector: 'Sales Enablement', variant: 'navy' },
+    { type: 'exit', acq: 'Glide',       acqDomain: 'glide.com',       to: 'Compass',       toDomain: 'compass.com',    year: '2024', sector: 'PropTech',         variant: 'deep' },
+    { type: 'exit', acq: 'Hidden Road', acqDomain: 'hiddenroad.com',  to: 'Ripple',        toDomain: 'ripple.com',     year: '2024', sector: 'Crypto Prime',     variant: 'ink',  value: '$1.25B' },
+    { type: 'exit', acq: 'Legalpad',    acqDomain: 'legalpad.io',     to: 'Deel',          toDomain: 'deel.com',       year: '2022', sector: 'Immigration',      variant: 'navy' },
+    { type: 'exit', acq: 'Ostro',       acqDomain: 'ostro.health',    to: 'Veeva Systems', toDomain: 'veeva.com',      year: '2023', sector: 'Health Tech',      variant: 'deep' },
+    { type: 'exit', acq: 'Pry',         acqDomain: 'pry.co',          to: 'Brex',          toDomain: 'brex.com',       year: '2023', sector: 'Fintech',          variant: 'ink' },
+    { type: 'exit', acq: 'SpotHero',    acqDomain: 'spothero.com',    to: 'Uber',          toDomain: 'uber.com',       year: '—',    sector: 'Mobility',         variant: 'navy' },
+    { type: 'exit', acq: 'TaxProper',   acqDomain: 'taxproper.com',   to: 'Opendoor',      toDomain: 'opendoor.com',   year: '2023', sector: 'PropTech',         variant: 'deep' }
+  ];
+
+  function nameSize(n) {
+    if (n.length >= 12) return 'tighter';
+    if (n.length >= 9)  return 'tight';
+    return '';
+  }
+
+  function exitBadge(e) {
+    if (e.value) return `<div class="yellow-badge stamp"><small>Exit</small>${e.value}</div>`;
+    return `<div class="yellow-badge label">Acquired</div>`;
+  }
+
+  function buildCard(c) {
+    if (c.type === 'ipo') {
+      return `
+        <article class="exit-card ipo ${c.variant}">
+          <div class="yellow-badge label">IPO</div>
+          <div class="exit-inner">
+            <div class="exit-flow">
+              <a class="company-name ${nameSize(c.name)}" href="https://${c.domain}" target="_blank" rel="noopener">${c.name}</a>
+            </div>
+          </div>
+          <div class="exit-footer">
+            <div class="exit-sector">${c.sector}</div>
+            <div class="exit-year">${c.year}</div>
+          </div>
+        </article>
+      `;
+    }
+    const lc = nameSize(c.acq);
+    const rc = nameSize(c.to);
+    return `
+      <article class="exit-card ${c.variant}">
+        ${exitBadge(c)}
+        <div class="exit-inner">
+          <div class="exit-flow">
+            <a class="company-name ${lc}" href="https://${c.acqDomain}" target="_blank" rel="noopener">${c.acq}</a>
+            <div class="exit-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <a class="company-name ${rc}" href="https://${c.toDomain}" target="_blank" rel="noopener">${c.to}</a>
+          </div>
+        </div>
+        <div class="exit-footer">
+          <div class="exit-sector">${c.sector}</div>
+          <div class="exit-year">${c.year}</div>
+        </div>
+      </article>
+    `;
+  }
+  const track = document.getElementById('track');
+  const cards = portfolio.map(buildCard).join('');
+  track.innerHTML = cards + cards;
+
+  /* ═══ FEATURED TESTIMONIALS ═══ */
+  const featured = [
+    { company: 'Deel',    domain: 'deel.com',
+      contributions: 'Sourced Revolut COO, brought on 100+ customers, supported the Legalpad acquisition.',
+      quote: 'A fantastic partner and ally to Deel since its early days.',
+      author: 'Alex Bouaziz', role: 'Co-Founder & CEO, Deel' },
+    { company: 'Headway', domain: 'headway.co',
+      contributions: 'Rebuilt early financial models. Acted as an early recruiter for the team.',
+      quote: 'He hustled harder for me than anyone else did. I want him to be a part of every single round and company that I start.',
+      author: 'Jake Sussman', role: 'Co-Founder, Headway' },
+    { company: 'Kalshi',  domain: 'kalshi.com',
+      contributions: 'Reinforced GTM and regulatory strategy through key fundraising rounds.',
+      quote: 'With us from day zero — a tremendous supporter through the twists and turns.',
+      author: 'Tarek Mansour', role: 'Co-Founder & CEO, Kalshi' }
+  ];
+  document.getElementById('featuredRow').innerHTML = featured.map(f => `
+    <div class="featured-card">
+      <a class="featured-company" href="https://${f.domain}" target="_blank" rel="noopener">${f.company}</a>
+      <p class="featured-quote">${f.quote}</p>
+      <div class="featured-attr">
+        <span class="name">${f.author}</span>
+        <span class="role">${f.role}</span>
+      </div>
+    </div>
+  `).join('');
+
+  /* ═══ SUPPORTING TESTIMONIALS ═══ */
+  const voices = [
+    { name: 'Aaron Bai',         role: 'Founder & CEO',       company: 'Affiniti',  domain: 'affiniti.com',
+      quote: "It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice." },
+    { name: 'Ankit Jain',        role: 'Co-Founder & CEO',    company: 'Aviator',   domain: 'aviator.co',
+      quote: "When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.", tag: 'SVB' },
+    { name: 'Filip Kozera',      role: 'Founder & CEO',       company: 'Wordware',  domain: 'wordware.ai',
+      quote: "Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again." },
+    { name: 'James Ding',        role: 'Co-Founder & CEO',    company: 'DraftWise', domain: 'draftwise.com',
+      quote: "He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again." },
+    { name: 'Lawrence Lin Murata',role: 'Co-Founder & CEO',   company: 'Slope',     domain: 'slopepay.com',
+      quote: "He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world." },
+    { name: 'Mark Lawrence',     role: 'Founder & CEO',       company: 'SpotHero',  domain: 'spothero.com',
+      quote: "We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would.", tag: 'Exit' },
+    { name: 'Max Kauderer',      role: 'Co-Founder & CEO',    company: 'Yuzu Health',domain:'yuzuhealth.com',
+      quote: "He could not have been more supportive through our pivots and challenges. We've been able to rely on Don as an independent point of feedback." },
+    { name: 'Michael Tannenbaum',role: 'CEO (fmr. COO, Brex)',company: 'Figure',    domain: 'figure.com',
+      quote: "When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.", tag: 'SVB' },
+    { name: 'Nick Evans',        role: 'Co-Founder & CEO',    company: 'Avocado',   domain: 'avocadohq.com',
+      quote: "Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately." },
+    { name: 'Sean Doherty',      role: 'CEO',                 company: 'GovDash',   domain: 'govdash.com',
+      quote: "He's been a great sounding board, especially during uncertain moments. We're backed by Kraft Ventures, Northzone, and others — but Don stands out." },
+    { name: 'Thiago Da Costa',   role: 'Co-Founder & CEO',    company: 'Datagrid',  domain: 'datagrid.com',
+      quote: "He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered.", tag: 'Acquired' },
+    { name: 'Thomas Dowling',    role: 'Co-Founder',          company: 'TaxProper', domain: 'taxproper.com',
+      quote: "From day one through to TaxProper's acquisition, Don was more than an investor. He's one of those rare investors who actually makes your business better.", tag: 'Acquired' },
+    { name: 'Todd Heine',        role: 'Founder & CEO',       company: 'Legalpad',  domain: 'legalpad.io',
+      quote: "He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition by Deel.", tag: 'Acquired' }
+  ];
+
+  function voiceCard(v) {
+    const initial = v.company[0];
+    const tagEl = v.tag ? `<span class="voice-tag">${v.tag}</span>` : '';
+    return `
+      <div class="voice-card">
+        <p class="voice-quote">"${v.quote}"</p>
+        <div class="voice-attr">
+          <a class="voice-mark" href="https://${v.domain}" target="_blank" rel="noopener" aria-label="${v.company}">
+            <img src="https://logo.clearbit.com/${v.domain}?size=80" alt="${v.company}"
+                 onerror="this.parentNode.classList.add('fallback'); this.outerHTML='${initial}';">
+          </a>
+          <div class="voice-author">
+            <span class="name">${v.name}</span>
+            <span class="role">${v.role}, <a class="voice-company" href="https://${v.domain}" target="_blank" rel="noopener">${v.company}</a></span>
+          </div>
+          ${tagEl}
+        </div>
+      </div>
+    `;
+  }
+
+  const half = Math.ceil(voices.length / 2);
+  const topVoices = voices.slice(0, half);
+  const botVoices = voices.slice(half);
+  document.getElementById('voicesRowTop').innerHTML = topVoices.map(voiceCard).join('') + topVoices.map(voiceCard).join('');
+  document.getElementById('voicesRowBot').innerHTML = botVoices.map(voiceCard).join('') + botVoices.map(voiceCard).join('');
+
+  /* ═══════════════ AMBIENT (bubbles + bioluminescence) ═══════════════ */
+  function spawnAmbient() {
+    const ocean = document.getElementById('ocean');
+    const H = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+
+    const bubbleCount = 60;
+    for (let i = 0; i < bubbleCount; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      const size = 3 + Math.random() * 24;
+      const top = Math.random() * H;
+      const dur = 14 + Math.random() * 26;
+      const op = 0.12 + Math.random() * 0.35;
+      b.style.cssText = `
+        left: ${Math.random() * 100}%;
+        top: ${top}px;
+        width: ${size}px;
+        height: ${size}px;
+        animation-duration: ${dur}s;
+        animation-delay: -${Math.random() * dur}s;
+        --op: ${op};
+      `;
+      ocean.appendChild(b);
+    }
+
+    const glowCount = 22;
+    const start = H * 0.55;
+    for (let i = 0; i < glowCount; i++) {
+      const g = document.createElement('div');
+      g.className = 'glow';
+      const top = start + Math.random() * (H - start);
+      g.style.cssText = `
+        left: ${Math.random() * 100}%;
+        top: ${top}px;
+        animation-duration: ${2 + Math.random() * 4}s;
+        animation-delay: -${Math.random() * 6}s;
+      `;
+      ocean.appendChild(g);
+    }
+  }
+  window.addEventListener('load', spawnAmbient);
+
+  /* ═══ Carousel controls + drag ═══ */
+  const wrap = document.getElementById('carouselWrap');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const pauseIcon = document.getElementById('pauseIcon');
+  let paused = false;
+
+  pauseBtn.addEventListener('click', () => {
+    paused = !paused;
+    wrap.classList.toggle('paused', paused);
+    pauseIcon.innerHTML = paused
+      ? '<path d="M8 5l11 7-11 7V5z" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>'
+      : '<path d="M9 5v14M15 5v14" stroke-width="1.8" stroke-linecap="round"/>';
+  });
+
+  function getCurrentX() {
+    const t = getComputedStyle(track).transform;
+    if (!t || t === 'none') return 0;
+    return new DOMMatrix(t).m41;
+  }
+
+  function nudge(dir) {
+    if (!paused) { paused = true; wrap.classList.add('paused'); }
+    const card = track.querySelector('.exit-card');
+    const step = (card.offsetWidth + 16) * dir;
+    const half = track.scrollWidth / 2;
+    let x = getCurrentX() - step;
+    if (x < -half) x += half;
+    if (x > 0) x -= half;
+    track.style.animation = 'none';
+    track.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+    track.style.transform = `translateX(${x}px)`;
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => nudge(1));
+  document.getElementById('prevBtn').addEventListener('click', () => nudge(-1));
+
+  /* Generic drag-to-scroll wiring — used for both carousels */
+  function wireCarouselDrag(wrapEl, trackEl) {
+    let isDown = false, startX = 0, offset = 0;
+    function getX() {
+      const t = getComputedStyle(trackEl).transform;
+      if (!t || t === 'none') return 0;
+      return new DOMMatrix(t).m41;
+    }
+    wrapEl.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('a, button')) return;
+      isDown = true;
+      startX = e.clientX;
+      offset = getX();
+      trackEl.style.animation = 'none';
+      trackEl.style.transition = 'none';
+      wrapEl.classList.add('paused');
+      wrapEl.style.cursor = 'grabbing';
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      let next = offset + dx;
+      const halfW = trackEl.scrollWidth / 2;
+      if (next < -halfW) next += halfW;
+      if (next > 0) next -= halfW;
+      trackEl.style.transform = `translateX(${next}px)`;
+    });
+    window.addEventListener('pointerup', () => {
+      if (!isDown) return;
+      isDown = false;
+      wrapEl.style.cursor = '';
+      trackEl.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+    });
+  }
+
+  wireCarouselDrag(wrap, track);
+  wireCarouselDrag(document.getElementById('leadersWrap'), leadersTrack);
+</script>
+
+</body>
+</html>

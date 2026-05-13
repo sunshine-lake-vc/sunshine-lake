@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan La Frinere-Sandoval — Sunshine Lake Capital</title>
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #155EE8;
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: clamp(20px, 3vw, 40px);
+            left: clamp(20px, 3vw, 40px);
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            font-family: inherit;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 8px 0;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        .site-logo {
+            position: fixed;
+            top: clamp(20px, 3vw, 40px);
+            right: clamp(20px, 3vw, 40px);
+            z-index: 100;
+            width: clamp(28px, 3vw, 40px);
+            height: auto;
+            pointer-events: none;
+        }
+
+        .bio-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: clamp(100px, 10vw, 160px) clamp(40px, 6vw, 120px) clamp(60px, 6vw, 100px);
+            display: flex;
+            flex-direction: row;
+            gap: clamp(40px, 5vw, 80px);
+            align-items: flex-start;
+        }
+        .bio-left {
+            flex: 0 0 38%;
+            position: sticky;
+            top: clamp(100px, 10vw, 160px);
+            align-self: flex-start;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .bio-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: clamp(10px, 1vw, 16px);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+        .bio-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bio-content {
+            flex: 1;
+            padding-top: clamp(8px, 1vw, 16px);
+        }
+        .bio-content h1 {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.5rem, 3.5vw, 5rem);
+            font-weight: 400; color: #fff;
+            margin: 0 0 clamp(4px, 0.5vw, 8px) 0; line-height: 1.1;
+            animation: fadeInUp 0.6s ease 0.15s both;
+        }
+
+        .bio-role {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.75rem, 0.85vw, 0.95rem);
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 clamp(28px, 3vw, 48px) 0;
+            animation: fadeInUp 0.6s ease 0.25s both;
+        }
+
+        .bio-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.05rem, 1.2vw, 1.5rem);
+            line-height: 1.55; color: #fff;
+            margin: 0 0 clamp(16px, 1.5vw, 24px) 0; font-weight: 400;
+            animation: fadeInUp 0.6s ease 0.35s both;
+        }
+
+        .bio-content h3 {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.2rem, 1.4vw, 1.8rem); font-weight: 400; color: #fff;
+            margin: clamp(28px, 3vw, 48px) 0 clamp(14px, 1.5vw, 24px) 0;
+            animation: fadeInUp 0.6s ease 0.5s both;
+        }
+
+        .bio-content ul {
+            list-style: none; padding: 0; margin: 0;
+            animation: fadeInUp 0.6s ease 0.6s both;
+        }
+        .bio-content ul li {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.95rem, 1.1vw, 1.3rem); line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            padding: clamp(10px, 1vw, 16px) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .bio-content ul li:last-child { border-bottom: none; }
+
+        .linkedin-pill {
+            display: inline-block;
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.9rem, 1vw, 1.1rem);
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: clamp(8px, 0.8vw, 12px) clamp(16px, 1.5vw, 24px);
+            border-radius: 100px;
+            transition: background 0.2s ease;
+            margin-top: clamp(12px, 1.5vw, 20px);
+        }
+        .linkedin-pill:hover { background: rgba(255, 255, 255, 0.2); }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .bio-section {
+                gap: clamp(24px, 3vw, 40px);
+                padding: clamp(80px, 8vw, 120px) clamp(30px, 4vw, 60px) clamp(40px, 4vw, 60px);
+            }
+            .bio-left { flex: 0 0 35%; }
+        }
+
+        @media (max-width: 768px) {
+            .bio-section {
+                flex-direction: column;
+                padding: 0 0 40px;
+                gap: 0;
+            }
+            .bio-left {
+                width: 100%;
+                max-width: none;
+                position: relative;
+                top: auto;
+            }
+            .linkedin-pill { margin-left: 24px; margin-top: 20px; }
+            .bio-photo {
+                width: 100%;
+                aspect-ratio: auto;
+                height: 55vh;
+                border-radius: 0;
+            }
+            .bio-content {
+                padding: 20px 24px 0;
+                min-width: 0;
+                max-width: 100%;
+            }
+            .site-logo { width: 24px; top: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn" onclick="event.preventDefault(); if (document.referrer.includes(location.hostname)) history.back(); else location.href='index.html';">
+        <svg viewBox="0 0 16 16" width="14" height="14"><path d="M12 8H4M8 12l-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back
+    </a>
+
+    <div class="site-logo" aria-label="Sunshine Lake Capital">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26">
+            <path fill="#ffffff" d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+            <polygon fill="#ffffff" points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+        </svg>
+    </div>
+
+    <section class="bio-section">
+        <div class="bio-left">
+            <div class="bio-photo">
+                <img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval">
+            </div>
+            <a href="https://www.linkedin.com/in/gridparity/" class="linkedin-pill" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <div class="bio-content">
+            <h1>Ivan La Frinere-Sandoval</h1>
+            <p class="bio-role">Partner, CFO & COO</p>
+            <p class="bio-text">Ivan is a technology driven investor and entrepreneur, who combines a rigorous technical background with a deep passion for science, technology, and environmental conservation. He holds dual undergraduate degrees in Mechanical Engineering and Finance from the California Institute of Technology, alongside an MBA and an MS in Environmental Engineering from Stanford.</p>
+            <p class="bio-text">Across his career, he has applied a rigorous quantitative framework to evaluating opportunities, combining technical depth with financial discipline. Ivan began his professional career at Credit Suisse in 2006, where he achieved a Top 15 all time ranking in the Training The Street financial modeling competition.</p>
+            <p class="bio-text">After Stanford, he launched his first company through StartX and went on to build multiple successful businesses with the support of the Bay Area entrepreneurial ecosystem. He leverages this structured, data driven framework to differentiate the firm's evaluation process.</p>
+            <p class="bio-text">At Sunshine Lake, he manages fund operations, supports deal sourcing and investment evaluation, and serves on the investment committee. Ivan speaks Spanish, reflecting his Mexican American heritage, and he developed conversational Chinese while working internationally. Outside the office, he is an outdoor enthusiast who enjoys hiking and surfing.</p>
+
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "sl-site",
+  "private": true,
+  "scripts": {
+    "pull": "node pull-content.js"
+  },
+  "dependencies": {
+    "csv-parse": "^5.6.0"
+  }
+}
