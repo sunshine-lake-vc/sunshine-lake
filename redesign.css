@@ -20,18 +20,14 @@
   --rd-gutter: max(var(--rd-side-pad), calc((100vw - var(--rd-max-w)) / 2 + var(--rd-side-pad)));
 }
 
-/* ═══ Section wrapper for redesign content ═══ */
+/* ═══ Section wrapper for redesign content
+   Background is defined later (section "COLOR STORY") so there's
+   only one source of truth and no risk of cached old rules. */
 .rd-zone {
-  background: linear-gradient(180deg, #155EE8 0%, #0032A8 100%);
   color: #fff;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   position: relative;
   z-index: 2;
-}
-
-/* Second zone darkens further toward the abyss */
-.rd-zone.rd-deep-zone {
-  background: linear-gradient(180deg, #0032A8 0%, #0B1275 38%, #050838 78%, #02041F 100%);
 }
 
 /* ═══ LP Login — fixed pill in the top-right of the page (Valence portal) ═══ */
