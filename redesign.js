@@ -348,12 +348,40 @@
     mo.observe(grid, { childList: true, subtree: false });
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     DIVE PARTICLES — white sparkles drifting through the dive layer
+     ═══════════════════════════════════════════════════════════════ */
+  function spawnDiveParticles() {
+    var layer = document.getElementById('rd-dive-particles');
+    if (!layer) return;
+    var count = 130;
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement('div');
+      p.className = 'rd-dive-particle';
+      var size = 1 + Math.random() * 3.5;
+      // Bias particles toward the upper 70% of the dive section so
+      // the bottom fade-to-white area stays clean
+      var yPct = Math.pow(Math.random(), 0.75) * 88;
+      p.style.cssText =
+        'left:' + (Math.random() * 100) + '%;' +
+        'top:' + yPct + '%;' +
+        'width:' + size + 'px;' +
+        'height:' + size + 'px;' +
+        'animation-duration:' + (1.4 + Math.random() * 4.2) + 's;' +
+        'animation-delay:-' + (Math.random() * 6) + 's;';
+      frag.appendChild(p);
+    }
+    layer.appendChild(frag);
+  }
+
   function init() {
     render();
     wireDrag(document.getElementById('rd-leaders-wrap'),   document.getElementById('rd-leaders-track'));
     wireDrag(document.getElementById('rd-portfolio-wrap'), document.getElementById('rd-portfolio-track'));
     wireControls();
     wireFooterCaptions();
+    spawnDiveParticles();
   }
 
   if (document.readyState === 'loading') {

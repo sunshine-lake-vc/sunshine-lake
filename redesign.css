@@ -579,6 +579,111 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   DIVE LAYER — painterly water transition between hero and thesis
+   The hero card scales down on scroll; once you scroll past it,
+   you "land" in this water section. Surface → deep gradient with
+   slowly drifting colored blobs, dense white sparkles, and a
+   "Dive Deeper" cue that bobs gently. Smooth fade to white at the
+   bottom so the existing thesis section (white) continues cleanly.
+   ═══════════════════════════════════════════════════════════════ */
+.rd-dive {
+  position: relative;
+  height: 80vh;
+  min-height: 520px;
+  overflow: hidden;
+  margin-top: -2px;
+  background:
+    linear-gradient(180deg,
+      #155EE8 0%,
+      #1450C8 20%,
+      #0E45BC 40%,
+      #0A3DAE 60%,
+      #1E68EE 78%,
+      #6DA4F0 92%,
+      #FFFFFF 100%);
+  z-index: 1;
+}
+
+.rd-dive-surface {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(255, 228, 92, 0.20), transparent 42%),
+    radial-gradient(ellipse at 72% 48%, rgba(122, 204, 255, 0.28), transparent 50%),
+    radial-gradient(ellipse at 48% 12%, rgba(255, 255, 255, 0.24), transparent 36%),
+    radial-gradient(ellipse at 18% 65%, rgba(242, 216, 49, 0.10), transparent 45%);
+  filter: blur(34px);
+  animation: rd-dive-drift 26s ease-in-out infinite alternate;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes rd-dive-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(2.5vw, 1.5vw, 0) scale(1.04); }
+  100% { transform: translate3d(-1.5vw, 2vw, 0) scale(0.98); }
+}
+
+.rd-dive-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rd-dive-particle {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: rd-dive-twinkle ease-in-out infinite;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 0.35);
+  will-change: opacity, transform;
+}
+
+@keyframes rd-dive-twinkle {
+  0%, 100% { opacity: 0.18; transform: scale(0.6); }
+  50%      { opacity: 1;    transform: scale(1.3); }
+}
+
+.rd-dive-caption {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  z-index: 3;
+  text-shadow: 0 1px 12px rgba(11, 18, 117, 0.45);
+}
+
+.rd-dive-arrow {
+  font-family: 'DomaineDisp', 'Times New Roman', serif;
+  font-size: 28px;
+  line-height: 1;
+  color: #F2D831;
+  text-shadow: 0 2px 16px rgba(242, 216, 49, 0.55), 0 0 24px rgba(242, 216, 49, 0.3);
+  animation: rd-dive-arrow-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes rd-dive-arrow-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(10px); }
+}
+
+@media (max-width: 720px) {
+  .rd-dive { height: 70vh; min-height: 440px; }
+  .rd-dive-caption { top: 32%; font-size: 10px; }
+  .rd-dive-arrow { font-size: 22px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    INTRO LINES — simpler fade pattern
    Lines 1–3 fade in sequentially and stay. When line 4 appears,
    lines 1–3 fade away so the final question stands alone.
