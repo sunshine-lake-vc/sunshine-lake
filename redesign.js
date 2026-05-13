@@ -182,7 +182,6 @@
     var portfolioTrack = document.getElementById('rd-portfolio-track');
     var featuredRow = document.getElementById('rd-featured-row');
     var voicesTop = document.getElementById('rd-voices-top');
-    var voicesBot = document.getElementById('rd-voices-bot');
 
     if (leadersTrack) {
       var L = leaders.map(buildLeader).join('');
@@ -195,12 +194,10 @@
     if (featuredRow) {
       featuredRow.innerHTML = featured.map(buildFeatured).join('');
     }
-    if (voicesTop && voicesBot) {
-      var half = Math.ceil(voices.length / 2);
-      var topV = voices.slice(0, half).map(buildVoice).join('');
-      var botV = voices.slice(half).map(buildVoice).join('');
-      voicesTop.innerHTML = topV + topV;
-      voicesBot.innerHTML = botV + botV;
+    if (voicesTop) {
+      // All voices into a single row, doubled for seamless loop
+      var allV = voices.map(buildVoice).join('');
+      voicesTop.innerHTML = allV + allV;
     }
   }
 
