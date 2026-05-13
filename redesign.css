@@ -35,14 +35,21 @@
 }
 
 /* ═══ Hero badge — $1M First Check Seed Fund (under the headline, solid yellow for emphasis) ═══ */
-.hero-badge {
-  position: relative;
+.hero-card .hero-badge {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
   z-index: 11;
-  display: inline-flex;
+  display: flex !important;
+  width: fit-content !important;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
   align-items: center;
   gap: clamp(10px, 1vw, 16px);
   padding: clamp(12px, 1.1vw, 16px) clamp(20px, 1.8vw, 28px);
-  margin-top: clamp(20px, 2.5vw, 36px);
+  margin-top: clamp(20px, 2.5vw, 36px) !important;
   background: #F2D831;
   border-radius: 999px;
   color: #0B1275;
