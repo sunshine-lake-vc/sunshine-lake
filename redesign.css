@@ -633,31 +633,43 @@ a.rd-name:hover { color: var(--rd-yellow); }
   overflow: hidden;
   background:
     linear-gradient(180deg,
-      #F5EBC0 0%,     /* warm cream — surface (matches painterly water) */
-      #F0E090 10%,    /* sunlit yellow */
-      #DDD8C0 20%,    /* cream fading toward blue */
-      #B8C8E5 32%,    /* pale tinted blue */
-      #7AC5EE 50%,    /* sky blue */
-      #4A88E5 70%,
-      #2A6CD8 85%,
-      #155EE8 100%    /* royal blue at bottom — continuous handoff to thesis */
+      #FFFFFF 0%,     /* pure white at the very top */
+      #FCF6E0 6%,     /* soft cream */
+      #F2DC78 14%,    /* yellow sun */
+      #E8E0B5 22%,    /* yellow fading toward blue */
+      #C5D5EA 32%,    /* pale blue */
+      #7AC5EE 48%,    /* sky blue */
+      #4A88E5 68%,
+      #2A6CD8 86%,
+      #155EE8 100%    /* royal blue at bottom — handoff to thesis */
     ) !important;
 }
 
-/* Drifting painterly blobs — fill the full spacer, sit behind the hero card */
+/* Drifting painterly blobs — bigger, more vivid, dispersed
+   across the spacer so wherever you scroll the painterly is felt */
 .hero-scroll-spacer .rd-dive-surface {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 28% 18%, rgba(255, 228, 92, 0.22), transparent 42%),
-    radial-gradient(ellipse at 72% 38%, rgba(122, 204, 255, 0.28), transparent 50%),
-    radial-gradient(ellipse at 48% 8%,  rgba(255, 255, 255, 0.22), transparent 36%),
-    radial-gradient(ellipse at 18% 55%, rgba(242, 216, 49, 0.12), transparent 45%),
-    radial-gradient(ellipse at 60% 78%, rgba(122, 204, 255, 0.22), transparent 48%);
-  filter: blur(40px);
-  animation: rd-dive-drift 30s ease-in-out infinite alternate;
+    /* Yellow + sun spots */
+    radial-gradient(ellipse at 22% 12%, rgba(242, 216, 49, 0.55), transparent 28%),
+    radial-gradient(ellipse at 78% 22%, rgba(255, 228, 92, 0.50), transparent 26%),
+    radial-gradient(ellipse at 50% 45%, rgba(242, 216, 49, 0.42), transparent 24%),
+    radial-gradient(ellipse at 28% 62%, rgba(242, 216, 49, 0.45), transparent 26%),
+    radial-gradient(ellipse at 72% 78%, rgba(255, 228, 92, 0.38), transparent 24%),
+    /* Sky / cyan currents */
+    radial-gradient(ellipse at 62% 32%, rgba(122, 204, 255, 0.55), transparent 30%),
+    radial-gradient(ellipse at 18% 38%, rgba(122, 204, 255, 0.45), transparent 28%),
+    radial-gradient(ellipse at 82% 58%, rgba(122, 204, 255, 0.42), transparent 28%),
+    radial-gradient(ellipse at 42% 88%, rgba(122, 204, 255, 0.40), transparent 26%),
+    /* White highlights — caustics catching the sun */
+    radial-gradient(ellipse at 45% 8%,  rgba(255, 255, 255, 0.55), transparent 22%),
+    radial-gradient(ellipse at 12% 28%, rgba(255, 255, 255, 0.35), transparent 18%),
+    radial-gradient(ellipse at 88% 70%, rgba(255, 255, 255, 0.30), transparent 18%);
+  filter: blur(28px);
+  animation: rd-dive-drift 26s ease-in-out infinite alternate;
   pointer-events: none;
-  mix-blend-mode: screen;
+  mix-blend-mode: normal;
   z-index: 0;
 }
 
