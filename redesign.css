@@ -30,45 +30,44 @@
   z-index: 2;
 }
 
-/* ═══ LP Login — fixed pill in the top-right of the page (Valence portal) ═══ */
+/* Hide the existing site-logo (wave SVG fixed top-right) — it
+   was conflicting with the LP Login at the same position, and
+   the hero card already carries the SLC brand at the top. */
+.site-logo { display: none !important; }
+
+/* ═══ LP Login — subtle text link top-right (Valence portal) ═══
+   Reduced visual weight: no solid pill, just thin text with a faint
+   border. Visible on both bright and dark backgrounds. */
 .rd-lp-login {
   position: fixed;
-  top: clamp(18px, 2.4vw, 36px);
-  right: clamp(18px, 2.4vw, 36px);
+  top: clamp(20px, 2.4vw, 32px);
+  right: clamp(20px, 3.2vw, 64px);
   z-index: 100;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: clamp(8px, 0.85vw, 12px) clamp(14px, 1.3vw, 20px);
-  background: rgba(11, 18, 117, 0.42);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(11, 18, 117, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 0.82);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  font-size: clamp(11px, 0.85vw, 13px);
+  font-size: clamp(10px, 0.72vw, 11.5px);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.3s ease, border-color 0.3s ease,
-              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .rd-lp-login:hover {
   background: #F2D831;
   border-color: #F2D831;
   color: #0B1275;
-  transform: translateY(-1px);
 }
-.rd-lp-login svg {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
+.rd-lp-login svg { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 .rd-lp-login:hover svg { transform: translate(2px, -2px); }
-@media (max-width: 720px) {
-  .rd-lp-login { padding: 7px 12px; gap: 6px; }
-}
 
 /* ═══ Hero badge — $1M First Check Seed Fund (under the headline, solid yellow for emphasis) ═══ */
 .hero-card .hero-badge {
@@ -629,13 +628,14 @@ a.rd-name:hover { color: var(--rd-yellow); }
   overflow: hidden;
   background:
     linear-gradient(180deg,
-      #FFFFFF 0%,
-      #FFFBE5 8%,     /* white with a hint of warmth */
-      #F4E08C 20%,    /* yellow sun band */
-      #FFF5D0 35%,    /* back toward cream */
-      #E8EAE0 55%,    /* cream-gray */
-      #D5DCEA 75%,    /* very pale blue */
-      #B8C8E5 100%    /* light blue at bottom — surface zone still bright */
+      #FFFFFF 0%,     /* pure white at the surface */
+      #FFFBEB 14%,    /* barely-warm cream */
+      #FFF1B8 28%,    /* light yellow — sun band, softer than #F4E08C */
+      #FCF0CC 42%,    /* yellow fading back to cream */
+      #ECE9DC 58%,    /* warm-cool transition */
+      #D8DEE8 75%,    /* cool cream-blue */
+      #C5D2E8 90%,    /* pale blue */
+      #B8C8E5 100%    /* light blue — handoff to thesis */
     ) !important;
 }
 
@@ -741,6 +741,20 @@ body { background: #010210 !important; }
 .content-sticky.hl-active p,
 .content-sticky.hl-active p .reveal-line {
   color: #0B1275 !important;
+}
+
+/* Kill the inline white-fade overlay on content-sticky (mode-tight)
+   so my color descent in .content-spacer shows cleanly through */
+body.mode-tight .content-sticky,
+.content-sticky {
+  background: transparent !important;
+}
+
+/* Lift the fade-in text higher in the viewport — top third
+   instead of vertically centered */
+.content-sticky {
+  justify-content: flex-start !important;
+  padding-top: clamp(18vh, 22vh, 26vh) !important;
 }
 
 /* Team — descent begins in earnest, medium blue → royal blue */
