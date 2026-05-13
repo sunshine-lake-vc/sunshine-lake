@@ -629,15 +629,13 @@ a.rd-name:hover { color: var(--rd-yellow); }
   overflow: hidden;
   background:
     linear-gradient(180deg,
-      #FFFFFF 0%,     /* pure white at the very top */
-      #FCF6E0 6%,     /* soft cream */
-      #F2DC78 14%,    /* yellow sun */
-      #E8E0B5 22%,    /* yellow fading toward blue */
-      #C5D5EA 32%,    /* pale blue */
-      #7AC5EE 48%,    /* sky blue */
-      #4A88E5 68%,
-      #2A6CD8 86%,
-      #155EE8 100%    /* royal blue at bottom — handoff to thesis */
+      #FFFFFF 0%,
+      #FFFBE5 8%,     /* white with a hint of warmth */
+      #F4E08C 20%,    /* yellow sun band */
+      #FFF5D0 35%,    /* back toward cream */
+      #E8EAE0 55%,    /* cream-gray */
+      #D5DCEA 75%,    /* very pale blue */
+      #B8C8E5 100%    /* light blue at bottom — surface zone still bright */
     ) !important;
 }
 
@@ -689,6 +687,17 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Make sure the hero sticky sits above the painterly water */
 .hero-scroll-spacer .hero-sticky { position: sticky; z-index: 5; }
 
+/* OPTION 1 — Hero card GROWS on scroll
+   The site's existing JS sets transform: scale(currentScale) where
+   currentScale shrinks 1.0 → ~0.5. We use the modern `scale` property
+   (which composes multiplicatively with the transform's scale) to
+   apply our own grow factor on top. JS updates --rd-card-grow each
+   frame so the net visual scale increases as you scroll. */
+.hero-card {
+  scale: var(--rd-card-grow, 1) !important;
+  transform-origin: center center !important;
+}
+
 /* Scroll-driven zoom: painterly water + sparkles scale up as the
    user scrolls. JS sets --rd-dive-zoom on the spacer (1 → ~2.8).
    We compose this with the drift animation by using the modern
@@ -713,41 +722,42 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Fallback in case any section bleeds through */
 body { background: #010210 !important; }
 
-/* Thesis — picks up from the hero spacer (royal blue at bottom)
-   and continues descending into a deeper royal blue */
+/* Thesis — continues the BRIGHT zone (pale blue, still surface-y)
+   Picks up from the hero spacer's light blue bottom and gradually
+   descends toward mid blue */
 .content-spacer {
   background: linear-gradient(180deg,
-    #155EE8 0%,
-    #1454D0 35%,
-    #0E45BC 70%,
-    #0A3DAE 100%) !important;
+    #B8C8E5 0%,    /* matches hero spacer bottom */
+    #A8BCE8 30%,
+    #7AA5E0 65%,
+    #4A88E5 100%) !important;
 }
 
-/* Thesis copy must flip to white on the new dark blue */
+/* Thesis copy stays dark navy on the bright bg */
 .content-sticky p,
 .content-sticky p .reveal-line {
-  color: #FFFFFF !important;
+  color: #0B1275 !important;
 }
 .content-sticky.hl-active p,
 .content-sticky.hl-active p .reveal-line {
-  color: #FFFFFF !important;
+  color: #0B1275 !important;
 }
 
-/* Team — deeper royal → mid navy */
+/* Team — descent begins in earnest, medium blue → royal blue */
 .team-section {
   background: linear-gradient(180deg,
-    #0A3DAE 0%,
-    #0E2A88 50%,
-    #0032A8 100%) !important;
+    #4A88E5 0%,
+    #2A6CD8 50%,
+    #155EE8 100%) !important;
 }
 
-/* Founders portfolio — mid navy → navy
+/* Founders portfolio — royal blue → navy.
    Drops the duotone-blue filter so photos pop against blue. */
 .founders-scroll-spacer {
   background: linear-gradient(180deg,
-    #0032A8 0%,
-    #0E1F88 50%,
-    #0B1275 100%) !important;
+    #155EE8 0%,
+    #0A3DAE 50%,
+    #0032A8 100%) !important;
 }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
@@ -755,8 +765,8 @@ body { background: #010210 !important; }
 /* rd-zone (Category Leaders + Strategic Exits) — navy → trench */
 .rd-zone {
   background: linear-gradient(180deg,
-    #0B1275 0%,
-    #080C5C 50%,
+    #0032A8 0%,    /* picks up from founders bottom */
+    #0B1275 50%,
     #050838 100%) !important;
 }
 /* rd-deep-zone (Day Zero + Voices) — trench → abyss */

@@ -387,6 +387,41 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════
+     HERO CARD GROW — Option 1
+     The site's existing JS shrinks the hero card 1.0 → ~0.5 over the
+     first 100vh of scroll. We compose a GROW factor on top using the
+     modern CSS `scale` property, so the net visual scale increases
+     (1 → ~2.5) and the painterly WebGL water inside the card
+     appears to zoom in toward the viewer.
+     ═══════════════════════════════════════════════════════════════ */
+  function setupHeroGrow() {
+    var card = document.querySelector('.hero-card');
+    if (!card) return;
+    var rafPending = false;
+    function update() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      var vh = window.innerHeight;
+      var progress = Math.max(0, Math.min(1, scrollY / vh));
+      // Existing scale shrinks 1 → ~0.5. We grow 1 → 5 so the net
+      // visual is 1 → 2.5. Quadratic ease so it accelerates as you dive.
+      var eased = progress * progress;
+      var grow = 1 + eased * 4;
+      card.style.setProperty('--rd-card-grow', grow.toFixed(3));
+    }
+    function onScroll() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function () {
+        update();
+        rafPending = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
      DIVE PARTICLES — white sparkles drifting through the dive layer
      ═══════════════════════════════════════════════════════════════ */
   function spawnDiveParticles() {
@@ -421,6 +456,7 @@
     wireFooterCaptions();
     spawnDiveParticles();
     setupDiveZoom();
+    setupHeroGrow();
   }
 
   if (document.readyState === 'loading') {
