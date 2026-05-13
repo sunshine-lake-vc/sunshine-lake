@@ -722,15 +722,14 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Fallback in case any section bleeds through */
 body { background: #010210 !important; }
 
-/* Thesis — continues the BRIGHT zone (pale blue, still surface-y)
-   Picks up from the hero spacer's light blue bottom and gradually
-   descends toward mid blue */
+/* Thesis — clean two-stop continuation of the descent so it reads
+   as ONE section with the hero spacer above it. Matches the
+   spacer's bottom edge exactly and slides into the team band. */
 .content-spacer {
   background: linear-gradient(180deg,
-    #B8C8E5 0%,    /* matches hero spacer bottom */
-    #A8BCE8 30%,
-    #7AA5E0 65%,
-    #4A88E5 100%) !important;
+    #B8C8E5 0%,    /* matches hero spacer bottom — invisible seam */
+    #4A88E5 100%   /* hands off to the team section */
+  ) !important;
 }
 
 /* Thesis copy stays dark navy on the bright bg */
@@ -860,8 +859,17 @@ body.mode-tight .content-sticky,
   color: #155EE8 !important;
 }
 
-/* All four lines fade in and stay visible — no pull-away of 1–3
-   when line 4 enters. The whole stack sits as one finished statement. */
+/* Sequential cinematic fade: each line fades IN, then fades OUT as
+   the next line takes its place. Implemented with :has() — any
+   reveal-line that has a LATER visible sibling fades to 0. */
+.content-sticky:has(.reveal-line:nth-child(2).visible) .reveal-line:nth-child(1),
+.content-sticky:has(.reveal-line:nth-child(3).visible) .reveal-line:nth-child(2),
+.content-sticky:has(.reveal-line:nth-child(4).visible) .reveal-line:nth-child(3) {
+  opacity: 0 !important;
+  transform: translateY(-20px) !important;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    FOOTER OVERRIDES — "Dive Beneath the Surface"

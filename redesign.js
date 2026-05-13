@@ -427,7 +427,7 @@
   function spawnDiveParticles() {
     var layer = document.getElementById('rd-dive-particles');
     if (!layer) return;
-    var count = 130;
+    var count = 70;
     var frag = document.createDocumentFragment();
     for (var i = 0; i < count; i++) {
       var p = document.createElement('div');
