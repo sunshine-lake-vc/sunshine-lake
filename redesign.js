@@ -368,7 +368,7 @@
       var progress = Math.max(0, Math.min(1, raw));
       // Ease the zoom so it accelerates as you go deeper
       var eased = progress * progress;
-      var zoom = 1 + eased * 5.5; // 1× → 6.5× over the spacer — dramatic dive
+      var zoom = 1 + eased * 2.4; // 1× → 3.4× over the spacer
       spacer.style.setProperty('--rd-dive-zoom', zoom.toFixed(3));
     }
 
