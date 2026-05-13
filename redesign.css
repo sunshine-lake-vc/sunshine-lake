@@ -49,7 +49,7 @@
   align-items: center;
   gap: clamp(10px, 1vw, 16px);
   padding: clamp(12px, 1.1vw, 16px) clamp(20px, 1.8vw, 28px);
-  margin-top: clamp(20px, 2.5vw, 36px) !important;
+  margin-top: clamp(8px, 1vw, 14px) !important;
   background: #F2D831;
   border-radius: 999px;
   color: #0B1275;
@@ -597,9 +597,9 @@ a.rd-name:hover { color: var(--rd-yellow); }
       #1450C8 22%,
       #0E45BC 42%,
       #0A3DAE 58%,
-      #1E68EE 75%,
-      #6DA4F0 90%,
-      #FFFFFF 100%) !important;
+      #2A7CFF 72%,
+      #7AC5EE 85%,
+      #F5EBC0 100%) !important; /* fades into the breakthrough cream of the thesis section */
 }
 
 /* Drifting painterly blobs — fill the full spacer, sit behind the hero card */
@@ -662,6 +662,93 @@ a.rd-name:hover { color: var(--rd-yellow); }
   transition: scale 0.05s linear;
   will-change: scale, transform;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   COLOR STORY — continuous descent through the whole site
+   surface (painterly) → breakthrough (warm cream) → sunlit
+   shallows (pale blue) → mid-blue → royal blue → deep navy →
+   trench → abyss. Each section paints its segment of the
+   descent so the page reads as one breath of water.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fallback in case any section bleeds through */
+body { background: #010210 !important; }
+
+/* Thesis — BREAKTHROUGH (warm cream still carrying sunlight) → sunlit shallows */
+.content-spacer {
+  background: linear-gradient(180deg,
+    #F5EBC0 0%,    /* breakthrough cream — picks up from the hero spacer bottom */
+    #EBE1B0 18%,
+    #D8DDD8 35%,
+    #C8D6F0 55%,
+    #A8BCE8 78%,
+    #7AA5E0 100%) !important;
+}
+
+/* Team — SUNLIT SHALLOWS to MID-BLUE */
+.team-section {
+  background: linear-gradient(180deg,
+    #7AA5E0 0%,
+    #5E8FE0 50%,
+    #3A6BC7 100%) !important;
+}
+
+/* Founders portfolio — MID-BLUE to ROYAL BLUE
+   Drops the duotone-blue filter so photos pop against blue. */
+.founders-scroll-spacer {
+  background: linear-gradient(180deg,
+    #3A6BC7 0%,
+    #155EE8 50%,
+    #0E45BC 100%) !important;
+}
+.founders-scroll-spacer img,
+.founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
+
+/* Footer — ABYSS (re-darken now that the descent ends here) */
+.footer-scroll-spacer {
+  background: linear-gradient(180deg, #050838 0%, #02041F 60%, #010210 100%) !important;
+}
+.footer-sticky { background: transparent !important; }
+
+/* ─── Text contrast overrides for sections that changed background ─── */
+
+/* Team — pale blue → mid blue. Royal-blue text still reads but
+   lift it for legibility on the mid-blue band */
+.team-section .team-desc { color: #0B1275 !important; }
+.team-section .team-intro { color: rgba(11, 18, 117, 0.85) !important; }
+.team-section .team-card-name { color: #0B1275 !important; }
+.team-section .team-card-role { color: rgba(11, 18, 117, 0.6) !important; }
+.team-section .team-card-desc { color: rgba(11, 18, 117, 0.78) !important; }
+.team-section .team-bio-btn {
+  color: rgba(11, 18, 117, 0.75) !important;
+  border-color: rgba(11, 18, 117, 0.25) !important;
+}
+.team-section .team-bio-btn:hover { color: #F2D831 !important; }
+
+/* Founders portfolio — switch to white text against royal/deep blue */
+.founders-scroll-spacer .founders-left-title { color: #fff !important; }
+.founders-scroll-spacer .founders-right-subtitle { color: rgba(255, 255, 255, 0.82) !important; }
+.founders-scroll-spacer .founders-item-company { color: #fff !important; }
+.founders-scroll-spacer .founders-item-founders { color: rgba(255, 255, 255, 0.68) !important; }
+.founders-scroll-spacer .founders-item-name { color: #fff !important; }
+.founders-scroll-spacer .founders-item-name .from-label { color: rgba(255, 255, 255, 0.6) !important; }
+.founders-scroll-spacer .founders-item-desc { color: rgba(255, 255, 255, 0.78) !important; }
+
+/* Footer — revert h2 to white now that the bg is the abyss */
+.footer-photo-content h2 {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 32px rgba(122, 204, 255, 0.25) !important;
+}
+.footer-photo-content .footer-contact a {
+  color: #FFFFFF !important;
+  border-bottom-color: rgba(255, 255, 255, 0.32) !important;
+}
+.footer-photo-content .footer-contact a:hover {
+  color: #F2D831 !important;
+  border-bottom-color: #F2D831 !important;
+}
+.footer-photo-content .footer-legal { color: rgba(255, 255, 255, 0.4) !important; }
+.footer-photo-content .footer-logo { fill: rgba(255, 255, 255, 0.85) !important; }
 
 /* ═══════════════════════════════════════════════════════════════
    INTRO LINES — simpler fade pattern
