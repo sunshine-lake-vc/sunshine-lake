@@ -862,7 +862,21 @@ body.mode-tight .content-sticky,
 }
 
 /* Sequential clean fade: opacity only, no translate, no glow.
-   Each line fades in, then fades out as the next one arrives. */
+   Each line fades in IN PLACE — they're stacked in the same grid
+   cell so they all share the viewport-center position, no "drift
+   downward" as later lines take over. */
+.content-sticky p {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+}
+.content-sticky p .reveal-line {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  text-align: center;
+}
 .reveal-line {
   transform: none !important;
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
@@ -1093,10 +1107,18 @@ body.mode-tight .content-sticky p {
   .footer-sticky { padding: clamp(40px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(32px, 6vw, 48px) !important; }
   .footer-photo-grid { gap: 8px !important; }
 
-  /* Team → Portfolio: a clean break so the founders' sticky photo
-     doesn't render under the team section */
-  .team-section { padding-bottom: clamp(40px, 8vw, 64px); }
-  .founders-scroll-spacer { padding-top: clamp(32px, 6vw, 56px); }
+  /* Team → Portfolio: clean break + extra headroom so the photo
+     stack inside founders doesn't get clipped against the bottom
+     of the team section */
+  .team-section { padding-bottom: clamp(56px, 10vw, 88px); }
+  .founders-scroll-spacer { padding-top: clamp(72px, 14vw, 120px); }
+
+  /* Hero title — pull main-content up off the bottom edge so the
+     headline sits closer to vertical center of the hero card on
+     phone instead of hugging the bottom */
+  .hero-card .main-content {
+    bottom: 22% !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
