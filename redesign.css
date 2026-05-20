@@ -1130,26 +1130,28 @@ body.mode-tight .content-sticky p {
   .team-section { padding-bottom: clamp(56px, 10vw, 88px); }
   .founders-scroll-spacer { padding-top: clamp(72px, 14vw, 120px); }
 
-  /* Hero title — center vertically in the hero card on mobile.
-     Override the inline scroll-driven translateY transform so it
-     doesn't drift up over the SLC logo. */
+  /* Hero title — true center of the hero card on mobile via
+     translate-based positioning. Doesn't fight the inline JS
+     transform because we're explicitly !important-ing it. */
   .hero-card .main-content {
     position: absolute !important;
-    inset: 0 !important;
+    top: 50% !important;
+    left: 50% !important;
+    bottom: auto !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
     align-items: center !important;
-    padding: 90px 24px 60px !important;
-    text-align: center !important;
-    transform: none !important;
+    width: calc(100% - 48px) !important;
     max-width: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
+    text-align: center !important;
+    padding: 0 !important;
   }
   .hero-card .title {
     text-align: center !important;
     font-size: clamp(2.4rem, 11vw, 3.4rem) !important;
+    width: 100%;
   }
   .hero-card .hero-badge { align-self: center !important; }
 }
@@ -1268,16 +1270,16 @@ body.mode-tight .content-sticky p {
     background: #F2D831;
     border-color: #F2D831;
   }
-  .rd-mobile-menu-btn span {
-    display: block;
-    width: 16px;
-    height: 1.5px;
-    background: #fff;
-    border-radius: 2px;
+  .rd-mobile-menu-btn > span {
+    display: block !important;
+    width: 18px !important;
+    height: 2px !important;
+    background: #ffffff !important;
+    border-radius: 2px !important;
     transition: background 0.3s ease;
   }
-  .rd-mobile-menu-btn:hover span,
-  .rd-mobile-menu-btn[aria-expanded="true"] span { background: #0B1275; }
+  .rd-mobile-menu-btn:hover > span,
+  .rd-mobile-menu-btn[aria-expanded="true"] > span { background: #0B1275 !important; }
 
   /* Slide-in overlay panel */
   .rd-mobile-menu {
