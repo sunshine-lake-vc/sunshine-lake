@@ -21,7 +21,7 @@
   /* ═══ CATEGORY LEADERS ═══ */
   var leaders = [
     { name: 'Assured',          domain: 'assured.claims',   value: '$1B',    sector: 'Claims Tech',         variant: 'rd-royal'  },
-    { name: 'Kalshi',           domain: 'kalshi.com',       value: '$11B',   sector: 'Prediction Markets',  variant: 'rd-cobalt' },
+    { name: 'Kalshi',           domain: 'kalshi.com',       value: '$22B',   sector: 'Prediction Markets',  variant: 'rd-cobalt' },
     { name: 'Deel',             domain: 'deel.com',         value: '$17.3B', sector: 'Global Payroll',      variant: 'rd-azure'  },
     { name: 'Checkr',           domain: 'checkr.com',       value: '$5B',    sector: 'Background Checks',   variant: 'rd-royal'  },
     { name: 'Fundamental.tech', domain: 'fundamental.tech', value: '$1.4B',  sector: 'AI Infrastructure',   variant: 'rd-cobalt' },
@@ -308,7 +308,9 @@
     'snapshot14.webp': 'Founder & GP',
     'deel.webp':     'Deel — early days',
     'headway.webp':  'Headway team',
-    'kalshi.webp':   'Kalshi founding'
+    'kalshi.webp':   'Kalshi founding',
+    'suhail-luana.jpg':   'Suhail with Luana Lopes Lara — Kalshi $22B party',
+    'suhail-nicolas.jpg': 'Suhail with Nicolas Dessaigne — YC Winter ’26 Demo Day'
   };
   var FALLBACK_CAPTION = 'Sunshine Lake portfolio';
 
