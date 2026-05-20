@@ -1085,21 +1085,33 @@ body.mode-tight .content-sticky p {
   .rd-featured-company { font-size: 28px; }
   .rd-featured-quote { font-size: 19px; }
 
-  /* Thesis lines: smaller, centered, balanced wrap so the long
-     last line doesn't sprawl while short lines stay anchored */
+  /* Thesis section on mobile — large centered type that fills the
+     viewport instead of leaving dead space, with predictable wrap */
   .content-sticky {
-    justify-content: center !important; /* override flex-start so text hugs viewport center on mobile */
-    padding: 8vh clamp(24px, 6vw, 40px) 8vh !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 6vh clamp(20px, 5vw, 32px) 6vh !important;
+    text-align: center !important;
   }
   .content-sticky p {
-    font-size: clamp(20px, 5.2vw, 28px) !important;
-    line-height: 1.32 !important;
-    max-width: 90vw;
-    margin: 0 auto;
+    font-size: clamp(28px, 8.5vw, 44px) !important;
+    line-height: 1.18 !important;
+    max-width: 92vw !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    /* Grid-stack so each line fades IN PLACE at the viewport center */
+    display: grid !important;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-items: center !important;
+    min-height: 60vh;
   }
-  .reveal-line {
-    text-wrap: balance;
-    display: block;
+  .content-sticky p .reveal-line {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    text-align: center !important;
+    text-wrap: pretty;
     padding: 0 4px;
   }
 
