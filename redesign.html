@@ -1118,6 +1118,29 @@
         </svg>
     </a>
 
+    <!-- Mobile menu — hamburger button + full-screen overlay panel
+         (sidebar nav is hidden under 900px width; this takes over there) -->
+    <button class="rd-mobile-menu-btn" id="rd-mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <aside class="rd-mobile-menu" id="rd-mobile-menu" aria-hidden="true">
+        <button class="rd-mobile-menu-close" id="rd-mobile-menu-close" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M6 6l12 12M18 6l-12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <nav class="rd-mobile-menu-list" aria-label="Sections">
+            <a href="#rd-section-hero" class="rd-mobile-menu-link">Surface</a>
+            <a href="#rd-section-thesis" class="rd-mobile-menu-link">Thesis</a>
+            <a href="#rd-section-team" class="rd-mobile-menu-link">Team</a>
+            <a href="#rd-section-portfolio" class="rd-mobile-menu-link">Portfolio</a>
+            <a href="#rd-section-exits" class="rd-mobile-menu-link">Exits</a>
+            <a href="#rd-section-voices" class="rd-mobile-menu-link">Voices</a>
+            <a href="#rd-section-contact" class="rd-mobile-menu-link">Contact</a>
+        </nav>
+        <a class="rd-mobile-menu-lp" href="https://www.vectorais.com/valence%20portal" target="_blank" rel="noopener">LP Login ↗</a>
+    </aside>
+
     <!-- Sticky side nav — anchor links into each major section -->
     <nav class="rd-sidenav" id="rd-sidenav" aria-label="Section navigation">
         <a href="#rd-section-hero" class="rd-sidenav-item" data-section="hero">

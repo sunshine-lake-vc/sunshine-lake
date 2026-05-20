@@ -159,7 +159,7 @@
   z-index: 2;
 }
 
-.rd-tier { padding: 64px 0; }
+.rd-tier { padding-top: 64px; padding-bottom: 64px; }
 
 .rd-tier-head {
   margin-bottom: 28px;
@@ -1043,7 +1043,7 @@ body.mode-tight .content-sticky p {
 }
 @media (max-width: 720px) {
   /* Tier headers: more breathing room, tighter type, less crowding */
-  .rd-tier { padding: 48px 0; }
+  .rd-tier { padding-top: 48px; padding-bottom: 48px; }
   .rd-tier-head { gap: 12px; margin-bottom: 20px; }
   .rd-tier-title { font-size: clamp(26px, 7vw, 32px); }
   .rd-tier-desc { font-size: 14.5px; line-height: 1.5; }
@@ -1174,6 +1174,124 @@ body.mode-tight .content-sticky p {
   .rd-sidenav-item,
   .rd-sidenav-dot,
   .rd-sidenav-label { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MENU — hamburger button + slide-in overlay panel
+   Hidden on desktop. Replaces the sidenav under 900px.
+   ═══════════════════════════════════════════════════════════════ */
+.rd-mobile-menu-btn,
+.rd-mobile-menu { display: none; }
+
+@media (max-width: 900px) {
+  .rd-mobile-menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    position: fixed;
+    top: clamp(20px, 2.4vw, 32px);
+    right: calc(20px + 120px); /* sits to the LEFT of the LP Login pill */
+    z-index: 101;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: rgba(11, 18, 117, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  .rd-mobile-menu-btn:hover,
+  .rd-mobile-menu-btn[aria-expanded="true"] {
+    background: #F2D831;
+    border-color: #F2D831;
+  }
+  .rd-mobile-menu-btn span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  }
+  .rd-mobile-menu-btn:hover span,
+  .rd-mobile-menu-btn[aria-expanded="true"] span { background: #0B1275; }
+
+  /* Slide-in overlay panel */
+  .rd-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: linear-gradient(180deg, rgba(11, 18, 117, 0.96), rgba(2, 4, 31, 0.96));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: clamp(64px, 12vw, 96px) clamp(24px, 6vw, 48px) clamp(32px, 6vw, 48px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .rd-mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .rd-mobile-menu-close {
+    position: absolute;
+    top: clamp(20px, 2.4vw, 32px);
+    right: clamp(20px, 3.2vw, 36px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .rd-mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8vh;
+  }
+  .rd-mobile-menu-link {
+    font-family: 'DomaineDisp', 'Times New Roman', serif;
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-decoration: none !important;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: color 0.25s ease, padding-left 0.25s ease;
+  }
+  .rd-mobile-menu-link:active,
+  .rd-mobile-menu-link:hover { color: #F2D831; padding-left: 6px; }
+  .rd-mobile-menu-lp {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 12px 22px;
+    background: #F2D831;
+    color: #0B1275;
+    border-radius: 999px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
