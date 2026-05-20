@@ -422,7 +422,12 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .rd-ctrl svg { width: 15px; height: 15px; stroke: currentColor; }
 
 /* ═══ Day Zero — Featured Testimonials ═══ */
-.rd-dayzero { padding-top: 56px; padding-bottom: 16px; }
+.rd-dayzero {
+  padding-top: 56px !important;
+  padding-bottom: 16px !important;
+  padding-left: var(--rd-side-pad) !important;
+  padding-right: var(--rd-side-pad) !important;
+}
 .rd-dayzero-head { max-width: 760px; margin-bottom: 28px; }
 
 .rd-featured-row {
@@ -1125,12 +1130,28 @@ body.mode-tight .content-sticky p {
   .team-section { padding-bottom: clamp(56px, 10vw, 88px); }
   .founders-scroll-spacer { padding-top: clamp(72px, 14vw, 120px); }
 
-  /* Hero title — pull main-content up off the bottom edge so the
-     headline sits closer to vertical center of the hero card on
-     phone instead of hugging the bottom */
+  /* Hero title — center vertically in the hero card on mobile.
+     Override the inline scroll-driven translateY transform so it
+     doesn't drift up over the SLC logo. */
   .hero-card .main-content {
-    bottom: 22% !important;
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 90px 24px 60px !important;
+    text-align: center !important;
+    transform: none !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
   }
+  .hero-card .title {
+    text-align: center !important;
+    font-size: clamp(2.4rem, 11vw, 3.4rem) !important;
+  }
+  .hero-card .hero-badge { align-self: center !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
