@@ -425,6 +425,57 @@
     wireFooterCaptions();
     spawnDiveParticles();
     setupDiveZoom();
+    setupSideNav();
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SIDE NAV — smooth scroll + scroll-spy highlight
+     ═══════════════════════════════════════════════════════════════ */
+  function setupSideNav() {
+    var nav = document.getElementById('rd-sidenav');
+    if (!nav) return;
+    var items = Array.prototype.slice.call(nav.querySelectorAll('.rd-sidenav-item'));
+    var sections = items.map(function (item) {
+      var sel = item.getAttribute('href');
+      var target = sel ? document.querySelector(sel) : null;
+      return { item: item, target: target };
+    }).filter(function (s) { return s.target; });
+
+    // Smooth scroll on click
+    sections.forEach(function (s) {
+      s.item.addEventListener('click', function (e) {
+        e.preventDefault();
+        var rect = s.target.getBoundingClientRect();
+        var top = rect.top + (window.pageYOffset || document.documentElement.scrollTop);
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+
+    // Scroll-spy: highlight the section closest to the viewport center
+    var rafPending = false;
+    function update() {
+      var mid = (window.pageYOffset || document.documentElement.scrollTop) + window.innerHeight * 0.4;
+      var activeIdx = 0;
+      for (var i = 0; i < sections.length; i++) {
+        var r = sections[i].target.getBoundingClientRect();
+        var top = r.top + (window.pageYOffset || document.documentElement.scrollTop);
+        if (top <= mid) activeIdx = i;
+      }
+      sections.forEach(function (s, i) {
+        s.item.classList.toggle('active', i === activeIdx);
+      });
+    }
+    function onScroll() {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function () {
+        update();
+        rafPending = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   }
 
   if (document.readyState === 'loading') {

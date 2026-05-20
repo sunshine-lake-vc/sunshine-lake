@@ -15,7 +15,7 @@
   --rd-cream: #EDECE3;
   --rd-ink: #0A0E1A;
   --rd-white: #FFFFFF;
-  --rd-max-w: 1280px;
+  --rd-max-w: 1440px;
   --rd-side-pad: clamp(24px, 4vw, 64px);
   --rd-gutter: max(var(--rd-side-pad), calc((100vw - var(--rd-max-w)) / 2 + var(--rd-side-pad)));
 }
@@ -163,11 +163,13 @@
 
 .rd-tier-head {
   margin-bottom: 28px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 20px 40px;
 }
+.rd-tier-head > :first-child { flex: 1 1 360px; min-width: 0; }
+.rd-tier-head > .rd-tier-desc { flex: 1 1 280px; max-width: 520px; margin-top: 0; }
 
 .rd-tier-eyebrow {
   display: inline-flex;
@@ -189,12 +191,14 @@
 
 .rd-tier-title {
   font-family: 'DomaineDisp', 'Times New Roman', serif;
-  font-size: clamp(36px, 3.6vw, 56px);
+  font-size: clamp(28px, 3.4vw, 56px);
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
+  word-break: break-word;
+  hyphens: auto;
 }
 .rd-tier-title em {
   font-style: italic;
@@ -226,7 +230,11 @@
   gap: 16px;
   padding: 16px var(--rd-gutter);
   width: max-content;
-  animation: rd-scroll 80s linear infinite;
+  /* Speed synced across all carousels at ~70 px/sec — exits track
+     is ~10500px doubled, so 150s. Voices marquee uses the same
+     px/sec via its own keyframe below. Cat leaders is ~5000px so
+     gets a proportionally shorter 70s. */
+  animation: rd-scroll 150s linear infinite;
   will-change: transform;
 }
 .rd-leaders-wrap .rd-track {
@@ -521,7 +529,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
   width: max-content;
   will-change: transform;
 }
-.rd-voices-row.rd-top { animation: rd-vscroll-l 95s linear infinite; }
+.rd-voices-row.rd-top { animation: rd-vscroll-l 175s linear infinite; }
 .rd-voices-marquee:hover .rd-voices-row { animation-play-state: paused; }
 @keyframes rd-vscroll-l {
   from { transform: translateX(0); }
@@ -1041,4 +1049,82 @@ body.mode-tight .content-sticky p {
   .rd-voice { width: 340px; padding: 22px; }
   .rd-voice-quote { font-size: 16px; }
   .hero-badge { top: 60px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STICKY SIDE NAV — anchor links into each major section
+   ═══════════════════════════════════════════════════════════════ */
+.rd-sidenav {
+  position: fixed;
+  top: 50%;
+  right: clamp(16px, 1.6vw, 28px);
+  transform: translateY(-50%);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.rd-sidenav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  flex-direction: row-reverse; /* label sits to the LEFT of the dot */
+}
+.rd-sidenav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 0 4px rgba(11, 18, 117, 0), 0 0 6px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+.rd-sidenav-item:hover .rd-sidenav-dot,
+.rd-sidenav-item.active .rd-sidenav-dot {
+  background: #F2D831;
+  transform: scale(1.25);
+  box-shadow: 0 0 0 4px rgba(242, 216, 49, 0.18), 0 0 12px rgba(242, 216, 49, 0.45);
+}
+.rd-sidenav-label {
+  opacity: 0;
+  transform: translateX(8px);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(11, 18, 117, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.rd-sidenav-item:hover .rd-sidenav-label,
+.rd-sidenav-item.active .rd-sidenav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.rd-sidenav-item.active .rd-sidenav-label {
+  background: #F2D831;
+  color: #0B1275;
+}
+@media (max-width: 900px) { .rd-sidenav { display: none; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE HERO READABILITY — strengthen the title against the
+   busy painterly water
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 720px) {
+  .hero-card .title {
+    text-shadow:
+      0 2px 16px rgba(11, 18, 117, 0.55),
+      0 0 28px rgba(0, 0, 0, 0.25);
+  }
 }

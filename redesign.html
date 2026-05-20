@@ -1118,8 +1118,33 @@
         </svg>
     </a>
 
+    <!-- Sticky side nav — anchor links into each major section -->
+    <nav class="rd-sidenav" id="rd-sidenav" aria-label="Section navigation">
+        <a href="#rd-section-hero" class="rd-sidenav-item" data-section="hero">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Surface</span>
+        </a>
+        <a href="#rd-section-thesis" class="rd-sidenav-item" data-section="thesis">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Thesis</span>
+        </a>
+        <a href="#rd-section-team" class="rd-sidenav-item" data-section="team">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Team</span>
+        </a>
+        <a href="#rd-section-portfolio" class="rd-sidenav-item" data-section="portfolio">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Portfolio</span>
+        </a>
+        <a href="#rd-section-exits" class="rd-sidenav-item" data-section="exits">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Exits</span>
+        </a>
+        <a href="#rd-section-voices" class="rd-sidenav-item" data-section="voices">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Voices</span>
+        </a>
+        <a href="#rd-section-contact" class="rd-sidenav-item" data-section="contact">
+            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Contact</span>
+        </a>
+    </nav>
+
     <!-- Hero with scroll-driven frame effect (painterly water continues behind/below, zooms in on scroll) -->
-    <div class="hero-scroll-spacer rd-water-extend">
+    <div class="hero-scroll-spacer rd-water-extend" id="rd-section-hero">
         <div class="rd-dive-surface" aria-hidden="true"></div>
         <div class="rd-dive-particles" id="rd-dive-particles" aria-hidden="true"></div>
         <div class="hero-sticky">
@@ -1182,7 +1207,7 @@
     </div>
 
     <!-- Content below hero — sticky with scroll-driven reveal -->
-    <div class="content-spacer">
+    <div class="content-spacer" id="rd-section-thesis">
         <div class="content-sticky">
             <p>
                 <span class="reveal-line"><mark class="hl" data-hl="0">Founders</mark> from <mark class="hl" data-hl="1">extreme origins</mark>.</span>
@@ -1194,7 +1219,7 @@
     </div>
 
     <!-- Team Section -->
-    <section class="team-section">
+    <section class="team-section" id="rd-section-team">
         <div class="team-inner">
             <div class="team-layout">
                 <!-- Left: Sticky descriptive text -->
@@ -1269,7 +1294,7 @@
     </section>
 
     <!-- Founders scroll-through -->
-    <div class="founders-scroll-spacer">
+    <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
             <h2 class="founders-left-title">Portfolio</h2>
             <div class="founders-photo-stack" id="foundersPhotoStack">
@@ -1284,7 +1309,7 @@
     </div>
 
     <!-- ════════ REDESIGN INJECTION 1: Category Leaders + Strategic Exits ════════ -->
-    <section class="rd-zone">
+    <section class="rd-zone" id="rd-section-exits">
         <div class="rd-container rd-tier">
             <div class="rd-tier-head">
                 <div>
@@ -1305,17 +1330,6 @@
                     <h2 class="rd-tier-title">Landscape-shifting <em>exits.</em></h2>
                     <p class="rd-tier-desc">Public listings and strategic acquisitions — our portfolio companies are consistently acquired by, or listed alongside, the world's leading tech innovators.</p>
                 </div>
-                <div class="rd-controls">
-                    <button class="rd-ctrl" id="rd-prev" aria-label="Previous">
-                        <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                    <button class="rd-ctrl" id="rd-pause" aria-label="Pause">
-                        <svg viewBox="0 0 24 24" fill="none" id="rd-pause-icon"><path d="M9 5v14M15 5v14" stroke-width="1.8" stroke-linecap="round"/></svg>
-                    </button>
-                    <button class="rd-ctrl" id="rd-next" aria-label="Next">
-                        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                </div>
             </div>
         </div>
         <div class="rd-carousel-wrap" id="rd-portfolio-wrap">
@@ -1326,7 +1340,7 @@
 
 
     <!-- ════════ REDESIGN INJECTION 2: From Day Zero + Founder Voices ════════ -->
-    <section class="rd-zone rd-deep-zone">
+    <section class="rd-zone rd-deep-zone" id="rd-section-voices">
         <div class="rd-container rd-dayzero">
             <div class="rd-dayzero-head">
                 <div class="rd-tier-eyebrow">The Approach</div>
@@ -1347,7 +1361,7 @@
     </main>
 
     <!-- Footer with photo grid -->
-    <footer class="footer-scroll-spacer">
+    <footer class="footer-scroll-spacer" id="rd-section-contact">
         <div class="footer-sticky">
             <div class="footer-photo-grid" id="footerPhotoGrid"></div>
             <div class="footer-photo-card" id="footerPhotoCard"></div>
