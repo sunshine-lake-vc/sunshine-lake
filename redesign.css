@@ -1071,10 +1071,23 @@ body.mode-tight .content-sticky p {
   .rd-featured-company { font-size: 28px; }
   .rd-featured-quote { font-size: 19px; }
 
-  /* Thesis lines: smaller + balanced wrap so they don't break awkwardly */
-  .content-sticky p { font-size: clamp(22px, 5.6vw, 30px) !important; line-height: 1.32 !important; }
-  .reveal-line { text-wrap: balance; }
-  .content-sticky { padding-top: clamp(14vh, 18vh, 22vh) !important; }
+  /* Thesis lines: smaller, centered, balanced wrap so the long
+     last line doesn't sprawl while short lines stay anchored */
+  .content-sticky {
+    justify-content: center !important; /* override flex-start so text hugs viewport center on mobile */
+    padding: 8vh clamp(24px, 6vw, 40px) 8vh !important;
+  }
+  .content-sticky p {
+    font-size: clamp(20px, 5.2vw, 28px) !important;
+    line-height: 1.32 !important;
+    max-width: 90vw;
+    margin: 0 auto;
+  }
+  .reveal-line {
+    text-wrap: balance;
+    display: block;
+    padding: 0 4px;
+  }
 
   /* Footer photo grid: more padding around the section heading */
   .footer-sticky { padding: clamp(40px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(32px, 6vw, 48px) !important; }
