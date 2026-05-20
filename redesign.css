@@ -422,7 +422,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .rd-ctrl svg { width: 15px; height: 15px; stroke: currentColor; }
 
 /* ═══ Day Zero — Featured Testimonials ═══ */
-.rd-dayzero { padding: 56px 0 16px; }
+.rd-dayzero { padding-top: 56px; padding-bottom: 16px; }
 .rd-dayzero-head { max-width: 760px; margin-bottom: 28px; }
 
 .rd-featured-row {
@@ -511,7 +511,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 
 /* ═══ Voices marquee (now connected directly under Day Zero — no second header) ═══ */
-.rd-voices { padding: 0 0 64px; }
+.rd-voices { padding-bottom: 64px; }
 
 .rd-voices-marquee {
   position: relative;
@@ -1206,42 +1206,53 @@ body.mode-tight .content-sticky p {
 .rd-mobile-menu { display: none; }
 
 @media (max-width: 900px) {
+  /* Hamburger pill — top-left, matches LP Login's pill style */
   .rd-mobile-menu-btn {
     display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     position: fixed;
     top: clamp(20px, 2.4vw, 32px);
-    right: calc(20px + 120px); /* sits to the LEFT of the LP Login pill */
+    left: clamp(20px, 3.2vw, 64px);
     z-index: 101;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background: rgba(11, 18, 117, 0.45);
+    padding: 6px 14px 6px 10px;
+    background: rgba(11, 18, 117, 0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 999px;
+    color: rgba(255, 255, 255, 0.82);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: clamp(10px, 0.72vw, 11.5px);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   .rd-mobile-menu-btn:hover,
   .rd-mobile-menu-btn[aria-expanded="true"] {
     background: #F2D831;
     border-color: #F2D831;
+    color: #0B1275;
   }
-  .rd-mobile-menu-btn span {
+  /* Three-line hamburger glyph inside the pill */
+  .rd-mobile-menu-icon {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    width: 14px;
+    height: 12px;
+  }
+  .rd-mobile-menu-icon span {
     display: block;
-    width: 16px;
-    height: 1.5px;
-    background: #fff;
+    width: 100%;
+    height: 1.4px;
+    background: currentColor;
     border-radius: 2px;
-    transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    transition: background 0.3s ease;
   }
-  .rd-mobile-menu-btn:hover span,
-  .rd-mobile-menu-btn[aria-expanded="true"] span { background: #0B1275; }
 
   /* Slide-in overlay panel */
   .rd-mobile-menu {
