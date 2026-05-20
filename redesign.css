@@ -1218,53 +1218,45 @@ body.mode-tight .content-sticky p {
 .rd-mobile-menu { display: none; }
 
 @media (max-width: 900px) {
-  /* Hamburger pill — top-left, matches LP Login's pill style */
+  /* Hamburger button — top-LEFT corner, mirrors LP Login's pill
+     aesthetic (glass-blur navy bg, white border, gold-on-hover)
+     but icon-only: three horizontal lines */
   .rd-mobile-menu-btn {
     display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     position: fixed;
     top: clamp(20px, 2.4vw, 32px);
     left: clamp(20px, 3.2vw, 64px);
     z-index: 101;
-    padding: 6px 14px 6px 10px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     background: rgba(11, 18, 117, 0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 999px;
-    color: rgba(255, 255, 255, 0.82);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    font-size: clamp(10px, 0.72vw, 11.5px);
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
   .rd-mobile-menu-btn:hover,
   .rd-mobile-menu-btn[aria-expanded="true"] {
     background: #F2D831;
     border-color: #F2D831;
-    color: #0B1275;
   }
-  /* Three-line hamburger glyph inside the pill */
-  .rd-mobile-menu-icon {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3px;
-    width: 14px;
-    height: 12px;
-  }
-  .rd-mobile-menu-icon span {
+  .rd-mobile-menu-btn span {
     display: block;
-    width: 100%;
-    height: 1.4px;
-    background: currentColor;
+    width: 16px;
+    height: 1.5px;
+    background: #fff;
     border-radius: 2px;
     transition: background 0.3s ease;
   }
+  .rd-mobile-menu-btn:hover span,
+  .rd-mobile-menu-btn[aria-expanded="true"] span { background: #0B1275; }
 
   /* Slide-in overlay panel */
   .rd-mobile-menu {
