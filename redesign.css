@@ -1042,13 +1042,48 @@ body.mode-tight .content-sticky p {
   .rd-featured-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
-  .rd-tier-title { font-size: 30px; }
-  .rd-card { width: 320px; height: 200px; }
-  .rd-name { font-size: 28px; }
-  .rd-card.rd-ipo .rd-name { font-size: 36px; }
-  .rd-voice { width: 340px; padding: 22px; }
-  .rd-voice-quote { font-size: 16px; }
-  .hero-badge { top: 60px; }
+  /* Tier headers: more breathing room, tighter type, less crowding */
+  .rd-tier { padding: 48px 0; }
+  .rd-tier-head { gap: 12px; margin-bottom: 20px; }
+  .rd-tier-title { font-size: clamp(26px, 7vw, 32px); }
+  .rd-tier-desc { font-size: 14.5px; line-height: 1.5; }
+  .rd-tier-eyebrow { font-size: 10.5px; margin-bottom: 8px; gap: 8px; }
+  .rd-tier-eyebrow::before { width: 16px; }
+
+  /* Carousel cards: smaller so they fit a phone viewport with peek */
+  .rd-card { width: 280px; height: 180px; border-radius: 14px; }
+  .rd-name { font-size: 24px; }
+  .rd-card.rd-ipo .rd-name { font-size: 30px; }
+  .rd-name.rd-tight   { font-size: 20px; }
+  .rd-name.rd-tighter { font-size: 17px; }
+  .rd-card-inner { padding: 14px 16px 38px; }
+  .rd-card-foot { padding: 8px 16px 10px; }
+  .yellow-badge.stamp, .rd-badge.rd-stamp { width: 44px; height: 44px; font-size: 10px; }
+  .rd-track { gap: 12px; padding: 12px var(--rd-side-pad); }
+
+  /* Voices: same compact treatment */
+  .rd-voice { width: 300px; padding: 20px; gap: 14px; }
+  .rd-voice-quote { font-size: 15px; }
+  .rd-voices-row { padding: 8px var(--rd-side-pad); }
+
+  /* Featured row stacks already (1fr above), tighten the cards themselves */
+  .rd-featured { padding: 22px; gap: 16px; }
+  .rd-featured-company { font-size: 28px; }
+  .rd-featured-quote { font-size: 19px; }
+
+  /* Thesis lines: smaller + balanced wrap so they don't break awkwardly */
+  .content-sticky p { font-size: clamp(22px, 5.6vw, 30px) !important; line-height: 1.32 !important; }
+  .reveal-line { text-wrap: balance; }
+  .content-sticky { padding-top: clamp(14vh, 18vh, 22vh) !important; }
+
+  /* Footer photo grid: more padding around the section heading */
+  .footer-sticky { padding: clamp(40px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(32px, 6vw, 48px) !important; }
+  .footer-photo-grid { gap: 8px !important; }
+
+  /* Team → Portfolio: a clean break so the founders' sticky photo
+     doesn't render under the team section */
+  .team-section { padding-bottom: clamp(40px, 8vw, 64px); }
+  .founders-scroll-spacer { padding-top: clamp(32px, 6vw, 56px); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
