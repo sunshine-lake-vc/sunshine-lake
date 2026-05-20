@@ -1103,10 +1103,16 @@ body.mode-tight .content-sticky p {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
-  color: inherit;
+  text-decoration: none !important;
+  color: inherit !important;
   cursor: pointer;
   flex-direction: row-reverse; /* label sits to the LEFT of the dot */
+}
+.rd-sidenav-item:visited,
+.rd-sidenav-item:focus,
+.rd-sidenav-item:active {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 .rd-sidenav-dot {
   width: 8px;
@@ -1150,7 +1156,12 @@ body.mode-tight .content-sticky p {
   background: #F2D831;
   color: #0B1275;
 }
-@media (max-width: 900px) { .rd-sidenav { display: none; } }
+@media (max-width: 900px) {
+  .rd-sidenav,
+  .rd-sidenav-item,
+  .rd-sidenav-dot,
+  .rd-sidenav-label { display: none !important; }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE HERO READABILITY — strengthen the title against the
