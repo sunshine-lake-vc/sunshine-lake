@@ -233,15 +233,21 @@
   /* Speed synced across all carousels at ~70 px/sec — exits track
      is ~10500px doubled, so 150s. Voices marquee uses the same
      px/sec via its own keyframe below. Cat leaders is ~5000px so
-     gets a proportionally shorter 70s. */
-  animation: rd-scroll 150s linear infinite;
+     gets a proportionally shorter 70s. !important beats the site's
+     prefers-reduced-motion override which was nuking animations
+     on iOS phones with Reduce Motion turned on. */
+  animation: rd-scroll 150s linear infinite !important;
   will-change: transform;
 }
 .rd-leaders-wrap .rd-track {
-  animation-name: rd-scroll-leaders;
-  animation-duration: 70s;
+  animation: rd-scroll-leaders 70s linear infinite !important;
 }
-.rd-carousel-wrap:hover .rd-track,
+/* Hover-pause only on devices that actually have hover (desktop)
+   — on touch screens :hover used to stick after a tap and freeze
+   the carousels until another tap somewhere else */
+@media (hover: hover) {
+  .rd-carousel-wrap:hover .rd-track { animation-play-state: paused; }
+}
 .rd-carousel-wrap.rd-paused .rd-track { animation-play-state: paused; }
 
 @keyframes rd-scroll {
@@ -534,8 +540,10 @@ a.rd-name:hover { color: var(--rd-yellow); }
   width: max-content;
   will-change: transform;
 }
-.rd-voices-row.rd-top { animation: rd-vscroll-l 175s linear infinite; }
-.rd-voices-marquee:hover .rd-voices-row { animation-play-state: paused; }
+.rd-voices-row.rd-top { animation: rd-vscroll-l 175s linear infinite !important; }
+@media (hover: hover) {
+  .rd-voices-marquee:hover .rd-voices-row { animation-play-state: paused; }
+}
 @keyframes rd-vscroll-l {
   from { transform: translateX(0); }
   to   { transform: translateX(calc(-50% - 9px)); }
@@ -1124,11 +1132,17 @@ body.mode-tight .content-sticky p {
   .footer-sticky { padding: clamp(40px, 8vw, 64px) clamp(20px, 5vw, 32px) clamp(32px, 6vw, 48px) !important; }
   .footer-photo-grid { gap: 8px !important; }
 
-  /* Team → Portfolio: clean break + extra headroom so the photo
-     stack inside founders doesn't get clipped against the bottom
-     of the team section */
-  .team-section { padding-bottom: clamp(56px, 10vw, 88px); }
-  .founders-scroll-spacer { padding-top: clamp(72px, 14vw, 120px); }
+  /* Team → Portfolio: kill the inline -50vh negative margin and
+     z-index:1 that was making the founders section overlap with
+     and render BEHIND the team section on mobile. Now founders
+     sits in normal flow under the team with explicit breathing
+     room above its 'Portfolio' header. */
+  .founders-scroll-spacer {
+    margin-top: 0 !important;
+    z-index: 2 !important;
+    padding-top: clamp(48px, 10vw, 96px) !important;
+  }
+  .team-section { padding-bottom: clamp(48px, 10vw, 88px) !important; }
 
   /* Hero title — true center of the hero card on mobile via
      translate-based positioning. Doesn't fight the inline JS
