@@ -1022,7 +1022,7 @@
         body.mode-combined .hero-scroll-spacer { height: 400vh; }
 
         /* Mode C: gradient bleed from shader into white */
-        body.mode-tight .hero-scroll-spacer { height: 200vh; }
+        body.mode-tight .hero-scroll-spacer { height: 150vh; }
         body.mode-tight .content-spacer { height: 58vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
@@ -1738,8 +1738,10 @@
             const vh = window.innerHeight;
             const vw = window.innerWidth;
 
-            // Frame: scale from 1.0 → slightly smaller card
-            const frameZone = vh;
+            // Frame: scale from 1.0 → slightly smaller card.
+            // Animation runs over 0.5vh so it completes within the
+            // shorter (150vh) hero spacer's pinned phase.
+            const frameZone = vh * 0.5;
             const progress = Math.min(1, scrollY / frameZone);
             const maxInset = vw <= 768 ? 16 : 68;
             const scaleX = 1 - (maxInset * 2) / vw;
@@ -1755,9 +1757,8 @@
             const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
             targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
-            // Shader intensity over 0 → 100vh (aligned to the shorter
-            // hero spacer so it peaks while the card is still pinned)
-            targetShaderIntensity = Math.min(1, scrollY / vh);
+            // Shader intensity ramps with the card animation
+            targetShaderIntensity = Math.min(1, scrollY / frameZone);
 
             // Footer — scroll math from cached offsetTop (no getBoundingClientRect)
             const footerTop = cachedFooterTop - scrollY;
@@ -1786,14 +1787,8 @@
             const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
             const isMobileReveal = window.innerWidth <= 768;
             const revealEnd = isMobileReveal ? 0.7 : 0.35, hlStart = 0.4, hlEnd = 0.9;
-            for (let i = 0; i < totalLines; i++) {
-                const lineStart = 0.1 + (revealEnd - 0.1) * (i / totalLines);
-                const shouldShow = revealProgress >= lineStart;
-                if (shouldShow !== lineVisible[i]) {
-                    lineVisible[i] = shouldShow;
-                    revealLines[i].classList.toggle('visible', shouldShow);
-                }
-            }
+            // Thesis line reveal is handled by the time-based autoplay
+            // (thesisAutoplay IIFE), not scroll position.
             // Mobile: fade + slide up thesis text, portfolio slides up from below
             if (isMobileReveal) {
                 const fadeStart = 0.5, fadeEnd = 0.85;
@@ -2075,6 +2070,40 @@
         document.querySelectorAll('.team-card').forEach(el => {
             aboutObserver.observe(el);
         });
+
+        // ── Thesis line reveal — time-based autoplay ──────────────
+        // The 4 thesis lines crossfade on a timer once the section is
+        // in view, decoupled from scroll so they always play in full.
+        (function thesisAutoplay() {
+            const spacer = document.querySelector('.content-spacer');
+            const lines = document.querySelectorAll('.content-sticky .reveal-line');
+            if (!spacer || !lines.length) return;
+            const HOLD = 1300;
+            let timers = [];
+            let playing = false;
+            function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+            function play() {
+                if (playing) return;
+                playing = true;
+                clearTimers();
+                lines.forEach(l => l.classList.remove('visible'));
+                lines.forEach((l, i) => {
+                    timers.push(setTimeout(() => l.classList.add('visible'), i * HOLD));
+                });
+            }
+            function reset() {
+                clearTimers();
+                lines.forEach(l => l.classList.remove('visible'));
+                playing = false;
+            }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.intersectionRatio >= 0.35) play();
+                    else if (e.intersectionRatio === 0) reset();
+                });
+            }, { threshold: [0, 0.35] });
+            io.observe(spacer);
+        })();
 
         // =======================================
         // FOOTER PHOTO WATER RIPPLE (shared context, visibility-culled)
@@ -2845,26 +2874,10 @@
                     window._footerProgress = footerProg;
 
                 } else if (currentMode === 'tight') {
-                    // --- MODE C: Tight (gradient bleed + earlier reveal) ---
-                    // Run original for frame/footer/logo math
+                    // --- MODE C: Tight ---
+                    // Frame/footer/logo math only. Thesis line reveal is
+                    // handled by the time-based autoplay (thesisAutoplay).
                     origUpdateTargets();
-
-                    // Override line reveal with tighter thresholds.
-                    // Runway is (section height − thesis band height) since
-                    // the band is now shorter than the viewport.
-                    const contentTop = cachedContentTop - scrollY;
-                    const revealScroll = -contentTop;
-                    const revealTotal = Math.max(1, cachedContentHeight - cachedStickyHeight);
-                    const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
-                    const startAt = 0.05, endAt = 0.5;
-                    for (let i = 0; i < totalLines; i++) {
-                        const lineStart = startAt + (endAt - startAt) * (i / totalLines);
-                        if (revealProgress >= lineStart) {
-                            revealLines[i].classList.add('visible');
-                        } else {
-                            revealLines[i].classList.remove('visible');
-                        }
-                    }
                 } else {
                     // --- MODE A: Original ---
                     origUpdateTargets();
