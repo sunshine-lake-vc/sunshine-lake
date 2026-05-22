@@ -652,10 +652,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   background:
     linear-gradient(180deg,
       #FFFFFF 0%,     /* pure white at the surface */
-      #FFFBE5 20%,    /* white with hint of warmth */
-      #FFF1B8 40%,    /* light yellow — sun band */
-      #FFF6D8 65%,    /* cream-yellow */
-      #FFFBEB 100%    /* warm white at handoff — stays bright */
+      #FFFBE5 14%,    /* white with hint of warmth */
+      #FFF1B8 28%,    /* sunlight band — behind the pinned card */
+      #FFF6D8 42%,    /* cream-yellow — still behind the card */
+      #FFFFFF 66%,    /* fully white well before the card scrolls away */
+      #FFFFFF 100%    /* white at the handoff — matches the thesis start */
     ) !important;
 }
 
