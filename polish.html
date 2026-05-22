@@ -1240,6 +1240,44 @@
                 padding-right: 20px !important;
             }
         }
+
+        /* Founders stepper — applies at all breakpoints so the
+           "01 / 12" counter shows on desktop too. */
+        .founders-stepper {
+            position: fixed;
+            bottom: clamp(20px, 2.4vh, 32px);
+            left: clamp(24px, 4vw, 64px);
+            right: clamp(24px, 4vw, 64px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .founders-stepper.visible { opacity: 1; }
+        .founders-stepper span {
+            flex: 1;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 1px;
+            transition: background 0.3s ease;
+        }
+        .founders-stepper span.active {
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .founders-stepper-counter {
+            flex: 0 0 auto;
+            margin-left: 14px;
+            color: rgba(255, 255, 255, 0.78);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body>
@@ -2520,10 +2558,10 @@
                 var isMobile = window.innerWidth <= 768;
                 var center;
 
-                // Stepper visibility: mobile only, after page load, hide during push-up exit
+                // Stepper visibility: shown at every breakpoint once the
+                // founders scroll-through is in view (after page load).
                 var scrollY = window.scrollY;
-                if (isMobile && stepperReady) {
-                    // Use cached spacer position instead of getBoundingClientRect
+                if (stepperReady) {
                     var spacerViewTop = cachedSpacerTop - scrollY;
                     var spacerViewBottom = spacerViewTop + cachedFoundersHeight;
                     var inView = spacerViewTop < vh && spacerViewBottom > 0;
