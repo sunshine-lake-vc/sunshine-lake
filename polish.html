@@ -1164,11 +1164,11 @@
             }
         }
 
-        /* ── Thesis statement — simple static headline above the team ── */
+        /* ── Thesis statement — left-aligned, emphasised on scroll ── */
         body.mode-tight .content-spacer {
             height: auto !important;
             background: linear-gradient(180deg,
-                #FFFBEB 0%, #FFF4CC 58%, #DCE4F0 82%, #4A88E5 100%) !important;
+                #FFFBEB 0%, #FFF6D8 66%, #DCE4F0 88%, #4A88E5 100%) !important;
         }
         body.mode-tight .content-sticky,
         .content-spacer .content-sticky {
@@ -1177,19 +1177,27 @@
             min-height: 0 !important;
             display: block !important;
             background: transparent !important;
-            padding: clamp(58px, 11vh, 130px) clamp(24px, 6vw, 90px) clamp(66px, 13vh, 150px) !important;
+            padding: clamp(44px, 7vh, 96px) clamp(24px, 6vw, 110px) clamp(52px, 8vh, 110px) !important;
         }
         .sl-thesis-headline {
-            margin: 0 auto;
-            max-width: 1080px;
-            text-align: center;
+            margin: 0;
+            max-width: 17em;
+            text-align: left;
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-weight: 400;
-            font-size: clamp(1.5rem, 2.9vw, 3rem);
-            line-height: 1.34;
-            color: #0B1275;
+            font-size: clamp(1.45rem, 2.7vw, 2.85rem);
+            line-height: 1.32;
         }
-        .sl-thesis-headline span { display: block; }
+        .sl-line {
+            display: block;
+            color: rgba(11, 18, 117, 0.3);
+            font-weight: 400;
+            transition: color 0.45s ease, font-weight 0.45s ease;
+        }
+        .sl-line.on {
+            color: #0B1275;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -1322,10 +1330,10 @@
     <div class="content-spacer" id="rd-section-thesis">
         <div class="content-sticky">
             <h2 class="sl-thesis-headline">
-                <span>Founders from extreme origins.</span>
-                <span>Acute global problems.</span>
-                <span>Revolutionary technologies.</span>
-                <span>What better time to build than when the world needs it most?</span>
+                <span class="sl-line">Founders from extreme origins.</span>
+                <span class="sl-line">Acute global problems.</span>
+                <span class="sl-line">Revolutionary technologies.</span>
+                <span class="sl-line">What better time to build than when the world needs it most?</span>
             </h2>
         </div>
     </div>
@@ -2124,38 +2132,20 @@
             aboutObserver.observe(el);
         });
 
-        // ── Thesis line reveal — time-based autoplay ──────────────
-        // The 4 thesis lines crossfade on a timer once the section is
-        // in view, decoupled from scroll so they always play in full.
-        (function thesisAutoplay() {
-            const spacer = document.querySelector('.content-spacer');
-            const lines = document.querySelectorAll('.content-sticky .reveal-line');
-            if (!spacer || !lines.length) return;
-            const HOLD = 1300;
-            let timers = [];
-            let playing = false;
-            function clearTimers() { timers.forEach(clearTimeout); timers = []; }
-            function play() {
-                if (playing) return;
-                playing = true;
-                clearTimers();
-                lines.forEach(l => l.classList.remove('visible'));
-                lines.forEach((l, i) => {
-                    timers.push(setTimeout(() => l.classList.add('visible'), i * HOLD));
-                });
+        // ── Thesis statement — bold each line as it scrolls into focus ──
+        (function thesisEmphasis() {
+            const lines = document.querySelectorAll('.sl-thesis-headline .sl-line');
+            if (!lines.length) return;
+            function update() {
+                const trigger = window.innerHeight * 0.6;
+                for (let i = 0; i < lines.length; i++) {
+                    lines[i].classList.toggle('on', lines[i].getBoundingClientRect().top < trigger);
+                }
             }
-            function reset() {
-                clearTimers();
-                lines.forEach(l => l.classList.remove('visible'));
-                playing = false;
-            }
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.intersectionRatio >= 0.35) play();
-                    else if (e.intersectionRatio === 0) reset();
-                });
-            }, { threshold: [0, 0.35] });
-            io.observe(spacer);
+            if (window.lenis && window.lenis.on) window.lenis.on('scroll', update);
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+            update();
         })();
 
         // =======================================
