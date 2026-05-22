@@ -15,10 +15,10 @@
   --rd-cream: #EDECE3;
   --rd-ink: #0A0E1A;
   --rd-white: #FFFFFF;
-  --rd-max-w: 1440px;
-  /* Matches the team section's horizontal padding so the Voices /
-     Day Zero containers line up with "Meet Sunshine Lake" and
-     leave the same breathing room at the edges. */
+  /* Matches the team section's max-width + padding so the Voices /
+     Day Zero containers line up with "Meet Sunshine Lake" at every
+     breakpoint instead of capping narrower and drifting inward. */
+  --rd-max-w: 1800px;
   --rd-side-pad: clamp(40px, 6vw, 120px);
   --rd-gutter: max(var(--rd-side-pad), calc((100vw - var(--rd-max-w)) / 2 + var(--rd-side-pad)));
 }
