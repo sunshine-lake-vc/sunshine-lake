@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css">
+    <link rel="stylesheet" href="polish.css?v=2">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -260,6 +260,7 @@
         }
         .team-sticky-text {
             flex: 0 0 40%;
+            min-width: 0;
             position: sticky;
             top: clamp(80px, 10vw, 160px);
         }
@@ -287,6 +288,59 @@
             color: rgba(21, 94, 232, 0.5);
             margin: clamp(16px, 1.5vw, 24px) 0 0 0;
             font-weight: 500;
+        }
+
+        /* Portfolio chip carousel — sits under the team intro */
+        .sl-portfolio {
+            position: relative;
+            margin-top: clamp(22px, 2.6vw, 38px);
+            max-width: 100%;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+                    mask-image: linear-gradient(90deg, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+        }
+        .sl-portfolio-track {
+            display: flex;
+            gap: 8px;
+            width: max-content;
+            animation: sl-scroll 64s linear infinite;
+            will-change: transform;
+        }
+        .sl-portfolio:hover .sl-portfolio-track,
+        .sl-portfolio.rd-paused .sl-portfolio-track { animation-play-state: paused; }
+        @keyframes sl-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(calc(-50% - 4px)); }
+        }
+        .sl-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+        }
+        .sl-chip-name {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.85rem, 0.95vw, 1.05rem);
+            color: #fff;
+        }
+        .sl-chip-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .sl-chip-name a:hover { color: #F2D831; }
+        .sl-chip-arrow { color: rgba(255, 255, 255, 0.4); margin: 0 2px; }
+        .sl-chip-tag {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.6rem, 0.68vw, 0.72rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: rgba(255, 255, 255, 0.62);
         }
 
         /* Footer photo water ripple overlay (WebGL) */
@@ -1135,13 +1189,6 @@
     </div>
 
     <main>
-    <!-- LP Login — Vector AIS Valence portal -->
-    <a class="rd-lp-login" href="https://www.vectorais.com/valence%20portal" target="_blank" rel="noopener">
-        LP Login
-        <svg viewBox="0 0 14 14" width="11" height="11" aria-hidden="true">
-            <path d="M3 11l8-8M5 3h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </a>
 
     <!-- Mobile menu — hamburger button + full-screen overlay panel
          (sidebar nav is hidden under 900px width; this takes over there) -->
@@ -1158,7 +1205,6 @@
             <a href="#rd-section-hero" class="rd-mobile-menu-link">Surface</a>
             <a href="#rd-section-team" class="rd-mobile-menu-link">Team</a>
             <a href="#rd-section-portfolio" class="rd-mobile-menu-link">Portfolio</a>
-            <a href="#rd-section-exits" class="rd-mobile-menu-link">Exits</a>
             <a href="#rd-section-voices" class="rd-mobile-menu-link">Voices</a>
             <a href="#rd-section-contact" class="rd-mobile-menu-link">Contact</a>
         </nav>
@@ -1175,9 +1221,6 @@
         </a>
         <a href="#rd-section-portfolio" class="rd-sidenav-item" data-section="portfolio">
             <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Portfolio</span>
-        </a>
-        <a href="#rd-section-exits" class="rd-sidenav-item" data-section="exits">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Exits</span>
         </a>
         <a href="#rd-section-voices" class="rd-sidenav-item" data-section="voices">
             <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Voices</span>
@@ -1261,7 +1304,10 @@
                 <!-- Left: Sticky descriptive text -->
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
-                    <p class="team-intro">The Sunshine Lake team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($22B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
+                    <p class="team-intro">The team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($22B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
+                    <div class="sl-portfolio" id="rd-leaders-wrap" aria-label="Portfolio companies">
+                        <div class="sl-portfolio-track" id="rd-leaders-track"></div>
+                    </div>
                 </div>
 
                 <!-- Right: Team members -->
@@ -1344,35 +1390,7 @@
         </div>
     </div>
 
-    <!-- ════════ REDESIGN INJECTION 1: Category Leaders + Strategic Exits ════════ -->
-    <section class="rd-zone" id="rd-section-exits">
-        <div class="rd-container rd-tier">
-            <div class="rd-tier-head">
-                <div>
-                    <div class="rd-tier-eyebrow">Tier 01 — Late-Stage Privates</div>
-                    <h2 class="rd-tier-title">Category <em>leaders.</em></h2>
-                </div>
-                <p class="rd-tier-desc">Seed-stage bets now trading at unicorn-and-up valuations.</p>
-            </div>
-        </div>
-        <div class="rd-carousel-wrap rd-leaders-wrap" id="rd-leaders-wrap">
-            <div class="rd-track" id="rd-leaders-track"></div>
-        </div>
-
-        <div class="rd-container rd-tier">
-            <div class="rd-tier-head">
-                <div>
-                    <div class="rd-tier-eyebrow">Tier 02 — Liquidity Events</div>
-                    <h2 class="rd-tier-title">Landscape-shifting <em>exits.</em></h2>
-                    <p class="rd-tier-desc">Public listings and strategic acquisitions — our portfolio companies are consistently acquired by, or listed alongside, the world's leading tech innovators.</p>
-                </div>
-            </div>
-        </div>
-        <div class="rd-carousel-wrap" id="rd-portfolio-wrap">
-            <div class="rd-track" id="rd-portfolio-track"></div>
-        </div>
-    </section>
-    <!-- ════════ /REDESIGN INJECTION 1 ════════ -->
+    <!-- (Category Leaders + Strategic Exits — folded into the team-section carousel) -->
 
 
     <!-- ════════ REDESIGN INJECTION 2: From Day Zero + Founder Voices ════════ -->
@@ -2899,7 +2917,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js" defer></script>
+    <script src="polish.js?v=2" defer></script>
 
 </body>
 </html>

@@ -1251,13 +1251,13 @@ body.mode-tight .content-sticky p {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE MENU — hamburger button + slide-in overlay panel
-   Hidden on desktop. Replaces the sidenav under 900px.
+   MENU — hamburger button + slide-in overlay panel.
+   Available at all widths; holds the section links + LP Login.
    ═══════════════════════════════════════════════════════════════ */
 .rd-mobile-menu-btn,
 .rd-mobile-menu { display: none; }
 
-@media (max-width: 900px) {
+@media (min-width: 0px) {
   /* Hamburger button — top-LEFT corner, mirrors LP Login's pill
      aesthetic (glass-blur navy bg, white border, gold-on-hover)
      but icon-only: three horizontal lines */
@@ -1269,7 +1269,7 @@ body.mode-tight .content-sticky p {
     gap: 4px;
     position: fixed;
     top: clamp(20px, 2.4vw, 32px);
-    left: clamp(20px, 3.2vw, 64px);
+    right: clamp(20px, 3.2vw, 64px);
     z-index: 101;
     width: 40px;
     height: 40px;

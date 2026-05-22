@@ -103,6 +103,27 @@
       + '</article>';
   }
 
+  /* ═══ Compact portfolio chips — merged single carousel ═══ */
+  function slLink(name, domain) {
+    return '<a href="https://' + domain + '" target="_blank" rel="noopener">' + name + '</a>';
+  }
+  function slChip(nameHtml, tag) {
+    return '<div class="sl-chip"><span class="sl-chip-name">' + nameHtml + '</span>'
+         + '<span class="sl-chip-tag">' + tag + '</span></div>';
+  }
+  function buildLeaderChip(c) {
+    return slChip(slLink(c.name, c.domain), c.value);
+  }
+  function buildPortfolioChip(c) {
+    if (c.type === 'ipo') {
+      return slChip(slLink(c.name, c.domain), 'IPO');
+    }
+    var nm = slLink(c.acq, c.acqDomain)
+           + '<span class="sl-chip-arrow">&rarr;</span>'
+           + slLink(c.to, c.toDomain);
+    return slChip(nm, c.value || 'Acquired');
+  }
+
   /* ═══ FEATURED TESTIMONIALS (from Day Zero) ═══ */
   var featured = [
     { company: 'Deel',    domain: 'deel.com',
@@ -184,12 +205,10 @@
     var voicesTop = document.getElementById('rd-voices-top');
 
     if (leadersTrack) {
-      var L = leaders.map(buildLeader).join('');
-      leadersTrack.innerHTML = L + L;
-    }
-    if (portfolioTrack) {
-      var P = portfolio.map(buildPortfolio).join('');
-      portfolioTrack.innerHTML = P + P;
+      // One merged carousel: category leaders + exits/IPOs as compact chips
+      var chips = leaders.map(buildLeaderChip).join('')
+                + portfolio.map(buildPortfolioChip).join('');
+      leadersTrack.innerHTML = chips + chips;
     }
     if (featuredRow) {
       featuredRow.innerHTML = featured.map(buildFeatured).join('');
