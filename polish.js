@@ -124,22 +124,59 @@
     return slChip(nm, c.value || 'Acquired');
   }
 
-  /* ═══ 3 x 3 portfolio grid — curated nine ═══ */
-  var gridCells = [
-    { name: 'Deel',             tag: '$17.3B', url: 'deel.com' },
-    { name: 'Kalshi',           tag: '$22B',   url: 'kalshi.com' },
-    { name: 'Checkr',           tag: '$5B',    url: 'checkr.com' },
-    { name: 'Headway',          tag: '$2.3B',  url: 'headway.co' },
-    { name: 'Fundamental.tech', tag: '$1.4B',  url: 'fundamental.tech' },
-    { name: 'Assured',          tag: '$1B',    url: 'assured.claims' },
-    { name: 'Airbnb',           tag: 'IPO',    url: 'airbnb.com' },
-    { name: 'Figma',            tag: 'IPO',    url: 'figma.com' },
-    { name: 'Groupon',          tag: 'IPO',    url: 'groupon.com' }
+  /* ═══ 3 x 3 portfolio grid — 20 companies cycle through 9 cells ═══ */
+  var allCells = [
+    // Category leaders
+    { name: 'Deel',             tag: '$17.3B',   url: 'deel.com' },
+    { name: 'Kalshi',           tag: '$22B',     url: 'kalshi.com' },
+    { name: 'Checkr',           tag: '$5B',      url: 'checkr.com' },
+    { name: 'Headway',          tag: '$2.3B',    url: 'headway.co' },
+    { name: 'Fundamental.tech', tag: '$1.4B',    url: 'fundamental.tech' },
+    { name: 'Assured',          tag: '$1B',      url: 'assured.claims' },
+    // IPOs
+    { name: 'Airbnb',           tag: 'IPO',      url: 'airbnb.com' },
+    { name: 'Figma',            tag: 'IPO',      url: 'figma.com' },
+    { name: 'Groupon',          tag: 'IPO',      url: 'groupon.com' },
+    // Exits / acquisitions
+    { name: 'Brex',             tag: '$5.15B',   url: 'brex.com' },
+    { name: 'Hidden Road',      tag: '$1.25B',   url: 'hiddenroad.com' },
+    { name: 'BitOasis',         tag: 'Acquired', url: 'bitoasis.com' },
+    { name: 'Datagrid',         tag: 'Acquired', url: 'datagrid.com' },
+    { name: 'Enable',           tag: 'Acquired', url: 'enable.us' },
+    { name: 'Glide',            tag: 'Acquired', url: 'glide.com' },
+    { name: 'Legalpad',         tag: 'Acquired', url: 'legalpad.io' },
+    { name: 'Ostro',            tag: 'Acquired', url: 'ostro.health' },
+    { name: 'Pry',              tag: 'Acquired', url: 'pry.co' },
+    { name: 'SpotHero',         tag: 'Acquired', url: 'spothero.com' },
+    { name: 'TaxProper',        tag: 'Acquired', url: 'taxproper.com' }
   ];
   function buildCell(c) {
     return '<a class="sl-cell" href="https://' + c.url + '" target="_blank" rel="noopener">'
          + '<span class="sl-cell-name">' + c.name + '</span>'
          + '<span class="sl-cell-tag">' + c.tag + '</span></a>';
+  }
+  function startGridRotation() {
+    var track = document.getElementById('rd-leaders-track');
+    if (!track) return;
+    var cells = track.querySelectorAll('.sl-cell');
+    if (cells.length < 9 || allCells.length <= 9) return;
+    var visible = allCells.slice(0, 9).slice(); // companies currently in the grid
+    var slot = 0;
+    setInterval(function () {
+      var cell = cells[slot];
+      var pool = allCells.filter(function (c) { return visible.indexOf(c) === -1; });
+      if (pool.length === 0) { slot = (slot + 1) % 9; return; }
+      var next = pool[Math.floor(Math.random() * pool.length)];
+      visible[slot] = next;
+      cell.style.opacity = '0';
+      setTimeout(function () {
+        cell.querySelector('.sl-cell-name').textContent = next.name;
+        cell.querySelector('.sl-cell-tag').textContent = next.tag;
+        cell.setAttribute('href', 'https://' + next.url);
+        cell.style.opacity = '1';
+      }, 450);
+      slot = (slot + 1) % 9;
+    }, 2800);
   }
 
   /* ═══ FEATURED TESTIMONIALS (from Day Zero) ═══ */
@@ -223,8 +260,8 @@
     var voicesTop = document.getElementById('rd-voices-top');
 
     if (leadersTrack) {
-      // 3 x 3 minimalist grid — the most prominent nine companies
-      leadersTrack.innerHTML = gridCells.map(buildCell).join('');
+      // 3 x 3 minimalist grid — start with the first nine; the rest rotate in
+      leadersTrack.innerHTML = allCells.slice(0, 9).map(buildCell).join('');
     }
     if (featuredRow) {
       featuredRow.innerHTML = featured.map(buildFeatured).join('');
@@ -454,6 +491,7 @@
 
   function init() {
     render();
+    startGridRotation();
     wireDrag(document.getElementById('rd-leaders-wrap'),   document.getElementById('rd-leaders-track'));
     wireDrag(document.getElementById('rd-portfolio-wrap'), document.getElementById('rd-portfolio-track'));
     wireControls();
