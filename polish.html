@@ -684,7 +684,7 @@
             .team-sticky-text { flex: 0 0 35%; }
             .team-card-photo { flex: 0 0 clamp(100px, 15vw, 160px); width: clamp(100px, 15vw, 160px); }
             .team-desc { font-size: clamp(1.8rem, 3vw, 3rem); }
-            .founders-scroll-spacer { padding: 0 clamp(20px, 3vw, 40px); }
+            .founders-scroll-spacer { padding: 0 clamp(40px, 6vw, 120px); }
             .founders-left { flex: 0 0 40%; }
         }
 
@@ -692,7 +692,7 @@
             .founders-scroll-spacer {
                 display: flex;
                 flex-direction: column;
-                padding: 0 clamp(16px, 4vw, 24px);
+                padding: 0 20px;  /* matches team-section's mobile padding */
             }
             /* Mobile: founders-left becomes its own flex column, so its
                children stack reliably regardless of how the browser
@@ -1207,6 +1207,14 @@
             .footer-scroll-spacer .footer-logo,
             .footer-photo-content .footer-logo {
                 height: 30px !important;
+            }
+            /* Mobile: pin Day Zero / Voices padding to match the team
+               section's 20px (overrides the clamp on --rd-side-pad
+               which would otherwise give ~40px). */
+            .rd-container,
+            .rd-dayzero {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
             }
         }
     </style>
