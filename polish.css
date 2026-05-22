@@ -505,8 +505,7 @@ a.rd-name:hover { color: var(--rd-yellow); }
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 0;
 }
 .rd-featured-attr .rd-name-line {
   font-family: 'DomaineDisp', serif;
@@ -800,11 +799,14 @@ body.mode-tight .content-sticky,
     #0B1275 50%,
     #050838 100%) !important;
 }
-/* rd-deep-zone (Day Zero + Voices) — trench → abyss */
+/* rd-deep-zone (Day Zero + Voices) — picks up the founders' blue and
+   descends smoothly to the abyss (no hard seam at the section edge) */
 .rd-zone.rd-deep-zone {
   background: linear-gradient(180deg,
-    #050838 0%,
-    #030625 50%,
+    #0032A8 0%,
+    #0B1275 26%,
+    #050838 54%,
+    #030625 78%,
     #02041F 100%) !important;
 }
 
