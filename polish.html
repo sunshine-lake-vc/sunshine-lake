@@ -154,7 +154,7 @@
         .content-sticky {
             position: sticky;
             top: 0;
-            height: 56vh;
+            height: 36vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1023,7 +1023,7 @@
 
         /* Mode C: gradient bleed from shader into white */
         body.mode-tight .hero-scroll-spacer { height: 200vh; }
-        body.mode-tight .content-spacer { height: 350vh; background: transparent; }
+        body.mode-tight .content-spacer { height: 58vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
                 rgba(255,255,255,0) 0%,
@@ -2847,10 +2847,12 @@
                     // Run original for frame/footer/logo math
                     origUpdateTargets();
 
-                    // Override line reveal with tighter thresholds
+                    // Override line reveal with tighter thresholds.
+                    // Runway is (section height − thesis band height) since
+                    // the band is now shorter than the viewport.
                     const contentTop = cachedContentTop - scrollY;
                     const revealScroll = -contentTop;
-                    const revealTotal = cachedContentHeight - vh;
+                    const revealTotal = Math.max(1, cachedContentHeight - cachedStickyHeight);
                     const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
                     const startAt = 0.05, endAt = 0.5;
                     for (let i = 0; i < totalLines; i++) {
