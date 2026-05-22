@@ -52,7 +52,7 @@
 
         /* Hero scroll spacer — phase 1: frame appears, phase 2: page scrolls */
         .hero-scroll-spacer {
-            height: 300vh;
+            height: 200vh;
             position: relative;
         }
 
@@ -78,6 +78,20 @@
             background: #000;
             will-change: transform, border-radius;
             transform-origin: center center;
+        }
+
+        /* Always-on contrast scrim — darkens the bright water shader
+           behind the white hero title (bottom) and logo (top) so the
+           text stays legible. Sits above the canvas, below the copy. */
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+            background:
+                linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 26%, rgba(0,0,0,0) 52%),
+                linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 18%);
         }
 
         /* Fluid Background */
@@ -131,7 +145,7 @@
 
         /* Content section — sticky with scroll-driven line reveal */
         .content-spacer {
-            height: 250vh;
+            height: 120vh;
             position: relative;
             z-index: 2;
             background: #ffffff;
@@ -218,7 +232,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: clamp(80px, 8vw, 160px) clamp(40px, 6vw, 120px);
+            padding: clamp(36px, 4vw, 72px) clamp(40px, 6vw, 120px);
         }
         .team-inner {
             max-width: 1800px;
@@ -771,7 +785,7 @@
 
         /* Footer — white scales down to card, revealing WebGL lake */
         .footer-scroll-spacer {
-            height: 200vh;
+            height: 150vh;
             position: relative;
             z-index: 2;
         }
@@ -1264,7 +1278,7 @@
                             </div>
                             <p class="team-card-role">General Partner</p>
                             <p class="team-card-desc">Over two decades of experience across venture capital, operations, and global strategy.</p>
-                            <a class="team-bio-btn" href="don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <a class="team-bio-btn" href="polish-don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -1367,7 +1381,7 @@
         <div class="rd-container rd-dayzero">
             <div class="rd-dayzero-head">
                 <div class="rd-tier-eyebrow">The Approach</div>
-                <h2 class="rd-tier-title">From Day <em>Zero.</em></h2>
+                <h2 class="rd-tier-title">From day <em>zero.</em></h2>
                 <p class="rd-tier-desc">Our investments target foundational technical problems in complex, often overlooked markets. We partner from Day Zero — deploying precise operational architecture and non-obvious expertise to translate macro volatility into engineering-led scale.</p>
             </div>
             <div class="rd-featured-row" id="rd-featured-row"></div>
@@ -1393,7 +1407,8 @@
                     <h2>Dive Beneath<br>the Surface.</h2>
                     <div class="footer-contact">
                         <a href="mailto:hello@sunshinelake.vc">hello@sunshinelake.vc</a>
-                        <a href="https://linkedin.com/company/sunshinelake" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                         <a href="https://www.vectorais.com/valence%20portal" target="_blank" rel="noopener">LP Login ↗</a>
                     </div>
                 </div>
@@ -1738,8 +1753,9 @@
             const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
             targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
-            // Shader intensity over 0 → 150vh
-            targetShaderIntensity = Math.min(1, scrollY / (vh * 1.5));
+            // Shader intensity over 0 → 100vh (aligned to the shorter
+            // hero spacer so it peaks while the card is still pinned)
+            targetShaderIntensity = Math.min(1, scrollY / vh);
 
             // Footer — scroll math from cached offsetTop (no getBoundingClientRect)
             const footerTop = cachedFooterTop - scrollY;

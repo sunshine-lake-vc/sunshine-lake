@@ -663,11 +663,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 28% 18%, rgba(255, 228, 92, 0.22), transparent 42%),
-    radial-gradient(ellipse at 72% 38%, rgba(122, 204, 255, 0.28), transparent 50%),
-    radial-gradient(ellipse at 48% 8%,  rgba(255, 255, 255, 0.22), transparent 36%),
-    radial-gradient(ellipse at 18% 55%, rgba(242, 216, 49, 0.12), transparent 45%),
-    radial-gradient(ellipse at 60% 78%, rgba(122, 204, 255, 0.22), transparent 48%);
+    radial-gradient(ellipse at 28% 18%, rgba(255, 228, 92, 0.16), transparent 42%),
+    radial-gradient(ellipse at 72% 38%, rgba(122, 204, 255, 0.22), transparent 50%),
+    radial-gradient(ellipse at 48% 8%,  rgba(255, 255, 255, 0.10), transparent 36%),
+    radial-gradient(ellipse at 18% 55%, rgba(242, 216, 49, 0.09), transparent 45%),
+    radial-gradient(ellipse at 60% 78%, rgba(122, 204, 255, 0.18), transparent 48%);
   filter: blur(40px);
   animation: rd-dive-drift 30s ease-in-out infinite alternate;
   pointer-events: none;
@@ -694,13 +694,13 @@ a.rd-name:hover { color: var(--rd-yellow); }
   background: #ffffff;
   border-radius: 50%;
   animation: rd-dive-twinkle ease-in-out infinite;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.6), 0 0 8px rgba(255, 255, 255, 0.2);
   will-change: opacity, transform;
 }
 
 @keyframes rd-dive-twinkle {
-  0%, 100% { opacity: 0.18; transform: scale(0.6); }
-  50%      { opacity: 1;    transform: scale(1.3); }
+  0%, 100% { opacity: 0.1;  transform: scale(0.6); }
+  50%      { opacity: 0.55; transform: scale(1.3); }
 }
 
 /* Make sure the hero sticky sits above the painterly water */
@@ -764,11 +764,12 @@ body.mode-tight .content-sticky,
   background: transparent !important;
 }
 
-/* Lift the fade-in text higher in the viewport — top third
-   instead of vertically centered */
+/* Center the thesis copy in the viewport so the empty space is
+   balanced top/bottom instead of dumped below the lines. */
 .content-sticky {
-  justify-content: flex-start !important;
-  padding-top: clamp(18vh, 22vh, 26vh) !important;
+  justify-content: center !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Team — descent begins in earnest, medium blue → royal blue */
