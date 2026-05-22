@@ -291,56 +291,43 @@
         }
 
         /* Portfolio chip carousel — sits under the team intro */
-        .sl-portfolio {
-            position: relative;
+        /* Portfolio grid — 3 x 3 minimalist checkerboard */
+        .sl-grid {
             margin-top: clamp(26px, 3vw, 44px);
-            max-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-radius: 14px;
             overflow: hidden;
-            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%);
-                    mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .sl-portfolio-track {
+        .sl-cell {
+            aspect-ratio: 1;
             display: flex;
-            gap: 13px;
-            width: max-content;
-            animation: sl-scroll 96s linear infinite;
-            will-change: transform;
-        }
-        .sl-portfolio:hover .sl-portfolio-track,
-        .sl-portfolio.rd-paused .sl-portfolio-track { animation-play-state: paused; }
-        @keyframes sl-scroll {
-            from { transform: translateX(0); }
-            to   { transform: translateX(calc(-50% - 6.5px)); }
-        }
-        .sl-chip {
-            display: inline-flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-            padding: 12px 23px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            white-space: nowrap;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.3s ease;
         }
-        .sl-chip-name {
+        .sl-cell:nth-child(odd)  { background: rgba(255, 255, 255, 0.07); }
+        .sl-cell:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+        .sl-cell:hover { background: rgba(255, 255, 255, 0.14) !important; }
+        .sl-cell-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.45rem, 1.6vw, 1.8rem);
+            font-size: clamp(1.05rem, 1.3vw, 1.4rem);
+            line-height: 1.1;
             color: #fff;
         }
-        .sl-chip-name a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        .sl-chip-name a:hover { color: #F2D831; }
-        .sl-chip-arrow { color: rgba(255, 255, 255, 0.4); margin: 0 3px; }
-        .sl-chip-tag {
+        .sl-cell-tag {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(0.76rem, 0.85vw, 0.92rem);
+            font-size: clamp(0.6rem, 0.7vw, 0.76rem);
             font-weight: 700;
-            letter-spacing: 0.04em;
-            color: rgba(255, 255, 255, 0.62);
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         /* Footer photo water ripple overlay (WebGL) */
@@ -1346,9 +1333,7 @@
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
                     <p class="team-intro">The team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($22B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
-                    <div class="sl-portfolio" id="rd-leaders-wrap" aria-label="Portfolio companies">
-                        <div class="sl-portfolio-track" id="rd-leaders-track"></div>
-                    </div>
+                    <div class="sl-grid" id="rd-leaders-track" aria-label="Portfolio companies"></div>
                 </div>
 
                 <!-- Right: Team members -->
@@ -2940,7 +2925,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=2" defer></script>
+    <script src="polish.js?v=3" defer></script>
 
 </body>
 </html>

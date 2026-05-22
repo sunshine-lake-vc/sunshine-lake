@@ -124,6 +124,24 @@
     return slChip(nm, c.value || 'Acquired');
   }
 
+  /* ═══ 3 x 3 portfolio grid — curated nine ═══ */
+  var gridCells = [
+    { name: 'Deel',             tag: '$17.3B', url: 'deel.com' },
+    { name: 'Kalshi',           tag: '$22B',   url: 'kalshi.com' },
+    { name: 'Checkr',           tag: '$5B',    url: 'checkr.com' },
+    { name: 'Headway',          tag: '$2.3B',  url: 'headway.co' },
+    { name: 'Fundamental.tech', tag: '$1.4B',  url: 'fundamental.tech' },
+    { name: 'Assured',          tag: '$1B',    url: 'assured.claims' },
+    { name: 'Airbnb',           tag: 'IPO',    url: 'airbnb.com' },
+    { name: 'Figma',            tag: 'IPO',    url: 'figma.com' },
+    { name: 'Groupon',          tag: 'IPO',    url: 'groupon.com' }
+  ];
+  function buildCell(c) {
+    return '<a class="sl-cell" href="https://' + c.url + '" target="_blank" rel="noopener">'
+         + '<span class="sl-cell-name">' + c.name + '</span>'
+         + '<span class="sl-cell-tag">' + c.tag + '</span></a>';
+  }
+
   /* ═══ FEATURED TESTIMONIALS (from Day Zero) ═══ */
   var featured = [
     { company: 'Deel',    domain: 'deel.com',
@@ -205,10 +223,8 @@
     var voicesTop = document.getElementById('rd-voices-top');
 
     if (leadersTrack) {
-      // One merged carousel: category leaders + exits/IPOs as compact chips
-      var chips = leaders.map(buildLeaderChip).join('')
-                + portfolio.map(buildPortfolioChip).join('');
-      leadersTrack.innerHTML = chips + chips;
+      // 3 x 3 minimalist grid — the most prominent nine companies
+      leadersTrack.innerHTML = gridCells.map(buildCell).join('');
     }
     if (featuredRow) {
       featuredRow.innerHTML = featured.map(buildFeatured).join('');
