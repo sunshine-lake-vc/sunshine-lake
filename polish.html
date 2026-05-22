@@ -295,7 +295,11 @@
         .sl-grid {
             margin-top: clamp(26px, 3vw, 44px);
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            /* minmax(0, 1fr) keeps the three columns at exactly 1/3
+               each — without it, a long name like "Fundamental.tech"
+               can expand its column and push the third cell off-screen
+               on mobile. */
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 0;
             border-radius: 14px;
             overflow: hidden;
@@ -311,7 +315,14 @@
             padding: 10px;
             text-align: center;
             text-decoration: none;
+            overflow: hidden;
             transition: background 0.3s ease, opacity 0.45s ease;
+        }
+        .sl-cell-name { overflow-wrap: anywhere; }
+        @media (max-width: 768px) {
+            .sl-cell { padding: 8px; gap: 4px; }
+            .sl-cell-name { font-size: clamp(0.78rem, 3vw, 1.05rem); }
+            .sl-cell-tag  { font-size: clamp(0.52rem, 2.2vw, 0.72rem); }
         }
         .sl-cell:nth-child(odd)  { background: rgba(255, 255, 255, 0.07); }
         .sl-cell:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
