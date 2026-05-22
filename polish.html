@@ -1163,6 +1163,33 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        /* ── Thesis statement — simple static headline above the team ── */
+        body.mode-tight .content-spacer {
+            height: auto !important;
+            background: linear-gradient(180deg,
+                #FFFBEB 0%, #FFF4CC 58%, #DCE4F0 82%, #4A88E5 100%) !important;
+        }
+        body.mode-tight .content-sticky,
+        .content-spacer .content-sticky {
+            position: static !important;
+            height: auto !important;
+            min-height: 0 !important;
+            display: block !important;
+            background: transparent !important;
+            padding: clamp(58px, 11vh, 130px) clamp(24px, 6vw, 90px) clamp(66px, 13vh, 150px) !important;
+        }
+        .sl-thesis-headline {
+            margin: 0 auto;
+            max-width: 1080px;
+            text-align: center;
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-weight: 400;
+            font-size: clamp(1.5rem, 2.9vw, 3rem);
+            line-height: 1.34;
+            color: #0B1275;
+        }
+        .sl-thesis-headline span { display: block; }
     </style>
 </head>
 <body>
@@ -1269,7 +1296,6 @@
                 <!-- 3. Title -->
                 <div class="main-content">
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
-                    <p class="hero-thesis">Founders from extreme origins, building revolutionary technology for the world's most acute problems.</p>
                     <!-- Pre-seed &amp; seed badge -->
                     <div class="hero-badge" aria-label="Pre-seed and seed">
                         <span class="hero-badge-dot"></span>
@@ -1292,9 +1318,16 @@
         </div>
     </div>
 
-    <!-- Color-transition bridge: hero surface → deep water (thesis now in hero) -->
+    <!-- Thesis statement — simple static headline above the team -->
     <div class="content-spacer" id="rd-section-thesis">
-        <div class="content-sticky"></div>
+        <div class="content-sticky">
+            <h2 class="sl-thesis-headline">
+                <span>Founders from extreme origins.</span>
+                <span>Acute global problems.</span>
+                <span>Revolutionary technologies.</span>
+                <span>What better time to build than when the world needs it most?</span>
+            </h2>
+        </div>
     </div>
 
     <!-- Team Section -->
