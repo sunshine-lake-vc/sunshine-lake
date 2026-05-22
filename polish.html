@@ -728,11 +728,16 @@
                 z-index: 2;
             }
             .founders-photo-stack {
+                /* Safety net: if the JS sticky-wrap doesn't get created,
+                   make sure the photo stack still lands after the title
+                   and subtitle (matches the wrap's order). */
+                order: 3;
                 position: relative;
                 width: 100%;
                 aspect-ratio: 4 / 3;
                 border-radius: 8px;
             }
+            .founders-mobile-overlay { order: 3; }
             /* Toggle — static, below photo */
             .founders-toggle {
                 position: static;
@@ -2381,8 +2386,10 @@
             spacer.insertBefore(mobileOverlay, right);
             var mobTitles = mobileOverlay.querySelectorAll('.mob-title');
 
-            // Mobile: wrap photo + overlay in a single sticky container
-            if (window.innerWidth <= 768) {
+            // Mobile: wrap photo + overlay in a single sticky container.
+            // Use matchMedia so this check stays in sync with the CSS
+            // breakpoint (innerWidth can drift on some mobile browsers).
+            if (window.matchMedia('(max-width: 768px)').matches) {
                 var stickyWrap = document.createElement('div');
                 stickyWrap.className = 'founders-sticky-wrap';
                 photoStack.parentNode.insertBefore(stickyWrap, photoStack);
