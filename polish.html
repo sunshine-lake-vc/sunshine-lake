@@ -145,7 +145,7 @@
 
         /* Content section — sticky with scroll-driven line reveal */
         .content-spacer {
-            height: 120vh;
+            height: 90vh;
             position: relative;
             z-index: 2;
             background: #ffffff;
@@ -154,7 +154,7 @@
         .content-sticky {
             position: sticky;
             top: 0;
-            height: 100vh;
+            height: 56vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1653,6 +1653,7 @@
         let cachedFooterCardW = footerPhotoCardEl.offsetWidth;
         let cachedFooterCardH = footerPhotoCardEl.offsetHeight;
         let cachedContentHeight = 0;
+        let cachedStickyHeight = 0;
         // Cached offsetTop for scroll-position math (avoids getBoundingClientRect)
         let cachedFooterTop = 0;
         let cachedContentTop = 0;
@@ -1671,6 +1672,7 @@
             cachedFooterCardW = footerPhotoCardEl.offsetWidth;
             cachedFooterCardH = footerPhotoCardEl.offsetHeight;
             cachedContentHeight = contentSpacer.offsetHeight;
+            cachedStickyHeight = contentSticky.offsetHeight;
             // Cache element offsets from document top (replaces getBoundingClientRect in scroll handler)
             cachedFooterTop = footerSpacer.offsetTop;
             cachedContentTop = contentSpacer.offsetTop;
@@ -1775,7 +1777,12 @@
             // Line-by-line reveal — scroll math from cached offsetTop
             const contentTop = cachedContentTop - scrollY;
             const revealScroll = -contentTop;
-            const revealTotal = cachedContentHeight - vh;
+            // Desktop: the thesis band is shorter than the viewport, so the
+            // reveal runway is (section height − band height). Mobile keeps
+            // its original viewport-based math.
+            const revealTotal = window.innerWidth <= 768
+                ? (cachedContentHeight - vh)
+                : Math.max(1, cachedContentHeight - cachedStickyHeight);
             const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
             const isMobileReveal = window.innerWidth <= 768;
             const revealEnd = isMobileReveal ? 0.7 : 0.35, hlStart = 0.4, hlEnd = 0.9;
