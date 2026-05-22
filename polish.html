@@ -1087,7 +1087,7 @@
         body.mode-combined .hero-scroll-spacer { height: 400vh; }
 
         /* Mode C: gradient bleed from shader into white */
-        body.mode-tight .hero-scroll-spacer { height: 150vh; }
+        body.mode-tight .hero-scroll-spacer { height: 106vh; }
         body.mode-tight .content-spacer { height: 40vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
@@ -1177,7 +1177,7 @@
             min-height: 0 !important;
             display: block !important;
             background: transparent !important;
-            padding: clamp(44px, 7vh, 96px) clamp(24px, 6vw, 110px) clamp(52px, 8vh, 110px) !important;
+            padding: clamp(20px, 3vh, 48px) clamp(24px, 6vw, 110px) clamp(48px, 7vh, 100px) !important;
         }
         .sl-thesis-headline {
             margin: 0;
@@ -1799,9 +1799,9 @@
             // Frame: scale from 1.0 → slightly smaller card.
             // Animation runs over 0.5vh so it completes within the
             // shorter (150vh) hero spacer's pinned phase.
-            const frameZone = vh * 0.5;
+            const frameZone = vh * 0.06;
             const progress = Math.min(1, scrollY / frameZone);
-            const maxInset = vw <= 768 ? 16 : 68;
+            const maxInset = vw <= 768 ? 16 : 40;
             const scaleX = 1 - (maxInset * 2) / vw;
             const scaleY = 1 - (maxInset * 2) / vh;
             const minScale = Math.min(scaleX, scaleY);
