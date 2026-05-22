@@ -1220,11 +1220,9 @@
                 <div class="main-content">
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
                     <!-- Pre-seed & seed badge — up to $1.5M first checks -->
-                    <div class="hero-badge" aria-label="Pre-seed and seed. Up to one point five million dollars">
+                    <div class="hero-badge" aria-label="Pre-seed and seed">
                         <span class="hero-badge-dot"></span>
                         <span class="hero-badge-label">Pre-Seed &amp; Seed</span>
-                        <span class="hero-badge-divider"></span>
-                        <span class="hero-badge-amount">Up to $1.5M</span>
                     </div>
                 </div>
 
@@ -1969,7 +1967,10 @@
         gl.uniform1f(locs.u_sun_glitter, parseFloat(getVal('sunGlitter', '0.4')));
         // Glitter density forced to 0.55 — ~40% fewer white flecks than
         // the exported config's 0.96 (config kept intact for other values).
-        gl.uniform1f(locs.u_sun_glitter_density, 0.55);
+        // NOTE: the shader spawns a fleck when rand > spawn_chance, so a
+        // HIGHER value here means FEWER flecks. 0.99 ≈ ~65% fewer than
+        // the exported config's 0.96.
+        gl.uniform1f(locs.u_sun_glitter_density, 0.99);
         gl.uniform1f(locs.u_sun_glitter_size, parseFloat(getVal('sunGlitterSize', '1.0')));
         gl.uniform1f(locs.u_sun_streak, parseFloat(getVal('sunStreak', '0.0')));
         gl.uniform1f(locs.u_sun_flare, parseFloat(getVal('sunFlare', '0.0')));
