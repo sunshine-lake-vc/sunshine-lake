@@ -836,6 +836,7 @@
                 left: clamp(16px, 4vw, 24px);
                 right: clamp(16px, 4vw, 24px);
                 display: flex;
+                align-items: center;
                 gap: 4px;
                 z-index: 10;
                 opacity: 0;
@@ -852,6 +853,17 @@
             }
             .founders-stepper span.active {
                 background: rgba(255,255,255,0.85);
+            }
+            .founders-stepper-counter {
+                flex: 0 0 auto;
+                margin-left: 12px;
+                color: rgba(255, 255, 255, 0.78);
+                font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.14em;
+                white-space: nowrap;
+                font-variant-numeric: tabular-nums;
             }
         }
 
@@ -2490,6 +2502,11 @@
                 if (i === 0) bar.classList.add('active');
                 stepper.appendChild(bar);
             });
+            var pad2 = function (n) { return n < 10 ? '0' + n : '' + n; };
+            var stepperCounter = document.createElement('div');
+            stepperCounter.className = 'founders-stepper-counter';
+            stepperCounter.textContent = '01 / ' + pad2(data.length);
+            stepper.appendChild(stepperCounter);
             document.body.appendChild(stepper);
             var stepperBars = stepper.querySelectorAll('span');
             var stepperReady = false;
@@ -2606,6 +2623,7 @@
                     if (stepperBars.length) {
                         stepperBars[currentIndex].classList.remove('active');
                         stepperBars[closest].classList.add('active');
+                        stepperCounter.textContent = pad2(closest + 1) + ' / ' + pad2(stepperBars.length);
                     }
                     currentIndex = closest;
                 }
