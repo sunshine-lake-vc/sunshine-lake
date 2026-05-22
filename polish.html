@@ -1262,7 +1262,7 @@
                 <!-- Left: Sticky descriptive text -->
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
-                    <p class="team-intro">The Sunshine Lake team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($11B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
+                    <p class="team-intro">The Sunshine Lake team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($22B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
                 </div>
 
                 <!-- Right: Team members -->
@@ -1972,7 +1972,9 @@
         gl.uniform1f(locs.u_sun_int, parseFloat(getVal('sunInt', '2.5')));
         gl.uniform1f(locs.u_sun_size, parseFloat(getVal('sunSize', '0.08')));
         gl.uniform1f(locs.u_sun_glitter, parseFloat(getVal('sunGlitter', '0.4')));
-        gl.uniform1f(locs.u_sun_glitter_density, parseFloat(getVal('sunGlitterDensity', '0.96')));
+        // Glitter density forced to 0.55 — ~40% fewer white flecks than
+        // the exported config's 0.96 (config kept intact for other values).
+        gl.uniform1f(locs.u_sun_glitter_density, 0.55);
         gl.uniform1f(locs.u_sun_glitter_size, parseFloat(getVal('sunGlitterSize', '1.0')));
         gl.uniform1f(locs.u_sun_streak, parseFloat(getVal('sunStreak', '0.0')));
         gl.uniform1f(locs.u_sun_flare, parseFloat(getVal('sunFlare', '0.0')));

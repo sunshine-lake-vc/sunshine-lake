@@ -140,9 +140,11 @@
 @media (max-width: 720px) {
   .hero-badge {
     padding: 10px 16px;
-    margin-top: 18px;
     gap: 10px;
   }
+  /* More breathing room between the title and the pill on mobile.
+     Needs the .hero-card prefix + !important to beat the base rule. */
+  .hero-card .hero-badge { margin-top: 32px !important; }
   .hero-badge-amount { font-size: 22px; }
   .hero-badge-label { font-size: 9.5px; letter-spacing: 0.14em; }
   .hero-badge-divider { height: 22px; }
@@ -764,11 +766,11 @@ body.mode-tight .content-sticky,
   background: transparent !important;
 }
 
-/* Center the thesis copy in the viewport so the empty space is
-   balanced top/bottom instead of dumped below the lines. */
+/* Sit the thesis copy near the top of its band so there isn't a big
+   empty gap above the line. */
 .content-sticky {
-  justify-content: center !important;
-  padding-top: 0 !important;
+  justify-content: flex-start !important;
+  padding-top: clamp(5vh, 6vh, 8vh) !important;
   padding-bottom: 0 !important;
 }
 
