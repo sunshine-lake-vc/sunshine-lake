@@ -694,9 +694,13 @@
                 flex-direction: column;
                 padding: 0 clamp(16px, 4vw, 24px);
             }
-            /* Dissolve left wrapper — children become direct flex items of spacer */
+            /* Mobile: founders-left becomes its own flex column, so its
+               children stack reliably regardless of how the browser
+               handles display:contents. Order properties below still
+               position the title above the photo/Niek-and-Titus area. */
             .founders-left {
-                display: contents;
+                display: flex;
+                flex-direction: column;
             }
             /* Title — larger, more space above */
             .founders-left-title {
