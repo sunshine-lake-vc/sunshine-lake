@@ -1200,6 +1200,15 @@
             font-style: italic;
             font-weight: 400 !important;
         }
+
+        /* Footer icon logo — 50% larger on mobile (overrides the
+           inline clamp(20px, 2vw, 32px) height on the <svg>). */
+        @media (max-width: 768px) {
+            .footer-scroll-spacer .footer-logo,
+            .footer-photo-content .footer-logo {
+                height: 30px !important;
+            }
+        }
     </style>
 </head>
 <body>
