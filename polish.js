@@ -127,33 +127,54 @@
   /* ═══ 3 x 3 portfolio grid — 20 companies cycle through 9 cells ═══ */
   var allCells = [
     // Category leaders
-    { name: 'Deel',             tag: '$17.3B',   url: 'deel.com' },
-    { name: 'Kalshi',           tag: '$22B',     url: 'kalshi.com' },
-    { name: 'Checkr',           tag: '$5B',      url: 'checkr.com' },
-    { name: 'Headway',          tag: '$2.3B',    url: 'headway.co' },
-    { name: 'Fundamental.tech', tag: '$1.4B',    url: 'fundamental.tech' },
-    { name: 'Assured',          tag: '$1B',      url: 'assured.claims' },
+    { type: 'leader', name: 'Deel',             tag: '$17.3B', url: 'deel.com' },
+    { type: 'leader', name: 'Kalshi',           tag: '$22B',   url: 'kalshi.com' },
+    { type: 'leader', name: 'Checkr',           tag: '$5B',    url: 'checkr.com' },
+    { type: 'leader', name: 'Headway',          tag: '$2.3B',  url: 'headway.co' },
+    { type: 'leader', name: 'Fundamental.tech', tag: '$1.4B',  url: 'fundamental.tech' },
+    { type: 'leader', name: 'Assured',          tag: '$1B',    url: 'assured.claims' },
     // IPOs
-    { name: 'Airbnb',           tag: 'IPO',      url: 'airbnb.com' },
-    { name: 'Figma',            tag: 'IPO',      url: 'figma.com' },
-    { name: 'Groupon',          tag: 'IPO',      url: 'groupon.com' },
+    { type: 'ipo', name: 'Airbnb',  tag: 'IPO', url: 'airbnb.com' },
+    { type: 'ipo', name: 'Figma',   tag: 'IPO', url: 'figma.com' },
+    { type: 'ipo', name: 'Groupon', tag: 'IPO', url: 'groupon.com' },
     // Exits / acquisitions
-    { name: 'Brex',             tag: '$5.15B',   url: 'brex.com' },
-    { name: 'Hidden Road',      tag: '$1.25B',   url: 'hiddenroad.com' },
-    { name: 'BitOasis',         tag: 'Acquired', url: 'bitoasis.com' },
-    { name: 'Datagrid',         tag: 'Acquired', url: 'datagrid.com' },
-    { name: 'Enable',           tag: 'Acquired', url: 'enable.us' },
-    { name: 'Glide',            tag: 'Acquired', url: 'glide.com' },
-    { name: 'Legalpad',         tag: 'Acquired', url: 'legalpad.io' },
-    { name: 'Ostro',            tag: 'Acquired', url: 'ostro.health' },
-    { name: 'Pry',              tag: 'Acquired', url: 'pry.co' },
-    { name: 'SpotHero',         tag: 'Acquired', url: 'spothero.com' },
-    { name: 'TaxProper',        tag: 'Acquired', url: 'taxproper.com' }
+    { type: 'exit', name: 'Brex',        acquirer: 'Capital One',   tag: '$5.15B', url: 'brex.com',       acquirerUrl: 'capitalone.com' },
+    { type: 'exit', name: 'Hidden Road', acquirer: 'Ripple',        tag: '$1.25B', url: 'hiddenroad.com', acquirerUrl: 'ripple.com' },
+    { type: 'exit', name: 'BitOasis',    acquirer: 'Coinbase',      tag: '',       url: 'bitoasis.com',   acquirerUrl: 'coinbase.com' },
+    { type: 'exit', name: 'Datagrid',    acquirer: 'Procore',       tag: '',       url: 'datagrid.com',   acquirerUrl: 'procore.com' },
+    { type: 'exit', name: 'Enable',      acquirer: 'Mindtickle',    tag: '',       url: 'enable.us',      acquirerUrl: 'mindtickle.com' },
+    { type: 'exit', name: 'Glide',       acquirer: 'Compass',       tag: '',       url: 'glide.com',      acquirerUrl: 'compass.com' },
+    { type: 'exit', name: 'Legalpad',    acquirer: 'Deel',          tag: '',       url: 'legalpad.io',    acquirerUrl: 'deel.com' },
+    { type: 'exit', name: 'Ostro',       acquirer: 'Veeva Systems', tag: '',       url: 'ostro.health',   acquirerUrl: 'veeva.com' },
+    { type: 'exit', name: 'Pry',         acquirer: 'Brex',          tag: '',       url: 'pry.co',         acquirerUrl: 'brex.com' },
+    { type: 'exit', name: 'SpotHero',    acquirer: 'Uber',          tag: '',       url: 'spothero.com',   acquirerUrl: 'uber.com' },
+    { type: 'exit', name: 'TaxProper',   acquirer: 'Opendoor',      tag: '',       url: 'taxproper.com',  acquirerUrl: 'opendoor.com' }
   ];
+  // Prefer local logo files; fall back to Google's favicon service.
+  var LOCAL_LOGOS = {
+    'deel.com':    'images/logos/deel.webp',
+    'kalshi.com':  'images/logos/kalshi.webp',
+    'headway.co':  'images/logos/headway.webp',
+    'airbnb.com':  'images/logos/airbnb.svg',
+    'groupon.com': 'images/logos/groupon.svg'
+  };
+  function logoUrl(domain) {
+    if (LOCAL_LOGOS[domain]) return LOCAL_LOGOS[domain];
+    return 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=128';
+  }
   function buildCell(c) {
-    return '<a class="sl-cell" href="https://' + c.url + '" target="_blank" rel="noopener">'
-         + '<span class="sl-cell-name">' + c.name + '</span>'
-         + '<span class="sl-cell-tag">' + c.tag + '</span></a>';
+    var name = c.name;
+    var tag = c.tag;
+    if (c.type === 'exit' && c.acquirer) {
+      name = c.name + ' acquired by ' + c.acquirer;
+    }
+    var tagHtml = tag ? '<span class="sl-cell-tag">' + tag + '</span>' : '';
+    var typeCls = c.type ? ' sl-cell-' + c.type : '';
+    return '<a class="sl-cell' + typeCls + '" href="https://' + c.url + '" target="_blank" rel="noopener">'
+         + '<img class="sl-cell-logo" src="' + logoUrl(c.url) + '" alt="" loading="lazy" onerror="this.classList.add(\'sl-cell-logo--missing\')">'
+         + '<span class="sl-cell-name">' + name + '</span>'
+         + tagHtml
+         + '</a>';
   }
   function startGridRotation() {
     var track = document.getElementById('rd-leaders-track');
@@ -162,6 +183,15 @@
     if (cells.length < 9 || allCells.length <= 9) return;
     var visible = allCells.slice(0, 9).slice(); // companies currently in the grid
     var slot = 0;
+    // Replace a cell's content + classes with a freshly-built one
+    function applyCell(cell, next) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = buildCell(next);
+      var rebuilt = tmp.firstChild;
+      cell.className = rebuilt.className;
+      cell.setAttribute('href', rebuilt.getAttribute('href'));
+      cell.innerHTML = rebuilt.innerHTML;
+    }
     setInterval(function () {
       var cell = cells[slot];
       var pool = allCells.filter(function (c) { return visible.indexOf(c) === -1; });
@@ -170,9 +200,7 @@
       visible[slot] = next;
       cell.style.opacity = '0';
       setTimeout(function () {
-        cell.querySelector('.sl-cell-name').textContent = next.name;
-        cell.querySelector('.sl-cell-tag').textContent = next.tag;
-        cell.setAttribute('href', 'https://' + next.url);
+        applyCell(cell, next);
         cell.style.opacity = '1';
       }, 450);
       slot = (slot + 1) % 9;

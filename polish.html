@@ -319,10 +319,28 @@
             transition: background 0.3s ease, opacity 0.45s ease;
         }
         .sl-cell-name { overflow-wrap: anywhere; }
+        .sl-cell-logo {
+            width: clamp(28px, 3vw, 40px);
+            height: clamp(28px, 3vw, 40px);
+            object-fit: contain;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 4px;
+            box-sizing: border-box;
+            margin-bottom: 2px;
+        }
+        .sl-cell-logo.sl-cell-logo--missing { display: none; }
+        /* Exit cells: longer "X acquired by Y" — slightly smaller name */
+        .sl-cell-exit .sl-cell-name {
+            font-size: clamp(0.72rem, 0.9vw, 0.92rem);
+            line-height: 1.22;
+        }
         @media (max-width: 768px) {
             .sl-cell { padding: 8px; gap: 4px; }
+            .sl-cell-logo { width: clamp(22px, 7vw, 30px); height: clamp(22px, 7vw, 30px); padding: 3px; }
             .sl-cell-name { font-size: clamp(0.78rem, 3vw, 1.05rem); }
             .sl-cell-tag  { font-size: clamp(0.52rem, 2.2vw, 0.72rem); }
+            .sl-cell-exit .sl-cell-name { font-size: clamp(0.62rem, 2.4vw, 0.85rem); }
         }
         .sl-cell:nth-child(odd)  { background: rgba(255, 255, 255, 0.07); }
         .sl-cell:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
@@ -3004,7 +3022,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=4" defer></script>
+    <script src="polish.js?v=5" defer></script>
 
 </body>
 </html>
