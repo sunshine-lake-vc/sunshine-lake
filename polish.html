@@ -829,17 +829,23 @@
             .founders-item-company { font-size: clamp(1.6rem, 5vw, 2.4rem); }
             .founders-item-name { font-size: clamp(1.4rem, 5vw, 2rem); }
             .site-logo { width: 24px; top: 26px; right: 13px; }
-            /* Founders stepper — full width matching image.
-               bottom uses env() so it clears iOS Safari's bottom UI bar. */
+            /* Founders stepper — sits inside the founder photo near the
+               bottom, so it stays visible as the user scrolls through
+               founders (was floating at viewport bottom and hidden). */
             .founders-stepper {
-                position: fixed;
-                bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));
-                left: clamp(16px, 4vw, 24px);
-                right: clamp(16px, 4vw, 24px);
+                position: absolute;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
                 display: flex;
                 align-items: center;
-                gap: 4px;
-                z-index: 50;
+                gap: 6px;
+                padding: 9px 14px;
+                background: rgba(0, 0, 0, 0.32);
+                -webkit-backdrop-filter: blur(8px);
+                        backdrop-filter: blur(8px);
+                border-radius: 999px;
+                z-index: 5;
                 opacity: 0;
                 transition: opacity 0.3s ease;
                 pointer-events: none;
@@ -2458,7 +2464,15 @@
             stepperCounter.className = 'founders-stepper-counter';
             stepperCounter.textContent = '01 / ' + pad2(data.length);
             stepper.appendChild(stepperCounter);
-            document.body.appendChild(stepper);
+            // On mobile, attach the stepper inside the photo-stack so it
+            // overlays the founder image (was floating at viewport bottom
+            // and getting hidden behind iOS UI / scroll position). On
+            // desktop the stepper is mobile-only anyway.
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                photoStack.appendChild(stepper);
+            } else {
+                document.body.appendChild(stepper);
+            }
             var stepperBars = stepper.querySelectorAll('span');
             // Ready immediately so the stepper appears as soon as the
             // founders section scrolls into view (don't depend on the
