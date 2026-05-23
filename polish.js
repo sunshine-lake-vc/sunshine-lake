@@ -152,11 +152,11 @@
     { type: 'exit', name: 'Pry',         acquirer: 'Brex',          tag: '',       url: 'pry.co',         acquirerUrl: 'brex.com' },
     { type: 'exit', name: 'TaxProper',   acquirer: 'Opendoor',      tag: '',       url: 'taxproper.com',  acquirerUrl: 'opendoor.com' }
   ];
-  // Prefer local logo files; fall back to Google's favicon service.
+  // Prefer local logo files where we have actual brand marks; fall
+  // back to Google's favicon service for the rest. (deel/kalshi/headway
+  // intentionally NOT here — the .webp files in images/logos/ for those
+  // are founder photos, not company logos.)
   var LOCAL_LOGOS = {
-    'deel.com':    'images/logos/deel.webp',
-    'kalshi.com':  'images/logos/kalshi.webp',
-    'headway.co':  'images/logos/headway.webp',
     'airbnb.com':  'images/logos/airbnb.svg',
     'groupon.com': 'images/logos/groupon.svg'
   };
