@@ -125,29 +125,31 @@
   }
 
   /* ═══ 3 x 3 portfolio grid — 20 companies cycle through 9 cells ═══ */
+  // First 9 entries are shown on initial load; remainder rotate in.
+  // Curated initial mix = 4 leaders + 2 IPOs + 3 notable exits so the
+  // "acquired by X" treatment is visible from the first render.
   var allCells = [
-    // Category leaders
-    { type: 'leader', name: 'Deel',             tag: '$17.3B', url: 'deel.com' },
-    { type: 'leader', name: 'Kalshi',           tag: '$22B',   url: 'kalshi.com' },
-    { type: 'leader', name: 'Checkr',           tag: '$5B',    url: 'checkr.com' },
-    { type: 'leader', name: 'Headway',          tag: '$2.3B',  url: 'headway.co' },
-    { type: 'leader', name: 'Fundamental.tech', tag: '$1.4B',  url: 'fundamental.tech' },
-    { type: 'leader', name: 'Assured',          tag: '$1B',    url: 'assured.claims' },
-    // IPOs
-    { type: 'ipo', name: 'Airbnb',  tag: 'IPO', url: 'airbnb.com' },
-    { type: 'ipo', name: 'Figma',   tag: 'IPO', url: 'figma.com' },
-    { type: 'ipo', name: 'Groupon', tag: 'IPO', url: 'groupon.com' },
-    // Exits / acquisitions
-    { type: 'exit', name: 'Brex',        acquirer: 'Capital One',   tag: '$5.15B', url: 'brex.com',       acquirerUrl: 'capitalone.com' },
+    // ── Initial 9 (mixed) ──
+    { type: 'leader', name: 'Deel',     tag: '$17.3B', url: 'deel.com' },
+    { type: 'leader', name: 'Kalshi',   tag: '$22B',   url: 'kalshi.com' },
+    { type: 'exit',   name: 'Brex',     acquirer: 'Capital One', tag: '$5.15B', url: 'brex.com',       acquirerUrl: 'capitalone.com' },
+    { type: 'leader', name: 'Checkr',   tag: '$5B',    url: 'checkr.com' },
+    { type: 'ipo',    name: 'Airbnb',   tag: 'IPO',    url: 'airbnb.com' },
+    { type: 'exit',   name: 'SpotHero', acquirer: 'Uber',        tag: '',       url: 'spothero.com',   acquirerUrl: 'uber.com' },
+    { type: 'leader', name: 'Headway',  tag: '$2.3B',  url: 'headway.co' },
+    { type: 'exit',   name: 'BitOasis', acquirer: 'Coinbase',    tag: '',       url: 'bitoasis.com',   acquirerUrl: 'coinbase.com' },
+    { type: 'ipo',    name: 'Figma',    tag: 'IPO',    url: 'figma.com' },
+    // ── Rotation pool ──
+    { type: 'leader', name: 'Fundamental.tech', tag: '$1.4B', url: 'fundamental.tech' },
+    { type: 'leader', name: 'Assured',          tag: '$1B',   url: 'assured.claims' },
+    { type: 'ipo',    name: 'Groupon',          tag: 'IPO',   url: 'groupon.com' },
     { type: 'exit', name: 'Hidden Road', acquirer: 'Ripple',        tag: '$1.25B', url: 'hiddenroad.com', acquirerUrl: 'ripple.com' },
-    { type: 'exit', name: 'BitOasis',    acquirer: 'Coinbase',      tag: '',       url: 'bitoasis.com',   acquirerUrl: 'coinbase.com' },
     { type: 'exit', name: 'Datagrid',    acquirer: 'Procore',       tag: '',       url: 'datagrid.com',   acquirerUrl: 'procore.com' },
     { type: 'exit', name: 'Enable',      acquirer: 'Mindtickle',    tag: '',       url: 'enable.us',      acquirerUrl: 'mindtickle.com' },
     { type: 'exit', name: 'Glide',       acquirer: 'Compass',       tag: '',       url: 'glide.com',      acquirerUrl: 'compass.com' },
     { type: 'exit', name: 'Legalpad',    acquirer: 'Deel',          tag: '',       url: 'legalpad.io',    acquirerUrl: 'deel.com' },
     { type: 'exit', name: 'Ostro',       acquirer: 'Veeva Systems', tag: '',       url: 'ostro.health',   acquirerUrl: 'veeva.com' },
     { type: 'exit', name: 'Pry',         acquirer: 'Brex',          tag: '',       url: 'pry.co',         acquirerUrl: 'brex.com' },
-    { type: 'exit', name: 'SpotHero',    acquirer: 'Uber',          tag: '',       url: 'spothero.com',   acquirerUrl: 'uber.com' },
     { type: 'exit', name: 'TaxProper',   acquirer: 'Opendoor',      tag: '',       url: 'taxproper.com',  acquirerUrl: 'opendoor.com' }
   ];
   // Prefer local logo files; fall back to Google's favicon service.
