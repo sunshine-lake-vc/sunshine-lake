@@ -829,23 +829,20 @@
             .founders-item-company { font-size: clamp(1.6rem, 5vw, 2.4rem); }
             .founders-item-name { font-size: clamp(1.4rem, 5vw, 2rem); }
             .site-logo { width: 24px; top: 26px; right: 13px; }
-            /* Founders stepper — sits inside the founder photo near the
-               bottom, so it stays visible as the user scrolls through
-               founders (was floating at viewport bottom and hidden). */
+            /* Founders stepper — pill that sits between the subtitle and
+               the founder photo, inside the sticky wrap so it pins with
+               the image as the user scrolls through founders. */
             .founders-stepper {
-                position: absolute;
-                left: 12px;
-                right: 12px;
-                bottom: 12px;
+                width: 100%;
+                box-sizing: border-box;
                 display: flex;
                 align-items: center;
                 gap: 6px;
-                padding: 9px 14px;
-                background: rgba(0, 0, 0, 0.32);
-                -webkit-backdrop-filter: blur(8px);
-                        backdrop-filter: blur(8px);
+                margin-bottom: 14px;
+                padding: 10px 16px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.15);
                 border-radius: 999px;
-                z-index: 5;
                 opacity: 0;
                 transition: opacity 0.3s ease;
                 pointer-events: none;
@@ -2464,12 +2461,14 @@
             stepperCounter.className = 'founders-stepper-counter';
             stepperCounter.textContent = '01 / ' + pad2(data.length);
             stepper.appendChild(stepperCounter);
-            // On mobile, attach the stepper inside the photo-stack so it
-            // overlays the founder image (was floating at viewport bottom
-            // and getting hidden behind iOS UI / scroll position). On
-            // desktop the stepper is mobile-only anyway.
+            // On mobile, place the stepper INSIDE the sticky wrap, just
+            // above the photo. That way it lives between the subtitle and
+            // the founder image (below the messaging, above the images),
+            // and pins with the photo as the user scrolls.
             if (window.matchMedia('(max-width: 768px)').matches) {
-                photoStack.appendChild(stepper);
+                var sw = document.querySelector('.founders-sticky-wrap');
+                if (sw) sw.insertBefore(stepper, sw.firstChild);
+                else photoStack.parentNode.insertBefore(stepper, photoStack);
             } else {
                 document.body.appendChild(stepper);
             }
