@@ -163,16 +163,16 @@
     return 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=128';
   }
   function buildCell(c) {
-    var name = c.name;
-    var tag = c.tag;
-    if (c.type === 'exit' && c.acquirer) {
-      name = c.name + ' acquired by ' + c.acquirer;
-    }
-    var tagHtml = tag ? '<span class="sl-cell-tag">' + tag + '</span>' : '';
+    var nameBlock =
+      '<span class="sl-cell-name">' + c.name + '</span>'
+      + (c.type === 'exit' && c.acquirer
+          ? '<span class="sl-cell-sub">acquired by ' + c.acquirer + '</span>'
+          : '');
+    var tagHtml = c.tag ? '<span class="sl-cell-tag">' + c.tag + '</span>' : '';
     var typeCls = c.type ? ' sl-cell-' + c.type : '';
     return '<a class="sl-cell' + typeCls + '" href="https://' + c.url + '" target="_blank" rel="noopener">'
          + '<img class="sl-cell-logo" src="' + logoUrl(c.url) + '" alt="" loading="lazy" onerror="this.classList.add(\'sl-cell-logo--missing\')">'
-         + '<span class="sl-cell-name">' + name + '</span>'
+         + nameBlock
          + tagHtml
          + '</a>';
   }
