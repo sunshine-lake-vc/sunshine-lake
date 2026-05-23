@@ -829,43 +829,42 @@
             .founders-item-company { font-size: clamp(1.6rem, 5vw, 2.4rem); }
             .founders-item-name { font-size: clamp(1.4rem, 5vw, 2rem); }
             .site-logo { width: 24px; top: 26px; right: 13px; }
-            /* Founders stepper — pill that sits between the subtitle and
-               the founder photo, inside the sticky wrap so it pins with
-               the image as the user scrolls through founders. */
+            /* Founders stepper — minimal in-flow row sitting between the
+               photo and the founder name/desc. No background or border,
+               just thin bars + counter; lives in the sticky wrap so it
+               stays with the image as the user scrolls. */
             .founders-stepper {
                 width: 100%;
                 box-sizing: border-box;
                 display: flex;
                 align-items: center;
-                gap: 6px;
-                margin-bottom: 14px;
-                padding: 10px 16px;
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.15);
-                border-radius: 999px;
+                gap: 8px;
+                margin: 14px 0 4px;
+                padding: 0;
+                background: transparent;
                 opacity: 0;
-                transition: opacity 0.3s ease;
+                transition: opacity 0.4s ease;
                 pointer-events: none;
             }
             .founders-stepper.visible { opacity: 1; }
             .founders-stepper span {
                 flex: 1;
-                height: 2px;
-                background: rgba(255,255,255,0.25);
+                height: 1.5px;
+                background: rgba(255, 255, 255, 0.18);
                 border-radius: 1px;
-                transition: background 0.3s ease;
+                transition: background 0.4s ease;
             }
             .founders-stepper span.active {
-                background: rgba(255,255,255,0.85);
+                background: rgba(255, 255, 255, 0.62);
             }
             .founders-stepper-counter {
                 flex: 0 0 auto;
-                margin-left: 12px;
-                color: rgba(255, 255, 255, 0.78);
+                margin-left: 10px;
+                color: rgba(255, 255, 255, 0.55);
                 font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.14em;
+                font-size: 10.5px;
+                font-weight: 500;
+                letter-spacing: 0.12em;
                 white-space: nowrap;
                 font-variant-numeric: tabular-nums;
             }
@@ -2462,12 +2461,11 @@
             stepperCounter.textContent = '01 / ' + pad2(data.length);
             stepper.appendChild(stepperCounter);
             // On mobile, place the stepper INSIDE the sticky wrap, just
-            // above the photo. That way it lives between the subtitle and
-            // the founder image (below the messaging, above the images),
-            // and pins with the photo as the user scrolls.
+            // BELOW the photo and above the founder name/desc. Pins
+            // alongside the photo as the user scrolls.
             if (window.matchMedia('(max-width: 768px)').matches) {
                 var sw = document.querySelector('.founders-sticky-wrap');
-                if (sw) sw.insertBefore(stepper, sw.firstChild);
+                if (sw) sw.insertBefore(stepper, mobileOverlay);
                 else photoStack.parentNode.insertBefore(stepper, photoStack);
             } else {
                 document.body.appendChild(stepper);
@@ -2611,8 +2609,9 @@
                     var naturalBottom = overlaySticky + contentH;
                     var exitGap = 32;
 
-                    // No push-up — let sticky elements scroll out naturally
-                    stepperHidden = teamTop < naturalBottom + exitGap;
+                    // Keep stepper visible the whole time the section is in
+                    // view; rely on the inView check above for hiding.
+                    stepperHidden = false;
                 }
             }
 
