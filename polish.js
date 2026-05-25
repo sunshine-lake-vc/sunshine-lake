@@ -313,8 +313,9 @@
     var portfolioTrack = document.getElementById('rd-portfolio-track');
     var featuredRow = document.getElementById('rd-featured-row');
     var voicesTop = document.getElementById('rd-voices-top');
-    var exitsTop = document.getElementById('rd-exits-top');
-    var exitsBottom = document.getElementById('rd-exits-bottom');
+    var exitsIpo    = document.getElementById('rd-exits-ipo');
+    var exitsSeed   = document.getElementById('rd-exits-seed');
+    var exitsMa     = document.getElementById('rd-exits-ma');
 
     if (leadersTrack) {
       // Legacy 3x3 grid — only renders if the element still exists
@@ -328,16 +329,27 @@
       var allV = voices.map(buildVoice).join('');
       voicesTop.innerHTML = allV + allV;
     }
-    if (exitsTop && exitsBottom) {
-      // Top row: leaders + IPOs (the "still scaling" set)
-      // Bottom row: exits (the "strategic exits" set)
-      var topSet    = allCells.filter(function (c) { return c.type !== 'exit'; });
-      var bottomSet = allCells.filter(function (c) { return c.type === 'exit'; });
-      var topHtml    = topSet.map(buildExitCard).join('');
-      var bottomHtml = bottomSet.map(buildExitCard).join('');
+    if (exitsIpo && exitsSeed && exitsMa) {
+      // Three rows by deal type. Smaller source sets get repeated more
+      // times so every row has enough card volume for a seamless wrap.
+      var ipoSet    = allCells.filter(function (c) { return c.type === 'ipo'; });
+      var seedSet   = allCells.filter(function (c) { return c.type === 'leader'; });
+      var maSet     = allCells.filter(function (c) { return c.type === 'exit'; });
+
+      function repeatList(arr, times) {
+        var out = [];
+        for (var i = 0; i < times; i++) out = out.concat(arr);
+        return out;
+      }
+      // Aim for roughly equal card counts per row (~18-22 cards each)
+      var ipoHtml   = repeatList(ipoSet,  6).map(buildExitCard).join('');
+      var seedHtml  = repeatList(seedSet, 3).map(buildExitCard).join('');
+      var maHtml    = repeatList(maSet,   2).map(buildExitCard).join('');
+
       // Doubled so the rAF marquee can wrap seamlessly
-      exitsTop.innerHTML    = topHtml + topHtml;
-      exitsBottom.innerHTML = bottomHtml + bottomHtml;
+      exitsIpo.innerHTML  = ipoHtml  + ipoHtml;
+      exitsSeed.innerHTML = seedHtml + seedHtml;
+      exitsMa.innerHTML   = maHtml   + maHtml;
     }
   }
 
@@ -399,10 +411,12 @@
     driveMarquee(document.getElementById('rd-voices-top'), -55);
   }
 
-  /* ─── Strategic Exits carousel — two rows, opposite directions ─── */
+  /* ─── Strategic Exits carousel — three rows (IPO / Seed / M&A),
+       alternating scroll directions for visual interest ─── */
   function startExitsMarquees() {
-    driveMarquee(document.getElementById('rd-exits-top'),    -38);
-    driveMarquee(document.getElementById('rd-exits-bottom'),  34);
+    driveMarquee(document.getElementById('rd-exits-ipo'),  -36); // IPOs scroll left
+    driveMarquee(document.getElementById('rd-exits-seed'),  30); // Seed deals scroll right
+    driveMarquee(document.getElementById('rd-exits-ma'),   -42); // M&A scroll left
   }
 
   /* ─── Carousel drag (per carousel) ─── */
