@@ -290,15 +290,32 @@
       + '</div>';
   }
 
+  /* ─── Build a pill-shaped exit-card for the cream marquee band ─── */
+  function buildExitCard(c) {
+    var sub = (c.type === 'exit' && c.acquirer)
+      ? '<span class="rd-exit-sub">acquired by ' + c.acquirer + '</span>'
+      : '';
+    var tag = c.tag ? '<span class="rd-exit-tag">' + c.tag + '</span>' : '';
+    return ''
+      + '<a class="rd-exit-card" href="https://' + c.url + '" target="_blank" rel="noopener">'
+      + '  <span class="rd-exit-logo"><img src="' + logoUrl(c.url) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"></span>'
+      + '  <span class="rd-exit-name">' + c.name + '</span>'
+      + sub
+      + tag
+      + '</a>';
+  }
+
   /* ─── Render to DOM ─── */
   function render() {
     var leadersTrack = document.getElementById('rd-leaders-track');
     var portfolioTrack = document.getElementById('rd-portfolio-track');
     var featuredRow = document.getElementById('rd-featured-row');
     var voicesTop = document.getElementById('rd-voices-top');
+    var exitsTop = document.getElementById('rd-exits-top');
+    var exitsBottom = document.getElementById('rd-exits-bottom');
 
     if (leadersTrack) {
-      // 3 x 3 minimalist grid — start with the first nine; the rest rotate in
+      // Legacy 3x3 grid — only renders if the element still exists
       leadersTrack.innerHTML = allCells.slice(0, 9).map(buildCell).join('');
     }
     if (featuredRow) {
@@ -309,33 +326,48 @@
       var allV = voices.map(buildVoice).join('');
       voicesTop.innerHTML = allV + allV;
     }
+    if (exitsTop && exitsBottom) {
+      // Top row: leaders + IPOs (the "still scaling" set)
+      // Bottom row: exits (the "strategic exits" set)
+      var topSet    = allCells.filter(function (c) { return c.type !== 'exit'; });
+      var bottomSet = allCells.filter(function (c) { return c.type === 'exit'; });
+      var topHtml    = topSet.map(buildExitCard).join('');
+      var bottomHtml = bottomSet.map(buildExitCard).join('');
+      // Doubled so the rAF marquee can wrap seamlessly
+      exitsTop.innerHTML    = topHtml + topHtml;
+      exitsBottom.innerHTML = bottomHtml + bottomHtml;
+    }
   }
 
-  /* ─── Founder Voices marquee — rAF-driven for reliable seamless loop ─── */
-  function startMarquee() {
-    var row = document.getElementById('rd-voices-top');
+  /* ─── Generic rAF-driven marquee (used by Voices + Exits) ─────────
+     speed: px/sec. Negative = scroll left, positive = scroll right.
+     Track must be rendered as [...items, ...items] for seamless wrap. */
+  function driveMarquee(row, speed) {
     if (!row) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var wrap = row.parentElement; // .rd-voices-marquee
+    var wrap = row.parentElement;
     var paused = false;
     var x = 0;
     var lastT = null;
-    var SPEED = 55; // px per second
     var halfWidth = 0;
+    var initialized = false;
 
     function measure() {
-      // The track is rendered as [...voices, ...voices], so half = one copy
-      // width plus one inter-card gap (gap also sits between the two copies).
       var styles = getComputedStyle(row);
-      var gap = parseFloat(styles.columnGap || styles.gap) || 18;
+      var gap = parseFloat(styles.columnGap || styles.gap) || 0;
       halfWidth = (row.scrollWidth + gap) / 2;
+      // For right-scrolling rows, start with x at -halfWidth so the
+      // animation can move toward 0 then wrap back.
+      if (!initialized && speed > 0 && halfWidth > 0) {
+        x = -halfWidth;
+        initialized = true;
+      }
     }
 
     if (wrap) {
       wrap.addEventListener('mouseenter', function () { paused = true; });
       wrap.addEventListener('mouseleave', function () { paused = false; });
-      // Don't pause on touch — touch devices don't have hover semantics
       wrap.addEventListener('touchstart', function () { paused = false; }, { passive: true });
     }
 
@@ -344,21 +376,31 @@
       var dt = (t - lastT) / 1000;
       lastT = t;
       if (!paused && halfWidth > 0) {
-        x -= SPEED * dt;
-        if (x <= -halfWidth) x += halfWidth;
+        x += speed * dt;
+        if (speed < 0 && x <= -halfWidth) x += halfWidth;
+        if (speed > 0 && x >= 0) x -= halfWidth;
         row.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
       }
       requestAnimationFrame(tick);
     }
 
     measure();
-    // Re-measure once after favicon images load (they affect card width minimally
-    // via the logo-mark slot, but the wordmark fallback can widen cards a bit).
     setTimeout(measure, 800);
     setTimeout(measure, 2500);
     window.addEventListener('resize', measure);
 
     requestAnimationFrame(tick);
+  }
+
+  /* ─── Founder Voices marquee — single row, leftward at 55 px/s ─── */
+  function startMarquee() {
+    driveMarquee(document.getElementById('rd-voices-top'), -55);
+  }
+
+  /* ─── Strategic Exits carousel — two rows, opposite directions ─── */
+  function startExitsMarquees() {
+    driveMarquee(document.getElementById('rd-exits-top'),    -38);
+    driveMarquee(document.getElementById('rd-exits-bottom'),  34);
   }
 
   /* ─── Carousel drag (per carousel) ─── */
@@ -579,8 +621,9 @@
 
   function init() {
     render();
-    startGridRotation();
-    startMarquee();
+    startGridRotation();       // no-op now that the 3x3 grid is removed
+    startMarquee();            // Founder Voices marquee
+    startExitsMarquees();      // Strategic Exits carousel (two opposite rows)
     wireDrag(document.getElementById('rd-leaders-wrap'),   document.getElementById('rd-leaders-track'));
     wireDrag(document.getElementById('rd-portfolio-wrap'), document.getElementById('rd-portfolio-track'));
     wireControls();
