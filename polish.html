@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=16">
+    <link rel="stylesheet" href="polish.css?v=17">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1266,7 +1266,11 @@
         body.mode-combined .hero-scroll-spacer { height: 400vh; }
 
         /* Mode C: gradient bleed from shader into white */
-        body.mode-tight .hero-scroll-spacer { height: 80vh; }
+        /* Hero spacer must be >= the 100vh sticky height — the spacer has
+           overflow:hidden, so a shorter spacer clips the bottom of the hero
+           card (and its title). 106vh keeps the existing 6vh scroll runway
+           for the card-recede animation. */
+        body.mode-tight .hero-scroll-spacer { height: 106vh; }
         body.mode-tight .content-spacer { height: 40vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
@@ -2007,9 +2011,12 @@
             const endRadius = vw <= 768 ? 15 : 22;
             targetRadius = baseRadius + progress * ((endRadius / minScale) - baseRadius);
 
-            // Title: slides from center to bottom of card
+            // Title: slides from center toward the bottom of the card, but
+            // stops well clear of the bottom edge so the descenders never
+            // get clipped (was: 30-60px; now: ~100-160px) — works for the
+            // larger desktop title size.
             const titleStartY = vh * 0.42;
-            const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
+            const titleEndY = Math.max(100, Math.min(vh * 0.12, 160));
             targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
             // Shader intensity ramps with the card animation
@@ -3048,7 +3055,7 @@
                     targetRadius = baseR + progress * ((endR / minSc) - baseR);
 
                     const titleStartY = vh * 0.42;
-                    const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
+                    const titleEndY = Math.max(100, Math.min(vh * 0.12, 160));
                     targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
                     // Shader intensity — ramp up, then dim 40% on exit (3.0vh→3.8vh)
