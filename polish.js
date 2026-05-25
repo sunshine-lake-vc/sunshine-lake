@@ -311,6 +311,56 @@
     }
   }
 
+  /* ─── Founder Voices marquee — rAF-driven for reliable seamless loop ─── */
+  function startMarquee() {
+    var row = document.getElementById('rd-voices-top');
+    if (!row) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var wrap = row.parentElement; // .rd-voices-marquee
+    var paused = false;
+    var x = 0;
+    var lastT = null;
+    var SPEED = 55; // px per second
+    var halfWidth = 0;
+
+    function measure() {
+      // The track is rendered as [...voices, ...voices], so half = one copy
+      // width plus one inter-card gap (gap also sits between the two copies).
+      var styles = getComputedStyle(row);
+      var gap = parseFloat(styles.columnGap || styles.gap) || 18;
+      halfWidth = (row.scrollWidth + gap) / 2;
+    }
+
+    if (wrap) {
+      wrap.addEventListener('mouseenter', function () { paused = true; });
+      wrap.addEventListener('mouseleave', function () { paused = false; });
+      // Don't pause on touch — touch devices don't have hover semantics
+      wrap.addEventListener('touchstart', function () { paused = false; }, { passive: true });
+    }
+
+    function tick(t) {
+      if (lastT === null) lastT = t;
+      var dt = (t - lastT) / 1000;
+      lastT = t;
+      if (!paused && halfWidth > 0) {
+        x -= SPEED * dt;
+        if (x <= -halfWidth) x += halfWidth;
+        row.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      }
+      requestAnimationFrame(tick);
+    }
+
+    measure();
+    // Re-measure once after favicon images load (they affect card width minimally
+    // via the logo-mark slot, but the wordmark fallback can widen cards a bit).
+    setTimeout(measure, 800);
+    setTimeout(measure, 2500);
+    window.addEventListener('resize', measure);
+
+    requestAnimationFrame(tick);
+  }
+
   /* ─── Carousel drag (per carousel) ─── */
   function wireDrag(wrap, track) {
     if (!wrap || !track) return;
@@ -530,6 +580,7 @@
   function init() {
     render();
     startGridRotation();
+    startMarquee();
     wireDrag(document.getElementById('rd-leaders-wrap'),   document.getElementById('rd-leaders-track'));
     wireDrag(document.getElementById('rd-portfolio-wrap'), document.getElementById('rd-portfolio-track'));
     wireControls();

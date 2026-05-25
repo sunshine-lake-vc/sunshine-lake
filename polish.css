@@ -482,14 +482,8 @@ a.rd-name:hover { color: var(--rd-yellow); }
   padding: 12px var(--rd-gutter);
   width: max-content;
   will-change: transform;
-}
-.rd-voices-row.rd-top { animation: rd-vscroll-l 175s linear infinite !important; }
-@media (hover: hover) {
-  .rd-voices-marquee:hover .rd-voices-row { animation-play-state: paused; }
-}
-@keyframes rd-vscroll-l {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - 9px)); }
+  /* Animation is driven by JS rAF (see startMarquee in polish.js)
+     for reliable seamless looping across browsers. */
 }
 
 .rd-voice {
