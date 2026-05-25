@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=12">
+    <link rel="stylesheet" href="polish.css?v=13">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -280,6 +280,26 @@
             margin: clamp(16px, 1.5vw, 24px) 0 0 0;
             font-weight: 400;
             max-width: 24em;
+        }
+        /* Thesis paragraph beneath "Meet Sunshine Lake." — fades up
+           gently as it enters view, one block at once (no per-line). */
+        .team-thesis {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.15rem, 1.4vw, 1.65rem);
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.92);
+            margin: clamp(18px, 1.8vw, 28px) 0 clamp(24px, 2.2vw, 36px) 0;
+            font-weight: 400;
+            max-width: 26em;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .team-thesis.in-view {
+            opacity: 1;
+            transform: translateY(0);
         }
         .team-subtitle {
             font-family: 'DomaineDisp', Georgia, serif;
@@ -1404,20 +1424,14 @@
         </div>
     </div>
 
-    <!-- Thesis statement — single static block, fades in on scroll -->
-    <div class="content-spacer" id="rd-section-thesis">
-        <div class="content-sticky">
-            <p class="sl-thesis-block">We are first believers. We back founders from extreme origins solving acute problems with revolutionary technology. There has never been a better time to build.</p>
-        </div>
-    </div>
-
-    <!-- Team Section -->
+    <!-- Team Section (thesis now lives at the top of this block) -->
     <section class="team-section" id="rd-section-team">
         <div class="team-inner">
             <div class="team-layout">
                 <!-- Left: Sticky descriptive text -->
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
+                    <p class="team-thesis" id="rd-section-thesis">We are first believers. We back founders from extreme origins solving acute problems with revolutionary technology. There has never been a better time to build.</p>
                     <div class="sl-grid" id="rd-leaders-track" aria-label="Portfolio companies"></div>
                 </div>
 
@@ -1797,11 +1811,13 @@
         function cacheLayoutValues() {
             cachedFooterCardW = footerPhotoCardEl.offsetWidth;
             cachedFooterCardH = footerPhotoCardEl.offsetHeight;
-            cachedContentHeight = contentSpacer.offsetHeight;
-            cachedStickyHeight = contentSticky.offsetHeight;
+            // contentSpacer/contentSticky are dormant now that the thesis
+            // lives inside the team section — guard for missing nodes.
+            cachedContentHeight = contentSpacer ? contentSpacer.offsetHeight : 0;
+            cachedStickyHeight = contentSticky ? contentSticky.offsetHeight : 0;
             // Cache element offsets from document top (replaces getBoundingClientRect in scroll handler)
             cachedFooterTop = footerSpacer.offsetTop;
-            cachedContentTop = contentSpacer.offsetTop;
+            cachedContentTop = contentSpacer ? contentSpacer.offsetTop : 0;
             cachedFooterHeight = footerSpacer.offsetHeight;
             cachedFoundersTop = foundersGridSection.offsetTop;
             cachedFoundersHeight = foundersGridSection.offsetHeight;
@@ -1915,18 +1931,9 @@
             const revealEnd = isMobileReveal ? 0.7 : 0.35, hlStart = 0.4, hlEnd = 0.9;
             // Thesis line reveal is handled by the time-based autoplay
             // (thesisAutoplay IIFE), not scroll position.
-            // Mobile: fade + slide up thesis text, portfolio slides up from below
-            if (isMobileReveal) {
-                const fadeStart = 0.5, fadeEnd = 0.85;
-                if (revealProgress > fadeStart) {
-                    const t = Math.min(1, (revealProgress - fadeStart) / (fadeEnd - fadeStart));
-                    contentSticky.style.opacity = 1 - t;
-                    contentSticky.style.transform = 'translateY(' + (-t * 12) + 'vh)';
-                } else {
-                    contentSticky.style.opacity = '';
-                    contentSticky.style.transform = '';
-                }
-            }
+            // Mobile thesis fade-out used to live here; the thesis now lives
+            // inside the team section and handles its own fade-in via
+            // IntersectionObserver, so this block is intentionally a no-op.
             // Sequential word highlights — direction-aware
             // Scrolling down: dim text + sequential highlights (kept even past last hl)
             // Scrolling up:   full blue text (no highlights, no dim)
@@ -2202,7 +2209,7 @@
 
         // ── Thesis statement — fade the whole block in once it enters view ──
         (function thesisFadeIn() {
-            const block = document.querySelector('.sl-thesis-block');
+            const block = document.querySelector('.team-thesis');
             if (!block) return;
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach((e) => {
@@ -2211,7 +2218,7 @@
                         obs.disconnect();
                     }
                 });
-            }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+            }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
             obs.observe(block);
         })();
 
@@ -3028,7 +3035,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=11" defer></script>
+    <script src="polish.js?v=12" defer></script>
 
 </body>
 </html>
