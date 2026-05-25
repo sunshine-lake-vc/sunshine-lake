@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=19">
+    <link rel="stylesheet" href="polish.css?v=20">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -2050,39 +2050,41 @@
             // Mobile thesis fade-out used to live here; the thesis now lives
             // inside the team section and handles its own fade-in via
             // IntersectionObserver, so this block is intentionally a no-op.
-            // Sequential word highlights — direction-aware
-            // Scrolling down: dim text + sequential highlights (kept even past last hl)
-            // Scrolling up:   full blue text (no highlights, no dim)
+            // Sequential word highlights — only runs when the legacy
+            // .content-sticky thesis element still exists. The thesis
+            // now lives inside the team section as .team-thesis with
+            // its own IntersectionObserver fade, so this whole block
+            // is a no-op on the polished layout.
             const scrollingDown = scrollY >= prevScrollY;
             prevScrollY = scrollY;
-            let activeIdx = -1;
-            for (let i = totalHl - 1; i >= 0; i--) {
-                const hlThreshold = hlStart + (hlEnd - hlStart) * (i / totalHl);
-                if (revealProgress >= hlThreshold) { activeIdx = i; break; }
-            }
-            // Only advance forward, never go back
-            if (activeIdx > hlPeakIdx) hlPeakIdx = activeIdx;
-            // Reset peak when scrolling back above highlight zone
-            if (revealProgress < hlStart) hlPeakIdx = -1;
-            const inHlZone = hlPeakIdx >= 0 && revealProgress >= hlStart;
-            const shouldHlActive = inHlZone && scrollingDown;
-            if (shouldHlActive !== wasHlActive) {
-                wasHlActive = shouldHlActive;
-                contentSticky.classList.toggle('hl-active', shouldHlActive);
-            }
-            if (shouldHlActive) {
-                for (let i = 0; i < totalHl; i++) {
-                    const shouldMark = i === hlPeakIdx;
-                    if (shouldMark !== hlActive[i]) {
-                        hlActive[i] = shouldMark;
-                        hlMarks[i].classList.toggle('active', shouldMark);
-                    }
+            if (contentSticky && totalHl > 0) {
+                let activeIdx = -1;
+                for (let i = totalHl - 1; i >= 0; i--) {
+                    const hlThreshold = hlStart + (hlEnd - hlStart) * (i / totalHl);
+                    if (revealProgress >= hlThreshold) { activeIdx = i; break; }
                 }
-            } else if (hlActive.some(Boolean)) {
-                for (let i = 0; i < totalHl; i++) {
-                    if (hlActive[i]) {
-                        hlActive[i] = false;
-                        hlMarks[i].classList.remove('active');
+                if (activeIdx > hlPeakIdx) hlPeakIdx = activeIdx;
+                if (revealProgress < hlStart) hlPeakIdx = -1;
+                const inHlZone = hlPeakIdx >= 0 && revealProgress >= hlStart;
+                const shouldHlActive = inHlZone && scrollingDown;
+                if (shouldHlActive !== wasHlActive) {
+                    wasHlActive = shouldHlActive;
+                    contentSticky.classList.toggle('hl-active', shouldHlActive);
+                }
+                if (shouldHlActive) {
+                    for (let i = 0; i < totalHl; i++) {
+                        const shouldMark = i === hlPeakIdx;
+                        if (shouldMark !== hlActive[i]) {
+                            hlActive[i] = shouldMark;
+                            hlMarks[i].classList.toggle('active', shouldMark);
+                        }
+                    }
+                } else if (hlActive.some(Boolean)) {
+                    for (let i = 0; i < totalHl; i++) {
+                        if (hlActive[i]) {
+                            hlActive[i] = false;
+                            hlMarks[i].classList.remove('active');
+                        }
                     }
                 }
             }
