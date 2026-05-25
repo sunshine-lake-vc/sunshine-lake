@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=10">
+    <link rel="stylesheet" href="polish.css?v=11">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1235,30 +1235,27 @@
             background: transparent !important;
             padding: clamp(14px, 2vh, 32px) clamp(24px, 6vw, 110px) clamp(70px, 11vh, 150px) !important;
         }
-        .sl-thesis-headline {
+        /* Thesis: single block, fades up as it enters the viewport. No
+           per-line / per-word animation — the whole paragraph moves as
+           one unit, slowly. */
+        .sl-thesis-block {
             margin: 0;
-            max-width: 17em;
+            max-width: 22em;
             text-align: left;
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-weight: 400;
-            font-size: clamp(2rem, 2.7vw, 2.85rem);
-            line-height: 1.32;
-        }
-        .sl-line {
-            display: block;
-            color: rgba(11, 18, 117, 0.5);
-            font-weight: 400;
-            transition: color 0.45s ease, font-weight 0.45s ease;
-        }
-        .sl-line.on {
+            font-size: clamp(1.85rem, 2.6vw, 2.75rem);
+            line-height: 1.35;
             color: #0B1275;
-            font-weight: 700;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
         }
-        /* Final line ("What better time to build…") stays light + italic
-           — reads as the closing rhetorical beat, not another stamp. */
-        .sl-thesis-headline .sl-line:last-child {
-            font-style: italic;
-            font-weight: 400 !important;
+        .sl-thesis-block.in-view {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Footer icon logo — 50% larger on mobile (overrides the
@@ -1406,15 +1403,10 @@
         </div>
     </div>
 
-    <!-- Thesis statement — simple static headline above the team -->
+    <!-- Thesis statement — single static block, fades in on scroll -->
     <div class="content-spacer" id="rd-section-thesis">
         <div class="content-sticky">
-            <h2 class="sl-thesis-headline">
-                <span class="sl-line">Extreme origins.</span>
-                <span class="sl-line">Acute problems.</span>
-                <span class="sl-line">Revolutionary technologies.</span>
-                <span class="sl-line">What better time to build than when the world needs it most?</span>
-            </h2>
+            <p class="sl-thesis-block">We are first believers. We back founders from extreme origins solving acute problems with revolutionary technology. There has never been a better time to build.</p>
         </div>
     </div>
 
@@ -2208,20 +2200,19 @@
             aboutObserver.observe(el);
         });
 
-        // ── Thesis statement — bold each line as it scrolls into focus ──
-        (function thesisEmphasis() {
-            const lines = document.querySelectorAll('.sl-thesis-headline .sl-line');
-            if (!lines.length) return;
-            function update() {
-                const trigger = window.innerHeight * 0.6;
-                for (let i = 0; i < lines.length; i++) {
-                    lines[i].classList.toggle('on', lines[i].getBoundingClientRect().top < trigger);
-                }
-            }
-            if (window.lenis && window.lenis.on) window.lenis.on('scroll', update);
-            window.addEventListener('scroll', update, { passive: true });
-            window.addEventListener('resize', update);
-            update();
+        // ── Thesis statement — fade the whole block in once it enters view ──
+        (function thesisFadeIn() {
+            const block = document.querySelector('.sl-thesis-block');
+            if (!block) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach((e) => {
+                    if (e.isIntersecting) {
+                        block.classList.add('in-view');
+                        obs.disconnect();
+                    }
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+            obs.observe(block);
         })();
 
         // =======================================
