@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=14">
+    <link rel="stylesheet" href="polish.css?v=15">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -390,6 +390,18 @@
             padding: clamp(28px, 3.4vw, 56px) 0;
             position: relative;
             z-index: 2;
+        }
+        .rd-exits-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(10px, 0.8vw, 12px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(11, 18, 117, 0.42);
+            margin: 0 0 clamp(16px, 1.6vw, 26px) clamp(20px, 5vw, 88px);
+        }
+        @media (max-width: 720px) {
+            .rd-exits-label { margin-left: 20px; font-size: 10.5px; }
         }
         .rd-exits-marquee {
             width: 100%;
@@ -1514,6 +1526,7 @@
          between the hero and the blue team section. Two rows scroll in
          opposite directions. -->
     <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
+        <p class="rd-exits-label">Exceptional Track Record</p>
         <div class="rd-exits-marquee">
             <div class="rd-exits-row" id="rd-exits-top"></div>
         </div>
