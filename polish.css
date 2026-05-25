@@ -168,7 +168,7 @@
   align-items: center;
   gap: clamp(7px, 0.7vw, 10px);
   padding: clamp(5px, 0.5vw, 7px) clamp(10px, 0.9vw, 14px);
-  margin-top: clamp(6px, 0.7vw, 10px) !important;
+  margin-top: clamp(16px, 1.4vw, 20px) !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 999px;
@@ -200,7 +200,7 @@
   .logo-container .hero-badge.logo-badge {
     padding: 5px 11px;
     gap: 7px;
-    margin-top: 7px !important;
+    margin-top: 16px !important;
   }
   .logo-container .hero-badge.logo-badge .hero-badge-label {
     font-size: 9.5px;
