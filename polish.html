@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=9">
+    <link rel="stylesheet" href="polish.css?v=10">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -466,6 +466,21 @@
             margin: clamp(4px, 0.5vw, 8px) 0 0 0;
             font-weight: 400;
         }
+        /* Founder quote on the homepage team card — sits where the teaser
+           used to live. Italic serif in blue, with smart curly quotes. */
+        .team-card-quote {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.92rem, 1.02vw, 1.18rem);
+            line-height: 1.46;
+            font-style: italic;
+            color: #155EE8;
+            margin: clamp(6px, 0.7vw, 10px) 0 0 0;
+            padding-left: clamp(10px, 0.9vw, 14px);
+            border-left: 2px solid rgba(242, 216, 49, 0.7);
+            font-weight: 400;
+        }
+        .team-card-quote::before { content: '\201C'; }
+        .team-card-quote::after  { content: '\201D'; }
 
         /* Bio button on team cards */
         .team-bio-btn {
@@ -1426,7 +1441,7 @@
                                 <span class="team-card-name">Don Stalter</span>
                             </div>
                             <p class="team-card-role">General Partner</p>
-                            <p class="team-card-desc">Over two decades of experience across venture capital, operations, and global strategy.</p>
+                            <blockquote class="team-card-quote">The best founders don&rsquo;t come from the obvious places. They never have. Finding them before the market does, and staying in from the first check to the moment everyone else figures it out, is the whole job. It&rsquo;s also the best part of it.</blockquote>
                             <a class="team-bio-btn" href="polish-don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
@@ -1440,7 +1455,7 @@
                                 <span class="team-card-name">Suhail Younus</span>
                             </div>
                             <p class="team-card-role">Partner</p>
-                            <p class="team-card-desc">A background spanning venture capital, private equity, and emerging technology research.</p>
+                            <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
                             <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
@@ -1454,7 +1469,7 @@
                                 <span class="team-card-name">Ivan La Frinere-Sandoval</span>
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
-                            <p class="team-card-desc">A builder and investor with deep roots in engineering, finance, and entrepreneurship.</p>
+                            <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline allows us to see viable opportunities where others might only see complexity.</blockquote>
                             <a class="team-bio-btn" href="ivan.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
@@ -1468,7 +1483,7 @@
                                 <span class="team-card-name">Wieger Lamers</span>
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
-                            <p class="team-card-desc">Raised at the intersection of European tech and entrepreneurship, with experience across venture and early-stage operations.</p>
+                            <blockquote class="team-card-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
                             <a class="team-bio-btn" href="wieger.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>

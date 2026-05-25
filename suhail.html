@@ -120,8 +120,17 @@
             font-size: clamp(0.75rem, 0.85vw, 0.95rem);
             text-transform: uppercase; letter-spacing: 0.1em;
             color: rgba(255, 255, 255, 0.5);
-            margin: 0 0 clamp(28px, 3vw, 48px) 0;
+            margin: 0 0 clamp(8px, 0.8vw, 12px) 0;
             animation: fadeInUp 0.6s ease 0.25s both;
+        }
+        .bio-tagline {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1rem, 1.15vw, 1.3rem);
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.86);
+            margin: 0 0 clamp(24px, 2.6vw, 36px) 0;
+            max-width: 56ch;
+            animation: fadeInUp 0.6s ease 0.28s both;
         }
 
         .bio-text {
@@ -450,6 +459,7 @@
         <div class="bio-content">
             <h1>Suhail Younus</h1>
             <p class="bio-role">Partner</p>
+            <p class="bio-tagline">A background spanning venture capital, private equity, and emerging technology research.</p>
             <div class="bio-meta">
                 <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> Syosset, NY</span>
                 <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> San Francisco, CA</span>
