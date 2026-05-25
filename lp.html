@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>LP Portal — Sunshine Lake Capital</title>
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'),
+                 url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400; font-style: normal; font-display: swap;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #155EE8 0%, #0A3DAE 55%, #0032A8 100%);
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .lp-card {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 20px;
+            padding: clamp(32px, 5vw, 56px);
+        }
+        .lp-logo {
+            width: 40px;
+            height: auto;
+            display: block;
+            margin: 0 0 26px 0;
+            fill: #fff;
+        }
+        .lp-h1 {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(2rem, 3.4vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            margin: 0 0 14px;
+        }
+        .lp-intro {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.1rem);
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.78);
+            margin: 0 0 30px;
+        }
+        .lp-form { display: flex; flex-direction: column; gap: 14px; }
+        .lp-field { display: flex; flex-direction: column; gap: 6px; }
+        .lp-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.58);
+        }
+        .lp-input {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .lp-input:focus {
+            outline: none;
+            border-color: rgba(242, 216, 49, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .lp-submit {
+            margin-top: 8px;
+            background: #F2D831;
+            color: #0B1275;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 22px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .lp-submit:hover { background: #F7DF47; transform: translateY(-1px); }
+        .lp-error {
+            color: #F2D831;
+            font-size: 13px;
+            margin-top: 4px;
+            min-height: 18px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .lp-error.show { opacity: 1; }
+        .lp-back {
+            display: inline-block;
+            margin-top: 24px;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .lp-back:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <main class="lp-card">
+        <svg class="lp-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" aria-hidden="true">
+            <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+            <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+        </svg>
+        <h1 class="lp-h1">LP Portal</h1>
+        <p class="lp-intro">Login to the LP portal below for up-to-date reporting and recent Sunshine Lake updates and newsletters.</p>
+        <form class="lp-form" id="lpForm" autocomplete="off">
+            <div class="lp-field">
+                <label class="lp-label" for="lpPassword">Password</label>
+                <input class="lp-input" id="lpPassword" name="password" type="password" required autofocus>
+            </div>
+            <button class="lp-submit" type="submit">Sign In</button>
+            <p class="lp-error" id="lpError">Incorrect password.</p>
+        </form>
+        <a href="polish.html" class="lp-back">&larr; Back to site</a>
+    </main>
+    <script>
+        // ─────────────────────────────────────────────────────────
+        // Soft password gate — single shared password, SHA-256 hashed.
+        // Current password: "sunshine2026" (CHANGE THIS).
+        // To rotate the password, regenerate the hash with:
+        //   printf '%s' 'new-password' | shasum -a 256
+        // …and replace PASSWORD_HASH below. (Also update lp-portal.html
+        // and lp-updates.html if you ever embed it elsewhere — they
+        // only check the session flag, not the hash.)
+        // ─────────────────────────────────────────────────────────
+        const PASSWORD_HASH = '5d6180aa498ee7335f2899c3e818a2f42c4493e94331b049a00e71efbdbca6cc';
+
+        const form = document.getElementById('lpForm');
+        const pwInput = document.getElementById('lpPassword');
+        const errorEl = document.getElementById('lpError');
+
+        async function sha256(text) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+            return Array.from(new Uint8Array(buf))
+                .map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorEl.classList.remove('show');
+            const hash = await sha256(pwInput.value);
+            if (hash === PASSWORD_HASH) {
+                sessionStorage.setItem('slLpAuth', '1');
+                location.href = 'lp-portal.html';
+            } else {
+                errorEl.classList.add('show');
+                pwInput.value = '';
+                pwInput.focus();
+            }
+        });
+        // Skip the form if already authed this session
+        if (sessionStorage.getItem('slLpAuth') === '1') {
+            location.replace('lp-portal.html');
+        }
+    </script>
+</body>
+</html>

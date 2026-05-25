@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Updates &amp; Newsletters — LP Portal — Sunshine Lake Capital</title>
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        // Gate the page before render — bounce to login if not authed.
+        if (sessionStorage.getItem('slLpAuth') !== '1') {
+            location.replace('lp.html');
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'),
+                 url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400; font-style: normal; font-display: swap;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #155EE8 0%, #0A3DAE 55%, #0032A8 100%);
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(24px, 4vw, 56px) clamp(20px, 4vw, 56px) clamp(40px, 6vw, 80px);
+        }
+        .lp-topbar {
+            width: 100%;
+            max-width: 780px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(24px, 3vw, 36px);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .lp-topbar a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .lp-topbar a:hover { color: #fff; }
+        .lp-portal-card {
+            width: 100%;
+            max-width: 780px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 22px;
+            padding: clamp(32px, 5vw, 64px);
+        }
+        .lp-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+        .lp-h1 {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(2rem, 3.2vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            margin-bottom: clamp(28px, 3.5vw, 44px);
+        }
+        .lp-updates-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .lp-update {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 24px;
+            padding: clamp(18px, 2vw, 24px) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            text-decoration: none;
+            color: #fff;
+            transition: padding-left 0.2s ease;
+        }
+        .lp-update:hover { padding-left: 6px; }
+        .lp-update-title {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(1.1rem, 1.35vw, 1.4rem);
+            font-weight: 400;
+            line-height: 1.3;
+            color: #fff;
+            transition: color 0.2s ease;
+        }
+        .lp-update:hover .lp-update-title { color: #F2D831; }
+        .lp-update-date {
+            flex-shrink: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+        .lp-empty {
+            text-align: center;
+            padding: clamp(40px, 6vw, 72px) 20px;
+            color: rgba(255, 255, 255, 0.55);
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(1rem, 1.1vw, 1.15rem);
+            line-height: 1.5;
+            border: 1px dashed rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+        }
+        .lp-empty-strong {
+            display: block;
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 6px;
+        }
+        .lp-back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: clamp(28px, 3.5vw, 44px);
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+        .lp-back-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="lp-topbar">
+        <a href="lp-portal.html">&larr; LP Portal</a>
+        <a href="#" id="lpLogout">Log out &rarr;</a>
+    </div>
+
+    <main class="lp-portal-card">
+        <div class="lp-eyebrow">Sunshine Lake LP Communications</div>
+        <h1 class="lp-h1">Updates &amp; Newsletters</h1>
+
+        <!--
+            Each newsletter / update is a row below. To add one, copy the
+            template inside the <ul> and update the href, title, and date.
+            Drop the linked file into a folder (e.g. lp-files/) and link
+            to it. Example row (commented out):
+
+            <li>
+                <a class="lp-update" href="lp-files/2026-q1-letter.pdf" target="_blank" rel="noopener">
+                    <span class="lp-update-title">Q1 2026 Investor Letter</span>
+                    <span class="lp-update-date">Apr 2026</span>
+                </a>
+            </li>
+        -->
+        <ul class="lp-updates-list" id="lpUpdatesList" hidden></ul>
+
+        <div class="lp-empty" id="lpEmptyState">
+            <span class="lp-empty-strong">No updates posted yet.</span>
+            New letters and newsletters will appear here as they're published.
+        </div>
+
+        <a href="lp-portal.html" class="lp-back-link">&larr; Back to portal</a>
+    </main>
+
+    <script>
+        // If the updates list has any rows, show the list and hide the
+        // empty state. (Lets you add rows above without touching JS.)
+        const list = document.getElementById('lpUpdatesList');
+        const empty = document.getElementById('lpEmptyState');
+        if (list && list.children.length > 0) {
+            list.hidden = false;
+            if (empty) empty.style.display = 'none';
+        }
+
+        document.getElementById('lpLogout').addEventListener('click', (e) => {
+            e.preventDefault();
+            sessionStorage.removeItem('slLpAuth');
+            location.replace('lp.html');
+        });
+    </script>
+</body>
+</html>
