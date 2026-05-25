@@ -2284,25 +2284,39 @@
         // --- SINGLE unified rAF loop ---
         let rafId;
         function tick(now) {
-            lenis.raf(now);
+            // Wrap the per-frame work in a try so a single bad frame (e.g.
+            // a transient null ref) can't kill the rAF loop and freeze
+            // scrolling + the shader. The next frame is always scheduled.
+            try {
+                lenis.raf(now);
 
-            const lerpFrame = 0.14;
-            currentScale += (targetScale - currentScale) * lerpFrame;
-            currentRadius += (targetRadius - currentRadius) * lerpFrame;
-            currentTitleY += (targetTitleY - currentTitleY) * lerpFrame;
-            shaderIntensity += (targetShaderIntensity - shaderIntensity) * 0.10;
-            currentFooterScale += (targetFooterScale - currentFooterScale) * 0.25;
-            currentFooterRadius += (targetFooterRadius - currentFooterRadius) * 0.25;
+                const lerpFrame = 0.14;
+                currentScale += (targetScale - currentScale) * lerpFrame;
+                currentRadius += (targetRadius - currentRadius) * lerpFrame;
+                currentTitleY += (targetTitleY - currentTitleY) * lerpFrame;
+                shaderIntensity += (targetShaderIntensity - shaderIntensity) * 0.10;
+                currentFooterScale += (targetFooterScale - currentFooterScale) * 0.25;
+                currentFooterRadius += (targetFooterRadius - currentFooterRadius) * 0.25;
 
-            // Batch all DOM writes together (no reads between!)
-            heroCard.style.transform = `scale(${currentScale})`;
-            heroCard.style.borderRadius = currentRadius + 'px';
-            mainContent.style.transform = `translateY(-${currentTitleY}px)`;
-            footerPhotoCardEl.style.transform = `scale(${currentFooterScale})`;
-            footerPhotoCardEl.style.borderRadius = currentFooterRadius + 'px';
+                // Batch all DOM writes together (no reads between!)
+                if (heroCard) {
+                    heroCard.style.transform = `scale(${currentScale})`;
+                    heroCard.style.borderRadius = currentRadius + 'px';
+                }
+                if (mainContent) {
+                    mainContent.style.transform = `translateY(-${currentTitleY}px)`;
+                }
+                if (footerPhotoCardEl) {
+                    footerPhotoCardEl.style.transform = `scale(${currentFooterScale})`;
+                    footerPhotoCardEl.style.borderRadius = currentFooterRadius + 'px';
+                }
 
-            // WebGL — use cached visibility flags (no getBoundingClientRect!)
-            if (heroInView) render(now);
+                // WebGL — use cached visibility flags (no getBoundingClientRect!)
+                if (heroInView) render(now);
+            } catch (err) {
+                // Surface to console but keep the loop alive
+                if (window.console) console.error('tick() frame error:', err);
+            }
 
             rafId = requestAnimationFrame(tick);
         }
