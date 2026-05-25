@@ -430,6 +430,63 @@
             .media-item-top { flex-wrap: wrap; }
             .media-date { margin-left: 0; }
         }
+
+        /* ========================== */
+        /* META / QUOTE / EDUCATION    */
+        /* ========================== */
+        .bio-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(14px, 1.8vw, 22px) clamp(20px, 2.5vw, 36px);
+            margin: 0 0 clamp(24px, 2.8vw, 36px) 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.85rem, 0.95vw, 1rem);
+            color: rgba(255, 255, 255, 0.78);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .bio-meta-item { display: inline-flex; align-items: baseline; gap: 8px; }
+        .bio-meta-label {
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .bio-quote {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+            font-style: italic;
+            line-height: 1.45;
+            color: #fff;
+            margin: 0 0 clamp(28px, 3vw, 40px) 0;
+            padding-left: clamp(14px, 1.5vw, 22px);
+            border-left: 2px solid rgba(242, 216, 49, 0.6);
+            animation: fadeInUp 0.6s ease 0.35s both;
+        }
+        .bio-quote::before { content: '\201C'; }
+        .bio-quote::after  { content: '\201D'; }
+        .bio-education {
+            margin-top: clamp(28px, 3vw, 44px);
+            padding-top: clamp(20px, 2vw, 28px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        .bio-education-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 8px 0;
+        }
+        .bio-education-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.88);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -451,15 +508,26 @@
             <div class="bio-photo">
                 <img src="images/team/don.webp" alt="Don Stalter">
             </div>
+            <a href="mailto:don@sunshinelake.vc" class="linkedin-pill">Get in touch ↗</a>
             <a href="https://linkedin.com/in/donstalter" class="linkedin-pill" target="_blank" rel="noopener">LinkedIn ↗</a>
             <a href="https://x.com/donnystalter" class="linkedin-pill" target="_blank" rel="noopener">X ↗</a>
         </div>
         <div class="bio-content">
             <h1>Don Stalter</h1>
             <p class="bio-role">General Partner</p>
-                        <p class="bio-text">Don Stalter founded Sunshine Lake Capital with the conviction that the most overlooked founders often build the most enduring companies. With over two decades of experience across venture capital, operations, and strategy, Don has developed a sharp eye for identifying founders whose unconventional paths give them a distinct edge.</p>
-            <p class="bio-text">Before launching Sunshine Lake, Don held senior roles at leading financial institutions and technology companies, where he built cross-border teams and led investments spanning multiple continents. His global network and hands-on approach make him a trusted partner from first check to growth stage and beyond.</p>
-            
+            <div class="bio-meta">
+                <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> Minneapolis, MN</span>
+                <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> San Francisco, CA</span>
+            </div>
+            <blockquote class="bio-quote">I&rsquo;ve always believed that the most unconventional paths yield the most distinct advantages. Finding those often-overlooked founders and partnering with them from their first check to their defining milestones is the greatest privilege of my career.</blockquote>
+            <p class="bio-text">Donald grew up in the Midwest and early on demonstrated an entrepreneurial streak, running an online marketplace during high school. He later attended the University of Chicago, studying economics and international relations, which sparked his enduring global perspective and deep interest in cross-border ecosystems.</p>
+            <p class="bio-text">Right out of college, Don began his career as an M&amp;A banker at Credit Suisse in San Francisco, working on monumental acquisitions before building his career in venture capital. He went on to hold senior roles at leading financial institutions and technology companies, building and scaling global investment teams and leading cross-border investments spanning multiple continents.</p>
+            <p class="bio-text">Don founded Sunshine Lake Capital with the conviction that the most overlooked founders often build the most enduring companies. With over two decades of experience across venture capital, operations, and strategy, his hands-on approach makes him a trusted partner to founders worldwide.</p>
+            <div class="bio-education">
+                <p class="bio-education-label">Education</p>
+                <p class="bio-education-text">University of Chicago &mdash; B.A. Economics and Cultural Studies; M.A. Global Econometrics and Quantitative Economics</p>
+            </div>
+
             <div class="prefund-section">
                 <h3>Pre-Fund Track Record</h3>
                 <div class="prefund-grid">

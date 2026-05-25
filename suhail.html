@@ -365,6 +365,63 @@
             }
             .prefund-dots { display: flex; }
         }
+
+        /* ========================== */
+        /* META / QUOTE / EDUCATION    */
+        /* ========================== */
+        .bio-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(14px, 1.8vw, 22px) clamp(20px, 2.5vw, 36px);
+            margin: 0 0 clamp(24px, 2.8vw, 36px) 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.85rem, 0.95vw, 1rem);
+            color: rgba(255, 255, 255, 0.78);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .bio-meta-item { display: inline-flex; align-items: baseline; gap: 8px; }
+        .bio-meta-label {
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .bio-quote {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+            font-style: italic;
+            line-height: 1.45;
+            color: #fff;
+            margin: 0 0 clamp(28px, 3vw, 40px) 0;
+            padding-left: clamp(14px, 1.5vw, 22px);
+            border-left: 2px solid rgba(242, 216, 49, 0.6);
+            animation: fadeInUp 0.6s ease 0.35s both;
+        }
+        .bio-quote::before { content: '\201C'; }
+        .bio-quote::after  { content: '\201D'; }
+        .bio-education {
+            margin-top: clamp(28px, 3vw, 44px);
+            padding-top: clamp(20px, 2vw, 28px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        .bio-education-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 8px 0;
+        }
+        .bio-education-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.88);
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -386,17 +443,25 @@
             <div class="bio-photo">
                 <img src="images/team/suhail.webp" alt="Suhail Younus">
             </div>
+            <a href="mailto:suhail@sunshinelake.vc" class="linkedin-pill">Get in touch ↗</a>
             <a href="https://linkedin.com/in/suhailyounus/" class="linkedin-pill" target="_blank" rel="noopener">LinkedIn ↗</a>
             <a href="https://x.com/syou018" class="linkedin-pill" target="_blank" rel="noopener">X ↗</a>
         </div>
         <div class="bio-content">
             <h1>Suhail Younus</h1>
             <p class="bio-role">Partner</p>
-            <p class="bio-text">Suhail is an investor at Sunshine Lake, where he works with the next generation of founders. He graduated from Cornell and has experience across venture capital and private equity.</p>
-            <p class="bio-text">Prior to Cornell, he conducted research on blockchain and Web3 applications in Colombo, Sri Lanka, collaborating with a local social acceleration lab to explore practical use cases in developing economies. He traces his interest in investing back to competitive speech and debate, where he competed on the national circuit and learned to break down complex ideas and form conviction in uncertain environments.</p>
-            <p class="bio-text">He later worked at an early-stage fund focused on sleep and wellness, sourcing and evaluating companies across consumer health, hardware, and wellness. Prior to Sunshine Lake, he was involved in private equity co-investment and advisory, working with institutional investors on diligence and investment strategy.</p>
-            <p class="bio-text">He is based in New York and San Francisco and spends time reading Persian literature and history, especially the Shahnameh.</p>
-
+            <div class="bio-meta">
+                <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> Syosset, NY</span>
+                <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> New York, NY</span>
+            </div>
+            <blockquote class="bio-quote">Finding clarity in an uncertain environment requires breaking down complex ideas to their core. Working alongside the next generation of founders to build conviction around the future is an incredibly rewarding pursuit.</blockquote>
+            <p class="bio-text">Suhail grew up in New York, where he developed a rigorous analytical approach through competitive speech and debate, competing successfully on the national circuit. He went on to attend Cornell University, bringing his drive for structured evaluation to his higher education.</p>
+            <p class="bio-text">Before his current role, Suhail conducted extensive research on blockchain and Web3 applications in Colombo, Sri Lanka, collaborating with a local social acceleration lab to explore practical use cases in developing economies. He later worked at an early-stage fund focused on sleep and wellness, and spent time in private equity co-investment and advisory, working closely with institutional investors on diligence and strategy.</p>
+            <p class="bio-text">Today, Suhail is a Partner at Sunshine Lake where he works with the next generation of founders, drawing on his background spanning venture capital, private equity, and emerging technology. Splitting his time between New York and San Francisco, he spends his downtime reading Persian literature and history, especially the Shahnameh.</p>
+            <div class="bio-education">
+                <p class="bio-education-label">Education</p>
+                <p class="bio-education-text">Cornell University &mdash; B.S. Economics</p>
+            </div>
         </div>
     </section>
 

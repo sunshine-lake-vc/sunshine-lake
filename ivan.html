@@ -191,6 +191,64 @@
             }
             .site-logo { width: 24px; top: 20px; right: 20px; }
         }
+
+        /* ========================== */
+        /* META / QUOTE / EDUCATION    */
+        /* ========================== */
+        .bio-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(14px, 1.8vw, 22px) clamp(20px, 2.5vw, 36px);
+            margin: 0 0 clamp(24px, 2.8vw, 36px) 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.85rem, 0.95vw, 1rem);
+            color: rgba(255, 255, 255, 0.78);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .bio-meta-item { display: inline-flex; align-items: baseline; gap: 8px; }
+        .bio-meta-label {
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .bio-quote {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+            font-style: italic;
+            line-height: 1.45;
+            color: #fff;
+            margin: 0 0 clamp(28px, 3vw, 40px) 0;
+            padding-left: clamp(14px, 1.5vw, 22px);
+            border-left: 2px solid rgba(242, 216, 49, 0.6);
+            animation: fadeInUp 0.6s ease 0.35s both;
+        }
+        .bio-quote::before { content: '\201C'; }
+        .bio-quote::after  { content: '\201D'; }
+        .bio-education {
+            margin-top: clamp(28px, 3vw, 44px);
+            padding-top: clamp(20px, 2vw, 28px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        .bio-education-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 8px 0;
+        }
+        .bio-education-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.88);
+            margin: 0;
+        }
+        .linkedin-pill + .linkedin-pill { margin-left: 10px; }
     </style>
 </head>
 <body>
@@ -211,16 +269,24 @@
             <div class="bio-photo">
                 <img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval">
             </div>
+            <a href="mailto:ivan@sunshinelake.vc" class="linkedin-pill">Get in touch ↗</a>
             <a href="https://www.linkedin.com/in/gridparity/" class="linkedin-pill" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
         <div class="bio-content">
             <h1>Ivan La Frinere-Sandoval</h1>
-            <p class="bio-role">Partner, CFO & COO</p>
-            <p class="bio-text">Ivan is a technology driven investor and entrepreneur, who combines a rigorous technical background with a deep passion for science, technology, and environmental conservation. He holds dual undergraduate degrees in Mechanical Engineering and Finance from the California Institute of Technology, alongside an MBA and an MS in Environmental Engineering from Stanford.</p>
-            <p class="bio-text">Across his career, he has applied a rigorous quantitative framework to evaluating opportunities, combining technical depth with financial discipline. Ivan began his professional career at Credit Suisse in 2006, where he achieved a Top 15 all time ranking in the Training The Street financial modeling competition.</p>
-            <p class="bio-text">After Stanford, he launched his first company through StartX and went on to build multiple successful businesses with the support of the Bay Area entrepreneurial ecosystem. He leverages this structured, data driven framework to differentiate the firm's evaluation process.</p>
-            <p class="bio-text">At Sunshine Lake, he manages fund operations, supports deal sourcing and investment evaluation, and serves on the investment committee. Ivan speaks Spanish, reflecting his Mexican American heritage, and he developed conversational Chinese while working internationally. Outside the office, he is an outdoor enthusiast who enjoys hiking and surfing.</p>
-
+            <p class="bio-role">Partner, CFO &amp; COO</p>
+            <div class="bio-meta">
+                <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> San Jose, CA</span>
+                <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> San Francisco, CA</span>
+            </div>
+            <blockquote class="bio-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline allows us to see viable opportunities where others might only see complexity.</blockquote>
+            <p class="bio-text">Proud of his Mexican American heritage, Ivan grew up in California with a deep passion for science, technology, and environmental conservation. He pursued this dual interest rigorously at the California Institute of Technology, earning undergraduate degrees in Mechanical Engineering and Finance, before securing his MBA and an MS in Environmental Engineering from Stanford.</p>
+            <p class="bio-text">Ivan began his professional career at Credit Suisse in 2006, distinguishing himself early by achieving a Top 15 all-time ranking in the Training The Street financial modeling competition. Following Stanford, he launched his first company through StartX and went on to build multiple successful businesses deeply embedded within the Bay Area&rsquo;s entrepreneurial ecosystem.</p>
+            <p class="bio-text">At Sunshine Lake, Ivan manages fund operations, supports deal sourcing, and serves on the investment committee. He leverages a structured, data-driven framework to differentiate the firm&rsquo;s evaluation process. Outside the office, he is an outdoor enthusiast who enjoys hiking and surfing, and is conversational in both Spanish and Chinese.</p>
+            <div class="bio-education">
+                <p class="bio-education-label">Education</p>
+                <p class="bio-education-text">California Institute of Technology &mdash; B.S. Mechanical Engineering and Finance<br>Stanford University &mdash; MBA &amp; M.S. Environmental Engineering</p>
+            </div>
         </div>
     </section>
 </body>

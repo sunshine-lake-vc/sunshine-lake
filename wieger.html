@@ -191,6 +191,64 @@
             }
             .site-logo { width: 24px; top: 20px; right: 20px; }
         }
+
+        /* ========================== */
+        /* META / QUOTE / EDUCATION    */
+        /* ========================== */
+        .bio-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(14px, 1.8vw, 22px) clamp(20px, 2.5vw, 36px);
+            margin: 0 0 clamp(24px, 2.8vw, 36px) 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.85rem, 0.95vw, 1rem);
+            color: rgba(255, 255, 255, 0.78);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .bio-meta-item { display: inline-flex; align-items: baseline; gap: 8px; }
+        .bio-meta-label {
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .bio-quote {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+            font-style: italic;
+            line-height: 1.45;
+            color: #fff;
+            margin: 0 0 clamp(28px, 3vw, 40px) 0;
+            padding-left: clamp(14px, 1.5vw, 22px);
+            border-left: 2px solid rgba(242, 216, 49, 0.6);
+            animation: fadeInUp 0.6s ease 0.35s both;
+        }
+        .bio-quote::before { content: '\201C'; }
+        .bio-quote::after  { content: '\201D'; }
+        .bio-education {
+            margin-top: clamp(28px, 3vw, 44px);
+            padding-top: clamp(20px, 2vw, 28px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        .bio-education-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 8px 0;
+        }
+        .bio-education-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.15rem);
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.88);
+            margin: 0;
+        }
+        .linkedin-pill + .linkedin-pill { margin-left: 10px; }
     </style>
 </head>
 <body>
@@ -211,15 +269,24 @@
             <div class="bio-photo">
                 <div style="width:100%;height:100%;background:rgba(255,255,255,0.08);"></div>
             </div>
+            <a href="mailto:wieger@sunshinelake.vc" class="linkedin-pill">Get in touch ↗</a>
             <a href="https://www.linkedin.com/in/wiegerlamers/" class="linkedin-pill" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
         <div class="bio-content">
             <h1>Wieger Lamers</h1>
-            <p class="bio-role">EMEA & Platforms Lead</p>
-            <p class="bio-text">Wieger is an investor at Sunshine Lake, based in London. He grew up outside Amsterdam in an entrepreneurial family, with a front-row seat to Adyen's journey from a 12-person team to one of Europe's defining IPOs.</p>
-            <p class="bio-text">Before Sunshine Lake, he worked in venture at Valia Ventures and in early-stage operations at Unlock (Antler), which was later acquired. During his studies, he interviewed 300+ immigrant founders globally, exploring the link between early adversity and entrepreneurial success.</p>
-            <p class="bio-text">He holds a BSc in Business (Finance) from ESCP, and in his spare time follows Dutch history and AFC Ajax.</p>
-
+            <p class="bio-role">EMEA &amp; Platforms Lead</p>
+            <div class="bio-meta">
+                <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> Amsterdam, Netherlands</span>
+                <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> London, UK</span>
+            </div>
+            <blockquote class="bio-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
+            <p class="bio-text">Wieger was raised outside Amsterdam in an entrepreneurial family, gaining invaluable early exposure to the European tech ecosystem. Growing up, he had a front-row seat to Adyen&rsquo;s remarkable journey, watching the company scale from a 12-person team to one of Europe&rsquo;s most defining IPOs.</p>
+            <p class="bio-text">During his studies, Wieger interviewed over 300 immigrant founders globally, diving deep into the link between early adversity and entrepreneurial success. Before his current role, he honed his venture experience at Valia Ventures and led early-stage operations at Unlock (Antler), which was subsequently acquired.</p>
+            <p class="bio-text">Based in London, Wieger is an investor and the EMEA &amp; Platforms Lead at Sunshine Lake, where he lives at the intersection of European tech and entrepreneurship. In his spare time, he is an avid follower of Dutch history and a dedicated supporter of AFC Ajax.</p>
+            <div class="bio-education">
+                <p class="bio-education-label">Education</p>
+                <p class="bio-education-text">ESCP Business School &mdash; B.Sc. Business (Finance)</p>
+            </div>
         </div>
     </section>
 </body>
