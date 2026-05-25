@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=18">
+    <link rel="stylesheet" href="polish.css?v=19">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -281,15 +281,10 @@
             font-weight: 400;
             max-width: 24em;
         }
-        /* Thesis paragraph beneath "Meet Sunshine Lake." — fades up
-           gently as it enters view, one block at once (no per-line). */
+        /* Thesis paragraphs beneath "Meet Sunshine Lake." — fade up
+           gently as a single block when scrolled into view. */
         .team-thesis {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.15rem, 1.4vw, 1.65rem);
-            line-height: 1.45;
-            color: rgba(255, 255, 255, 0.92);
-            margin: clamp(18px, 1.8vw, 28px) 0 clamp(24px, 2.2vw, 36px) 0;
-            font-weight: 400;
+            margin: clamp(18px, 1.8vw, 28px) 0 clamp(20px, 2vw, 32px) 0;
             max-width: 26em;
             opacity: 0;
             transform: translateY(14px);
@@ -297,6 +292,15 @@
                         transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: opacity, transform;
         }
+        .team-thesis p {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.1rem, 1.32vw, 1.55rem);
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0 0 clamp(14px, 1.2vw, 22px) 0;
+            font-weight: 400;
+        }
+        .team-thesis p:last-child { margin-bottom: 0; }
         .team-thesis.in-view {
             opacity: 1;
             transform: translateY(0);
@@ -381,52 +385,50 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* ── Strategic exits carousel — sits in the cream band between
-           the hero and the blue team section. Two horizontal marquees
-           scroll in opposite directions (rAF-driven, see startExitsMarquees
-           in polish.js). Minimal: pill cards with logo + name. ── */
+        /* ── Strategic exits carousel — now sits in the blue team
+           column directly under the thesis text. Two horizontal
+           marquees scroll in opposite directions (rAF-driven, see
+           startExitsMarquees in polish.js). White pills on blue. ── */
         .rd-exits-band {
-            background: #FFFBEB;
-            /* Nearly-zero top padding so the carousel hugs the end of
-               the hero; keep generous bottom padding so the hard line
-               into the blue team section still has breathing room. */
-            padding: 2px 0 clamp(28px, 3.4vw, 56px);
+            background: transparent;
+            padding: clamp(6px, 0.8vw, 14px) 0 0;
             position: relative;
             z-index: 2;
+            margin-top: clamp(12px, 1.4vw, 22px);
         }
         .rd-exits-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.8vw, 12px);
+            font-size: clamp(10px, 0.8vw, 11.5px);
             font-weight: 600;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: rgba(11, 18, 117, 0.42);
-            margin: 0 0 clamp(16px, 1.6vw, 26px) clamp(20px, 5vw, 88px);
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 0 clamp(12px, 1.2vw, 18px) 0;
         }
         @media (max-width: 720px) {
-            .rd-exits-label { margin-left: 20px; font-size: 10.5px; }
+            .rd-exits-label { font-size: 10.5px; }
         }
         .rd-exits-marquee {
             width: 100%;
             overflow: hidden;
-            -webkit-mask-image: linear-gradient(90deg, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
-                    mask-image: linear-gradient(90deg, transparent 0, black 80px, black calc(100% - 80px), transparent 100%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
+                    mask-image: linear-gradient(90deg, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
         }
-        .rd-exits-marquee + .rd-exits-marquee { margin-top: clamp(12px, 1.4vw, 22px); }
+        .rd-exits-marquee + .rd-exits-marquee { margin-top: clamp(10px, 1vw, 14px); }
         .rd-exits-row {
             display: flex;
-            gap: clamp(12px, 1.2vw, 20px);
+            gap: clamp(10px, 1vw, 16px);
             width: max-content;
-            padding: 4px 0;
+            padding: 3px 0;
             will-change: transform;
         }
         .rd-exit-card {
             display: inline-flex;
             align-items: center;
-            gap: clamp(8px, 0.8vw, 12px);
-            padding: clamp(8px, 0.9vw, 12px) clamp(14px, 1.4vw, 22px);
-            background: rgba(11, 18, 117, 0.04);
-            border: 1px solid rgba(11, 18, 117, 0.1);
+            gap: clamp(7px, 0.7vw, 10px);
+            padding: clamp(7px, 0.7vw, 10px) clamp(12px, 1.2vw, 18px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 999px;
             text-decoration: none;
             flex-shrink: 0;
@@ -434,52 +436,50 @@
             transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
         }
         .rd-exit-card:hover {
-            background: rgba(11, 18, 117, 0.08);
-            border-color: rgba(11, 18, 117, 0.18);
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.32);
             transform: translateY(-1px);
         }
         .rd-exit-logo {
-            width: clamp(22px, 2.2vw, 28px);
-            height: clamp(22px, 2.2vw, 28px);
-            border-radius: 7px;
+            width: clamp(20px, 1.9vw, 24px);
+            height: clamp(20px, 1.9vw, 24px);
+            border-radius: 6px;
             background: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             overflow: hidden;
-            border: 1px solid rgba(11, 18, 117, 0.06);
         }
         .rd-exit-logo img { width: 80%; height: 80%; object-fit: contain; }
         .rd-exit-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(15px, 1.1vw, 18px);
-            color: #0B1275;
+            font-size: clamp(14px, 1vw, 16.5px);
+            color: #ffffff;
             line-height: 1;
         }
         .rd-exit-sub {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10.5px, 0.78vw, 12.5px);
+            font-size: clamp(10px, 0.74vw, 11.5px);
             font-weight: 500;
-            color: rgba(11, 18, 117, 0.5);
+            color: rgba(255, 255, 255, 0.72);
             letter-spacing: 0.01em;
-            margin-left: 6px;
+            margin-left: 5px;
         }
         .rd-exit-tag {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(9.5px, 0.7vw, 11.5px);
+            font-size: clamp(9px, 0.68vw, 10.5px);
             font-weight: 700;
             letter-spacing: 0.08em;
-            color: rgba(11, 18, 117, 0.55);
-            margin-left: 6px;
+            color: rgba(255, 255, 255, 0.78);
+            margin-left: 5px;
             text-transform: uppercase;
         }
         @media (max-width: 720px) {
-            .rd-exits-band { padding: clamp(20px, 5vw, 32px) 0; }
-            .rd-exit-card { padding: 7px 14px; gap: 8px; }
-            .rd-exit-name { font-size: 14px; }
-            .rd-exit-sub  { font-size: 10.5px; margin-left: 5px; }
-            .rd-exit-tag  { font-size: 10px; margin-left: 5px; }
+            .rd-exit-card { padding: 6px 12px; gap: 7px; }
+            .rd-exit-name { font-size: 13.5px; }
+            .rd-exit-sub  { font-size: 10px; margin-left: 4px; }
+            .rd-exit-tag  { font-size: 9.5px; margin-left: 4px; }
         }
 
         /* Footer photo water ripple overlay (WebGL) */
@@ -1530,27 +1530,26 @@
         </div>
     </div>
 
-    <!-- Strategic exits / leaders carousel — sits in the cream band
-         between the hero and the blue team section. Two rows scroll in
-         opposite directions. -->
-    <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
-        <p class="rd-exits-label">Exceptional Track Record</p>
-        <div class="rd-exits-marquee">
-            <div class="rd-exits-row" id="rd-exits-top"></div>
-        </div>
-        <div class="rd-exits-marquee">
-            <div class="rd-exits-row" id="rd-exits-bottom"></div>
-        </div>
-    </section>
-
-    <!-- Team Section (thesis now lives at the top of this block) -->
+    <!-- Team Section (thesis + exits carousel now live in the left column) -->
     <section class="team-section" id="rd-section-team">
         <div class="team-inner">
             <div class="team-layout">
-                <!-- Left: Sticky descriptive text -->
+                <!-- Left: Sticky descriptive text + portfolio carousel -->
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
-                    <p class="team-thesis" id="rd-section-thesis">We are first believers. We back founders from extreme origins solving acute problems with revolutionary technology. There has never been a better time to build.</p>
+                    <div class="team-thesis" id="rd-section-thesis">
+                        <p>We back international founders from extreme origins. They solve vital problems with revolutionary technologies. There has never been a better time to build.</p>
+                        <p>We operate at the edge of economic, geopolitical, and tech change and defy sector cycles, allowing us to support multiple blockbuster companies a decade.</p>
+                    </div>
+                    <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
+                        <p class="rd-exits-label">Exceptional Track Record</p>
+                        <div class="rd-exits-marquee">
+                            <div class="rd-exits-row" id="rd-exits-top"></div>
+                        </div>
+                        <div class="rd-exits-marquee">
+                            <div class="rd-exits-row" id="rd-exits-bottom"></div>
+                        </div>
+                    </section>
                 </div>
 
                 <!-- Right: Team members -->
@@ -1626,7 +1625,6 @@
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
             <div class="founders-toggle" id="foundersToggle" style="display:none;"></div>
-            <p class="founders-right-subtitle" id="foundersSubtitle">We operate at the edge of economic, geopolitical, and tech change and defy sector cycles, allowing us to support multiple blockbuster companies a decade.</p>
         </div>
         <div class="founders-right" id="foundersRight">
             <!-- Items injected by JS from FOUNDERS_DATA -->
