@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=17">
+    <link rel="stylesheet" href="polish.css?v=18">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -64,7 +64,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 14px 20px 8px;
             contain: layout;
         }
 
@@ -387,10 +387,10 @@
            in polish.js). Minimal: pill cards with logo + name. ── */
         .rd-exits-band {
             background: #FFFBEB;
-            /* Tighter top padding so the carousel hugs the end of the
-               hero animation; keep generous bottom padding so the hard
-               line into the blue team section still has breathing room. */
-            padding: clamp(8px, 1vw, 18px) 0 clamp(28px, 3.4vw, 56px);
+            /* Nearly-zero top padding so the carousel hugs the end of
+               the hero; keep generous bottom padding so the hard line
+               into the blue team section still has breathing room. */
+            padding: 2px 0 clamp(28px, 3.4vw, 56px);
             position: relative;
             z-index: 2;
         }
@@ -1268,9 +1268,10 @@
         /* Mode C: gradient bleed from shader into white */
         /* Hero spacer must be >= the 100vh sticky height — the spacer has
            overflow:hidden, so a shorter spacer clips the bottom of the hero
-           card (and its title). 106vh keeps the existing 6vh scroll runway
-           for the card-recede animation. */
-        body.mode-tight .hero-scroll-spacer { height: 106vh; }
+           card. 102vh gives the recede animation just enough scroll runway
+           (paired with a 2vh frameZone in JS) while pulling the carousel
+           below much closer to the hero. */
+        body.mode-tight .hero-scroll-spacer { height: 102vh; }
         body.mode-tight .content-spacer { height: 40vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
@@ -1998,9 +1999,9 @@
             const vw = window.innerWidth;
 
             // Frame: scale from 1.0 → slightly smaller card.
-            // Animation runs over 0.5vh so it completes within the
-            // shorter (150vh) hero spacer's pinned phase.
-            const frameZone = vh * 0.06;
+            // Animation runs over 2vh so it completes within the
+            // tightened (102vh) hero spacer's pinned phase.
+            const frameZone = vh * 0.02;
             const progress = Math.min(1, scrollY / frameZone);
             const maxInset = vw <= 768 ? 16 : 40;
             const scaleX = 1 - (maxInset * 2) / vw;
