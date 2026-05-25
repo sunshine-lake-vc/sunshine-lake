@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=20">
+    <link rel="stylesheet" href="polish.css?v=21">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -425,8 +425,8 @@
         .rd-exit-card {
             display: inline-flex;
             align-items: center;
-            gap: clamp(7px, 0.7vw, 10px);
-            padding: clamp(7px, 0.7vw, 10px) clamp(12px, 1.2vw, 18px);
+            gap: clamp(8px, 0.8vw, 12px);
+            padding: clamp(9px, 0.85vw, 12px) clamp(14px, 1.4vw, 21px);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 999px;
@@ -441,9 +441,9 @@
             transform: translateY(-1px);
         }
         .rd-exit-logo {
-            width: clamp(20px, 1.9vw, 24px);
-            height: clamp(20px, 1.9vw, 24px);
-            border-radius: 6px;
+            width: clamp(23px, 2.2vw, 28px);
+            height: clamp(23px, 2.2vw, 28px);
+            border-radius: 7px;
             background: #fff;
             display: flex;
             align-items: center;
@@ -454,32 +454,32 @@
         .rd-exit-logo img { width: 80%; height: 80%; object-fit: contain; }
         .rd-exit-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(14px, 1vw, 16.5px);
+            font-size: clamp(16px, 1.15vw, 19px);
             color: #ffffff;
             line-height: 1;
         }
         .rd-exit-sub {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.74vw, 11.5px);
+            font-size: clamp(11.5px, 0.85vw, 13px);
             font-weight: 500;
             color: rgba(255, 255, 255, 0.72);
             letter-spacing: 0.01em;
-            margin-left: 5px;
+            margin-left: 6px;
         }
         .rd-exit-tag {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(9px, 0.68vw, 10.5px);
+            font-size: clamp(10.5px, 0.78vw, 12px);
             font-weight: 700;
             letter-spacing: 0.08em;
             color: rgba(255, 255, 255, 0.78);
-            margin-left: 5px;
+            margin-left: 6px;
             text-transform: uppercase;
         }
         @media (max-width: 720px) {
-            .rd-exit-card { padding: 6px 12px; gap: 7px; }
-            .rd-exit-name { font-size: 13.5px; }
-            .rd-exit-sub  { font-size: 10px; margin-left: 4px; }
-            .rd-exit-tag  { font-size: 9.5px; margin-left: 4px; }
+            .rd-exit-card { padding: 8px 14px; gap: 8px; }
+            .rd-exit-name { font-size: 15.5px; }
+            .rd-exit-sub  { font-size: 11.5px; margin-left: 5px; }
+            .rd-exit-tag  { font-size: 11px; margin-left: 5px; }
         }
 
         /* Footer photo water ripple overlay (WebGL) */
