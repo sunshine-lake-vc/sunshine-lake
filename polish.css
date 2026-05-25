@@ -652,15 +652,9 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .hero-scroll-spacer.rd-water-extend {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(180deg,
-      #FFFFFF 0%,     /* pure white at the surface */
-      #FFFBE5 14%,    /* white with hint of warmth */
-      #FFF1B8 28%,    /* sunlight band — behind the pinned card */
-      #FFF6D8 42%,    /* cream-yellow — still behind the card */
-      #FFFFFF 66%,    /* fully white well before the card scrolls away */
-      #FFFFFF 100%    /* white at the handoff — matches the thesis start */
-    ) !important;
+  /* Solid warm white — same color as the thesis section, so no line
+     between them; the hard color break starts at the team section. */
+  background: #FFFBEB !important;
 }
 
 /* Drifting painterly blobs — subtle overlay behind the hero card */
@@ -738,18 +732,9 @@ a.rd-name:hover { color: var(--rd-yellow); }
 /* Fallback in case any section bleeds through */
 body { background: #010210 !important; }
 
-/* Thesis — starts white-with-yellow (continues bright zone from
-   the hero spacer) and then plunges dramatically to blue at the
-   bottom. Stops bias the bright portion toward the top so the
-   transition feels sudden, not gradual. */
+/* Thesis — solid warm white. Hard line into the team section below. */
 .content-spacer {
-  background: linear-gradient(180deg,
-    #FFFBEB 0%,    /* warm white — matches hero spacer bottom */
-    #FFEFB8 18%,   /* light yellow */
-    #FFF1C5 35%,   /* yellow-cream — still bright */
-    #C8D5E8 62%,   /* abrupt cool — the plunge begins */
-    #4A88E5 100%   /* royal blue — hands off to team */
-  ) !important;
+  background: #FFFBEB !important;
 }
 
 /* Thesis copy stays dark navy on the bright bg */
@@ -777,47 +762,15 @@ body.mode-tight .content-sticky,
   padding-bottom: 0 !important;
 }
 
-/* Team — descent begins in earnest, medium blue → royal blue */
-.team-section {
-  background: linear-gradient(180deg,
-    #4A88E5 0%,
-    #2A6CD8 50%,
-    #155EE8 100%) !important;
-}
-
-/* Founders portfolio — royal blue → navy.
-   Drops the duotone-blue filter so photos pop against blue. */
-.founders-scroll-spacer {
-  background: linear-gradient(180deg,
-    #155EE8 0%,
-    #0A3DAE 50%,
-    #0032A8 100%) !important;
-}
+/* Solid section colours — hard lines at every section boundary
+   instead of gradient fades. Each step gets darker as you scroll. */
+.team-section            { background: #4A88E5 !important; }
+.founders-scroll-spacer  { background: #0A3DAE !important; }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
-
-/* rd-zone (Category Leaders + Strategic Exits) — navy → trench */
-.rd-zone {
-  background: linear-gradient(180deg,
-    #0032A8 0%,    /* picks up from founders bottom */
-    #0B1275 50%,
-    #050838 100%) !important;
-}
-/* rd-deep-zone (Day Zero + Voices) — picks up the founders' blue and
-   descends smoothly to the abyss (no hard seam at the section edge) */
-.rd-zone.rd-deep-zone {
-  background: linear-gradient(180deg,
-    #0032A8 0%,
-    #0B1275 26%,
-    #050838 54%,
-    #030625 78%,
-    #02041F 100%) !important;
-}
-
-/* Footer — ABYSS bottom of the dive */
-.footer-scroll-spacer {
-  background: linear-gradient(180deg, #02041F 0%, #010210 100%) !important;
-}
+.rd-zone                 { background: #050838 !important; }
+.rd-zone.rd-deep-zone    { background: #050838 !important; }
+.footer-scroll-spacer    { background: #02041F !important; }
 .footer-sticky { background: transparent !important; }
 
 /* ─── Text contrast overrides — everything from thesis down is dark blue, so white type ─── */

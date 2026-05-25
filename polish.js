@@ -157,8 +157,10 @@
   // intentionally NOT here — the .webp files in images/logos/ for those
   // are founder photos, not company logos.)
   var LOCAL_LOGOS = {
-    'airbnb.com':  'images/logos/airbnb.svg',
-    'groupon.com': 'images/logos/groupon.svg'
+    'airbnb.com':   'images/logos/airbnb.svg',
+    'groupon.com':  'images/logos/groupon.svg',
+    'legalpad.io':  'images/logos/legalpad.png',
+    'ostro.health': 'images/logos/ostro.png'
   };
   function logoUrl(domain) {
     if (LOCAL_LOGOS[domain]) return LOCAL_LOGOS[domain];
