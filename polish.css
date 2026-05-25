@@ -444,85 +444,24 @@ a.rd-name:hover { color: var(--rd-yellow); }
 .rd-featured-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 48px;
+  gap: 18px;
+  margin-bottom: 40px;
 }
-.rd-featured {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(242, 216, 49, 0.22);
-  border-radius: 20px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.5s ease,
-              box-shadow 0.5s ease;
-  position: relative;
-  overflow: hidden;
+/* Featured cards reuse the .rd-voice shell so the layout matches the
+   marquee below; the --featured modifier just nudges them visually. */
+.rd-voice--featured {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(242, 216, 49, 0.28);
 }
-.rd-featured:hover {
-  transform: translateY(-8px);
-  border-color: rgba(242, 216, 49, 0.4);
-  box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.45),
-              0 0 80px -20px rgba(242, 216, 49, 0.22);
+.rd-voice--featured:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(242, 216, 49, 0.48);
 }
-.rd-featured-company {
-  font-family: 'DomaineDisp', serif;
-  font-weight: 400;
-  font-size: 38px;
-  letter-spacing: -0.025em;
-  line-height: 1;
+.rd-voice--featured .rd-voice-quote {
+  font-size: 19.5px;
+  line-height: 1.45;
   color: #fff;
-  width: fit-content;
-  transition: color 0.3s ease;
-  padding-bottom: 4px;
-  border-bottom: 1px solid transparent;
-}
-.rd-featured-company:hover {
-  color: var(--rd-yellow);
-  border-bottom-color: rgba(242, 216, 49, 0.45);
-}
-.rd-featured-quote {
-  font-family: 'DomaineDisp', serif;
-  font-size: 26px;
-  line-height: 1.4;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  color: #fff;
-  margin: auto 0 0;
-}
-.rd-featured-quote::before {
-  content: '"';
-  font-family: 'DomaineDisp', serif;
-  font-size: 60px;
-  line-height: 0;
-  color: var(--rd-yellow);
-  opacity: 0.6;
-  vertical-align: -14px;
-  margin-right: 4px;
-}
-.rd-featured-attr {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-top: 0;
-}
-.rd-featured-attr .rd-name-line {
-  font-family: 'DomaineDisp', serif;
-  font-size: 21px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: #fff;
-}
-.rd-featured-attr .rd-role-line {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.68);
 }
 
 /* ═══ Voices marquee (now connected directly under Day Zero — no second header) ═══ */
@@ -582,12 +521,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 4px;
 }
 .rd-voice-mark {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   background: #fff;
   flex-shrink: 0;
@@ -597,14 +535,25 @@ a.rd-name:hover { color: var(--rd-yellow); }
   overflow: hidden;
   transition: transform 0.3s ease;
 }
-.rd-voice-mark:hover { transform: scale(1.1); }
-.rd-voice-mark img { max-width: 80%; max-height: 80%; object-fit: contain; }
+.rd-voice-mark:hover { transform: scale(1.08); }
+.rd-voice-mark img { max-width: 82%; max-height: 82%; object-fit: contain; }
+/* Wordmark fallback: when the favicon fails, drop the white box and
+   show the company name as a serif wordmark, consistent with the
+   text-based featured names. */
 .rd-voice-mark.rd-fallback {
-  background: rgba(242, 216, 49, 0.18);
-  color: var(--rd-yellow);
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.94);
   font-family: 'DomaineDisp', serif;
-  font-size: 13px;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
+.rd-voice-mark.rd-fallback:hover { transform: none; color: var(--rd-yellow); }
 .rd-voice-author { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
 .rd-voice-author .rd-vname {
   font-size: 15.5px;
@@ -1055,10 +1004,9 @@ body.mode-tight .content-sticky p {
   .rd-voice-quote { font-size: 15px; }
   .rd-voices-row { padding: 8px var(--rd-side-pad); }
 
-  /* Featured row stacks already (1fr above), tighten the cards themselves */
-  .rd-featured { padding: 22px; gap: 16px; }
-  .rd-featured-company { font-size: 28px; }
-  .rd-featured-quote { font-size: 19px; }
+  /* Featured row stacks already (1fr above), tighten the featured cards */
+  .rd-voice--featured { padding: 22px; gap: 14px; }
+  .rd-voice--featured .rd-voice-quote { font-size: 16px; }
 
   /* Thesis section on mobile — large centered type that fills the
      viewport instead of leaving dead space, with predictable wrap */

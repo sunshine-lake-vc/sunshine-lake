@@ -4,12 +4,14 @@
    From Day Zero featured testimonials, Founder Voices marquee).
    ═══════════════════════════════════════════════════════════════ */
 (function () {
-  /* ─── Logo helper (Clearbit + wordmark fallback) ─── */
+  /* ─── Logo helper (LOCAL_LOGOS → Google favicons → text wordmark) ─── */
   function logoImg(name, domain, size) {
-    size = size || 80;
-    var initial = name[0];
-    return '<img src="https://logo.clearbit.com/' + domain + '?size=' + size +
-           '" alt="' + name + '" onerror="this.parentNode.classList.add(\'rd-fallback\');this.outerHTML=\'' + initial + '\';">';
+    size = size || 128;
+    var src = (typeof LOCAL_LOGOS !== 'undefined' && LOCAL_LOGOS[domain])
+           || 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=' + size;
+    var safeName = String(name).replace(/'/g, "\\'");
+    return '<img src="' + src + '" alt="' + name +
+           '" onerror="var p=this.parentNode;p.classList.add(\'rd-fallback\');p.textContent=\'' + safeName + '\';">';
   }
 
   function nameSize(n) {
@@ -215,23 +217,27 @@
   var featured = [
     { company: 'Deel',    domain: 'deel.com',
       quote: 'A fantastic partner and ally to Deel since its early days.',
-      author: 'Alex Bouaziz', role: 'Co-Founder & CEO, Deel' },
+      author: 'Alex Bouaziz', role: 'Co-Founder & CEO' },
     { company: 'Headway', domain: 'headway.co',
       quote: 'He hustled harder for me than anyone else did. I want him to be a part of every single round and company that I start.',
-      author: 'Jake Sussman', role: 'Co-Founder, Headway' },
+      author: 'Jake Sussman', role: 'Co-Founder' },
     { company: 'Kalshi',  domain: 'kalshi.com',
       quote: 'With us from day zero — a tremendous supporter through the twists and turns.',
-      author: 'Tarek Mansour', role: 'Co-Founder & CEO, Kalshi' }
+      author: 'Tarek Mansour', role: 'Co-Founder & CEO' }
   ];
 
   function buildFeatured(f) {
     return ''
-      + '<div class="rd-featured">'
-      + '  <a class="rd-featured-company" href="https://' + f.domain + '" target="_blank" rel="noopener">' + f.company + '</a>'
-      + '  <p class="rd-featured-quote">' + f.quote + '</p>'
-      + '  <div class="rd-featured-attr">'
-      + '    <span class="rd-name-line">' + f.author + '</span>'
-      + '    <span class="rd-role-line">' + f.role + '</span>'
+      + '<div class="rd-voice rd-voice--featured">'
+      + '  <p class="rd-voice-quote">"' + f.quote + '"</p>'
+      + '  <div class="rd-voice-attr">'
+      + '    <a class="rd-voice-mark" href="https://' + f.domain + '" target="_blank" rel="noopener" aria-label="' + f.company + '">'
+      + '      ' + logoImg(f.company, f.domain, 128)
+      + '    </a>'
+      + '    <div class="rd-voice-author">'
+      + '      <span class="rd-vname">' + f.author + '</span>'
+      + '      <span class="rd-vrole">' + f.role + ', <a class="rd-voice-company" href="https://' + f.domain + '" target="_blank" rel="noopener">' + f.company + '</a></span>'
+      + '    </div>'
       + '  </div>'
       + '</div>';
   }
