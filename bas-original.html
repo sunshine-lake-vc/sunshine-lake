@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Lake Capital — Redesign Preview</title>
+    <title>Sunshine Lake Capital</title>
     <meta name="description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
     <meta property="og:title" content="Sunshine Lake Capital">
     <meta property="og:description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
@@ -24,7 +24,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=19">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -52,7 +51,7 @@
 
         /* Hero scroll spacer — phase 1: frame appears, phase 2: page scrolls */
         .hero-scroll-spacer {
-            height: 200vh;
+            height: 300vh;
             position: relative;
         }
 
@@ -64,7 +63,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px 20px 8px;
+            padding: 20px;
             contain: layout;
         }
 
@@ -78,20 +77,6 @@
             background: #000;
             will-change: transform, border-radius;
             transform-origin: center center;
-        }
-
-        /* Always-on contrast scrim — darkens the bright water shader
-           behind the white hero title (bottom) and logo (top) so the
-           text stays legible. Sits above the canvas, below the copy. */
-        .hero-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 4;
-            pointer-events: none;
-            background:
-                linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 26%, rgba(0,0,0,0) 52%),
-                linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 18%);
         }
 
         /* Fluid Background */
@@ -114,7 +99,7 @@
         }
 
         .logo-img {
-            height: clamp(26px, 2.75vw, 57px);
+            height: clamp(24px, 2.5vw, 52px);
             width: auto;
             aspect-ratio: 1626 / 177;
             display: block;
@@ -143,29 +128,18 @@
             margin: 0;
         }
 
-        /* Condensed thesis line — sits under the hero title */
-        .hero-thesis {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.05rem, 1.5vw, 1.65rem);
-            line-height: 1.4;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.92);
-            max-width: 30em;
-            margin: clamp(14px, 1.6vw, 24px) 0 0 0;
-        }
-
         /* Content section — sticky with scroll-driven line reveal */
         .content-spacer {
-            height: 90vh;
+            height: 250vh;
             position: relative;
             z-index: 2;
-            background: #FFFBEB;
+            background: #ffffff;
         }
 
         .content-sticky {
             position: sticky;
             top: 0;
-            height: 36vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -243,7 +217,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            padding: clamp(36px, 4vw, 72px) clamp(40px, 6vw, 120px);
+            padding: clamp(80px, 8vw, 160px) clamp(40px, 6vw, 120px);
         }
         .team-inner {
             max-width: 1800px;
@@ -260,7 +234,6 @@
         }
         .team-sticky-text {
             flex: 0 0 40%;
-            min-width: 0;
             position: sticky;
             top: clamp(80px, 10vw, 160px);
         }
@@ -281,30 +254,6 @@
             font-weight: 400;
             max-width: 24em;
         }
-        /* Thesis paragraphs beneath "Meet Sunshine Lake." — fade up
-           gently as a single block when scrolled into view. */
-        .team-thesis {
-            margin: clamp(18px, 1.8vw, 28px) 0 clamp(20px, 2vw, 32px) 0;
-            max-width: 26em;
-            opacity: 0;
-            transform: translateY(14px);
-            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
-        }
-        .team-thesis p {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.1rem, 1.32vw, 1.55rem);
-            line-height: 1.45;
-            color: rgba(255, 255, 255, 0.92);
-            margin: 0 0 clamp(14px, 1.2vw, 22px) 0;
-            font-weight: 400;
-        }
-        .team-thesis p:last-child { margin-bottom: 0; }
-        .team-thesis.in-view {
-            opacity: 1;
-            transform: translateY(0);
-        }
         .team-subtitle {
             font-family: 'DomaineDisp', Georgia, serif;
             font-size: clamp(0.8rem, 0.9vw, 1rem);
@@ -312,174 +261,6 @@
             color: rgba(21, 94, 232, 0.5);
             margin: clamp(16px, 1.5vw, 24px) 0 0 0;
             font-weight: 500;
-        }
-
-        /* Portfolio chip carousel — sits under the team intro */
-        /* Portfolio grid — 3 x 3 minimalist checkerboard */
-        .sl-grid {
-            margin-top: clamp(26px, 3vw, 44px);
-            display: grid;
-            /* minmax(0, 1fr) keeps the three columns at exactly 1/3
-               each — without it, a long name like "Fundamental.tech"
-               can expand its column and push the third cell off-screen
-               on mobile. */
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .sl-cell {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            overflow: hidden;
-            transition: background 0.3s ease, opacity 0.45s ease;
-        }
-        .sl-cell-name { overflow-wrap: anywhere; }
-        .sl-cell-logo {
-            width: clamp(40px, 4.5vw, 60px);
-            height: clamp(40px, 4.5vw, 60px);
-            object-fit: contain;
-            margin-bottom: 4px;
-        }
-        .sl-cell-logo.sl-cell-logo--missing { display: none; }
-        /* "acquired by X" secondary line under the exit company name */
-        .sl-cell-sub {
-            display: block;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(0.58rem, 0.68vw, 0.74rem);
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            color: rgba(255, 255, 255, 0.55);
-            line-height: 1.2;
-            margin-top: 2px;
-        }
-        @media (max-width: 768px) {
-            .sl-cell { padding: 8px; gap: 4px; }
-            .sl-cell-logo { width: clamp(34px, 10vw, 48px); height: clamp(34px, 10vw, 48px); }
-            .sl-cell-name { font-size: clamp(0.78rem, 3vw, 1.05rem); }
-            .sl-cell-tag  { font-size: clamp(0.52rem, 2.2vw, 0.72rem); }
-            .sl-cell-sub  { font-size: clamp(0.5rem, 2vw, 0.66rem); }
-        }
-        .sl-cell:nth-child(odd)  { background: rgba(255, 255, 255, 0.07); }
-        .sl-cell:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
-        .sl-cell:hover { background: rgba(255, 255, 255, 0.14) !important; }
-        .sl-cell-name {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.05rem, 1.3vw, 1.4rem);
-            line-height: 1.1;
-            color: #fff;
-        }
-        .sl-cell-tag {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(0.6rem, 0.7vw, 0.76rem);
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* ── Strategic exits carousel — now sits in the blue team
-           column directly under the thesis text. Two horizontal
-           marquees scroll in opposite directions (rAF-driven, see
-           startExitsMarquees in polish.js). White pills on blue. ── */
-        .rd-exits-band {
-            background: transparent;
-            padding: clamp(6px, 0.8vw, 14px) 0 0;
-            position: relative;
-            z-index: 2;
-            margin-top: clamp(12px, 1.4vw, 22px);
-        }
-        .rd-exits-label {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.8vw, 11.5px);
-            font-weight: 600;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
-            margin: 0 0 clamp(12px, 1.2vw, 18px) 0;
-        }
-        @media (max-width: 720px) {
-            .rd-exits-label { font-size: 10.5px; }
-        }
-        .rd-exits-marquee {
-            width: 100%;
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(90deg, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
-                    mask-image: linear-gradient(90deg, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
-        }
-        .rd-exits-marquee + .rd-exits-marquee { margin-top: clamp(10px, 1vw, 14px); }
-        .rd-exits-row {
-            display: flex;
-            gap: clamp(10px, 1vw, 16px);
-            width: max-content;
-            padding: 3px 0;
-            will-change: transform;
-        }
-        .rd-exit-card {
-            display: inline-flex;
-            align-items: center;
-            gap: clamp(7px, 0.7vw, 10px);
-            padding: clamp(7px, 0.7vw, 10px) clamp(12px, 1.2vw, 18px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 999px;
-            text-decoration: none;
-            flex-shrink: 0;
-            white-space: nowrap;
-            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-        }
-        .rd-exit-card:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.32);
-            transform: translateY(-1px);
-        }
-        .rd-exit-logo {
-            width: clamp(20px, 1.9vw, 24px);
-            height: clamp(20px, 1.9vw, 24px);
-            border-radius: 6px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-        .rd-exit-logo img { width: 80%; height: 80%; object-fit: contain; }
-        .rd-exit-name {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(14px, 1vw, 16.5px);
-            color: #ffffff;
-            line-height: 1;
-        }
-        .rd-exit-sub {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.74vw, 11.5px);
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.72);
-            letter-spacing: 0.01em;
-            margin-left: 5px;
-        }
-        .rd-exit-tag {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(9px, 0.68vw, 10.5px);
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            color: rgba(255, 255, 255, 0.78);
-            margin-left: 5px;
-            text-transform: uppercase;
-        }
-        @media (max-width: 720px) {
-            .rd-exit-card { padding: 6px 12px; gap: 7px; }
-            .rd-exit-name { font-size: 13.5px; }
-            .rd-exit-sub  { font-size: 10px; margin-left: 4px; }
-            .rd-exit-tag  { font-size: 9.5px; margin-left: 4px; }
         }
 
         /* Footer photo water ripple overlay (WebGL) */
@@ -587,22 +368,6 @@
             margin: clamp(4px, 0.5vw, 8px) 0 0 0;
             font-weight: 400;
         }
-        /* Founder quote on the homepage team card — sits where the teaser
-           used to live. White italic serif so it reads against the blue
-           team-section background, with a yellow accent border. */
-        .team-card-quote {
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(0.92rem, 1.02vw, 1.18rem);
-            line-height: 1.46;
-            font-style: italic;
-            color: #ffffff;
-            margin: clamp(6px, 0.7vw, 10px) 0 0 0;
-            padding-left: clamp(10px, 0.9vw, 14px);
-            border-left: 2px solid rgba(242, 216, 49, 0.8);
-            font-weight: 400;
-        }
-        .team-card-quote::before { content: '\201C'; }
-        .team-card-quote::after  { content: '\201D'; }
 
         /* Bio button on team cards */
         .team-bio-btn {
@@ -852,7 +617,7 @@
             .team-sticky-text { flex: 0 0 35%; }
             .team-card-photo { flex: 0 0 clamp(100px, 15vw, 160px); width: clamp(100px, 15vw, 160px); }
             .team-desc { font-size: clamp(1.8rem, 3vw, 3rem); }
-            .founders-scroll-spacer { padding: 0 clamp(40px, 6vw, 120px); }
+            .founders-scroll-spacer { padding: 0 clamp(20px, 3vw, 40px); }
             .founders-left { flex: 0 0 40%; }
         }
 
@@ -860,22 +625,18 @@
             .founders-scroll-spacer {
                 display: flex;
                 flex-direction: column;
-                padding: 0 20px;  /* matches team-section's mobile padding */
+                padding: 0 clamp(16px, 4vw, 24px);
             }
-            /* Mobile: founders-left becomes its own flex column, so its
-               children stack reliably regardless of how the browser
-               handles display:contents. Order properties below still
-               position the title above the photo/Niek-and-Titus area. */
+            /* Dissolve left wrapper — children become direct flex items of spacer */
             .founders-left {
-                display: flex;
-                flex-direction: column;
+                display: contents;
             }
             /* Title — larger, more space above */
             .founders-left-title {
                 position: static;
                 order: 1;
                 font-size: clamp(2.2rem, 7vw, 3.2rem);
-                padding: clamp(28px, 6vw, 46px) 0 clamp(2px, 0.6vw, 6px);
+                padding: clamp(43px, 8.4vw, 67px) 0 clamp(10px, 2.4vw, 19px);
             }
             /* Subtitle — +20% space from title, +30% space to image */
             .founders-right-subtitle {
@@ -885,7 +646,7 @@
                 max-width: none;
                 order: 2;
                 font-size: clamp(1rem, 4vw, 1.45rem);
-                padding-bottom: clamp(10px, 2vw, 16px);
+                padding-bottom: clamp(21px, 4vw, 31px);
                 opacity: 1 !important;
             }
             /* Single sticky wrapper for photo + overlay on mobile */
@@ -896,16 +657,11 @@
                 z-index: 2;
             }
             .founders-photo-stack {
-                /* Safety net: if the JS sticky-wrap doesn't get created,
-                   make sure the photo stack still lands after the title
-                   and subtitle (matches the wrap's order). */
-                order: 3;
                 position: relative;
                 width: 100%;
                 aspect-ratio: 4 / 3;
                 border-radius: 8px;
             }
-            .founders-mobile-overlay { order: 3; }
             /* Toggle — static, below photo */
             .founders-toggle {
                 position: static;
@@ -986,50 +742,35 @@
             .founders-item-company { font-size: clamp(1.6rem, 5vw, 2.4rem); }
             .founders-item-name { font-size: clamp(1.4rem, 5vw, 2rem); }
             .site-logo { width: 24px; top: 26px; right: 13px; }
-            /* Founders stepper — minimal in-flow row sitting between the
-               photo and the founder name/desc. No background or border,
-               just thin bars + counter; lives in the sticky wrap so it
-               stays with the image as the user scrolls. */
+            /* Founders stepper — full width matching image */
             .founders-stepper {
-                width: 100%;
-                box-sizing: border-box;
+                position: fixed;
+                bottom: 24px;
+                left: clamp(16px, 4vw, 24px);
+                right: clamp(16px, 4vw, 24px);
                 display: flex;
-                align-items: center;
-                gap: 8px;
-                margin: 14px 0 4px;
-                padding: 0;
-                background: transparent;
+                gap: 4px;
+                z-index: 10;
                 opacity: 0;
-                transition: opacity 0.4s ease;
+                transition: opacity 0.3s ease;
                 pointer-events: none;
             }
             .founders-stepper.visible { opacity: 1; }
             .founders-stepper span {
                 flex: 1;
-                height: 1.5px;
-                background: rgba(255, 255, 255, 0.18);
+                height: 2px;
+                background: rgba(255,255,255,0.25);
                 border-radius: 1px;
-                transition: background 0.4s ease;
+                transition: background 0.3s ease;
             }
             .founders-stepper span.active {
-                background: rgba(255, 255, 255, 0.62);
-            }
-            .founders-stepper-counter {
-                flex: 0 0 auto;
-                margin-left: 10px;
-                color: rgba(255, 255, 255, 0.55);
-                font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                font-size: 10.5px;
-                font-weight: 500;
-                letter-spacing: 0.12em;
-                white-space: nowrap;
-                font-variant-numeric: tabular-nums;
+                background: rgba(255,255,255,0.85);
             }
         }
 
         /* Footer — white scales down to card, revealing WebGL lake */
         .footer-scroll-spacer {
-            height: 150vh;
+            height: 200vh;
             position: relative;
             z-index: 2;
         }
@@ -1266,13 +1007,8 @@
         body.mode-combined .hero-scroll-spacer { height: 400vh; }
 
         /* Mode C: gradient bleed from shader into white */
-        /* Hero spacer must be >= the 100vh sticky height — the spacer has
-           overflow:hidden, so a shorter spacer clips the bottom of the hero
-           card. 102vh gives the recede animation just enough scroll runway
-           (paired with a 2vh frameZone in JS) while pulling the carousel
-           below much closer to the hero. */
-        body.mode-tight .hero-scroll-spacer { height: 102vh; }
-        body.mode-tight .content-spacer { height: 40vh; background: transparent; }
+        body.mode-tight .hero-scroll-spacer { height: 200vh; }
+        body.mode-tight .content-spacer { height: 350vh; background: transparent; }
         body.mode-tight .content-sticky {
             background: linear-gradient(to bottom,
                 rgba(255,255,255,0) 0%,
@@ -1315,7 +1051,7 @@
             }
             .content-sticky.hl-active p { color: #155EE8; }
             .hl { color: #155EE8 !important; }
-            .logo-img { height: clamp(26px, 5.5vw, 40px); }
+            .logo-img { height: clamp(24px, 5vw, 36px); }
             .logo-container { left: 50%; transform: translateX(-50%); top: clamp(28px, 4vw, 64px); }
             .main-content { left: 0; right: 0; align-items: center; text-align: center; padding: 0 20px; max-width: 100%; }
             .title { text-align: center; }
@@ -1347,61 +1083,6 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
-        /* ── Thesis statement — left-aligned, emphasised on scroll ── */
-        body.mode-tight .content-spacer {
-            height: auto !important;
-            background: #FFFBEB !important;
-        }
-        body.mode-tight .content-sticky,
-        .content-spacer .content-sticky {
-            position: static !important;
-            height: auto !important;
-            min-height: 0 !important;
-            display: block !important;
-            background: transparent !important;
-            padding: clamp(14px, 2vh, 32px) clamp(24px, 6vw, 110px) clamp(70px, 11vh, 150px) !important;
-        }
-        /* Thesis: single block, fades up as it enters the viewport. No
-           per-line / per-word animation — the whole paragraph moves as
-           one unit, slowly. */
-        .sl-thesis-block {
-            margin: 0;
-            max-width: 22em;
-            text-align: left;
-            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-weight: 400;
-            font-size: clamp(1.85rem, 2.6vw, 2.75rem);
-            line-height: 1.35;
-            color: #0B1275;
-            opacity: 0;
-            transform: translateY(18px);
-            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
-        }
-        .sl-thesis-block.in-view {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Footer icon logo — 50% larger on mobile (overrides the
-           inline clamp(20px, 2vw, 32px) height on the <svg>). */
-        @media (max-width: 768px) {
-            .footer-scroll-spacer .footer-logo,
-            .footer-photo-content .footer-logo {
-                height: 30px !important;
-            }
-            /* Mobile: pin Day Zero / Voices padding to match the team
-               section's 20px (overrides the clamp on --rd-side-pad
-               which would otherwise give ~40px). */
-            .rd-container,
-            .rd-dayzero {
-                padding-left: 20px !important;
-                padding-right: 20px !important;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -1428,51 +1109,8 @@
     </div>
 
     <main>
-
-    <!-- Mobile menu — hamburger button + full-screen overlay panel
-         (sidebar nav is hidden under 900px width; this takes over there) -->
-    <button class="rd-mobile-menu-btn" id="rd-mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-    </button>
-    <aside class="rd-mobile-menu" id="rd-mobile-menu" aria-hidden="true">
-        <button class="rd-mobile-menu-close" id="rd-mobile-menu-close" aria-label="Close menu">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                <path d="M6 6l12 12M18 6l-12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-        </button>
-        <nav class="rd-mobile-menu-list" aria-label="Sections">
-            <a href="#rd-section-hero" class="rd-mobile-menu-link">Thesis</a>
-            <a href="#rd-section-team" class="rd-mobile-menu-link">Team</a>
-            <a href="#rd-section-portfolio" class="rd-mobile-menu-link">Portfolio</a>
-            <a href="#rd-section-voices" class="rd-mobile-menu-link">Voices</a>
-            <a href="#rd-section-contact" class="rd-mobile-menu-link">Contact</a>
-        </nav>
-        <a class="rd-mobile-menu-lp" href="lp.html">LP Login ↗</a>
-    </aside>
-
-    <!-- Sticky side nav — anchor links into each major section -->
-    <nav class="rd-sidenav" id="rd-sidenav" aria-label="Section navigation">
-        <a href="#rd-section-hero" class="rd-sidenav-item" data-section="hero">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Thesis</span>
-        </a>
-        <a href="#rd-section-team" class="rd-sidenav-item" data-section="team">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Team</span>
-        </a>
-        <a href="#rd-section-portfolio" class="rd-sidenav-item" data-section="portfolio">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Portfolio</span>
-        </a>
-        <a href="#rd-section-voices" class="rd-sidenav-item" data-section="voices">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Voices</span>
-        </a>
-        <a href="#rd-section-contact" class="rd-sidenav-item" data-section="contact">
-            <span class="rd-sidenav-dot"></span><span class="rd-sidenav-label">Contact</span>
-        </a>
-    </nav>
-
-    <!-- Hero with scroll-driven frame effect (painterly water continues behind/below, zooms in on scroll) -->
-    <div class="hero-scroll-spacer rd-water-extend" id="rd-section-hero">
-        <div class="rd-dive-surface" aria-hidden="true"></div>
-        <div class="rd-dive-particles" id="rd-dive-particles" aria-hidden="true"></div>
+    <!-- Hero with scroll-driven frame effect -->
+    <div class="hero-scroll-spacer">
         <div class="hero-sticky">
             <div class="hero-card">
                 <!-- 1. The Fluid WebGL Background -->
@@ -1508,11 +1146,6 @@
                 <!-- 3. Title -->
                 <div class="main-content">
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
-                    <!-- Pre-seed & Seed Fund badge -->
-                    <div class="hero-badge" aria-label="Pre-Seed and Seed Fund">
-                        <span class="hero-badge-dot"></span>
-                        <span class="hero-badge-label">Pre-Seed &amp; Seed Fund</span>
-                    </div>
                 </div>
 
                 <!-- 4. Dark vignette for text readability (Mode B only) -->
@@ -1530,26 +1163,41 @@
         </div>
     </div>
 
-    <!-- Team Section (thesis + exits carousel now live in the left column) -->
-    <section class="team-section" id="rd-section-team">
+    <!-- Content below hero — sticky with scroll-driven reveal -->
+    <div class="content-spacer">
+        <div class="content-sticky">
+            <p>
+                <span class="reveal-line"><mark class="hl" data-hl="0">Sunshine Lake</mark> invests in <mark class="hl" data-hl="1">founders</mark></span>
+                <span class="reveal-line">forged by <mark class="hl" data-hl="2">extreme origins</mark></span>
+                <span class="reveal-line">who see what others miss</span>
+                <span class="reveal-line">and <mark class="hl" data-hl="3">build</mark> what others <mark class="hl" data-hl="4">can't imagine</mark>.</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Founders scroll-through -->
+    <div class="founders-scroll-spacer">
+        <div class="founders-left">
+            <h2 class="founders-left-title">Portfolio</h2>
+            <div class="founders-photo-stack" id="foundersPhotoStack">
+                <!-- Photos injected by JS from FOUNDERS_DATA -->
+            </div>
+            <div class="founders-toggle" id="foundersToggle" style="display:none;"></div>
+            <p class="founders-right-subtitle" id="foundersSubtitle">We operate at the edge of economic, geopolitical, and tech change and defy sector cycles, allowing us to support multiple blockbuster companies a decade.</p>
+        </div>
+        <div class="founders-right" id="foundersRight">
+            <!-- Items injected by JS from FOUNDERS_DATA -->
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <section class="team-section">
         <div class="team-inner">
             <div class="team-layout">
-                <!-- Left: Sticky descriptive text + portfolio carousel -->
+                <!-- Left: Sticky descriptive text -->
                 <div class="team-sticky-text">
                     <p class="team-desc">Meet<br>Sunshine Lake.</p>
-                    <div class="team-thesis" id="rd-section-thesis">
-                        <p>We back international founders from extreme origins. They solve vital problems with revolutionary technologies. There has never been a better time to build.</p>
-                        <p>We operate at the edge of economic, geopolitical, and tech change and defy sector cycles, allowing us to support multiple blockbuster companies a decade.</p>
-                    </div>
-                    <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
-                        <p class="rd-exits-label">Exceptional Track Record</p>
-                        <div class="rd-exits-marquee">
-                            <div class="rd-exits-row" id="rd-exits-top"></div>
-                        </div>
-                        <div class="rd-exits-marquee">
-                            <div class="rd-exits-row" id="rd-exits-bottom"></div>
-                        </div>
-                    </section>
+                    <p class="team-intro">The Sunshine Lake team has been first check behind a roster of unicorns, category leaders, and strategic exits, including Deel ($17.3B), Kalshi ($11B), Checkr ($5B), Headway ($2.3B), Fundamental.tech ($1.4B), and Assured ($1B), as well as acquisitions like Brex ($5.15B, Capital One), Pry (sold to Brex), and Legalpad (sold to Deel).</p>
                 </div>
 
                 <!-- Right: Team members -->
@@ -1564,8 +1212,8 @@
                                 <span class="team-card-name">Don Stalter</span>
                             </div>
                             <p class="team-card-role">General Partner</p>
-                            <blockquote class="team-card-quote">The best founders don&rsquo;t come from the obvious places. They never have. Finding them before the market does, and staying in from the first check to the moment everyone else figures it out, is the whole job. It&rsquo;s also the best part of it.</blockquote>
-                            <a class="team-bio-btn" href="polish-don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <p class="team-card-desc">Over two decades of experience across venture capital, operations, and global strategy.</p>
+                            <a class="team-bio-btn" href="don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -1578,7 +1226,7 @@
                                 <span class="team-card-name">Suhail Younus</span>
                             </div>
                             <p class="team-card-role">Partner</p>
-                            <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
+                            <p class="team-card-desc">A background spanning venture capital, private equity, and emerging technology research.</p>
                             <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
@@ -1592,21 +1240,21 @@
                                 <span class="team-card-name">Ivan La Frinere-Sandoval</span>
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
-                            <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline allows us to see viable opportunities where others might only see complexity.</blockquote>
+                            <p class="team-card-desc">A builder and investor with deep roots in engineering, finance, and entrepreneurship.</p>
                             <a class="team-bio-btn" href="ivan.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
                     <div class="team-card">
                         <div class="team-card-photo">
-                            <img src="images/team/wieger.png" alt="Wieger Lamers" loading="lazy">
+                            <div class="team-card-photo-placeholder"></div>
                         </div>
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Wieger Lamers</span>
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
-                            <blockquote class="team-card-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
+                            <p class="team-card-desc">Raised at the intersection of European tech and entrepreneurship, with experience across venture and early-stage operations.</p>
                             <a class="team-bio-btn" href="wieger.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
@@ -1617,41 +1265,10 @@
         </div>
     </section>
 
-    <!-- Founders scroll-through -->
-    <div class="founders-scroll-spacer" id="rd-section-portfolio">
-        <div class="founders-left">
-            <h2 class="founders-left-title">Portfolio</h2>
-            <div class="founders-photo-stack" id="foundersPhotoStack">
-                <!-- Photos injected by JS from FOUNDERS_DATA -->
-            </div>
-            <div class="founders-toggle" id="foundersToggle" style="display:none;"></div>
-        </div>
-        <div class="founders-right" id="foundersRight">
-            <!-- Items injected by JS from FOUNDERS_DATA -->
-        </div>
-    </div>
-
-    <!-- (Category Leaders + Strategic Exits — folded into the team-section carousel) -->
-
-
-    <!-- ════════ REDESIGN INJECTION 2: Featured Testimonials + Founder Voices ════════ -->
-    <section class="rd-zone rd-deep-zone" id="rd-section-voices">
-        <div class="rd-container rd-dayzero">
-            <div class="rd-featured-row" id="rd-featured-row"></div>
-        </div>
-
-        <div class="rd-voices">
-            <div class="rd-voices-marquee">
-                <div class="rd-voices-row rd-top" id="rd-voices-top"></div>
-            </div>
-        </div>
-    </section>
-    <!-- ════════ /REDESIGN INJECTION 2 ════════ -->
-
     </main>
 
     <!-- Footer with photo grid -->
-    <footer class="footer-scroll-spacer" id="rd-section-contact">
+    <footer class="footer-scroll-spacer">
         <div class="footer-sticky">
             <div class="footer-photo-grid" id="footerPhotoGrid"></div>
             <div class="footer-photo-card" id="footerPhotoCard"></div>
@@ -1660,9 +1277,7 @@
                     <h2>Dive Beneath<br>the Surface.</h2>
                     <div class="footer-contact">
                         <a href="mailto:hello@sunshinelake.vc">hello@sunshinelake.vc</a>
-                        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
-                        <a href="lp.html">LP Login ↗</a>
+                        <a href="https://linkedin.com/company/sunshinelake" target="_blank" rel="noopener">LinkedIn</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -1906,7 +1521,6 @@
         let cachedFooterCardW = footerPhotoCardEl.offsetWidth;
         let cachedFooterCardH = footerPhotoCardEl.offsetHeight;
         let cachedContentHeight = 0;
-        let cachedStickyHeight = 0;
         // Cached offsetTop for scroll-position math (avoids getBoundingClientRect)
         let cachedFooterTop = 0;
         let cachedContentTop = 0;
@@ -1924,13 +1538,10 @@
         function cacheLayoutValues() {
             cachedFooterCardW = footerPhotoCardEl.offsetWidth;
             cachedFooterCardH = footerPhotoCardEl.offsetHeight;
-            // contentSpacer/contentSticky are dormant now that the thesis
-            // lives inside the team section — guard for missing nodes.
-            cachedContentHeight = contentSpacer ? contentSpacer.offsetHeight : 0;
-            cachedStickyHeight = contentSticky ? contentSticky.offsetHeight : 0;
+            cachedContentHeight = contentSpacer.offsetHeight;
             // Cache element offsets from document top (replaces getBoundingClientRect in scroll handler)
             cachedFooterTop = footerSpacer.offsetTop;
-            cachedContentTop = contentSpacer ? contentSpacer.offsetTop : 0;
+            cachedContentTop = contentSpacer.offsetTop;
             cachedFooterHeight = footerSpacer.offsetHeight;
             cachedFoundersTop = foundersGridSection.offsetTop;
             cachedFoundersHeight = foundersGridSection.offsetHeight;
@@ -1993,12 +1604,10 @@
             const vh = window.innerHeight;
             const vw = window.innerWidth;
 
-            // Frame: scale from 1.0 → slightly smaller card.
-            // Animation runs over 2vh so it completes within the
-            // tightened (102vh) hero spacer's pinned phase.
-            const frameZone = vh * 0.02;
+            // Frame: scale from 1.0 → slightly smaller card
+            const frameZone = vh;
             const progress = Math.min(1, scrollY / frameZone);
-            const maxInset = vw <= 768 ? 16 : 40;
+            const maxInset = vw <= 768 ? 16 : 68;
             const scaleX = 1 - (maxInset * 2) / vw;
             const scaleY = 1 - (maxInset * 2) / vh;
             const minScale = Math.min(scaleX, scaleY);
@@ -2007,16 +1616,13 @@
             const endRadius = vw <= 768 ? 15 : 22;
             targetRadius = baseRadius + progress * ((endRadius / minScale) - baseRadius);
 
-            // Title: slides from center toward the bottom of the card, but
-            // stops well clear of the bottom edge so the descenders never
-            // get clipped (was: 30-60px; now: ~100-160px) — works for the
-            // larger desktop title size.
+            // Title: slides from center to bottom of card
             const titleStartY = vh * 0.42;
-            const titleEndY = Math.max(100, Math.min(vh * 0.12, 160));
+            const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
             targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
-            // Shader intensity ramps with the card animation
-            targetShaderIntensity = Math.min(1, scrollY / frameZone);
+            // Shader intensity over 0 → 150vh
+            targetShaderIntensity = Math.min(1, scrollY / (vh * 1.5));
 
             // Footer — scroll math from cached offsetTop (no getBoundingClientRect)
             const footerTop = cachedFooterTop - scrollY;
@@ -2036,20 +1642,30 @@
             // Line-by-line reveal — scroll math from cached offsetTop
             const contentTop = cachedContentTop - scrollY;
             const revealScroll = -contentTop;
-            // Desktop: the thesis band is shorter than the viewport, so the
-            // reveal runway is (section height − band height). Mobile keeps
-            // its original viewport-based math.
-            const revealTotal = window.innerWidth <= 768
-                ? (cachedContentHeight - vh)
-                : Math.max(1, cachedContentHeight - cachedStickyHeight);
+            const revealTotal = cachedContentHeight - vh;
             const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
             const isMobileReveal = window.innerWidth <= 768;
             const revealEnd = isMobileReveal ? 0.7 : 0.35, hlStart = 0.4, hlEnd = 0.9;
-            // Thesis line reveal is handled by the time-based autoplay
-            // (thesisAutoplay IIFE), not scroll position.
-            // Mobile thesis fade-out used to live here; the thesis now lives
-            // inside the team section and handles its own fade-in via
-            // IntersectionObserver, so this block is intentionally a no-op.
+            for (let i = 0; i < totalLines; i++) {
+                const lineStart = 0.1 + (revealEnd - 0.1) * (i / totalLines);
+                const shouldShow = revealProgress >= lineStart;
+                if (shouldShow !== lineVisible[i]) {
+                    lineVisible[i] = shouldShow;
+                    revealLines[i].classList.toggle('visible', shouldShow);
+                }
+            }
+            // Mobile: fade + slide up thesis text, portfolio slides up from below
+            if (isMobileReveal) {
+                const fadeStart = 0.5, fadeEnd = 0.85;
+                if (revealProgress > fadeStart) {
+                    const t = Math.min(1, (revealProgress - fadeStart) / (fadeEnd - fadeStart));
+                    contentSticky.style.opacity = 1 - t;
+                    contentSticky.style.transform = 'translateY(' + (-t * 12) + 'vh)';
+                } else {
+                    contentSticky.style.opacity = '';
+                    contentSticky.style.transform = '';
+                }
+            }
             // Sequential word highlights — direction-aware
             // Scrolling down: dim text + sequential highlights (kept even past last hl)
             // Scrolling up:   full blue text (no highlights, no dim)
@@ -2216,12 +1832,7 @@
         gl.uniform1f(locs.u_sun_int, parseFloat(getVal('sunInt', '2.5')));
         gl.uniform1f(locs.u_sun_size, parseFloat(getVal('sunSize', '0.08')));
         gl.uniform1f(locs.u_sun_glitter, parseFloat(getVal('sunGlitter', '0.4')));
-        // Glitter density forced to 0.55 — ~40% fewer white flecks than
-        // the exported config's 0.96 (config kept intact for other values).
-        // NOTE: the shader spawns a fleck when rand > spawn_chance, so a
-        // HIGHER value here means FEWER flecks. 0.99 ≈ ~65% fewer than
-        // the exported config's 0.96.
-        gl.uniform1f(locs.u_sun_glitter_density, 0.99);
+        gl.uniform1f(locs.u_sun_glitter_density, parseFloat(getVal('sunGlitterDensity', '0.96')));
         gl.uniform1f(locs.u_sun_glitter_size, parseFloat(getVal('sunGlitterSize', '1.0')));
         gl.uniform1f(locs.u_sun_streak, parseFloat(getVal('sunStreak', '0.0')));
         gl.uniform1f(locs.u_sun_flare, parseFloat(getVal('sunFlare', '0.0')));
@@ -2322,21 +1933,6 @@
         document.querySelectorAll('.team-card').forEach(el => {
             aboutObserver.observe(el);
         });
-
-        // ── Thesis statement — fade the whole block in once it enters view ──
-        (function thesisFadeIn() {
-            const block = document.querySelector('.team-thesis');
-            if (!block) return;
-            const obs = new IntersectionObserver((entries) => {
-                entries.forEach((e) => {
-                    if (e.isIntersecting) {
-                        block.classList.add('in-view');
-                        obs.disconnect();
-                    }
-                });
-            }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
-            obs.observe(block);
-        })();
 
         // =======================================
         // FOOTER PHOTO WATER RIPPLE (shared context, visibility-culled)
@@ -2583,10 +2179,8 @@
             spacer.insertBefore(mobileOverlay, right);
             var mobTitles = mobileOverlay.querySelectorAll('.mob-title');
 
-            // Mobile: wrap photo + overlay in a single sticky container.
-            // Use matchMedia so this check stays in sync with the CSS
-            // breakpoint (innerWidth can drift on some mobile browsers).
-            if (window.matchMedia('(max-width: 768px)').matches) {
+            // Mobile: wrap photo + overlay in a single sticky container
+            if (window.innerWidth <= 768) {
                 var stickyWrap = document.createElement('div');
                 stickyWrap.className = 'founders-sticky-wrap';
                 photoStack.parentNode.insertBefore(stickyWrap, photoStack);
@@ -2602,28 +2196,11 @@
                 if (i === 0) bar.classList.add('active');
                 stepper.appendChild(bar);
             });
-            var pad2 = function (n) { return n < 10 ? '0' + n : '' + n; };
-            var stepperCounter = document.createElement('div');
-            stepperCounter.className = 'founders-stepper-counter';
-            stepperCounter.textContent = '01 / ' + pad2(data.length);
-            stepper.appendChild(stepperCounter);
-            // On mobile, place the stepper INSIDE the sticky wrap, just
-            // BELOW the photo and above the founder name/desc. Pins
-            // alongside the photo as the user scrolls.
-            if (window.matchMedia('(max-width: 768px)').matches) {
-                var sw = document.querySelector('.founders-sticky-wrap');
-                if (sw) sw.insertBefore(stepper, mobileOverlay);
-                else photoStack.parentNode.insertBefore(stepper, photoStack);
-            } else {
-                document.body.appendChild(stepper);
-            }
+            document.body.appendChild(stepper);
             var stepperBars = stepper.querySelectorAll('span');
-            // Ready immediately so the stepper appears as soon as the
-            // founders section scrolls into view (don't depend on the
-            // window 'load' event firing — flaky on some mobile browsers).
-            var stepperReady = true;
+            var stepperReady = false;
             var stepperHidden = false;
-            window.addEventListener('load', function() { cacheLayoutValues(); });
+            window.addEventListener('load', function() { stepperReady = true; cacheLayoutValues(); });
 
             // View toggle
 
@@ -2735,7 +2312,6 @@
                     if (stepperBars.length) {
                         stepperBars[currentIndex].classList.remove('active');
                         stepperBars[closest].classList.add('active');
-                        stepperCounter.textContent = pad2(closest + 1) + ' / ' + pad2(stepperBars.length);
                     }
                     currentIndex = closest;
                 }
@@ -2756,9 +2332,8 @@
                     var naturalBottom = overlaySticky + contentH;
                     var exitGap = 32;
 
-                    // Keep stepper visible the whole time the section is in
-                    // view; rely on the inView check above for hiding.
-                    stepperHidden = false;
+                    // No push-up — let sticky elements scroll out naturally
+                    stepperHidden = teamTop < naturalBottom + exitGap;
                 }
             }
 
@@ -2804,10 +2379,7 @@
                 // Don bio portraits
                 { src: 'images/logos/deel.webp' },
                 { src: 'images/logos/headway.webp' },
-                { src: 'images/logos/kalshi.webp' },
-                // Suhail with notable folks
-                { src: 'images/snapshots/suhail-luana.jpg' },
-                { src: 'images/snapshots/suhail-nicolas.jpg' }
+                { src: 'images/logos/kalshi.webp' }
                 // /CONTENT:snapshots
             ];
 
@@ -3051,7 +2623,7 @@
                     targetRadius = baseR + progress * ((endR / minSc) - baseR);
 
                     const titleStartY = vh * 0.42;
-                    const titleEndY = Math.max(100, Math.min(vh * 0.12, 160));
+                    const titleEndY = Math.max(30, Math.min(vh * 0.04, 60));
                     targetTitleY = titleStartY - progress * (titleStartY - titleEndY);
 
                     // Shader intensity — ramp up, then dim 40% on exit (3.0vh→3.8vh)
@@ -3128,10 +2700,24 @@
                     window._footerProgress = footerProg;
 
                 } else if (currentMode === 'tight') {
-                    // --- MODE C: Tight ---
-                    // Frame/footer/logo math only. Thesis line reveal is
-                    // handled by the time-based autoplay (thesisAutoplay).
+                    // --- MODE C: Tight (gradient bleed + earlier reveal) ---
+                    // Run original for frame/footer/logo math
                     origUpdateTargets();
+
+                    // Override line reveal with tighter thresholds
+                    const contentTop = cachedContentTop - scrollY;
+                    const revealScroll = -contentTop;
+                    const revealTotal = cachedContentHeight - vh;
+                    const revealProgress = Math.max(0, Math.min(1, revealScroll / revealTotal));
+                    const startAt = 0.05, endAt = 0.5;
+                    for (let i = 0; i < totalLines; i++) {
+                        const lineStart = startAt + (endAt - startAt) * (i / totalLines);
+                        if (revealProgress >= lineStart) {
+                            revealLines[i].classList.add('visible');
+                        } else {
+                            revealLines[i].classList.remove('visible');
+                        }
+                    }
                 } else {
                     // --- MODE A: Original ---
                     origUpdateTargets();
@@ -3149,9 +2735,6 @@
         })();
 
     </script>
-
-    <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=15" defer></script>
 
 </body>
 </html>

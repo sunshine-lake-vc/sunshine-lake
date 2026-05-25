@@ -161,6 +161,8 @@
   // return the real brand-colored marks instead. deel/kalshi/headway
   // .webp files in images/logos/ are founder photos, not logos.)
   var LOCAL_LOGOS = {
+    'airbnb.com':   'images/logos/airbnb.png',
+    'groupon.com':  'images/logos/Groupon-Symbol.png',
     'legalpad.io':  'images/logos/legalpad.png',
     'ostro.health': 'images/logos/ostro.png'
   };
