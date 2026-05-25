@@ -155,12 +155,12 @@
     { type: 'exit', name: 'TaxProper',   acquirer: 'Opendoor',      tag: '',       url: 'taxproper.com',  acquirerUrl: 'opendoor.com' }
   ];
   // Prefer local logo files where we have actual brand marks; fall
-  // back to Google's favicon service for the rest. (deel/kalshi/headway
-  // intentionally NOT here — the .webp files in images/logos/ for those
-  // are founder photos, not company logos.)
+  // back to Google's favicon service for the rest. (airbnb.svg and
+  // groupon.svg were authored white-on-blue for the old 3x3 grid and
+  // disappear on the cream exits-band, so we let the favicon service
+  // return the real brand-colored marks instead. deel/kalshi/headway
+  // .webp files in images/logos/ are founder photos, not logos.)
   var LOCAL_LOGOS = {
-    'airbnb.com':   'images/logos/airbnb.svg',
-    'groupon.com':  'images/logos/groupon.svg',
     'legalpad.io':  'images/logos/legalpad.png',
     'ostro.health': 'images/logos/ostro.png'
   };
