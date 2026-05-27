@@ -700,8 +700,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   50%      { opacity: 0.55; transform: scale(1.3); }
 }
 
-/* Make sure the hero sticky sits above the painterly water */
-.hero-scroll-spacer .hero-sticky { position: sticky; z-index: 5; }
+/* Hero sits above the painterly water. Position:relative (not sticky)
+   so the hero scrolls naturally with the page — the recede animation
+   is scrollY-driven, so the card still shrinks on scroll without the
+   long pin-period cream gap that sticky would create. */
+.hero-scroll-spacer .hero-sticky { position: relative; z-index: 5; }
 
 /* (Option 1 hero-card-grow reverted — existing site shrink-on-scroll
    behavior is restored.) */
