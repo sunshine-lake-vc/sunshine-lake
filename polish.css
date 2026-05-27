@@ -166,8 +166,8 @@
   width: fit-content !important;
   align-self: flex-start !important;
   align-items: center;
-  gap: clamp(7px, 0.7vw, 10px);
-  padding: clamp(5px, 0.5vw, 7px) clamp(10px, 0.9vw, 14px);
+  gap: clamp(8px, 0.84vw, 12px);
+  padding: clamp(6px, 0.6vw, 8.4px) clamp(12px, 1.08vw, 17px);
   margin-top: clamp(16px, 1.4vw, 20px) !important;
   background: rgba(255, 255, 255, 0.06) !important;
   border: 1px solid rgba(255, 255, 255, 0.32);
@@ -184,13 +184,13 @@
   box-shadow: none !important;
 }
 .logo-container .hero-badge.logo-badge .hero-badge-dot {
-  width: clamp(5px, 0.45vw, 7px);
-  height: clamp(5px, 0.45vw, 7px);
+  width: clamp(6px, 0.54vw, 8.4px);
+  height: clamp(6px, 0.54vw, 8.4px);
   background: rgba(255, 255, 255, 0.92);
   animation: none;
 }
 .logo-container .hero-badge.logo-badge .hero-badge-label {
-  font-size: clamp(9px, 0.7vw, 11px);
+  font-size: clamp(11px, 0.84vw, 13.2px);
   font-weight: 600;
   letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.92);
@@ -198,12 +198,12 @@
 }
 @media (max-width: 720px) {
   .logo-container .hero-badge.logo-badge {
-    padding: 5px 11px;
-    gap: 7px;
+    padding: 6px 14px;
+    gap: 8.5px;
     margin-top: 16px !important;
   }
   .logo-container .hero-badge.logo-badge .hero-badge-label {
-    font-size: 9.5px;
+    font-size: 11.5px;
     letter-spacing: 0.14em;
   }
 }
