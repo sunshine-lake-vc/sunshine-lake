@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=28">
+    <link rel="stylesheet" href="polish.css?v=29">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1063,11 +1063,15 @@
         .footer-photo-cell {
             overflow: hidden;
             position: relative;
-            opacity: 0;
-            transform: scale(0.85);
+            opacity: 1;
+            transform: scale(1);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* .revealed class is still toggled by the IntersectionObserver
+           but no longer required for the cells to appear — if the
+           observer fails to fire (cache, race condition, etc.) the
+           photos still render. */
         .footer-photo-cell.revealed {
             opacity: 1;
             transform: scale(1);
