@@ -972,7 +972,11 @@ body.mode-tight .content-sticky p {
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
-  justify-content: center !important;
+  /* flex-start (not center) so the contact text + photo grid stack
+     from the top down. With justify-content: center the combined
+     content was centering in min-height and getting clipped by the
+     inline overflow rule, hiding the photo grid on desktop. */
+  justify-content: flex-start !important;
   gap: clamp(32px, 4vw, 56px);
   padding: clamp(56px, 7vw, 112px) clamp(24px, 4vw, 64px) clamp(40px, 5vw, 72px) !important;
 }
