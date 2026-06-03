@@ -634,40 +634,45 @@
        auto-scrolling marquee so the testimonials don't compete with
        the Top 1% Track Record carousel above. ═══ */
   function setupVoicesCarousel() {
-    var track   = document.getElementById('rd-voices-top');
+    var row     = document.getElementById('rd-voices-top');
+    // The scrollable element is the .rd-voices-marquee parent — NOT the
+    // inner .rd-voices-row. The row only provides the flex layout.
+    var scroller = row ? row.parentElement : null;
     var prev    = document.getElementById('voicesPrev');
     var next    = document.getElementById('voicesNext');
     var counter = document.getElementById('voicesCounter');
-    if (!track || !prev || !next) return;
+    if (!row || !scroller || !prev || !next) return;
 
     function step() {
-      var card = track.querySelector('.rd-voice');
-      if (!card) return track.clientWidth || window.innerWidth;
-      return card.offsetWidth;
+      var card = row.querySelector('.rd-voice');
+      if (!card) return scroller.clientWidth || 320;
+      var styles = getComputedStyle(row);
+      var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+      return card.offsetWidth + gap;
     }
     function activeIndex() {
       var w = step();
       if (!w) return 0;
-      return Math.round(track.scrollLeft / w);
+      return Math.round(scroller.scrollLeft / w);
     }
     function total() {
-      return track.querySelectorAll('.rd-voice').length;
+      return row.querySelectorAll('.rd-voice').length;
     }
     function updateUI() {
       var n = total();
       var i = activeIndex();
-      var max = track.scrollWidth - track.clientWidth - 2;
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= max;
+      var max = scroller.scrollWidth - scroller.clientWidth - 2;
+      prev.disabled = scroller.scrollLeft <= 2;
+      next.disabled = scroller.scrollLeft >= max;
       if (counter) counter.textContent = (i + 1) + ' / ' + n;
     }
     prev.addEventListener('click', function () {
-      track.scrollBy({ left: -step(), behavior: 'smooth' });
+      scroller.scrollBy({ left: -step(), behavior: 'smooth' });
     });
     next.addEventListener('click', function () {
-      track.scrollBy({ left: step(), behavior: 'smooth' });
+      scroller.scrollBy({ left: step(), behavior: 'smooth' });
     });
-    track.addEventListener('scroll', updateUI, { passive: true });
+    scroller.addEventListener('scroll', updateUI, { passive: true });
     window.addEventListener('resize', updateUI);
     updateUI();
   }
