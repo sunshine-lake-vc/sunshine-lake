@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=42">
+    <link rel="stylesheet" href="polish.css?v=43">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -702,12 +702,18 @@
         .team-card-quote::before { content: '\201C'; }
         .team-card-quote::after  { content: '\201D'; }
 
-        /* Bio button on team cards */
+        /* Bio button on team cards — margin-top:auto pushes it to the
+           bottom of the .team-card-info flex column. Since all cards in
+           the carousel stretch to the same height (flex row default),
+           every "Full Background" link ends up at the same vertical
+           position regardless of quote length.
+           align-self:flex-start keeps the link itself left-aligned. */
         .team-bio-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-top: clamp(4px, 0.6vw, 10px);
+            margin-top: auto;
+            align-self: flex-start;
             font-size: clamp(0.75rem, 0.85vw, 0.95rem);
             color: #155EE8;
             letter-spacing: 0.05em;
@@ -716,7 +722,7 @@
             text-decoration: none;
             opacity: 0.5;
             transition: opacity 0.2s ease;
-            padding: 14px 0;
+            padding: clamp(10px, 1vw, 16px) 0 14px;
         }
         .team-bio-btn:hover {
             opacity: 1;
