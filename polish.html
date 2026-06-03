@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=40">
+    <link rel="stylesheet" href="polish.css?v=41">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -253,18 +253,16 @@
             margin: 0 auto;
         }
 
-        /* Team layout: sticky text left, members right */
+        /* Team layout — thesis + track record both run full-width
+           across the top of the section, partner carousel sits below. */
         .team-layout {
-            display: flex;
-            flex-direction: row;
-            gap: clamp(40px, 5vw, 80px);
-            align-items: flex-start;
+            display: block;
+            margin-top: clamp(32px, 4vw, 56px);
         }
         .team-sticky-text {
-            flex: 0 0 40%;
+            /* Legacy class — no longer used by layout, kept for any
+               leftover references. */
             min-width: 0;
-            position: sticky;
-            top: clamp(80px, 10vw, 160px);
         }
         .team-desc {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
@@ -283,11 +281,12 @@
             font-weight: 400;
             max-width: 24em;
         }
-        /* Thesis paragraphs beneath "Meet Sunshine Lake." — fade up
-           gently as a single block when scrolled into view. */
+        /* Thesis — full-width band across the top of the team section.
+           Cap line length at ~56ch so paragraphs stay readable across
+           wide viewports while the band itself spans full width. */
         .team-thesis {
-            margin: clamp(18px, 1.8vw, 28px) 0 clamp(20px, 2vw, 32px) 0;
-            max-width: 26em;
+            margin: 0 0 clamp(36px, 4vw, 64px) 0;
+            max-width: 56ch;
             opacity: 0;
             transform: translateY(14px);
             transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
@@ -403,16 +402,18 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* ── Strategic exits carousel — now sits in the blue team
-           column directly under the thesis text. Two horizontal
-           marquees scroll in opposite directions (rAF-driven, see
-           startExitsMarquees in polish.js). White pills on blue. ── */
+        /* ── Top 1% Track Record carousel — now runs full-width across
+           the team section, between the thesis and the partner carousel.
+           Three rd-voices-style rows scroll in alternating directions
+           (rAF-driven, see startExitsMarquees in polish.js). White pills
+           on the blue team-section background. ── */
         .rd-exits-band {
+            width: 100%;
             background: transparent;
-            padding: clamp(6px, 0.8vw, 14px) 0 0;
+            padding: clamp(8px, 1vw, 16px) 0 0;
             position: relative;
             z-index: 2;
-            margin-top: clamp(12px, 1.4vw, 22px);
+            margin-bottom: clamp(36px, 4vw, 64px);
         }
         .rd-exits-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -524,7 +525,7 @@
            clean swipe on touch and trackpad; the JS-wired arrows give
            desktop users an obvious "more partners" affordance. */
         .team-cards-wrap {
-            flex: 1 1 60%;
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: clamp(14px, 1.4vw, 22px);
@@ -533,7 +534,7 @@
         .team-cards-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: clamp(16px, 2vw, 32px);
         }
         .team-cards-label {
@@ -1390,24 +1391,6 @@
            styles below. ── */
         @media (max-width: 1024px) {
             .team-section { padding-left: clamp(20px, 5vw, 48px); padding-right: clamp(20px, 5vw, 48px); }
-            .team-layout {
-                flex-direction: column;
-                gap: clamp(28px, 4vw, 56px);
-            }
-            .team-sticky-text {
-                position: static;
-                flex: 1 1 auto;
-                width: 100%;
-                max-width: 100%;
-                top: auto;
-                margin-bottom: clamp(24px, 4vw, 40px);
-            }
-            .team-cards-wrap { flex: 1 1 auto; width: 100%; }
-            .team-cards { flex: 1 1 auto; width: 100%; }
-            /* Carousel pills inside the now-full-width column — keep the
-               max-content row inside the marquee mask. */
-            .rd-exits-band { width: 100%; }
-            .rd-exits-marquee { max-width: 100%; }
         }
 
         @media (max-width: 768px) {
@@ -1446,8 +1429,6 @@
             .about-text { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
             /* Team section */
             .team-section { padding-left: 20px; padding-right: 20px; }
-            .team-layout { flex-direction: column; }
-            .team-sticky-text { position: static; flex: unset; margin-bottom: clamp(24px, 4vw, 40px); }
             .team-desc { font-size: clamp(2.2rem, 7vw, 3.2rem); }
             /* team-cards stays horizontal scroll on mobile too — flex: row
                + scroll-snap inherited from base rule. Just tighten card
@@ -1655,32 +1636,31 @@
     <!-- Team Section (thesis + exits carousel now live in the left column) -->
     <section class="team-section" id="rd-section-team">
         <div class="team-inner">
-            <div class="team-layout">
-                <!-- Left: Sticky descriptive text + portfolio carousel -->
-                <div class="team-sticky-text">
-                    <div class="team-thesis" id="rd-section-thesis">
-                        <p class="thesis-lede">Sunshine Lake invests in international founders from extreme origins at their breakout moments.</p>
-                        <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade.</p>
-                        <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
-                    </div>
-                    <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
-                        <p class="rd-exits-label">Top 1% Track Record</p>
-                        <div class="rd-exits-marquee">
-                            <div class="rd-exits-row" id="rd-exits-ipo"></div>
-                        </div>
-                        <div class="rd-exits-marquee">
-                            <div class="rd-exits-row" id="rd-exits-seed"></div>
-                        </div>
-                        <div class="rd-exits-marquee">
-                            <div class="rd-exits-row" id="rd-exits-ma"></div>
-                        </div>
-                    </section>
-                </div>
+            <!-- Thesis, full-width band across the top -->
+            <div class="team-thesis" id="rd-section-thesis">
+                <p class="thesis-lede">Sunshine Lake invests in international founders from extreme origins at their breakout moments.</p>
+                <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade.</p>
+                <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
+            </div>
 
-                <!-- Right: Team members (horizontal carousel + arrows) -->
+            <!-- Top 1% Track Record — full-width pill marquee, 3 rows -->
+            <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
+                <p class="rd-exits-label">Top 1% Track Record</p>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ipo"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-seed"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ma"></div>
+                </div>
+            </section>
+
+            <div class="team-layout">
+                <!-- Partners — horizontal carousel with arrows -->
                 <div class="team-cards-wrap">
                     <div class="team-cards-header">
-                        <p class="team-cards-label">Meet Sunshine Lake</p>
                         <div class="team-cards-nav" id="teamCardsNav">
                             <button class="team-cards-nav-btn" id="teamPrev" aria-label="Previous partner" type="button">
                                 <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
