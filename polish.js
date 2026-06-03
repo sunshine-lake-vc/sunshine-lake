@@ -625,6 +625,47 @@
     setupSideNav();
     setupMobileMenu();
     setupTeamCarousel();
+    setupThesisCodaShift();
+  }
+
+  /* ═══ Thesis coda — color shift white → Sunshine Yellow on scroll
+       The "What better time to build…" question fades from white at the
+       moment it enters the viewport to gold #F2D831 by the time it
+       reaches the top. Pure scroll-progress lerp via rAF. ═══ */
+  function setupThesisCodaShift() {
+    var coda = document.querySelector('.team-thesis .thesis-coda');
+    if (!coda) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // RGB endpoints
+    var W = [255, 255, 255];  // white
+    var Y = [242, 216, 49];   // Sunshine Yellow
+
+    var pending = false;
+    function compute() {
+      pending = false;
+      var rect = coda.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // 0 when the coda's TOP first enters the bottom of the viewport,
+      // 1 when the coda's TOP reaches roughly 20% from the top of viewport
+      var startY = vh * 0.85;   // begin shift when top is here
+      var endY   = vh * 0.2;    // fully gold when top is here
+      var t = (startY - rect.top) / (startY - endY);
+      if (t < 0) t = 0;
+      if (t > 1) t = 1;
+      var r = Math.round(W[0] + (Y[0] - W[0]) * t);
+      var g = Math.round(W[1] + (Y[1] - W[1]) * t);
+      var b = Math.round(W[2] + (Y[2] - W[2]) * t);
+      coda.style.setProperty('--coda-color', 'rgb(' + r + ',' + g + ',' + b + ')');
+    }
+    function onScroll() {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(compute);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    compute();
   }
 
   /* ═══ Team carousel — prev/next arrows scroll one card at a time ═══ */

@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=41">
+    <link rel="stylesheet" href="polish.css?v=42">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -282,11 +282,11 @@
             max-width: 24em;
         }
         /* Thesis — full-width band across the top of the team section.
-           Cap line length at ~56ch so paragraphs stay readable across
-           wide viewports while the band itself spans full width. */
+           Wider max-width (~78ch) lets the type breathe across most of
+           the row while still capping line length for readability. */
         .team-thesis {
-            margin: 0 0 clamp(36px, 4vw, 64px) 0;
-            max-width: 56ch;
+            margin: 0 0 clamp(44px, 5vw, 80px) 0;
+            max-width: 78ch;
             opacity: 0;
             transform: translateY(14px);
             transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
@@ -295,27 +295,30 @@
         }
         .team-thesis p {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.1rem, 1.32vw, 1.55rem);
+            font-size: clamp(1.25rem, 1.55vw, 1.85rem);
             line-height: 1.45;
             color: rgba(255, 255, 255, 0.92);
-            margin: 0 0 clamp(14px, 1.2vw, 22px) 0;
+            margin: 0 0 clamp(16px, 1.4vw, 26px) 0;
             font-weight: 400;
         }
         /* First sentence — bolder + slightly larger, acts as the section
            lede now that the "Meet Sunshine Lake" headline is gone. */
         .team-thesis .thesis-lede {
-            font-size: clamp(1.35rem, 1.7vw, 2rem);
-            line-height: 1.32;
+            font-size: clamp(1.6rem, 2.1vw, 2.5rem);
+            line-height: 1.25;
             color: #ffffff;
             font-weight: 500;
-            letter-spacing: -0.005em;
+            letter-spacing: -0.01em;
             margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
         }
-        /* Closing rhetorical beat on its own line, with a little breathing
-           room above so it doesn't crowd the previous paragraph. */
+        /* Closing rhetorical beat on its own line. Color starts white and
+           shifts to Sunshine Yellow as the reader scrolls past it
+           (driven by JS — see setupThesisCodaShift). The CSS variable
+           --coda-color is the smoothed RGB the JS writes. */
         .team-thesis .thesis-coda {
-            margin-top: clamp(14px, 1.2vw, 22px);
-            color: #ffffff;
+            margin-top: clamp(16px, 1.4vw, 26px);
+            color: var(--coda-color, #ffffff);
+            transition: color 0.15s linear;
         }
         .team-thesis p:last-child { margin-bottom: 0; }
         .team-thesis.in-view {
@@ -413,7 +416,7 @@
             padding: clamp(8px, 1vw, 16px) 0 0;
             position: relative;
             z-index: 2;
-            margin-bottom: clamp(36px, 4vw, 64px);
+            margin-top: clamp(40px, 5vw, 72px);
         }
         .rd-exits-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -1643,20 +1646,6 @@
                 <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
             </div>
 
-            <!-- Top 1% Track Record — full-width pill marquee, 3 rows -->
-            <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
-                <p class="rd-exits-label">Top 1% Track Record</p>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-ipo"></div>
-                </div>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-seed"></div>
-                </div>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-ma"></div>
-                </div>
-            </section>
-
             <div class="team-layout">
                 <!-- Partners — horizontal carousel with arrows -->
                 <div class="team-cards-wrap">
@@ -1732,6 +1721,20 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Top 1% Track Record — full-width pill marquee, 3 rows -->
+            <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
+                <p class="rd-exits-label">Top 1% Track Record</p>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ipo"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-seed"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ma"></div>
+                </div>
+            </section>
         </div>
     </section>
 
@@ -3277,7 +3280,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=20" defer></script>
+    <script src="polish.js?v=21" defer></script>
 
 </body>
 </html>
