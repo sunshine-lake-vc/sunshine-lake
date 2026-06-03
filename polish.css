@@ -639,6 +639,13 @@ a.rd-name:hover { color: var(--rd-yellow); }
   letter-spacing: -0.005em;
   margin: 0;
 }
+/* Length-aware sizing — shorter quotes get bigger type, longer quotes
+   smaller, so each card fills roughly the same visual area. Driven by
+   tuneVoiceQuoteSize() in polish.js after voices render. */
+.rd-voice-quote.is-xl { font-size: clamp(20px, 1.55vw, 24px);   line-height: 1.42; }
+.rd-voice-quote.is-lg { font-size: clamp(18px, 1.35vw, 21px);   line-height: 1.45; }
+.rd-voice-quote.is-md { font-size: clamp(16px, 1.2vw, 18.5px);  line-height: 1.48; }
+.rd-voice-quote.is-sm { font-size: clamp(14.5px, 1.05vw, 17px); line-height: 1.5;  }
 .rd-voice-attr {
   display: flex;
   align-items: center;

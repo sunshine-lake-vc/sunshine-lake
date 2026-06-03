@@ -633,6 +633,22 @@
        prev/next with a "1 / N" counter beneath. Replaces the previous
        auto-scrolling marquee so the testimonials don't compete with
        the Top 1% Track Record carousel above. ═══ */
+  /* Tune each voice quote's font-size class based on character length so
+     short and long quotes fill roughly the same visual area in the card. */
+  function tuneVoiceQuoteSize() {
+    var quotes = document.querySelectorAll('#rd-voices-top .rd-voice-quote');
+    quotes.forEach(function (q) {
+      q.classList.remove('is-xl', 'is-lg', 'is-md', 'is-sm');
+      var len = (q.textContent || '').length;
+      var cls = 'is-md';
+      if      (len < 90)  cls = 'is-xl';
+      else if (len < 150) cls = 'is-lg';
+      else if (len < 220) cls = 'is-md';
+      else                cls = 'is-sm';
+      q.classList.add(cls);
+    });
+  }
+
   function setupVoicesCarousel() {
     var row     = document.getElementById('rd-voices-top');
     // The scrollable element is the .rd-voices-marquee parent — NOT the
@@ -642,6 +658,8 @@
     var next    = document.getElementById('voicesNext');
     var counter = document.getElementById('voicesCounter');
     if (!row || !scroller || !prev || !next) return;
+
+    tuneVoiceQuoteSize();
 
     function step() {
       var card = row.querySelector('.rd-voice');
