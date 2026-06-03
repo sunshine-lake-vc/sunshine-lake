@@ -519,8 +519,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   color: #fff;
 }
 
-/* ═══ Voices marquee (now connected directly under Day Zero — no second header) ═══ */
-.rd-voices { padding-bottom: 64px; }
+/* ═══ Voices carousel — single-card with prev/next arrows ═══ */
+.rd-voices {
+  padding-top: clamp(48px, 6vw, 96px);
+  padding-bottom: clamp(56px, 6vw, 96px);
+}
 
 .rd-voices-marquee {
   position: relative;
