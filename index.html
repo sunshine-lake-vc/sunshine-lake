@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=47">
+    <link rel="stylesheet" href="polish.css?v=48">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -281,12 +281,12 @@
             font-weight: 400;
             max-width: 24em;
         }
-        /* Thesis — full-width band across the top of the team section.
-           Wider max-width (~78ch) lets the type breathe across most of
-           the row while still capping line length for readability. */
+        /* Thesis — runs full-width across the top of the team section.
+           No max-width cap so the type fills the whole row. Fonts
+           bumped to keep line length feeling tight despite wider band. */
         .team-thesis {
             margin: 0 0 clamp(44px, 5vw, 80px) 0;
-            max-width: 78ch;
+            max-width: none;
             opacity: 0;
             transform: translateY(14px);
             transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
@@ -295,8 +295,8 @@
         }
         .team-thesis p {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.25rem, 1.55vw, 1.85rem);
-            line-height: 1.45;
+            font-size: clamp(1.4rem, 1.85vw, 2.25rem);
+            line-height: 1.4;
             color: rgba(255, 255, 255, 0.92);
             margin: 0 0 clamp(16px, 1.4vw, 26px) 0;
             font-weight: 400;
@@ -304,11 +304,11 @@
         /* First sentence — bolder + slightly larger, acts as the section
            lede now that the "Meet Sunshine Lake" headline is gone. */
         .team-thesis .thesis-lede {
-            font-size: clamp(1.6rem, 2.1vw, 2.5rem);
-            line-height: 1.25;
+            font-size: clamp(1.8rem, 2.5vw, 3rem);
+            line-height: 1.2;
             color: #ffffff;
             font-weight: 500;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.012em;
             margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
         }
         /* Closing rhetorical beat on its own line. Color starts white and
