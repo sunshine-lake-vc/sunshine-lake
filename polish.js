@@ -246,6 +246,8 @@
 
   /* ═══ SUPPORTING VOICES ═══ */
   var voices = [
+    { name: 'Shuo Wang',         role: 'Co-Founder',          company: 'Deel',       domain: 'deel.com',
+      quote: "We spent those early days working side-by-side out of Don's office. He has incredible heart, helped wire the core DNA of the business, and is still just as crucial to us today." },
     { name: 'Aaron Bai',         role: 'Founder & CEO',       company: 'Affiniti',   domain: 'affiniti.com',
       quote: "It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice." },
     { name: 'Ankit Jain',        role: 'Co-Founder & CEO',    company: 'Aviator',    domain: 'aviator.co',

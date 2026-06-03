@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=31">
+    <link rel="stylesheet" href="polish.css?v=32">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -302,6 +302,16 @@
             margin: 0 0 clamp(14px, 1.2vw, 22px) 0;
             font-weight: 400;
         }
+        /* First sentence — bolder + slightly larger, acts as the section
+           lede now that the "Meet Sunshine Lake" headline is gone. */
+        .team-thesis .thesis-lede {
+            font-size: clamp(1.35rem, 1.7vw, 2rem);
+            line-height: 1.32;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: -0.005em;
+            margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
+        }
         .team-thesis p:last-child { margin-bottom: 0; }
         .team-thesis.in-view {
             opacity: 1;
@@ -503,43 +513,62 @@
         .footer-photo-cell:hover img {
             filter: none !important;
         }
+        /* Team members — horizontal swipeable carousel (replaced the
+           old vertical stack). Native overflow-x scroll + scroll-snap
+           gives clean swipe on touch and trackpad without JS. Thin
+           white scrollbar so users see it's scrollable. */
         .team-cards {
             flex: 1 1 60%;
             display: flex;
-            flex-direction: column;
-            gap: 0;
+            flex-direction: row;
+            gap: clamp(16px, 1.6vw, 28px);
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-padding-inline-start: 0;
+            padding: 0 0 clamp(14px, 1.4vw, 22px);
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
             contain: layout;
         }
+        .team-cards::-webkit-scrollbar { height: 6px; }
+        .team-cards::-webkit-scrollbar-track { background: transparent; }
+        .team-cards::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        .team-cards::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
 
-        /* Team member — no card bg, blue divider between */
         .team-card {
+            flex: 0 0 clamp(280px, 30vw, 340px);
             display: flex;
-            flex-direction: row;
-            gap: clamp(20px, 2.5vw, 36px);
-            align-items: flex-start;
-            padding: clamp(28px, 3vw, 48px) 0;
-            border-bottom: 1px solid rgba(21, 94, 232, 0.15);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
-                        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            flex-direction: column;
+            align-items: stretch;
+            gap: clamp(14px, 1.3vw, 20px);
+            padding: 0;
+            border: none;
+            scroll-snap-align: start;
+            opacity: 1;
+            transform: none;
         }
-        .team-card:first-child {
-            padding-top: 0;
-        }
+        .team-card:first-child,
         .team-card:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
+            padding: 0;
+            border: none;
         }
+        /* Keep aboutObserver compatible — .visible just keeps cards visible */
         .team-card.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
         }
         .team-card-photo {
-            flex: 0 0 clamp(180px, 18vw, 300px);
-            width: clamp(180px, 18vw, 300px);
-            aspect-ratio: 3 / 4;
-            border-radius: clamp(8px, 0.8vw, 12px);
+            flex: none;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border-radius: clamp(10px, 1vw, 16px);
             overflow: hidden;
             background: #dde4f0;
         }
@@ -850,10 +879,6 @@
         /* TABLET (769–1024px)         */
         /* ========================== */
         @media (max-width: 1024px) and (min-width: 769px) {
-            .team-layout { gap: clamp(24px, 3vw, 40px); }
-            .team-sticky-text { flex: 0 0 35%; }
-            .team-card-photo { flex: 0 0 clamp(100px, 15vw, 160px); width: clamp(100px, 15vw, 160px); }
-            .team-desc { font-size: clamp(1.8rem, 3vw, 3rem); }
             .founders-scroll-spacer { padding: 0 clamp(40px, 6vw, 120px); }
             .founders-left { flex: 0 0 40%; }
         }
@@ -1360,9 +1385,12 @@
             .team-layout { flex-direction: column; }
             .team-sticky-text { position: static; flex: unset; margin-bottom: clamp(24px, 4vw, 40px); }
             .team-desc { font-size: clamp(2.2rem, 7vw, 3.2rem); }
-            .team-cards { flex: unset; }
-            .team-card { flex-direction: column; gap: clamp(12px, 3vw, 20px); }
-            .team-card-photo { flex: none; width: 100%; aspect-ratio: 1 / 1; }
+            /* team-cards stays horizontal scroll on mobile too — flex: row
+               + scroll-snap inherited from base rule. Just tighten card
+               width so one card with a peek of the next fits a phone. */
+            .team-cards { flex: 1 1 auto; width: 100%; }
+            .team-card { flex: 0 0 78vw; gap: clamp(10px, 3vw, 16px); }
+            .team-card-photo { flex: none; width: 100%; aspect-ratio: 4 / 5; }
             /* Companies section */
             .founders-scroll-spacer { padding: 0 20px; }
             .founders-photo-stack { aspect-ratio: 1; }
@@ -1566,9 +1594,9 @@
             <div class="team-layout">
                 <!-- Left: Sticky descriptive text + portfolio carousel -->
                 <div class="team-sticky-text">
-                    <p class="team-desc">Meet<br>Sunshine Lake.</p>
                     <div class="team-thesis" id="rd-section-thesis">
-                        <p>Sunshine Lake invests in international founders from extreme origins at their breakout moments. Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade. <em>What better time to build than when the world needs it most?</em></p>
+                        <p class="thesis-lede">Sunshine Lake invests in international founders from extreme origins at their breakout moments.</p>
+                        <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade. <em>What better time to build than when the world needs it most?</em></p>
                     </div>
                     <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
                         <p class="rd-exits-label">Top 1% Track Record</p>
@@ -1603,20 +1631,6 @@
 
                     <div class="team-card">
                         <div class="team-card-photo">
-                            <img src="images/team/suhail.webp" alt="Suhail Younus" loading="lazy">
-                        </div>
-                        <div class="team-card-info">
-                            <div class="team-card-name-row">
-                                <span class="team-card-name">Suhail Younus</span>
-                            </div>
-                            <p class="team-card-role">Partner</p>
-                            <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
-                            <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-                        </div>
-                    </div>
-
-                    <div class="team-card">
-                        <div class="team-card-photo">
                             <img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval" loading="lazy">
                         </div>
                         <div class="team-card-info">
@@ -1626,6 +1640,20 @@
                             <p class="team-card-role">Partner, CFO & COO</p>
                             <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline allows us to see viable opportunities where others might only see complexity.</blockquote>
                             <a class="team-bio-btn" href="ivan.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="team-card-photo">
+                            <img src="images/team/suhail.webp" alt="Suhail Younus" loading="lazy">
+                        </div>
+                        <div class="team-card-info">
+                            <div class="team-card-name-row">
+                                <span class="team-card-name">Suhail Younus</span>
+                            </div>
+                            <p class="team-card-role">Partner</p>
+                            <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
+                            <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -3199,7 +3227,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=17" defer></script>
+    <script src="polish.js?v=18" defer></script>
 
 </body>
 </html>
