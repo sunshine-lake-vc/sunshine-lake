@@ -1035,7 +1035,7 @@ body.mode-tight .content-sticky p {
   .rd-track { gap: 12px; padding: 12px var(--rd-side-pad); }
 
   /* Voices: same compact treatment */
-  .rd-voice { width: 300px; padding: 20px; gap: 14px; }
+  .rd-voice { width: 86vw; max-width: 380px; padding: 22px; gap: 14px; }
   .rd-voice-quote { font-size: 15px; }
   .rd-voices-row { padding: 8px var(--rd-side-pad); }
 
