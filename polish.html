@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=35">
+    <link rel="stylesheet" href="polish.css?v=36">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -311,6 +311,12 @@
             font-weight: 500;
             letter-spacing: -0.005em;
             margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
+        }
+        /* Closing rhetorical beat on its own line, with a little breathing
+           room above so it doesn't crowd the previous paragraph. */
+        .team-thesis .thesis-coda {
+            margin-top: clamp(14px, 1.2vw, 22px);
+            color: #ffffff;
         }
         .team-thesis p:last-child { margin-bottom: 0; }
         .team-thesis.in-view {
@@ -1652,7 +1658,8 @@
                 <div class="team-sticky-text">
                     <div class="team-thesis" id="rd-section-thesis">
                         <p class="thesis-lede">Sunshine Lake invests in international founders from extreme origins at their breakout moments.</p>
-                        <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade. <em>What better time to build than when the world needs it most?</em></p>
+                        <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade.</p>
+                        <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
                     </div>
                     <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
                         <p class="rd-exits-label">Top 1% Track Record</p>
