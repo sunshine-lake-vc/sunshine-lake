@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=37">
+    <link rel="stylesheet" href="polish.css?v=38">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -650,7 +650,9 @@
             display: flex;
             flex-direction: column;
             gap: clamp(4px, 0.4vw, 8px);
-            padding-top: clamp(4px, 0.5vw, 8px);
+            /* Horizontal breathing room around all the text content so
+               name / role / quote / bio-btn don't hit the card edges. */
+            padding: clamp(4px, 0.5vw, 8px) clamp(16px, 1.6vw, 26px) 0;
         }
         .team-card-name-row {
             display: flex;
