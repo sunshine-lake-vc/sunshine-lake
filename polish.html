@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=34">
+    <link rel="stylesheet" href="polish.css?v=35">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -676,16 +676,15 @@
         }
         /* Founder quote on the homepage team card — sits where the teaser
            used to live. White italic serif so it reads against the blue
-           team-section background, with a yellow accent border. */
+           team-section background. */
         .team-card-quote {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(0.92rem, 1.02vw, 1.18rem);
             line-height: 1.46;
             font-style: italic;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.92);
             margin: clamp(6px, 0.7vw, 10px) 0 0 0;
-            padding-left: clamp(10px, 0.9vw, 14px);
-            border-left: 2px solid rgba(242, 216, 49, 0.8);
+            padding: 0;
             font-weight: 400;
         }
         .team-card-quote::before { content: '\201C'; }
