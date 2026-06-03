@@ -390,9 +390,9 @@
   /* ─── Strategic Exits carousel — three rows (IPO / Seed / M&A),
        alternating scroll directions for visual interest ─── */
   function startExitsMarquees() {
-    driveMarquee(document.getElementById('rd-exits-ipo'),  -36); // IPOs scroll left
-    driveMarquee(document.getElementById('rd-exits-seed'),  30); // Seed deals scroll right
-    driveMarquee(document.getElementById('rd-exits-ma'),   -42); // M&A scroll left
+    driveMarquee(document.getElementById('rd-exits-ipo'),  -26); // IPOs scroll left
+    driveMarquee(document.getElementById('rd-exits-seed'),  22); // Seed deals scroll right
+    driveMarquee(document.getElementById('rd-exits-ma'),   -30); // M&A scroll left
   }
 
   /* ─── Carousel drag (per carousel) ─── */
