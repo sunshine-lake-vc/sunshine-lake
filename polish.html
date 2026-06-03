@@ -1788,7 +1788,19 @@
     <!-- Footer with photo grid -->
     <footer class="footer-scroll-spacer" id="rd-section-contact">
         <div class="footer-sticky">
-            <div class="footer-photo-grid" id="footerPhotoGrid"></div>
+            <!-- Static fallback cells — JS replaces them with shuffled
+                 cells on init, but they ensure the grid is visible even
+                 if the inline script throws upstream. -->
+            <div class="footer-photo-grid" id="footerPhotoGrid">
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-1.webp" alt="" loading="eager"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-2.webp" alt="" loading="eager"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-3.webp" alt="" loading="eager"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-4.webp" alt="" loading="eager"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-5.webp" alt="" loading="lazy"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-6.webp" alt="" loading="lazy"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-7.webp" alt="" loading="lazy"></div>
+                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-9.webp" alt="" loading="lazy"></div>
+            </div>
             <div class="footer-photo-card" id="footerPhotoCard"></div>
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
@@ -2966,6 +2978,9 @@
             const CELL_COUNT = COLS * ROWS;
             const grid = document.getElementById('footerPhotoGrid');
             const footer = document.querySelector('.footer-scroll-spacer');
+            if (!grid) return; // defensive — grid must exist
+            // Clear any static fallback cells before rendering the shuffled set
+            grid.innerHTML = '';
             function shuffle(arr) {
                 const a = arr.slice();
                 for (let i = a.length - 1; i > 0; i--) {
