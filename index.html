@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=33">
+    <link rel="stylesheet" href="polish.css?v=34">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -513,20 +513,76 @@
         .footer-photo-cell:hover img {
             filter: none !important;
         }
-        /* Team members — horizontal swipeable carousel (replaced the
-           old vertical stack). Native overflow-x scroll + scroll-snap
-           gives clean swipe on touch and trackpad without JS. Thin
-           white scrollbar so users see it's scrollable. */
-        .team-cards {
+        /* Team members — horizontal swipeable carousel with arrow
+           controls above. Native overflow-x scroll + scroll-snap gives
+           clean swipe on touch and trackpad; the JS-wired arrows give
+           desktop users an obvious "more partners" affordance. */
+        .team-cards-wrap {
             flex: 1 1 60%;
             display: flex;
+            flex-direction: column;
+            gap: clamp(14px, 1.4vw, 22px);
+            min-width: 0;
+        }
+        .team-cards-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(16px, 2vw, 32px);
+        }
+        .team-cards-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(10px, 0.8vw, 11.5px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+        .team-cards-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .team-cards-nav-btn {
+            width: clamp(36px, 3vw, 44px);
+            height: clamp(36px, 3vw, 44px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+        }
+        .team-cards-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.45);
+        }
+        .team-cards-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+        .team-cards-nav-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .team-cards {
+            display: flex;
             flex-direction: row;
-            gap: clamp(16px, 1.6vw, 28px);
+            gap: clamp(20px, 2vw, 36px);
             overflow-x: auto;
             overflow-y: hidden;
             scroll-snap-type: x mandatory;
             scroll-padding-inline-start: 0;
-            padding: 0 0 clamp(14px, 1.4vw, 22px);
+            scroll-behavior: smooth;
+            padding: clamp(6px, 0.6vw, 10px) 0 clamp(18px, 1.6vw, 28px);
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
@@ -1339,6 +1395,7 @@
                 top: auto;
                 margin-bottom: clamp(24px, 4vw, 40px);
             }
+            .team-cards-wrap { flex: 1 1 auto; width: 100%; }
             .team-cards { flex: 1 1 auto; width: 100%; }
             /* Carousel pills inside the now-full-width column — keep the
                max-content row inside the marquee mask. */
@@ -1612,8 +1669,20 @@
                     </section>
                 </div>
 
-                <!-- Right: Team members -->
-                <div class="team-cards">
+                <!-- Right: Team members (horizontal carousel + arrows) -->
+                <div class="team-cards-wrap">
+                    <div class="team-cards-header">
+                        <p class="team-cards-label">Meet Sunshine Lake</p>
+                        <div class="team-cards-nav" id="teamCardsNav">
+                            <button class="team-cards-nav-btn" id="teamPrev" aria-label="Previous partner" type="button">
+                                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                            </button>
+                            <button class="team-cards-nav-btn" id="teamNext" aria-label="Next partner" type="button">
+                                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="team-cards" id="teamCards">
                     <!-- CONTENT:team -->
                     <div class="team-card">
                         <div class="team-card-photo">
@@ -1672,6 +1741,7 @@
                     </div>
 
                     <!-- /CONTENT:team -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -3227,7 +3297,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=18" defer></script>
+    <script src="polish.js?v=19" defer></script>
 
 </body>
 </html>

@@ -650,6 +650,37 @@
     setupDiveZoom();
     setupSideNav();
     setupMobileMenu();
+    setupTeamCarousel();
+  }
+
+  /* ═══ Team carousel — prev/next arrows scroll one card at a time ═══ */
+  function setupTeamCarousel() {
+    var track = document.getElementById('teamCards');
+    var prev  = document.getElementById('teamPrev');
+    var next  = document.getElementById('teamNext');
+    if (!track || !prev || !next) return;
+
+    function step() {
+      var card = track.querySelector('.team-card');
+      if (!card) return 320;
+      var styles = getComputedStyle(track);
+      var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+      return card.offsetWidth + gap;
+    }
+    function updateButtons() {
+      var max = track.scrollWidth - track.clientWidth - 2; // 2px tolerance
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      track.scrollBy({ left:  step(), behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
   }
 
   /* ═══════════════════════════════════════════════════════════════
