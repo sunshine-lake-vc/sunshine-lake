@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=50">
+    <link rel="stylesheet" href="polish.css?v=51">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -702,27 +702,28 @@
         .team-card-quote::before { content: '\201C'; }
         .team-card-quote::after  { content: '\201D'; }
 
-        /* Bio button on team cards — margin-top:auto pushes it to the
-           bottom of the .team-card-info flex column. Since all cards in
-           the carousel stretch to the same height (flex row default),
-           every "Full Background" link ends up at the same vertical
-           position regardless of quote length.
-           align-self:flex-start keeps the link itself left-aligned. */
+        /* Bio link on team cards — now just a long horizontal arrow that
+           hints at "more" without spelling it out. margin-top:auto pins
+           it to the bottom of the card-info column so every arrow aligns
+           across cards regardless of quote length. */
         .team-bio-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
             margin-top: auto;
             align-self: flex-start;
-            font-size: clamp(0.75rem, 0.85vw, 0.95rem);
-            color: #155EE8;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            font-weight: 500;
+            color: #FFFFFF;
             text-decoration: none;
-            opacity: 0.5;
-            transition: opacity 0.2s ease;
+            opacity: 0.6;
+            transition: opacity 0.25s ease;
             padding: clamp(10px, 1vw, 16px) 0 14px;
+        }
+        .team-bio-arrow {
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+        .team-bio-btn:hover .team-bio-arrow {
+            transform: translateX(6px);
         }
         .team-bio-btn:hover {
             opacity: 1;
@@ -1680,7 +1681,7 @@
                             </div>
                             <p class="team-card-role">Founder, Sunshine Lake</p>
                             <blockquote class="team-card-quote">True alpha doesn&rsquo;t come from the obvious path. It comes from founders navigating extreme constraints &mdash; that shared psychological DNA that turns global outsiders into category leaders. We back that hunger from the very first check.</blockquote>
-                            <a class="team-bio-btn" href="polish-don.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><svg class="team-bio-arrow" viewBox="0 0 64 12" width="64" height="12" aria-hidden="true"><path d="M0 6h54M48 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -1694,7 +1695,7 @@
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
                             <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline lets us see viable opportunities where others only see complexity. That&rsquo;s the edge I look for in every founder we back.</blockquote>
-                            <a class="team-bio-btn" href="ivan.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><svg class="team-bio-arrow" viewBox="0 0 64 12" width="64" height="12" aria-hidden="true"><path d="M0 6h54M48 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -1708,7 +1709,7 @@
                             </div>
                             <p class="team-card-role">Partner</p>
                             <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
-                            <a class="team-bio-btn" href="suhail.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><svg class="team-bio-arrow" viewBox="0 0 64 12" width="64" height="12" aria-hidden="true"><path d="M0 6h54M48 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
@@ -1722,7 +1723,7 @@
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
                             <blockquote class="team-card-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
-                            <a class="team-bio-btn" href="wieger.html">Full Background <svg viewBox="0 0 16 16" width="14" height="14"><path d="M4 8h8M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                            <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><svg class="team-bio-arrow" viewBox="0 0 64 12" width="64" height="12" aria-hidden="true"><path d="M0 6h54M48 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                         </div>
                     </div>
 
