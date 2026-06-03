@@ -771,6 +771,10 @@ body.mode-tight .content-sticky,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
 .rd-zone                 { background: #050838 !important; }
 .rd-zone.rd-deep-zone    { background: #050838 !important; }
+/* Voices section sits between team-section (#4A88E5 Lake Surface)
+   and the founders-scroll-spacer (#0A3DAE Mid Lake) — pick an
+   intermediate so the depth ladder reads smoothly downward. */
+.rd-zone.rd-voices-zone  { background: #1E54C8 !important; }
 .footer-scroll-spacer    { background: #02041F !important; }
 .footer-sticky { background: transparent !important; }
 

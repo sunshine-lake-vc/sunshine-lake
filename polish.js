@@ -215,37 +215,15 @@
     }, 2800);
   }
 
-  /* ═══ FEATURED TESTIMONIALS (from Day Zero) ═══ */
-  var featured = [
-    { company: 'Deel',    domain: 'deel.com',
-      quote: 'A fantastic partner and ally to Deel since its early days.',
-      author: 'Alex Bouaziz', role: 'Co-Founder & CEO' },
-    { company: 'Headway', domain: 'headway.co',
-      quote: 'He hustled harder for me than anyone else did. I want him to be a part of every single round and company that I start.',
-      author: 'Jake Sussman', role: 'Co-Founder' },
-    { company: 'Kalshi',  domain: 'kalshi.com',
-      quote: 'With us from day zero — a tremendous supporter through the twists and turns.',
-      author: 'Tarek Mansour', role: 'Co-Founder & CEO' }
-  ];
-
-  function buildFeatured(f) {
-    return ''
-      + '<div class="rd-voice rd-voice--featured">'
-      + '  <p class="rd-voice-quote">"' + f.quote + '"</p>'
-      + '  <div class="rd-voice-attr">'
-      + '    <a class="rd-voice-mark" href="https://' + f.domain + '" target="_blank" rel="noopener" aria-label="' + f.company + '">'
-      + '      ' + logoImg(f.company, f.domain, 128)
-      + '    </a>'
-      + '    <div class="rd-voice-author">'
-      + '      <span class="rd-vname">' + f.author + '</span>'
-      + '      <span class="rd-vrole">' + f.role + ', <a class="rd-voice-company" href="https://' + f.domain + '" target="_blank" rel="noopener">' + f.company + '</a></span>'
-      + '    </div>'
-      + '  </div>'
-      + '</div>';
-  }
-
-  /* ═══ SUPPORTING VOICES ═══ */
+  /* ═══ FOUNDER VOICES — one unified feed ═══ */
   var voices = [
+    // ── Lead voices (formerly the featured row) ──
+    { name: 'Alex Bouaziz',      role: 'Co-Founder & CEO',    company: 'Deel',       domain: 'deel.com',
+      quote: "A fantastic partner and ally to Deel since its early days." },
+    { name: 'Jake Sussman',      role: 'Co-Founder',          company: 'Headway',    domain: 'headway.co',
+      quote: "He hustled harder for me than anyone else did. I want him to be a part of every single round and company that I start." },
+    { name: 'Tarek Mansour',     role: 'Co-Founder & CEO',    company: 'Kalshi',     domain: 'kalshi.com',
+      quote: "With us from day zero — a tremendous supporter through the twists and turns." },
     { name: 'Shuo Wang',         role: 'Co-Founder',          company: 'Deel',       domain: 'deel.com',
       quote: "We spent those early days working side-by-side out of Don's office. He has incredible heart, helped wire the core DNA of the business, and is still just as crucial to us today." },
     { name: 'Aaron Bai',         role: 'Founder & CEO',       company: 'Affiniti',   domain: 'affiniti.com',
@@ -313,7 +291,6 @@
   function render() {
     var leadersTrack = document.getElementById('rd-leaders-track');
     var portfolioTrack = document.getElementById('rd-portfolio-track');
-    var featuredRow = document.getElementById('rd-featured-row');
     var voicesTop = document.getElementById('rd-voices-top');
     var exitsIpo    = document.getElementById('rd-exits-ipo');
     var exitsSeed   = document.getElementById('rd-exits-seed');
@@ -322,9 +299,6 @@
     if (leadersTrack) {
       // Legacy 3x3 grid — only renders if the element still exists
       leadersTrack.innerHTML = allCells.slice(0, 9).map(buildCell).join('');
-    }
-    if (featuredRow) {
-      featuredRow.innerHTML = featured.map(buildFeatured).join('');
     }
     if (voicesTop) {
       // All voices into a single row, doubled for seamless loop
