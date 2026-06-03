@@ -301,9 +301,9 @@
       leadersTrack.innerHTML = allCells.slice(0, 9).map(buildCell).join('');
     }
     if (voicesTop) {
-      // All voices into a single row, doubled for seamless loop
-      var allV = voices.map(buildVoice).join('');
-      voicesTop.innerHTML = allV + allV;
+      // Voices now render as a single-card carousel (no auto-scroll
+      // doubling) — see setupVoicesCarousel() for the prev/next wiring.
+      voicesTop.innerHTML = voices.map(buildVoice).join('');
     }
     if (exitsIpo && exitsSeed && exitsMa) {
       // Three rows by deal type. Smaller source sets get repeated more
@@ -382,10 +382,10 @@
     requestAnimationFrame(tick);
   }
 
-  /* ─── Founder Voices marquee — single row, leftward at 55 px/s ─── */
-  function startMarquee() {
-    driveMarquee(document.getElementById('rd-voices-top'), -55);
-  }
+  /* ─── Founder Voices is now a single-card carousel (see
+       setupVoicesCarousel) — no auto-scroll. Kept as a stub for any
+       caller still referencing it. ─── */
+  function startMarquee() { /* no-op */ }
 
   /* ─── Strategic Exits carousel — three rows (IPO / Seed / M&A),
        alternating scroll directions for visual interest ─── */
@@ -625,7 +625,51 @@
     setupSideNav();
     setupMobileMenu();
     setupTeamCarousel();
+    setupVoicesCarousel();
     setupThesisCodaShift();
+  }
+
+  /* ═══ Founder Voices carousel — single card at a time, user-driven
+       prev/next with a "1 / N" counter beneath. Replaces the previous
+       auto-scrolling marquee so the testimonials don't compete with
+       the Top 1% Track Record carousel above. ═══ */
+  function setupVoicesCarousel() {
+    var track   = document.getElementById('rd-voices-top');
+    var prev    = document.getElementById('voicesPrev');
+    var next    = document.getElementById('voicesNext');
+    var counter = document.getElementById('voicesCounter');
+    if (!track || !prev || !next) return;
+
+    function step() {
+      var card = track.querySelector('.rd-voice');
+      if (!card) return track.clientWidth || window.innerWidth;
+      return card.offsetWidth;
+    }
+    function activeIndex() {
+      var w = step();
+      if (!w) return 0;
+      return Math.round(track.scrollLeft / w);
+    }
+    function total() {
+      return track.querySelectorAll('.rd-voice').length;
+    }
+    function updateUI() {
+      var n = total();
+      var i = activeIndex();
+      var max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+      if (counter) counter.textContent = (i + 1) + ' / ' + n;
+    }
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateUI, { passive: true });
+    window.addEventListener('resize', updateUI);
+    updateUI();
   }
 
   /* ═══ Thesis coda — color shift white → Sunshine Yellow on scroll
