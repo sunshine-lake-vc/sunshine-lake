@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=54">
+    <link rel="stylesheet" href="polish.css?v=55">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -320,6 +320,12 @@
             transition: color 0.15s linear;
         }
         .team-thesis p:last-child { margin-bottom: 0; }
+        /* Inline accent — same Sunshine Yellow as the coda. Used to
+           emphasise key words inside body paragraphs ("dynamic",
+           "sparks"). Stays static (no scroll-shift like the coda). */
+        .team-thesis .thesis-accent {
+            color: #F2D831;
+        }
         .team-thesis.in-view {
             opacity: 1;
             transform: translateY(0);
@@ -1654,8 +1660,9 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Sunshine Lake invests in international founders from extreme origins at their breakout moments.</p>
-                <p>Their psychology drives them to solve problems vital to our collective future. Our aperture targets the geopolitical, economic, and technological inflection points that spark massive waves. Here, we defy sector cycles to support multiple blockbuster companies a decade.</p>
+                <p class="thesis-lede">Sunshine Lake invests in global founders from extreme origins&mdash;at their breakout moments.</p>
+                <p>Their psychology is to solve problems vital to our <span class="thesis-accent">dynamic</span> future.</p>
+                <p>Our aperture into geopolitical, economic, and technological inflections <span class="thesis-accent">sparks</span> massive waves, defying sector cycles to support multiple blockbuster companies a decade.</p>
                 <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
             </div>
 
