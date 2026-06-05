@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=55">
+    <link rel="stylesheet" href="polish.css?v=56">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -310,22 +310,43 @@
             letter-spacing: -0.015em;
             margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
         }
-        /* Closing rhetorical beat on its own line. Color starts white and
-           shifts to Sunshine Yellow as the reader scrolls past it
-           (driven by JS — see setupThesisCodaShift). The CSS variable
-           --coda-color is the smoothed RGB the JS writes. */
+        /* Closing rhetorical beat — same display weight as the lede so
+           it lands as the section's payoff. Sunshine Yellow base with a
+           slow shimmer sweeping across via background-clip. No italics. */
         .team-thesis .thesis-coda {
-            margin-top: clamp(16px, 1.4vw, 26px);
-            color: var(--coda-color, #ffffff);
-            transition: color 0.15s linear;
+            font-size: clamp(2.1rem, 2.9vw, 3.6rem);
+            line-height: 1.15;
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: -0.015em;
+            margin-top: clamp(24px, 2.6vw, 44px);
+            background: linear-gradient(
+                100deg,
+                #F2D831 0%,
+                #F2D831 38%,
+                #FFF59E 50%,
+                #F2D831 62%,
+                #F2D831 100%
+            );
+            background-size: 250% 100%;
+            background-position: 100% 0;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: thesisShimmer 4.5s ease-in-out infinite;
+        }
+        @keyframes thesisShimmer {
+            0%   { background-position: 220% 0; }
+            100% { background-position: -120% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .team-thesis .thesis-coda { animation: none; }
         }
         .team-thesis p:last-child { margin-bottom: 0; }
-        /* Inline accent — same Sunshine Yellow as the coda. Used to
-           emphasise key words inside body paragraphs ("dynamic",
-           "sparks"). Stays static (no scroll-shift like the coda). */
-        .team-thesis .thesis-accent {
-            color: #F2D831;
-        }
+        /* .thesis-accent kept available for future inline highlights —
+           currently inherits the body color so it reads as normal text. */
+        .team-thesis .thesis-accent { color: inherit; }
         .team-thesis.in-view {
             opacity: 1;
             transform: translateY(0);
@@ -1661,9 +1682,9 @@
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
                 <p class="thesis-lede">Sunshine Lake invests in global founders from extreme origins&mdash;at their breakout moments.</p>
-                <p>Their psychology is to solve problems vital to our <span class="thesis-accent">dynamic</span> future.</p>
-                <p>Our aperture into geopolitical, economic, and technological inflections <span class="thesis-accent">sparks</span> massive waves, defying sector cycles to support multiple blockbuster companies a decade.</p>
-                <p class="thesis-coda"><em>What better time to build than when the world needs it most?</em></p>
+                <p>Their psychology is to solve problems vital to our dynamic future.</p>
+                <p>Our aperture into geopolitical, economic, and technological inflections sparks massive waves, defying sector cycles to support multiple blockbuster companies a decade.</p>
+                <p class="thesis-coda">What better time to build than when the world needs it most?</p>
             </div>
 
             <div class="team-layout">
@@ -3324,7 +3345,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=25" defer></script>
+    <script src="polish.js?v=26" defer></script>
 
 </body>
 </html>

@@ -700,6 +700,11 @@
        moment it enters the viewport to gold #F2D831 by the time it
        reaches the top. Pure scroll-progress lerp via rAF. ═══ */
   function setupThesisCodaShift() {
+    // No-op — the coda's color treatment is now a CSS shimmer animation
+    // (see .team-thesis .thesis-coda in the inline page styles). Kept as
+    // a stub so init() doesn't blow up.
+    return;
+    /* eslint-disable no-unreachable */
     var coda = document.querySelector('.team-thesis .thesis-coda');
     if (!coda) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
