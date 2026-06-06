@@ -1007,12 +1007,14 @@
             margin: 0;
             line-height: 1.15;
             letter-spacing: -0.015em;
-            /* Headline can still spill wider than the sticky 42%
-               column on desktop so a longer sentence has room to
-               breathe — capped at min(78vw, 1100px). */
-            max-width: min(78vw, 1100px);
+            /* Single line on desktop: nowrap forces the headline onto
+               one row, max-width clamps it to a sensible measure, and
+               the inline <br> below is suppressed via display:none. */
+            white-space: nowrap;
+            max-width: min(85vw, 1200px);
             z-index: 3;
         }
+        .founders-left-title br { display: none; }
         /* Intro line under "Portfolio Founders". Same DomaineDisp body
            type used by .team-intro / .founders-item-desc so it reads
            as part of the same editorial family. */
@@ -1253,13 +1255,18 @@
                 display: flex;
                 flex-direction: column;
             }
-            /* Title — larger, more space above */
+            /* Title — larger, more space above. Mobile breaks "Every
+               Founder" / "has a story." onto two lines by re-enabling
+               the inline <br> and dropping the nowrap. */
             .founders-left-title {
                 position: static;
                 order: 1;
                 font-size: clamp(2.2rem, 7vw, 3.2rem);
                 padding: clamp(28px, 6vw, 46px) 0 clamp(2px, 0.6vw, 6px);
+                white-space: normal;
+                max-width: none;
             }
+            .founders-left-title br { display: inline; }
             /* Subtitle — +20% space from title, +30% space to image */
             .founders-right-subtitle {
                 position: static;
@@ -2097,7 +2104,7 @@
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
             <p class="founders-left-eyebrow">Sunshine Lake Portfolio</p>
-            <h2 class="founders-left-title">Every Founder has a story.</h2>
+            <h2 class="founders-left-title">Every Founder<br>has a story.</h2>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
