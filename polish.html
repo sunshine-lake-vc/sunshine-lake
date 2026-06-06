@@ -188,9 +188,12 @@
             align-items: center;
             gap: clamp(12px, 3vw, 18px);
         }
-        /* Bottom tagline — sibling of the chevron. Hidden by default
-           (desktop shows the eyebrow inside .main-content instead). */
-        .hero-tagline--bottom { display: none; }
+        /* Bottom tagline — sibling of the chevron. Shown on every
+           viewport now; the eyebrow inside .main-content is hidden
+           so "Pre-Seed & Seed Fund" always reads with the scroll-
+           down chevron rather than as a title eyebrow. */
+        .hero-tagline--bottom { display: inline-block; }
+        .main-content .hero-tagline { display: none; }
         .hero-scroll-hint {
             display: inline-flex;
             color: rgba(255, 255, 255, 0.85);
