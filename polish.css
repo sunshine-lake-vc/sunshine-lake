@@ -864,6 +864,11 @@ body.mode-tight .content-sticky,
    sections read as one continuous band. Was #4A88E5 (Lake Surface)
    for team and #1E54C8 for voices. */
 .team-section            { background: #155EE8 !important; }
+/* Voices section overlaps the team section by 2px so any sub-pixel
+   rounding gap between the two same-cobalt blocks can't expose the
+   dark body background (#010210) as a thin horizontal line below
+   the Track Record on mobile. */
+.rd-zone.rd-voices-zone  { margin-top: -2px !important; }
 /* Founders/Portfolio: open with the same Royal Cobalt as the band
    above (team + voices) and fade into Mid Lake over the first 320px
    so there's no hard edge — the seam between voices and Portfolio
