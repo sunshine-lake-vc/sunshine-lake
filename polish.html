@@ -2189,18 +2189,13 @@
             const vh = window.innerHeight;
             const vw = window.innerWidth;
 
-            // Frame: scale from 1.0 → slightly smaller card.
-            // Animation runs over 2vh so it completes within the
-            // tightened (102vh) hero spacer's pinned phase.
+            // Frame zone kept so other animations referencing `progress`
+            // still work, but scale is pinned to 1 — the hero now floods
+            // full-bleed, so any scale-down would just expose the page
+            // background behind it (visible especially on mobile).
             const frameZone = vh * 0.02;
             const progress = Math.min(1, scrollY / frameZone);
-            const maxInset = vw <= 768 ? 16 : 40;
-            const scaleX = 1 - (maxInset * 2) / vw;
-            const scaleY = 1 - (maxInset * 2) / vh;
-            const minScale = Math.min(scaleX, scaleY);
-            targetScale = 1 - progress * (1 - minScale);
-            // Hero now floods full-bleed — no rounded corners ever.
-            // (Was: baseRadius 11/16 → endRadius 15/22 on scroll.)
+            targetScale = 1;
             targetRadius = 0;
 
             // Title: slides from center toward the bottom of the card, but
@@ -3256,13 +3251,8 @@
 
                     const frameZone = vh;
                     const progress = Math.min(1, scrollY / frameZone);
-                    const maxInset = window.innerWidth <= 768 ? 16 : 68;
-                    const scaleX = 1 - (maxInset * 2) / window.innerWidth;
-                    const scaleY = 1 - (maxInset * 2) / vh;
-                    const minSc = Math.min(scaleX, scaleY);
-                    targetScale = 1 - progress * (1 - minSc);
-                    // Full-bleed hero — no rounded corners (legacy values
-                    // baseR 11/16, endR 15/22 left in comment for reference).
+                    // Full-bleed hero — no scale recede, no rounded corners.
+                    targetScale = 1;
                     targetRadius = 0;
 
                     const titleStartY = vh * 0.42;
