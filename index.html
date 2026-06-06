@@ -199,6 +199,12 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            /* Mobile keeps the higher inset so the cluster sits in a
+               comfortable thumb zone. Desktop pulls down (override
+               below) so the tagline clears the title's bottom edge —
+               "Forge the Future" was overlapping "PRE-SEED & SEED
+               FUND" at wide viewports because both were landing in
+               the same vertical band. */
             bottom: clamp(40px, 5vw, 72px);
             z-index: 11;
             /* The wrap itself ignores pointer events so the wrap-
@@ -210,6 +216,14 @@
             flex-direction: column;
             align-items: center;
             gap: clamp(14px, 2.4vw, 20px);
+        }
+        /* Desktop: drop the cluster to bottom: clamp(20-32px) so the
+           tagline (which sits above the chevron in the column stack)
+           clears the title's bottom line. Mobile rule above keeps
+           the higher inset since the title is centred there and
+           there's nothing to clash with. */
+        @media (min-width: 769px) {
+            .hero-scroll-hint-wrap { bottom: clamp(20px, 2.2vw, 32px); }
         }
         /* Bottom tagline — sibling of the chevron. Shown on every
            viewport now; the eyebrow inside .main-content is hidden
