@@ -451,13 +451,17 @@
            sharp white highlight sweeping across via background-clip
            text + an animated gradient. Subtle yellow glow underneath
            for warmth. */
-        .team-thesis .thesis-coda {
+        /* Selector intentionally NOT scoped to .team-thesis any more —
+           the coda lives in its own .thesis-coda-section below the
+           Portfolio now, but the styling stays identical. */
+        .thesis-coda {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(1.95rem, 2.7vw, 3.35rem);
             line-height: 1.15;
             font-weight: 500;
             font-style: normal;
             letter-spacing: -0.015em;
-            margin-top: clamp(24px, 2.6vw, 44px);
+            margin: 0;
             background: linear-gradient(
                 100deg,
                 #F2D831  0%,
@@ -476,17 +480,36 @@
             text-shadow: 0 0 16px rgba(242, 216, 49, 0.28);
             animation: thesisShimmer 3.4s ease-in-out infinite;
         }
+        /* Standalone closing section that sits between Portfolio and
+           the Footer. Solid Mid Lake background to bridge the
+           Portfolio gradient end (#0A3DAE) into the Abyss footer. */
+        .thesis-coda-section {
+            background: #0A3DAE;
+            padding: clamp(80px, 9vw, 160px) clamp(56px, 8vw, 180px);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            /* -2px overlap so the same sub-pixel gap fix used at the
+               other cobalt seams works here too. */
+            margin-top: -2px;
+        }
         @keyframes thesisShimmer {
             0%   { background-position: 200% 0; }
             100% { background-position: -100% 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .team-thesis .thesis-coda {
+            .thesis-coda {
                 animation: none;
                 background: none;
                 color: #F2D831;
                 -webkit-text-fill-color: #F2D831;
             }
+        }
+        @media (max-width: 768px) {
+            .thesis-coda-section {
+                padding: clamp(48px, 12vw, 80px) clamp(24px, 6vw, 36px);
+            }
+            .thesis-coda { font-size: clamp(1.6rem, 6.5vw, 2.4rem); }
         }
         .team-thesis p:last-child { margin-bottom: 0; }
         /* .thesis-accent kept available for future inline highlights —
@@ -971,6 +994,18 @@
             margin: 0;
             line-height: 1.05;
             letter-spacing: -0.02em;
+        }
+        /* Intro line under "Portfolio Founders". Same DomaineDisp body
+           type used by .team-intro / .founders-item-desc so it reads
+           as part of the same editorial family. */
+        .founders-left-intro {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.05rem, 1.25vw, 1.4rem);
+            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.82);
+            margin: clamp(12px, 1.2vw, 18px) 0 0 0;
+            font-weight: 400;
+            max-width: 28em;
         }
         .founders-photo-stack {
             position: relative;
@@ -1927,9 +1962,7 @@
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
                 <p class="thesis-lede">Sunshine Lake invests in global founders from extreme origins at their breakout moments.</p>
-                <p>Their psychology is to solve problems vital to our future.</p>
                 <p>Our aperture into geopolitical, economic, and technological inflections sparks massive waves, defying sector cycles to support multiple blockbuster companies a decade.</p>
-                <p class="thesis-coda">What better time to build than when the world needs it most?</p>
             </div>
 
             <div class="team-layout">
@@ -2045,7 +2078,8 @@
     <!-- Founders scroll-through -->
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
-            <h2 class="founders-left-title">Portfolio</h2>
+            <h2 class="founders-left-title">Portfolio Founders</h2>
+            <p class="founders-left-intro">Their psychology is to solve problems vital to our future.</p>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
@@ -2055,6 +2089,14 @@
             <!-- Items injected by JS from FOUNDERS_DATA -->
         </div>
     </div>
+
+    <!-- Coda — closing rhetorical beat, lives below the Portfolio
+         section now so the founder grid hands off into the question
+         before the dive into the footer. Inherits .thesis-coda
+         shimmer styling. -->
+    <section class="thesis-coda-section" aria-label="Closing thought">
+        <p class="thesis-coda">What better time to build than when the world needs it most?</p>
+    </section>
 
     </main>
 
