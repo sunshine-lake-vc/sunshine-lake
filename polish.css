@@ -1016,13 +1016,43 @@ body.mode-tight .content-sticky p {
   align-items: center;
   gap: clamp(16px, 1.8vw, 24px);
 }
+/* "Dive Beneath the Surface." — ocean shimmer, the darker sibling of
+   the homepage coda. Deep cobalt base with a pale sky highlight
+   sweeping across (slower than the gold shimmer for an aquatic feel). */
 .footer-photo-content h2 {
   font-family: 'DomaineDisp', 'Times New Roman', serif;
   font-size: clamp(48px, 5.5vw, 84px) !important;
   line-height: 1.02 !important;
   letter-spacing: -0.02em !important;
-  color: #155EE8 !important;
-  text-shadow: none !important;
+  background: linear-gradient(
+    100deg,
+    #155EE8  0%,
+    #155EE8 40%,
+    #7AC8FF 48%,
+    #DCEEFF 52%,
+    #155EE8 60%,
+    #155EE8 100%
+  ) !important;
+  background-size: 300% 100% !important;
+  background-position: 200% 0 !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 0 22px rgba(21, 94, 232, 0.32) !important;
+  animation: footerShimmer 5s ease-in-out infinite;
+}
+@keyframes footerShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-photo-content h2 {
+    animation: none;
+    background: none !important;
+    color: #155EE8 !important;
+    -webkit-text-fill-color: #155EE8 !important;
+  }
 }
 .footer-photo-content .footer-contact a {
   color: #155EE8 !important;
