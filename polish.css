@@ -1201,9 +1201,13 @@ body.mode-tight .content-sticky p {
      — was clamp(48px, 10vw, 96px) top and clamp(48px, 10vw, 88px)
      bottom, which produced a tall dead band around the seam on
      phones. Compressed by ~40% so Portfolio reads as the next
-     beat, not a separate page. */
+     beat, not a separate page.
+     margin-top: -2px overlaps the voices zone above so the same
+     sub-pixel rounding fix used at team→voices works here too —
+     the dark body background (#010210) can't show through a 1px
+     gap between two same-cobalt blocks. */
   .founders-scroll-spacer {
-    margin-top: 0 !important;
+    margin-top: -2px !important;
     z-index: 2 !important;
     padding-top: clamp(24px, 5vw, 48px) !important;
   }

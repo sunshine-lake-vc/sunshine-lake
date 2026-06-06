@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=69">
+    <link rel="stylesheet" href="polish.css?v=70">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -212,6 +212,13 @@
             display: inline-block;
             font-size: clamp(12px, 0.9vw, 14px);
             letter-spacing: 0.36em;
+            /* Keep the tagline on one line — the wide tracking
+               pushes "PRE-SEED & SEED FUND" past ~240px on small
+               viewports and it was wrapping to "PRE-SEED & SEED"
+               / "FUND". nowrap is safe because the wrap is
+               centered with translateX(-50%) and the parent has
+               no max-width constraint. */
+            white-space: nowrap;
         }
         .main-content .hero-tagline { display: none; }
         /* Chevron: a real <button> so it's keyboard-focusable and
