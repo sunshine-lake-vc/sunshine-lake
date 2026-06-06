@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=71">
+    <link rel="stylesheet" href="polish.css?v=72">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -416,7 +416,8 @@
         /* Thesis — stretches across ~86% of the team-section row so
            the lede wraps after "...extreme origins". */
         .team-thesis {
-            margin: 0 0 clamp(12px, 1.4vw, 22px) 0;
+            /* Tightened: was clamp(12-22px) bottom margin. */
+            margin: 0 0 clamp(6px, 0.6vw, 12px) 0;
             max-width: 86%;
             opacity: 0;
             transform: translateY(14px);
@@ -429,7 +430,9 @@
             font-size: clamp(1.4rem, 1.85vw, 2.15rem);
             line-height: 1.38;
             color: rgba(255, 255, 255, 0.92);
-            margin: 0 0 clamp(16px, 1.4vw, 26px) 0;
+            /* Tightened: was clamp(16-26px) bottom margin between
+               paragraphs in the thesis. */
+            margin: 0 0 clamp(10px, 1vw, 16px) 0;
             font-weight: 400;
         }
         /* First sentence — bolder + slightly larger, acts as the section
@@ -613,11 +616,11 @@
             padding: clamp(8px, 1vw, 16px) 0 0;
             position: relative;
             z-index: 2;
-            /* Tightened from clamp(40-72px) so the Track Record pills
-               sit closer to the team-cards above and Voices below —
-               the section reads as one continuous cobalt band, not
-               three stacked beats with dead space between them. */
-            margin-top: clamp(20px, 2.6vw, 36px);
+            /* Tightened again from clamp(20-36px) so the Track Record
+               pills sit even closer under the team carousel — pulled
+               the eyebrow + first row right up under the last team
+               card. */
+            margin-top: clamp(8px, 1.2vw, 18px);
         }
         .rd-exits-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -904,13 +907,14 @@
             font-weight: 400;
         }
         /* Founder quote on the homepage team card — sits where the teaser
-           used to live. White italic serif so it reads against the blue
-           team-section background. */
+           used to live. Roman (not italic) DomaineDisp serif so the
+           weight matches the rest of the editorial copy on the page;
+           italic was reading as a different voice from the body type. */
         .team-card-quote {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(0.92rem, 1.02vw, 1.18rem);
             line-height: 1.5;
-            font-style: italic;
+            font-style: normal;
             color: rgba(255, 255, 255, 0.92);
             margin: clamp(14px, 1.4vw, 22px) 0 clamp(10px, 1vw, 16px) 0;
             padding: 0;
@@ -977,12 +981,12 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            gap: clamp(18px, 2vw, 32px);
-            /* Top inset reduced from clamp(40-80px) → clamp(20-40px) so
-               the "Portfolio" title sits nearer to the voices section
-               above. Bottom inset unchanged — the sticky photo still
-               wants air below it. */
-            padding: clamp(20px, 2.6vw, 40px) clamp(32px, 4vw, 80px) clamp(28px, 3.5vw, 56px) 0;
+            /* Tightened: was clamp(18-32px) gap. Eyebrow → headline →
+               photo now sit closer together. */
+            gap: clamp(6px, 0.8vw, 14px);
+            /* Top inset also tightened from clamp(20-40px) so the
+               eyebrow lands nearer the top of the section. */
+            padding: clamp(12px, 1.4vw, 24px) clamp(32px, 4vw, 80px) clamp(28px, 3.5vw, 56px) 0;
             box-sizing: border-box;
         }
         /* Eyebrow above the Portfolio headline — mirrors the
@@ -995,7 +999,8 @@
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.72);
-            margin: 0 0 clamp(12px, 1.2vw, 18px) 0;
+            /* Tighter eyebrow → headline gap (was clamp(12-18px)). */
+            margin: 0 0 clamp(2px, 0.3vw, 6px) 0;
         }
         .founders-left-title {
             position: relative;

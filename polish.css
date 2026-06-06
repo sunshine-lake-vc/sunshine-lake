@@ -638,24 +638,26 @@ a.rd-name:hover { color: var(--rd-yellow); }
   border-color: rgba(242, 216, 49, 0.34);
   transform: translateY(-2px);
 }
+/* Voice quote: matched to .team-card-quote so the two testimonial
+   surfaces (team-cards on cobalt + voices carousel) read at the same
+   scale and weight. Font-style: normal because the team quote is
+   roman (italic was reading as a different voice). */
 .rd-voice-quote {
-  font-family: 'DomaineDisp', serif;
-  font-size: clamp(19px, 1.4vw, 23px);
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.95);
+  font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+  font-size: clamp(0.92rem, 1.02vw, 1.18rem);
+  line-height: 1.5;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: -0.005em;
   margin: 0;
 }
-/* Length-aware sizing — shorter quotes nudge larger, longer quotes
-   smaller, so each card fills roughly the same visual area. Anchored
-   to the Top 1% Track Record company-name scale (clamp(19-23px)) so
-   the two sections feel like one continuous treatment. Range
-   compressed (±2px around the baseline) so the carousel reads as one
-   uniform type ladder instead of four obviously different sizes. */
-.rd-voice-quote.is-xl { font-size: clamp(20px, 1.5vw, 25px); line-height: 1.4; }
-.rd-voice-quote.is-lg { font-size: clamp(19px, 1.4vw, 24px); line-height: 1.42; }
-.rd-voice-quote.is-md { font-size: clamp(19px, 1.4vw, 23px); line-height: 1.45; }
-.rd-voice-quote.is-sm { font-size: clamp(18px, 1.35vw, 22px); line-height: 1.48; }
+/* Length-aware sizing kept for back-compat but every size class now
+   resolves to the same team-card-quote scale — no more "four
+   obviously different sizes" inside one carousel. */
+.rd-voice-quote.is-xl,
+.rd-voice-quote.is-lg,
+.rd-voice-quote.is-md,
+.rd-voice-quote.is-sm { font-size: clamp(0.92rem, 1.02vw, 1.18rem); line-height: 1.5; }
 .rd-voice-attr {
   display: flex;
   align-items: center;
@@ -1141,15 +1143,15 @@ body.mode-tight .content-sticky p {
   .yellow-badge.stamp, .rd-badge.rd-stamp { width: 44px; height: 44px; font-size: 10px; }
   .rd-track { gap: 12px; padding: 12px var(--rd-side-pad); }
 
-  /* Voices: compact treatment. Quote size lifted to 17px so it reads
-     at the same scale as the Top 1% Track Record company name (also
-     17px on mobile) — the two carousels share one type ladder. */
+  /* Voices: compact treatment. Quote size matched to .team-card-quote
+     on mobile (~15px) so the team carousel and voices carousel read
+     at the same type scale. */
   .rd-voice { width: 86vw; max-width: 380px; padding: 22px; gap: 14px; }
   .rd-voice-quote,
   .rd-voice-quote.is-xl,
   .rd-voice-quote.is-lg,
   .rd-voice-quote.is-md,
-  .rd-voice-quote.is-sm { font-size: 17px; line-height: 1.45; }
+  .rd-voice-quote.is-sm { font-size: 15px; line-height: 1.5; }
   .rd-voices-row { padding: 8px var(--rd-side-pad); }
   /* Compress voices section bottom padding on mobile — combined with
      the founders top padding it was producing ~100px of dead cobalt
@@ -1158,7 +1160,7 @@ body.mode-tight .content-sticky p {
 
   /* Featured row stacks already (1fr above), tighten the featured cards */
   .rd-voice--featured { padding: 22px; gap: 14px; }
-  .rd-voice--featured .rd-voice-quote { font-size: 17px; }
+  .rd-voice--featured .rd-voice-quote { font-size: 15px; }
 
   /* Thesis section on mobile — large centered type that fills the
      viewport instead of leaving dead space, with predictable wrap */
