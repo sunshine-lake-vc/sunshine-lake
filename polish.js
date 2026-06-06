@@ -281,27 +281,26 @@
   // crossorigin="anonymous" was breaking the image loads entirely.
   // Hardcoded values are also more controllable — exact brand match
   // rather than whatever the favicon's dominant pixel happens to be.
+  // Per Don's call: airbnb / assured / groupon / taxproper read
+  // better as the default white tile, so they're intentionally
+  // absent from this map and fall through to the '#fff' fallback.
   var BRAND_TILE = {
     'figma.com':         '#0D0D0D',  // Figma uses a near-black tile
-    'deel.com':          '#7B61FF',  // Deel purple
+    'deel.com':          '#326FEB',  // Deel blue
     'kalshi.com':        '#00D082',  // Kalshi green
-    'checkr.com':        '#1AC6A9',  // Checkr teal
-    'airbnb.com':        '#FF5A5F',  // Airbnb coral
-    'groupon.com':       '#53A318',  // Groupon green
+    'checkr.com':        '#009BB5',  // Checkr teal
     'brex.com':          '#0F0F0F',  // Brex near-black
     'headway.co':        '#1B3D5C',  // Headway navy
     'fundamental.tech':  '#0D0D0D',  // Fundamental.tech black
     'datagrid.com':      '#0D0D0D',  // Datagrid black
     'spothero.com':      '#19A3E0',  // SpotHero blue
     'bitoasis.com':      '#0A1E3C',  // BitOasis navy
-    'assured.claims':    '#0F2D6E',  // Assured deep blue
     'hiddenroad.com':    '#0D0D0D',  // Hidden Road black
     'enable.us':         '#FF6A39',  // Enable orange
     'glide.com':         '#3F22FF',  // Glide indigo
     'legalpad.io':       '#0F8A6A',  // Legalpad green
     'ostro.health':      '#0D0D0D',  // Ostro black
-    'pry.co':            '#5BC0A8',  // Pry mint
-    'taxproper.com':     '#1F4FB6'   // TaxProper blue
+    'pry.co':            '#171717'   // Pry near-black
   };
 
   /* ─── Build a pill-shaped exit-card for the Track Record band ─── */
