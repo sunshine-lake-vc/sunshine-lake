@@ -519,9 +519,12 @@ a.rd-name:hover { color: var(--rd-yellow); }
   color: #fff;
 }
 
-/* ═══ Voices carousel — single-card with prev/next arrows ═══ */
+/* ═══ Voices carousel — single-card with prev/next arrows ═══
+   Top padding intentionally small — the team section above shares
+   the same Royal cobalt bg, so the two should read as one continuous
+   band with the voices sitting just under the track record. */
 .rd-voices {
-  padding-top: clamp(43px, 5.4vw, 86px);
+  padding-top: clamp(14px, 1.6vw, 28px);
   padding-bottom: clamp(43px, 5.4vw, 86px);
 }
 
@@ -633,19 +636,20 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 .rd-voice-quote {
   font-family: 'DomaineDisp', serif;
-  font-size: 17.5px;
-  line-height: 1.5;
+  font-size: clamp(19px, 1.4vw, 23px);
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: -0.005em;
   margin: 0;
 }
-/* Length-aware sizing — shorter quotes get bigger type, longer quotes
-   smaller, so each card fills roughly the same visual area. Driven by
-   tuneVoiceQuoteSize() in polish.js after voices render. */
-.rd-voice-quote.is-xl { font-size: clamp(20px, 1.55vw, 24px);   line-height: 1.42; }
-.rd-voice-quote.is-lg { font-size: clamp(18px, 1.35vw, 21px);   line-height: 1.45; }
-.rd-voice-quote.is-md { font-size: clamp(16px, 1.2vw, 18.5px);  line-height: 1.48; }
-.rd-voice-quote.is-sm { font-size: clamp(14.5px, 1.05vw, 17px); line-height: 1.5;  }
+/* Length-aware sizing — shorter quotes nudge larger, longer quotes
+   smaller, so each card fills roughly the same visual area. Anchored
+   to the Top 1% Track Record company-name scale (~19-23px) so the
+   two sections feel like one continuous treatment. */
+.rd-voice-quote.is-xl { font-size: clamp(22px, 1.7vw, 27px);    line-height: 1.4; }
+.rd-voice-quote.is-lg { font-size: clamp(20px, 1.5vw, 24px);    line-height: 1.42; }
+.rd-voice-quote.is-md { font-size: clamp(19px, 1.4vw, 23px);    line-height: 1.45; }
+.rd-voice-quote.is-sm { font-size: clamp(17px, 1.25vw, 21px);   line-height: 1.48; }
 .rd-voice-attr {
   display: flex;
   align-items: center;
@@ -653,6 +657,11 @@ a.rd-name:hover { color: var(--rd-yellow); }
   padding-top: 4px;
 }
 .rd-voice-mark {
+  /* Hidden — Don removed the company logo tile from the voice cards.
+     Track Record pills above still use their own logo treatment. */
+  display: none !important;
+}
+.rd-voice-mark--hidden {
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -845,7 +854,10 @@ body.mode-tight .content-sticky,
 
 /* Solid section colours — hard lines at every section boundary
    instead of gradient fades. Each step gets darker as you scroll. */
-.team-section            { background: #4A88E5 !important; }
+/* Team + Voices share the same Royal/Cobalt background so the two
+   sections read as one continuous band. Was #4A88E5 (Lake Surface)
+   for team and #1E54C8 for voices. */
+.team-section            { background: #155EE8 !important; }
 .founders-scroll-spacer  { background: #0A3DAE !important; }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
@@ -854,7 +866,7 @@ body.mode-tight .content-sticky,
 /* Voices section sits between team-section (#4A88E5 Lake Surface)
    and the founders-scroll-spacer (#0A3DAE Mid Lake) — pick an
    intermediate so the depth ladder reads smoothly downward. */
-.rd-zone.rd-voices-zone  { background: #1E54C8 !important; }
+.rd-zone.rd-voices-zone  { background: #155EE8 !important; }
 .footer-scroll-spacer    { background: #02041F !important; }
 .footer-sticky { background: transparent !important; }
 
