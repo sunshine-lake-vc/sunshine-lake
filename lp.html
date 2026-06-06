@@ -142,14 +142,14 @@
     <script>
         // ─────────────────────────────────────────────────────────
         // Soft password gate — single shared password, SHA-256 hashed.
-        // Current password: "sunshine2026" (CHANGE THIS).
+        // Current password: "ewok" (CHANGE THIS).
         // To rotate the password, regenerate the hash with:
         //   printf '%s' 'new-password' | shasum -a 256
         // …and replace PASSWORD_HASH below. (Also update lp-portal.html
         // and lp-updates.html if you ever embed it elsewhere — they
         // only check the session flag, not the hash.)
         // ─────────────────────────────────────────────────────────
-        const PASSWORD_HASH = '5d6180aa498ee7335f2899c3e818a2f42c4493e94331b049a00e71efbdbca6cc';
+        const PASSWORD_HASH = '8e83635d4cba5a262b09c1900b06b8190d677faa2b9de53ef23401dc157f6ac7';
 
         const form = document.getElementById('lpForm');
         const pwInput = document.getElementById('lpPassword');
