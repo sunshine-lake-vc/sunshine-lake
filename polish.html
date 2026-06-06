@@ -1366,7 +1366,12 @@
             color: transparent;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 22px rgba(21, 94, 232, 0.28);
-            animation: oceanShimmer 4.6s ease-in-out infinite;
+            /* Linear timing + a longer 8s cycle so the highlight sweeps
+               across at one constant, slow pace. ease-in-out was reading
+               as "slow then fast then slow" within each loop because
+               cubic timing accelerates through the middle — the user
+               wanted a single consistent speed. */
+            animation: oceanShimmer 8s linear infinite;
         }
         @keyframes oceanShimmer {
             0%   { background-position: 200% 0; }
