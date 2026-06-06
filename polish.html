@@ -867,11 +867,15 @@
         .founders-left-title {
             position: static;
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(2.2rem, 3.2vw, 4.5rem);
+            /* Scaled to match Meet Sunshine Lake + Dive Beneath the
+               Surface so the three section headings read as one family
+               (was clamp(2.2-4.5rem) — felt a half-step smaller). */
+            font-size: clamp(2.4rem, 4vw, 5rem);
             font-weight: 400;
             color: #fff;
             margin: 0;
             line-height: 1.05;
+            letter-spacing: -0.02em;
         }
         .founders-photo-stack {
             position: relative;
@@ -890,9 +894,15 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            /* Soft "wash" entrance — the incoming photo fades in WHILE
+               scaling down from 1.04 to 1.0 so the swap reads like a
+               gentle current pulling the next founder into view, not a
+               hard binary cut. Matches the water/dive theme. */
+            transform: scale(1.04);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .founders-photo-stack img.active { opacity: 1; }
+        .founders-photo-stack img.active { opacity: 1; transform: scale(1); }
 
         /* Right column — names scroll naturally */
         .founders-right {
@@ -918,8 +928,12 @@
         }
         .founders-item {
             padding: clamp(22px, 3vw, 48px) 0;
-            opacity: 0.15;
-            transition: opacity 0.5s ease;
+            /* Inactive names sit at 0.28 (was 0.15) so the full list
+               reads as a portfolio family rather than ghosted spacers.
+               Active still steps to opacity 1, so the focused founder
+               still pops. */
+            opacity: 0.28;
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
             text-decoration: none;
             display: block;
@@ -990,10 +1004,12 @@
         .founders-detailed .founders-item-company,
         .founders-detailed .founders-item-founders { display: none; }
 
-        /* Detailed view: spacing, opacity, dividers */
+        /* Detailed view: spacing, opacity, dividers — opacity matches
+           the base .founders-item value (0.28) so the family-list feel
+           is consistent across both views. */
         .founders-detailed .founders-item {
             padding: clamp(29px, 3vw, 48px) 0;
-            opacity: 0.25;
+            opacity: 0.28;
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
         .founders-detailed .founders-item.active { opacity: 1; }
@@ -3063,8 +3079,12 @@
                     currentIndex = closest;
                 }
 
-                // Fade out subtitle (desktop only — on mobile it scrolls away naturally)
-                if (!isMobile) {
+                // Fade out subtitle (desktop only). The #foundersSubtitle
+                // element was removed from the HTML, but the JS reference
+                // is kept around as a safe no-op for legacy templates that
+                // still include it. Null-guard so the rest of the scroll
+                // handler doesn't bail on every event.
+                if (!isMobile && subtitle) {
                     var fadeProgress = Math.max(0, Math.min(1, (center - firstViewTop) / (vh * 0.25)));
                     subtitle.style.opacity = 1 - fadeProgress;
                 }
