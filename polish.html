@@ -737,7 +737,11 @@
         }
         .team-cards-header {
             display: flex;
-            align-items: center;
+            /* flex-end so the eyebrow's baseline sits at the bottom of
+               the arrow buttons instead of vertically centered — gives
+               the label a subtle "anchored at the bottom" feel that
+               reads as more deliberate than the centered version. */
+            align-items: flex-end;
             justify-content: space-between;
             gap: clamp(16px, 2vw, 32px);
         }
@@ -752,6 +756,9 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.72);
             margin: 0;
+            /* Small inset above the baseline so the eyebrow doesn't
+               touch the absolute bottom of the arrow buttons. */
+            padding-bottom: clamp(6px, 0.7vw, 10px);
         }
         .team-cards-nav {
             display: flex;
