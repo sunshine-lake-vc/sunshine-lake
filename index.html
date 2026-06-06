@@ -483,15 +483,27 @@
             text-shadow: 0 0 16px rgba(242, 216, 49, 0.28);
             animation: thesisShimmer 3.4s ease-in-out infinite;
         }
-        /* Standalone closing section that sits between Portfolio and
-           the Footer. Renders as a vertical gradient bleed from Mid
-           Lake (matching the Portfolio gradient end above) down into
-           the Abyss (#02041F, matching the footer below) — no hard
-           cobalt-to-abyss seam, the dive feels continuous. Same
-           bridging pattern used at the voices → Portfolio seam. */
+        /* Standalone closing section between Portfolio and Footer.
+           Renders as a multi-stop vertical gradient — hold the Mid
+           Lake at the very top, then a long perceptually-smooth
+           midtone ramp through deeper blues into the Abyss at the
+           bottom. Multi-stop sRGB interpolation kills the visible
+           banding a 2-stop blue→black ramp produces.
+           Padding bumped so the section is tall enough for the
+           gradient to breathe (was 80-160px → 120-200px). */
         .thesis-coda-section {
-            background: linear-gradient(180deg, #0A3DAE 0%, #02041F 100%);
-            padding: clamp(80px, 9vw, 160px) clamp(56px, 8vw, 180px);
+            background: linear-gradient(
+                180deg,
+                #0A3DAE  0%,
+                #0A3DAE  10%,
+                #093396 28%,
+                #062771 46%,
+                #041B4D 64%,
+                #02103A 80%,
+                #020924 92%,
+                #02041F 100%
+            );
+            padding: clamp(120px, 12vw, 200px) clamp(56px, 8vw, 180px);
             text-align: center;
             position: relative;
             z-index: 2;
