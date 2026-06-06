@@ -1228,7 +1228,11 @@ body.mode-tight .content-sticky p {
   }
   .hero-card .title {
     text-align: left !important;
-    font-size: clamp(2.6rem, 12vw, 3.8rem) !important;
+    /* Lowered from clamp(2.6-3.8rem) to clamp(2.2-3.2rem) so
+       "Forge the Future" fits on a single line on a 390px
+       iPhone instead of wrapping to "Forge the" / "Future". */
+    font-size: clamp(2.2rem, 9.5vw, 3.2rem) !important;
+    line-height: 1.05 !important;
     width: 100%;
   }
   .hero-card .hero-badge { align-self: flex-start !important; }

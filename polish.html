@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=66">
+    <link rel="stylesheet" href="polish.css?v=67">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -173,32 +173,63 @@
             50%      { opacity: 1; }
         }
         /* Bottom-center scroll-hint cluster — column-stacks the
-           mobile-only bottom tagline above the chevron. Lives
-           outside .main-content so the title can move freely
-           without affecting the chevron position. */
+           bottom tagline above the chevron. Lives outside
+           .main-content so the title can move freely without
+           affecting the chevron position. Lifted further up the
+           card (clamp(40-72px) bottom) so the cluster sits well
+           clear of the very bottom edge — feels intentional and
+           keeps the chevron in a comfortable thumb zone on phones. */
         .hero-scroll-hint-wrap {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: clamp(20px, 2.4vw, 36px);
+            bottom: clamp(40px, 5vw, 72px);
             z-index: 11;
+            /* The wrap itself ignores pointer events so the wrap-
+               level layout doesn't intercept clicks meant for the
+               canvas behind it — only the chevron button re-enables
+               pointer-events for its own hit zone. */
             pointer-events: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(12px, 3vw, 18px);
+            gap: clamp(14px, 2.4vw, 20px);
         }
         /* Bottom tagline — sibling of the chevron. Shown on every
            viewport now; the eyebrow inside .main-content is hidden
            so "Pre-Seed & Seed Fund" always reads with the scroll-
-           down chevron rather than as a title eyebrow. */
-        .hero-tagline--bottom { display: inline-block; }
+           down chevron rather than as a title eyebrow. Bumped one
+           notch larger so it carries enough weight to anchor the
+           cluster (was clamp(10.5-12.5) — felt undersized). */
+        .hero-tagline--bottom {
+            display: inline-block;
+            font-size: clamp(12px, 0.9vw, 14px);
+            letter-spacing: 0.36em;
+        }
         .main-content .hero-tagline { display: none; }
+        /* Chevron: a real <button> so it's keyboard-focusable and
+           announces as actionable. JS wires the click → smooth-
+           scroll to the next section (see "Hero chevron skip"
+           handler near the bottom of the script). */
         .hero-scroll-hint {
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            background: transparent;
+            border: 0;
+            border-radius: 999px;
             color: rgba(255, 255, 255, 0.85);
             filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
+            cursor: pointer;
+            pointer-events: auto;
             animation: heroHintBob 2.4s ease-in-out infinite;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+        .hero-scroll-hint:hover { color: #ffffff; }
+        .hero-scroll-hint:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.6);
+            outline-offset: 4px;
         }
         @keyframes heroHintBob {
             0%, 100% { transform: translateY(0);    opacity: 0.7; }
@@ -1788,18 +1819,17 @@
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
                 </div>
 
-                <!-- Bottom-center scroll-hint cluster — tagline (mobile
-                     only) above a softly-bobbing chevron. On desktop
-                     only the chevron shows; the tagline lives as an
-                     eyebrow above the title (.main-content). On mobile
-                     it's the inverse: the eyebrow hides and a separate
-                     tagline appears directly above the chevron so the
-                     title is free to occupy the vertical center. -->
+                <!-- Bottom-center scroll-hint cluster — "Pre-Seed & Seed
+                     Fund" tagline above a clickable chevron. The chevron
+                     is a real <button> with a JS handler (wired below)
+                     that smoothly scrolls the page to the next content
+                     section, so it doubles as a quick-skip affordance
+                     for users who landed on the hero and want to dive in. -->
                 <div class="hero-scroll-hint-wrap" aria-hidden="false">
                     <span class="hero-tagline hero-tagline--bottom" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
-                    <span class="hero-scroll-hint" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="34" height="34" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                    </span>
+                    <button class="hero-scroll-hint" id="heroScrollHint" type="button" aria-label="Scroll to next section">
+                        <svg viewBox="0 0 24 24" width="34" height="34" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
                 </div>
 
                 <!-- 4. Dark vignette for text readability (Mode B only) -->
@@ -2443,6 +2473,23 @@
         });
         window._lenis = lenis;
         lenis.on('scroll', updateTargets);
+
+        // Hero chevron skip — clicking the bottom-center chevron smooth-
+        // scrolls past the hero to the next content beat. Scroll to one
+        // viewport height (≈ end of hero card) so the user lands at the
+        // top of the thesis no matter how the page is laid out below.
+        // Using lenis.scrollTo to stay inside the Lenis-managed smooth
+        // scroll instead of fighting it with window.scrollTo.
+        var heroChevronBtn = document.getElementById('heroScrollHint');
+        if (heroChevronBtn) {
+            heroChevronBtn.addEventListener('click', function () {
+                if (window._lenis && typeof window._lenis.scrollTo === 'function') {
+                    window._lenis.scrollTo(window.innerHeight, { duration: 1.1 });
+                } else {
+                    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                }
+            });
+        }
 
         cacheLayoutValues();
         updateTargets();
