@@ -109,8 +109,17 @@
         }
 
         /* Hero edge inset — single source of truth for the left edge of
-           the wordmark + title so they ALWAYS share the same gutter. */
-        :root { --hero-edge-x: clamp(20px, 3.6vw, 72px); }
+           the wordmark + title so they ALWAYS share the same gutter.
+           Matched to .team-section's horizontal padding so the hero
+           wordmark + headline align with the thesis copy that sits
+           just below ("Sunshine Lake invests in global founders..."). */
+        :root { --hero-edge-x: clamp(56px, 8vw, 180px); }
+        @media (max-width: 1024px) {
+            :root { --hero-edge-x: clamp(20px, 5vw, 48px); }
+        }
+        @media (max-width: 768px) {
+            :root { --hero-edge-x: clamp(24px, 6vw, 36px); }
+        }
 
         /* Top Left Logo */
         .logo-container {
