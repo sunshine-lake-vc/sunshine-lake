@@ -127,8 +127,8 @@
         /* Main Content Overlay (Title) */
         .main-content {
             position: absolute;
-            bottom: 0;
-            left: clamp(16px, 3.2vw, 64px);
+            bottom: clamp(24px, 3vw, 48px);
+            left: clamp(20px, 5vw, 120px);
             z-index: 10;
             color: #ffffff;
             display: flex;
@@ -145,6 +145,40 @@
             font-weight: 400;
             line-height: 1.1;
             margin: 0;
+        }
+
+        /* Mobile-only scroll hint — soft fade-in on load, then a slow
+           gentle bob to suggest "swipe up to scroll." */
+        .hero-scroll-hint { display: none; }
+        @media (max-width: 768px) {
+            .hero-scroll-hint {
+                display: flex;
+                position: absolute;
+                bottom: clamp(18px, 5vw, 32px);
+                left: 50%;
+                transform: translate(-50%, 0);
+                color: rgba(255, 255, 255, 0.85);
+                z-index: 11;
+                pointer-events: none;
+                opacity: 0;
+                animation: heroHintIntro 1.2s ease 1.2s forwards,
+                           heroHintBob 2.4s ease-in-out 2.4s infinite;
+                filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
+            }
+            @keyframes heroHintIntro {
+                from { opacity: 0; transform: translate(-50%, -6px); }
+                to   { opacity: 0.85; transform: translate(-50%, 0); }
+            }
+            @keyframes heroHintBob {
+                0%, 100% { transform: translate(-50%, 0);   opacity: 0.7; }
+                50%      { transform: translate(-50%, 6px); opacity: 1; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .hero-scroll-hint {
+                    animation: none;
+                    opacity: 0.85;
+                }
+            }
         }
 
         /* Condensed thesis line — sits under the hero title */
@@ -1479,7 +1513,7 @@
             .content-sticky.hl-active p { color: #155EE8; }
             .hl { color: #155EE8 !important; }
             .logo-img { height: clamp(26px, 5.5vw, 40px); }
-            .logo-container { left: 50%; transform: translateX(-50%); top: clamp(28px, 4vw, 64px); }
+            .logo-container { left: 50%; transform: translateX(-50%); top: clamp(48px, 9vw, 80px); }
             .main-content { left: 0; right: 0; align-items: center; text-align: center; padding: 0 20px; max-width: 100%; }
             .title { text-align: center; }
             /* Content text section — reflow as single block on mobile */
@@ -1680,6 +1714,11 @@
                 <!-- 3. Title -->
                 <div class="main-content">
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
+                </div>
+
+                <!-- Mobile-only scroll hint — soft-bouncing chevron -->
+                <div class="hero-scroll-hint" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </div>
 
                 <!-- 4. Dark vignette for text readability (Mode B only) -->
