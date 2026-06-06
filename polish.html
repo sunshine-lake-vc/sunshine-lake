@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=63">
+    <link rel="stylesheet" href="polish.css?v=64">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1334,13 +1334,46 @@
             align-items: center;
             justify-content: center;
         }
+        /* "Dive Beneath the Surface." — ocean shimmer baked inline so
+           the animation runs regardless of polish.css load order or
+           caching. Deep cobalt base with a pale sky highlight sweeping
+           across; mirrors the thesis-coda shimmer in family. */
         .footer-photo-content h2 {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(2.2rem, 3.5vw, 4.5rem);
+            font-size: clamp(2.4rem, 4vw, 5rem);
             font-weight: 400;
-            color: #155EE8;
-            line-height: 1.1;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
             margin: 0 0 clamp(20px, 2.5vw, 36px) 0;
+            background: linear-gradient(
+                100deg,
+                #155EE8  0%,
+                #155EE8 40%,
+                #7AC8FF 48%,
+                #DCEEFF 52%,
+                #155EE8 60%,
+                #155EE8 100%
+            );
+            background-size: 300% 100%;
+            background-position: 200% 0;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 22px rgba(21, 94, 232, 0.28);
+            animation: oceanShimmer 4.6s ease-in-out infinite;
+        }
+        @keyframes oceanShimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -100% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .footer-photo-content h2 {
+                animation: none;
+                background: none;
+                color: #155EE8;
+                -webkit-text-fill-color: #155EE8;
+            }
         }
         .footer-contact {
             display: flex;
@@ -1385,7 +1418,9 @@
                 height: 55vh;
             }
             .footer-photo-content h2 {
-                font-size: clamp(1.6rem, 6vw, 2.5rem);
+                /* Match Meet Sunshine Lake + Portfolio mobile scale so
+                   the three section headings read as one family. */
+                font-size: clamp(2.2rem, 7vw, 3.2rem);
             }
         }
 

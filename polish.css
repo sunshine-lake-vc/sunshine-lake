@@ -645,12 +645,14 @@ a.rd-name:hover { color: var(--rd-yellow); }
 }
 /* Length-aware sizing — shorter quotes nudge larger, longer quotes
    smaller, so each card fills roughly the same visual area. Anchored
-   to the Top 1% Track Record company-name scale (~19-23px) so the
-   two sections feel like one continuous treatment. */
-.rd-voice-quote.is-xl { font-size: clamp(22px, 1.7vw, 27px);    line-height: 1.4; }
-.rd-voice-quote.is-lg { font-size: clamp(20px, 1.5vw, 24px);    line-height: 1.42; }
-.rd-voice-quote.is-md { font-size: clamp(19px, 1.4vw, 23px);    line-height: 1.45; }
-.rd-voice-quote.is-sm { font-size: clamp(17px, 1.25vw, 21px);   line-height: 1.48; }
+   to the Top 1% Track Record company-name scale (clamp(19-23px)) so
+   the two sections feel like one continuous treatment. Range
+   compressed (±2px around the baseline) so the carousel reads as one
+   uniform type ladder instead of four obviously different sizes. */
+.rd-voice-quote.is-xl { font-size: clamp(20px, 1.5vw, 25px); line-height: 1.4; }
+.rd-voice-quote.is-lg { font-size: clamp(19px, 1.4vw, 24px); line-height: 1.42; }
+.rd-voice-quote.is-md { font-size: clamp(19px, 1.4vw, 23px); line-height: 1.45; }
+.rd-voice-quote.is-sm { font-size: clamp(18px, 1.35vw, 22px); line-height: 1.48; }
 .rd-voice-attr {
   display: flex;
   align-items: center;
@@ -859,7 +861,11 @@ body.mode-tight .content-sticky,
    sections read as one continuous band. Was #4A88E5 (Lake Surface)
    for team and #1E54C8 for voices. */
 .team-section            { background: #155EE8 !important; }
-.founders-scroll-spacer  { background: #0A3DAE !important; }
+/* Founders/Portfolio: open with the same Royal Cobalt as the band
+   above (team + voices) and fade into Mid Lake over the first 320px
+   so there's no hard edge — the seam between voices and Portfolio
+   was rendering as a visible dark band on mobile. */
+.founders-scroll-spacer  { background: linear-gradient(180deg, #155EE8 0px, #0A3DAE 320px) !important; }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
 .rd-zone                 { background: #050838 !important; }
@@ -1014,46 +1020,9 @@ body.mode-tight .content-sticky p {
   align-items: center;
   gap: clamp(16px, 1.8vw, 24px);
 }
-/* "Dive Beneath the Surface." — ocean shimmer, the darker sibling of
-   the homepage coda. Deep cobalt base with a pale sky highlight
-   sweeping across (slower than the gold shimmer for an aquatic feel). */
-.footer-photo-content h2 {
-  font-family: 'DomaineDisp', 'Times New Roman', serif;
-  font-size: clamp(48px, 5.5vw, 84px) !important;
-  line-height: 1.02 !important;
-  letter-spacing: -0.02em !important;
-  background: linear-gradient(
-    100deg,
-    #155EE8  0%,
-    #155EE8 40%,
-    #7AC8FF 48%,
-    #DCEEFF 52%,
-    #155EE8 60%,
-    #155EE8 100%
-  ) !important;
-  background-size: 300% 100% !important;
-  /* No !important on background-position — that'd pin it and block the
-     keyframe animation from moving the gradient across the text. */
-  background-position: 200% 0;
-  background-clip: text !important;
-  -webkit-background-clip: text !important;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: 0 0 22px rgba(21, 94, 232, 0.32) !important;
-  animation: footerShimmer 5s ease-in-out infinite;
-}
-@keyframes footerShimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -100% 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .footer-photo-content h2 {
-    animation: none;
-    background: none !important;
-    color: #155EE8 !important;
-    -webkit-text-fill-color: #155EE8 !important;
-  }
-}
+/* Footer "Dive Beneath the Surface" shimmer now lives inline in the
+   index.html / polish.html <style> blocks so cascade order can't kill
+   it. Intentionally no rules here. */
 .footer-photo-content .footer-contact a {
   color: #155EE8 !important;
   border-bottom-color: rgba(21, 94, 232, 0.3) !important;
@@ -1164,14 +1133,24 @@ body.mode-tight .content-sticky p {
   .yellow-badge.stamp, .rd-badge.rd-stamp { width: 44px; height: 44px; font-size: 10px; }
   .rd-track { gap: 12px; padding: 12px var(--rd-side-pad); }
 
-  /* Voices: same compact treatment */
+  /* Voices: compact treatment. Quote size lifted to 17px so it reads
+     at the same scale as the Top 1% Track Record company name (also
+     17px on mobile) — the two carousels share one type ladder. */
   .rd-voice { width: 86vw; max-width: 380px; padding: 22px; gap: 14px; }
-  .rd-voice-quote { font-size: 15px; }
+  .rd-voice-quote,
+  .rd-voice-quote.is-xl,
+  .rd-voice-quote.is-lg,
+  .rd-voice-quote.is-md,
+  .rd-voice-quote.is-sm { font-size: 17px; line-height: 1.45; }
   .rd-voices-row { padding: 8px var(--rd-side-pad); }
+  /* Compress voices section bottom padding on mobile — combined with
+     the founders top padding it was producing ~100px of dead cobalt
+     between the carousel and the Portfolio title. */
+  .rd-voices { padding-top: clamp(8px, 2vw, 16px); padding-bottom: clamp(24px, 5vw, 48px); }
 
   /* Featured row stacks already (1fr above), tighten the featured cards */
   .rd-voice--featured { padding: 22px; gap: 14px; }
-  .rd-voice--featured .rd-voice-quote { font-size: 16px; }
+  .rd-voice--featured .rd-voice-quote { font-size: 17px; }
 
   /* Thesis section on mobile — large centered type that fills the
      viewport instead of leaving dead space, with predictable wrap */
@@ -1210,14 +1189,21 @@ body.mode-tight .content-sticky p {
   /* Team → Portfolio: kill the inline -50vh negative margin and
      z-index:1 that was making the founders section overlap with
      and render BEHIND the team section on mobile. Now founders
-     sits in normal flow under the team with explicit breathing
-     room above its 'Portfolio' header. */
+     sits in normal flow under the team with tighter vertical rhythm
+     — was clamp(48px, 10vw, 96px) top and clamp(48px, 10vw, 88px)
+     bottom, which produced a tall dead band around the seam on
+     phones. Compressed by ~40% so Portfolio reads as the next
+     beat, not a separate page. */
   .founders-scroll-spacer {
     margin-top: 0 !important;
     z-index: 2 !important;
-    padding-top: clamp(48px, 10vw, 96px) !important;
+    padding-top: clamp(24px, 5vw, 48px) !important;
   }
-  .team-section { padding-bottom: clamp(48px, 10vw, 88px) !important; }
+  .team-section { padding-bottom: clamp(24px, 5vw, 48px) !important; }
+  /* Compress the trailing scroll runway below the last portfolio
+     name so the founders → footer transition lands sooner. */
+  .founders-right { padding-bottom: 18vh !important; }
+  .founders-mobile-overlay { padding-bottom: clamp(24px, 5vw, 48px) !important; }
 
   /* Hero title — left-aligned on mobile so it sits flush with the
      wordmark above. We explicitly clear the older centered ruleset by
