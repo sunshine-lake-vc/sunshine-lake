@@ -1222,30 +1222,31 @@ body.mode-tight .content-sticky p {
   }
   .team-section { padding-bottom: clamp(48px, 10vw, 88px) !important; }
 
-  /* Hero title — true center of the hero card on mobile via
-     translate-based positioning. Doesn't fight the inline JS
-     transform because we're explicitly !important-ing it. */
+  /* Hero title — left-aligned on mobile so it sits flush with the
+     wordmark above. We explicitly clear the older centered ruleset by
+     pinning bottom/left to the hero edge inset and forcing
+     flex-direction column + flex-start. */
   .hero-card .main-content {
     position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    bottom: auto !important;
+    top: auto !important;
+    bottom: clamp(28px, 6vw, 56px) !important;
+    left: var(--hero-edge-x) !important;
     right: auto !important;
-    transform: translate(-50%, -50%) !important;
+    transform: none !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
-    width: calc(100% - 48px) !important;
-    max-width: 100% !important;
-    text-align: center !important;
+    align-items: flex-start !important;
+    width: calc(100% - (var(--hero-edge-x) * 2)) !important;
+    max-width: calc(100% - (var(--hero-edge-x) * 2)) !important;
+    text-align: left !important;
     padding: 0 !important;
   }
   .hero-card .title {
-    text-align: center !important;
-    font-size: clamp(2.4rem, 11vw, 3.4rem) !important;
+    text-align: left !important;
+    font-size: clamp(2.6rem, 12vw, 3.8rem) !important;
     width: 100%;
   }
-  .hero-card .hero-badge { align-self: center !important; }
+  .hero-card .hero-badge { align-self: flex-start !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
