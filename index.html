@@ -746,7 +746,11 @@
         }
 
         .team-card {
-            flex: 0 0 clamp(280px, 30vw, 340px);
+            /* Bumped max from 340px → 380px so the longest partner
+               name ("Ivan La Frinere-Sandoval") clears the chevron
+               on a single line. Mobile width override below is
+               unchanged. */
+            flex: 0 0 clamp(280px, 31vw, 380px);
             display: flex;
             flex-direction: column;
             align-items: stretch;
@@ -802,10 +806,19 @@
         }
         .team-card-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.3rem, 1.6vw, 2rem);
+            /* Lowered from clamp(1.3-2rem) to clamp(1.2-1.55rem) so
+               the longest partner name fits beside the chevron on a
+               single line. The other three names still read at a
+               comfortable headline scale. white-space: nowrap +
+               min-width: 0 are belt-and-braces guards against any
+               sub-pixel rounding pushing the name onto a second line. */
+            font-size: clamp(1.2rem, 1.45vw, 1.55rem);
             color: #155EE8;
             font-weight: 400;
             line-height: 1.2;
+            letter-spacing: -0.005em;
+            white-space: nowrap;
+            min-width: 0;
         }
 
         .team-card-role {
