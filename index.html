@@ -744,16 +744,19 @@
         .team-cards-header {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: space-between;
             gap: clamp(16px, 2vw, 32px);
         }
+        /* Eyebrow next to the team carousel arrows. Styled to match
+           "TOP 1% TRACK RECORD" and "SUNSHINE LAKE PORTFOLIO" so all
+           three supporting labels on the page read as one family. */
         .team-cards-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.8vw, 11.5px);
+            font-size: clamp(12px, 1vw, 14px);
             font-weight: 600;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.72);
             margin: 0;
         }
         .team-cards-nav {
@@ -2002,6 +2005,7 @@
                 <!-- Partners — horizontal carousel with arrows -->
                 <div class="team-cards-wrap">
                     <div class="team-cards-header">
+                        <p class="team-cards-label">Sunshine Lake Team</p>
                         <div class="team-cards-nav" id="teamCardsNav">
                             <button class="team-cards-nav-btn" id="teamPrev" aria-label="Previous partner" type="button">
                                 <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
