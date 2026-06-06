@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=67">
+    <link rel="stylesheet" href="polish.css?v=68">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -544,7 +544,11 @@
             padding: clamp(8px, 1vw, 16px) 0 0;
             position: relative;
             z-index: 2;
-            margin-top: clamp(40px, 5vw, 72px);
+            /* Tightened from clamp(40-72px) so the Track Record pills
+               sit closer to the team-cards above and Voices below —
+               the section reads as one continuous cobalt band, not
+               three stacked beats with dead space between them. */
+            margin-top: clamp(20px, 2.6vw, 36px);
         }
         .rd-exits-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -905,7 +909,11 @@
             justify-content: flex-start;
             align-items: flex-start;
             gap: clamp(18px, 2vw, 32px);
-            padding: clamp(40px, 5vw, 80px) clamp(32px, 4vw, 80px) clamp(28px, 3.5vw, 56px) 0;
+            /* Top inset reduced from clamp(40-80px) → clamp(20-40px) so
+               the "Portfolio" title sits nearer to the voices section
+               above. Bottom inset unchanged — the sticky photo still
+               wants air below it. */
+            padding: clamp(20px, 2.6vw, 40px) clamp(32px, 4vw, 80px) clamp(28px, 3.5vw, 56px) 0;
             box-sizing: border-box;
         }
         .founders-left-title {

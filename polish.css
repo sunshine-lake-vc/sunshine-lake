@@ -526,7 +526,10 @@ a.rd-name:hover { color: var(--rd-yellow); }
    band with the voices sitting just under the track record. */
 .rd-voices {
   padding-top: clamp(14px, 1.6vw, 28px);
-  padding-bottom: clamp(43px, 5.4vw, 86px);
+  /* Was clamp(43-86px) — produced a tall band of empty cobalt
+     between the last testimonial and the Portfolio header.
+     Compressed so the two sections feel like one continuous beat. */
+  padding-bottom: clamp(16px, 2vw, 32px);
 }
 
 .rd-voices-marquee {
