@@ -979,15 +979,17 @@
         .founders-left-title {
             position: static;
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            /* Scaled to match Meet Sunshine Lake + Dive Beneath the
-               Surface so the three section headings read as one family
-               (was clamp(2.2-4.5rem) — felt a half-step smaller). */
-            font-size: clamp(2.4rem, 4vw, 5rem);
-            font-weight: 400;
+            /* Sized + weighted to MATCH .team-thesis .thesis-lede so the
+               sentence here ("Portfolio Founders solving problems vital
+               to our future.") reads as the same family of editorial
+               opening line as "Sunshine Lake invests in global founders
+               from extreme origins at their breakout moments." up top. */
+            font-size: clamp(2.1rem, 2.9vw, 3.6rem);
+            font-weight: 500;
             color: #fff;
             margin: 0;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
         }
         /* Intro line under "Portfolio Founders". Same DomaineDisp body
            type used by .team-intro / .founders-item-desc so it reads
@@ -2072,8 +2074,7 @@
     <!-- Founders scroll-through -->
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
-            <h2 class="founders-left-title">Portfolio Founders</h2>
-            <p class="founders-left-intro">Their psychology is to solve problems vital to our future.</p>
+            <h2 class="founders-left-title">Portfolio Founders solving problems vital to our future.</h2>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
