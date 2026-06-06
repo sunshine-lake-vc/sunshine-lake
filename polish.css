@@ -1205,17 +1205,19 @@ body.mode-tight .content-sticky p {
   .founders-right { padding-bottom: 18vh !important; }
   .founders-mobile-overlay { padding-bottom: clamp(24px, 5vw, 48px) !important; }
 
-  /* Hero title — left-aligned on mobile so it sits flush with the
-     wordmark above. We explicitly clear the older centered ruleset by
-     pinning bottom/left to the hero edge inset and forcing
-     flex-direction column + flex-start. */
+  /* Hero title — primary position is the vertical centre of the hero
+     on mobile (per Don's request). Left-aligned to match the wordmark
+     above, but vertically pinned to 50% via top/transform. The JS
+     title-slide is disabled on small viewports (see tick() — mobile
+     branch writes translateY(-50%) so this CSS transform survives the
+     per-frame inline rewrite). */
   .hero-card .main-content {
     position: absolute !important;
-    top: auto !important;
-    bottom: clamp(28px, 6vw, 56px) !important;
+    top: 50% !important;
+    bottom: auto !important;
     left: var(--hero-edge-x) !important;
     right: auto !important;
-    transform: none !important;
+    transform: translateY(-50%) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -1230,6 +1232,11 @@ body.mode-tight .content-sticky p {
     width: 100%;
   }
   .hero-card .hero-badge { align-self: flex-start !important; }
+  /* Hide the eyebrow tagline inside the title block on mobile — the
+     mobile-only bottom tagline (.hero-tagline--bottom, above the
+     chevron) takes its place so the title sits alone at centre. */
+  .hero-card .main-content .hero-tagline { display: none !important; }
+  .hero-card .hero-tagline--bottom { display: inline-block !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════

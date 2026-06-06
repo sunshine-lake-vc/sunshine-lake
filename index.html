@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=65">
+    <link rel="stylesheet" href="polish.css?v=66">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -172,9 +172,10 @@
             0%, 100% { opacity: 0.45; }
             50%      { opacity: 1; }
         }
-        /* Bottom-center scroll-hint — softly bobs to signal "scroll
-           down for more". Lives outside .main-content so the title
-           can move freely without affecting the chevron position. */
+        /* Bottom-center scroll-hint cluster — column-stacks the
+           mobile-only bottom tagline above the chevron. Lives
+           outside .main-content so the title can move freely
+           without affecting the chevron position. */
         .hero-scroll-hint-wrap {
             position: absolute;
             left: 50%;
@@ -182,7 +183,14 @@
             bottom: clamp(20px, 2.4vw, 36px);
             z-index: 11;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(12px, 3vw, 18px);
         }
+        /* Bottom tagline — sibling of the chevron. Hidden by default
+           (desktop shows the eyebrow inside .main-content instead). */
+        .hero-tagline--bottom { display: none; }
         .hero-scroll-hint {
             display: inline-flex;
             color: rgba(255, 255, 255, 0.85);
@@ -1762,11 +1770,16 @@
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
                 </div>
 
-                <!-- Bottom-center scroll-hint chevron — softly bobs up
-                     and down to suggest "scroll down for more". Shown
-                     on every viewport now (was mobile-only). -->
-                <div class="hero-scroll-hint-wrap" aria-hidden="true">
-                    <span class="hero-scroll-hint">
+                <!-- Bottom-center scroll-hint cluster — tagline (mobile
+                     only) above a softly-bobbing chevron. On desktop
+                     only the chevron shows; the tagline lives as an
+                     eyebrow above the title (.main-content). On mobile
+                     it's the inverse: the eyebrow hides and a separate
+                     tagline appears directly above the chevron so the
+                     title is free to occupy the vertical center. -->
+                <div class="hero-scroll-hint-wrap" aria-hidden="false">
+                    <span class="hero-tagline hero-tagline--bottom" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
+                    <span class="hero-scroll-hint" aria-hidden="true">
                         <svg viewBox="0 0 24 24" width="34" height="34" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     </span>
                 </div>
@@ -2180,7 +2193,11 @@
         const initTitleY = window.innerHeight * 0.42;
         let currentTitleY = initTitleY;
         let targetTitleY = initTitleY;
-        mainContent.style.transform = `translateY(-${initTitleY}px)`;
+        // Initial transform — mobile uses CSS centring (top:50% + -50%),
+        // desktop starts in the slid-up position.
+        mainContent.style.transform = window.innerWidth <= 768
+            ? 'translateY(-50%)'
+            : `translateY(-${initTitleY}px)`;
 
         // Footer — scale card from full-screen down to natural size
         const footerSpacer = document.querySelector('.footer-scroll-spacer');
@@ -2580,7 +2597,15 @@
                     heroCard.style.borderRadius = currentRadius + 'px';
                 }
                 if (mainContent) {
-                    mainContent.style.transform = `translateY(-${currentTitleY}px)`;
+                    // Mobile: title is vertically centred via top:50% in
+                    // CSS — write translateY(-50%) so the centring math
+                    // works AND so the per-frame slide animation skips
+                    // small viewports entirely.
+                    if (window.innerWidth <= 768) {
+                        mainContent.style.transform = 'translateY(-50%)';
+                    } else {
+                        mainContent.style.transform = `translateY(-${currentTitleY}px)`;
+                    }
                 }
                 if (footerPhotoCardEl) {
                     footerPhotoCardEl.style.transform = `scale(${currentFooterScale})`;
