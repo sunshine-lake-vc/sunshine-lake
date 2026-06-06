@@ -218,14 +218,16 @@
   /* ═══ FOUNDER VOICES — one unified feed ═══ */
   var voices = [
     // ── Lead voices (formerly the featured row) ──
+    // Shuo opens the feed — anchor quote that frames the rest of the
+    // voices around Don's hands-on, day-zero involvement.
+    { name: 'Shuo Wang',         role: 'Co-Founder',          company: 'Deel',       domain: 'deel.com',
+      quote: "We spent those early days working side-by-side out of Don's office. He has incredible heart, helped wire the core DNA of the business, and is still just as crucial to us today." },
     { name: 'Alex Bouaziz',      role: 'Co-Founder & CEO',    company: 'Deel',       domain: 'deel.com',
       quote: "A fantastic partner and ally to Deel since its early days." },
     { name: 'Jake Sussman',      role: 'Co-Founder',          company: 'Headway',    domain: 'headway.co',
       quote: "He hustled harder for me than anyone else did. I want him to be a part of every single round and company that I start." },
     { name: 'Tarek Mansour',     role: 'Co-Founder & CEO',    company: 'Kalshi',     domain: 'kalshi.com',
       quote: "With us from day zero — a tremendous supporter through the twists and turns." },
-    { name: 'Shuo Wang',         role: 'Co-Founder',          company: 'Deel',       domain: 'deel.com',
-      quote: "We spent those early days working side-by-side out of Don's office. He has incredible heart, helped wire the core DNA of the business, and is still just as crucial to us today." },
     { name: 'Aaron Bai',         role: 'Founder & CEO',       company: 'Affiniti',   domain: 'affiniti.com',
       quote: "It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice." },
     { name: 'Ankit Jain',        role: 'Co-Founder & CEO',    company: 'Aviator',    domain: 'aviator.co',
