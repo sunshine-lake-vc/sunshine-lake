@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=64">
+    <link rel="stylesheet" href="polish.css?v=65">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -152,23 +152,11 @@
             text-align: left;
         }
 
-        /* Bottom-center stack: pulsing "Pre-Seed & Seed Fund" tagline
-           above a softly bobbing scroll-hint chevron. The hint shows
-           only on mobile (touch users need the scroll affordance more);
-           the tagline shows on every viewport. */
-        .hero-scroll-stack {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: clamp(28px, 4.5vw, 64px);
-            z-index: 11;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(14px, 1.6vw, 24px);
-            pointer-events: none;
-        }
+        /* "Pre-Seed & Seed Fund" — small-caps editorial eyebrow that
+           sits ABOVE the headline inside .main-content. Pulses softly
+           in and out so it reads as a deliberate accent. */
         .hero-tagline {
+            display: inline-block;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: clamp(10.5px, 0.78vw, 12.5px);
             font-weight: 600;
@@ -176,6 +164,7 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.92);
             text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+            margin-bottom: clamp(14px, 1.4vw, 22px);
             animation: heroTaglinePulse 3.2s ease-in-out infinite;
             will-change: opacity;
         }
@@ -183,8 +172,19 @@
             0%, 100% { opacity: 0.45; }
             50%      { opacity: 1; }
         }
+        /* Bottom-center scroll-hint — softly bobs to signal "scroll
+           down for more". Lives outside .main-content so the title
+           can move freely without affecting the chevron position. */
+        .hero-scroll-hint-wrap {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: clamp(20px, 2.4vw, 36px);
+            z-index: 11;
+            pointer-events: none;
+        }
         .hero-scroll-hint {
-            display: none;
+            display: inline-flex;
             color: rgba(255, 255, 255, 0.85);
             filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
             animation: heroHintBob 2.4s ease-in-out infinite;
@@ -192,9 +192,6 @@
         @keyframes heroHintBob {
             0%, 100% { transform: translateY(0);    opacity: 0.7; }
             50%      { transform: translateY(6px);  opacity: 1; }
-        }
-        @media (max-width: 768px) {
-            .hero-scroll-hint { display: inline-flex; }
         }
         @media (prefers-reduced-motion: reduce) {
             .hero-tagline   { animation: none; opacity: 0.85; }
@@ -1756,16 +1753,20 @@
                     </svg>
                 </div>
 
-                <!-- 3. Title -->
+                <!-- 3. Title + eyebrow tagline — left-aligned column.
+                     Tagline sits ABOVE the headline (small caps "Pre-Seed
+                     & Seed Fund") so it doesn't collide with the centered
+                     scroll-down chevron at the bottom. -->
                 <div class="main-content">
+                    <span class="hero-tagline" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
                     <h1 class="title">Global Founders<br>Forge the Future</h1>
                 </div>
 
-                <!-- Pre-seed & Seed Fund tagline + scroll hint — stacked
-                     bottom-center of the hero. Tagline pulses softly. -->
-                <div class="hero-scroll-stack" aria-hidden="false">
-                    <span class="hero-tagline" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
-                    <span class="hero-scroll-hint" aria-hidden="true">
+                <!-- Bottom-center scroll-hint chevron — softly bobs up
+                     and down to suggest "scroll down for more". Shown
+                     on every viewport now (was mobile-only). -->
+                <div class="hero-scroll-hint-wrap" aria-hidden="true">
+                    <span class="hero-scroll-hint">
                         <svg viewBox="0 0 24 24" width="34" height="34" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                     </span>
                 </div>
@@ -2166,7 +2167,11 @@
 
         let heroLoaded = false;
         let currentScale = 1;
-        let currentRadius = 16;
+        // currentRadius starts at 0 so the hero loads truly full-bleed —
+        // the previous 16px initial was being lerped down to 0, but during
+        // the first ~30 frames the rounded corners exposed the cream
+        // .hero-scroll-spacer background, which looked like a stray border.
+        let currentRadius = 0;
         let targetScale = 1;
         let targetRadius = 0;
 
