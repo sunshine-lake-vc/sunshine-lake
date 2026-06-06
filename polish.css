@@ -1257,8 +1257,11 @@ body.mode-tight .content-sticky p {
 
 /* ═══════════════════════════════════════════════════════════════
    STICKY SIDE NAV — anchor links into each major section
+   Hidden on every viewport per Don's call — the section anchors
+   weren't earning their visual real-estate on the right rail.
    ═══════════════════════════════════════════════════════════════ */
-.rd-sidenav {
+.rd-sidenav { display: none !important; }
+.rd-sidenav-legacy {
   position: fixed;
   top: 50%;
   right: clamp(16px, 1.6vw, 28px);
