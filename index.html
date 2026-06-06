@@ -481,10 +481,13 @@
             animation: thesisShimmer 3.4s ease-in-out infinite;
         }
         /* Standalone closing section that sits between Portfolio and
-           the Footer. Solid Mid Lake background to bridge the
-           Portfolio gradient end (#0A3DAE) into the Abyss footer. */
+           the Footer. Renders as a vertical gradient bleed from Mid
+           Lake (matching the Portfolio gradient end above) down into
+           the Abyss (#02041F, matching the footer below) — no hard
+           cobalt-to-abyss seam, the dive feels continuous. Same
+           bridging pattern used at the voices → Portfolio seam. */
         .thesis-coda-section {
-            background: #0A3DAE;
+            background: linear-gradient(180deg, #0A3DAE 0%, #02041F 100%);
             padding: clamp(80px, 9vw, 160px) clamp(56px, 8vw, 180px);
             text-align: center;
             position: relative;
