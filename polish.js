@@ -274,103 +274,53 @@
       + '</div>';
   }
 
-  /* ─── Build a pill-shaped exit-card for the cream marquee band ─── */
+  // Brand color per company — applied as the rd-exit-logo tile
+  // background. Falls back to white if a domain isn't listed. Added
+  // here (rather than detected from the favicon at runtime) because
+  // Google's favicon service doesn't reliably send CORS headers, so
+  // crossorigin="anonymous" was breaking the image loads entirely.
+  // Hardcoded values are also more controllable — exact brand match
+  // rather than whatever the favicon's dominant pixel happens to be.
+  var BRAND_TILE = {
+    'figma.com':         '#0D0D0D',  // Figma uses a near-black tile
+    'deel.com':          '#7B61FF',  // Deel purple
+    'kalshi.com':        '#00D082',  // Kalshi green
+    'checkr.com':        '#1AC6A9',  // Checkr teal
+    'airbnb.com':        '#FF5A5F',  // Airbnb coral
+    'groupon.com':       '#53A318',  // Groupon green
+    'brex.com':          '#0F0F0F',  // Brex near-black
+    'headway.co':        '#1B3D5C',  // Headway navy
+    'fundamental.tech':  '#0D0D0D',  // Fundamental.tech black
+    'datagrid.com':      '#0D0D0D',  // Datagrid black
+    'spothero.com':      '#19A3E0',  // SpotHero blue
+    'bitoasis.com':      '#0A1E3C',  // BitOasis navy
+    'assured.claims':    '#0F2D6E',  // Assured deep blue
+    'hiddenroad.com':    '#0D0D0D',  // Hidden Road black
+    'enable.us':         '#FF6A39',  // Enable orange
+    'glide.com':         '#3F22FF',  // Glide indigo
+    'legalpad.io':       '#0F8A6A',  // Legalpad green
+    'ostro.health':      '#0D0D0D',  // Ostro black
+    'pry.co':            '#5BC0A8',  // Pry mint
+    'taxproper.com':     '#1F4FB6'   // TaxProper blue
+  };
+
+  /* ─── Build a pill-shaped exit-card for the Track Record band ─── */
   function buildExitCard(c) {
     var sub = (c.type === 'exit' && c.acquirer)
       ? '<span class="rd-exit-sub">acquired by ' + c.acquirer + '</span>'
       : '';
     var tag = c.tag ? '<span class="rd-exit-tag">' + c.tag + '</span>' : '';
-    // crossorigin="anonymous" so Google's favicon service responds with
-    // CORS headers, letting us sample the image's dominant color from
-    // a canvas without tainting it (see paintExitLogoBackgrounds below).
+    // Inline-style the tile background per company (default white if
+    // we don't have a brand match yet — keeps the favicon visible).
+    var tileBg = BRAND_TILE[c.url] || '#fff';
+    var tileStyle = ' style="background:' + tileBg + ';"';
     return ''
       + '<a class="rd-exit-card" href="https://' + c.url + '" target="_blank" rel="noopener">'
-      + '  <span class="rd-exit-logo"><img src="' + logoUrl(c.url) + '" alt="" loading="lazy" crossorigin="anonymous" onerror="this.style.display=\'none\'"></span>'
+      + '  <span class="rd-exit-logo"' + tileStyle + '><img src="' + logoUrl(c.url) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"></span>'
       + '  <span class="rd-exit-name">' + c.name + '</span>'
       + sub
       + tag
       + '</a>';
-  }
-
-  /* ─── Dominant-color extraction ─────────────────────────────────
-     For every logo in the Top 1% Track Record pills, sample the
-     image's most-frequent saturated color and paint the rounded
-     square behind it that brand color (Figma → black, Deel →
-     purple, Kalshi → green, Checkr → green, etc). Skips white,
-     near-white and very-low-saturation pixels so backgrounds
-     don't win the vote over the actual logo.
-
-     If the canvas taints (CORS failure on a specific host) the
-     try/catch swallows the SecurityError and that one logo stays
-     on the default white tile. */
-  var _logoColorCache = {};
-  function dominantLogoColor(img) {
-    if (_logoColorCache[img.src]) return _logoColorCache[img.src];
-    var SAMPLE = 40; // small canvas — speed > precision
-    var canvas = document.createElement('canvas');
-    canvas.width = SAMPLE;
-    canvas.height = SAMPLE;
-    var ctx = canvas.getContext('2d');
-    try {
-      ctx.drawImage(img, 0, 0, SAMPLE, SAMPLE);
-      var data = ctx.getImageData(0, 0, SAMPLE, SAMPLE).data;
-    } catch (e) {
-      // CORS taint — cache null so we don't retry on every render.
-      _logoColorCache[img.src] = null;
-      return null;
-    }
-    var buckets = {}; // quantized RGB → count
-    var counted = 0;
-    for (var i = 0; i < data.length; i += 4) {
-      var r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
-      if (a < 200) continue;                              // skip transparent
-      if (r > 235 && g > 235 && b > 235) continue;        // skip near-white background
-      var max = Math.max(r, g, b), min = Math.min(r, g, b);
-      var sat = max === 0 ? 0 : (max - min) / max;
-      // Skip very low-saturation pixels UNLESS they're dark (near-black logos
-      // like Figma should still win). Lightness ~= max/255.
-      if (sat < 0.18 && max > 80) continue;
-      var qr = (r >> 5) << 5;
-      var qg = (g >> 5) << 5;
-      var qb = (b >> 5) << 5;
-      var key = qr + ',' + qg + ',' + qb;
-      buckets[key] = (buckets[key] || 0) + 1;
-      counted++;
-    }
-    if (counted < 8) { _logoColorCache[img.src] = null; return null; }
-    var bestKey = null, bestCount = 0;
-    for (var k in buckets) {
-      if (buckets[k] > bestCount) { bestCount = buckets[k]; bestKey = k; }
-    }
-    if (!bestKey || bestCount < counted * 0.04) {
-      _logoColorCache[img.src] = null;
-      return null;
-    }
-    var parts = bestKey.split(',').map(Number);
-    // Re-centre the quantized bucket back to its midpoint so the
-    // applied color is closer to the true mid-bucket shade.
-    var color = 'rgb(' + (parts[0] + 16) + ',' + (parts[1] + 16) + ',' + (parts[2] + 16) + ')';
-    _logoColorCache[img.src] = color;
-    return color;
-  }
-  function paintOneExitLogo(img) {
-    if (!img.complete || img.naturalWidth === 0) return;
-    var color = dominantLogoColor(img);
-    if (!color) return;
-    var tile = img.parentElement; // .rd-exit-logo
-    if (tile) tile.style.background = color;
-  }
-  function paintExitLogoBackgrounds(root) {
-    var imgs = (root || document).querySelectorAll('.rd-exit-logo img');
-    for (var i = 0; i < imgs.length; i++) {
-      var img = imgs[i];
-      if (img.complete) {
-        paintOneExitLogo(img);
-      } else {
-        img.addEventListener('load',  function (e) { paintOneExitLogo(e.target); }, { once: true });
-        img.addEventListener('error', function (e) { e.target.parentElement && (e.target.parentElement.style.background = '#fff'); }, { once: true });
-      }
-    }
   }
 
   /* ─── Render to DOM ─── */
@@ -412,12 +362,6 @@
       exitsIpo.innerHTML  = ipoHtml  + ipoHtml;
       exitsSeed.innerHTML = seedHtml + seedHtml;
       exitsMa.innerHTML   = maHtml   + maHtml;
-      // After cards are in the DOM, sample each logo's dominant brand
-      // color and paint the rounded square behind it. Runs async per
-      // image — see dominantLogoColor above.
-      paintExitLogoBackgrounds(exitsIpo);
-      paintExitLogoBackgrounds(exitsSeed);
-      paintExitLogoBackgrounds(exitsMa);
     }
   }
 
