@@ -1034,7 +1034,9 @@ body.mode-tight .content-sticky p {
     #155EE8 100%
   ) !important;
   background-size: 300% 100% !important;
-  background-position: 200% 0 !important;
+  /* No !important on background-position — that'd pin it and block the
+     keyframe animation from moving the gradient across the text. */
+  background-position: 200% 0;
   background-clip: text !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
