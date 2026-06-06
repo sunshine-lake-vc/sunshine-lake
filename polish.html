@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=57">
+    <link rel="stylesheet" href="polish.css?v=58">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -322,26 +322,33 @@
             margin-top: clamp(24px, 2.6vw, 44px);
             background: linear-gradient(
                 100deg,
-                #F2D831 0%,
-                #F2D831 38%,
-                #FFF59E 50%,
-                #F2D831 62%,
+                #F2D831  0%,
+                #F2D831 40%,
+                #FFFFFF 48%,
+                #FFFCD8 52%,
+                #F2D831 60%,
                 #F2D831 100%
             );
-            background-size: 250% 100%;
-            background-position: 100% 0;
+            background-size: 300% 100%;
+            background-position: 200% 0;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            animation: thesisShimmer 4.5s ease-in-out infinite;
+            text-shadow: 0 0 28px rgba(242, 216, 49, 0.35);
+            animation: thesisShimmer 3.4s ease-in-out infinite;
         }
         @keyframes thesisShimmer {
-            0%   { background-position: 220% 0; }
-            100% { background-position: -120% 0; }
+            0%   { background-position: 200% 0; }
+            100% { background-position: -100% 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .team-thesis .thesis-coda { animation: none; }
+            .team-thesis .thesis-coda {
+                animation: none;
+                background: none;
+                color: #F2D831;
+                -webkit-text-fill-color: #F2D831;
+            }
         }
         .team-thesis p:last-child { margin-bottom: 0; }
         /* .thesis-accent kept available for future inline highlights —
