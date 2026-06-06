@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=62">
+    <link rel="stylesheet" href="polish.css?v=63">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -794,34 +794,29 @@
         .team-card-quote::before { content: '\201C'; }
         .team-card-quote::after  { content: '\201D'; }
 
-        /* Bio link on team cards — small circular outlined button matching
-           the team carousel and voices carousel arrows for visual
-           consistency. margin-top:auto pins it to the bottom of the
-           card-info column so every button aligns across cards regardless
-           of quote length. */
+        /* Bio link on team cards — bare white chevron tucked beside the
+           name, no circle/border. Used to sit at the bottom of the card
+           in a 36-44px outlined disc; we moved it inline with the name
+           because the disc was visually duplicating the carousel arrows
+           and adding clutter to the card. */
         .team-bio-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-top: auto;
-            align-self: flex-start;
-            width: clamp(36px, 3vw, 44px);
-            height: clamp(36px, 3vw, 44px);
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 999px;
-            color: #FFFFFF;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            padding: 4px 0 4px 4px;
+            margin-left: auto;
+            flex-shrink: 0;
+            transition: color 0.25s ease;
         }
         .team-bio-btn:hover {
-            background: rgba(255, 255, 255, 0.16);
-            border-color: rgba(255, 255, 255, 0.45);
+            color: #ffffff;
         }
         .team-bio-arrow {
             display: block;
-            width: 16px;
-            height: 16px;
+            width: clamp(16px, 1.3vw, 20px);
+            height: clamp(16px, 1.3vw, 20px);
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
@@ -830,7 +825,7 @@
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .team-bio-btn:hover .team-bio-arrow {
-            transform: translateX(2px);
+            transform: translateX(3px);
         }
 
 
@@ -1782,10 +1777,10 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Don Stalter</span>
+                                <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Founder, Sunshine Lake</p>
                             <blockquote class="team-card-quote">True alpha doesn&rsquo;t come from the obvious path. It comes from founders navigating extreme constraints who share DNA that turns global outsiders into category leaders. We back that hunger from the very first check.</blockquote>
-                            <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                         </div>
                     </div>
 
@@ -1796,10 +1791,10 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Ivan La Frinere-Sandoval</span>
+                                <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
                             <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline lets us see viable opportunities where others only see complexity. That&rsquo;s the edge I look for in every founder we back.</blockquote>
-                            <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                         </div>
                     </div>
 
@@ -1810,10 +1805,10 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Suhail Younus</span>
+                                <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner</p>
                             <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
-                            <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                         </div>
                     </div>
 
@@ -1824,10 +1819,10 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Wieger Lamers</span>
+                                <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
                             <blockquote class="team-card-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
-                            <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                         </div>
                     </div>
 

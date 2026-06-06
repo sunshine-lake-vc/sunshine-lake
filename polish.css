@@ -879,10 +879,7 @@ body.mode-tight .content-sticky,
 .team-section .team-card-name { color: #FFFFFF !important; }
 .team-section .team-card-role { color: rgba(255, 255, 255, 0.62) !important; }
 .team-section .team-card-desc { color: rgba(255, 255, 255, 0.8) !important; }
-.team-section .team-bio-btn {
-  color: rgba(255, 255, 255, 0.72) !important;
-  border-color: rgba(255, 255, 255, 0.22) !important;
-}
+.team-section .team-bio-btn { color: rgba(255, 255, 255, 0.72) !important; }
 .team-section .team-bio-btn:hover { color: #F2D831 !important; }
 
 /* Founders portfolio — switch to white text against royal/deep blue */
