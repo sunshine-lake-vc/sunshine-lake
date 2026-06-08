@@ -258,17 +258,18 @@
 
   function buildVoice(v) {
     var tag = v.tag ? '<span class="rd-voice-tag">' + v.tag + '</span>' : '';
+    // Attribution renders as a single line: "Name, Role, Company"
+    // (per Don's call). Company stays linkable. Markup intentionally
+    // flat — no logo mark, no author block — so the card has minimal
+    // chrome below the quote.
     return ''
       + '<div class="rd-voice">'
       + '  <p class="rd-voice-quote">"' + v.quote + '"</p>'
       + '  <div class="rd-voice-attr">'
-      + '    <a class="rd-voice-mark" href="https://' + v.domain + '" target="_blank" rel="noopener" aria-label="' + v.company + '">'
-      + '      ' + logoImg(v.company, v.domain, 80)
-      + '    </a>'
-      + '    <div class="rd-voice-author">'
-      + '      <span class="rd-vname">' + v.name + '</span>'
-      + '      <span class="rd-vrole">' + v.role + ', <a class="rd-voice-company" href="https://' + v.domain + '" target="_blank" rel="noopener">' + v.company + '</a></span>'
-      + '    </div>'
+      + '    <span class="rd-voice-attr-line">'
+      +          v.name + ', ' + v.role + ', '
+      + '      <a class="rd-voice-company" href="https://' + v.domain + '" target="_blank" rel="noopener">' + v.company + '</a>'
+      + '    </span>'
       + '    ' + tag
       + '  </div>'
       + '</div>';

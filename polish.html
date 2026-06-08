@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=72">
+    <link rel="stylesheet" href="polish.css?v=73">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -450,32 +450,51 @@
            slow shimmer sweeping across via background-clip. No italics. */
         /* Selector intentionally NOT scoped to .team-thesis any more —
            the coda lives in its own .thesis-coda-section below the
-           Portfolio now, but the styling stays identical. */
+           Portfolio now, but the styling stays identical.
+           Bigger display scale than the in-thesis version + stronger
+           highlight band + a soft yellow halo that echoes the hero's
+           sun reflection through the water. */
         .thesis-coda {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.95rem, 2.7vw, 3.35rem);
-            line-height: 1.15;
+            font-size: clamp(2.6rem, 4.4vw, 5.4rem);
+            line-height: 1.08;
             font-weight: 500;
             font-style: normal;
-            letter-spacing: -0.015em;
+            letter-spacing: -0.02em;
             margin: 0;
             background: linear-gradient(
                 100deg,
                 #F2D831  0%,
-                #F2D831 40%,
-                #FFFFFF 48%,
-                #FFFCD8 52%,
-                #F2D831 60%,
+                #F2D831 38%,
+                #FFFFFF 47%,
+                #FFFFFF 50%,
+                #FFFCD8 53%,
+                #F2D831 62%,
                 #F2D831 100%
             );
-            background-size: 300% 100%;
-            background-position: 200% 0;
+            background-size: 320% 100%;
+            background-position: 220% 0;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            text-shadow: 0 0 16px rgba(242, 216, 49, 0.28);
-            animation: thesisShimmer 3.4s ease-in-out infinite;
+            text-shadow:
+                0 0 28px rgba(242, 216, 49, 0.42),
+                0 0 80px rgba(242, 216, 49, 0.18);
+            animation: thesisShimmer 5.2s ease-in-out infinite,
+                       codaGlow 6s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+        /* Subtle pulsing halo behind the coda — echoes the sun
+           reflection in the hero water shader. Animates the alpha of
+           the existing text-shadow so the wordmark feels alive. */
+        @keyframes codaGlow {
+            0%, 100% { filter: drop-shadow(0 0 0 rgba(242, 216, 49, 0)); }
+            50%      { filter: drop-shadow(0 0 22px rgba(242, 216, 49, 0.32)); }
+        }
+        @media (max-width: 768px) {
+            .thesis-coda { font-size: clamp(1.9rem, 8vw, 2.8rem); }
         }
         /* Standalone closing section between Portfolio and Footer.
            Renders as a multi-stop vertical gradient — hold the Mid
@@ -521,7 +540,8 @@
             .thesis-coda-section {
                 padding: clamp(48px, 12vw, 80px) clamp(24px, 6vw, 36px);
             }
-            .thesis-coda { font-size: clamp(1.6rem, 6.5vw, 2.4rem); }
+            /* Mobile coda size is defined in the inline .thesis-coda
+               rule above — intentionally omitted here. */
         }
         .team-thesis p:last-child { margin-bottom: 0; }
         /* .thesis-accent kept available for future inline highlights —
@@ -1143,6 +1163,17 @@
             font-weight: 400;
             margin: 0;
             line-height: 1.15;
+        }
+        /* Company name sitting just under the founder name —
+           matches the team-cards format (name big, role small below)
+           and uses the same scale as .team-card-role for consistency. */
+        .founders-item-company-sub {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.65);
+            margin: clamp(2px, 0.4vw, 6px) 0 0 0;
+            line-height: 1.3;
+            letter-spacing: 0;
         }
         .founders-item-name .from-label {
             color: rgba(255, 255, 255, 0.4);
@@ -2010,7 +2041,7 @@
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
                 <p class="thesis-lede">Sunshine Lake invests in global founders from extreme origins at their breakout moments.</p>
-                <p>Our aperture into geopolitical, economic, and technological inflections sparks massive waves, defying sector cycles to support multiple blockbuster companies a decade.</p>
+                <p>Our aperture into geopolitical, economic, and technological inflections allows us to monitor sector cycles and support multiple blockbuster companies a decade.</p>
             </div>
 
             <div class="team-layout">
@@ -2149,31 +2180,20 @@
 
     </main>
 
-    <!-- Footer with photo grid -->
+    <!-- Footer (photo grid removed from here — moved to polish-don.html
+         below the case studies. Snapshots now anchor the bio page, not
+         the homepage CTA which reads cleaner without them.) -->
     <footer class="footer-scroll-spacer" id="rd-section-contact">
         <div class="footer-sticky">
-            <!-- Static fallback cells — JS replaces them with shuffled
-                 cells on init, but they ensure the grid is visible even
-                 if the inline script throws upstream. -->
-            <div class="footer-photo-grid" id="footerPhotoGrid">
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-1.webp" alt="" loading="eager"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-2.webp" alt="" loading="eager"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-3.webp" alt="" loading="eager"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-4.webp" alt="" loading="eager"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-5.webp" alt="" loading="lazy"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-6.webp" alt="" loading="lazy"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-7.webp" alt="" loading="lazy"></div>
-                <div class="footer-photo-cell"><img class="front" src="images/snapshots/snap-9.webp" alt="" loading="lazy"></div>
-            </div>
             <div class="footer-photo-card" id="footerPhotoCard"></div>
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
                     <h2>Dive in.</h2>
                     <div class="footer-contact">
-                        <a href="mailto:hello@sunshinelake.vc">hello@sunshinelake.vc</a>
+                        <a href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch &rarr;</a>
+                        <a href="sessions.html">Read the latest Sessions &rarr;</a>
                         <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
                         <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
-                        <a href="lp.html">LP Login ↗</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -3110,14 +3130,16 @@
                 item.className = 'founders-item' + (i === 0 ? ' active' : '');
                 // item.href = 'companies/' + d.slug + '.html'; // temporarily disabled
                 item.style.pointerEvents = 'none';
+                // Match the team-cards format (name on top, company
+                // beneath, no "from" connector). Country flag dropped
+                // in the same pass.
                 item.innerHTML =
-                    // Clean view
+                    // Clean view (legacy)
                     '<div class="founders-item-company">' + d.company + '</div>' +
                     '<div class="founders-item-founders">' + d.name + '</div>' +
-                    // Detailed view
-                    '<div class="founders-item-name">' + d.name +
-                    '<br><span class="from-label">from</span> ' + d.company +
-                    ' <span class="card-flag"><img src="' + d.flag + '" alt="" loading="lazy"></span></div>' +
+                    // Detailed view (active): Name on top, company under
+                    '<div class="founders-item-name">' + d.name + '</div>' +
+                    '<div class="founders-item-company-sub">' + d.company + '</div>' +
                     '<div class="founders-item-detail">' +
                     '<p class="founders-item-desc">' + d.desc + '</p>' +
                     '</div>';
@@ -3132,14 +3154,13 @@
                 var panel = document.createElement('div');
                 panel.className = 'mob-title' + (i === 0 ? ' active' : '');
                 panel.innerHTML =
-                    // Clean view
+                    // Clean view (legacy)
                     '<div class="mob-title-company">' + d.company + '</div>' +
                     '<div class="mob-title-founders">' + d.name + '</div>' +
-                    // Detailed view
+                    // Detailed view: Name on top, company under
                     '<div class="mob-title-detail">' +
-                        '<div class="founders-item-name">' + d.name +
-                        '<br><span class="from-label">from</span> ' + d.company +
-                        ' <span class="card-flag"><img src="' + d.flag + '" alt="" loading="lazy"></span></div>' +
+                        '<div class="founders-item-name">' + d.name + '</div>' +
+                        '<div class="founders-item-company-sub">' + d.company + '</div>' +
                         '<p class="founders-item-desc">' + d.desc + '</p>' +
                     '</div>';
                 mobileOverlay.appendChild(panel);
@@ -3717,7 +3738,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=30" defer></script>
+    <script src="polish.js?v=31" defer></script>
 
 </body>
 </html>

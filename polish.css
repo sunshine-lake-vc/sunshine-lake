@@ -630,7 +630,10 @@ a.rd-name:hover { color: var(--rd-yellow); }
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  /* Tighter gap between quote and attribution line (was 18px) so
+     the attribution reads as a direct continuation of the quote
+     rather than a separate metadata block beneath it. */
+  gap: 8px;
   transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
 }
 .rd-voice:hover {
@@ -662,7 +665,22 @@ a.rd-name:hover { color: var(--rd-yellow); }
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-top: 4px;
+  padding-top: 0;
+}
+/* Single-line attribution: "Name, Role, Company". Replaces the old
+   two-line .rd-voice-author block. Smaller Segoe UI sans so it sits
+   quietly beneath the editorial serif quote. */
+.rd-voice-attr-line {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: clamp(12.5px, 0.92vw, 14px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+.rd-voice-attr-line .rd-voice-company {
+  color: #fff;
+  font-weight: 600;
 }
 .rd-voice-mark {
   /* Hidden — Don removed the company logo tile from the voice cards.

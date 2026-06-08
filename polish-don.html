@@ -196,6 +196,35 @@
             flex-direction: column;
             gap: 0;
         }
+        /* Snapshots grid — small tiled photos beneath the case studies.
+           4-col on desktop, 2-col on mobile. Tiles are square-aspect
+           rounded thumbnails with subtle hover lift. */
+        .snapshots-section {
+            margin: clamp(36px, 4vw, 56px) 0 0 0;
+        }
+        .snapshots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(8px, 1vw, 14px);
+        }
+        .snapshots-cell {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: clamp(10px, 1vw, 14px);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.04);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .snapshots-cell:hover { transform: translateY(-2px); }
+        .snapshots-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 720px) {
+            .snapshots-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         .prefund-card {
             display: flex;
             gap: clamp(16px, 2vw, 28px);
@@ -608,6 +637,23 @@
                     <span class="prefund-dot active"></span>
                     <span class="prefund-dot"></span>
                     <span class="prefund-dot"></span>
+                </div>
+            </div>
+
+            <!-- Snapshots grid — small tiled photos that used to live in
+                 the homepage footer. Repositioned here so they anchor
+                 Don's bio page narrative rather than competing with the
+                 "Dive in" CTA on the homepage. -->
+            <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
+                <div class="snapshots-grid">
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-1.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-2.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-3.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-4.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-5.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-6.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-7.webp" alt="" loading="lazy"></div>
+                    <div class="snapshots-cell"><img src="images/snapshots/snap-9.webp" alt="" loading="lazy"></div>
                 </div>
             </div>
             <div class="media-section">
