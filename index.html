@@ -1041,8 +1041,11 @@
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.72);
-            /* Tighter eyebrow → headline gap (was clamp(12-18px)). */
-            margin: 0 0 clamp(2px, 0.3vw, 6px) 0;
+            /* Eyebrow now sits BELOW the headline (per Don's call) —
+               margin moved from bottom to top so the breathing room
+               is between the headline and the label rather than the
+               label and whatever sits above. */
+            margin: clamp(8px, 1vw, 14px) 0 0 0;
         }
         .founders-left-title {
             position: relative;
@@ -2165,8 +2168,8 @@
     <!-- Founders scroll-through -->
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
-            <p class="founders-left-eyebrow">Sunshine Lake Portfolio</p>
             <h2 class="founders-left-title">Every Founder <br>has a story.</h2>
+            <p class="founders-left-eyebrow">Sunshine Lake Portfolio</p>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
