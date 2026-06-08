@@ -481,7 +481,13 @@
             text-shadow:
                 0 0 28px rgba(242, 216, 49, 0.42),
                 0 0 80px rgba(242, 216, 49, 0.18);
-            animation: thesisShimmer 5.2s ease-in-out infinite,
+            /* Linear timing + slower 9s cycle so the highlight glides
+               across at one constant pace. ease-in-out was reading as
+               "once slow, once fast" within each loop because cubic
+               easing accelerates through the middle. Glow stays on
+               ease-in-out because it's a breath — symmetric in/out
+               is what makes it feel like a pulse, not a strobe. */
+            animation: thesisShimmer 9s linear infinite,
                        codaGlow 6s ease-in-out infinite;
             position: relative;
             display: inline-block;
