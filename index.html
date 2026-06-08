@@ -505,8 +505,73 @@
             0%, 100% { filter: drop-shadow(0 0 0 rgba(242, 216, 49, 0)); }
             50%      { filter: drop-shadow(0 0 22px rgba(242, 216, 49, 0.32)); }
         }
+        /* Stage that holds the coda + decorative ornaments. Inline-block
+           so the underline matches the headline's wrapped width. */
+        .thesis-coda-stage {
+            position: relative;
+            display: inline-block;
+            isolation: isolate;
+        }
+        /* Floating yellow specks behind the coda — mirror the speckled
+           sun-on-water glints in the hero shader. Each speck drifts on
+           its own loop so the field never lines up. */
+        .thesis-coda-specks {
+            position: absolute;
+            inset: -30% -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .thesis-coda-specks .speck {
+            position: absolute;
+            background: #FFEEA2;
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(0.3px);
+            box-shadow: 0 0 8px rgba(242, 216, 49, 0.5);
+            animation: speckDrift 9s ease-in-out infinite;
+        }
+        .speck-1  { top: 14%; left: 6%;  width: 4px;  height: 4px;  animation-delay: 0s;   }
+        .speck-2  { top: 28%; left: 22%; width: 3px;  height: 3px;  animation-delay: 1.4s; }
+        .speck-3  { top: 8%;  left: 44%; width: 5px;  height: 5px;  animation-delay: 0.7s; }
+        .speck-4  { top: 36%; left: 62%; width: 3px;  height: 3px;  animation-delay: 2.1s; }
+        .speck-5  { top: 20%; left: 84%; width: 4px;  height: 4px;  animation-delay: 3.2s; }
+        .speck-6  { top: 72%; left: 12%; width: 3px;  height: 3px;  animation-delay: 4.6s; }
+        .speck-7  { top: 82%; left: 30%; width: 5px;  height: 5px;  animation-delay: 1.8s; }
+        .speck-8  { top: 68%; left: 56%; width: 4px;  height: 4px;  animation-delay: 5.3s; }
+        .speck-9  { top: 88%; left: 76%; width: 3px;  height: 3px;  animation-delay: 6.1s; }
+        .speck-10 { top: 76%; left: 92%; width: 4px;  height: 4px;  animation-delay: 7.4s; }
+        @keyframes speckDrift {
+            0%, 100% { opacity: 0;    transform: translateY(0)   scale(0.6); }
+            20%, 60% { opacity: 0.85; transform: translateY(-8px) scale(1); }
+            80%      { opacity: 0;    transform: translateY(-14px) scale(0.7); }
+        }
+        /* Soft glowing rule beneath the coda — a horizontal beam that
+           draws itself in then dims out. */
+        .thesis-coda-rule {
+            margin: clamp(20px, 2.4vw, 36px) auto 0;
+            height: 1.5px;
+            width: 60%;
+            background: linear-gradient(
+                90deg,
+                rgba(242, 216, 49, 0) 0%,
+                rgba(242, 216, 49, 0.65) 50%,
+                rgba(242, 216, 49, 0) 100%
+            );
+            transform-origin: center;
+            animation: codaRule 9s ease-in-out infinite;
+            box-shadow: 0 0 12px rgba(242, 216, 49, 0.35);
+        }
+        @keyframes codaRule {
+            0%, 100% { transform: scaleX(0.4); opacity: 0.3; }
+            50%      { transform: scaleX(1);   opacity: 0.9; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .thesis-coda-specks .speck { animation: none; opacity: 0.6; }
+            .thesis-coda-rule { animation: none; opacity: 0.6; transform: none; }
+        }
         @media (max-width: 768px) {
             .thesis-coda { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+            .thesis-coda-rule { width: 75%; }
         }
         /* Standalone closing section between Portfolio and Footer.
            Renders as a multi-stop vertical gradient — hold the Mid
@@ -2188,10 +2253,21 @@
 
     <!-- Coda — closing rhetorical beat, lives below the Portfolio
          section now so the founder grid hands off into the question
-         before the dive into the footer. Inherits .thesis-coda
-         shimmer styling. -->
+         before the dive into the footer. The animated yellow specks
+         echo the sun-on-water highlights in the hero shader and pull
+         the eye to the question. -->
     <section class="thesis-coda-section" aria-label="Closing thought">
-        <p class="thesis-coda">What better time to build than when the world needs it most?</p>
+        <div class="thesis-coda-stage">
+            <div class="thesis-coda-specks" aria-hidden="true">
+                <span class="speck speck-1"></span><span class="speck speck-2"></span>
+                <span class="speck speck-3"></span><span class="speck speck-4"></span>
+                <span class="speck speck-5"></span><span class="speck speck-6"></span>
+                <span class="speck speck-7"></span><span class="speck speck-8"></span>
+                <span class="speck speck-9"></span><span class="speck speck-10"></span>
+            </div>
+            <p class="thesis-coda">What better time to build than when the world needs it most?</p>
+            <div class="thesis-coda-rule" aria-hidden="true"></div>
+        </div>
     </section>
 
     </main>
@@ -3378,8 +3454,43 @@
 
             // Recache layout values now that founders items + padding are set
             cacheLayoutValues();
-            // Recache again after a short delay to catch late layout shifts
+            // Recache again after short delays to catch late layout shifts —
+            // particularly on iOS Safari where the address bar collapses
+            // shortly after first paint, changing innerHeight and shifting
+            // sticky-photo positions. Without this, mobile users would see
+            // the founder list "stuck on Minimal" because cachedItemTops
+            // and cachedPhotoStickyTop were locked to the pre-collapse
+            // viewport.
             setTimeout(cacheLayoutValues, 500);
+            setTimeout(function () { cacheLayoutValues(); refreshCachedStyles(); alignFirstCard(); updateFounders(); }, 1500);
+
+            // Recache on resize + orientation change. iOS Safari triggers
+            // a resize when the URL bar shows/hides during scroll, so a
+            // light debounce avoids thrashing.
+            var foundersResizeTimer;
+            function foundersResync() {
+                clearTimeout(foundersResizeTimer);
+                foundersResizeTimer = setTimeout(function () {
+                    alignFirstCard();
+                    refreshCachedStyles();
+                    cacheLayoutValues();
+                    updateFounders();
+                }, 180);
+            }
+            window.addEventListener('resize', foundersResync);
+            window.addEventListener('orientationchange', foundersResync);
+            // Final safety net — when every founder image has loaded the
+            // item heights may shift slightly. Recache once images settle.
+            var photoImgs = photoStack.querySelectorAll('img');
+            var loadedCount = 0;
+            photoImgs.forEach(function (img) {
+                if (img.complete) loadedCount++;
+                else img.addEventListener('load', function () {
+                    loadedCount++;
+                    if (loadedCount >= photoImgs.length) foundersResync();
+                }, { once: true });
+            });
+            if (loadedCount >= photoImgs.length) foundersResync();
             setTimeout(cacheLayoutValues, 2000);
         })();
 

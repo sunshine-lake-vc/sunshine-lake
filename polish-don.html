@@ -196,34 +196,97 @@
             flex-direction: column;
             gap: 0;
         }
-        /* Snapshots grid — small tiled photos beneath the case studies.
-           4-col on desktop, 2-col on mobile. Tiles are square-aspect
-           rounded thumbnails with subtle hover lift. */
+        /* Snapshots grid — tiny tiled photos beneath the case studies.
+           6-col on desktop, 4-col on tablet, 3-col on mobile. Each tile
+           is square-aspect with a translucent cobalt "shallow water"
+           overlay at rest. On hover (or focus / touch), the water
+           clears and a caption slides up from the bottom naming the
+           people in the shot. */
         .snapshots-section {
             margin: clamp(36px, 4vw, 56px) 0 0 0;
         }
         .snapshots-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: clamp(8px, 1vw, 14px);
+            grid-template-columns: repeat(6, 1fr);
+            gap: clamp(6px, 0.8vw, 10px);
         }
         .snapshots-cell {
             position: relative;
             aspect-ratio: 1 / 1;
-            border-radius: clamp(10px, 1vw, 14px);
+            border-radius: clamp(8px, 0.7vw, 12px);
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.04);
+            margin: 0;
+            background: #0A3DAE;
             transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: default;
         }
-        .snapshots-cell:hover { transform: translateY(-2px); }
         .snapshots-cell img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 0.5s ease;
+            /* Shallow-water look: a cool blue cast + slight desat so
+               every tile feels submerged. Lifts on hover. */
+            filter: saturate(0.65) brightness(0.78);
         }
-        @media (max-width: 720px) {
-            .snapshots-grid { grid-template-columns: repeat(2, 1fr); }
+        /* Translucent cobalt overlay (the "water") — sits between the
+           image and the caption, fades away on hover/focus. */
+        .snapshots-cell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(21, 94, 232, 0.42),
+                rgba(10, 61, 174, 0.32) 60%,
+                rgba(2, 16, 58, 0.42)
+            );
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .snapshots-cap {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: clamp(8px, 0.8vw, 14px) clamp(8px, 0.8vw, 12px);
+            background: linear-gradient(180deg, transparent, rgba(2, 6, 26, 0.85));
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(9.5px, 0.65vw, 11px);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        .snapshots-cell:hover,
+        .snapshots-cell:focus-within { transform: translateY(-2px); }
+        .snapshots-cell:hover img,
+        .snapshots-cell:focus-within img {
+            filter: saturate(1.05) brightness(1);
+            transform: scale(1.04);
+        }
+        .snapshots-cell:hover::after,
+        .snapshots-cell:focus-within::after { opacity: 0; }
+        .snapshots-cell:hover .snapshots-cap,
+        .snapshots-cell:focus-within .snapshots-cap {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 1024px) {
+            .snapshots-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .snapshots-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            /* Touch devices don't have hover — clear the water by default
+               so users can still see the photos. Caption stays hidden
+               until they tap (focus-within picks up the tap). */
+            .snapshots-cell img { filter: saturate(0.9) brightness(0.9); }
+            .snapshots-cell::after { opacity: 0.55; }
         }
         .prefund-card {
             display: flex;
@@ -553,10 +616,6 @@
         <div class="bio-content">
             <h1>Donald Stalter</h1>
             <p class="bio-role">Founder, Sunshine Lake</p>
-            <div class="bio-meta">
-                <span class="bio-meta-item"><span class="bio-meta-label">Hometown</span> Minneapolis, MN</span>
-                <span class="bio-meta-item"><span class="bio-meta-label">Residence</span> San Francisco, CA</span>
-            </div>
             <blockquote class="bio-quote">True alpha doesn&rsquo;t come from the obvious path. It comes from founders navigating extreme constraints &mdash; that shared psychological DNA that turns global outsiders into category leaders. We back that hunger from the very first check.</blockquote>
             <p class="bio-text">Donald Stalter founded Sunshine Lake, a seed fund that backs global breakout founders who leverage the Silicon Valley ecosystem. Don targets investments at the macro inflection points of geopolitical, economic, and technological change. This thematic flexibility enabled him to back multiple multi-billion-dollar businesses over the past decade.</p>
             <p class="bio-text">Don generates proprietary deal flow through a dense network of unicorn founders and elite functional operators. He applies a rigorous, systematic approach to ensure Sunshine Lake identifies and executes on premier investments before the broader market reacts.</p>
@@ -668,22 +727,58 @@
                 </div>
             </div>
 
-            <!-- Snapshots grid — small tiled photos that used to live in
-                 the homepage footer. Repositioned here so they anchor
-                 Don's bio page narrative rather than competing with the
-                 "Dive in" CTA on the homepage. -->
+            <!-- Snapshots grid — every photo in images/snapshots/.
+                 Default state has a translucent cobalt overlay ("shallow
+                 water") and a hover lifts the water to reveal a caption
+                 with the people in the shot. Caption text comes from
+                 SNAPSHOTS_DATA below (initially placeholders — replace
+                 with Don's identifications doc when ready). -->
             <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
-                <div class="snapshots-grid">
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-1.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-2.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-3.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-4.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-5.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-6.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-7.webp" alt="" loading="lazy"></div>
-                    <div class="snapshots-cell"><img src="images/snapshots/snap-9.webp" alt="" loading="lazy"></div>
-                </div>
+                <div class="snapshots-grid" id="snapshotsGrid"></div>
             </div>
+            <script>
+            (function () {
+                // Captions keyed by filename — keys MUST match the file
+                // in images/snapshots/ exactly (with or without .webp,
+                // we strip the extension in the lookup).
+                var SNAPSHOTS_DATA = [
+                    { src: 'snap-1.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-2.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-3.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-4.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-5.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-6.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-7.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-8.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-9.webp',  caption: 'Tap to add names' },
+                    { src: 'snap-10.webp', caption: 'Tap to add names' },
+                    { src: 'snap-11.webp', caption: 'Tap to add names' },
+                    { src: 'snap-12.webp', caption: 'Tap to add names' },
+                    { src: 'snap-13.webp', caption: 'Tap to add names' },
+                    { src: 'snap-14.webp', caption: 'Tap to add names' },
+                    { src: 'snap-15.webp', caption: 'Tap to add names' },
+                    { src: 'snap-16.webp', caption: 'Tap to add names' },
+                    { src: 'snap-17.webp', caption: 'Tap to add names' },
+                    { src: 'snap-18.webp', caption: 'Tap to add names' },
+                    { src: 'snapshot9.webp',  caption: 'Tap to add names' },
+                    { src: 'snapshot11.webp', caption: 'Tap to add names' },
+                    { src: 'snapshot13.webp', caption: 'Tap to add names' },
+                    { src: 'snapshot14.webp', caption: 'Tap to add names' }
+                ];
+                var grid = document.getElementById('snapshotsGrid');
+                if (!grid) return;
+                var html = '';
+                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) {
+                    var s = SNAPSHOTS_DATA[i];
+                    html += ''
+                        + '<figure class="snapshots-cell">'
+                        + '  <img src="images/snapshots/' + s.src + '" alt="" loading="lazy">'
+                        + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
+                        + '</figure>';
+                }
+                grid.innerHTML = html;
+            })();
+            </script>
             <div class="media-section">
                 <h3>In the Media</h3>
                 <div class="media-list">

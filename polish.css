@@ -641,16 +641,17 @@ a.rd-name:hover { color: var(--rd-yellow); }
   border-color: rgba(242, 216, 49, 0.34);
   transform: translateY(-2px);
 }
-/* Voice quote: matched to .team-card-quote so the two testimonial
-   surfaces (team-cards on cobalt + voices carousel) read at the same
-   scale and weight. Font-style: normal because the team quote is
-   roman (italic was reading as a different voice). */
+/* Voice quote: matched to .team-card-quote on scale + weight.
+   Color shifted from white to a soft Sunshine Yellow tint — keeps
+   the testimonials in dialogue with the gold coda below ("What
+   better time to build...") and the hero's yellow water highlights,
+   instead of reading as generic white body copy. */
 .rd-voice-quote {
   font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
   font-size: clamp(0.92rem, 1.02vw, 1.18rem);
   line-height: 1.5;
   font-style: normal;
-  color: rgba(255, 255, 255, 0.92);
+  color: #FFF1B6;
   letter-spacing: -0.005em;
   margin: 0;
 }
