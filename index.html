@@ -46,6 +46,13 @@
             margin: 0;
             padding: 0;
             width: 100%;
+            /* Belt-and-braces: clamp horizontal overflow so any
+               full-bleed child with sub-pixel width quirks (the voices
+               marquee uses width: 100vw with negative margin-left, etc)
+               can't push the document wider than the viewport and
+               expose a white sliver on the right edge on mobile. */
+            max-width: 100vw;
+            overflow-x: hidden;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #ffffff;
         }
