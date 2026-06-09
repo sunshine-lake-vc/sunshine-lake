@@ -668,19 +668,21 @@ a.rd-name:hover { color: var(--rd-yellow); }
   gap: 12px;
   padding-top: 0;
 }
-/* Single-line attribution: "Name, Role, Company". Replaces the old
-   two-line .rd-voice-author block. Smaller Segoe UI sans so it sits
-   quietly beneath the editorial serif quote. */
+/* Single-line attribution: "Name, Role, Company". Tinted to match
+   the yellow quote color above (#FFF1B6 at lower opacity) so the
+   testimonial card reads as one cohesive sunshine-yellow voice
+   rather than yellow-on-white. Company link bumped to a brighter
+   yellow so it still pops as the interactive element. */
 .rd-voice-attr-line {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   font-size: clamp(12.5px, 0.92vw, 14px);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 241, 182, 0.72);
   letter-spacing: 0.01em;
   line-height: 1.35;
 }
 .rd-voice-attr-line .rd-voice-company {
-  color: #fff;
+  color: #FFF1B6;
   font-weight: 600;
 }
 .rd-voice-mark {

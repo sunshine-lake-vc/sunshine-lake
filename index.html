@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=73">
+    <link rel="stylesheet" href="polish.css?v=74">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -528,50 +528,32 @@
             opacity: 0;
             filter: blur(0.3px);
             box-shadow: 0 0 8px rgba(242, 216, 49, 0.5);
-            animation: speckDrift 9s ease-in-out infinite;
+            /* Snappier drift — was 9s. Faster pace reads as "playful
+               sparkle" rather than a sleepy float. */
+            animation: speckDrift 4.5s ease-in-out infinite;
         }
+        /* Delays staggered across the new 4.5s cycle so the field
+           still feels chaotic — no two specks peak at the same time. */
         .speck-1  { top: 14%; left: 6%;  width: 4px;  height: 4px;  animation-delay: 0s;   }
-        .speck-2  { top: 28%; left: 22%; width: 3px;  height: 3px;  animation-delay: 1.4s; }
-        .speck-3  { top: 8%;  left: 44%; width: 5px;  height: 5px;  animation-delay: 0.7s; }
-        .speck-4  { top: 36%; left: 62%; width: 3px;  height: 3px;  animation-delay: 2.1s; }
-        .speck-5  { top: 20%; left: 84%; width: 4px;  height: 4px;  animation-delay: 3.2s; }
-        .speck-6  { top: 72%; left: 12%; width: 3px;  height: 3px;  animation-delay: 4.6s; }
-        .speck-7  { top: 82%; left: 30%; width: 5px;  height: 5px;  animation-delay: 1.8s; }
-        .speck-8  { top: 68%; left: 56%; width: 4px;  height: 4px;  animation-delay: 5.3s; }
-        .speck-9  { top: 88%; left: 76%; width: 3px;  height: 3px;  animation-delay: 6.1s; }
-        .speck-10 { top: 76%; left: 92%; width: 4px;  height: 4px;  animation-delay: 7.4s; }
+        .speck-2  { top: 28%; left: 22%; width: 3px;  height: 3px;  animation-delay: 0.6s; }
+        .speck-3  { top: 8%;  left: 44%; width: 5px;  height: 5px;  animation-delay: 0.3s; }
+        .speck-4  { top: 36%; left: 62%; width: 3px;  height: 3px;  animation-delay: 1.0s; }
+        .speck-5  { top: 20%; left: 84%; width: 4px;  height: 4px;  animation-delay: 1.6s; }
+        .speck-6  { top: 72%; left: 12%; width: 3px;  height: 3px;  animation-delay: 2.3s; }
+        .speck-7  { top: 82%; left: 30%; width: 5px;  height: 5px;  animation-delay: 0.9s; }
+        .speck-8  { top: 68%; left: 56%; width: 4px;  height: 4px;  animation-delay: 2.7s; }
+        .speck-9  { top: 88%; left: 76%; width: 3px;  height: 3px;  animation-delay: 3.1s; }
+        .speck-10 { top: 76%; left: 92%; width: 4px;  height: 4px;  animation-delay: 3.7s; }
         @keyframes speckDrift {
             0%, 100% { opacity: 0;    transform: translateY(0)   scale(0.6); }
             20%, 60% { opacity: 0.85; transform: translateY(-8px) scale(1); }
             80%      { opacity: 0;    transform: translateY(-14px) scale(0.7); }
         }
-        /* Soft glowing rule beneath the coda — a horizontal beam that
-           draws itself in then dims out. */
-        .thesis-coda-rule {
-            margin: clamp(20px, 2.4vw, 36px) auto 0;
-            height: 1.5px;
-            width: 60%;
-            background: linear-gradient(
-                90deg,
-                rgba(242, 216, 49, 0) 0%,
-                rgba(242, 216, 49, 0.65) 50%,
-                rgba(242, 216, 49, 0) 100%
-            );
-            transform-origin: center;
-            animation: codaRule 9s ease-in-out infinite;
-            box-shadow: 0 0 12px rgba(242, 216, 49, 0.35);
-        }
-        @keyframes codaRule {
-            0%, 100% { transform: scaleX(0.4); opacity: 0.3; }
-            50%      { transform: scaleX(1);   opacity: 0.9; }
-        }
         @media (prefers-reduced-motion: reduce) {
             .thesis-coda-specks .speck { animation: none; opacity: 0.6; }
-            .thesis-coda-rule { animation: none; opacity: 0.6; transform: none; }
         }
         @media (max-width: 768px) {
             .thesis-coda { font-size: clamp(1.9rem, 8vw, 2.8rem); }
-            .thesis-coda-rule { width: 75%; }
         }
         /* Standalone closing section between Portfolio and Footer.
            Renders as a multi-stop vertical gradient — hold the Mid
@@ -2266,7 +2248,6 @@
                 <span class="speck speck-9"></span><span class="speck speck-10"></span>
             </div>
             <p class="thesis-coda">What better time to build than when the world needs it most?</p>
-            <div class="thesis-coda-rule" aria-hidden="true"></div>
         </div>
     </section>
 
