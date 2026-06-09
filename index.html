@@ -1033,15 +1033,23 @@
            in a 36-44px outlined disc; we moved it inline with the name
            because the disc was visually duplicating the carousel arrows
            and adding clutter to the card. */
+        /* Bio link now reads as "Bio →" (small caps label + chevron)
+           instead of just the chevron alone — gave the affordance a
+           clearer name so users know where it goes. */
         .team-bio-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.7);
+            gap: 4px;
+            color: rgba(255, 255, 255, 0.78);
             text-decoration: none;
             padding: 4px 0 4px 4px;
             margin-left: auto;
             flex-shrink: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(10.5px, 0.78vw, 12px);
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
             transition: color 0.25s ease;
         }
         .team-bio-btn:hover {
@@ -1049,8 +1057,8 @@
         }
         .team-bio-arrow {
             display: block;
-            width: clamp(16px, 1.3vw, 20px);
-            height: clamp(16px, 1.3vw, 20px);
+            width: clamp(12px, 1vw, 14px);
+            height: clamp(12px, 1vw, 14px);
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
@@ -1713,20 +1721,98 @@
         }
         */
         /* ─────────────── END SHIMMER ARCHIVE ─────────────── */
+        /* Primary footer CTAs — sit ABOVE the smaller text links.
+           Solid pill buttons in Sunshine Yellow so they read as the
+           page's two actionable destinations: "Submit your pitch"
+           and "Read the latest Sessions". */
+        .footer-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(10px, 1.2vw, 18px);
+            margin: 0 0 clamp(20px, 2.4vw, 32px) 0;
+        }
+        .footer-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: clamp(12px, 1.2vw, 16px) clamp(20px, 2vw, 28px);
+            border-radius: 999px;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.95rem, 1.05vw, 1.1rem);
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.25s ease, color 0.25s ease,
+                        border-color 0.25s ease;
+        }
+        .footer-cta--primary {
+            background: #F2D831;
+            color: #02041F;
+        }
+        .footer-cta--primary:hover {
+            background: #FFE85A;
+            transform: translateY(-1px);
+        }
+        .footer-cta--secondary {
+            background: transparent;
+            color: #F2D831;
+            border: 1.5px solid rgba(242, 216, 49, 0.6);
+        }
+        .footer-cta--secondary:hover {
+            background: rgba(242, 216, 49, 0.12);
+            border-color: #F2D831;
+            transform: translateY(-1px);
+        }
+        .footer-cta span { font-size: 1.05em; line-height: 1; }
         .footer-contact {
             display: flex;
             gap: clamp(16px, 2vw, 32px);
+            flex-wrap: wrap;
         }
         .footer-contact a {
             font-size: clamp(0.85rem, 1vw, 1.1rem);
-            color: #155EE8;
+            color: rgba(255, 255, 255, 0.62);
             text-decoration: none;
-            border-bottom: 1px solid rgba(21, 94, 232, 0.3);
-            padding: 14px 4px 6px;
-            transition: border-color 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 8px 2px 4px;
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
         .footer-contact a:hover {
-            border-bottom-color: #155EE8;
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+        /* Editorial "definition" blurb beneath the contact links —
+           reads as Don's voice, ties the footer to the SL identity. */
+        .footer-definition {
+            margin: clamp(28px, 3vw, 44px) 0 0 0;
+            max-width: 640px;
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.98rem, 1.1vw, 1.2rem);
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.68);
+            text-align: left;
+        }
+        .footer-definition strong {
+            color: #fff;
+            font-weight: 500;
+        }
+        .footer-definition em {
+            color: #F2D831;
+            font-style: normal;
+            font-weight: 500;
+        }
+        .footer-definition-ipa {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.92em;
+            margin: 0 4px;
+        }
+        .footer-definition-cite {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255, 255, 255, 0.42);
+            font-size: 0.9em;
         }
         .footer-bottom {
             display: flex;
@@ -2130,7 +2216,7 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Sunshine Lake invests in global founders from extreme origins at their breakout moments.</p>
+                <p class="thesis-lede">Sunshine Lake invests in founders from extreme origins at their breakout moments.</p>
                 <p>Our aperture into geopolitical, economic, and technological inflections allows us to monitor sector cycles and support multiple blockbuster companies a decade.</p>
             </div>
 
@@ -2157,7 +2243,7 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Don Stalter</span>
-                                <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+                                <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Founder, Sunshine Lake</p>
                             <blockquote class="team-card-quote">True alpha doesn&rsquo;t come from the obvious path. It comes from founders navigating extreme constraints who share DNA that turns global outsiders into category leaders. We back that hunger from the very first check.</blockquote>
@@ -2171,7 +2257,7 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Ivan La Frinere-Sandoval</span>
-                                <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+                                <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
                             <blockquote class="team-card-quote">True innovation requires a rigorous framework. Combining technical depth with financial discipline lets us see viable opportunities where others only see complexity. That&rsquo;s the edge I look for in every founder we back.</blockquote>
@@ -2185,7 +2271,7 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Suhail Younus</span>
-                                <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+                                <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner</p>
                             <blockquote class="team-card-quote">I&rsquo;ve always been drawn to messy problems. The ones where nothing&rsquo;s obvious and you have to think from zero. Getting to do that alongside founders, and build real conviction in what comes next, is the best part of this job.</blockquote>
@@ -2199,7 +2285,7 @@
                         <div class="team-card-info">
                             <div class="team-card-name-row">
                                 <span class="team-card-name">Wieger Lamers</span>
-                                <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
+                                <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
                             <blockquote class="team-card-quote">Having a front-row seat to a defining startup journey early in life taught me that enduring success is often born from early adversity. Empowering visionary founders across Europe and beyond is what drives me every single day.</blockquote>
@@ -2248,7 +2334,7 @@
     <!-- Founders scroll-through -->
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
-            <h2 class="founders-left-title">Every Founder <br>has a story.</h2>
+            <h2 class="founders-left-title">Stories that <br>spark movements.</h2>
             <p class="founders-left-eyebrow">Sunshine Lake Portfolio</p>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
@@ -2289,12 +2375,30 @@
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
                     <h2>Dive in.</h2>
+                    <!-- Two primary CTAs as solid yellow pill buttons so
+                         they read at a glance — previous text-link
+                         treatment was getting missed. LinkedIn / X stay
+                         as smaller text links beneath. -->
+                    <div class="footer-cta-row">
+                        <a class="footer-cta footer-cta--primary" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">
+                            Submit your pitch <span aria-hidden="true">&rarr;</span>
+                        </a>
+                        <a class="footer-cta footer-cta--secondary" href="sessions.html">
+                            Read the latest Sessions <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
                     <div class="footer-contact">
-                        <a href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch &rarr;</a>
-                        <a href="sessions.html">Read the latest Sessions &rarr;</a>
                         <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
                         <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                     </div>
+                    <!-- Sunshine Lake definition — editorial blurb that
+                         echoes Don's voice. Phonetic spelling, bold
+                         emphasis on the active phrase. -->
+                    <p class="footer-definition">
+                        <strong>Sunshine Lake</strong> <span class="footer-definition-ipa">/&#712;s&#652;n&#643;a&#618;n le&#618;k/</span> (noun):
+                        A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
+                        <span class="footer-definition-cite">(Star Wars: Ewoks #9)</span>
+                    </p>
                 </div>
                 <div class="footer-bottom">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="footer-logo" fill="#155EE8" style="height:clamp(20px,2vw,32px);width:auto;">

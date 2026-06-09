@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions — Sunshine Lake Capital</title>
+    <link rel="canonical" href="https://sunshinelake.vc/sessions.html">
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(180deg, #155EE8 0%, #0A3DAE 60%, #02041F 100%);
+            min-height: 100vh;
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: clip;
+        }
+
+        /* Back button — mirrors the bio pages so the navigation feels
+           consistent across the secondary surfaces. */
+        .back-btn {
+            position: fixed;
+            top: clamp(20px, 3vw, 40px);
+            left: clamp(20px, 3vw, 40px);
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            opacity: 0.65;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 8px 0;
+            transition: opacity 0.2s ease;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: clamp(80px, 10vw, 160px) clamp(24px, 6vw, 64px) clamp(80px, 10vw, 160px);
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: clamp(40px, 5vw, 72px);
+        }
+        .page-eyebrow {
+            font-size: clamp(12px, 1vw, 14px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: clamp(12px, 1.4vw, 22px);
+        }
+        .page-title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.4rem, 5vw, 4.6rem);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            color: #fff;
+            margin-bottom: clamp(14px, 1.6vw, 24px);
+        }
+        .page-intro {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.05rem, 1.2vw, 1.4rem);
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.78);
+            max-width: 36em;
+        }
+
+        /* Section heading shared by Newsletter + Media */
+        .section {
+            margin-top: clamp(60px, 7vw, 100px);
+        }
+        .section-title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: clamp(20px, 2vw, 32px);
+            letter-spacing: -0.01em;
+        }
+
+        /* Monthly Newsletter — 3-up tile grid with placeholders. */
+        .newsletter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(16px, 1.6vw, 24px);
+        }
+        .newsletter-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(12px, 1.2vw, 18px);
+            padding: clamp(20px, 2vw, 28px);
+            border-radius: clamp(14px, 1.4vw, 20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            text-decoration: none;
+            min-height: 220px;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+        .newsletter-card.is-active {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .newsletter-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(242, 216, 49, 0.4);
+            transform: translateY(-2px);
+        }
+        .newsletter-card-issue {
+            font-size: clamp(11px, 0.85vw, 12.5px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 241, 182, 0.78);
+        }
+        .newsletter-card-title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.15rem, 1.4vw, 1.5rem);
+            line-height: 1.2;
+            color: #fff;
+            font-weight: 500;
+        }
+        .newsletter-card-summary {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.92rem, 1vw, 1.05rem);
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.5;
+            flex: 1;
+        }
+        .newsletter-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.04em;
+        }
+        .newsletter-card-cta {
+            color: rgba(242, 216, 49, 0.7);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        .newsletter-card.is-coming-soon .newsletter-card-cta::after {
+            content: '  •  COMING SOON';
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.18em;
+        }
+
+        /* In the Media — line list, one row per item. Mirrors the
+           media-section style from the old Don bio page. */
+        .media-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .media-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(16px, 2vw, 28px);
+            padding: clamp(18px, 1.8vw, 26px) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            text-decoration: none;
+            transition: padding 0.3s ease;
+        }
+        .media-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+        .media-item:hover { padding-left: 12px; }
+        .media-item-top {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            min-width: 200px;
+        }
+        .media-outlet { color: #FFF1B6; }
+        .media-title {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1rem, 1.2vw, 1.3rem);
+            line-height: 1.35;
+            color: rgba(255, 255, 255, 0.92);
+            flex: 1;
+            transition: color 0.2s ease;
+        }
+        .media-item:hover .media-title { color: #fff; }
+        .media-arrow {
+            font-size: 1.2em;
+            color: rgba(255, 241, 182, 0.6);
+            transition: transform 0.3s ease, color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .media-item:hover .media-arrow {
+            color: #F2D831;
+            transform: translate(3px, -3px);
+        }
+
+        @media (max-width: 900px) {
+            .newsletter-grid { grid-template-columns: 1fr; }
+            .media-item { flex-wrap: wrap; }
+            .media-item-top { min-width: 0; width: 100%; }
+        }
+
+        /* Page footer — small contact links so the page doesn't feel
+           like a dead end. */
+        .page-footer {
+            margin-top: clamp(80px, 10vw, 140px);
+            padding-top: clamp(28px, 3vw, 44px);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            gap: clamp(16px, 2vw, 32px);
+            flex-wrap: wrap;
+        }
+        .page-footer a {
+            font-size: clamp(0.85rem, 1vw, 1rem);
+            color: rgba(255, 255, 255, 0.62);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 4px 2px 4px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .page-footer a:hover {
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <a class="back-btn" href="index.html">&larr; Back to site</a>
+
+    <div class="container">
+        <header class="page-header">
+            <p class="page-eyebrow">Sunshine Lake Sessions</p>
+            <h1 class="page-title">Notes from the lake.</h1>
+            <p class="page-intro">Our monthly read on the founders, ideas, and inflections we're watching — plus interviews and pieces from across the broader Sunshine Lake universe.</p>
+        </header>
+
+        <!-- ════════ Monthly Newsletter ════════ -->
+        <section class="section" aria-label="Monthly Newsletter">
+            <h2 class="section-title">Monthly Newsletter</h2>
+            <div class="newsletter-grid">
+                <!-- Placeholder cards. Promote to .is-active and add the
+                     real href when an issue ships. -->
+                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
+                    <span class="newsletter-card-issue">Issue 01</span>
+                    <h3 class="newsletter-card-title">The first dispatch.</h3>
+                    <p class="newsletter-card-summary">A short preview of what we're seeing at the seed stage right now — global founders, sector inflections, the founders we're betting on next.</p>
+                    <div class="newsletter-card-meta">
+                        <span>Coming soon</span>
+                        <span class="newsletter-card-cta">Subscribe</span>
+                    </div>
+                </a>
+                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
+                    <span class="newsletter-card-issue">Issue 02</span>
+                    <h3 class="newsletter-card-title">In the field.</h3>
+                    <p class="newsletter-card-summary">Voices from the founders we're working with, lessons from the last quarter, and a deeper look at one breakout company.</p>
+                    <div class="newsletter-card-meta">
+                        <span>Coming soon</span>
+                        <span class="newsletter-card-cta">Subscribe</span>
+                    </div>
+                </a>
+                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
+                    <span class="newsletter-card-issue">Issue 03</span>
+                    <h3 class="newsletter-card-title">Macro inflections.</h3>
+                    <p class="newsletter-card-summary">Geopolitical, economic, and technological waves the Sunshine Lake aperture is tracking — and what they unlock for early founders.</p>
+                    <div class="newsletter-card-meta">
+                        <span>Coming soon</span>
+                        <span class="newsletter-card-cta">Subscribe</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ════════ In the Media — moved from Don's bio page ════════ -->
+        <section class="section" aria-label="In the Media">
+            <h2 class="section-title">In the Media</h2>
+            <div class="media-list">
+                <a class="media-item" href="https://www.jefferies.com/insights/boardroom-intelligence/data-moats-infrastructure-and-agents-where-investors-see-ais-next-big-opportunities/" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Jefferies</span>
+                        <span>Article</span>
+                    </div>
+                    <p class="media-title">Data Moats, Infrastructure and Agents: Where Investors See AI's Next Big Opportunities</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://www.youtube.com/watch?v=cUryiZ6bafc" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">YouTube</span>
+                        <span>Interview</span>
+                    </div>
+                    <p class="media-title">Don Stalter &mdash; Interview</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://therideshareguy.com/rsg080-don-stalter-on-the-on-demand-economy-vs-the-sharing-economy/" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">RideShareGuy</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">On Demand vs. the Sharing Economy</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://investorconnect.org/donald-stalter-of-global-founders-capital/" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Investor Connect</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">Donald Stalter of Global Founders Capital</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://open.spotify.com/episode/2yw5mquHWs5CwV75EyJPOA" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Scaleup Valley</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">Ep. 103 &mdash; Scaling Up With a Partner at Global Founders Capital</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://www.youtube.com/watch?v=H3KFqXTuHdI&t=1s&ab_channel=EpicFoundation" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Epic Foundation</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">Epic Chat with Don Stalter @ Global Founders Capital</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://www.youtube.com/watch?v=L9tkkB4ng3w" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Cheddar Now</span>
+                        <span>Interview</span>
+                    </div>
+                    <p class="media-title">Investing Platform Robinhood Expected to Launch its Own IPO</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://ventureunlocked.substack.com/p/global-founders-capitals-don-stalter" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Venture Unlocked</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">Global Founders Capital's Don Stalter</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+                <a class="media-item" href="https://open.spotify.com/episode/3UsHfInCci61rPbzb5KpLe" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Paradigm Shift</span>
+                        <span>Podcast</span>
+                    </div>
+                    <p class="media-title">Opportunities in Marketplaces, Future of Work, and Fintech</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            <a href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch &rarr;</a>
+            <a href="index.html">Back to the homepage</a>
+            <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
+        </footer>
+    </div>
+</body>
+</html>

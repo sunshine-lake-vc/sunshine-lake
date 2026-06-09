@@ -230,11 +230,12 @@
             display: block;
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                         filter 0.6s ease;
-            /* At rest: cool cast + the SVG turbulence-displacement
-               filter (#snapshotsWaterWarp) actually warps the photo
-               like it's seen through moving water. The SVG animates
-               its baseFrequency so the warp pattern keeps shifting. */
-            filter: saturate(0.78) brightness(0.92) hue-rotate(-6deg) url(#snapshotsWaterWarp);
+            /* At rest: blue monochrome — grayscale → sepia → rotate
+               hue 180° → bump saturation produces a deep cobalt
+               duotone, like the snapshots were printed in cyan ink.
+               The SVG turbulence still warps the photo ON TOP of the
+               monochrome so the surface still moves like water. */
+            filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.4) brightness(0.92) contrast(1.05) url(#snapshotsWaterWarp);
         }
         /* ::after = water DEPTH tint. Multiply blend so it sits over
            the photo as a cobalt veil — light at the surface, deeper
@@ -301,10 +302,10 @@
         .snapshots-cell:focus-within { transform: translateY(-2px); }
         .snapshots-cell:hover img,
         .snapshots-cell:focus-within img {
-            /* Hover: drop the water — kill the cool tint, drop the
-               turbulence warp, restore full saturation + brightness.
-               The photo snaps into focus. */
-            filter: saturate(1) brightness(1) hue-rotate(0deg);
+            /* Hover: drop ALL the effects — kill the monochrome, drop
+               the turbulence warp, restore full color. The photo
+               snaps into focus. */
+            filter: grayscale(0%) sepia(0%) hue-rotate(0deg) saturate(1) brightness(1) contrast(1);
             transform: scale(1.04);
         }
         .snapshots-cell:hover::before,
@@ -328,12 +329,14 @@
             .snapshots-cell::before { opacity: 0.55; }
             .snapshots-cell::after { opacity: 0.5; }
             .snapshots-cell img {
-                filter: saturate(0.82) brightness(0.95) hue-rotate(-4deg);
+                /* Skip the expensive SVG turbulence on mobile — keep
+                   the monochrome look without the per-frame warp. */
+                filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94) contrast(1.05);
             }
         }
         @media (prefers-reduced-motion: reduce) {
             /* Pause the warp AND the caustics for users who opt out. */
-            .snapshots-cell img { filter: saturate(0.82) brightness(0.95) hue-rotate(-4deg); }
+            .snapshots-cell img { filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94); }
             .snapshots-cell::before { animation: none; }
             #snapshotsWaterWarp feTurbulence animate { display: none; }
         }
@@ -839,7 +842,9 @@
                     { src: 'snap-doc-05.webp', caption: 'Mark Cuban' },
                     { src: 'snap-doc-08.webp', caption: 'Ben Silbermann (Pinterest)' },
                     { src: 'snap-doc-11.webp', caption: 'Brian Chesky (Airbnb)' },
-                    { src: 'snap-doc-16.webp', caption: 'Don' }
+                    // snap-doc-16 (the neon sign + "Don" caption) was
+                    // removed per Don's call — felt redundant alongside
+                    // the actual portraits.
                     // The pre-existing snap-1…snap-18 + snapshot9/11/13/14
                     // tiles were dropped because they were duplicates of
                     // the doc photos. To re-add any individual one with
@@ -859,83 +864,10 @@
                 grid.innerHTML = html;
             })();
             </script>
-            <div class="media-section">
-                <h3>In the Media</h3>
-                <div class="media-list">
-                    <a class="media-item" href="https://www.jefferies.com/insights/boardroom-intelligence/data-moats-infrastructure-and-agents-where-investors-see-ais-next-big-opportunities/" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Jefferies</span>
-                            <span class="media-type">Article</span>
-                        </div>
-                        <p class="media-title">Data Moats, Infrastructure and Agents: Where Investors See AI's Next Big Opportunities</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://www.youtube.com/watch?v=cUryiZ6bafc" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">YouTube</span>
-                            <span class="media-type">Interview</span>
-                        </div>
-                        <p class="media-title">Don Stalter — Interview</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://therideshareguy.com/rsg080-don-stalter-on-the-on-demand-economy-vs-the-sharing-economy/" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">RideShareGuy</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">On Demand vs. the Sharing Economy</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://investorconnect.org/donald-stalter-of-global-founders-capital/" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Investor Connect</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">Donald Stalter of Global Founders Capital</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://open.spotify.com/episode/2yw5mquHWs5CwV75EyJPOA" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Scaleup Valley Podcast</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">Ep. 103 — Scaling Up With a Partner at Global Founders Capital</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://www.youtube.com/watch?v=H3KFqXTuHdI&t=1s&ab_channel=EpicFoundation" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Epic Foundation</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">Epic Chat with Don Stalter @ Global Founders Capital</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://www.youtube.com/watch?v=L9tkkB4ng3w" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Cheddar Now</span>
-                            <span class="media-type">Interview</span>
-                        </div>
-                        <p class="media-title">Investing Platform Robinhood Expected to Launch its Own IPO</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://ventureunlocked.substack.com/p/global-founders-capitals-don-stalter" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Venture Unlocked</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">Global Founders Capital's Don Stalter</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                    <a class="media-item" href="https://open.spotify.com/episode/3UsHfInCci61rPbzb5KpLe" target="_blank" rel="noopener">
-                        <div class="media-item-top">
-                            <span class="media-outlet">Paradigm Shift</span>
-                            <span class="media-type">Podcast</span>
-                        </div>
-                        <p class="media-title">Opportunities in Marketplaces, Future of Work, and Fintech</p>
-                        <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                    </a>
-                </div>
-            </div>
+            <!-- "In the Media" moved out to sessions.html — Don's bio
+                 page now ends at the snapshots grid. The full media
+                 list (plus a Monthly Newsletter hub above it) lives
+                 at /sessions.html. -->
         </div>
     </section>
 
