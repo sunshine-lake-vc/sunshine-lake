@@ -227,23 +227,41 @@
             display: block;
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                         filter 0.5s ease;
-            /* Shallow-water look: a cool blue cast + slight desat so
-               every tile feels submerged. Lifts on hover. */
-            filter: saturate(0.65) brightness(0.78);
+            /* Shallow-water look: cool cyan cast + slight brighten so
+               photos look "lit from above" instead of murky/dim. */
+            filter: saturate(0.85) brightness(1.04) contrast(0.94);
         }
-        /* Translucent cobalt overlay (the "water") — sits between the
-           image and the caption, fades away on hover/focus. */
+        /* Watery overlay — light cyan top fading to soft cobalt, on
+           screen blend so it BRIGHTENS the photo rather than darkening
+           it. A second ::before adds a soft diagonal highlight to
+           suggest light filtering through the water surface. */
+        .snapshots-cell::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.22) 0%,
+                rgba(255, 255, 255, 0) 35%,
+                rgba(255, 255, 255, 0) 65%,
+                rgba(122, 204, 255, 0.18) 100%
+            );
+            mix-blend-mode: screen;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
         .snapshots-cell::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(21, 94, 232, 0.42),
-                rgba(10, 61, 174, 0.32) 60%,
-                rgba(2, 16, 58, 0.42)
+                rgba(122, 204, 255, 0.32) 0%,
+                rgba(21, 94, 232, 0.22) 55%,
+                rgba(10, 61, 174, 0.18) 100%
             );
-            mix-blend-mode: multiply;
+            mix-blend-mode: screen;
             pointer-events: none;
             transition: opacity 0.5s ease;
         }
@@ -270,6 +288,8 @@
             filter: saturate(1.05) brightness(1);
             transform: scale(1.04);
         }
+        .snapshots-cell:hover::before,
+        .snapshots-cell:focus-within::before,
         .snapshots-cell:hover::after,
         .snapshots-cell:focus-within::after { opacity: 0; }
         .snapshots-cell:hover .snapshots-cap,
@@ -282,11 +302,10 @@
         }
         @media (max-width: 600px) {
             .snapshots-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            /* Touch devices don't have hover — clear the water by default
-               so users can still see the photos. Caption stays hidden
-               until they tap (focus-within picks up the tap). */
-            .snapshots-cell img { filter: saturate(0.9) brightness(0.9); }
-            .snapshots-cell::after { opacity: 0.55; }
+            /* Touch devices don't have hover — soften the water tint
+               at rest so users can still see the photos clearly. */
+            .snapshots-cell::before { opacity: 0.6; }
+            .snapshots-cell::after { opacity: 0.5; }
         }
         .prefund-card {
             display: flex;
@@ -691,15 +710,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Assured case study — data pulled from the
-                         deck slide Don shared (Justin & Theo, Critical
-                         Infrastructure / automotive insurance ML, 1st
-                         check Dec 2019). Logo + founders portrait
-                         still use placeholder paths — add
-                         images/logos/assured.jpg + images/founders/assured.webp
-                         when ready. -->
+                    <!-- Assured case study — using snap-doc-21 (Justin
+                         Lewis-Weber + Don selfie) as the case-study
+                         photo per Don's call. Real Assured logo can
+                         replace it later by swapping the src to
+                         images/logos/assured.jpg. -->
                     <div class="prefund-card">
-                        <div class="prefund-photo"><img src="https://www.google.com/s2/favicons?domain=assured.claims&sz=128" alt="Assured" loading="lazy"></div>
+                        <div class="prefund-photo"><img src="images/snapshots/snap-doc-21.webp" alt="Justin Lewis-Weber (Assured)" loading="lazy"></div>
                         <div class="prefund-card-body">
                             <div class="prefund-card-header">
                                 <h4>Assured</h4>
@@ -764,8 +781,8 @@
                     { src: 'snap-doc-19.webp', caption: 'Lip-Bu Tan (Intel CEO)' },
                     { src: 'snap-doc-18.webp', caption: 'Oliver Samwer (Global Entrepreneur)' },
                     { src: 'snap-doc-22.webp', caption: 'Shardul Shah (Index Ventures)' },
-                    { src: 'snap-doc-21.webp', caption: 'Evan Spiegel (Snap)' },
-                    { src: 'snap-doc-20.webp', caption: 'Justin Lewis-Weber (Assured.claims)' },
+                    { src: 'snap-doc-21.webp', caption: 'Justin Lewis-Weber (Assured)' },
+                    { src: 'snap-doc-20.webp', caption: 'Evan Spiegel (Snap)' },
                     { src: 'snap-doc-12.webp', caption: 'Francis Thumpasery (Permitflow)' },
                     { src: 'snap-doc-04.webp', caption: 'Esther Wojcicki (Godmother of Silicon Valley)' },
                     { src: 'snap-doc-23.webp', caption: 'David Helgason (Unity Software)' },
@@ -779,32 +796,11 @@
                     { src: 'snap-doc-05.webp', caption: 'Mark Cuban' },
                     { src: 'snap-doc-08.webp', caption: 'Ben Silbermann (Pinterest)' },
                     { src: 'snap-doc-11.webp', caption: 'Brian Chesky (Airbnb)' },
-                    { src: 'snap-doc-16.webp', caption: 'Don' },
-                    // Original snapshot set — kept in the feed in case
-                    // they're additional photos not in the doc. No
-                    // captions until you confirm what each one is.
-                    { src: 'snap-1.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-2.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-3.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-4.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-5.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-6.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-7.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-8.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-9.webp',  caption: 'Tap to add names' },
-                    { src: 'snap-10.webp', caption: 'Tap to add names' },
-                    { src: 'snap-11.webp', caption: 'Tap to add names' },
-                    { src: 'snap-12.webp', caption: 'Tap to add names' },
-                    { src: 'snap-13.webp', caption: 'Tap to add names' },
-                    { src: 'snap-14.webp', caption: 'Tap to add names' },
-                    { src: 'snap-15.webp', caption: 'Tap to add names' },
-                    { src: 'snap-16.webp', caption: 'Tap to add names' },
-                    { src: 'snap-17.webp', caption: 'Tap to add names' },
-                    { src: 'snap-18.webp', caption: 'Tap to add names' },
-                    { src: 'snapshot9.webp',  caption: 'Tap to add names' },
-                    { src: 'snapshot11.webp', caption: 'Tap to add names' },
-                    { src: 'snapshot13.webp', caption: 'Tap to add names' },
-                    { src: 'snapshot14.webp', caption: 'Tap to add names' }
+                    { src: 'snap-doc-16.webp', caption: 'Don' }
+                    // The pre-existing snap-1…snap-18 + snapshot9/11/13/14
+                    // tiles were dropped because they were duplicates of
+                    // the doc photos. To re-add any individual one with
+                    // a real caption, append it here.
                 ];
                 var grid = document.getElementById('snapshotsGrid');
                 if (!grid) return;

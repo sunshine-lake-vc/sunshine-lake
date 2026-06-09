@@ -526,18 +526,22 @@
                sparkle" rather than a sleepy float. */
             animation: speckDrift 4.5s ease-in-out infinite;
         }
-        /* Delays staggered across the new 4.5s cycle so the field
-           still feels chaotic — no two specks peak at the same time. */
-        .speck-1  { top: 14%; left: 6%;  width: 4px;  height: 4px;  animation-delay: 0s;   }
-        .speck-2  { top: 28%; left: 22%; width: 3px;  height: 3px;  animation-delay: 0.6s; }
-        .speck-3  { top: 8%;  left: 44%; width: 5px;  height: 5px;  animation-delay: 0.3s; }
-        .speck-4  { top: 36%; left: 62%; width: 3px;  height: 3px;  animation-delay: 1.0s; }
-        .speck-5  { top: 20%; left: 84%; width: 4px;  height: 4px;  animation-delay: 1.6s; }
-        .speck-6  { top: 72%; left: 12%; width: 3px;  height: 3px;  animation-delay: 2.3s; }
-        .speck-7  { top: 82%; left: 30%; width: 5px;  height: 5px;  animation-delay: 0.9s; }
-        .speck-8  { top: 68%; left: 56%; width: 4px;  height: 4px;  animation-delay: 2.7s; }
-        .speck-9  { top: 88%; left: 76%; width: 3px;  height: 3px;  animation-delay: 3.1s; }
-        .speck-10 { top: 76%; left: 92%; width: 4px;  height: 4px;  animation-delay: 3.7s; }
+        /* Delays staggered across the 4.5s cycle so the field never
+           lines up. Selector intentionally repeats the parent class so
+           specificity beats the base .thesis-coda-specks .speck rule
+           above — the previous .speck-N rule had specificity 0,0,1,0
+           and was being overridden by the 0,0,2,0 base, which kept
+           every speck on a 0s delay and made them peak together. */
+        .thesis-coda-specks .speck-1  { top: 14%; left: 6%;  width: 4px;  height: 4px;  animation-delay: 0s;   }
+        .thesis-coda-specks .speck-2  { top: 28%; left: 22%; width: 3px;  height: 3px;  animation-delay: 0.55s; }
+        .thesis-coda-specks .speck-3  { top: 8%;  left: 44%; width: 5px;  height: 5px;  animation-delay: 0.3s; }
+        .thesis-coda-specks .speck-4  { top: 36%; left: 62%; width: 3px;  height: 3px;  animation-delay: 1.05s; }
+        .thesis-coda-specks .speck-5  { top: 20%; left: 84%; width: 4px;  height: 4px;  animation-delay: 1.65s; }
+        .thesis-coda-specks .speck-6  { top: 72%; left: 12%; width: 3px;  height: 3px;  animation-delay: 2.25s; }
+        .thesis-coda-specks .speck-7  { top: 82%; left: 30%; width: 5px;  height: 5px;  animation-delay: 0.9s; }
+        .thesis-coda-specks .speck-8  { top: 68%; left: 56%; width: 4px;  height: 4px;  animation-delay: 2.7s; }
+        .thesis-coda-specks .speck-9  { top: 88%; left: 76%; width: 3px;  height: 3px;  animation-delay: 3.15s; }
+        .thesis-coda-specks .speck-10 { top: 76%; left: 92%; width: 4px;  height: 4px;  animation-delay: 3.75s; }
         @keyframes speckDrift {
             0%, 100% { opacity: 0;    transform: translateY(0)   scale(0.6); }
             20%, 60% { opacity: 0.85; transform: translateY(-8px) scale(1); }
