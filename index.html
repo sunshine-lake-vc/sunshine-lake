@@ -50,9 +50,15 @@
                full-bleed child with sub-pixel width quirks (the voices
                marquee uses width: 100vw with negative margin-left, etc)
                can't push the document wider than the viewport and
-               expose a white sliver on the right edge on mobile. */
+               expose a white sliver on the right edge on mobile.
+               IMPORTANT: overflow-x: clip (NOT hidden) — `hidden`
+               creates a scroll container, which breaks position:sticky
+               in every descendant (the portfolio photo+overlay block
+               relies on sticky on mobile). `clip` clips the same way
+               but doesn't establish a scroll container, so sticky
+               continues to work. */
             max-width: 100vw;
-            overflow-x: hidden;
+            overflow-x: clip;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #ffffff;
         }
