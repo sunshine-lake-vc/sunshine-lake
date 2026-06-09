@@ -67,10 +67,13 @@
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: clamp(12px, 1.4vw, 22px);
         }
-        /* Title-row stages "Notes from the lake." next to a CSS ripple
-           cluster — three concentric circles expanding from a soft
-           yellow point, echoing the water-on-stone feel of the homepage
-           hero water shader without spinning up WebGL on a content page. */
+        /* Peaceful tap-ripple — concentric rings emanating from a
+           single point, like a drop hitting still water. No pulsing
+           center dot, no boundary, no animation race. Each ring
+           starts as a tiny circle, expands slowly outward on a 7s
+           cubic-out curve, fading to nothing. Rings stagger by ~1.7s
+           so a new one starts as the previous is still mid-flight —
+           the field stays continuously alive but never busy. */
         .page-title-row {
             display: flex;
             align-items: center;
@@ -89,54 +92,38 @@
         .page-title-ripple {
             position: relative;
             flex: 0 0 auto;
-            width: clamp(72px, 8vw, 120px);
-            height: clamp(72px, 8vw, 120px);
+            width: clamp(96px, 10vw, 140px);
+            height: clamp(96px, 10vw, 140px);
             pointer-events: none;
-            /* Hide on narrow viewports — the title alone reads cleanly. */
-        }
-        .page-title-ripple .drop {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 12px;
-            height: 12px;
-            margin: -6px 0 0 -6px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #FFF1B6 0%, rgba(242, 216, 49, 0.55) 60%, transparent 100%);
-            box-shadow: 0 0 14px rgba(242, 216, 49, 0.5);
-            opacity: 0.95;
-            animation: rippleDropPulse 4s ease-in-out infinite;
+            overflow: visible;
         }
         .page-title-ripple .ring {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 12px;
-            height: 12px;
-            margin: -6px 0 0 -6px;
+            inset: 50% 50% 50% 50%;
+            width: 8px;
+            height: 8px;
+            margin: -4px 0 0 -4px;
             border-radius: 50%;
-            border: 1.5px solid rgba(255, 241, 182, 0.75);
+            border: 1px solid rgba(255, 241, 182, 0.85);
             transform: scale(0);
             opacity: 0;
-            animation: rippleRing 4s ease-out infinite;
+            animation: rippleRing 7s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
         }
-        .page-title-ripple .ring:nth-child(2) { animation-delay: 1.0s; }
-        .page-title-ripple .ring:nth-child(3) { animation-delay: 2.0s; }
-        .page-title-ripple .ring:nth-child(4) { animation-delay: 3.0s; }
+        .page-title-ripple .ring:nth-child(1) { animation-delay: 0s; }
+        .page-title-ripple .ring:nth-child(2) { animation-delay: 1.75s; }
+        .page-title-ripple .ring:nth-child(3) { animation-delay: 3.5s; }
+        .page-title-ripple .ring:nth-child(4) { animation-delay: 5.25s; }
         @keyframes rippleRing {
-            0%   { transform: scale(0);  opacity: 0; border-width: 2px;   }
-            6%   { opacity: 0.9; }
-            100% { transform: scale(7);  opacity: 0; border-width: 0.5px; }
-        }
-        @keyframes rippleDropPulse {
-            0%, 100% { transform: scale(1);   box-shadow: 0 0 14px rgba(242, 216, 49, 0.5); }
-            50%      { transform: scale(0.8); box-shadow: 0 0 22px rgba(242, 216, 49, 0.8); }
+            0%   { transform: scale(0);   opacity: 0;    border-width: 1.5px; }
+            5%   { opacity: 0.85; }
+            100% { transform: scale(11);  opacity: 0;    border-width: 0.4px; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .page-title-ripple .ring,
-            .page-title-ripple .drop { animation: none; }
-            .page-title-ripple .ring:nth-child(2) { transform: translate(-50%, -50%) scale(2.6); opacity: 0.5; }
-            .page-title-ripple .ring:nth-child(3) { transform: translate(-50%, -50%) scale(4.5); opacity: 0.3; }
+            .page-title-ripple .ring { animation: none; }
+            .page-title-ripple .ring:nth-child(1) { transform: translate(-50%, -50%) scale(2);   opacity: 0.6; }
+            .page-title-ripple .ring:nth-child(2) { transform: translate(-50%, -50%) scale(4.5); opacity: 0.4; }
+            .page-title-ripple .ring:nth-child(3) { transform: translate(-50%, -50%) scale(7);   opacity: 0.25; }
+            .page-title-ripple .ring:nth-child(4) { transform: translate(-50%, -50%) scale(9.5); opacity: 0.12; }
         }
         .page-intro {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
@@ -325,10 +312,10 @@
             <p class="page-eyebrow">Sunshine Lake Sessions</p>
             <div class="page-title-row">
                 <h1 class="page-title">Notes from the lake.</h1>
-                <!-- Ripple animation — concentric rings expanding from a
-                     glowing yellow drop, echoing the homepage hero. -->
+                <!-- Peaceful tap-ripple — 4 staggered rings expanding
+                     from a single point on a 7s cubic-out curve. No
+                     pulsing center; just water moving outward. -->
                 <div class="page-title-ripple" aria-hidden="true">
-                    <span class="drop"></span>
                     <span class="ring"></span>
                     <span class="ring"></span>
                     <span class="ring"></span>
