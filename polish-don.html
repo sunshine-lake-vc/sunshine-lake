@@ -226,44 +226,55 @@
             object-fit: cover;
             display: block;
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 0.5s ease;
-            /* Shallow-water look: cool cyan cast + slight brighten so
-               photos look "lit from above" instead of murky/dim. */
-            filter: saturate(0.85) brightness(1.04) contrast(0.94);
+                        filter 0.6s ease;
+            /* At rest: gentle cool cast — like looking down at the photo
+               through a few inches of water. Saturation pulled back
+               slightly, hue nudged toward cyan, brightness untouched. */
+            filter: saturate(0.78) brightness(0.94) hue-rotate(-6deg);
         }
-        /* Watery overlay — light cyan top fading to soft cobalt, on
-           screen blend so it BRIGHTENS the photo rather than darkening
-           it. A second ::before adds a soft diagonal highlight to
-           suggest light filtering through the water surface. */
-        .snapshots-cell::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.22) 0%,
-                rgba(255, 255, 255, 0) 35%,
-                rgba(255, 255, 255, 0) 65%,
-                rgba(122, 204, 255, 0.18) 100%
-            );
-            mix-blend-mode: screen;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-            z-index: 1;
-        }
+        /* ::after = water DEPTH tint. Multiply blend so it sits over
+           the photo as a soft cobalt veil — darker as you go deeper,
+           lighter at the surface. Low opacity = subtle, not murky. */
         .snapshots-cell::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(122, 204, 255, 0.32) 0%,
+                rgba(140, 200, 255, 0.18) 0%,
                 rgba(21, 94, 232, 0.22) 55%,
-                rgba(10, 61, 174, 0.18) 100%
+                rgba(8, 30, 78, 0.28) 100%
             );
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+        /* ::before = light CAUSTICS rippling across the surface. Three
+           offset radial highlights on a screen blend, slow-drifting so
+           it reads as moving water. Sits ABOVE the depth tint via
+           z-index. */
+        .snapshots-cell::before {
+            content: '';
+            position: absolute;
+            inset: -8%;
+            background:
+                radial-gradient(ellipse 55% 28% at 28% 22%, rgba(220, 240, 255, 0.32), transparent 60%),
+                radial-gradient(ellipse 45% 22% at 72% 62%, rgba(255, 255, 255, 0.22), transparent 60%),
+                radial-gradient(ellipse 38% 20% at 18% 78%, rgba(170, 210, 240, 0.24), transparent 60%);
             mix-blend-mode: screen;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s ease;
+            z-index: 1;
+            animation: waterCaustic 11s ease-in-out infinite alternate;
+            transform-origin: center;
+        }
+        @keyframes waterCaustic {
+            0%   { transform: translate(0, 0)     scale(1); }
+            50%  { transform: translate(-3%, 2%)  scale(1.04); }
+            100% { transform: translate(2%, -1%)  scale(1.02); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .snapshots-cell::before { animation: none; }
         }
         .snapshots-cap {
             position: absolute;
@@ -285,7 +296,9 @@
         .snapshots-cell:focus-within { transform: translateY(-2px); }
         .snapshots-cell:hover img,
         .snapshots-cell:focus-within img {
-            filter: saturate(1.05) brightness(1);
+            /* Hover: drop the cool tint, restore full saturation +
+               brightness so the photo reads naturally beneath. */
+            filter: saturate(1) brightness(1) hue-rotate(0deg);
             transform: scale(1.04);
         }
         .snapshots-cell:hover::before,
