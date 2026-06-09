@@ -738,10 +738,51 @@
             </div>
             <script>
             (function () {
-                // Captions keyed by filename — keys MUST match the file
-                // in images/snapshots/ exactly (with or without .webp,
-                // we strip the extension in the lookup).
+                // Captions extracted from "Image and overlay.docx".
+                // Files snap-doc-01.webp through snap-doc-26.webp are
+                // the 26 photos that were embedded in the doc, converted
+                // to webp and dropped into images/snapshots/.
+                //
+                // The image-to-caption mapping below follows the doc's
+                // markdown serialization. I verified a few by sight
+                // (#3 Alex/Don/Tarek, #4 Esther, #5 Mark Cuban) — the
+                // rest are best-effort, so please spot-check and tell
+                // me which to swap.
+                //
+                // The original snap-1…snap-18 + snapshot9/11/13/14 files
+                // are appended at the end without captions in case they
+                // overlap with any of the doc images. Tap one to add a
+                // name, or tell me to drop it from the feed.
                 var SNAPSHOTS_DATA = [
+                    { src: 'snap-doc-03.webp', caption: 'Alex Bouaziz (Deel), Don, &amp; Tarek Mansour (Kalshi)' },
+                    { src: 'snap-doc-13.webp', caption: 'Julien Bek (Sequoia)' },
+                    { src: 'snap-doc-06.webp', caption: 'Don &amp; founder' },
+                    { src: 'snap-doc-09.webp', caption: 'Garry Tan (YC)' },
+                    { src: 'snap-doc-24.webp', caption: 'Nicolas Dessaigne (YC)' },
+                    { src: 'snap-doc-26.webp', caption: 'Jeannette zu F&uuml;rstenberg (General Catalyst)' },
+                    { src: 'snap-doc-25.webp', caption: 'Thomas Dohmke (GitHub)' },
+                    { src: 'snap-doc-19.webp', caption: 'Lip-Bu Tan (Intel CEO)' },
+                    { src: 'snap-doc-18.webp', caption: 'Oliver Samwer (Global Entrepreneur)' },
+                    { src: 'snap-doc-22.webp', caption: 'Shardul Shah (Index Ventures)' },
+                    { src: 'snap-doc-21.webp', caption: 'Evan Spiegel (Snap)' },
+                    { src: 'snap-doc-20.webp', caption: 'Justin Lewis-Weber (Assured.claims)' },
+                    { src: 'snap-doc-12.webp', caption: 'Francis Thumpasery (Permitflow)' },
+                    { src: 'snap-doc-04.webp', caption: 'Esther Wojcicki (Godmother of Silicon Valley)' },
+                    { src: 'snap-doc-23.webp', caption: 'David Helgason (Unity Software)' },
+                    { src: 'snap-doc-10.webp', caption: 'Josh Browder' },
+                    { src: 'snap-doc-14.webp', caption: 'Mark Kvamme' },
+                    { src: 'snap-doc-07.webp', caption: 'Michael Tannenbaum (Figure)' },
+                    { src: 'snap-doc-02.webp', caption: 'Henrique Dubugras (Brex)' },
+                    { src: 'snap-doc-17.webp', caption: 'Jeremy Levine (Underdog)' },
+                    { src: 'snap-doc-01.webp', caption: 'Carsten Maschmeyer (German Shark Tank)' },
+                    { src: 'snap-doc-15.webp', caption: 'Dan Perez (Hinge Health)' },
+                    { src: 'snap-doc-05.webp', caption: 'Mark Cuban' },
+                    { src: 'snap-doc-08.webp', caption: 'Ben Silbermann (Pinterest)' },
+                    { src: 'snap-doc-11.webp', caption: 'Brian Chesky (Airbnb)' },
+                    { src: 'snap-doc-16.webp', caption: 'Don' },
+                    // Original snapshot set — kept in the feed in case
+                    // they're additional photos not in the doc. No
+                    // captions until you confirm what each one is.
                     { src: 'snap-1.webp',  caption: 'Tap to add names' },
                     { src: 'snap-2.webp',  caption: 'Tap to add names' },
                     { src: 'snap-3.webp',  caption: 'Tap to add names' },
