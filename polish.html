@@ -1637,10 +1637,30 @@
             align-items: center;
             justify-content: center;
         }
-        /* "Dive Beneath the Surface." — ocean shimmer baked inline so
-           the animation runs regardless of polish.css load order or
-           caching. Deep cobalt base with a pale sky highlight sweeping
-           across; mirrors the thesis-coda shimmer in family. */
+        /* ┌──────────────────────────────────────────────────────────┐
+           │ "Dive in." — STATIC version (current).                   │
+           │                                                          │
+           │ The ocean-shimmer animation lives in the archived block  │
+           │ below, kept verbatim so we can flip it back on later.    │
+           │ To restore: delete this .footer-photo-content h2 rule    │
+           │ and uncomment the SHIMMER ARCHIVE block underneath.      │
+           └──────────────────────────────────────────────────────────┘ */
+        .footer-photo-content h2 {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(2.4rem, 4vw, 5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin: 0 0 clamp(20px, 2.5vw, 36px) 0;
+            color: #155EE8;
+        }
+
+        /* ───── SHIMMER ARCHIVE — Dive in ocean-shimmer animation ─────
+           Original code preserved verbatim. Drop the comment markers
+           around this block (and remove the static rule above) to
+           re-enable the sweeping gold/blue gradient across the
+           headline. Matches the .thesis-coda shimmer in family.        */
+        /*
         .footer-photo-content h2 {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(2.4rem, 4vw, 5rem);
@@ -1664,11 +1684,6 @@
             color: transparent;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 22px rgba(21, 94, 232, 0.28);
-            /* Linear timing + a longer 8s cycle so the highlight sweeps
-               across at one constant, slow pace. ease-in-out was reading
-               as "slow then fast then slow" within each loop because
-               cubic timing accelerates through the middle — the user
-               wanted a single consistent speed. */
             animation: oceanShimmer 8s linear infinite;
         }
         @keyframes oceanShimmer {
@@ -1683,6 +1698,8 @@
                 -webkit-text-fill-color: #155EE8;
             }
         }
+        */
+        /* ─────────────── END SHIMMER ARCHIVE ─────────────── */
         .footer-contact {
             display: flex;
             gap: clamp(16px, 2vw, 32px);
