@@ -207,8 +207,11 @@
         }
         .snapshots-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: clamp(6px, 0.8vw, 10px);
+            /* 5-col instead of 6 so tiles feel substantial on desktop
+               (was reading as a thumbnail strip). Tablet drops to 4,
+               mobile to 3 via the media queries below. */
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(8px, 1vw, 14px);
         }
         .snapshots-cell {
             position: relative;
@@ -227,51 +230,53 @@
             display: block;
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                         filter 0.6s ease;
-            /* At rest: gentle cool cast — like looking down at the photo
-               through a few inches of water. Saturation pulled back
-               slightly, hue nudged toward cyan, brightness untouched. */
-            filter: saturate(0.78) brightness(0.94) hue-rotate(-6deg);
+            /* At rest: cool cast + the SVG turbulence-displacement
+               filter (#snapshotsWaterWarp) actually warps the photo
+               like it's seen through moving water. The SVG animates
+               its baseFrequency so the warp pattern keeps shifting. */
+            filter: saturate(0.78) brightness(0.92) hue-rotate(-6deg) url(#snapshotsWaterWarp);
         }
         /* ::after = water DEPTH tint. Multiply blend so it sits over
-           the photo as a soft cobalt veil — darker as you go deeper,
-           lighter at the surface. Low opacity = subtle, not murky. */
+           the photo as a cobalt veil — light at the surface, deeper
+           at the bottom. Slightly stronger than the previous pass. */
         .snapshots-cell::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(140, 200, 255, 0.18) 0%,
-                rgba(21, 94, 232, 0.22) 55%,
-                rgba(8, 30, 78, 0.28) 100%
+                rgba(140, 200, 255, 0.28) 0%,
+                rgba(21, 94, 232, 0.30) 55%,
+                rgba(8, 30, 78, 0.38) 100%
             );
             mix-blend-mode: multiply;
             pointer-events: none;
             transition: opacity 0.6s ease;
         }
-        /* ::before = light CAUSTICS rippling across the surface. Three
-           offset radial highlights on a screen blend, slow-drifting so
-           it reads as moving water. Sits ABOVE the depth tint via
-           z-index. */
+        /* ::before = surface CAUSTICS. Brighter highlights + faster
+           drift than before so the field reads as moving water rather
+           than a static gradient. Two stacked layers on different
+           timings keep the pattern from ever lining up. */
         .snapshots-cell::before {
             content: '';
             position: absolute;
-            inset: -8%;
+            inset: -12%;
             background:
-                radial-gradient(ellipse 55% 28% at 28% 22%, rgba(220, 240, 255, 0.32), transparent 60%),
-                radial-gradient(ellipse 45% 22% at 72% 62%, rgba(255, 255, 255, 0.22), transparent 60%),
-                radial-gradient(ellipse 38% 20% at 18% 78%, rgba(170, 210, 240, 0.24), transparent 60%);
+                radial-gradient(ellipse 55% 28% at 28% 18%, rgba(230, 245, 255, 0.55), transparent 58%),
+                radial-gradient(ellipse 42% 22% at 78% 58%, rgba(255, 255, 255, 0.42), transparent 60%),
+                radial-gradient(ellipse 36% 20% at 18% 82%, rgba(180, 220, 245, 0.45), transparent 60%),
+                radial-gradient(ellipse 28% 14% at 62% 28%, rgba(255, 255, 255, 0.32), transparent 64%);
             mix-blend-mode: screen;
             pointer-events: none;
             transition: opacity 0.6s ease;
             z-index: 1;
-            animation: waterCaustic 11s ease-in-out infinite alternate;
+            animation: waterCaustic 6.5s ease-in-out infinite alternate;
             transform-origin: center;
         }
         @keyframes waterCaustic {
-            0%   { transform: translate(0, 0)     scale(1); }
-            50%  { transform: translate(-3%, 2%)  scale(1.04); }
-            100% { transform: translate(2%, -1%)  scale(1.02); }
+            0%   { transform: translate(0, 0)     scale(1)     rotate(0deg); }
+            50%  { transform: translate(-6%, 4%)  scale(1.08)  rotate(0.5deg); }
+            100% { transform: translate(5%, -3%)  scale(1.04)  rotate(-0.5deg); }
         }
         @media (prefers-reduced-motion: reduce) {
             .snapshots-cell::before { animation: none; }
@@ -296,8 +301,9 @@
         .snapshots-cell:focus-within { transform: translateY(-2px); }
         .snapshots-cell:hover img,
         .snapshots-cell:focus-within img {
-            /* Hover: drop the cool tint, restore full saturation +
-               brightness so the photo reads naturally beneath. */
+            /* Hover: drop the water — kill the cool tint, drop the
+               turbulence warp, restore full saturation + brightness.
+               The photo snaps into focus. */
             filter: saturate(1) brightness(1) hue-rotate(0deg);
             transform: scale(1.04);
         }
@@ -316,9 +322,20 @@
         @media (max-width: 600px) {
             .snapshots-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
             /* Touch devices don't have hover — soften the water tint
-               at rest so users can still see the photos clearly. */
-            .snapshots-cell::before { opacity: 0.6; }
+               at rest so users can still see the photos clearly. SVG
+               turbulence is also expensive on mobile GPUs, so drop
+               the filter to just the cool cast. */
+            .snapshots-cell::before { opacity: 0.55; }
             .snapshots-cell::after { opacity: 0.5; }
+            .snapshots-cell img {
+                filter: saturate(0.82) brightness(0.95) hue-rotate(-4deg);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            /* Pause the warp AND the caustics for users who opt out. */
+            .snapshots-cell img { filter: saturate(0.82) brightness(0.95) hue-rotate(-4deg); }
+            .snapshots-cell::before { animation: none; }
+            #snapshotsWaterWarp feTurbulence animate { display: none; }
         }
         .prefund-card {
             display: flex;
@@ -758,12 +775,25 @@
             </div>
 
             <!-- Snapshots grid — every photo in images/snapshots/.
-                 Default state has a translucent cobalt overlay ("shallow
-                 water") and a hover lifts the water to reveal a caption
-                 with the people in the shot. Caption text comes from
-                 SNAPSHOTS_DATA below (initially placeholders — replace
-                 with Don's identifications doc when ready). -->
+                 Default state shows photos through an SVG turbulence
+                 + displacement filter (actual underwater warp), with
+                 a depth tint and drifting caustic highlights stacked
+                 on top. Hover lifts all three layers and snaps the
+                 photo into focus with its caption. -->
             <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
+                <!-- SVG water-warp filter — animated turbulence drives
+                     a small displacement map so every photo visibly
+                     ripples beneath the surface at rest. Shared by all
+                     tiles. width=0 + position:absolute keeps it
+                     invisible in the document flow. -->
+                <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+                    <filter id="snapshotsWaterWarp" x="-10%" y="-10%" width="120%" height="120%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="2" seed="3" result="noise">
+                            <animate attributeName="baseFrequency" dur="14s" values="0.012 0.022;0.018 0.014;0.012 0.022" repeatCount="indefinite"/>
+                        </feTurbulence>
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                    </filter>
+                </svg>
                 <div class="snapshots-grid" id="snapshotsGrid"></div>
             </div>
             <script>
