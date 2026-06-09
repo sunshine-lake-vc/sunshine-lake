@@ -456,10 +456,12 @@
            for warmth. */
         /* Selector intentionally NOT scoped to .team-thesis any more —
            the coda lives in its own .thesis-coda-section below the
-           Portfolio now, but the styling stays identical.
-           Bigger display scale than the in-thesis version + stronger
-           highlight band + a soft yellow halo that echoes the hero's
-           sun reflection through the water. */
+           Portfolio now. The gold shimmer is the only animation on
+           the headline itself; the floating specks behind it carry
+           the "alive" feeling. (Previously also ran a codaGlow
+           drop-shadow keyframe that pulsed the halo — removed because
+           drop-shadow forces a full text re-paint every frame, which
+           was reading as a clunky shimmer flicker.) */
         .thesis-coda {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(2.6rem, 4.4vw, 5.4rem);
@@ -484,26 +486,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            text-shadow:
-                0 0 28px rgba(242, 216, 49, 0.42),
-                0 0 80px rgba(242, 216, 49, 0.18);
-            /* Linear timing + slower 9s cycle so the highlight glides
-               across at one constant pace. ease-in-out was reading as
-               "once slow, once fast" within each loop because cubic
-               easing accelerates through the middle. Glow stays on
-               ease-in-out because it's a breath — symmetric in/out
-               is what makes it feel like a pulse, not a strobe. */
-            animation: thesisShimmer 9s linear infinite,
-                       codaGlow 6s ease-in-out infinite;
+            /* Static halo — single soft glow that doesn't animate, so
+               the GPU doesn't have to re-rasterize the text every
+               frame. */
+            text-shadow: 0 0 32px rgba(242, 216, 49, 0.28);
+            /* Linear timing + slow 9s cycle so the highlight glides
+               across at one constant pace. will-change: background-
+               position promotes the shimmer to its own GPU layer. */
+            animation: thesisShimmer 9s linear infinite;
+            will-change: background-position;
             position: relative;
             display: inline-block;
-        }
-        /* Subtle pulsing halo behind the coda — echoes the sun
-           reflection in the hero water shader. Animates the alpha of
-           the existing text-shadow so the wordmark feels alive. */
-        @keyframes codaGlow {
-            0%, 100% { filter: drop-shadow(0 0 0 rgba(242, 216, 49, 0)); }
-            50%      { filter: drop-shadow(0 0 22px rgba(242, 216, 49, 0.32)); }
         }
         /* Stage that holds the coda + decorative ornaments. Inline-block
            so the underline matches the headline's wrapped width. */
