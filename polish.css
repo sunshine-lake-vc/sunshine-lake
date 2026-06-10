@@ -1010,21 +1010,22 @@ body.mode-tight .content-sticky p {
    and a caption appears.
    ═══════════════════════════════════════════════════════════════ */
 
-/* Sticky footer container: stack text on top of grid, normal flow */
-.footer-scroll-spacer { height: auto !important; min-height: 100vh; }
+/* Sticky footer container: stack text on top of grid, normal flow.
+   No min-height: 100vh anymore — sign-off (logo + ©) moved out to
+   the white .sl-definition-bar below, so the dark abyss footer
+   should just size to its content (Dive in + CTAs + pills) plus
+   padding, not stretch to a full viewport and float the content
+   in dead space. */
+.footer-scroll-spacer { height: auto !important; min-height: 0 !important; }
 .footer-sticky {
   position: relative !important;
   height: auto !important;
-  min-height: 100vh;
+  min-height: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
-  /* flex-start (not center) so the contact text + photo grid stack
-     from the top down. With justify-content: center the combined
-     content was centering in min-height and getting clipped by the
-     inline overflow rule, hiding the photo grid on desktop. */
   justify-content: flex-start !important;
-  gap: clamp(32px, 4vw, 56px);
+  gap: clamp(24px, 3vw, 40px);
   padding: clamp(56px, 7vw, 112px) clamp(24px, 4vw, 64px) clamp(40px, 5vw, 72px) !important;
 }
 

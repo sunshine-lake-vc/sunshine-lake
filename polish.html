@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=75">
+    <link rel="stylesheet" href="polish.css?v=76">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1882,34 +1882,31 @@
             .footer-cta-row { justify-content: center; }
             .footer-contact { justify-content: center; }
         }
-        /* Sign-off row at the bottom of the dark footer. Generous top
-           margin so the legal copy doesn't feel glued to the social
-           pills above. Logo gets a thin hairline divider before it for
-           a deliberate "end-of-document" beat. */
-        .footer-bottom {
+        /* Sign-off row — used to live inside the dark footer as
+           .footer-bottom but moved into the white .sl-definition-bar
+           below so it lands at the true bottom of the page. Cobalt
+           tones to match the bar's white background. */
+        .sl-definition-signoff {
+            margin-top: clamp(28px, 3.4vw, 48px);
+            padding-top: clamp(24px, 2.8vw, 36px);
+            border-top: 1px solid rgba(2, 16, 58, 0.12);
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(14px, 1.8vw, 22px);
-            padding: clamp(56px, 7vw, 96px) 0 clamp(28px, 3.5vh, 48px);
-            margin-top: clamp(40px, 5vw, 72px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            width: 100%;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: clamp(10px, 1.2vw, 16px);
         }
-        .footer-bottom .footer-logo {
-            height: clamp(28px, 2.6vw, 40px) !important;
+        .sl-definition-logo {
+            height: clamp(24px, 2.2vw, 32px);
             width: auto;
-            opacity: 0.92;
+            fill: rgba(21, 94, 232, 0.78);
         }
-        .footer-legal {
+        .sl-definition-legal {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(0.7rem, 0.78vw, 0.85rem);
-            color: rgba(255, 255, 255, 0.42);
+            font-size: clamp(0.68rem, 0.75vw, 0.78rem);
+            color: rgba(2, 16, 58, 0.45);
             margin: 0;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
         }
 
         @media (max-width: 768px) {
@@ -2487,22 +2484,15 @@
                         <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                     </div>
                 </div>
-                <div class="footer-bottom">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="footer-logo" fill="#155EE8" style="height:clamp(20px,2vw,32px);width:auto;">
-                        <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
-                        <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
-                    </svg>
-                    <p class="footer-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
-                </div>
             </div>
         </div>
     </footer>
 
     <!-- ════════ Sunshine Lake definition bar ════════
-         White band at the very bottom of the page that puts the SL
-         definition under a silhouette of the ewok mark. Sits OUTSIDE
-         the dark abyss footer so the dictionary card reads as a
-         deliberate signature, not buried CTA copy. -->
+         White band at the very bottom of the page. Sign-off (logo +
+         © line) now lives at the end of this section so it lands at
+         the true bottom instead of floating mid-screen inside the
+         sticky 100vh dark footer. -->
     <section class="sl-definition-bar" aria-label="Sunshine Lake definition">
         <div class="sl-definition-inner">
             <img class="sl-definition-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
@@ -2511,6 +2501,13 @@
                 A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
                 <span class="sl-definition-cite">(Star Wars: Ewoks #9)</span>
             </p>
+            <div class="sl-definition-signoff">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="sl-definition-logo" aria-hidden="true">
+                    <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+                    <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+                </svg>
+                <p class="sl-definition-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
+            </div>
         </div>
     </section>
 
