@@ -4009,10 +4009,12 @@
 
 
         // Ewok-head Easter egg — click reveals the cream dictionary
-        // card (which lives below the dark abyss footer, hidden by
-        // default via .is-collapsed). On click: fade the peek button
-        // out, drop .is-collapsed off the bar, optionally scroll the
-        // card into view.
+        // card. The card grows downward from its (collapsed) top edge
+        // via max-height + padding transitions; the viewport then
+        // smooth-scrolls so the user lands looking at the fully-
+        // revealed card. (Scrolling DURING the expand would land at
+        // the bar's initial top position while the card kept growing
+        // below the viewport — i.e. "loads out of view".)
         (function () {
             var peek = document.getElementById('ewokPeek');
             var bar  = document.getElementById('slDefinitionBar');
@@ -4022,16 +4024,33 @@
                 bar.classList.remove('is-collapsed');
                 peek.setAttribute('aria-expanded', 'true');
                 peek.classList.add('is-hidden');
-                // Smooth-scroll the card into view after its open
-                // animation has settled. Lenis if available, else
-                // native scrollIntoView.
-                setTimeout(function () {
+
+                // Two scroll phases:
+                //   1. Immediate easing toward the bar so the page
+                //      begins sliding down while the card expands.
+                //   2. After the expand transition settles (~900ms),
+                //      do a final correction to the bottom of the
+                //      page so the card lands flush in the viewport.
+                function scrollTo(target, duration) {
                     if (window._lenis && typeof window._lenis.scrollTo === 'function') {
-                        window._lenis.scrollTo(bar, { duration: 1.1, offset: -40 });
+                        window._lenis.scrollTo(target, { duration: duration });
+                    } else if (typeof target === 'number') {
+                        window.scrollTo({ top: target, behavior: 'smooth' });
                     } else {
-                        bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                }, 280);
+                }
+                // Phase 1 — kick off motion right away
+                requestAnimationFrame(function () {
+                    scrollTo(bar, 0.9);
+                });
+                // Phase 2 — settle at the page bottom once the card
+                // has finished growing (max-height transition is
+                // 0.85s; adding 60ms cushion).
+                setTimeout(function () {
+                    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    scrollTo(maxScroll, 0.6);
+                }, 910);
             });
         })();
 

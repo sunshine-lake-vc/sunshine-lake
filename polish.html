@@ -3974,7 +3974,9 @@
 
 
         // Ewok-head Easter egg — click reveals the cream dictionary
-        // card (hidden by default via .is-collapsed).
+        // card. Two-phase scroll: kick off motion immediately so the
+        // page slides down while the card expands, then correct to
+        // the page bottom after the expand transition settles.
         (function () {
             var peek = document.getElementById('ewokPeek');
             var bar  = document.getElementById('slDefinitionBar');
@@ -3984,13 +3986,22 @@
                 bar.classList.remove('is-collapsed');
                 peek.setAttribute('aria-expanded', 'true');
                 peek.classList.add('is-hidden');
-                setTimeout(function () {
+                function scrollTo(target, duration) {
                     if (window._lenis && typeof window._lenis.scrollTo === 'function') {
-                        window._lenis.scrollTo(bar, { duration: 1.1, offset: -40 });
+                        window._lenis.scrollTo(target, { duration: duration });
+                    } else if (typeof target === 'number') {
+                        window.scrollTo({ top: target, behavior: 'smooth' });
                     } else {
-                        bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                }, 280);
+                }
+                requestAnimationFrame(function () {
+                    scrollTo(bar, 0.9);
+                });
+                setTimeout(function () {
+                    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    scrollTo(maxScroll, 0.6);
+                }, 910);
             });
         })();
 
