@@ -1813,13 +1813,12 @@
             --ewok-size: clamp(80px, 8vw, 120px);
         }
         .sl-definition-inner {
-            max-width: 720px;
+            max-width: 640px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: clamp(20px, 2.4vw, 36px);
-            text-align: center;
         }
         .sl-definition-mark {
             width: var(--ewok-size);
@@ -1846,33 +1845,80 @@
         @media (prefers-reduced-motion: reduce) {
             .sl-definition-mark.is-dropping { animation: none; }
         }
-        .sl-definition-text {
+        /* Dictionary entry — left-aligned typographic block modeled on
+           Merriam-Webster: bold headword with interpunct, slashed
+           phonetic, italic part-of-speech, then a numbered sense and
+           an italic origin line. */
+        .sl-definition-entry {
+            width: 100%;
+            text-align: left;
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.15rem, 1.4vw, 1.5rem);
-            line-height: 1.55;
-            color: rgba(255, 251, 235, 0.78);
-            margin: 0;
+            color: rgba(255, 251, 235, 0.84);
         }
-        .sl-definition-text strong {
+        .sl-definition-headword {
+            margin: 0 0 clamp(8px, 1vw, 14px) 0;
+            font-size: clamp(1.3rem, 1.7vw, 1.85rem);
+            line-height: 1.25;
+            letter-spacing: -0.005em;
+            color: rgba(255, 251, 235, 0.92);
+        }
+        .sl-definition-headword strong {
             color: #FFFBEB;
             font-weight: 600;
         }
-        .sl-definition-text em {
-            color: #F2D831;
-            font-style: normal;
-            font-weight: 600;
-        }
-        .sl-definition-ipa {
+        .sl-definition-pron {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: rgba(255, 251, 235, 0.55);
-            font-size: 0.86em;
-            margin: 0 4px;
+            font-size: 0.7em;
+            color: rgba(255, 251, 235, 0.62);
+            letter-spacing: 0.01em;
+            font-weight: 500;
+            white-space: nowrap;
         }
-        .sl-definition-cite {
-            display: block;
-            margin-top: 6px;
-            color: rgba(255, 251, 235, 0.42);
-            font-size: 0.84em;
+        .sl-definition-pos {
+            font-style: italic;
+            color: rgba(255, 251, 235, 0.6);
+            font-size: 0.78em;
+            margin-left: 4px;
+        }
+        .sl-definition-sense {
+            margin: 0;
+            font-size: clamp(1.05rem, 1.25vw, 1.32rem);
+            line-height: 1.55;
+            color: rgba(255, 251, 235, 0.82);
+            padding-left: 1.6em;
+            text-indent: -1.6em;
+        }
+        .sl-definition-sense .sl-definition-num {
+            display: inline-block;
+            width: 1em;
+            margin-right: 0.4em;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 0.78em;
+            font-weight: 700;
+            color: #F2D831;
+            vertical-align: 0.12em;
+        }
+        .sl-definition-sense .sl-definition-num::after {
+            content: ':';
+            margin-left: 0.32em;
+            color: rgba(255, 251, 235, 0.4);
+            font-weight: 400;
+        }
+        .sl-definition-key {
+            color: #F2D831;
+            font-style: italic;
+            font-weight: 500;
+        }
+        .sl-definition-etym {
+            margin: clamp(10px, 1.2vw, 16px) 0 0 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.8rem, 0.88vw, 0.95rem);
+            color: rgba(255, 251, 235, 0.5);
+            letter-spacing: 0.02em;
+        }
+        .sl-definition-etym i {
+            font-style: italic;
+            color: rgba(255, 251, 235, 0.7);
         }
         /* Mobile: center every footer element (CTAs, social links,
            Dive in headline) so the section reads cohesively. */
@@ -2499,11 +2545,17 @@
     <section class="sl-definition-bar" aria-label="Sunshine Lake definition">
         <div class="sl-definition-inner">
             <img class="sl-definition-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
-            <p class="sl-definition-text">
-                <strong>Sunshine Lake</strong> <span class="sl-definition-ipa">/&#712;s&#652;n&#643;a&#618;n le&#618;k/</span> (noun):
-                <br>A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
-                <span class="sl-definition-cite">(Star Wars: Ewoks #9)</span>
-            </p>
+            <div class="sl-definition-entry">
+                <p class="sl-definition-headword">
+                    <strong>Sun&middot;shine Lake</strong><span class="sl-definition-pron"> \ &#712;s&#652;n&#643;a&#618;n le&#618;k \ </span><em class="sl-definition-pos">noun</em>
+                </p>
+                <p class="sl-definition-sense">
+                    <span class="sl-definition-num">1</span> a far away location where rare entrepreneurial beings are <em class="sl-definition-key">forged by extreme origins</em>.
+                </p>
+                <p class="sl-definition-etym">
+                    Origin: <i>Star Wars: Ewoks #9</i>.
+                </p>
+            </div>
             <div class="sl-definition-signoff">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="sl-definition-logo" aria-hidden="true">
                     <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
