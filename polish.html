@@ -1803,14 +1803,13 @@
            of the page (sits outside the dark abyss footer). Reads as
            a dictionary signature with a silhouetted ewok mark above
            the definition. */
+        /* Definition bar — same dark Abyss as the footer above so the
+           bottom of the page reads as one continuous deep zone. */
         .sl-definition-bar {
-            background: #FFFBEB;
-            padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px);
+            background: #02041F;
+            padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px) clamp(40px, 5vw, 72px);
             position: relative;
             z-index: 4;
-            /* Single source of truth for the size shared by the silhouette
-               and the floating cursor ewok — they must match exactly so the
-               cursor can "drop into" the silhouette without resizing. */
             --ewok-size: clamp(80px, 8vw, 120px);
         }
         .sl-definition-inner {
@@ -1825,8 +1824,9 @@
         .sl-definition-mark {
             width: var(--ewok-size);
             height: auto;
-            filter: brightness(0) saturate(100%);
-            opacity: 0.78;
+            /* Light silhouette on the dark background. */
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
             transition: filter 0.6s ease, opacity 0.5s ease;
             transform-origin: center bottom;
         }
@@ -1848,31 +1848,31 @@
         }
         .sl-definition-text {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1rem, 1.15vw, 1.25rem);
+            font-size: clamp(1.15rem, 1.4vw, 1.5rem);
             line-height: 1.55;
-            color: rgba(2, 16, 58, 0.7);
+            color: rgba(255, 251, 235, 0.78);
             margin: 0;
         }
         .sl-definition-text strong {
-            color: #02041F;
+            color: #FFFBEB;
             font-weight: 600;
         }
         .sl-definition-text em {
-            color: #155EE8;
+            color: #F2D831;
             font-style: normal;
             font-weight: 600;
         }
         .sl-definition-ipa {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: rgba(2, 16, 58, 0.55);
-            font-size: 0.9em;
+            color: rgba(255, 251, 235, 0.55);
+            font-size: 0.86em;
             margin: 0 4px;
         }
         .sl-definition-cite {
             display: block;
             margin-top: 6px;
-            color: rgba(2, 16, 58, 0.42);
-            font-size: 0.88em;
+            color: rgba(255, 251, 235, 0.42);
+            font-size: 0.84em;
         }
         /* Mobile: center every footer element (CTAs, social links,
            Dive in headline) so the section reads cohesively. */
@@ -1886,10 +1886,11 @@
            .footer-bottom but moved into the white .sl-definition-bar
            below so it lands at the true bottom of the page. Cobalt
            tones to match the bar's white background. */
+        /* Sign-off — light tones on the dark Abyss background. */
         .sl-definition-signoff {
             margin-top: clamp(28px, 3.4vw, 48px);
             padding-top: clamp(24px, 2.8vw, 36px);
-            border-top: 1px solid rgba(2, 16, 58, 0.12);
+            border-top: 1px solid rgba(255, 251, 235, 0.1);
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -1899,12 +1900,12 @@
         .sl-definition-logo {
             height: clamp(24px, 2.2vw, 32px);
             width: auto;
-            fill: rgba(21, 94, 232, 0.78);
+            fill: rgba(255, 251, 235, 0.78);
         }
         .sl-definition-legal {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: clamp(0.68rem, 0.75vw, 0.78rem);
-            color: rgba(2, 16, 58, 0.45);
+            color: rgba(255, 251, 235, 0.42);
             margin: 0;
             letter-spacing: 0.06em;
         }
@@ -2498,7 +2499,7 @@
             <img class="sl-definition-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
             <p class="sl-definition-text">
                 <strong>Sunshine Lake</strong> <span class="sl-definition-ipa">/&#712;s&#652;n&#643;a&#618;n le&#618;k/</span> (noun):
-                A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
+                <br>A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
                 <span class="sl-definition-cite">(Star Wars: Ewoks #9)</span>
             </p>
             <div class="sl-definition-signoff">
