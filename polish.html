@@ -1817,7 +1817,10 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            /* Everything in the bottom block — silhouette, dictionary
+               entry, sign-off — shares the same left edge for a
+               consistent dictionary-page feel. */
+            align-items: flex-start;
             gap: clamp(20px, 2.4vw, 36px);
         }
         .sl-definition-mark {
@@ -1885,24 +1888,6 @@
             font-size: clamp(1.05rem, 1.25vw, 1.32rem);
             line-height: 1.55;
             color: rgba(255, 251, 235, 0.82);
-            padding-left: 1.6em;
-            text-indent: -1.6em;
-        }
-        .sl-definition-sense .sl-definition-num {
-            display: inline-block;
-            width: 1em;
-            margin-right: 0.4em;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: 0.78em;
-            font-weight: 700;
-            color: #F2D831;
-            vertical-align: 0.12em;
-        }
-        .sl-definition-sense .sl-definition-num::after {
-            content: ':';
-            margin-left: 0.32em;
-            color: rgba(255, 251, 235, 0.4);
-            font-weight: 400;
         }
         .sl-definition-key {
             color: #F2D831;
@@ -1932,7 +1917,8 @@
            .footer-bottom but moved into the white .sl-definition-bar
            below so it lands at the true bottom of the page. Cobalt
            tones to match the bar's white background. */
-        /* Sign-off — light tones on the dark Abyss background. */
+        /* Sign-off — light tones on the dark Abyss background.
+           Left-aligned to match the dictionary entry above. */
         .sl-definition-signoff {
             margin-top: clamp(28px, 3.4vw, 48px);
             padding-top: clamp(24px, 2.8vw, 36px);
@@ -1940,7 +1926,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             gap: clamp(10px, 1.2vw, 16px);
         }
         .sl-definition-logo {
@@ -2549,9 +2535,7 @@
                 <p class="sl-definition-headword">
                     <strong>Sun&middot;shine Lake</strong><span class="sl-definition-pron"> \ &#712;s&#652;n&#643;a&#618;n le&#618;k \ </span><em class="sl-definition-pos">noun</em>
                 </p>
-                <p class="sl-definition-sense">
-                    <span class="sl-definition-num">1</span> a far away location where rare entrepreneurial beings are <em class="sl-definition-key">forged by extreme origins</em>.
-                </p>
+                <p class="sl-definition-sense">A far away location where rare entrepreneurial beings are <em class="sl-definition-key">forged by extreme origins</em>.</p>
                 <p class="sl-definition-etym">
                     Origin: <i>Star Wars: Ewoks #9</i>.
                 </p>
