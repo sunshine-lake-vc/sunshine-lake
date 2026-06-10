@@ -1985,9 +1985,10 @@
         .ewok-peek-svg {
             display: block;
             margin: 0 auto;
-            width: clamp(56px, 6vw, 84px);
-            height: clamp(48px, 5.2vw, 72px);
-            clip-path: inset(0 0 32% 0);
+            /* Tall aspect to match the pear/egg silhouette. */
+            width: clamp(64px, 6.4vw, 92px);
+            height: clamp(74px, 7.4vw, 108px);
+            clip-path: inset(0 0 40% 0);
             fill: currentColor;
             animation: ewokBob 4.5s ease-in-out infinite;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
@@ -2609,10 +2610,10 @@
          Replaces the old floating ewoks-in-boat cursor. Click to
          reveal the cream dictionary card. -->
     <button class="ewok-peek" id="ewokPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="slDefinitionBar">
-        <svg viewBox="0 0 120 120" class="ewok-peek-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <path d="M60 12c-16 0-29 9-32 25-4 0-7 4-7 9 0 5 3 8 7 9 1 21 14 41 32 41s31-20 32-41c4-1 7-4 7-9 0-5-3-9-7-9-3-16-16-25-32-25z"/>
-            <circle cx="28" cy="32" r="9"/>
-            <circle cx="92" cy="32" r="9"/>
+        <svg viewBox="0 0 120 140" class="ewok-peek-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ewok-head silhouette: tall egg-hood body + 2 pointed
+                 triangle ears at the top corners. -->
+            <path d="M 24 32 L 12 4 L 40 30 Z M 96 32 L 108 4 L 80 30 Z M 60 16 C 30 16 18 40 18 72 C 18 110 32 138 60 138 C 88 138 102 110 102 72 C 102 40 90 16 60 16 Z"/>
         </svg>
         <span class="ewok-peek-label">Look closer</span>
     </button>
