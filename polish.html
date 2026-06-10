@@ -1803,16 +1803,33 @@
            of the page (sits outside the dark abyss footer). Reads as
            a dictionary signature with a silhouetted ewok mark above
            the definition. */
-        /* Definition bar — same dark Abyss as the footer above. The
-           dictionary entry inside sits on a subtle cream-tinted
-           "paper card" — nod to the beige Don liked, without
-           breaking the dark flow. */
+        /* Definition bar — dark Abyss surround with a cream paper card
+           inside. Collapsed by default until the user clicks the
+           ewok-head silhouette above. */
         .sl-definition-bar {
             background: #02041F;
             padding: clamp(48px, 6vw, 96px) clamp(40px, 7vw, 120px) clamp(40px, 5vw, 72px);
             position: relative;
             z-index: 4;
             --ewok-size: clamp(80px, 8vw, 120px);
+            overflow: hidden;
+            max-height: 1600px;
+            opacity: 1;
+            transition: max-height 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                        padding 0.65s ease,
+                        opacity 0.5s ease;
+        }
+        .sl-definition-bar.is-collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+        }
+        .sl-definition-bar.is-collapsed .sl-definition-inner {
+            transform: translateY(40px);
+        }
+        .sl-definition-inner {
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .sl-definition-inner {
             max-width: 720px;
@@ -1923,13 +1940,11 @@
            .footer-bottom but moved into the white .sl-definition-bar
            below so it lands at the true bottom of the page. Cobalt
            tones to match the bar's white background. */
-        /* Sign-off — logo + © on a single row beneath the dictionary
-           entry. Hairline cobalt divider above for the cream card. */
-        .sl-definition-signoff {
-            margin-top: clamp(24px, 2.8vw, 40px);
+        /* Sign-off in the dark abyss footer (above the cream card). */
+        .footer-signoff {
+            margin-top: clamp(28px, 3.4vw, 48px);
             padding-top: clamp(20px, 2.4vw, 32px);
-            border-top: 1px solid rgba(2, 16, 58, 0.12);
-            width: 100%;
+            border-top: 1px solid rgba(255, 251, 235, 0.1);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -1937,17 +1952,67 @@
             gap: clamp(14px, 1.6vw, 24px);
             flex-wrap: wrap;
         }
-        .sl-definition-logo {
-            height: clamp(24px, 2.2vw, 32px);
+        .footer-signoff-logo {
+            height: clamp(22px, 2vw, 30px);
             width: auto;
-            fill: rgba(21, 94, 232, 0.78);
+            fill: rgba(255, 251, 235, 0.78);
         }
-        .sl-definition-legal {
+        .footer-signoff-legal {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: clamp(0.68rem, 0.75vw, 0.78rem);
-            color: rgba(2, 16, 58, 0.45);
+            color: rgba(255, 251, 235, 0.42);
             margin: 0;
             letter-spacing: 0.06em;
+        }
+
+        /* Ewok-head Easter-egg peek button. */
+        .ewok-peek {
+            display: block;
+            margin: clamp(40px, 5vw, 72px) auto 0;
+            padding: 0;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            text-align: center;
+            color: rgba(255, 251, 235, 0.78);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        color 0.3s ease;
+            position: relative;
+            z-index: 5;
+        }
+        .ewok-peek:hover { transform: translateY(-4px); color: #FFF1B6; }
+        .ewok-peek-svg {
+            display: block;
+            margin: 0 auto;
+            width: clamp(56px, 6vw, 84px);
+            height: clamp(48px, 5.2vw, 72px);
+            clip-path: inset(0 0 32% 0);
+            fill: currentColor;
+            animation: ewokBob 4.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+        }
+        .ewok-peek-label {
+            display: block;
+            margin-top: 4px;
+            font-size: clamp(10px, 0.78vw, 12px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        @keyframes ewokBob {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-4px); }
+        }
+        .ewok-peek.is-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ewok-peek-svg { animation: none; }
         }
 
         @media (max-width: 768px) {
@@ -2526,17 +2591,36 @@
                         <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
                         <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                     </div>
+                    <!-- Sign-off (logo + ©) moved into the dark abyss
+                         above the cream card. -->
+                    <div class="footer-signoff">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="footer-signoff-logo" aria-hidden="true">
+                            <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+                            <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+                        </svg>
+                        <p class="footer-signoff-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- ════════ Sunshine Lake definition bar ════════
-         White band at the very bottom of the page. Sign-off (logo +
-         © line) now lives at the end of this section so it lands at
-         the true bottom instead of floating mid-screen inside the
-         sticky 100vh dark footer. -->
-    <section class="sl-definition-bar" aria-label="Sunshine Lake definition">
+    <!-- ════════ Easter-egg ewok-head silhouette ════════
+         Replaces the old floating ewoks-in-boat cursor. Click to
+         reveal the cream dictionary card. -->
+    <button class="ewok-peek" id="ewokPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="slDefinitionBar">
+        <svg viewBox="0 0 120 120" class="ewok-peek-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 12c-16 0-29 9-32 25-4 0-7 4-7 9 0 5 3 8 7 9 1 21 14 41 32 41s31-20 32-41c4-1 7-4 7-9 0-5-3-9-7-9-3-16-16-25-32-25z"/>
+            <circle cx="28" cy="32" r="9"/>
+            <circle cx="92" cy="32" r="9"/>
+        </svg>
+        <span class="ewok-peek-label">Look closer</span>
+    </button>
+
+    <!-- ════════ Sunshine Lake definition card ════════
+         Cream paper card with stitched border. Initially hidden via
+         .is-collapsed; click on #ewokPeek above toggles open. -->
+    <section class="sl-definition-bar is-collapsed" id="slDefinitionBar" aria-label="Sunshine Lake definition">
         <div class="sl-definition-inner">
             <img class="sl-definition-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
             <div class="sl-definition-entry">
@@ -2547,13 +2631,6 @@
                 <p class="sl-definition-etym">
                     Origin: <i>Star Wars: Ewoks #9</i>.
                 </p>
-            </div>
-            <div class="sl-definition-signoff">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="sl-definition-logo" aria-hidden="true">
-                    <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
-                    <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
-                </svg>
-                <p class="sl-definition-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
             </div>
         </div>
     </section>
@@ -3895,8 +3972,30 @@
         })();
 
 
-        // Footer ewok follows mouse
-        (function() {
+        // Ewok-head Easter egg — click reveals the cream dictionary
+        // card (hidden by default via .is-collapsed).
+        (function () {
+            var peek = document.getElementById('ewokPeek');
+            var bar  = document.getElementById('slDefinitionBar');
+            if (!peek || !bar) return;
+            peek.addEventListener('click', function () {
+                if (!bar.classList.contains('is-collapsed')) return;
+                bar.classList.remove('is-collapsed');
+                peek.setAttribute('aria-expanded', 'true');
+                peek.classList.add('is-hidden');
+                setTimeout(function () {
+                    if (window._lenis && typeof window._lenis.scrollTo === 'function') {
+                        window._lenis.scrollTo(bar, { duration: 1.1, offset: -40 });
+                    } else {
+                        bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 280);
+            });
+        })();
+
+        // Old floating boat-ewok cursor — retired in favour of the new
+        // ewok-head peek button above. IIFE short-circuits.
+        (function() { return; /* old boat-ewok cursor disabled */
             var footerSticky = document.querySelector('.footer-sticky');
             var slBar = document.querySelector('.sl-definition-bar');
             var slMark = document.querySelector('.sl-definition-mark');
