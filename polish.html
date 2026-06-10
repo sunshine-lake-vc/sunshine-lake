@@ -730,6 +730,12 @@
                     mask-image: linear-gradient(90deg, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
         }
         .rd-exits-marquee + .rd-exits-marquee { margin-top: clamp(10px, 1vw, 14px); }
+        /* Mobile-only Track Record rows — hidden on desktop, shown
+           ≤720px so phones get 5 visible rows instead of 3. */
+        .rd-exits-marquee--mobile-only { display: none; }
+        @media (max-width: 720px) {
+            .rd-exits-marquee--mobile-only { display: block; }
+        }
         .rd-exits-row {
             display: flex;
             gap: clamp(10px, 1vw, 16px);
@@ -1775,37 +1781,66 @@
             color: #fff;
             border-bottom-color: rgba(255, 255, 255, 0.5);
         }
-        /* Editorial "definition" blurb beneath the contact links —
-           reads as Don's voice, ties the footer to the SL identity. */
-        .footer-definition {
-            margin: clamp(28px, 3vw, 44px) 0 0 0;
-            max-width: 640px;
+        /* Sunshine Lake definition bar — white card at the VERY bottom
+           of the page (sits outside the dark abyss footer). Reads as
+           a dictionary signature with a silhouetted ewok mark above
+           the definition. */
+        .sl-definition-bar {
+            background: #FFFBEB;
+            padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px);
+            position: relative;
+            z-index: 4;
+        }
+        .sl-definition-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(20px, 2.4vw, 36px);
+            text-align: center;
+        }
+        .sl-definition-mark {
+            width: clamp(68px, 7vw, 100px);
+            height: auto;
+            filter: brightness(0) saturate(100%);
+            opacity: 0.78;
+        }
+        .sl-definition-text {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(0.98rem, 1.1vw, 1.2rem);
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.68);
-            text-align: left;
+            font-size: clamp(1rem, 1.15vw, 1.25rem);
+            line-height: 1.55;
+            color: rgba(2, 16, 58, 0.7);
+            margin: 0;
         }
-        .footer-definition strong {
-            color: #fff;
-            font-weight: 500;
+        .sl-definition-text strong {
+            color: #02041F;
+            font-weight: 600;
         }
-        .footer-definition em {
-            color: #F2D831;
+        .sl-definition-text em {
+            color: #155EE8;
             font-style: normal;
-            font-weight: 500;
+            font-weight: 600;
         }
-        .footer-definition-ipa {
+        .sl-definition-ipa {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.92em;
+            color: rgba(2, 16, 58, 0.55);
+            font-size: 0.9em;
             margin: 0 4px;
         }
-        .footer-definition-cite {
+        .sl-definition-cite {
             display: block;
-            margin-top: 4px;
-            color: rgba(255, 255, 255, 0.42);
-            font-size: 0.9em;
+            margin-top: 6px;
+            color: rgba(2, 16, 58, 0.42);
+            font-size: 0.88em;
+        }
+        /* Mobile: center every footer element (CTAs, social links,
+           Dive in headline) so the section reads cohesively. */
+        @media (max-width: 768px) {
+            .footer-photo-content-main { align-items: center; text-align: center; }
+            .footer-photo-content-main h2 { text-align: center; }
+            .footer-cta-row { justify-content: center; }
+            .footer-contact { justify-content: center; }
         }
         .footer-bottom {
             display: flex;
@@ -2290,7 +2325,12 @@
                 </div>
             </div>
 
-            <!-- Top 1% Track Record — full-width pill marquee, 3 rows -->
+            <!-- Top 1% Track Record — full-width pill marquee.
+                 Desktop: 3 rows (IPO, Seed, M&A).
+                 Mobile: 5 rows — Seed and M&A each split into a 2nd
+                 row (.rd-exits-marquee--mobile-only) so phone users
+                 see more of the portfolio without horizontal-scrolling
+                 the carousel. Mobile-only rows are hidden on >720px. -->
             <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
                 <p class="rd-exits-label">Top 1% Track Record</p>
                 <div class="rd-exits-marquee">
@@ -2299,8 +2339,14 @@
                 <div class="rd-exits-marquee">
                     <div class="rd-exits-row" id="rd-exits-seed"></div>
                 </div>
+                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
+                    <div class="rd-exits-row" id="rd-exits-seed-2"></div>
+                </div>
                 <div class="rd-exits-marquee">
                     <div class="rd-exits-row" id="rd-exits-ma"></div>
+                </div>
+                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
+                    <div class="rd-exits-row" id="rd-exits-ma-2"></div>
                 </div>
             </section>
         </div>
@@ -2384,14 +2430,6 @@
                         <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
                         <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                     </div>
-                    <!-- Sunshine Lake definition — editorial blurb that
-                         echoes Don's voice. Phonetic spelling, bold
-                         emphasis on the active phrase. -->
-                    <p class="footer-definition">
-                        <strong>Sunshine Lake</strong> <span class="footer-definition-ipa">/&#712;s&#652;n&#643;a&#618;n le&#618;k/</span> (noun):
-                        A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
-                        <span class="footer-definition-cite">(Star Wars: Ewoks #9)</span>
-                    </p>
                 </div>
                 <div class="footer-bottom">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" class="footer-logo" fill="#155EE8" style="height:clamp(20px,2vw,32px);width:auto;">
@@ -2403,6 +2441,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- ════════ Sunshine Lake definition bar ════════
+         White band at the very bottom of the page that puts the SL
+         definition under a silhouette of the ewok mark. Sits OUTSIDE
+         the dark abyss footer so the dictionary card reads as a
+         deliberate signature, not buried CTA copy. -->
+    <section class="sl-definition-bar" aria-label="Sunshine Lake definition">
+        <div class="sl-definition-inner">
+            <img class="sl-definition-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
+            <p class="sl-definition-text">
+                <strong>Sunshine Lake</strong> <span class="sl-definition-ipa">/&#712;s&#652;n&#643;a&#618;n le&#618;k/</span> (noun):
+                A far away location where rare entrepreneurial beings are <em>forged by extreme origins.</em>
+                <span class="sl-definition-cite">(Star Wars: Ewoks #9)</span>
+            </p>
+        </div>
+    </section>
 
 
     <!-- WebGL Shaders -->
@@ -3970,7 +4024,7 @@
     </script>
 
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
-    <script src="polish.js?v=31" defer></script>
+    <script src="polish.js?v=32" defer></script>
 
 </body>
 </html>

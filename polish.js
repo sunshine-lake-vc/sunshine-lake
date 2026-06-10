@@ -330,7 +330,9 @@
     var voicesTop = document.getElementById('rd-voices-top');
     var exitsIpo    = document.getElementById('rd-exits-ipo');
     var exitsSeed   = document.getElementById('rd-exits-seed');
+    var exitsSeed2  = document.getElementById('rd-exits-seed-2');
     var exitsMa     = document.getElementById('rd-exits-ma');
+    var exitsMa2    = document.getElementById('rd-exits-ma-2');
 
     if (leadersTrack) {
       // Legacy 3x3 grid — only renders if the element still exists
@@ -362,6 +364,24 @@
       exitsIpo.innerHTML  = ipoHtml  + ipoHtml;
       exitsSeed.innerHTML = seedHtml + seedHtml;
       exitsMa.innerHTML   = maHtml   + maHtml;
+
+      // Mobile-only secondary rows — pull from the SAME source sets
+      // (seed for seed-2, exit for ma-2) but offset the rotation so
+      // the same logo never sits directly above its twin. Hidden on
+      // desktop via CSS (.rd-exits-marquee--mobile-only).
+      function rotate(arr, n) {
+        if (!arr.length) return arr;
+        n = ((n % arr.length) + arr.length) % arr.length;
+        return arr.slice(n).concat(arr.slice(0, n));
+      }
+      if (exitsSeed2) {
+        var seedHtml2 = repeatList(rotate(seedSet, Math.ceil(seedSet.length / 2)), 3).map(buildExitCard).join('');
+        exitsSeed2.innerHTML = seedHtml2 + seedHtml2;
+      }
+      if (exitsMa2) {
+        var maHtml2 = repeatList(rotate(maSet, Math.ceil(maSet.length / 2)), 2).map(buildExitCard).join('');
+        exitsMa2.innerHTML = maHtml2 + maHtml2;
+      }
     }
   }
 
@@ -426,9 +446,11 @@
   /* ─── Strategic Exits carousel — three rows (IPO / Seed / M&A),
        alternating scroll directions for visual interest ─── */
   function startExitsMarquees() {
-    driveMarquee(document.getElementById('rd-exits-ipo'),  -26); // IPOs scroll left
-    driveMarquee(document.getElementById('rd-exits-seed'),  22); // Seed deals scroll right
-    driveMarquee(document.getElementById('rd-exits-ma'),   -30); // M&A scroll left
+    driveMarquee(document.getElementById('rd-exits-ipo'),    -26); // IPOs scroll left
+    driveMarquee(document.getElementById('rd-exits-seed'),    22); // Seed deals scroll right
+    driveMarquee(document.getElementById('rd-exits-seed-2'), -24); // Mobile seed row 2: counter direction
+    driveMarquee(document.getElementById('rd-exits-ma'),     -30); // M&A scroll left
+    driveMarquee(document.getElementById('rd-exits-ma-2'),    26); // Mobile M&A row 2: counter direction
   }
 
   /* ─── Carousel drag (per carousel) ─── */
