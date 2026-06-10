@@ -1803,25 +1803,35 @@
            of the page (sits outside the dark abyss footer). Reads as
            a dictionary signature with a silhouetted ewok mark above
            the definition. */
-        /* Definition bar — same dark Abyss as the footer above so the
-           bottom of the page reads as one continuous deep zone. */
+        /* Definition bar — same dark Abyss as the footer above. The
+           dictionary entry inside sits on a subtle cream-tinted
+           "paper card" — nod to the beige Don liked, without
+           breaking the dark flow. */
         .sl-definition-bar {
             background: #02041F;
-            padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px) clamp(40px, 5vw, 72px);
+            padding: clamp(48px, 6vw, 96px) clamp(40px, 7vw, 120px) clamp(40px, 5vw, 72px);
             position: relative;
             z-index: 4;
             --ewok-size: clamp(80px, 8vw, 120px);
         }
         .sl-definition-inner {
-            max-width: 640px;
+            max-width: 720px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            /* Everything in the bottom block — silhouette, dictionary
-               entry, sign-off — shares the same left edge for a
-               consistent dictionary-page feel. */
             align-items: flex-start;
             gap: clamp(20px, 2.4vw, 36px);
+            background:
+                linear-gradient(180deg,
+                    rgba(255, 251, 235, 0.05),
+                    rgba(255, 251, 235, 0.025) 60%,
+                    rgba(255, 251, 235, 0.015));
+            border: 1px solid rgba(255, 251, 235, 0.12);
+            border-radius: clamp(10px, 1.2vw, 18px);
+            padding: clamp(32px, 4vw, 56px) clamp(28px, 3.6vw, 52px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 251, 235, 0.06),
+                0 24px 60px -28px rgba(0, 0, 0, 0.55);
         }
         .sl-definition-mark {
             width: var(--ewok-size);
@@ -1917,17 +1927,19 @@
            .footer-bottom but moved into the white .sl-definition-bar
            below so it lands at the true bottom of the page. Cobalt
            tones to match the bar's white background. */
-        /* Sign-off — light tones on the dark Abyss background.
-           Left-aligned to match the dictionary entry above. */
+        /* Sign-off — logo + © on a single row beneath the dictionary
+           entry. Hairline cream divider above. */
         .sl-definition-signoff {
-            margin-top: clamp(28px, 3.4vw, 48px);
-            padding-top: clamp(24px, 2.8vw, 36px);
+            margin-top: clamp(24px, 2.8vw, 40px);
+            padding-top: clamp(20px, 2.4vw, 32px);
             border-top: 1px solid rgba(255, 251, 235, 0.1);
             width: 100%;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: clamp(10px, 1.2vw, 16px);
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: clamp(14px, 1.6vw, 24px);
+            flex-wrap: wrap;
         }
         .sl-definition-logo {
             height: clamp(24px, 2.2vw, 32px);
