@@ -1054,17 +1054,10 @@ body.mode-tight .content-sticky p {
 /* Footer "Dive Beneath the Surface" shimmer now lives inline in the
    index.html / polish.html <style> blocks so cascade order can't kill
    it. Intentionally no rules here. */
-.footer-photo-content .footer-contact a {
-  color: #155EE8 !important;
-  border-bottom-color: rgba(21, 94, 232, 0.3) !important;
-}
-.footer-photo-content .footer-contact a:hover {
-  color: #0032A8 !important;
-  border-bottom-color: #155EE8 !important;
-}
-.footer-photo-content .footer-legal {
-  color: rgba(21, 94, 232, 0.55) !important;
-}
+/* Stale cobalt overrides removed — the footer is now the dark
+   Abyss zone (#02041F), so blue text was unreadable. LinkedIn/X
+   styled inline in index.html as subtle outlined pills; legal
+   copy left at its default rgba(255,255,255,0.4). */
 
 /* Photo grid: below text, simple 4×2 in normal flow */
 .footer-photo-grid {

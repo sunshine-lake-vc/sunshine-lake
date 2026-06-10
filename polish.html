@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=74">
+    <link rel="stylesheet" href="polish.css?v=75">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -1764,22 +1764,40 @@
             transform: translateY(-1px);
         }
         .footer-cta span { font-size: 1.05em; line-height: 1; }
+        /* Social links — small outlined pills sized so they sit as a
+           companion row beneath the two big CTAs. Same visual language
+           (rounded pill, white type, hover lifts toward Sunshine
+           yellow) just stepped down a notch in weight + scale so they
+           don't compete with the primary actions above. */
         .footer-contact {
             display: flex;
-            gap: clamp(16px, 2vw, 32px);
+            gap: clamp(8px, 1vw, 14px);
             flex-wrap: wrap;
+            margin-top: clamp(4px, 0.6vw, 10px);
         }
         .footer-contact a {
-            font-size: clamp(0.85rem, 1vw, 1.1rem);
-            color: rgba(255, 255, 255, 0.62);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: transparent;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.78rem, 0.85vw, 0.9rem);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.82);
             text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-            padding: 8px 2px 4px;
-            transition: color 0.2s ease, border-color 0.2s ease;
+            transition: color 0.25s ease, border-color 0.25s ease,
+                        background 0.25s ease, transform 0.25s ease;
         }
         .footer-contact a:hover {
-            color: #fff;
-            border-bottom-color: rgba(255, 255, 255, 0.5);
+            color: #FFF1B6;
+            border-color: rgba(255, 241, 182, 0.55);
+            background: rgba(255, 241, 182, 0.05);
+            transform: translateY(-1px);
         }
         /* Sunshine Lake definition bar — white card at the VERY bottom
            of the page (sits outside the dark abyss footer). Reads as
@@ -1864,18 +1882,34 @@
             .footer-cta-row { justify-content: center; }
             .footer-contact { justify-content: center; }
         }
+        /* Sign-off row at the bottom of the dark footer. Generous top
+           margin so the legal copy doesn't feel glued to the social
+           pills above. Logo gets a thin hairline divider before it for
+           a deliberate "end-of-document" beat. */
         .footer-bottom {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: clamp(10px, 1.5vh, 20px);
-            padding-bottom: clamp(20px, 3vh, 40px);
+            gap: clamp(14px, 1.8vw, 22px);
+            padding: clamp(56px, 7vw, 96px) 0 clamp(28px, 3.5vh, 48px);
+            margin-top: clamp(40px, 5vw, 72px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            width: 100%;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .footer-bottom .footer-logo {
+            height: clamp(28px, 2.6vw, 40px) !important;
+            width: auto;
+            opacity: 0.92;
         }
         .footer-legal {
-            font-size: clamp(0.65rem, 0.7vw, 0.8rem);
-            color: rgba(21, 94, 232, 0.4);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.7rem, 0.78vw, 0.85rem);
+            color: rgba(255, 255, 255, 0.42);
             margin: 0;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.08em;
         }
 
         @media (max-width: 768px) {
