@@ -2099,8 +2099,10 @@
             /* Companies section */
             .founders-scroll-spacer { padding: 0 20px; }
             .founders-photo-stack { aspect-ratio: 1; }
-            .footer-contact { flex-direction: column; gap: 12px; }
-            .footer-bottom { padding-bottom: clamp(30px, 5vh, 60px); }
+            /* LinkedIn / X pills stay on one row on mobile — was
+               forcing flex-direction: column from when they were
+               text-link underlines, but as outlined pills they fit
+               horizontally with plenty of room. */
         }
 
         @media (prefers-reduced-motion: reduce) {
