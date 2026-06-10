@@ -1797,6 +1797,10 @@
             padding: clamp(48px, 6vw, 96px) clamp(24px, 5vw, 64px);
             position: relative;
             z-index: 4;
+            /* Single source of truth for the size shared by the silhouette
+               and the floating cursor ewok — they must match exactly so the
+               cursor can "drop into" the silhouette without resizing. */
+            --ewok-size: clamp(80px, 8vw, 120px);
         }
         .sl-definition-inner {
             max-width: 720px;
@@ -1808,14 +1812,35 @@
             text-align: center;
         }
         .sl-definition-mark {
-            width: clamp(68px, 7vw, 100px);
+            width: var(--ewok-size);
             height: auto;
-            /* Black silhouette of the ewok mark. brightness(0) collapses
-               every visible pixel to pure black while preserving the
-               transparent areas; opacity dials it back to a quiet
-               signature so it doesn't shout. */
+            /* Black silhouette of the ewok mark by default. brightness(0)
+               collapses every visible pixel to pure black while preserving
+               the transparent areas; opacity dials it back to a quiet
+               signature so it doesn't shout. When the floating cursor ewok
+               hovers it, .is-filled removes the filter, .is-dropping fires
+               a pulse, and the colored mark stays put for the rest of
+               the session. */
             filter: brightness(0) saturate(100%);
             opacity: 0.78;
+            transition: filter 0.6s ease, opacity 0.5s ease;
+            transform-origin: center bottom;
+        }
+        .sl-definition-mark.is-filled {
+            filter: none;
+            opacity: 1;
+        }
+        .sl-definition-mark.is-dropping {
+            animation: ewokDropIn 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes ewokDropIn {
+            0%   { transform: scale(0.86); filter: drop-shadow(0 0 0 rgba(242, 216, 49, 0));       }
+            18%  { transform: scale(1.14); filter: drop-shadow(0 0 28px rgba(242, 216, 49, 0.95)); }
+            55%  { transform: scale(0.97); filter: drop-shadow(0 0 12px rgba(242, 216, 49, 0.45)); }
+            100% { transform: scale(1);    filter: drop-shadow(0 0 0 rgba(242, 216, 49, 0));       }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .sl-definition-mark.is-dropping { animation: none; }
         }
         .sl-definition-text {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
@@ -3814,17 +3839,45 @@
         // Footer ewok follows mouse
         (function() {
             var footerSticky = document.querySelector('.footer-sticky');
-            if (!footerSticky) return;
+            var slBar = document.querySelector('.sl-definition-bar');
+            var slMark = document.querySelector('.sl-definition-mark');
+            if (!footerSticky && !slBar) return;
 
-            // Create a dedicated floating ewok element
+            // Compute the cursor size from the same --ewok-size token the
+            // silhouette uses, so the two are always identical in dimension.
+            // Read off the .sl-definition-bar at first mousemove (the var is
+            // defined there). Falls back to 80px if the bar isn't present.
+            var ewokSize = 80;
+            function measureEwokSize() {
+                if (!slBar) return;
+                var raw = getComputedStyle(slBar).getPropertyValue('--ewok-size').trim();
+                if (!raw) return;
+                // Resolve clamp() by setting it on a sized scratch div.
+                var probe = document.createElement('div');
+                probe.style.cssText = 'position:absolute;visibility:hidden;width:' + raw + ';';
+                document.body.appendChild(probe);
+                var w = probe.getBoundingClientRect().width;
+                probe.remove();
+                if (w > 0) ewokSize = w;
+            }
+            measureEwokSize();
+            window.addEventListener('resize', measureEwokSize);
+
+            // Create a dedicated floating ewok element. Sized via the same
+            // CSS variable so cursor and silhouette match.
             var ewok = document.createElement('div');
             var img = document.createElement('img');
             img.src = 'images/logos/ewoks.webp';
             img.alt = '';
-            img.style.cssText = 'width:80px;height:auto;display:block;';
+            img.style.cssText = 'width:' + ewokSize + 'px;height:auto;display:block;';
             ewok.appendChild(img);
             ewok.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:50;opacity:0;transition:opacity 0.3s ease;will-change:transform;';
             document.body.appendChild(ewok);
+
+            // Update cursor size on resize so it tracks the responsive var.
+            window.addEventListener('resize', function() {
+                img.style.width = ewokSize + 'px';
+            });
 
             var mx = window.innerWidth / 2, my = window.innerHeight / 2;
             var prevMx = mx;
@@ -3839,27 +3892,58 @@
                 cx = lerp(cx, mx, 0.1);
                 cy = lerp(cy, my, 0.1);
                 var flip = facingLeft ? ' scaleX(-1)' : '';
-                ewok.style.transform = 'translate(' + (cx - 40) + 'px,' + (cy - 40) + 'px)' + flip;
+                var half = ewokSize / 2;
+                ewok.style.transform = 'translate(' + (cx - half) + 'px,' + (cy - half) + 'px)' + flip;
                 if (visible) raf = requestAnimationFrame(tick);
             }
 
-            footerSticky.addEventListener('mouseenter', function() {
+            function activate() {
+                if (visible) return;
                 visible = true;
                 ewok.style.opacity = '1';
                 cx = mx; cy = my;
                 tick();
-            });
-            footerSticky.addEventListener('mouseleave', function() {
+            }
+            function deactivate() {
                 visible = false;
                 ewok.style.opacity = '0';
                 if (raf) cancelAnimationFrame(raf);
-            });
-            footerSticky.addEventListener('mousemove', function(e) {
+            }
+            function track(e) {
                 if (e.clientX < mx - 2) facingLeft = true;
                 else if (e.clientX > mx + 2) facingLeft = false;
                 mx = e.clientX;
                 my = e.clientY;
+            }
+
+            // The cursor activates inside BOTH the dark footer AND the white
+            // SL definition bar below it — so users can carry the floating
+            // ewok all the way down to the silhouette without it vanishing.
+            [footerSticky, slBar].filter(Boolean).forEach(function (zone) {
+                zone.addEventListener('mouseenter', activate);
+                zone.addEventListener('mouseleave', deactivate);
+                zone.addEventListener('mousemove', track);
             });
+
+            // Drop the cursor INTO the silhouette: when the pointer enters
+            // .sl-definition-mark, hide the floating cursor, fill the
+            // silhouette with its real colors, and fire a one-shot
+            // pulse-glow. The .is-filled class persists for the rest of
+            // the session — the ewok stays "dropped into place".
+            var dropped = false;
+            if (slMark) {
+                slMark.addEventListener('mouseenter', function () {
+                    if (dropped) return;
+                    dropped = true;
+                    // Vanish the floating cursor so it visually "lands"
+                    // into the silhouette.
+                    ewok.style.opacity = '0';
+                    slMark.classList.add('is-filled', 'is-dropping');
+                    setTimeout(function () {
+                        slMark.classList.remove('is-dropping');
+                    }, 1400);
+                });
+            }
 
             // Hide ewok when footer leaves viewport (fixes mobile sticky issue)
             var ewokObserver = new IntersectionObserver(function(entries) {
