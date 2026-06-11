@@ -4012,12 +4012,12 @@
 
 
         // Ewok-head Easter egg — click reveals the cream dictionary
-        // card. The card grows downward from its (collapsed) top edge
-        // via max-height + padding transitions; the viewport then
-        // smooth-scrolls so the user lands looking at the fully-
-        // revealed card. (Scrolling DURING the expand would land at
-        // the bar's initial top position while the card kept growing
-        // below the viewport — i.e. "loads out of view".)
+        // card and scrolls the page so the user lands on the
+        // description. Using native scrollIntoView (not Lenis) and
+        // waiting for the expand transition to finish FIRST so the
+        // target has a real height when we scroll to it. Earlier
+        // dual-phase Lenis approach was silently failing because the
+        // bar had max-height: 0 at the first scroll call.
         (function () {
             var peek = document.getElementById('ewokPeek');
             var bar  = document.getElementById('slDefinitionBar');
@@ -4028,32 +4028,23 @@
                 peek.setAttribute('aria-expanded', 'true');
                 peek.classList.add('is-hidden');
 
-                // Two scroll phases:
-                //   1. Immediate easing toward the bar so the page
-                //      begins sliding down while the card expands.
-                //   2. After the expand transition settles (~900ms),
-                //      do a final correction to the bottom of the
-                //      page so the card lands flush in the viewport.
-                function scrollTo(target, duration) {
-                    if (window._lenis && typeof window._lenis.scrollTo === 'function') {
-                        window._lenis.scrollTo(target, { duration: duration });
-                    } else if (typeof target === 'number') {
-                        window.scrollTo({ top: target, behavior: 'smooth' });
-                    } else {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-                // Phase 1 — kick off motion right away
-                requestAnimationFrame(function () {
-                    scrollTo(bar, 0.9);
-                });
-                // Phase 2 — settle at the page bottom once the card
-                // has finished growing (max-height transition is
-                // 0.85s; adding 60ms cushion).
+                // Pause Lenis briefly so its scroll loop doesn't fight
+                // the native scrollIntoView call below. (Lenis takes
+                // over wheel + touch but a manual scroll command
+                // should still land.) Resume after the scroll lands.
+                var lenis = window._lenis;
+                if (lenis && typeof lenis.stop === 'function') lenis.stop();
+
+                // Wait for the expand (max-height 0.85s) to settle so
+                // the bar has a real, measurable height — THEN scroll.
                 setTimeout(function () {
-                    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    scrollTo(maxScroll, 0.6);
-                }, 910);
+                    bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Resume Lenis a beat after the smooth scroll
+                    // has had time to start.
+                    setTimeout(function () {
+                        if (lenis && typeof lenis.start === 'function') lenis.start();
+                    }, 1200);
+                }, 880);
             });
         })();
 

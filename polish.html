@@ -3974,10 +3974,9 @@
         })();
 
 
-        // Ewok-head Easter egg — click reveals the cream dictionary
-        // card. Two-phase scroll: kick off motion immediately so the
-        // page slides down while the card expands, then correct to
-        // the page bottom after the expand transition settles.
+        // Ewok-head Easter egg — click reveals + scrolls to the card.
+        // Using native scrollIntoView (not Lenis) and waiting for the
+        // expand transition to finish first.
         (function () {
             var peek = document.getElementById('ewokPeek');
             var bar  = document.getElementById('slDefinitionBar');
@@ -3987,22 +3986,14 @@
                 bar.classList.remove('is-collapsed');
                 peek.setAttribute('aria-expanded', 'true');
                 peek.classList.add('is-hidden');
-                function scrollTo(target, duration) {
-                    if (window._lenis && typeof window._lenis.scrollTo === 'function') {
-                        window._lenis.scrollTo(target, { duration: duration });
-                    } else if (typeof target === 'number') {
-                        window.scrollTo({ top: target, behavior: 'smooth' });
-                    } else {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-                requestAnimationFrame(function () {
-                    scrollTo(bar, 0.9);
-                });
+                var lenis = window._lenis;
+                if (lenis && typeof lenis.stop === 'function') lenis.stop();
                 setTimeout(function () {
-                    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    scrollTo(maxScroll, 0.6);
-                }, 910);
+                    bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    setTimeout(function () {
+                        if (lenis && typeof lenis.start === 'function') lenis.start();
+                    }, 1200);
+                }, 880);
             });
         })();
 
