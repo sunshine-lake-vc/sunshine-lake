@@ -727,22 +727,55 @@
             height: auto;
             display: block;
         }
-        /* Subtle swell — each wave drifts a few px on its own duration
-           and phase so the three never line up. Durations are mutually
-           prime-ish (11/9/13s) for a long repeat horizon. */
+        /* Wave motion — two stages.
+           1. BUILD-IN: when the band first scrolls into view
+              (.waves-in, set by IntersectionObserver), each hump
+              rises out of the baseline with a slight overshoot,
+              staggered oldest → newest, and the names fade in just
+              after their wave lands.
+           2. SWELL: once risen, each wave breathes on its own loop —
+              bottom-anchored scaleY + lateral sway, strong enough to
+              read as water at a glance. The gold wave runs the
+              quickest cycle so the eye lands there.
+           Pre-JS / reduced-motion: the static band shows fully. */
         .wave-drift {
             will-change: transform;
-            animation: waveDrift 11s ease-in-out infinite alternate;
+            transform-box: fill-box;
+            transform-origin: 50% 100%;
         }
-        .wave-drift-2 { animation-duration: 9s;  animation-delay: -3s; }
-        .wave-drift-3 { animation-duration: 13s; animation-delay: -6s; }
-        @keyframes waveDrift {
-            0%   { transform: translate(0, 0); }
-            50%  { transform: translate(-5px, 2.5px); }
-            100% { transform: translate(6px, -2px); }
+        .waves-band.waves-armed .wave-drift { transform: scaleY(0); }
+        .waves-band.waves-armed .wave-text { opacity: 0; }
+        .waves-band.waves-in .wave-drift-1 {
+            animation: waveRise 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both,
+                       waveSwell 10s ease-in-out 1.15s infinite;
+        }
+        .waves-band.waves-in .wave-drift-2 {
+            animation: waveRise 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both,
+                       waveSwell 8.2s ease-in-out 1.45s infinite;
+        }
+        .waves-band.waves-in .wave-drift-3 {
+            animation: waveRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both,
+                       waveSwell 6.8s ease-in-out 1.85s infinite;
+        }
+        .wave-text { transition: opacity 0.7s ease; }
+        .waves-band.waves-in .wave-text-1 { opacity: 1; transition-delay: 0.85s; }
+        .waves-band.waves-in .wave-text-2 { opacity: 1; transition-delay: 1.15s; }
+        .waves-band.waves-in .wave-text-3 { opacity: 1; transition-delay: 1.45s; }
+        .waves-band.waves-in .wave-text-labels { opacity: 1; transition-delay: 1.7s; }
+        @keyframes waveRise {
+            0%   { transform: scaleY(0); }
+            72%  { transform: scaleY(1.07); }
+            100% { transform: scaleY(1); }
+        }
+        @keyframes waveSwell {
+            0%   { transform: scaleY(1)     translateX(0); }
+            30%  { transform: scaleY(1.05)  translateX(-9px); }
+            65%  { transform: scaleY(0.965) translateX(8px); }
+            100% { transform: scaleY(1)     translateX(0); }
         }
         @media (prefers-reduced-motion: reduce) {
-            .wave-drift { animation: none; }
+            .waves-band .wave-drift { transform: none; animation: none !important; }
+            .waves-band .wave-text { opacity: 1 !important; }
         }
         @media (max-width: 720px) {
             .waves-scroll {
@@ -2588,7 +2621,7 @@
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
                 <p class="thesis-lede">We invest in founders from extreme origins at their breakout moments.</p>
-                <p>Our insight into geopolitical, economic, and technological shifts help navigate market cycles to back multiple blockbuster companies a decade.</p>
+                <p>Our insight into global, economic, and technological shifts helps navigate market cycles to back multiple blockbuster companies a decade.</p>
             </div>
 
             <!-- ════════ Market-cycle waves ════════
@@ -2617,13 +2650,13 @@
                         <!-- Wave 3: AI-Native (cresting, gold) -->
                         <path class="wave-drift wave-drift-3" d="M 680 320 C 812 318 830 42 962 42 C 1094 42 1112 318 1200 320 Z" fill="url(#waveGold)"/>
                         <!-- Wave 1 companies -->
-                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.92)">
+                        <g class="wave-text wave-text-1" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.92)">
                             <text x="230" y="237" font-size="21">Groupon</text>
                             <text x="230" y="268" font-size="21">Airbnb</text>
                             <text x="230" y="299" font-size="21">SpotHero</text>
                         </g>
                         <!-- Wave 2 companies -->
-                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.95)">
+                        <g class="wave-text wave-text-2" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.95)">
                             <text x="580" y="172" font-size="21">Deel</text>
                             <text x="580" y="204" font-size="21">Brex</text>
                             <text x="580" y="236" font-size="21">Kalshi</text>
@@ -2631,7 +2664,7 @@
                             <text x="580" y="300" font-size="21">Checkr</text>
                         </g>
                         <!-- Wave 3 companies (navy on gold) -->
-                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="#0B1275" font-weight="500">
+                        <g class="wave-text wave-text-3" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="#0B1275" font-weight="500">
                             <text x="962" y="110" font-size="22">Entire</text>
                             <text x="962" y="147" font-size="22">Blurry</text>
                             <text x="962" y="184" font-size="22">Duranta</text>
@@ -2640,7 +2673,7 @@
                             <text x="962" y="295" font-size="22">Minimal</text>
                         </g>
                         <!-- Era labels -->
-                        <g font-family="'Segoe UI', system-ui, sans-serif" text-anchor="middle" font-weight="600" letter-spacing="2.5">
+                        <g class="wave-text wave-text-labels" font-family="'Segoe UI', system-ui, sans-serif" text-anchor="middle" font-weight="600" letter-spacing="2.5">
                             <text x="230" y="350" font-size="12" fill="rgba(255,255,255,0.6)">MARKETPLACES &amp; CONSUMER</text>
                             <text x="580" y="350" font-size="12" fill="rgba(255,255,255,0.7)">GLOBAL WORK &amp; FINTECH</text>
                             <text x="962" y="350" font-size="13" fill="#F2D831" font-weight="700">AI-NATIVE</text>
@@ -2650,14 +2683,31 @@
                 </div>
             </section>
             <script>
-            // Mobile: open the waves band on the cresting gold wave
-            // (right end). The left end is wave 1 sitting under the
-            // dead space created by the gold crest's height, and the
-            // payoff wave would otherwise be hidden two swipes away.
+            // Waves band init.
             (function () {
-                if (window.innerWidth > 720) return;
-                var s = document.querySelector('.waves-band .waves-scroll');
-                if (s) s.scrollLeft = s.scrollWidth;
+                var band = document.querySelector('.waves-band');
+                if (!band) return;
+                // Mobile: open the scroller on the cresting gold wave
+                // (right end) — the payoff, and the only full-height
+                // region of the SVG.
+                if (window.innerWidth <= 720) {
+                    var s = band.querySelector('.waves-scroll');
+                    if (s) s.scrollLeft = s.scrollWidth;
+                }
+                // Build-in: arm the rise/swell choreography, fire it
+                // when the band is ~35% visible. Skipped for reduced-
+                // motion users and old browsers — they just see the
+                // static band.
+                var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (reduce || !('IntersectionObserver' in window)) return;
+                band.classList.add('waves-armed');
+                var io = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        band.classList.add('waves-in');
+                        io.disconnect();
+                    }
+                }, { threshold: 0.35 });
+                io.observe(band);
             })();
             </script>
 
