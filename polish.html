@@ -694,7 +694,7 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* ── MOCKUP: Market-cycle waves band. ── */
+        /* ── Market-cycle waves band. ── */
         .waves-band {
             width: 100%;
             margin: clamp(36px, 4.2vw, 64px) 0 clamp(20px, 2.4vw, 36px);
@@ -714,6 +714,21 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+        /* Subtle swell — each wave drifts on its own duration + phase. */
+        .wave-drift {
+            will-change: transform;
+            animation: waveDrift 11s ease-in-out infinite alternate;
+        }
+        .wave-drift-2 { animation-duration: 9s;  animation-delay: -3s; }
+        .wave-drift-3 { animation-duration: 13s; animation-delay: -6s; }
+        @keyframes waveDrift {
+            0%   { transform: translate(0, 0); }
+            50%  { transform: translate(-5px, 2.5px); }
+            100% { transform: translate(6px, -2px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .wave-drift { animation: none; }
         }
         @media (max-width: 720px) {
             .waves-scroll {
@@ -2527,7 +2542,7 @@
                 <p>Our insight into geopolitical, economic, and technological shifts help navigate market cycles to back multiple blockbuster companies a decade.</p>
             </div>
 
-            <!-- ════════ MOCKUP: Market-cycle waves ════════ -->
+            <!-- ════════ Market-cycle waves ════════ -->
             <section class="waves-band" aria-label="Market cycles">
                 <p class="waves-label">Across Market Cycles</p>
                 <div class="waves-scroll">
@@ -2539,9 +2554,9 @@
                             </linearGradient>
                         </defs>
                         <line x1="0" y1="320" x2="1200" y2="320" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-                        <path d="M 0 320 C 110 318 130 170 230 170 C 330 170 350 318 460 320 Z" fill="rgba(255,255,255,0.10)"/>
-                        <path d="M 320 320 C 440 318 460 118 580 118 C 700 118 720 318 840 320 Z" fill="rgba(255,255,255,0.17)"/>
-                        <path d="M 680 320 C 812 318 830 42 962 42 C 1094 42 1112 318 1200 320 Z" fill="url(#waveGold)"/>
+                        <path class="wave-drift wave-drift-1" d="M 0 320 C 110 318 130 170 230 170 C 330 170 350 318 460 320 Z" fill="rgba(255,255,255,0.10)"/>
+                        <path class="wave-drift wave-drift-2" d="M 320 320 C 440 318 460 118 580 118 C 700 118 720 318 840 320 Z" fill="rgba(255,255,255,0.17)"/>
+                        <path class="wave-drift wave-drift-3" d="M 680 320 C 812 318 830 42 962 42 C 1094 42 1112 318 1200 320 Z" fill="url(#waveGold)"/>
                         <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.92)">
                             <text x="230" y="237" font-size="21">Groupon</text>
                             <text x="230" y="268" font-size="21">Airbnb</text>
