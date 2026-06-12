@@ -700,6 +700,40 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* ── MOCKUP: Market-cycle waves band — static SVG under the
+           thesis. Eyebrow matches the OUR TEAM / TOP 1% family. On
+           mobile the SVG keeps a readable minimum width and scrolls
+           horizontally (same interaction as the carousels). ── */
+        .waves-band {
+            width: 100%;
+            margin: clamp(36px, 4.2vw, 64px) 0 clamp(20px, 2.4vw, 36px);
+            position: relative;
+            z-index: 2;
+        }
+        .waves-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(12px, 1vw, 14px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0 0 clamp(14px, 1.4vw, 22px) 0;
+        }
+        .waves-scroll svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        @media (max-width: 720px) {
+            .waves-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .waves-scroll::-webkit-scrollbar { display: none; }
+            .waves-scroll svg { min-width: 880px; }
+        }
+
         /* ── Advisors strip — compact two-up row under the partner
            carousel. Small rounded photo + name + one-line bio per
            advisor; deliberately quieter than the partner cards so it
@@ -2525,6 +2559,65 @@
                 <p class="thesis-lede">We invest in founders from extreme origins at their breakout moments.</p>
                 <p>Our insight into geopolitical, economic, and technological shifts help navigate market cycles to back multiple blockbuster companies a decade.</p>
             </div>
+
+            <!-- ════════ MOCKUP: Market-cycle waves ════════
+                 Static SVG band illustrating the thesis line above —
+                 each hump is a cycle the GP rode, with the companies
+                 backed in that era inside it. The current AI-Native
+                 wave crests largest in Sunshine yellow. Inspired by
+                 the "five waves of Silicon Valley" treatment Don
+                 liked. Remove this whole <section> to kill the mock. -->
+            <section class="waves-band" aria-label="Market cycles">
+                <p class="waves-label">Across Market Cycles</p>
+                <div class="waves-scroll">
+                    <svg viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">
+                        <defs>
+                            <linearGradient id="waveGold" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#F8E25C"/>
+                                <stop offset="100%" stop-color="#F2D831"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- baseline -->
+                        <line x1="0" y1="320" x2="1200" y2="320" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+                        <!-- Wave 1: Marketplaces & Consumer -->
+                        <path d="M 0 320 C 110 318 130 170 230 170 C 330 170 350 318 460 320 Z" fill="rgba(255,255,255,0.10)"/>
+                        <!-- Wave 2: Global Work & Fintech -->
+                        <path d="M 320 320 C 440 318 460 118 580 118 C 700 118 720 318 840 320 Z" fill="rgba(255,255,255,0.17)"/>
+                        <!-- Wave 3: AI-Native (cresting, gold) -->
+                        <path d="M 680 320 C 812 318 830 42 962 42 C 1094 42 1112 318 1200 320 Z" fill="url(#waveGold)"/>
+                        <!-- Wave 1 companies -->
+                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.92)">
+                            <text x="230" y="237" font-size="21">Groupon</text>
+                            <text x="230" y="268" font-size="21">Airbnb</text>
+                            <text x="230" y="299" font-size="21">SpotHero</text>
+                        </g>
+                        <!-- Wave 2 companies -->
+                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.95)">
+                            <text x="580" y="172" font-size="21">Deel</text>
+                            <text x="580" y="204" font-size="21">Brex</text>
+                            <text x="580" y="236" font-size="21">Kalshi</text>
+                            <text x="580" y="268" font-size="21">Headway</text>
+                            <text x="580" y="300" font-size="21">Checkr</text>
+                        </g>
+                        <!-- Wave 3 companies (navy on gold) -->
+                        <g font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="#0B1275" font-weight="500">
+                            <text x="962" y="110" font-size="22">Entire</text>
+                            <text x="962" y="147" font-size="22">Blurry</text>
+                            <text x="962" y="184" font-size="22">Duranta</text>
+                            <text x="962" y="221" font-size="22">Stitcher</text>
+                            <text x="962" y="258" font-size="22">FullSeam</text>
+                            <text x="962" y="295" font-size="22">Minimal</text>
+                        </g>
+                        <!-- Era labels -->
+                        <g font-family="'Segoe UI', system-ui, sans-serif" text-anchor="middle" font-weight="600" letter-spacing="2.5">
+                            <text x="230" y="350" font-size="12" fill="rgba(255,255,255,0.6)">MARKETPLACES &amp; CONSUMER</text>
+                            <text x="580" y="350" font-size="12" fill="rgba(255,255,255,0.7)">GLOBAL WORK &amp; FINTECH</text>
+                            <text x="962" y="350" font-size="13" fill="#F2D831" font-weight="700">AI-NATIVE</text>
+                            <text x="962" y="369" font-size="10" fill="rgba(255,255,255,0.55)">MID-CYCLE</text>
+                        </g>
+                    </svg>
+                </div>
+            </section>
 
             <div class="team-layout">
                 <!-- Partners — horizontal carousel with arrows -->
