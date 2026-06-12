@@ -701,6 +701,8 @@
             position: relative;
             z-index: 2;
         }
+        /* Band is parked (hidden attribute on the section). */
+        .waves-band[hidden] { display: none !important; }
         .waves-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: clamp(12px, 1vw, 14px);
@@ -2560,7 +2562,9 @@
             </div>
 
             <!-- ════════ Market-cycle waves ════════ -->
-            <section class="waves-band" aria-label="Market cycles">
+            <!-- Waves band HIDDEN for now (per Don). Remove `hidden`
+                 + the display rule to restore. -->
+            <section class="waves-band" aria-label="Market cycles" hidden>
                 <p class="waves-label">Across Market Cycles</p>
                 <div class="waves-scroll">
                     <svg class="waves-svg-desktop" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">

@@ -713,6 +713,9 @@
             position: relative;
             z-index: 2;
         }
+        /* Band is parked (hidden attribute on the section) — guard so
+           no other display rule can resurrect it accidentally. */
+        .waves-band[hidden] { display: none !important; }
         .waves-label {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             font-size: clamp(12px, 1vw, 14px);
@@ -2609,7 +2612,11 @@
                  wave crests largest in Sunshine yellow. Wave shapes
                  drift on slow offset loops (water swell); the names
                  stay still so they read as stable above the water. -->
-            <section class="waves-band" aria-label="Market cycles">
+            <!-- Waves band HIDDEN for now (per Don, June 2026). All
+                 markup, CSS, and the init script remain intact —
+                 remove the `hidden` attribute + the display rule
+                 below to bring it back. -->
+            <section class="waves-band" aria-label="Market cycles" hidden>
                 <p class="waves-label">Across Market Cycles</p>
                 <div class="waves-scroll">
                     <svg class="waves-svg-desktop" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">
