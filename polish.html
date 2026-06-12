@@ -757,19 +757,14 @@
             .waves-band .wave-drift { transform: none; animation: none !important; }
             .waves-band .wave-text { opacity: 1 !important; }
         }
+        /* Two compositions: wide desktop SVG, portrait mobile SVG so
+           all three waves fit one phone screen — no swiping.
+           .waves-scroll prefix outranks the base `.waves-scroll svg`
+           display rule. */
+        .waves-scroll .waves-svg-mobile { display: none; }
         @media (max-width: 720px) {
-            .waves-scroll {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                /* Edge fades — swipe affordance. */
-                -webkit-mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-                        mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-            }
-            .waves-scroll::-webkit-scrollbar { display: none; }
-            /* JS below opens the scroller on the gold wave (right
-               end) — the payoff and the only full-height region. */
-            .waves-scroll svg { min-width: 920px; }
+            .waves-scroll .waves-svg-desktop { display: none; }
+            .waves-scroll .waves-svg-mobile { display: block; }
         }
 
         /* ── Advisors strip — compact two-up row under the partner
@@ -2578,7 +2573,7 @@
             <section class="waves-band" aria-label="Market cycles">
                 <p class="waves-label">Across Market Cycles</p>
                 <div class="waves-scroll">
-                    <svg viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">
+                    <svg class="waves-svg-desktop" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">
                         <defs>
                             <linearGradient id="waveGold" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="0%" stop-color="#F8E25C"/>
@@ -2616,17 +2611,54 @@
                             <text x="962" y="369" font-size="10" fill="rgba(255,255,255,0.55)">MID-CYCLE</text>
                         </g>
                     </svg>
+                    <!-- Mobile composition — see index.html. -->
+                    <svg class="waves-svg-mobile" viewBox="0 0 400 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three investment waves: Marketplaces and Consumer, Global Work and Fintech, and the cresting AI-Native wave">
+                        <defs>
+                            <linearGradient id="waveGoldM" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#F8E25C"/>
+                                <stop offset="100%" stop-color="#F2D831"/>
+                            </linearGradient>
+                        </defs>
+                        <line x1="0" y1="400" x2="400" y2="400" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+                        <path class="wave-drift wave-drift-1" d="M 0 400 C 28 398 30 282 80 282 C 130 282 132 398 160 400 Z" fill="rgba(255,255,255,0.10)"/>
+                        <path class="wave-drift wave-drift-2" d="M 110 400 C 150 398 155 195 205 195 C 255 195 260 398 300 400 Z" fill="rgba(255,255,255,0.17)"/>
+                        <path class="wave-drift wave-drift-3" d="M 233 400 C 280 398 284 48 318 48 C 366 48 372 398 400 400 Z" fill="url(#waveGoldM)"/>
+                        <g class="wave-text wave-text-1" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.92)">
+                            <text x="80" y="328" font-size="14">Groupon</text>
+                            <text x="80" y="350" font-size="14">Airbnb</text>
+                            <text x="80" y="372" font-size="14">SpotHero</text>
+                        </g>
+                        <g class="wave-text wave-text-2" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="rgba(255,255,255,0.95)">
+                            <text x="205" y="244" font-size="14">Deel</text>
+                            <text x="205" y="276" font-size="14">Brex</text>
+                            <text x="205" y="308" font-size="14">Kalshi</text>
+                            <text x="205" y="340" font-size="14">Headway</text>
+                            <text x="205" y="372" font-size="14">Checkr</text>
+                        </g>
+                        <g class="wave-text wave-text-3" font-family="DomaineDisp, 'Times New Roman', serif" text-anchor="middle" fill="#0B1275" font-weight="500">
+                            <text x="320" y="112" font-size="16">Entire</text>
+                            <text x="320" y="154" font-size="16">Blurry</text>
+                            <text x="320" y="196" font-size="16">Duranta</text>
+                            <text x="320" y="238" font-size="16">Stitcher</text>
+                            <text x="320" y="280" font-size="16">FullSeam</text>
+                            <text x="320" y="322" font-size="16">Minimal</text>
+                        </g>
+                        <g class="wave-text wave-text-labels" font-family="'Segoe UI', system-ui, sans-serif" text-anchor="middle" font-weight="600" letter-spacing="1.2">
+                            <text x="80" y="428" font-size="9.5" fill="rgba(255,255,255,0.6)">MARKETPLACES</text>
+                            <text x="80" y="444" font-size="9.5" fill="rgba(255,255,255,0.6)">&amp; CONSUMER</text>
+                            <text x="205" y="428" font-size="9.5" fill="rgba(255,255,255,0.7)">GLOBAL WORK</text>
+                            <text x="205" y="444" font-size="9.5" fill="rgba(255,255,255,0.7)">&amp; FINTECH</text>
+                            <text x="318" y="428" font-size="11" fill="#F2D831" font-weight="700">AI-NATIVE</text>
+                            <text x="318" y="444" font-size="8.5" fill="rgba(255,255,255,0.55)">MID-CYCLE</text>
+                        </g>
+                    </svg>
                 </div>
             </section>
             <script>
-            // Waves band init: mobile scroll position + build-in arming.
+            // Waves band init — arm the build-in, fire on visibility.
             (function () {
                 var band = document.querySelector('.waves-band');
                 if (!band) return;
-                if (window.innerWidth <= 720) {
-                    var s = band.querySelector('.waves-scroll');
-                    if (s) s.scrollLeft = s.scrollWidth;
-                }
                 var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 if (reduce || !('IntersectionObserver' in window)) return;
                 band.classList.add('waves-armed');
