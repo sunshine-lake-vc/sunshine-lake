@@ -742,12 +742,35 @@
       next.disabled = scroller.scrollLeft >= max;
       if (counter) counter.textContent = (i + 1) + ' / ' + n;
     }
-    prev.addEventListener('click', function () {
-      scroller.scrollBy({ left: -step(), behavior: 'smooth' });
-    });
-    next.addEventListener('click', function () {
-      scroller.scrollBy({ left: step(), behavior: 'smooth' });
-    });
+    /* Index-based navigation — same fix as setupTeamCarousel. With
+       mandatory scroll-snap, smooth scrollBy can settle short of the
+       intended card; scrollTo an exact card offset (clamped to max
+       scroll) always lands flush. */
+    function vcards() {
+      return Array.prototype.slice.call(row.querySelectorAll('.rd-voice'));
+    }
+    function vcardLeft(card) {
+      return card.getBoundingClientRect().left
+           - scroller.getBoundingClientRect().left
+           + scroller.scrollLeft;
+    }
+    function vcurrentIndex() {
+      var cs = vcards(), sl = scroller.scrollLeft, best = 0, bd = Infinity;
+      for (var i = 0; i < cs.length; i++) {
+        var d = Math.abs(vcardLeft(cs[i]) - sl);
+        if (d < bd) { bd = d; best = i; }
+      }
+      return best;
+    }
+    function vgoTo(i) {
+      var cs = vcards();
+      if (!cs.length) return;
+      i = Math.max(0, Math.min(i, cs.length - 1));
+      var target = Math.min(vcardLeft(cs[i]), scroller.scrollWidth - scroller.clientWidth);
+      scroller.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+    prev.addEventListener('click', function () { vgoTo(vcurrentIndex() - 1); });
+    next.addEventListener('click', function () { vgoTo(vcurrentIndex() + 1); });
     scroller.addEventListener('scroll', updateUI, { passive: true });
     window.addEventListener('resize', updateUI);
     updateUI();
@@ -805,24 +828,46 @@
     var next  = document.getElementById('teamNext');
     if (!track || !prev || !next) return;
 
-    function step() {
-      var card = track.querySelector('.team-card');
-      if (!card) return 320;
-      var styles = getComputedStyle(track);
-      var gap = parseFloat(styles.columnGap || styles.gap) || 0;
-      return card.offsetWidth + gap;
+    /* Index-based navigation instead of relative scrollBy. With
+       scroll-snap-type: x mandatory on the track, a smooth scrollBy
+       of one card-width fights the snap resolution: the snap can
+       settle SHORT of the intended card (visibly stalling ~80% of
+       the way, needing a second click — seen on Wieger, the last
+       card, where the remaining distance is less than a full step).
+       scrollTo an exact snap-aligned offset never fights the snap
+       because the target IS a snap point; clamping to max scroll
+       makes the last card land flush. */
+    function cards() {
+      return Array.prototype.slice.call(track.querySelectorAll('.team-card'));
+    }
+    // A card's left offset inside the track's scroll space.
+    function cardLeft(card) {
+      return card.getBoundingClientRect().left
+           - track.getBoundingClientRect().left
+           + track.scrollLeft;
+    }
+    function currentIndex() {
+      var cs = cards(), sl = track.scrollLeft, best = 0, bd = Infinity;
+      for (var i = 0; i < cs.length; i++) {
+        var d = Math.abs(cardLeft(cs[i]) - sl);
+        if (d < bd) { bd = d; best = i; }
+      }
+      return best;
+    }
+    function goTo(i) {
+      var cs = cards();
+      if (!cs.length) return;
+      i = Math.max(0, Math.min(i, cs.length - 1));
+      var target = Math.min(cardLeft(cs[i]), track.scrollWidth - track.clientWidth);
+      track.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
     }
     function updateButtons() {
       var max = track.scrollWidth - track.clientWidth - 2; // 2px tolerance
       prev.disabled = track.scrollLeft <= 2;
       next.disabled = track.scrollLeft >= max;
     }
-    prev.addEventListener('click', function () {
-      track.scrollBy({ left: -step(), behavior: 'smooth' });
-    });
-    next.addEventListener('click', function () {
-      track.scrollBy({ left:  step(), behavior: 'smooth' });
-    });
+    prev.addEventListener('click', function () { goTo(currentIndex() - 1); });
+    next.addEventListener('click', function () { goTo(currentIndex() + 1); });
     track.addEventListener('scroll', updateButtons, { passive: true });
     window.addEventListener('resize', updateButtons);
     updateButtons();
