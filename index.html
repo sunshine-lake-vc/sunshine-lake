@@ -780,8 +780,22 @@
             color: rgba(255, 255, 255, 0.78);
             margin: 0;
         }
+        /* Mobile: side-by-side swipeable cards (scroll-snap) instead
+           of a tall stack — matches the team carousel interaction.
+           Each card is ~80vw so the next one peeks at the edge. */
         @media (max-width: 900px) {
-            .advisors-grid { grid-template-columns: 1fr; }
+            .advisors-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .advisors-grid::-webkit-scrollbar { display: none; }
+            .advisor-card {
+                flex: 0 0 80vw;
+                scroll-snap-align: start;
+            }
         }
 
         /* ── Top 1% Track Record carousel — now runs full-width across
@@ -2516,7 +2530,7 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Sunshine Lake invests in founders of extreme origin at breakout moments.</p>
+                <p class="thesis-lede">We invest in founders from extreme origins at their breakout moments.</p>
                 <p>Our insight into geopolitical, economic, and technological shifts helps us navigate market cycles and back multiple breakthrough companies a decade.</p>
             </div>
 
@@ -2608,15 +2622,15 @@
                     <div class="advisor-card">
                         <div class="advisor-photo"><img src="images/team/esther-wojcicki.webp" alt="Esther Wojcicki" loading="lazy"></div>
                         <div class="advisor-info">
-                            <p class="advisor-name">Esther Wojcicki <span class="advisor-role">Advisor</span></p>
-                            <p class="advisor-bio">Renowned educator, journalist and author of <i>How to Raise Successful People</i>; founder of the Palo Alto High School Media Arts Program and a longtime mentor to Silicon Valley founders.</p>
+                            <p class="advisor-name">Esther Wojcicki</p>
+                            <p class="advisor-bio">Renowned educator, journalist, and author of <i>How to Raise Successful People</i>; longtime mentor to Silicon Valley founders.</p>
                         </div>
                     </div>
                     <div class="advisor-card">
                         <div class="advisor-photo"><img src="images/team/mike-franklin.webp" alt="Mike Franklin" loading="lazy"></div>
                         <div class="advisor-info">
-                            <p class="advisor-name">Mike Franklin <span class="advisor-role">Advisor</span></p>
-                            <p class="advisor-bio">Liew Family Chair of Computer Science at the University of Chicago, the General Partner&rsquo;s alma mater, and founding director of UC Berkeley&rsquo;s AMPLab, the birthplace of Apache Spark.</p>
+                            <p class="advisor-name">Mike Franklin</p>
+                            <p class="advisor-bio">Liew Family Chair of Computer Science at the University of Chicago and founding director of UC Berkeley&rsquo;s AMPLab, the birthplace of Apache Spark.</p>
                         </div>
                     </div>
                 </div>
@@ -4128,7 +4142,16 @@
             if (!peek || !bar) return;
             peek.addEventListener('click', function () {
                 if (!bar.classList.contains('is-collapsed')) return;
+                // Animate max-height to the MEASURED content height, not
+                // the 1600px CSS catch-all. Animating to 1600px made the
+                // visible expansion finish in the first ~40% of the
+                // 0.85s transition (the rest animated invisible
+                // headroom) — which read as a sudden pop.
                 bar.classList.remove('is-collapsed');
+                var natural = bar.scrollHeight; // expanded padding included
+                bar.style.maxHeight = '0px';
+                void bar.offsetHeight; // reflow so 0 registers as the start
+                bar.style.maxHeight = natural + 'px';
                 peek.setAttribute('aria-expanded', 'true');
                 peek.classList.add('is-hidden');
 
@@ -4142,6 +4165,9 @@
                 // Wait for the expand (max-height 0.85s) to settle so
                 // the bar has a real, measurable height — THEN scroll.
                 setTimeout(function () {
+                    // Clear the inline cap so the bar reflows naturally
+                    // if the viewport resizes later.
+                    bar.style.maxHeight = '';
                     bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     // Resume Lenis a beat after the smooth scroll
                     // has had time to start.
