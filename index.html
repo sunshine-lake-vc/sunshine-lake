@@ -749,9 +749,20 @@
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
+                /* Edge fades — same affordance language as the Track
+                   Record marquee — so the cropped band reads as
+                   "swipe for more" instead of cut off. */
+                -webkit-mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+                        mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
             }
             .waves-scroll::-webkit-scrollbar { display: none; }
-            .waves-scroll svg { min-width: 880px; }
+            /* 920px min-width keeps SVG text ≥16px rendered. JS below
+               starts the scroller at the RIGHT end on mobile so the
+               first thing seen is the cresting gold AI-Native wave
+               (the payoff, and the only full-height region — starting
+               at the left showed wave 1 under a band of dead space).
+               Swiping left reads as looking back through the cycles. */
+            .waves-scroll svg { min-width: 920px; }
         }
 
         /* ── Advisors strip — compact two-up row under the partner
@@ -2638,6 +2649,17 @@
                     </svg>
                 </div>
             </section>
+            <script>
+            // Mobile: open the waves band on the cresting gold wave
+            // (right end). The left end is wave 1 sitting under the
+            // dead space created by the gold crest's height, and the
+            // payoff wave would otherwise be hidden two swipes away.
+            (function () {
+                if (window.innerWidth > 720) return;
+                var s = document.querySelector('.waves-band .waves-scroll');
+                if (s) s.scrollLeft = s.scrollWidth;
+            })();
+            </script>
 
             <div class="team-layout">
                 <!-- Partners — horizontal carousel with arrows -->

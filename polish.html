@@ -735,9 +735,14 @@
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
+                /* Edge fades — swipe affordance. */
+                -webkit-mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+                        mask-image: linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
             }
             .waves-scroll::-webkit-scrollbar { display: none; }
-            .waves-scroll svg { min-width: 880px; }
+            /* JS below opens the scroller on the gold wave (right
+               end) — the payoff and the only full-height region. */
+            .waves-scroll svg { min-width: 920px; }
         }
 
         /* ── Advisors strip — compact two-up row under the partner
@@ -2586,6 +2591,14 @@
                     </svg>
                 </div>
             </section>
+            <script>
+            // Mobile: open the waves band on the cresting gold wave.
+            (function () {
+                if (window.innerWidth > 720) return;
+                var s = document.querySelector('.waves-band .waves-scroll');
+                if (s) s.scrollLeft = s.scrollWidth;
+            })();
+            </script>
 
             <div class="team-layout">
                 <!-- Partners — horizontal carousel with arrows -->
