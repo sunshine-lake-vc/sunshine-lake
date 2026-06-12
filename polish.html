@@ -716,11 +716,11 @@
             grid-template-columns: repeat(2, 1fr);
             gap: clamp(16px, 1.8vw, 28px);
         }
+        /* Text-only advisor cards — no photos. Bold serif name with a
+           short Sunshine-gold tick above it; hover stretches the tick
+           and warms the name. */
         .advisor-card {
-            display: flex;
-            align-items: flex-start;
-            gap: clamp(14px, 1.5vw, 22px);
-            padding: clamp(16px, 1.7vw, 24px);
+            padding: clamp(20px, 2vw, 30px) clamp(20px, 2.2vw, 32px);
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.09);
             border-radius: 18px;
@@ -729,42 +729,32 @@
         }
         .advisor-card:hover {
             background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(242, 216, 49, 0.34);
             transform: translateY(-2px);
-        }
-        .advisor-photo {
-            flex: 0 0 clamp(64px, 6vw, 88px);
-            width: clamp(64px, 6vw, 88px);
-            height: clamp(64px, 6vw, 88px);
-            border-radius: 14px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .advisor-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
         .advisor-info { min-width: 0; }
         .advisor-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
-            font-size: clamp(1.1rem, 1.3vw, 1.45rem);
+            font-size: clamp(1.3rem, 1.6vw, 1.8rem);
             color: #fff;
-            font-weight: 400;
-            margin: 0 0 clamp(4px, 0.5vw, 8px) 0;
-            line-height: 1.25;
-        }
-        .advisor-role {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: clamp(10px, 0.78vw, 11.5px);
             font-weight: 600;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.55);
-            margin-left: 8px;
-            vertical-align: 0.15em;
+            margin: 0 0 clamp(8px, 0.9vw, 14px) 0;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            transition: color 0.3s ease;
         }
+        .advisor-name::before {
+            content: '';
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background: #F2D831;
+            margin-bottom: clamp(10px, 1vw, 16px);
+            transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .advisor-card:hover .advisor-name { color: #FFF1B6; }
+        .advisor-card:hover .advisor-name::before { width: 44px; }
         .advisor-bio {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(0.88rem, 0.98vw, 1.1rem);
@@ -2503,7 +2493,7 @@
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
                 <p class="thesis-lede">We invest in founders from extreme origins at their breakout moments.</p>
-                <p>Our insight into geopolitical, economic, and technological shifts helps us navigate market cycles and back multiple breakthrough companies a decade.</p>
+                <p>Our insight into geopolitical, economic, and technological shifts help navigate market cycles to back multiple blockbuster companies a decade.</p>
             </div>
 
             <div class="team-layout">
@@ -2588,14 +2578,12 @@
                 <p class="advisors-label">Advisors</p>
                 <div class="advisors-grid">
                     <div class="advisor-card">
-                        <div class="advisor-photo"><img src="images/team/esther-wojcicki.webp" alt="Esther Wojcicki" loading="lazy"></div>
                         <div class="advisor-info">
                             <p class="advisor-name">Esther Wojcicki</p>
                             <p class="advisor-bio">Educator, journalist and author of <i>How to Raise Successful People</i>. The daughter of Russian Jewish immigrants, she earned an advanced degree at the Sorbonne in Paris and lectures on education worldwide, from Dubai and India to Austria and South Korea &mdash; the cross-border arc this fund backs.</p>
                         </div>
                     </div>
                     <div class="advisor-card">
-                        <div class="advisor-photo"><img src="images/team/mike-franklin.webp" alt="Mike Franklin" loading="lazy"></div>
                         <div class="advisor-info">
                             <p class="advisor-name">Mike Franklin</p>
                             <p class="advisor-bio">Morton D. Hull Distinguished Service Professor of Computer Science at the University of Chicago, the General Partner&rsquo;s alma mater, and a co-creator of Apache Spark at Berkeley&rsquo;s AMPLab. He has held visiting research posts in Hong Kong, Shanghai and Paris, and is a founding advisor at Databricks.</p>
