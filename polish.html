@@ -694,6 +694,88 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* ── Advisors strip — compact two-up row under the partner
+           carousel. ── */
+        .advisors-band {
+            width: 100%;
+            margin-top: clamp(28px, 3.4vw, 52px);
+            position: relative;
+            z-index: 2;
+        }
+        .advisors-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(12px, 1vw, 14px);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0 0 clamp(14px, 1.4vw, 22px) 0;
+        }
+        .advisors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(16px, 1.8vw, 28px);
+        }
+        .advisor-card {
+            display: flex;
+            align-items: flex-start;
+            gap: clamp(14px, 1.5vw, 22px);
+            padding: clamp(16px, 1.7vw, 24px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 18px;
+            transition: background 0.3s ease, border-color 0.3s ease,
+                        transform 0.3s ease;
+        }
+        .advisor-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .advisor-photo {
+            flex: 0 0 clamp(64px, 6vw, 88px);
+            width: clamp(64px, 6vw, 88px);
+            height: clamp(64px, 6vw, 88px);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .advisor-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .advisor-info { min-width: 0; }
+        .advisor-name {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.45rem);
+            color: #fff;
+            font-weight: 400;
+            margin: 0 0 clamp(4px, 0.5vw, 8px) 0;
+            line-height: 1.25;
+        }
+        .advisor-role {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(10px, 0.78vw, 11.5px);
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            margin-left: 8px;
+            vertical-align: 0.15em;
+        }
+        .advisor-bio {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(0.88rem, 0.98vw, 1.1rem);
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.78);
+            margin: 0;
+        }
+        @media (max-width: 900px) {
+            .advisors-grid { grid-template-columns: 1fr; }
+        }
+
         /* ── Top 1% Track Record carousel — now runs full-width across
            the team section, between the thesis and the partner carousel.
            Three rd-voices-style rows scroll in alternating directions
@@ -2487,6 +2569,27 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ════════ Advisors — compact strip under the team ════════ -->
+            <section class="advisors-band" aria-label="Advisors">
+                <p class="advisors-label">Advisors</p>
+                <div class="advisors-grid">
+                    <div class="advisor-card">
+                        <div class="advisor-photo"><img src="images/team/esther-wojcicki.webp" alt="Esther Wojcicki" loading="lazy"></div>
+                        <div class="advisor-info">
+                            <p class="advisor-name">Esther Wojcicki <span class="advisor-role">Advisor</span></p>
+                            <p class="advisor-bio">Renowned educator, journalist and author of <i>How to Raise Successful People</i>; founder of the Palo Alto High School Media Arts Program and a longtime mentor to Silicon Valley founders.</p>
+                        </div>
+                    </div>
+                    <div class="advisor-card">
+                        <div class="advisor-photo"><img src="images/team/mike-franklin.webp" alt="Mike Franklin" loading="lazy"></div>
+                        <div class="advisor-info">
+                            <p class="advisor-name">Mike Franklin <span class="advisor-role">Advisor</span></p>
+                            <p class="advisor-bio">Liew Family Chair of Computer Science at the University of Chicago, the General Partner&rsquo;s alma mater, and founding director of UC Berkeley&rsquo;s AMPLab, the birthplace of Apache Spark.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- Top 1% Track Record — full-width pill marquee.
                  Desktop: 3 rows (IPO, Seed, M&A).
