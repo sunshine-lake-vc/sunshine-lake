@@ -776,10 +776,25 @@
             color: rgba(255, 255, 255, 0.72);
             margin: 0 0 clamp(14px, 1.4vw, 22px) 0;
         }
-        .advisors-grid {
+        /* Bench: Venture Partners + Advisors side by side as one block. */
+        .bench-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: clamp(16px, 1.8vw, 28px);
+            gap: clamp(24px, 3vw, 48px);
+        }
+        .bench-group-label {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(11px, 0.85vw, 12.5px);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            margin: 0 0 clamp(12px, 1.2vw, 18px) 0;
+        }
+        .bench-cards {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(14px, 1.5vw, 22px);
         }
         /* Text-only advisor cards — no photos. Bold serif name with a
            short Sunshine-gold tick above it; hover stretches the tick
@@ -832,20 +847,11 @@
             color: #fff;
             font-weight: 600;
         }
-        /* Mobile: side-by-side swipeable cards (scroll-snap) instead
-           of a tall stack — matches the team carousel interaction. */
+        /* Mobile: the two bench groups stack vertically. */
         @media (max-width: 900px) {
-            .advisors-grid {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
-            .advisors-grid::-webkit-scrollbar { display: none; }
-            .advisor-card {
-                flex: 0 0 80vw;
-                scroll-snap-align: start;
+            .bench-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(28px, 6vw, 40px);
             }
         }
 
@@ -2749,19 +2755,43 @@
             </div>
 
             <!-- ════════ Advisors — compact strip under the team ════════ -->
-            <section class="advisors-band" aria-label="Advisors">
-                <p class="advisors-label">Advisors</p>
-                <div class="advisors-grid">
-                    <div class="advisor-card">
-                        <div class="advisor-info">
-                            <p class="advisor-name">Esther Wojcicki</p>
-                            <p class="advisor-bio">Educator, journalist and author of <i>How to Raise Successful People</i>. The daughter of Russian Jewish immigrants, she earned an advanced degree at the Sorbonne in Paris and lectures on education worldwide, from Dubai and India to Austria and South Korea.</p>
+            <section class="advisors-band" aria-label="Venture Partners and Advisors">
+                <p class="advisors-label">Beyond the Partnership</p>
+                <div class="bench-grid">
+                    <!-- Venture Partners — firm operators -->
+                    <div class="bench-group">
+                        <p class="bench-group-label">Venture Partners</p>
+                        <div class="bench-cards">
+                            <div class="advisor-card">
+                                <div class="advisor-info">
+                                    <p class="advisor-name">Andrew Hovelson</p>
+                                    <p class="advisor-bio">Leads narrative and brand. An NYU Tisch graduate and TV and Broadway veteran who turns technical infrastructure into category-defining stories &mdash; most recently coaching the <strong>Wordware</strong> founders to a $30M seed.</p>
+                                </div>
+                            </div>
+                            <div class="advisor-card">
+                                <div class="advisor-info">
+                                    <p class="advisor-name">Jamie Feaster</p>
+                                    <p class="advisor-bio">Leads growth and conversion. Builds the frameworks, funnels and acquisition loops that turn early traction into compounding growth across the portfolio.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="advisor-card">
-                        <div class="advisor-info">
-                            <p class="advisor-name">Mike Franklin</p>
-                            <p class="advisor-bio">Morton D. Hull Distinguished Service Professor of Computer Science at the University of Chicago, the General Partner&rsquo;s alma mater, and a co-creator of Apache Spark at Berkeley&rsquo;s AMPLab. He has held visiting research posts in Hong Kong, Shanghai and Paris, and is a founding advisor at <strong>Databricks</strong>.</p>
+                    <!-- Advisors — external counsel -->
+                    <div class="bench-group">
+                        <p class="bench-group-label">Advisors</p>
+                        <div class="bench-cards">
+                            <div class="advisor-card">
+                                <div class="advisor-info">
+                                    <p class="advisor-name">Esther Wojcicki</p>
+                                    <p class="advisor-bio">Educator, journalist and author of <i>How to Raise Successful People</i>. The daughter of Russian Jewish immigrants, she earned an advanced degree at the Sorbonne in Paris and lectures on education worldwide, from Dubai and India to Austria and South Korea.</p>
+                                </div>
+                            </div>
+                            <div class="advisor-card">
+                                <div class="advisor-info">
+                                    <p class="advisor-name">Mike Franklin</p>
+                                    <p class="advisor-bio">Morton D. Hull Distinguished Service Professor of Computer Science at the University of Chicago, the General Partner&rsquo;s alma mater, and a co-creator of Apache Spark at Berkeley&rsquo;s AMPLab. He has held visiting research posts in Hong Kong, Shanghai and Paris, and is a founding advisor at <strong>Databricks</strong>.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
