@@ -515,7 +515,7 @@ const CASES=[
   steps:[['SCOUT','Discovered through NYC angels who passed on the unconventional founder but saw potential.'],['SELECT','Backed a bold, personal vision to transform a $240Bn market into a scalable, elegant solution.'],['SECURE','Formed a high-impact syndicate including Tom Lee (One Medical founder).'],['SUPPORT','Introduced 10+ candidates, delivered market insights, refined financial models with the CFO.']],
   metrics:[['Date','Sep 2018'],['Invested','$900k'],['Liquid Position Today','$103mm','hot'],['Post-Money Today','$2.2Bn'],['Ownership','11.9%']],
   insight:'Founders who overcome personal, human challenges launch with PMF 59% faster and become market leaders. If they fail, the world loses.',teaser:false},
- {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'The aggravation of dealing with insurance claims spurred Justin &amp; Theo to attack a global sleeping-giant opportunity.',
+ {key:'assured',logo:'Assured',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'The aggravation of dealing with insurance claims spurred Justin &amp; Theo to attack a global sleeping-giant opportunity.',
   founders:'Justin &amp; Theo',sector:'Critical Infrastructure — unique ML &amp; data for global automotive insurance.',
   steps:[['SCOUT','Introduced through mutual friends, including the DoNotPay founder.'],['SELECT','Backed resilient founders tackling massive industry inefficiencies — opinionated and relentless.'],['SECURE','Led syndicate while safeguarding the founder from problematic investors; ensured a strong cap table.'],['SUPPORT','Helped build customer pipelines and provided deep ecosystem support.']],
   metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Liquid Position Today','$84.5mm','hot'],['Post-Money Today','$1Bn'],['Ownership','8.6%']],
@@ -578,20 +578,20 @@ function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl
 /* world bubble map over real grey map (positions matched to original) */
 /* [name, count, x%, y%, labelX% , labelY%]  — labelX null => label inside bubble */
 const WORLD=[
- ['India',90,69,52,null,null],['Israel',52,58,48,null,null],['Canada',42,13,46,null,null],
- ['UK',31,44.5,35,null,null],['China',27,81,52,null,null],['Germany',18,50,37,null,null],
- ['France',17,46,42,null,null],['Russia',14,81,38,null,null],['Ukraine',12,56,38,null,null],
- ['Taiwan',12,85.5,60,null,null],['Ireland',10,40.5,38,null,null],['Belgium',9,47.5,23,null,null],
- ['Brazil',9,32,68,null,null],['Iran',9,64,46,null,null],['Australia',8,81,78,null,null],
- ['Netherlands',7,51,30,56,26],['New Zealand',6,95,86,93,80],['Denmark',5,50,27,53,14],
- ['Italy',5,50.5,45,48,53],['Poland',5,52.5,41,52,55],['Romania',5,54,43,54,80],
- ['South Africa',5,54,68,54,73],['Argentina',5,34,80,35,86],['Portugal',4,40,46,39,50],
- ['Lebanon',4,58.5,44,58,25],['Sweden',3,52,31,55,30],['Pakistan',3,68,53,69,68],
- ['Japan',3,90,53,93,57],['Greece',2,52,50,51,63],['Turkey',2,60,44,64,25],
- ['Uzbekistan',2,68,40,70,39],['Guatemala',2,18,62,20,65],['Others',29,null,null,95,40]
+ ['India',90,68,54,null,null],['Israel',52,58,40,null,null],['Canada',42,20,34,null,null],
+ ['UK',31,46,30,null,null],['China',27,76,43,null,null],['Germany',18,51,31,null,null],
+ ['France',17,48,35,null,null],['Russia',14,74,25,null,null],['Ukraine',12,56,31,null,null],
+ ['Taiwan',12,83,52,null,null],['Ireland',10,43,31,null,null],['Belgium',9,49,27,null,null],
+ ['Brazil',9,35,58,null,null],['Iran',9,63,40,null,null],['Australia',8,82,66,null,null],
+ ['Netherlands',7,50,28,53,18],['New Zealand',6,91,73,90,66],['Denmark',5,52,24,52,13],
+ ['Italy',5,51,37,49,46],['Poland',5,53,30,56,46],['Romania',5,55,33,56,79],
+ ['South Africa',5,55,67,55,73],['Argentina',5,34,74,35,81],['Portugal',4,45,37,43,43],
+ ['Lebanon',4,60,40,63,21],['Sweden',3,53,23,57,21],['Pakistan',3,64,45,64,69],
+ ['Japan',3,86,40,90,45],['Greece',2,54,38,52,62],['Turkey',2,59,36,66,21],
+ ['Uzbekistan',2,67,33,69,32],['Guatemala',2,22,50,22,56],['Others',29,null,null,95,40]
 ];
 function worldMap(){
-  const W=1000,H=500, rOf=c=>Math.max(6,Math.sqrt(c)*5.0);
+  const W=1000,H=500, rOf=c=>Math.max(11,Math.sqrt(c)*8.2);
   const els=WORLD.map(c=>{
     const [name,n,x,y,lx,ly]=c, X=x==null?null:x/100*W, Y=y==null?null:y/100*H, r=rOf(n);
     if(lx===null){ // big bubble, label inside
