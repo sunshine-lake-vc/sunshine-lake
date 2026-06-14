@@ -250,11 +250,10 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 
 /* case study */
 .cs-logo-img{height:38px;width:auto;max-width:230px;object-fit:contain;}
-.cs-founder{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.cs-photo{width:58px;height:58px;flex:0 0 58px;border-radius:8px;background:#e3e8f4 center/cover no-repeat;
+.cs-founder{display:flex;align-items:center;gap:18px;margin-bottom:16px;}
+.cs-photo{width:112px;height:112px;flex:0 0 112px;border-radius:10px;background:#e3e8f4 center/cover no-repeat;
   display:flex;align-items:center;justify-content:center;border:1px solid var(--line);position:relative;overflow:hidden;}
-.cs-photo.ph::after{content:"PHOTO";font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.1em;color:#9aa3bd;}
-.cs-founder .fn{font-weight:600;color:var(--ink);font-size:14px;}
+.cs-founder .fn{font-weight:600;color:var(--ink);font-size:19px;line-height:1.25;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
 .cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
 .cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
@@ -332,6 +331,12 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .disc .s-pad{padding:54px 72px;}
 .disc .cols{gap:30px;}
 .disc p{font-size:10.5px;line-height:1.5;color:#7a84a6;margin-bottom:12px;}
+
+/* venture partner strip (team slide) */
+.vp-strip{display:flex;gap:32px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px;}
+.vp-line{flex:1;font-size:13px;color:var(--ink-2);line-height:1.5;}
+.vp-line b{color:var(--ink);}
+.vp-lbl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);background:#eef3fc;border-radius:4px;padding:2px 7px;margin-right:7px;vertical-align:middle;}
 
 /* due-diligence columns */
 .dd-row{display:flex;flex:1;margin-top:18px;align-items:stretch;}
@@ -479,7 +484,7 @@ const TEAM=[
 ];
 const VECTORS=[
  {n:'1',t:'Founding Has Never Been Easier',p:'',ad:[['David Bell','Professor & Advisor — Warby Parker','🇳🇿'],['Esther Wojcicki','Silicon Valley Legend — Stanford','🇺🇸'],['Mike Franklin','Professor & Advisor — Databricks','🇺🇸']]},
- {n:'2',t:'Foundation-building Is Hard',p:'Product–market fit',ad:[['Christopher Muhr','Founder & COO — Auto1','🇩🇪'],['Drake Sutton-Shearer','Industrial & Tech Design — WB','🇳🇿'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸']]},
+ {n:'2',t:'Foundation-building Is Hard',p:'Product–market fit',ad:[['Christopher Muhr','Founder & COO — Auto1','🇩🇪'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸']]},
  {n:'3',t:'Sustainable Growth Is Harder Than Ever',p:'',ad:[['Florian Ingen-Housz','CFO & CSO — Back Market','🇫🇷'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
 ];
 const TRACK=[
@@ -489,47 +494,47 @@ const TRACK=[
  ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42','$1.0','101x','$60.2','157%','Kleiner Perkins']
 ];
 const CASES=[
- {key:'deel',logo:'deel.',logoImg:'images/logos/deel.webp',banner:'Realized Return on Investment (DPI)',story:'After MIT, these French &amp; Chinese engineers faced visa barriers, preventing their dream jobs.',
+ {key:'deel',logo:'deel.',banner:'Realized Return on Investment (DPI)',story:'After MIT, these French &amp; Chinese engineers faced visa barriers, preventing their dream jobs.',
   founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',sector:'Fintech × Global Workforce Infrastructure — crypto-native, AI-enabled, globally compliant.',
   steps:[['SCOUT','Spotted early by a UChicago entrepreneur and YC alum with firsthand founder instincts.'],['SELECT','Backed a visionary team targeting the $525B remote payroll / compliance market.'],['SECURE','Accelerated by introducing 5 top hires and 12 partners; broadcast to Daniel Gross and Elad Gil.'],['SUPPORT','Hosted team in-office for 6 months. Intro\'d customers / hires. Facilitated Legalpad acquisition.']],
   metrics:[['Date','Dec 2019'],['Invested','$1mm',''],['Realized Value','$20mm','hot'],['Liquid Position Today','$336mm','hot'],['Post-Money Today','$17Bn'],['Ownership','6%']],
   insight:'Global teams with proper tooling hire faster, access better talent, and raise capital 6 months earlier than competitors.',teaser:true},
- {key:'kalshi',logo:'Kalshi',logoImg:'images/logos/kalshi.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Frustrated by global blind spots in risk, MIT immigrants built an ML prediction market.',
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Frustrated by global blind spots in risk, MIT immigrants built an ML prediction market.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',sector:'Critical Infra × Emerging Exchange — ML-powered, globally compliant infrastructure.',
   steps:[['SCOUT','Met through top MIT engineers. Backed early despite regulatory hurdles and geopolitical complexity.'],['SELECT','Believed in Jane Street alumni building a $136B prediction exchange with global-first DNA.'],['SECURE','Leveraged shared EU and Lebanese roots, structured early trust networks, signaled top investors.'],['SUPPORT','Hosted in-office for 6 months. Shared BD and regulatory research; reinforced early GTM.']],
   metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm'],['Liquid Position Today','$559mm','hot'],['Post-Money Today','$22Bn'],['Ownership','5%']],
   insight:'International founders spot regulatory gaps and build durable infrastructure the world depends on.',teaser:false},
- {key:'headway',logo:'Headway',logoImg:'images/logos/headway.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Personal struggles to find a therapist inspired this humanities &amp; engineering grad to conquer global mental health.',
+ {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Personal struggles to find a therapist inspired this humanities &amp; engineering grad to conquer global mental health.',
   founders:'Andrew Adams 🇺🇸',sector:'Critical Infrastructure — mental-health insurance software with remote technology.',
   steps:[['SCOUT','Discovered through NYC angels who passed on the unconventional founder but saw potential.'],['SELECT','Backed a bold, personal vision to transform a $240Bn market into a scalable, elegant solution.'],['SECURE','Formed a high-impact syndicate including Tom Lee (One Medical founder).'],['SUPPORT','Introduced 10+ candidates, delivered market insights, refined financial models with the CFO.']],
   metrics:[['Date','Sep 2018'],['Invested','$900k'],['Liquid Position Today','$103mm','hot'],['Post-Money Today','$2.2Bn'],['Ownership','11.9%']],
   insight:'Founders who overcome personal, human challenges launch with PMF 59% faster and become market leaders. If they fail, the world loses.',teaser:false},
- {key:'assured',logo:'Assured',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'The aggravation of dealing with insurance claims spurred Justin &amp; Theo to attack a global sleeping-giant opportunity.',
+ {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'The aggravation of dealing with insurance claims spurred Justin &amp; Theo to attack a global sleeping-giant opportunity.',
   founders:'Justin &amp; Theo',sector:'Critical Infrastructure — unique ML &amp; data for global automotive insurance.',
   steps:[['SCOUT','Introduced through mutual friends, including the DoNotPay founder.'],['SELECT','Backed resilient founders tackling massive industry inefficiencies — opinionated and relentless.'],['SECURE','Led syndicate while safeguarding the founder from problematic investors; ensured a strong cap table.'],['SUPPORT','Helped build customer pipelines and provided deep ecosystem support.']],
   metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Liquid Position Today','$84.5mm','hot'],['Post-Money Today','$1Bn'],['Ownership','8.6%']],
   insight:'Founders with deep personal experience often have the relentless grit to endure multi-year sales cycles against all odds.',teaser:false},
- {key:'pry',logo:'Pry',banner:'Realized Return on Investment (DPI)',story:'After years in startup finance, this Chinese engineer built Pry to replace clunky Excel models with intuitive, real-time FP&amp;A tools.',
+ {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',banner:'Realized Return on Investment (DPI)',story:'After years in startup finance, this Chinese engineer built Pry to replace clunky Excel models with intuitive, real-time FP&amp;A tools.',
   founders:'Andy Su 🇨🇳',sector:'Global Productivity — FP&amp;A for tech operators, replacing legacy tech with real-time AI.',
   steps:[['SCOUT','Brex product alumni network.'],['SELECT','Strong engineering-led team with deep empathy for pain points; rapid conviction.'],['SECURE','Helped align Pry\'s roadmap with the market.'],['SUPPORT','Supported M&amp;A strategy and coached the team through a successful acquisition by Brex.']],
   metrics:[['Date','Dec 2019 → Apr 2022'],['Invested','$1.5mm'],['Realized Value','$10.6mm · 710% DPI','hot'],['Exit','Acquired by Brex'],['Ownership','12% (at exit)']],
   insight:'Startup finance is universally broken — tools built for CFOs don\'t work for founders. Founders need clarity, not complexity.',teaser:false},
- {key:'donotpay',logo:'DoNotPay',banner:'Realized Return on Investment (DPI)',story:'Outraged by systemic barriers in consumer justice, this British founder created the world\'s first AI lawyer.',
+ {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',banner:'Realized Return on Investment (DPI)',story:'Outraged by systemic barriers in consumer justice, this British founder created the world\'s first AI lawyer.',
   founders:'Joshua Browder 🇬🇧',sector:'Global Productivity — automated tools for the underserved: fighting fees, fines, and contracts.',
   steps:[['SCOUT','Met through global founder network.'],['SELECT','Saw breakout potential in a product-led growth model with real legal wins; believed in AI-first.'],['SECURE','Supported initial viral content and demand-gen launch strategy.'],['SUPPORT','Helped build brand and narrative; supported the founder on multi-round fundraising.']],
   metrics:[['Date','Feb 2019'],['Invested','$830k'],['Unrealized','$6.8mm'],['Realized','$95k · 11% DPI','hot'],['Post-Money Today','$230mm'],['Ownership','3.5%']],
   insight:'Regulatory friction can be an asset. Early-stage DoNotPay demonstrated dividends can be created in the space.',teaser:false},
- {key:'draftwise',logo:'DraftWise',banner:'Unrealized — Marked Position',story:'After struggling to leverage internal data at global law firms, this Turkish and American team transformed drafting from slow and manual to intelligent and data-driven.',
+ {key:'draftwise',logo:'DraftWise',logoImg:'images/cases/draftwise-logo.webp',banner:'Unrealized — Marked Position',story:'After struggling to leverage internal data at global law firms, this Turkish and American team transformed drafting from slow and manual to intelligent and data-driven.',
   founders:'Emre Ozen, James Ding, Ozan Yalti 🇹🇷🇺🇸',sector:'Global Productivity — contract-drafting tech to unlock precedent data for quality and speed.',
   steps:[['SCOUT','Palantir alumni network.'],['SELECT','Visionary team solving a latent workflow problem; trusted by elite law firms.'],['SECURE','Facilitated strategic intros to top-tier firms and co-investors.'],['SUPPORT','Supported messaging, GTM, and brought on angel advisors like Laszlo Bock.']],
   metrics:[['Date','Sep 2020'],['Invested','$800k'],['Unrealized','$3.8mm'],['Post-Money Today','$100mm'],['Ownership','4.7%']],
   insight:'Global AI teams from intelligence and defense outperform in antiquated industries due to first-principles execution.',teaser:false},
- {key:'wordware',logo:'Wordware',banner:'Unrealized — Marked Position',story:'These Polish &amp; British Cambridge graduates moved to Silicon Valley, irked by the insular AI community — now they provide AI access to all.',
+ {key:'wordware',logo:'Wordware',logoImg:'images/cases/wordware-logo.webp',banner:'Unrealized — Marked Position',story:'These Polish &amp; British Cambridge graduates moved to Silicon Valley, irked by the insular AI community — now they provide AI access to all.',
   founders:'Robert Chandler &amp; Filip Kozera 🇬🇧🇵🇱',sector:'Global Productivity — democratizing AI with an IDE to improve workforce efficiency.',
   steps:[['SCOUT','Global angel network.'],['SELECT','Exceptional international team from Poland and England that met at Cambridge.'],['SECURE','Moved fast leveraging shared EU roots to connect candidates and co-investors.'],['SUPPORT','Market strategy, syndicate building, talent acquisition, key advisors.']],
   metrics:[['Date','Dec 2021'],['Invested','$500k'],['Unrealized','$5.4mm'],['Post-Money Today','$140mm'],['Ownership','4.2%']],
   insight:'International founders from EU/MENA achieve 3× the average markup of other early-stage founders.',teaser:false},
- {key:'navier',logo:'NAVIER',banner:'Unrealized — Marked Position',story:'This Indian MIT engineer was frustrated by the inefficiencies and emissions of traditional boats and set out to electrify and revolutionize water mobility.',
+ {key:'navier',logo:'NAVIER',logoImg:'images/cases/navier-logo.webp',banner:'Unrealized — Marked Position',story:'This Indian MIT engineer was frustrated by the inefficiencies and emissions of traditional boats and set out to electrify and revolutionize water mobility.',
   founders:'Sampriti Bhattacharyya 🇮🇳',sector:'Global Logistics — reinventing maritime to enable clean, agile water transit.',
   steps:[['SCOUT','Identified through deeptech and climate circles at MIT.'],['SELECT','Bet on a visionary, highly technical team — naval architecture meets autonomous robotics.'],['SECURE','Introduced strategic climate and mobility angels; supported pilot build and government relationships.'],['SUPPORT','Helped structure early hiring, GTM, and Series A positioning.']],
   metrics:[['Date','Sep 2021'],['Invested','$1.0mm'],['Unrealized','$3.4mm'],['Post-Money Today','$120mm'],['Ownership','2.9%']],
@@ -598,9 +603,7 @@ function worldMap(){
 
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
-  const missing=c.logoImg?[]:['logo'];
   return {title:`Case Study — ${c.logo}`,track:'core',teaser:!!c.teaser,dark:false,cls:'',html:`
-   ${missing.length?needsArt(missing.join(' + ')):''}
    <div class="cs-banner liquid">${c.banner}</div>
    <div class="cs-body">
      <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span>${logo}</div>
@@ -691,10 +694,10 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
     <div class="quote-lg">Reading global technological and economic shifts early — and backing the founders who turn them into category-defining companies.</div>
     <div class="quote-sub">Born in Minnesota, raised globally, and fluent across cultures and languages. Cross-border M&amp;A and operating experience, with <b>13 unicorns</b> backed to date. <b>$60mm</b> deployed across <b>2 seed funds</b> — a <b>21× TVPI</b> and <b>60% DPI; 19× liquid</b>. Now spinning out with <b>$50mm</b> and a <b>5% GP commit</b>.</div>
     <hr class="s-rule">
-    <div class="gp">
+    <div class="gp" style="margin-top:24px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
       <div class="tiers">
-        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:6px">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
+        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 12px;padding-bottom:10px;border-bottom:2px solid var(--line)">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
         <div class="tier"><span class="val">$10Bn+</span><span class="cos">Deel · Figma · Databricks · Brex</span></div>
         <div class="tier"><span class="val">$1Bn+</span><span class="cos">Culture Amp · Kalshi · Headway · Checkr</span></div>
         <div class="tier"><span class="val">$100mm+</span><span class="cos">Slope · SpotHero · Wordware · Assured</span></div>
@@ -747,12 +750,15 @@ add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:''
 
 /* 7 — TEAM + ADVISORS */
 add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:36px">Sunshine Lake team: decades of international, KPI-driven technology expertise</h1>
-    <div class="team-row">${teamCardsHTML()}</div>
-    <div class="kicker" style="text-align:center;margin-bottom:10px">Equipping founders across three key vectors</div>
+  <div class="s-pad" style="padding-top:46px">
+    <h1 class="s-title" style="font-size:34px">Sunshine Lake team: decades of international, KPI-driven technology expertise</h1>
+    <div class="team-row" style="margin:14px 0 16px">${teamCardsHTML()}</div>
+    <div class="kicker" style="text-align:center;margin-bottom:8px">Advisors — equipping founders across three key vectors</div>
     <div class="vectors">${vectorsHTML()}</div>
-    <div style="text-align:center;font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:16px">Monthly advisory meetings provide founder support and proprietary deal flow.</div>
+    <div class="vp-strip">
+      <div class="vp-line"><span class="vp-lbl">Venture Partner</span><b>Andrew Hovelson</b> 🇺🇸 — Storytelling. Broadway &amp; TV actor (with Glenn Close) coaching international founders to resonate with their audiences.</div>
+      <div class="vp-line"><span class="vp-lbl">Venture Partner</span><b>Jamie Feaster</b> 🇺🇸 — Growth &amp; Brand. Brand whisperer to 100+ global clients; shapes founder voice, visuals and impact.</div>
+    </div>
   </div>${chrome(false)}`});
 
 /* 8 — SCOUT / SELECT */
@@ -836,7 +842,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
         <div class="tr"><span class="k">Number of Deals</span><span class="v">22 core companies + a discretionary sleeve to maximize returns</span></div>
         <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
         <div class="tr"><span class="k">Initial Check Range</span><span class="v">$500k–$1.65mm for core, over a 36-month investment period</span></div>
-        <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions (75% of total capital)</span></div>
+        <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions (75%–85% of total capital)</span></div>
         <div class="tr"><span class="k">Reserves</span><span class="v">10% dedicated reserves · 20% for other non-initial checks</span></div>
         <div class="tr"><span class="k">Discovery Strategy</span><span class="v">5% of capital; convert ~25% of these to "core"</span></div>
         <div class="tr"><span class="k">Structure</span><span class="v">2.5% management fee (stepping to 1.5%) · 20% carry · 5% GP commitment</span></div>
@@ -886,7 +892,7 @@ add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:
     <div class="cols" style="margin-top:22px;flex:1">
       <div class="col">
         <div class="kicker">Sunshine Lake</div>
-        <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin:8px 0 18px">A $50mm fund size allows for minimum-viable ownership (5–15%) while expanding top-of-funnel into a greater critical-global-problem set — more, and better, shots on goal.</p>
+        <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin:8px 0 18px">A $50mm fund size allows for minimum-viable ownership (5%) while expanding top-of-funnel into a greater critical-global-problem set — more, and better, shots on goal.</p>
         <div class="kicker">Co-Investors</div>
         <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:8px">Rather than competing with later-stage investors, we build a strong network of early-stage and sector-focused co-investors — mitigating capital risk while enhancing access to high-quality deals.</p>
       </div>
@@ -1026,18 +1032,6 @@ add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls
   </div>${chrome(false)}`});
 
 /* A3 — STORY / VENTURE PARTNERS */
-add({title:'Founders &amp; Story',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title">In the early days, what do founders really have but a story?</h1>
-    <div class="s-sub" style="color:var(--mid-lake);font-size:20px">Great stories unlock capital, attract talent, and earn trust. Sunshine Lake helps founders craft theirs.</div>
-    <hr class="s-rule">
-    <div class="cols" style="margin-top:24px;flex:1">
-      <div class="col"><div style="font-family:var(--serif);font-size:20px;color:var(--ink)">Venture Partner — Andrew Hovelson</div><p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:8px">A Broadway and TV actor (Co-star, Academy Award winner Glenn Close) who has coached dozens of international founders to resonate with their audiences.</p></div>
-      <div class="col"><div style="font-family:var(--serif);font-size:20px;color:var(--ink)">Venture Partner — Jamie Feaster</div><p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:8px">Brand whisperer to 100+ global clients. Brings cultural firepower across finance, tech, and entertainment — helping founders shape voice, visuals, and impact.</p></div>
-    </div>
-    <div style="display:flex;gap:24px;justify-content:center;font-family:var(--serif);font-size:16px;color:#9aa3bd">MightyFly · Shuttle · Overview · Deel · Wordware · Y Combinator</div>
-  </div>${chrome(false)}`});
-
 /* A4 — DUE DILIGENCE */
 add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -1161,6 +1155,15 @@ function flashChrome(){
   hideTimer=setTimeout(()=>{document.getElementById('bar').classList.remove('show');document.getElementById('progress').classList.remove('show');},2600);
 }
 addEventListener('mousemove',flashChrome);
+
+/* touch swipe navigation (mobile) */
+let tsx=0,tsy=0,tst=0;
+addEventListener('touchstart',e=>{const t=e.changedTouches[0];tsx=t.clientX;tsy=t.clientY;tst=Date.now();},{passive:true});
+addEventListener('touchend',e=>{
+  if(document.getElementById('gate').style.display!=='none')return;
+  const t=e.changedTouches[0],dx=t.clientX-tsx,dy=t.clientY-tsy;
+  if(Date.now()-tst<800 && Math.abs(dx)>48 && Math.abs(dx)>Math.abs(dy)*1.4){ dx<0?next():prev(); }
+},{passive:true});
 
 /* sparkle starfield on the cover */
 function sparkles(){
