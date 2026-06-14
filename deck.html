@@ -157,8 +157,10 @@ body{
 
 /* problem space columns */
 .prob{display:flex;gap:30px;margin-top:30px;flex:1;}
-.prob .pc{flex:1;border-top:2px solid var(--line);padding-top:22px;}
-.prob h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:20px;text-align:center;}
+.prob .pc{flex:1;border-top:2px solid var(--line);padding-top:18px;}
+.prob .prob-shift{font-size:12px;line-height:1.4;color:var(--cobalt);font-weight:600;text-align:center;min-height:50px;margin-bottom:6px;}
+.prob .prob-shift b{color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:3px;}
+.prob h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:18px;text-align:center;}
 .prob ul{list-style:none;display:flex;flex-direction:column;gap:16px;}
 .prob li{display:flex;flex-direction:column;align-items:center;text-align:center;}
 .prob li .co{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;}
@@ -608,11 +610,6 @@ add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
     <div class="sline gold">We back the rare founders forged to close the gap.</div>
   </div>${chrome(true)}`});
 
-/* SECTION I */
-add({title:'Section · The Opportunity',track:'core',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">I</div><h2>The Opportunity</h2>
-  <p>Talent is universal. Opportunity is not. We back the founders forged by extreme origins — wherever they begin.</p></div>${chrome(true)}`});
-
 /* 2 — THESIS */
 add({title:'Building Beyond Borders',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -634,34 +631,33 @@ add({title:'Building Beyond Borders',track:'core',teaser:true,dark:false,cls:'',
 /* 3 — PROBLEM SPACE */
 add({title:'Critical Global Problems',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
+    <div class="eyebrow">Riding global technological &amp; economic shifts</div>
     <h1 class="s-title">Backing founders solving critical global problems</h1>
+    <div class="s-sub" style="font-size:20px;color:var(--mid-lake)">Three tectonic shifts are rewiring the global economy. We back the founders building the infrastructure for each.</div>
+    <hr class="s-rule">
     <div class="prob">
-      <div class="pc"><h3>Infrastructure</h3><ul>
+      <div class="pc"><div class="prob-shift"><b>The shift</b>Critical systems going software-first &amp; sovereign</div><h3>Infrastructure</h3><ul>
         <li><span class="co">GovDash</span><span class="se">Government</span></li>
         <li><span class="co">Pachama</span><span class="se">Energy</span></li>
         <li><span class="co">Centaur Labs</span><span class="se">Health</span></li></ul></div>
-      <div class="pc"><h3>Productivity</h3><ul>
+      <div class="pc"><div class="prob-shift"><b>The shift</b>AI collapsing the cost of expert work</div><h3>Productivity</h3><ul>
         <li><span class="co">PermitFlow</span><span class="se">Construction</span></li>
         <li><span class="co">DraftWise</span><span class="se">Legal</span></li>
         <li><span class="co">Overview</span><span class="se">Manufacturing</span></li></ul></div>
-      <div class="pc"><h3>Supply Chain &amp; Logistics</h3><ul>
+      <div class="pc"><div class="prob-shift"><b>The shift</b>Supply chains re-globalizing &amp; automating the physical world</div><h3>Supply Chain &amp; Logistics</h3><ul>
         <li><span class="co">Cedar</span><span class="se">Rail</span></li>
         <li><span class="co">Navier</span><span class="se">Maritime</span></li>
         <li><span class="co">MightyFly</span><span class="se">Aviation</span></li></ul></div>
     </div>
-    <div class="prob-foot">Fintech and frontier underpin everything we invest in.</div>
+    <div class="prob-foot">Fintech and frontier underpin every shift we invest behind.</div>
   </div>${chrome(false)}`});
-
-/* SECTION II */
-add({title:'Section · Track Record',track:'core',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">II</div><h2>Track Record</h2>
-  <p>A top-1% legacy seed record — a unicorn for roughly every $15mm deployed.</p></div>${chrome(true)}`});
 
 /* 4 — GP CREDIBILITY */
 add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="quote-lg">"Even as geopolitics divide us, technology entrepreneurs unite us."</div>
-    <div class="quote-sub">"I was born in Minnesota, grew up globally and love languages. My cross-border M&amp;A and ops experience are top tier, and I've invested in <b>13 unicorns</b>. I've deployed <b>$60mm</b> in aggregate at <b>2 seed funds</b> with a <b>21× TVPI</b> and <b>60% DPI; 19× liquid</b>. I'm spinning out with <b>$50mm</b> and a <b>5% GP commit</b>." — Don Stalter</div>
+    <div class="eyebrow">Donald Stalter · General Partner</div>
+    <div class="quote-lg">Reading global technological and economic shifts early — and backing the founders who turn them into category-defining companies.</div>
+    <div class="quote-sub">Born in Minnesota, raised globally, and fluent across cultures and languages. Cross-border M&amp;A and operating experience, with <b>13 unicorns</b> backed to date. <b>$60mm</b> deployed across <b>2 seed funds</b> — a <b>21× TVPI</b> and <b>60% DPI; 19× liquid</b>. Now spinning out with <b>$50mm</b> and a <b>5% GP commit</b>.</div>
     <hr class="s-rule">
     <div class="gp">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
@@ -717,11 +713,6 @@ add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:''
     </div>
   </div>${chrome(false)}`});
 
-/* SECTION III */
-add({title:'Section · The Team',track:'core',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">III</div><h2>The Team</h2>
-  <p>Decades of international, KPI-driven technology expertise — equipping founders to compound operational momentum.</p></div>${chrome(true)}`});
-
 /* 7 — TEAM + ADVISORS */
 add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -731,11 +722,6 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="vectors">${vectorsHTML()}</div>
     <div style="text-align:center;font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:16px">Monthly advisory meetings provide founder support and proprietary deal flow.</div>
   </div>${chrome(false)}`});
-
-/* SECTION IV */
-add({title:'Section · How We Operate',track:'core',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">IV</div><h2>How We Operate</h2>
-  <p>A regimented, purpose-built operation: Scout → Select → Secure → Support.</p></div>${chrome(true)}`});
 
 /* 8 — SCOUT / SELECT */
 add({title:'Scout &amp; Select',track:'core',teaser:false,dark:false,cls:'',html:`
@@ -807,11 +793,6 @@ add({title:'A Global Network',track:'core',teaser:false,dark:true,cls:'ecosystem
 
 /* CASE STUDIES (data-driven) */
 CASES.forEach(c=>add(caseSlide(c)));
-
-/* SECTION V */
-add({title:'Section · The Fund',track:'core',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">V</div><h2>The Fund</h2>
-  <p>$50mm, Fund&nbsp;I — disciplined construction engineered for ownership, scale, and breakout returns.</p></div>${chrome(true)}`});
 
 /* 10 — FUND TERMS */
 add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
