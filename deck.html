@@ -229,7 +229,21 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .panel .row b{font-weight:600;color:var(--ink);}
 .panel .score{margin-top:auto;font-weight:600;color:var(--cobalt);font-size:14px;}
 
+/* needs-art working marker (corner) */
+.needs-art{position:absolute;top:18px;right:18px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#b4530c;background:#fff5e6;border:1px dashed #e09a3e;border-radius:999px;padding:5px 11px;}
+.needs-art::before{content:"";width:7px;height:7px;border-radius:50%;background:#e88c1a;}
+.slide.dark .needs-art{color:#ffd98a;background:rgba(255,180,60,.12);border-color:rgba(255,190,90,.5);}
+.slide.dark .needs-art::before{background:var(--sun);}
+
 /* case study */
+.cs-logo-img{height:38px;width:auto;max-width:230px;object-fit:contain;}
+.cs-founder{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.cs-photo{width:58px;height:58px;flex:0 0 58px;border-radius:8px;background:#e3e8f4 center/cover no-repeat;
+  display:flex;align-items:center;justify-content:center;border:1px solid var(--line);position:relative;overflow:hidden;}
+.cs-photo.ph::after{content:"PHOTO";font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.1em;color:#9aa3bd;}
+.cs-founder .fn{font-weight:600;color:var(--ink);font-size:14px;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
 .cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
 .cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
@@ -406,11 +420,11 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 <script>
 /* ============================================================
    PASSWORD GATE  (separate from the LP portal password)
-   Deck password: "forge-the-future"
+   Deck password: "forge"
    Rotate:  printf '%s' 'new-pw' | shasum -a 256
    …then replace DECK_HASH below.
    ============================================================ */
-const DECK_HASH='66d1f7451de6263976e15e2079a3bce4e32ab55e9b6b77f2f664a8ff3e43737d';
+const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
 async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),ge=document.getElementById('ge');
 function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');boot();}
@@ -441,17 +455,17 @@ const TRACK=[
  ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42','$1.0','101x','$60.2','157%','Kleiner Perkins']
 ];
 const CASES=[
- {key:'deel',logo:'deel.',banner:'Realized Return on Investment (DPI)',story:'After MIT, these French &amp; Chinese engineers faced visa barriers, preventing their dream jobs.',
+ {key:'deel',logo:'deel.',logoImg:'images/logos/deel.webp',banner:'Realized Return on Investment (DPI)',story:'After MIT, these French &amp; Chinese engineers faced visa barriers, preventing their dream jobs.',
   founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',sector:'Fintech × Global Workforce Infrastructure — crypto-native, AI-enabled, globally compliant.',
   steps:[['SCOUT','Spotted early by a UChicago entrepreneur and YC alum with firsthand founder instincts.'],['SELECT','Backed a visionary team targeting the $525B remote payroll / compliance market.'],['SECURE','Accelerated by introducing 5 top hires and 12 partners; broadcast to Daniel Gross and Elad Gil.'],['SUPPORT','Hosted team in-office for 6 months. Intro\'d customers / hires. Facilitated Legalpad acquisition.']],
   metrics:[['Date','Dec 2019'],['Invested','$1mm',''],['Realized Value','$20mm','hot'],['Liquid Position Today','$336mm','hot'],['Post-Money Today','$17Bn'],['Ownership','6%']],
   insight:'Global teams with proper tooling hire faster, access better talent, and raise capital 6 months earlier than competitors.',teaser:true},
- {key:'kalshi',logo:'Kalshi',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Frustrated by global blind spots in risk, MIT immigrants built an ML prediction market.',
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/logos/kalshi.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Frustrated by global blind spots in risk, MIT immigrants built an ML prediction market.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',sector:'Critical Infra × Emerging Exchange — ML-powered, globally compliant infrastructure.',
   steps:[['SCOUT','Met through top MIT engineers. Backed early despite regulatory hurdles and geopolitical complexity.'],['SELECT','Believed in Jane Street alumni building a $136B prediction exchange with global-first DNA.'],['SECURE','Leveraged shared EU and Lebanese roots, structured early trust networks, signaled top investors.'],['SUPPORT','Hosted in-office for 6 months. Shared BD and regulatory research; reinforced early GTM.']],
   metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm'],['Liquid Position Today','$559mm','hot'],['Post-Money Today','$22Bn'],['Ownership','5%']],
   insight:'International founders spot regulatory gaps and build durable infrastructure the world depends on.',teaser:false},
- {key:'headway',logo:'Headway',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Personal struggles to find a therapist inspired this humanities &amp; engineering grad to conquer global mental health.',
+ {key:'headway',logo:'Headway',logoImg:'images/logos/headway.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'Personal struggles to find a therapist inspired this humanities &amp; engineering grad to conquer global mental health.',
   founders:'Andrew Adams 🇺🇸',sector:'Critical Infrastructure — mental-health insurance software with remote technology.',
   steps:[['SCOUT','Discovered through NYC angels who passed on the unconventional founder but saw potential.'],['SELECT','Backed a bold, personal vision to transform a $240Bn market into a scalable, elegant solution.'],['SECURE','Formed a high-impact syndicate including Tom Lee (One Medical founder).'],['SUPPORT','Introduced 10+ candidates, delivered market insights, refined financial models with the CFO.']],
   metrics:[['Date','Sep 2018'],['Invested','$900k'],['Liquid Position Today','$103mm','hot'],['Post-Money Today','$2.2Bn'],['Ownership','11.9%']],
@@ -503,15 +517,20 @@ function vectorsHTML(){
 function trackRowsHTML(){
   return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
 }
+function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
 function caseSlide(c){
+  const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
+  const missing=['founder photo'].concat(c.logoImg?[]:['logo']);
   return {title:`Case Study — ${c.logo}`,track:'core',teaser:!!c.teaser,dark:false,cls:'',html:`
+   ${needsArt(missing.join(' + '))}
    <div class="cs-banner liquid">${c.banner}</div>
    <div class="cs-body">
-     <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span><span class="cs-logo">${c.logo}</span></div>
+     <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span>${logo}</div>
      <div class="cs-story">${c.story}</div>
      <div class="cs-grid">
        <div class="cs-left">
-         <div class="cs-sector"><b>${c.founders}</b><br>${c.sector}</div>
+         <div class="cs-founder"><div class="cs-photo ph"></div><div class="fn">${c.founders}</div></div>
+         <div class="cs-sector">${c.sector}</div>
          <div class="cs-steps">${c.steps.map(s=>`<div class="st"><span class="k">${s[0]}</span><span>${s[1]}</span></div>`).join('')}</div>
        </div>
        <div class="cs-right">${c.metrics.map(m=>`<div class="cs-metric ${m[2]||''}"><div class="ml">${m[0]}</div><div class="mv">${m[1]}</div></div>`).join('')}</div>
@@ -773,6 +792,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
 /* 11 — PORTFOLIO CONSTRUCTION */
 add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
+    ${needsArt('donut charts')}
     <div class="eyebrow">$50mm · Target Portfolio Construction</div>
     <h1 class="s-title" style="font-size:36px">Strategic capital deployment</h1>
     <div class="cols" style="margin-top:24px;flex:1">
@@ -883,6 +903,7 @@ add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html
 
 /* A1 — GLOBAL FOUNDERS */
 add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  ${needsArt('world map (bubble globe)')}
   <div class="s-pad">
     <h1 class="s-title">USA unicorn founders come from around the world</h1>
     <div class="grow center" style="flex-direction:column">
@@ -896,6 +917,7 @@ add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cl
 
 /* A2 — STORIES DRIVE MOMENTUM */
 add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  ${needsArt('layered momentum diagram')}
   <div class="s-pad">
     <h1 class="s-title" style="text-align:center">Global breakout founders change the world</h1>
     <div class="s-sub" style="text-align:center;color:var(--mid-lake)">Sunshine Lake helps make their dreams a reality</div>
