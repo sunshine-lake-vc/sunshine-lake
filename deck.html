@@ -1081,6 +1081,53 @@ add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html
     </div>
   </div>${chrome(false)}`});
 
+/* ===== KEYNOTE SLIDES (drafts recreated from the latest Keynote, for review) ===== */
+add({title:'Keynote Slides',track:'keynote',teaser:false,dark:true,cls:'section',html:`
+  <div class="s-pad"><div class="sec-no">For Review</div><h2>Keynote Slides</h2>
+  <p>Recreated from the latest Keynote for review. Titles and figures are drafts to confirm — fine copy wasn't legible in the source.</p></div>${chrome(true)}`});
+
+/* helper: 3 big stats */
+function kStat(title,sub,stats){
+  return {title:'Keynote · '+title.replace(/<[^>]+>/g,''),track:'keynote',teaser:false,dark:false,cls:'',html:`
+   <span class="needs-art">Keynote draft · confirm copy</span>
+   <div class="s-pad">
+     <h1 class="s-title">${title}</h1>
+     ${sub?`<div class="s-sub" style="font-size:20px;color:var(--mid-lake)">${sub}</div>`:''}
+     <hr class="s-rule">
+     <div style="display:flex;gap:46px;flex:1;align-items:center">
+       ${stats.map(s=>`<div style="flex:1;text-align:center"><div style="font-family:var(--serif);font-size:66px;color:var(--cobalt);line-height:1">${s[0]}</div><div style="font-size:15px;color:var(--ink-2);margin-top:12px;line-height:1.45;max-width:260px;margin-left:auto;margin-right:auto">${s[1]}</div></div>`).join('')}
+     </div>
+   </div>${chrome(false)}`};
+}
+add({title:'Dive in.',track:'keynote',teaser:false,dark:true,cls:'closing',html:`
+  <span class="needs-art">Keynote draft · confirm copy</span>
+  <div class="s-pad">
+    <h2 style="font-size:84px">Dive in.</h2>
+    <p>Back the founders forging the future — wherever they begin.</p>
+    <div class="cta">Donald Stalter · don@sunshinelake.vc · sunshinelake.vc</div>
+  </div>${chrome(true)}`});
+add(kStat('Three live inflections','Why now — three forces converging',[['244,000','New AI-native companies founded globally since 2023 [confirm]'],['50%','Share of knowledge work now automatable [confirm]'],['0%','The zero-rate era is over — capital discipline rewarded [confirm]']]));
+add(kStat('Resets mint category leaders','Downturns forge the most durable companies',[['90%+','Of category leaders founded in or near a downturn [confirm]'],['’08–’10','Airbnb · Uber · Stripe · Square born in the last reset [confirm]'],['2,500x','Best-case outcomes seeded at the bottom of the cycle [confirm]']]));
+add(kStat('Sized so the math works','Fund construction built for high-multiple returns',[['$3B','Realizable gross value from the legacy track record [confirm]'],['$42B','Aggregate FMV of legacy-backed companies today [confirm]'],['5%','Target ownership per core position [confirm]']]));
+add({title:'Pipeline is global &amp; compounding',track:'keynote',teaser:false,dark:false,cls:'',html:`
+  <span class="needs-art">Keynote draft · confirm copy</span>
+  <div class="s-pad">
+    <h1 class="s-title">The pipeline is global — and compounding</h1>
+    <div class="s-sub" style="font-size:19px;color:var(--mid-lake)">Bars below are illustrative (global founder pipeline by origin) — confirm against Keynote.</div>
+    <hr class="s-rule">
+    <div class="cols" style="flex:1;align-items:center;gap:40px;margin-top:8px">
+      <div class="col" style="flex:.5">
+        <div style="margin-bottom:22px"><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">59%</div><div style="font-size:13px;color:var(--ink-2)">referrals from prior founders [confirm]</div></div>
+        <div style="margin-bottom:22px"><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">$15T+</div><div style="font-size:13px;color:var(--ink-2)">addressable global problem set [confirm]</div></div>
+        <div><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">80%</div><div style="font-size:13px;color:var(--ink-2)">of deals sourced proprietarily [confirm]</div></div>
+      </div>
+      <div class="col" style="flex:1">
+        ${[['India',90],['Israel',52],['Canada',42],['UK',31],['China',27],['Germany',18],['France',17],['Russia',14]].map(b=>`<div style="display:flex;align-items:center;gap:12px;margin-bottom:9px"><div style="width:78px;text-align:right;font-size:13px;color:var(--ink-2)">${b[0]}</div><div style="height:18px;width:${b[1]/90*100}%;background:linear-gradient(90deg,#2f74ff,#155EE8);border-radius:3px"></div><div style="font-size:12px;color:var(--muted)">${b[1]}</div></div>`).join('')}
+        <div class="note" style="margin-top:8px">Illustrative — U.S. unicorn founders by country of origin (Stanford, 2022).</div>
+      </div>
+    </div>
+  </div>${chrome(false)}`});
+
 /* ============================================================
    RENDER + NAVIGATION
    ============================================================ */
