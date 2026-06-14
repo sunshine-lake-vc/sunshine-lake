@@ -114,13 +114,29 @@ body{
 .spark::before{width:1.5px;height:100%;}
 .spark::after{width:100%;height:1.5px;background:linear-gradient(90deg,rgba(242,216,49,0),var(--sun),rgba(242,216,49,0));}
 
-/* ---------- cobalt section break ---------- */
-.section{background:linear-gradient(135deg,var(--cobalt) 0%,var(--mid-lake) 60%,var(--navy) 100%);}
+/* ---------- navy section break (formal, ICONIQ-restrained) ---------- */
+.section{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
 .section .s-pad{justify-content:center;}
-.section .sec-no{font-family:var(--serif);font-size:22px;color:var(--sun);letter-spacing:.04em;margin-bottom:10px;}
-.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:78px;line-height:1;letter-spacing:-.01em;}
-.section p{font-family:var(--serif);font-size:24px;color:rgba(255,255,255,.82);margin-top:20px;max-width:760px;line-height:1.3;}
+.section .sec-no{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--sun);letter-spacing:.34em;text-transform:uppercase;margin-bottom:24px;}
+.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:66px;line-height:1.05;letter-spacing:.015em;text-transform:uppercase;}
+.section h2::after{content:"";display:block;width:60px;height:2px;background:var(--sun);margin:28px 0 0;}
+.section p{font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.74);max-width:700px;line-height:1.4;margin-top:26px;}
 .section .s-mark{opacity:1;}
+
+/* ---------- navy statement slide ---------- */
+.statement{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
+.statement .s-pad{justify-content:center;align-items:center;text-align:center;}
+.statement .sline{font-family:var(--serif);color:#fff;font-size:48px;line-height:1.22;letter-spacing:.05em;text-transform:uppercase;max-width:1000px;}
+.statement .sline.gold{color:var(--sun);margin-top:24px;font-size:38px;}
+.statement .s-mark{opacity:1;}
+
+/* ---------- ecosystem network ---------- */
+.ecosystem{background:radial-gradient(120% 120% at 70% 30%,#13183d,#02041F);}
+.eco-node{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--serif);color:#fff;line-height:1.15;padding:10px;}
+.eco-center{background:radial-gradient(circle at 38% 32%,#2f74ff,#155EE8 70%);box-shadow:0 0 0 8px rgba(21,94,232,.16);}
+.eco-sat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);}
+.eco-sat .ec-n{font-size:18px;} .eco-sat .ec-s{font-size:12px;color:#aeb6da;font-family:var(--sans);margin-top:3px;}
 
 /* ---------- generic layout helpers ---------- */
 .grow{flex:1;min-height:0;}
@@ -181,13 +197,13 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .tm .pe{font-size:11px;color:var(--cobalt);font-weight:600;margin-top:6px;letter-spacing:.02em;}
 .vectors{display:flex;gap:22px;flex:1;}
 .vec{flex:1;background:#f6f8fd;border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;}
-.vec:nth-child(2){background:#fdfaef;}
-.vec:nth-child(3){background:#f1faf3;}
+.vec:nth-child(2){background:#eef3fc;}
+.vec:nth-child(3){background:#e7eefb;}
 .vec .vn{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
 .vec .dot{width:24px;height:24px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.vec:nth-child(1) .dot{background:var(--cobalt);}
-.vec:nth-child(2) .dot{background:var(--sun);color:var(--navy);}
-.vec:nth-child(3) .dot{background:var(--green);color:#15402a;}
+.vec:nth-child(1) .dot{background:#5b8def;}
+.vec:nth-child(2) .dot{background:#2f6fea;}
+.vec:nth-child(3) .dot{background:#0A3DAE;}
 .vec h4{font-size:15px;color:var(--ink);}
 .vec .ph{font-size:12px;color:var(--muted);margin:4px 0 14px;}
 .vec .ad{font-size:13px;color:var(--ink-2);padding:7px 0;border-top:1px solid rgba(0,0,0,.06);}
@@ -206,7 +222,7 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .duo{display:flex;gap:26px;flex:1;}
 .panel{flex:1;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;}
 .panel.blue{background:#eef3fc;} .panel.gold{background:#fdf9ec;}
-.panel.green{background:#eef8f0;} .panel.sky{background:#eef6fb;}
+.panel.green{background:#eaf0fb;} .panel.sky{background:#eef6fb;}
 .panel h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);}
 .panel .big{font-size:16px;color:var(--ink-2);margin:6px 0 16px;}
 .panel .row{font-size:13.5px;color:var(--ink-2);padding:7px 0;line-height:1.4;}
@@ -215,7 +231,7 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 
 /* case study */
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
-.cs-banner.realized{background:#8fbf9f;} .cs-banner.liquid{background:#8fbf9f;}
+.cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
 .cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
 .cs-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
 .cs-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px;}
@@ -521,6 +537,13 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   </div>
   <span class="s-conf">Strictly Confidential</span>`});
 
+/* STATEMENT */
+add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
+  <div class="s-pad">
+    <div class="sline">Talent is universal.<br>Opportunity is not.</div>
+    <div class="sline gold">We back the rare founders forged to close the gap.</div>
+  </div>${chrome(true)}`});
+
 /* SECTION I */
 add({title:'Section · The Opportunity',track:'core',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">I</div><h2>The Opportunity</h2>
@@ -677,7 +700,7 @@ add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',ht
     <h1 class="s-title" style="font-size:38px">A 5-year blueprint to build a 50-year venture franchise</h1>
     <div class="engine-nav"><div class="en"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
       <div class="en"><span class="num">2</span><span class="nm">Select</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--green);color:#15402a">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
+      <div class="en on"><span class="num" style="background:var(--mid-lake)">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
       <div class="en on"><span class="num" style="background:var(--cobalt)">4</span><span class="nm">Support</span></div></div>
     <div class="duo">
       <div class="panel green"><h3>3 · Secure</h3><div class="big">100 pursued with high conviction.</div>
@@ -691,6 +714,32 @@ add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',ht
         <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div></div>
     </div>
   </div>${chrome(false)}`});
+
+/* ECOSYSTEM NETWORK */
+add({title:'A Global Network',track:'core',teaser:false,dark:true,cls:'ecosystem',html:`
+  <div class="s-pad" style="flex-direction:row;align-items:center;gap:40px">
+    <div style="flex:0 0 360px">
+      <div class="sec-no" style="font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sun);margin-bottom:18px">The Platform</div>
+      <h2 style="font-family:var(--serif);font-weight:400;color:#fff;font-size:46px;line-height:1.08">A global, proprietary network</h2>
+      <div style="width:60px;height:2px;background:var(--sun);margin:24px 0"></div>
+      <p style="font-family:var(--serif);font-size:19px;color:rgba(255,255,255,.78);line-height:1.45">One proprietary channel unites 250+ founders, advisors, VCs, and corporates — elevating every step of Scout, Select, Secure, and Support.</p>
+    </div>
+    <div style="flex:1;position:relative;height:520px">
+      <svg width="620" height="520" viewBox="0 0 620 520" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+        <g stroke="rgba(255,255,255,.22)" stroke-width="2">
+          <line x1="310" y1="270" x2="310" y2="60"/><line x1="310" y1="270" x2="510" y2="205"/>
+          <line x1="310" y1="270" x2="433" y2="440"/><line x1="310" y1="270" x2="187" y2="440"/>
+          <line x1="310" y1="270" x2="110" y2="205"/>
+        </g>
+      </svg>
+      <div class="eco-node eco-center" style="left:50%;top:50%;width:152px;height:152px;margin:-76px 0 0 -76px;font-size:22px">Sunshine&nbsp;Lake</div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-270px 0 0 -60px"><div><div class="ec-n">250+</div><div class="ec-s">Founders</div></div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-125px 0 0 140px"><div class="ec-n">Advisors</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:110px 0 0 63px"><div><div class="ec-n">Co-Investors</div><div class="ec-s">& VCs</div></div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:110px 0 0 -183px"><div class="ec-n">Corporates</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-125px 0 0 -260px"><div><div class="ec-n">Campus</div><div class="ec-s">Network</div></div></div>
+    </div>
+  </div>${chrome(true)}`});
 
 /* CASE STUDIES (data-driven) */
 CASES.forEach(c=>add(caseSlide(c)));
