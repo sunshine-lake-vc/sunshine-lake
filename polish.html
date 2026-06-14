@@ -847,11 +847,27 @@
             color: #fff;
             font-weight: 600;
         }
-        /* Mobile: the two bench groups stack vertically. */
+        /* Mobile: the two bench groups become a swipeable carousel
+           (scroll-snap, same as the team cards). Swipe between
+           Advisors and Venture Partners; each group is one ~84vw
+           slide with the next peeking. */
         @media (max-width: 900px) {
             .bench-grid {
-                grid-template-columns: 1fr;
-                gap: clamp(28px, 6vw, 40px);
+                display: flex;
+                flex-direction: row;
+                grid-template-columns: none;
+                gap: clamp(14px, 4vw, 22px);
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 4px;
+            }
+            .bench-grid::-webkit-scrollbar { display: none; }
+            .bench-group {
+                flex: 0 0 84vw;
+                scroll-snap-align: start;
             }
         }
 

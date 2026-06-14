@@ -875,13 +875,30 @@
             color: #fff;
             font-weight: 600;
         }
-        /* Mobile: the two bench groups stack vertically (Venture
-           Partners, then Advisors), each with its cards stacked
-           beneath its sub-label. */
+        /* Mobile: the two bench groups become a swipeable carousel
+           (same scroll-snap mechanic as the team cards) — swipe
+           between Advisors and Venture Partners instead of stacking
+           all four cards into a tall column. Each group is one slide
+           at ~84vw so the next peeks at the edge. */
         @media (max-width: 900px) {
             .bench-grid {
-                grid-template-columns: 1fr;
-                gap: clamp(28px, 6vw, 40px);
+                display: flex;
+                flex-direction: row;
+                grid-template-columns: none;
+                gap: clamp(14px, 4vw, 22px);
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                /* full-bleed within the section so a slide can sit
+                   flush to the left edge with the next peeking right */
+                padding-bottom: 4px;
+            }
+            .bench-grid::-webkit-scrollbar { display: none; }
+            .bench-group {
+                flex: 0 0 84vw;
+                scroll-snap-align: start;
             }
         }
 
