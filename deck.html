@@ -231,14 +231,20 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .en.on:nth-child(1) .num{background:var(--cobalt);} .en.on:nth-child(1) .nm{color:var(--cobalt);}
 .en-line{flex:1;height:1px;background:var(--line);}
 .duo{display:flex;gap:26px;flex:1;}
-.panel{flex:1;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;}
-.panel.blue{background:#eef3fc;} .panel.gold{background:#fdf9ec;}
-.panel.green{background:#eaf0fb;} .panel.sky{background:#eef6fb;}
-.panel h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);}
-.panel .big{font-size:16px;color:var(--ink-2);margin:6px 0 16px;}
-.panel .row{font-size:13.5px;color:var(--ink-2);padding:7px 0;line-height:1.4;}
+.panel{position:relative;flex:1;border-radius:16px;padding:32px 36px;display:flex;flex-direction:column;}
+.panel.blue{background:linear-gradient(165deg,#eef3fc,#e6eefb);} .panel.gold{background:linear-gradient(165deg,#fdf8ea,#faf1d8);}
+.panel.green{background:linear-gradient(165deg,#eef4fb,#e6eefb);} .panel.sky{background:linear-gradient(165deg,#eef6fb,#e6f1f8);}
+.panel .pnum{position:absolute;top:26px;right:28px;width:50px;height:50px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:25px;color:var(--cobalt);box-shadow:0 3px 16px rgba(11,18,117,.1);}
+.panel.gold .pnum{color:#b8902a;}
+.panel h3{font-family:var(--serif);font-size:29px;font-weight:400;color:var(--ink);}
+.panel .big{font-size:18px;color:var(--ink-2);margin:8px 0 20px;line-height:1.35;}
+.panel .row{font-size:15px;color:var(--ink-2);padding:9px 0;line-height:1.48;}
 .panel .row b{font-weight:600;color:var(--ink);}
-.panel .score{margin-top:auto;font-weight:600;color:var(--cobalt);font-size:14px;}
+.panel .score{margin-top:auto;font-weight:600;color:var(--cobalt);font-size:15px;}
+.panel .hl{margin-top:auto;padding-top:18px;border-top:1px solid rgba(11,18,117,.08);}
+.panel .hl b{font-family:var(--serif);font-size:28px;color:var(--cobalt);font-weight:400;}
+.panel.gold .hl b{color:#b8902a;}
+.panel .hl span{font-size:13px;color:var(--muted);display:block;margin-top:3px;}
 
 /* needs-art working marker (corner) */
 .needs-art{position:absolute;top:18px;right:18px;z-index:5;display:inline-flex;align-items:center;gap:6px;
@@ -770,16 +776,17 @@ add({title:'Scout &amp; Select',track:'core',teaser:false,dark:false,cls:'',html
       <div class="en"><span class="num">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
       <div class="en"><span class="num">4</span><span class="nm">Support</span></div></div>
     <div class="duo">
-      <div class="panel blue"><h3>1 · Scout</h3><div class="big">5,000+ targets identified via a multi-pronged global strategy.</div>
-        <div class="row"><b>Unicorn &amp; alumni groups</b> — Headway, Brex, and Deel founders introduce Don to the next breakouts (Marble, PermitFlow, Firstwork, Enshift).</div>
+      <div class="panel blue"><span class="pnum">1</span><h3>Scout</h3><div class="big">5,000+ targets identified via a multi-pronged global strategy.</div>
+        <div class="row"><b>Unicorn &amp; alumni groups</b> — Headway, Brex &amp; Deel founders introduce Don to the next breakouts (Marble, PermitFlow, Firstwork, Enshift).</div>
         <div class="row"><b>Campus programming</b> — UChicago · Stanford · Caltech · NYU · Imperial · Mines Paris · TUM · LSE · NUS · USP.</div>
-        <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div></div>
-      <div class="panel gold"><h3>2 · Select</h3><div class="big">500 top founders rigorously evaluated.</div>
-        <div class="row"><b>Example: SwiftClaim</b></div>
-        <div class="row">Breakout Story (4/5) · Global Ambition (4/5) · Emerging Software (4/5) · Domain Expertise (5/5) · Execution (4/5)</div>
-        <div class="score">Overall Score: 21/25 — Investment Selected.</div></div>
+        <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
+        <div class="hl"><b>500 advance</b><span>rigorously evaluated in the next stage</span></div></div>
+      <div class="panel gold"><span class="pnum">2</span><h3>Select</h3><div class="big">500 top founders scored 1–5 across five axes.</div>
+        <div class="row"><b>Example — SwiftClaim</b> · an ex-Stripe PM automating consumer insurance payouts.</div>
+        <div class="row">Breakout Story <b>4</b> · Global Ambition <b>4</b> · Emerging Software <b>4</b> · Domain Expertise <b>5</b> · Execution <b>4</b></div>
+        <div class="hl"><b>21 / 25</b><span>SwiftClaim — investment selected</span></div></div>
     </div>
-    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:16px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:18px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
   </div>${chrome(false)}`});
 
 /* 9 — SECURE / SUPPORT */
@@ -791,15 +798,17 @@ add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',ht
       <div class="en on"><span class="num" style="background:var(--mid-lake)">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
       <div class="en on"><span class="num" style="background:var(--cobalt)">4</span><span class="nm">Support</span></div></div>
     <div class="duo">
-      <div class="panel green"><h3>3 · Secure</h3><div class="big">100 pursued with high conviction.</div>
+      <div class="panel green"><span class="pnum">3</span><h3>Secure</h3><div class="big">100 pursued with high conviction.</div>
         <div class="row"><i>"Don's the best; he intro'd us to an elite marketer who revolutionized DNP."</i> — Joshua Browder, DoNotPay</div>
         <div class="row"><i>"Early on, Don mapped execution at WW; we scaled fast and had to have him in."</i> — Filip Kozera, Wordware</div>
-        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Afiniti</div></div>
-      <div class="panel sky"><h3>4 · Support</h3><div class="big">22 core investments onboarded &amp; augmented.</div>
+        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Afiniti</div>
+        <div class="hl"><b>22 core</b><span>secured into the portfolio</span></div></div>
+      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">22 core investments onboarded &amp; augmented.</div>
         <div class="row"><b>Weeks 1–2 · Storytelling</b> — pro acting skills; founder narratives force-multiply.</div>
         <div class="row"><b>Weeks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
         <div class="row"><b>Weeks 5–6 · Domain Expertise</b> — industry connections &amp; best practices.</div>
-        <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div></div>
+        <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div>
+        <div class="hl"><b>7 weeks</b><span>structured path to exit-readiness</span></div></div>
     </div>
   </div>${chrome(false)}`});
 
@@ -970,19 +979,23 @@ add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html
 
 /* A1 — GLOBAL FOUNDERS */
 add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad" style="padding-top:42px">
-    <h1 class="s-title" style="text-align:center;font-size:40px">Country of origin of US unicorn founders</h1>
-    <div style="position:relative;flex:1;margin:6px 0;min-height:0">
-      <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.6">
-      ${worldMap()}
+  <div class="s-pad" style="padding-top:32px">
+    <h1 class="s-title" style="text-align:center;font-size:40px">Country of Origin of US Unicorn Founders</h1>
+    <div style="flex:1;display:flex;align-items:flex-end;min-height:0;margin-top:2px">
+      <div style="position:relative;width:100%;aspect-ratio:2/1;max-height:100%;margin:0 auto">
+        <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6">
+        ${worldMap()}
+      </div>
     </div>
-    <div class="note" style="text-align:center">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
+    <div class="note" style="text-align:center;margin-top:6px">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
   </div>${chrome(false)}`});
 
 /* A2 — STORIES DRIVE MOMENTUM */
+function cogIcon(cx,cy,r){let t='';const n=8,tw=0.26,C=Math.cos,S=Math.sin;for(let k=0;k<n;k++){const a=k*2*Math.PI/n;t+=`<polygon points="${(cx+C(a-tw)*r).toFixed(1)},${(cy+S(a-tw)*r).toFixed(1)} ${(cx+C(a-tw)*(r+5)).toFixed(1)},${(cy+S(a-tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*(r+5)).toFixed(1)},${(cy+S(a+tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*r).toFixed(1)},${(cy+S(a+tw)*r).toFixed(1)}" fill="#155EE8"/>`;}return t+`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="#155EE8" stroke-width="2.4"/><circle cx="${cx}" cy="${cy}" r="${(r*0.36).toFixed(1)}" fill="#155EE8"/>`;}
+function zig(c,y){return `<polyline points="${c-13},${y-7} ${c-5},${y+7} ${c+3},${y-7} ${c+9},${y+2}" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M${c+9},${y+2} l-6,-3 m6,3 l-5,4" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round"/>`;}
 add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:40px">
-    <h1 class="s-title" style="text-align:center">Global breakout founders change the world</h1>
+    <h1 class="s-title" style="text-align:center">Global Breakout Founders Change the World</h1>
     <div style="flex:1;position:relative;min-height:0">
       <svg viewBox="0 0 1280 600" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" font-family="Segoe UI,sans-serif">
         <defs>
@@ -999,19 +1012,16 @@ add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls
         <text x="1168" y="270" text-anchor="middle" font-weight="700" font-size="19" fill="#0B1275"><tspan x="1168">STORIES FORCE</tspan><tspan x="1168" dy="25">MULTIPLY, FORGING</tspan><tspan x="1168" dy="25">N-OF-1 COMPANIES</tspan></text>
         <!-- feedback loop arrow -->
         <path d="M 935,455 C 800,585 560,580 482,418" fill="none" stroke="#F2D831" stroke-width="11" stroke-linecap="round" marker-end="url(#ya)"/>
-        <!-- connectors -->
-        <line x1="585" y1="300" x2="600" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
-        <line x1="712" y1="300" x2="726" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
-        <line x1="862" y1="300" x2="876" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
-        <line x1="1012" y1="300" x2="1026" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
+        <!-- zigzag connectors -->
+        ${zig(587,300)}${zig(725,300)}${zig(875,300)}${zig(1028,300)}
         <!-- central solid circle -->
         <circle cx="470" cy="300" r="103" fill="#2f74ff"/>
         <text x="470" y="300" text-anchor="middle" font-family="DomaineDisp,Times New Roman,serif" font-size="27" fill="#fff"><tspan x="470" dy="-6">Stories Drive</tspan><tspan x="470" dy="32">Momentum</tspan></text>
         <!-- stage icon circles -->
         <g filter="url(#sh)"><circle cx="650" cy="300" r="50" fill="#fff"/><circle cx="800" cy="300" r="50" fill="#fff"/><circle cx="950" cy="300" r="50" fill="#fff"/></g>
         <g transform="translate(650,300)" stroke="#155EE8" stroke-width="2.2" fill="none"><circle r="17"/><ellipse rx="17" ry="6.5"/><line x1="0" y1="-17" x2="0" y2="17"/><path d="M-15,-8 Q0,-2 15,-8 M-15,8 Q0,2 15,8"/></g>
-        <g transform="translate(800,300)" fill="#155EE8"><path d="M-16,-12 L-2,0 L-16,12 Z"/><path d="M2,-12 L16,0 L2,12 Z"/></g>
-        <g transform="translate(950,300)" stroke="#155EE8" stroke-width="2.2" fill="none"><circle r="16"/><circle r="9"/><circle r="2.6" fill="#155EE8"/></g>
+        ${cogIcon(800,300,14)}
+        ${cogIcon(944,295,11)}${cogIcon(960,311,7)}
         <text text-anchor="middle" font-weight="700" font-size="16" fill="#0B1275">
           <tspan x="650" y="378">Product</tspan><tspan x="650" y="397">Emerges</tspan>
           <tspan x="800" y="378">Execution</tspan><tspan x="800" y="397">Accelerates</tspan>
@@ -1028,7 +1038,7 @@ add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls
         </text>
       </svg>
     </div>
-    <div class="s-sub" style="text-align:center;color:var(--mid-lake)">We help make their dreams a reality</div>
+    <div class="s-sub" style="text-align:center;color:var(--mid-lake)">We Help Make their Dreams a Reality</div>
   </div>${chrome(false)}`});
 
 /* A3 — STORY / VENTURE PARTNERS */
