@@ -99,14 +99,22 @@ body{
 .s-rule{height:2px;background:linear-gradient(90deg,var(--cobalt),transparent);margin:22px 0 0;border:0;}
 
 /* ---------- cover (abyss hero) ---------- */
-.cover{background:radial-gradient(120% 120% at 78% 18%,#1a1d44 0%,#0a0c2c 45%,#02041F 100%);}
+.cover{background:
+  radial-gradient(48% 42% at 18% 26%, rgba(242,216,49,.62), transparent 62%),
+  radial-gradient(46% 50% at 78% 20%, rgba(25,189,232,.5), transparent 60%),
+  radial-gradient(70% 70% at 64% 82%, rgba(21,94,232,.65), transparent 62%),
+  radial-gradient(46% 46% at 28% 80%, rgba(242,216,49,.42), transparent 56%),
+  radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
+  linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
 .cover .s-pad{justify-content:center;}
-.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:118px;line-height:.95;letter-spacing:-.02em;}
-.cover .tag{font-family:var(--serif);font-size:34px;color:var(--light-blue);margin-top:18px;}
-.cover .meta{position:absolute;left:72px;bottom:84px;}
-.cover .meta .lead{font-weight:700;color:var(--sun);font-size:18px;letter-spacing:.01em;}
-.cover .meta .ln{color:#cfd6f5;font-size:16px;margin-top:6px;}
-.cover .meta .ln.dim{color:#8b93bd;}
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.0;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);}
+.cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:14px;color:#fff;font-family:var(--serif);font-size:30px;z-index:2;}
+.cover-logo svg{width:30px;fill:#fff;}
+.cover .meta{position:absolute;left:72px;bottom:74px;z-index:2;}
+.cover .meta .lead{font-weight:700;color:#fff;font-size:18px;letter-spacing:.02em;}
+.cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
+.cover .meta .ln.dim{color:rgba(255,255,255,.55);}
+.cover .s-conf{color:rgba(255,255,255,.65);}
 .spark{position:absolute;pointer-events:none;background:
    radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
 .spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -124,10 +132,11 @@ body{
 .section .s-mark{opacity:1;}
 
 /* ---------- navy statement slide ---------- */
-.statement{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
-.statement .s-pad{justify-content:center;align-items:center;text-align:center;}
-.statement .sline{font-family:var(--serif);color:#fff;font-size:48px;line-height:1.22;letter-spacing:.05em;text-transform:uppercase;max-width:1000px;}
-.statement .sline.gold{color:var(--sun);margin-top:24px;font-size:38px;}
+.statement{background:linear-gradient(155deg,#1a6bff 0%,#155EE8 45%,#0A3DAE 100%);}
+.statement .s-pad{justify-content:center;align-items:flex-start;}
+.statement .eyebrow{color:var(--sun);}
+.statement .sline{font-family:var(--serif);color:#fff;font-size:50px;line-height:1.16;letter-spacing:-.01em;max-width:1080px;}
+.statement .sline.sub{color:rgba(255,255,255,.84);margin-top:26px;font-size:29px;line-height:1.32;max-width:1000px;}
 .statement .s-mark{opacity:1;}
 
 /* ---------- ecosystem network ---------- */
@@ -323,6 +332,18 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .disc .s-pad{padding:54px 72px;}
 .disc .cols{gap:30px;}
 .disc p{font-size:10.5px;line-height:1.5;color:#7a84a6;margin-bottom:12px;}
+
+/* due-diligence columns */
+.dd-row{display:flex;flex:1;margin-top:18px;align-items:stretch;}
+.dd-col{flex:1;display:flex;flex-direction:column;}
+.dd-arrow{display:flex;align-items:center;color:#aebfe6;font-size:30px;padding:0 10px;}
+.dd-title{font-family:var(--serif);font-size:21px;color:var(--ink);margin:4px 0 8px;line-height:1.1;}
+.dd-chip{display:inline-block;align-self:flex-start;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:4px 12px;margin-bottom:14px;}
+.dd-h{font-size:14px;font-weight:700;color:var(--ink);margin:11px 0 5px;}
+.dd-col ul{list-style:none;margin:0;}
+.dd-col li{position:relative;padding-left:15px;font-size:14px;color:var(--ink-2);line-height:1.5;margin-bottom:5px;}
+.dd-col li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--cobalt);}
+.dd-flag{margin-top:auto;padding-top:14px;color:var(--cobalt);font-weight:600;font-size:13.5px;line-height:1.45;}
 
 /* donut legend */
 .dl{margin-top:16px;display:inline-block;text-align:left;}
@@ -543,27 +564,37 @@ function donut(segs,r,sw,center){
 }
 function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl-row"><span class="dl-sw" style="background:${s.color}"></span><span class="dl-lb">${s.label}</span><span class="dl-pct">${s.pct}%</span></div>`).join('')+`</div>`;}
 
-/* equirectangular world bubble map */
-const COUNTRIES=[
- ['India',79,21,90],['Israel',35,31,52],['Canada',-106,58,42],['UK',-2,54,31],['China',104,35,27],
- ['Germany',10,51,18],['France',2,47,17],['Russia',92,62,14],['Ukraine',31,49,12],['Taiwan',121,23.7,12],
- ['Ireland',-8,53,10],['Belgium',4.5,50.8,9],['Brazil',-52,-10,9],['Iran',53,32,9],['Australia',134,-25,8],
- ['Netherlands',5.3,53.6,7],['New Zealand',174,-41,6],['Others',null,null,29]
+/* world bubble map over real grey map (positions matched to original) */
+/* [name, count, x%, y%, labelX% , labelY%]  — labelX null => label inside bubble */
+const WORLD=[
+ ['India',90,69,52,null,null],['Israel',52,58,48,null,null],['Canada',42,13,46,null,null],
+ ['UK',31,44.5,35,null,null],['China',27,81,52,null,null],['Germany',18,50,37,null,null],
+ ['France',17,46,42,null,null],['Russia',14,81,38,null,null],['Ukraine',12,56,38,null,null],
+ ['Taiwan',12,85.5,60,null,null],['Ireland',10,40.5,38,null,null],['Belgium',9,47.5,23,null,null],
+ ['Brazil',9,32,68,null,null],['Iran',9,64,46,null,null],['Australia',8,81,78,null,null],
+ ['Netherlands',7,51,30,56,26],['New Zealand',6,95,86,93,80],['Denmark',5,50,27,53,14],
+ ['Italy',5,50.5,45,48,53],['Poland',5,52.5,41,52,55],['Romania',5,54,43,54,80],
+ ['South Africa',5,54,68,54,73],['Argentina',5,34,80,35,86],['Portugal',4,40,46,39,50],
+ ['Lebanon',4,58.5,44,58,25],['Sweden',3,52,31,55,30],['Pakistan',3,68,53,69,68],
+ ['Japan',3,90,53,93,57],['Greece',2,52,50,51,63],['Turkey',2,60,44,64,25],
+ ['Uzbekistan',2,68,40,70,39],['Guatemala',2,18,62,20,65],['Others',29,null,null,95,40]
 ];
 function worldMap(){
-  const W=940,H=430, LT=74, LB=-52, span=LT-LB;
-  const px=lon=>((lon+180)/360*W).toFixed(1), py=lat=>((LT-lat)/span*H).toFixed(1);
-  let grid='';
-  for(let lon=-180;lon<=180;lon+=30) grid+=`<line x1="${px(lon)}" y1="0" x2="${px(lon)}" y2="${H}"/>`;
-  for(let lat=-45;lat<=75;lat+=15) grid+=`<line x1="0" y1="${py(lat)}" x2="${W}" y2="${py(lat)}"/>`;
-  const bub=COUNTRIES.filter(c=>c[1]!==null).map(c=>{
-    const x=px(c[1]),y=py(c[2]),r=(6+Math.sqrt(c[3])*4.0).toFixed(1),big=c[3]>=27;
-    const fill=big?'rgba(242,216,49,.88)':'rgba(21,94,232,.68)';
-    const lab=r>15?`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.72,15).toFixed(0)}" font-weight="700" fill="${big?'#0B1275':'#fff'}">${c[3]}</text>`:'';
-    return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="#fff" stroke-width="1"/>${lab}`;}).join('');
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block"><g stroke="rgba(21,94,232,.13)" stroke-width="1">${grid}</g>${bub}</svg>`;
+  const W=1000,H=500, rOf=c=>Math.max(6,Math.sqrt(c)*5.0);
+  const els=WORLD.map(c=>{
+    const [name,n,x,y,lx,ly]=c, X=x==null?null:x/100*W, Y=y==null?null:y/100*H, r=rOf(n);
+    if(lx===null){ // big bubble, label inside
+      return `<circle cx="${X}" cy="${Y}" r="${r}" fill="rgba(47,116,255,.92)"/>`+
+        `<text x="${X}" y="${Y-r*0.32}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.42,15).toFixed(0)}" font-weight="600" fill="#fff">${name}</text>`+
+        `<text x="${X}" y="${Y+r*0.42}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.6,22).toFixed(0)}" font-weight="700" fill="#fff">${n}</text>`;
+    }
+    const LX=lx/100*W, LY=ly/100*H;
+    const dot=X==null?'':`<line x1="${X}" y1="${Y}" x2="${LX}" y2="${LY}" stroke="#9bb6e8" stroke-width="1"/><circle cx="${X}" cy="${Y}" r="${Math.max(3,r*0.7).toFixed(0)}" fill="rgba(47,116,255,.85)"/>`;
+    return dot+`<text x="${LX}" y="${LY-1}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#1d3a8a">${name}</text>`+
+      `<text x="${LX}" y="${LY+12}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#155EE8">${n}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%">${els}</svg>`;
 }
-function worldLegend(){return COUNTRIES.map(c=>`<span><b>${c[3]}</b> ${c[0]}</span>`).join('');}
 
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
@@ -592,12 +623,12 @@ function add(o){SLIDES.push(o);}
 
 /* 1 — COVER */
 add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
+  <div class="cover-logo">${MARK} Sunshine Lake</div>
   <div class="s-pad">
-    <h1>Sunshine&nbsp;Lake</h1>
-    <div class="tag">Where global founders forge the future</div>
+    <h1>Global Founders<br>forge the future.</h1>
   </div>
   <div class="meta">
-    <div class="lead">High-Conviction Seed · Fund&nbsp;I · 5% GP Commit</div>
+    <div class="lead">Pre-Seed &amp; Seed · Fund&nbsp;I · 5% GP Commit</div>
     <div class="ln">Donald Stalter · don@sunshinelake.vc</div>
     <div class="ln dim">San Francisco</div>
   </div>
@@ -606,8 +637,9 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
 /* STATEMENT */
 add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
   <div class="s-pad">
-    <div class="sline">Talent is universal.<br>Opportunity is not.</div>
-    <div class="sline gold">We back the rare founders forged to close the gap.</div>
+    <div class="eyebrow">Our Thesis</div>
+    <div class="sline">We believe talent is universal — and invest in the world's best founders at their breakout moments.</div>
+    <div class="sline sub">Our insights into global, economic, and technological shifts help back multiple blockbuster companies a decade.</div>
   </div>${chrome(true)}`});
 
 /* 2 — THESIS */
@@ -932,35 +964,65 @@ add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html
 
 /* A1 — GLOBAL FOUNDERS */
 add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:38px">USA unicorn founders come from around the world</h1>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0">
-      <div style="max-width:900px;width:100%;margin:0 auto">${worldMap()}</div>
-      <div class="wm-legend">${worldLegend()}</div>
+  <div class="s-pad" style="padding-top:42px">
+    <h1 class="s-title" style="text-align:center;font-size:40px">Country of origin of US unicorn founders</h1>
+    <div style="position:relative;flex:1;margin:6px 0;min-height:0">
+      <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.6">
+      ${worldMap()}
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px">
-      <div class="note">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
-      <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);white-space:nowrap">44% have an immigrant founder.</div>
-    </div>
+    <div class="note" style="text-align:center">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
   </div>${chrome(false)}`});
 
 /* A2 — STORIES DRIVE MOMENTUM */
 add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  ${needsArt('layered momentum diagram')}
-  <div class="s-pad">
+  <div class="s-pad" style="padding-top:40px">
     <h1 class="s-title" style="text-align:center">Global breakout founders change the world</h1>
-    <div class="s-sub" style="text-align:center;color:var(--mid-lake)">Sunshine Lake helps make their dreams a reality</div>
-    <div class="grow center"><div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;max-width:1000px">
-      <div style="font-family:var(--serif);font-size:20px;color:var(--ink);text-align:center;flex:0 0 180px">From extreme origins to extraordinary journeys</div>
-      <div style="font-size:30px;color:var(--sun)">→</div>
-      <div style="background:var(--cobalt);color:#fff;border-radius:50%;width:150px;height:150px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);font-size:20px;padding:16px">Stories drive momentum</div>
-      <div style="font-size:30px;color:var(--sun)">→</div>
-      <div style="display:flex;gap:10px">
-        ${['Product Emerges','Execution Accelerates','Domain Expertise'].map(s=>`<div style="background:#eef3fc;border-radius:12px;padding:18px 14px;text-align:center;font-size:14px;color:var(--ink);width:120px">${s}</div>`).join('')}
-      </div>
-      <div style="font-size:30px;color:var(--sun)">→</div>
-      <div style="font-family:var(--serif);font-size:18px;color:var(--navy);text-align:center;flex:0 0 150px;font-weight:600">Stories force-multiply, forging N-of-1 companies.</div>
-    </div></div>
+    <div style="flex:1;position:relative;min-height:0">
+      <svg viewBox="0 0 1280 600" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" font-family="Segoe UI,sans-serif">
+        <defs>
+          <filter id="sh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="7" flood-color="#0b1275" flood-opacity="0.13"/></filter>
+          <marker id="ya" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#F2D831"/></marker>
+          <marker id="ca" markerWidth="9" markerHeight="9" refX="4" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#7e8bb0"/></marker>
+        </defs>
+        <!-- expanding overlapping fields: blue -> yellow -->
+        <circle cx="1060" cy="300" r="285" fill="rgba(242,216,49,.30)"/>
+        <circle cx="905" cy="300" r="250" fill="rgba(176,198,236,.34)"/>
+        <circle cx="770" cy="300" r="210" fill="rgba(138,174,236,.30)"/>
+        <circle cx="645" cy="300" r="172" fill="rgba(86,139,239,.22)"/>
+        <!-- right outcome text -->
+        <text x="1168" y="270" text-anchor="middle" font-weight="700" font-size="19" fill="#0B1275"><tspan x="1168">STORIES FORCE</tspan><tspan x="1168" dy="25">MULTIPLY, FORGING</tspan><tspan x="1168" dy="25">N-OF-1 COMPANIES</tspan></text>
+        <!-- feedback loop arrow -->
+        <path d="M 935,455 C 800,585 560,580 482,418" fill="none" stroke="#F2D831" stroke-width="11" stroke-linecap="round" marker-end="url(#ya)"/>
+        <!-- connectors -->
+        <line x1="585" y1="300" x2="600" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
+        <line x1="712" y1="300" x2="726" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
+        <line x1="862" y1="300" x2="876" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
+        <line x1="1012" y1="300" x2="1026" y2="300" stroke="#7e8bb0" stroke-width="3" marker-end="url(#ca)"/>
+        <!-- central solid circle -->
+        <circle cx="470" cy="300" r="103" fill="#2f74ff"/>
+        <text x="470" y="300" text-anchor="middle" font-family="DomaineDisp,Times New Roman,serif" font-size="27" fill="#fff"><tspan x="470" dy="-6">Stories Drive</tspan><tspan x="470" dy="32">Momentum</tspan></text>
+        <!-- stage icon circles -->
+        <g filter="url(#sh)"><circle cx="650" cy="300" r="50" fill="#fff"/><circle cx="800" cy="300" r="50" fill="#fff"/><circle cx="950" cy="300" r="50" fill="#fff"/></g>
+        <g transform="translate(650,300)" stroke="#155EE8" stroke-width="2.2" fill="none"><circle r="17"/><ellipse rx="17" ry="6.5"/><line x1="0" y1="-17" x2="0" y2="17"/><path d="M-15,-8 Q0,-2 15,-8 M-15,8 Q0,2 15,8"/></g>
+        <g transform="translate(800,300)" fill="#155EE8"><path d="M-16,-12 L-2,0 L-16,12 Z"/><path d="M2,-12 L16,0 L2,12 Z"/></g>
+        <g transform="translate(950,300)" stroke="#155EE8" stroke-width="2.2" fill="none"><circle r="16"/><circle r="9"/><circle r="2.6" fill="#155EE8"/></g>
+        <text text-anchor="middle" font-weight="700" font-size="16" fill="#0B1275">
+          <tspan x="650" y="378">Product</tspan><tspan x="650" y="397">Emerges</tspan>
+          <tspan x="800" y="378">Execution</tspan><tspan x="800" y="397">Accelerates</tspan>
+          <tspan x="950" y="378">Domain</tspan><tspan x="950" y="397">Expertise</tspan>
+        </text>
+        <!-- left origins cluster -->
+        <text x="120" y="284" text-anchor="middle" font-family="DomaineDisp,Times New Roman,serif" font-size="21" fill="#0B1275"><tspan x="120">From Extreme</tspan><tspan x="120" dy="26">Origins to</tspan><tspan x="120" dy="26">Extraordinary</tspan><tspan x="120" dy="26">Journeys</tspan></text>
+        <g filter="url(#sh)"><circle cx="255" cy="300" r="33" fill="#fff"/><circle cx="222" cy="180" r="50" fill="#fff"/><circle cx="350" cy="148" r="55" fill="#fff"/><circle cx="245" cy="428" r="50" fill="#fff"/></g>
+        <g transform="translate(255,300)" stroke="#155EE8" stroke-width="2" fill="none"><circle r="15"/><circle cx="-5" cy="-3" r="1.6" fill="#155EE8" stroke="none"/><circle cx="5" cy="-3" r="1.6" fill="#155EE8" stroke="none"/><path d="M-7,4 Q0,11 7,4"/></g>
+        <text text-anchor="middle" font-size="10.5" fill="#41507a" font-style="italic">
+          <tspan x="222" y="166">My roots are</tspan><tspan x="222" y="180">extreme — my</tspan><tspan x="222" y="194">ambition, even</tspan><tspan x="222" y="208">greater.</tspan>
+          <tspan x="350" y="128">I left it all behind</tspan><tspan x="350" y="142">to build a future</tspan><tspan x="350" y="156">the world can't</tspan><tspan x="350" y="170">ignore.</tspan>
+          <tspan x="245" y="414">Borders mean</tspan><tspan x="245" y="428">nothing when</tspan><tspan x="245" y="442">your mission is</tspan><tspan x="245" y="456">boundless.</tspan>
+        </text>
+      </svg>
+    </div>
+    <div class="s-sub" style="text-align:center;color:var(--mid-lake)">We help make their dreams a reality</div>
   </div>${chrome(false)}`});
 
 /* A3 — STORY / VENTURE PARTNERS */
@@ -980,13 +1042,14 @@ add({title:'Founders &amp; Story',track:'appendix',teaser:false,dark:false,cls:'
 add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <h1 class="s-title">Select: high-conviction due-diligence process</h1>
-    <div class="cols" style="margin-top:24px;flex:1">
+    <hr class="s-rule">
+    <div class="dd-row">
       ${[
-        ['STEP 1','Founder Assessment','0–6 hrs','<b>Breakout Story (1–5)</b> — do they have a tangible impulse to change the world?<br><b>Team analysis</b> — are these the best founders in the world for this problem?'],
-        ['STEP 2','Market &amp; Model','6–18 hrs','Score: Global Ambition · Emerging Software · Domain Expertise · Execution.<br>Diligence: market sizing, key hires, financial model, product roadmap, data room, cap table.<br><b style="color:var(--cobalt)">20/25 advances to Step 3.</b>'],
-        ['STEP 3','Reflection &amp; Decision','18+ hrs','Internal team discussion &amp; alignment.<br>Competitive analysis, defensibility, SWOT.<br>Introduce founder to 3 ecosystem CEOs / operators for insights.'],
-        ['STEP 4','Closing Push','24–72 hrs','Thematic alignment session; present findings.<br>Support via customer &amp; talent intros, financial and operational guidance.<br>Showcase the Sunshine Lake 6-week program.']
-      ].map(s=>`<div class="col"><div class="kicker">${s[0]}</div><div style="font-family:var(--serif);font-size:19px;color:var(--ink);margin:4px 0 4px">${s[1]}</div><div style="display:inline-block;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;margin-bottom:12px">${s[2]}</div><div style="font-size:13px;color:var(--ink-2);line-height:1.5">${s[3]}</div></div>`).join('')}
+        ['STEP 1','Founder Assessment','0–6 hrs','<div class="dd-h">Score · Breakout Story (1–5)</div><ul><li>Do they have a tangible impulse to change the world?</li></ul><div class="dd-h">Team analysis</div><ul><li>Are these the best founders in the world for this problem?</li><li>What is the strength and potential of the team?</li></ul>'],
+        ['STEP 2','Market &amp; Model Assessment','6–18 hrs','<div class="dd-h">Score (1–5 each)</div><ul><li>Global Ambition &amp; Opportunity</li><li>Emerging Software</li><li>Domain Expertise</li><li>Execution Skills</li></ul><div class="dd-h">Diligence checklist</div><ul><li>Market sizing · Team &amp; key hires</li><li>Financial model · Product roadmap</li><li>Data room · Cap table</li></ul><div class="dd-flag">A 1–5 score; 20/25 advances to Step 3.</div>'],
+        ['STEP 3','Reflection &amp; Decision','18+ hrs','<div class="dd-h">Internal discussion &amp; alignment</div><ul><li>Review key findings from Steps 1 &amp; 2</li><li>Evaluate internal conviction</li></ul><div class="dd-h">Competitive analysis &amp; positioning</div><ul><li>Benchmark against comparable startups</li><li>Assess defensibility &amp; differentiation · SWOT</li><li>Introduce founder to 3 ecosystem CEOs / operators</li></ul>'],
+        ['STEP 4','Closing Push','24–72 hrs','<div class="dd-h">Thematic alignment session</div><ul><li>Present findings to the team</li><li>Support via customer &amp; talent intros</li><li>Financial &amp; operational guidance</li></ul><div class="dd-flag">Showcase the Sunshine Lake 6-week program — tailored to Steps 1, 2 &amp; 3.</div>']
+      ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
     </div>
   </div>${chrome(false)}`});
 
