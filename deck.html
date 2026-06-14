@@ -139,6 +139,17 @@ body{
 .statement .sline.sub{color:rgba(255,255,255,.84);margin-top:26px;font-size:29px;line-height:1.32;max-width:1000px;}
 .statement .s-mark{opacity:1;}
 
+/* ---------- boom (headline numbers) ---------- */
+.boom{background:radial-gradient(120% 130% at 20% 0%,#1a3fb0 0%,#0a2a82 45%,#02041F 100%);}
+.boom .s-pad{justify-content:center;}
+.boom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 24px;margin:18px 0 22px;}
+.boom .bstat{text-align:center;}
+.boom .bn{font-family:var(--serif);font-size:78px;line-height:.95;color:#fff;letter-spacing:-.01em;}
+.boom .bstat:nth-child(1) .bn,.boom .bstat:nth-child(5) .bn{color:var(--sun);}
+.boom .bl{font-size:13.5px;color:#b6bee0;margin-top:8px;letter-spacing:.01em;}
+.boom-foot{text-align:center;font-family:var(--serif);font-size:23px;color:#eaeeff;line-height:1.35;max-width:1000px;margin:0 auto;}
+.boom-foot b{color:var(--sun);font-weight:400;}
+
 /* ---------- ecosystem network ---------- */
 .ecosystem{background:radial-gradient(120% 120% at 70% 30%,#13183d,#02041F);}
 .eco-node{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
@@ -195,6 +206,7 @@ table.tbl th:first-child,table.tbl td:first-child{text-align:left;}
 table.tbl td{padding:13px 10px;text-align:right;border-bottom:1px solid var(--line);color:var(--ink-2);}
 table.tbl td.co{font-family:var(--serif);font-size:18px;color:var(--ink);}
 table.tbl td.pos{color:#1f9d6b;font-weight:600;}
+table.tbl td.mult{color:var(--cobalt);font-weight:700;}
 .tr-summary{margin-top:auto;background:linear-gradient(90deg,#FFFDF2,#FFFBEB);border-radius:10px;padding:20px 26px;text-align:center;}
 .tr-summary .l1{font-family:var(--serif);font-size:25px;color:var(--ink);}
 .tr-summary .l2{font-family:var(--serif);font-size:20px;color:var(--mid-lake);margin-top:6px;}
@@ -560,7 +572,7 @@ function vectorsHTML(){
   return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.p?`<div class="ph">${v.p}</div>`:'<div class="ph">&nbsp;</div>'}${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
 }
 function trackRowsHTML(){
-  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
+  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td class="mult">${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
 }
 function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
 
@@ -716,9 +728,10 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
 /* 5 — TRACK RECORD TABLE */
 add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <h1 class="s-title">Top 1% seed track record — a 'unicorn' every $15mm deployed</h1>
+    <h1 class="s-title">A unicorn for every $15mm deployed</h1>
+    <div class="s-sub" style="font-size:21px;color:var(--mid-lake)"><b style="font-weight:400">$1mm</b> first checks became <b style="font-weight:400;color:var(--cobalt)">$17B, $22B and $2.2B</b> companies.</div>
     <hr class="s-rule">
-    <table class="tbl" style="margin-top:18px">
+    <table class="tbl" style="margin-top:16px">
       <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Downstream</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
@@ -731,27 +744,36 @@ add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:''
 /* 6 — BENCHMARKING */
 add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="bm">
-      <div class="lead-col"><h1 class="s-title" style="font-size:40px">Sunshine Lake's GP ranks in the top 1% of all seed-stage funds by legacy performance.</h1></div>
-      <div style="flex:1">
-        <table class="tbl"><thead><tr><th>Legacy Seed Track Record</th><th>GFC&nbsp;1</th><th>GFC&nbsp;2</th><th>All</th></tr></thead>
-        <tbody>
-          <tr><td>Investment Duration</td><td>4.9 yrs</td><td>3.5 yrs</td><td>4.0 yrs</td></tr>
-          <tr><td>Investment Vintage</td><td>2019</td><td>2020</td><td>2020</td></tr>
-          <tr class="hl"><td>Gross TVPI</td><td>23.0×</td><td>20.4×</td><td>20.8×</td></tr>
-          <tr class="hl"><td>Gross DPI</td><td>1.00×</td><td>0.30×</td><td>0.56×</td></tr>
-          <tr class="hl"><td>Gross IRR</td><td>55%</td><td>67%</td><td>61%</td></tr>
-          <tr class="hl"><td>Fund Return Percentile</td><td>99%</td><td>99%</td><td>99%</td></tr>
-        </tbody></table>
-        <table class="tbl" style="margin-top:14px"><thead><tr><th>Seed: Industry Benchmarking</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th></tr></thead>
-        <tbody>
-          <tr><td>Median TVPI / IRR</td><td>1.40× · 15.1%</td><td>1.27× · 14.1%</td><td>1.27× · 14.1%</td></tr>
-          <tr><td>Overall Venture TVPI / DPI / IRR</td><td>1.45× · 0.10× · 14.1%</td><td>1.00× · 0.05× · 10.1%</td><td>1.00× · 0.05× · 10.1%</td></tr>
-          <tr><td>Top 5% Venture TVPI / DPI / IRR</td><td>2.92× · 0.56× · 35.5%</td><td>1.63× · 0.25× · 22.4%</td><td>1.63× · 0.25× · 22.4%</td></tr>
-        </tbody></table>
-        <div class="note" style="margin-top:12px">Benchmark metrics shown net to LPs; track-record metrics shown gross. Sources: AngelList, PitchBook, Cambridge Associates. Seed investments &lt;$33mm valuation.</div>
+    <h1 class="s-title">Top 1% of all seed-stage funds</h1>
+    <div class="s-sub" style="font-size:20px;color:var(--mid-lake)">Don's two legacy seed funds returned roughly <b style="font-weight:400;color:var(--cobalt)">13×</b> the average top-5% venture fund.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:32px;margin:22px 0 18px">
+      <div style="flex:1;background:linear-gradient(160deg,#155EE8,#0A3DAE);border-radius:14px;padding:24px 30px;color:#fff">
+        <div class="kicker" style="color:var(--sun);margin-bottom:14px">Sunshine Lake GP · legacy seed</div>
+        <div style="display:flex;gap:44px">
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">~21×</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross TVPI</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">61%</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross IRR</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">99th</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">percentile</div></div>
+        </div>
+      </div>
+      <div style="flex:1;background:#f1f3f8;border-radius:14px;padding:24px 30px">
+        <div class="kicker" style="color:var(--muted);margin-bottom:14px">Top-5% venture fund · Cambridge</div>
+        <div style="display:flex;gap:44px">
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1;color:#8a93b0">1.6×</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross TVPI</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1;color:#8a93b0">22%</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross IRR</div></div>
+        </div>
       </div>
     </div>
+    <table class="tbl" style="font-size:14.5px">
+      <thead><tr><th>Legacy Seed Track Record</th><th>GFC&nbsp;1</th><th>GFC&nbsp;2</th><th>All</th><th>Top-5% Venture</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Gross TVPI</td><td>23.0×</td><td>20.4×</td><td class="mult">20.8×</td><td>1.63×</td></tr>
+        <tr class="hl"><td>Gross DPI</td><td>1.00×</td><td>0.30×</td><td class="mult">0.56×</td><td>0.25×</td></tr>
+        <tr class="hl"><td>Gross IRR</td><td>55%</td><td>67%</td><td class="mult">61%</td><td>22.4%</td></tr>
+        <tr><td>Fund Return Percentile</td><td>99%</td><td>99%</td><td>99%</td><td>95%</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:12px">Benchmark metrics shown net to LPs; track-record metrics shown gross. Sources: AngelList, PitchBook, Cambridge Associates. Seed investments &lt;$33mm valuation.</div>
   </div>${chrome(false)}`});
 
 /* 7 — TEAM + ADVISORS */
@@ -1095,6 +1117,21 @@ add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html
 add({title:'Keynote Slides',track:'keynote',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">For Review</div><h2>Keynote Slides</h2>
   <p>Recreated from the latest Keynote for review. Titles and figures are drafts to confirm — fine copy wasn't legible in the source.</p></div>${chrome(true)}`});
+
+/* BOOM — the headline numbers */
+add({title:'The Numbers',track:'keynote',teaser:false,dark:true,cls:'boom',html:`
+  <div class="s-pad">
+    <div class="eyebrow" style="color:var(--sun);text-align:center;margin-bottom:6px">What a $1mm check can become</div>
+    <div class="boom-grid">
+      <div class="bstat"><div class="bn">831×</div><div class="bl">best outcome — Kalshi</div></div>
+      <div class="bstat"><div class="bn">356×</div><div class="bl">Deel — $1mm → $17B</div></div>
+      <div class="bstat"><div class="bn">61%</div><div class="bl">gross IRR</div></div>
+      <div class="bstat"><div class="bn">4</div><div class="bl">unicorns from two small seed funds</div></div>
+      <div class="bstat"><div class="bn">~21×</div><div class="bl">gross TVPI · top 1% of all seed funds</div></div>
+      <div class="bstat"><div class="bn">1 / $15mm</div><div class="bl">a unicorn for every $15mm deployed</div></div>
+    </div>
+    <div class="boom-foot">$60mm across two seed funds backed <b>Deel · Kalshi · Headway · Assured</b> — before the world's top funds piled in with billions.</div>
+  </div>${chrome(true)}`});
 
 /* helper: 3 big stats */
 function kStat(title,sub,stats){
