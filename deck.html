@@ -322,6 +322,17 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 .disc .cols{gap:30px;}
 .disc p{font-size:10.5px;line-height:1.5;color:#7a84a6;margin-bottom:12px;}
 
+/* donut legend */
+.dl{margin-top:16px;display:inline-block;text-align:left;}
+.dl-row{display:flex;align-items:center;gap:9px;padding:3.5px 0;font-size:13px;color:var(--ink-2);}
+.dl-sw{width:11px;height:11px;border-radius:3px;flex:0 0 11px;}
+.dl-lb{flex:1;white-space:nowrap;}
+.dl-pct{font-weight:700;color:var(--ink);}
+/* world map legend */
+.wm-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 16px;margin-top:16px;}
+.wm-legend span{font-size:12.5px;color:var(--muted);}
+.wm-legend b{color:var(--cobalt);font-weight:700;}
+
 /* ---------- top control bar ---------- */
 #bar{
   position:fixed;top:0;left:0;right:0;height:46px;z-index:60;
@@ -518,18 +529,52 @@ function trackRowsHTML(){
   return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
 }
 function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
+
+/* SVG donut from [{label,pct,color}] */
+function donut(segs,r,sw,center){
+  r=r||78; sw=sw||30; const pad=4, cx=r+sw/2+pad, vb=cx*2, C=2*Math.PI*r; let off=0;
+  const arcs=segs.map(s=>{const dash=s.pct/100*C;
+    const a=`<circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-linecap="butt" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cx})"/>`;
+    off+=dash; return a;}).join('');
+  const ctr=center?`<text x="${cx}" y="${cx}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vb} ${vb}" width="100%" style="max-width:${vb}px;display:block;margin:0 auto">${arcs}${ctr}</svg>`;
+}
+function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl-row"><span class="dl-sw" style="background:${s.color}"></span><span class="dl-lb">${s.label}</span><span class="dl-pct">${s.pct}%</span></div>`).join('')+`</div>`;}
+
+/* equirectangular world bubble map */
+const COUNTRIES=[
+ ['India',79,21,90],['Israel',35,31,52],['Canada',-106,58,42],['UK',-2,54,31],['China',104,35,27],
+ ['Germany',10,51,18],['France',2,47,17],['Russia',92,62,14],['Ukraine',31,49,12],['Taiwan',121,23.7,12],
+ ['Ireland',-8,53,10],['Belgium',4.5,50.8,9],['Brazil',-52,-10,9],['Iran',53,32,9],['Australia',134,-25,8],
+ ['Netherlands',5.3,53.6,7],['New Zealand',174,-41,6],['Others',null,null,29]
+];
+function worldMap(){
+  const W=940,H=430, LT=74, LB=-52, span=LT-LB;
+  const px=lon=>((lon+180)/360*W).toFixed(1), py=lat=>((LT-lat)/span*H).toFixed(1);
+  let grid='';
+  for(let lon=-180;lon<=180;lon+=30) grid+=`<line x1="${px(lon)}" y1="0" x2="${px(lon)}" y2="${H}"/>`;
+  for(let lat=-45;lat<=75;lat+=15) grid+=`<line x1="0" y1="${py(lat)}" x2="${W}" y2="${py(lat)}"/>`;
+  const bub=COUNTRIES.filter(c=>c[1]!==null).map(c=>{
+    const x=px(c[1]),y=py(c[2]),r=(6+Math.sqrt(c[3])*4.0).toFixed(1),big=c[3]>=27;
+    const fill=big?'rgba(242,216,49,.88)':'rgba(21,94,232,.68)';
+    const lab=r>15?`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.72,15).toFixed(0)}" font-weight="700" fill="${big?'#0B1275':'#fff'}">${c[3]}</text>`:'';
+    return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="#fff" stroke-width="1"/>${lab}`;}).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block"><g stroke="rgba(21,94,232,.13)" stroke-width="1">${grid}</g>${bub}</svg>`;
+}
+function worldLegend(){return COUNTRIES.map(c=>`<span><b>${c[3]}</b> ${c[0]}</span>`).join('');}
+
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
-  const missing=['founder photo'].concat(c.logoImg?[]:['logo']);
+  const missing=c.logoImg?[]:['logo'];
   return {title:`Case Study — ${c.logo}`,track:'core',teaser:!!c.teaser,dark:false,cls:'',html:`
-   ${needsArt(missing.join(' + '))}
+   ${missing.length?needsArt(missing.join(' + ')):''}
    <div class="cs-banner liquid">${c.banner}</div>
    <div class="cs-body">
      <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span>${logo}</div>
      <div class="cs-story">${c.story}</div>
      <div class="cs-grid">
        <div class="cs-left">
-         <div class="cs-founder"><div class="cs-photo ph"></div><div class="fn">${c.founders}</div></div>
+         <div class="cs-founder"><div class="cs-photo" style="background-image:url('images/cases/${c.key}.webp')"></div><div class="fn">${c.founders}</div></div>
          <div class="cs-sector">${c.sector}</div>
          <div class="cs-steps">${c.steps.map(s=>`<div class="st"><span class="k">${s[0]}</span><span>${s[1]}</span></div>`).join('')}</div>
        </div>
@@ -790,29 +835,32 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 /* 11 — PORTFOLIO CONSTRUCTION */
+const PC1=[{label:'Core: initial check',pct:65,color:'#155EE8'},{label:'Core: allocated reserves',pct:10,color:'#4f86ea'},{label:'Discovery program',pct:5,color:'#9cc0f7'},{label:'Other non-initial',pct:20,color:'#F2D831'}];
+const PC2=[{label:'Product signal only',pct:50,color:'#0A3DAE'},{label:'Pre-PMF & traction',pct:30,color:'#2f6fea'},{label:'Post-PMF & traction',pct:20,color:'#7aa6f2'}];
 add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    ${needsArt('donut charts')}
     <div class="eyebrow">$50mm · Target Portfolio Construction</div>
-    <h1 class="s-title" style="font-size:36px">Strategic capital deployment</h1>
-    <div class="cols" style="margin-top:24px;flex:1">
-      <div class="col">
-        <div class="kicker">Capital Deployment</div>
-        <div class="kv" style="grid-template-columns:1fr">
-          <div><span class="k">Core: Initial Check — 65%</span><div class="v">22 core investments (15 pre-seed, 7 seed)</div></div>
-          <div><span class="k">Core: Allocated Reserves — 10%</span><div class="v">Concentrated into winners with confirmed PMF</div></div>
-          <div><span class="k">Discovery Program — 5%</span><div class="v">25% objective to convert into core</div></div>
-          <div><span class="k">Other Non-Initial Checks — 20%</span><div class="v">Discretionary "cannonball" reserves (10%) + network "power-law" opportunities (10%)</div></div>
-        </div>
+    <h1 class="s-title" style="font-size:34px">Strategic capital deployment</h1>
+    <hr class="s-rule">
+    <div class="cols" style="margin-top:14px;flex:1;align-items:center;gap:30px">
+      <div class="col" style="text-align:center">
+        <div class="kicker" style="margin-bottom:8px">Capital deployment</div>
+        <div style="max-width:210px;margin:0 auto">${donut(PC1,78,30,'$50mm')}</div>
+        ${donutLegend(PC1)}
       </div>
-      <div class="col">
-        <div class="kicker">Initial-Check Signal Mix</div>
-        <div class="kv" style="grid-template-columns:1fr">
-          <div><span class="k">Product Signal Only — 50%</span><div class="v">Earliest conviction bets on team + insight</div></div>
-          <div><span class="k">Pre-PMF &amp; Traction — 30%</span><div class="v">Early signal, sharpening product</div></div>
-          <div><span class="k">Post-PMF &amp; Traction — 20%</span><div class="v">Confirmed traction, scaling ownership</div></div>
+      <div class="col" style="text-align:center">
+        <div class="kicker" style="margin-bottom:8px">Core initial-check signal mix</div>
+        <div style="max-width:210px;margin:0 auto">${donut(PC2,78,30,'Core')}</div>
+        ${donutLegend(PC2)}
+      </div>
+      <div class="col" style="flex:.95">
+        <div class="kicker">Non-initial check strategy</div>
+        <div class="kv" style="grid-template-columns:1fr;margin-top:10px">
+          <div><span class="k">Discovery — 5%</span><div class="v">~25% objective to convert into "core"</div></div>
+          <div><span class="k">Dedicated reserves — 10%</span><div class="v">Concentrated into ~50% of winners with confirmed PMF and revenue</div></div>
+          <div><span class="k">Other non-initial — 20%</span><div class="v">Discretionary "cannonball" reserves (10%) + network "power-law" opportunities (10%)</div></div>
         </div>
-        <div style="margin-top:18px;background:#eef3fc;border-radius:10px;padding:16px 18px;font-size:14px;color:var(--ink-2)">Dedicated reserves (10%) allocated to ~50% of winners with confirmed PMF traction and revenue.</div>
+        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">22 core investments · 15 pre-seed, 7 seed</div>
       </div>
     </div>
     <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
@@ -903,16 +951,16 @@ add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html
 
 /* A1 — GLOBAL FOUNDERS */
 add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  ${needsArt('world map (bubble globe)')}
   <div class="s-pad">
-    <h1 class="s-title">USA unicorn founders come from around the world</h1>
-    <div class="grow center" style="flex-direction:column">
-      <div class="kv" style="grid-template-columns:repeat(6,1fr);gap:18px 26px;width:100%;margin-top:10px">
-        ${[['India','90'],['Israel','52'],['Canada','42'],['UK','31'],['China','27'],['France','17'],['Germany','18'],['Russia','14'],['Ukraine','12'],['Taiwan','12'],['Ireland','10'],['Belgium','9'],['Brazil','9'],['Iran','9'],['Australia','8'],['Netherlands','7'],['New Zealand','6'],['Others','29']].map(c=>`<div style="text-align:center"><div style="font-family:var(--serif);font-size:34px;color:var(--cobalt)">${c[1]}</div><div style="font-size:13px;color:var(--muted)">${c[0]}</div></div>`).join('')}
-      </div>
-      <div style="font-family:var(--serif);font-size:22px;color:var(--mid-lake);margin-top:30px;text-align:center">44% of U.S. unicorns have an immigrant founder.</div>
+    <h1 class="s-title" style="font-size:38px">USA unicorn founders come from around the world</h1>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0">
+      <div style="max-width:900px;width:100%;margin:0 auto">${worldMap()}</div>
+      <div class="wm-legend">${worldLegend()}</div>
     </div>
-    <div class="note">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px">
+      <div class="note">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
+      <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);white-space:nowrap">44% have an immigrant founder.</div>
+    </div>
   </div>${chrome(false)}`});
 
 /* A2 — STORIES DRIVE MOMENTUM */
