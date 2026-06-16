@@ -2590,6 +2590,32 @@
                 <p>Our insights into global, economic, and technological shifts help back multiple blockbuster companies a decade.</p>
             </div>
 
+            <!-- Top 1% Track Record — full-width pill marquee. Moved directly
+                 below the thesis (above Our Team) per Don, June 2026.
+                 Desktop: 3 rows (IPO, Seed, M&A).
+                 Mobile: 5 rows — Seed and M&A each split into a 2nd
+                 row (.rd-exits-marquee--mobile-only) so phone users
+                 see more of the portfolio without horizontal-scrolling
+                 the carousel. Mobile-only rows are hidden on >720px. -->
+            <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
+                <p class="rd-exits-label">Top 1% Track Record</p>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ipo"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-seed"></div>
+                </div>
+                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
+                    <div class="rd-exits-row" id="rd-exits-seed-2"></div>
+                </div>
+                <div class="rd-exits-marquee">
+                    <div class="rd-exits-row" id="rd-exits-ma"></div>
+                </div>
+                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
+                    <div class="rd-exits-row" id="rd-exits-ma-2"></div>
+                </div>
+            </section>
+
             <!-- ════════ Market-cycle waves ════════ -->
             <!-- Waves band HIDDEN for now (per Don). Remove `hidden`
                  + the display rule to restore. -->
@@ -2814,30 +2840,6 @@
                 </div>
             </section>
 
-            <!-- Top 1% Track Record — full-width pill marquee.
-                 Desktop: 3 rows (IPO, Seed, M&A).
-                 Mobile: 5 rows — Seed and M&A each split into a 2nd
-                 row (.rd-exits-marquee--mobile-only) so phone users
-                 see more of the portfolio without horizontal-scrolling
-                 the carousel. Mobile-only rows are hidden on >720px. -->
-            <section class="rd-exits-band" id="rd-section-exits" aria-label="Portfolio companies">
-                <p class="rd-exits-label">Top 1% Track Record</p>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-ipo"></div>
-                </div>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-seed"></div>
-                </div>
-                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
-                    <div class="rd-exits-row" id="rd-exits-seed-2"></div>
-                </div>
-                <div class="rd-exits-marquee">
-                    <div class="rd-exits-row" id="rd-exits-ma"></div>
-                </div>
-                <div class="rd-exits-marquee rd-exits-marquee--mobile-only">
-                    <div class="rd-exits-row" id="rd-exits-ma-2"></div>
-                </div>
-            </section>
         </div>
     </section>
 
