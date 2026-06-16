@@ -209,7 +209,7 @@ table.tbl td.pos{color:#1f9d6b;font-weight:600;}
 table.tbl td.mult{color:var(--cobalt);font-weight:700;}
 table.tbl.tall td{padding:24px 10px;}
 table.tbl.tall td.co{font-size:20px;}
-.tr-callout{margin-top:auto;background:linear-gradient(150deg,#1a6bff,#0a3dae);border-radius:14px;padding:18px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:28px;}
+.tr-callout{margin:auto 0 24px;background:linear-gradient(150deg,#1a6bff,#0a3dae);border-radius:14px;padding:18px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:28px;}
 .trc-funds{display:flex;align-items:center;gap:28px;}
 .trc-amt{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sun);margin-bottom:5px;}
 .trc-nums{display:flex;align-items:baseline;gap:8px;}
@@ -221,12 +221,12 @@ table.tbl.tall td.co{font-size:20px;}
 .trc-quality b{font-family:var(--serif);font-size:19px;color:var(--sun);font-weight:400;margin-right:4px;}
 
 /* team */
-.team-row{display:flex;gap:18px;margin:6px 0 26px;}
+.team-row{display:flex;gap:28px;margin:10px 0 22px;}
 .tm{flex:1;display:flex;flex-direction:column;align-items:flex-start;}
-.tm .av{width:62px;height:62px;border-radius:50%;background:#dfe4f2 center/cover no-repeat;border:2px solid var(--cobalt);margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;color:var(--cobalt);}
-.tm .nm{font-family:var(--serif);font-size:18px;color:var(--ink);}
-.tm .rl{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;line-height:1.3;}
-.tm .pe{font-size:11px;color:var(--cobalt);font-weight:600;margin-top:6px;letter-spacing:.02em;}
+.tm .av{width:104px;height:104px;border-radius:50%;background:#dfe4f2 center/cover no-repeat;border:2px solid var(--cobalt);margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;color:var(--cobalt);}
+.tm .nm{font-family:var(--serif);font-size:23px;color:var(--ink);}
+.tm .rl{font-size:14px;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.35;}
+.tm .pe{font-size:13px;color:var(--cobalt);font-weight:600;margin-top:8px;letter-spacing:.02em;}
 .vectors{display:flex;gap:22px;flex:1;}
 .vec{flex:1;background:#f6f8fd;border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;}
 .vec:nth-child(2){background:#eef3fc;}
@@ -334,7 +334,7 @@ table.tbl.tall td.co{font-size:20px;}
 .bm .hl{background:#eaf1fb;}
 
 /* LP grid */
-.lp-grid{display:grid;grid-template-columns:repeat(6,1fr);column-gap:24px;row-gap:18px;margin-top:24px;flex:1;align-content:space-between;}
+.lp-grid{display:grid;grid-template-columns:repeat(6,1fr);column-gap:24px;row-gap:46px;margin-top:30px;align-content:flex-start;}
 .lp-h{grid-column:span 3;font-family:var(--serif);font-size:25px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:10px;}
 .lpc .nm{font-size:16px;color:var(--ink);font-weight:600;}
 .lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
@@ -506,8 +506,7 @@ const TEAM=[
  {nm:'Don Stalter',fl:'🇺🇸',rl:'General Partner · San Francisco',pe:'Airbnb · GFC · UChicago',img:'images/team/don.webp'},
  {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',rl:'Partner & COO · Los Angeles',pe:'Credit Suisse · Caltech',img:'images/team/ivan.webp'},
  {nm:'Suhail Younus',fl:'🇦🇫',rl:'Investor · New York City',pe:'Cornell University',img:'images/team/suhail.webp'},
- {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'ESCP Europe',img:'images/team/wieger.webp'},
- {nm:'Karambir Singh',fl:'🇮🇳',rl:'Venture Partner · Mumbai',pe:'Amazon · Sector Research',img:''}
+ {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'ESCP Europe',img:'images/team/wieger.webp'}
 ];
 const VECTORS=[
  {n:'1',t:'Founding Has Never Been Easier',p:'',ad:[['David Bell','Professor & Advisor — Warby Parker','🇳🇿'],['Esther Wojcicki','Silicon Valley Legend — Stanford','🇺🇸'],['Mike Franklin','Professor & Advisor — Databricks','🇺🇸']]},
@@ -808,27 +807,29 @@ add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',ht
 
 /* ECOSYSTEM NETWORK */
 add({title:'A Global Network',track:'core',teaser:false,dark:true,cls:'ecosystem',html:`
-  <div class="s-pad" style="flex-direction:row;align-items:center;gap:40px">
-    <div style="flex:0 0 360px">
+  <div class="s-pad" style="flex-direction:row;align-items:center;gap:36px">
+    <div style="flex:0 0 390px">
       <div class="sec-no" style="font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sun);margin-bottom:18px">The Platform</div>
-      <h2 style="font-family:var(--serif);font-weight:400;color:#fff;font-size:46px;line-height:1.08">A global, proprietary network</h2>
-      <div style="width:60px;height:2px;background:var(--sun);margin:24px 0"></div>
-      <p style="font-family:var(--serif);font-size:19px;color:rgba(255,255,255,.78);line-height:1.45">One proprietary channel unites 250+ founders, advisors, VCs, and corporates — elevating every step of Scout, Select, Secure, and Support.</p>
+      <h2 style="font-family:var(--serif);font-weight:400;color:#fff;font-size:46px;line-height:1.08">A deep, proprietary network</h2>
+      <div style="width:60px;height:2px;background:var(--sun);margin:22px 0"></div>
+      <p style="font-family:var(--serif);font-size:19px;color:rgba(255,255,255,.82);line-height:1.5">Built on a hands-on, performance-first operating model — we plug founders into a deep web of top unicorn founders, VCs, corporates, fellow entrepreneurs, incubators and accelerators, and work it at every step of Scout, Select, Secure &amp; Support.</p>
+      <p style="font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--sun);margin-top:18px;font-family:var(--sans)">250+ relationships · operational from day one</p>
     </div>
-    <div style="flex:1;position:relative;height:520px">
-      <svg width="620" height="520" viewBox="0 0 620 520" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
-        <g stroke="rgba(255,255,255,.22)" stroke-width="2">
-          <line x1="310" y1="270" x2="310" y2="60"/><line x1="310" y1="270" x2="510" y2="205"/>
-          <line x1="310" y1="270" x2="433" y2="440"/><line x1="310" y1="270" x2="187" y2="440"/>
-          <line x1="310" y1="270" x2="110" y2="205"/>
+    <div style="flex:1;position:relative;height:560px">
+      <svg width="620" height="560" viewBox="0 0 620 560" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+        <g stroke="rgba(255,255,255,.2)" stroke-width="2">
+          <line x1="310" y1="280" x2="310" y2="80"/><line x1="310" y1="280" x2="483" y2="180"/>
+          <line x1="310" y1="280" x2="483" y2="380"/><line x1="310" y1="280" x2="310" y2="480"/>
+          <line x1="310" y1="280" x2="137" y2="380"/><line x1="310" y1="280" x2="137" y2="180"/>
         </g>
       </svg>
       <div class="eco-node eco-center" style="left:50%;top:50%;width:152px;height:152px;margin:-76px 0 0 -76px;font-size:22px">Sunshine&nbsp;Lake</div>
-      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-270px 0 0 -60px"><div><div class="ec-n">250+</div><div class="ec-s">Founders</div></div></div>
-      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-125px 0 0 140px"><div class="ec-n">Advisors</div></div>
-      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:110px 0 0 63px"><div><div class="ec-n">Co-Investors</div><div class="ec-s">& VCs</div></div></div>
-      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:110px 0 0 -183px"><div class="ec-n">Corporates</div></div>
-      <div class="eco-node eco-sat" style="left:50%;top:50%;width:120px;height:120px;margin:-125px 0 0 -260px"><div><div class="ec-n">Campus</div><div class="ec-s">Network</div></div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:-261px 0 0 -61px"><div><div class="ec-n">Unicorn</div><div class="ec-s">Founders</div></div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:-161px 0 0 112px"><div class="ec-n">VCs</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:39px 0 0 112px"><div class="ec-n" style="font-size:16px">Corporates</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:139px 0 0 -61px"><div class="ec-n" style="font-size:15px">Entrepreneurs</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:39px 0 0 -234px"><div class="ec-n" style="font-size:16px">Incubators</div></div>
+      <div class="eco-node eco-sat" style="left:50%;top:50%;width:122px;height:122px;margin:-161px 0 0 -234px"><div class="ec-n" style="font-size:15px">Accelerators</div></div>
     </div>
   </div>${chrome(true)}`});
 
