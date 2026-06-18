@@ -115,6 +115,11 @@ body{
 .cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
 .cover .meta .ln.dim{color:rgba(255,255,255,.55);}
 .cover .s-conf{color:rgba(255,255,255,.65);}
+.cover-ribbon{position:absolute;top:-6px;right:-6px;width:172px;height:172px;overflow:hidden;z-index:3;pointer-events:none;}
+.cover-ribbon span{position:absolute;display:block;width:250px;padding:11px 0;top:34px;right:-30px;transform:rotate(45deg);
+  background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);text-align:center;
+  font-family:var(--sans);font-weight:700;font-size:13.5px;letter-spacing:.13em;text-transform:uppercase;
+  box-shadow:0 5px 16px rgba(2,4,31,.32);}
 .spark{position:absolute;pointer-events:none;background:
    radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
 .spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -655,6 +660,7 @@ function add(o){SLIDES.push(o);}
 /* 1 — COVER */
 add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   <div class="cover-logo">${MARK} Sunshine Lake</div>
+  <div class="cover-ribbon"><span>$50M Target</span></div>
   <div class="s-pad">
     <h1>Global Founders<br>forge the future.</h1>
   </div>
