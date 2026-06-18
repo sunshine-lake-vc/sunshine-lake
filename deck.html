@@ -115,11 +115,11 @@ body{
 .cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
 .cover .meta .ln.dim{color:rgba(255,255,255,.55);}
 .cover .s-conf{color:rgba(255,255,255,.65);}
-.cover-ribbon{position:absolute;top:-6px;right:-6px;width:172px;height:172px;overflow:hidden;z-index:3;pointer-events:none;}
-.cover-ribbon span{position:absolute;display:block;width:250px;padding:11px 0;top:34px;right:-30px;transform:rotate(45deg);
+.cover-ribbon{position:absolute;top:0;right:0;width:340px;height:340px;overflow:hidden;z-index:3;pointer-events:none;}
+.cover-ribbon span{position:absolute;display:block;width:520px;padding:17px 0;top:100px;right:-86px;transform:rotate(45deg);
   background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);text-align:center;
-  font-family:var(--sans);font-weight:700;font-size:13.5px;letter-spacing:.13em;text-transform:uppercase;
-  box-shadow:0 5px 16px rgba(2,4,31,.32);}
+  font-family:var(--sans);font-weight:700;font-size:20px;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 8px 26px rgba(2,4,31,.45);}
 .spark{position:absolute;pointer-events:none;background:
    radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
 .spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -131,7 +131,7 @@ body{
 .section{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
 .section .s-pad{justify-content:center;}
 .section .sec-no{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--sun);letter-spacing:.34em;text-transform:uppercase;margin-bottom:24px;}
-.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:66px;line-height:1.05;letter-spacing:.015em;text-transform:uppercase;}
+.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:66px;line-height:1.05;letter-spacing:.015em;}
 .section h2::after{content:"";display:block;width:60px;height:2px;background:var(--sun);margin:28px 0 0;}
 .section p{font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.74);max-width:700px;line-height:1.4;margin-top:26px;}
 .section .s-mark{opacity:1;}
@@ -170,6 +170,8 @@ body{
 .center{display:flex;align-items:center;justify-content:center;text-align:center;}
 .lede{font-family:var(--serif);font-size:26px;line-height:1.35;color:var(--ink-2);}
 .note{font-size:11px;line-height:1.45;color:#9aa3bd;max-width:880px;}
+.gross-note{position:absolute;left:0;right:0;bottom:32px;text-align:center;font-size:9.5px;line-height:1.3;letter-spacing:.02em;color:#9aa3bd;z-index:4;pointer-events:none;padding:0 210px;}
+.slide.dark .gross-note{color:rgba(255,255,255,.5);}
 .kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);}
 
 /* thesis */
@@ -193,13 +195,13 @@ body{
 .prob-foot{font-family:var(--serif);font-size:24px;text-align:center;color:var(--mid-lake);margin-top:24px;}
 
 /* GP credibility */
-.gp{display:flex;gap:40px;flex:1;}
-.gp .photo{width:300px;flex:0 0 300px;border-radius:6px;background:#dfe4f2 center/cover no-repeat;}
-.gp .tiers{flex:1;display:flex;flex-direction:column;}
-.gp .tier{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);}
-.gp .tier .val{width:160px;flex:0 0 160px;font-weight:700;color:var(--cobalt);font-size:18px;}
+.gp{display:flex;gap:36px;flex:1;}
+.gp .photo{width:280px;flex:0 0 280px;border-radius:6px;background:#dfe4f2 center/cover no-repeat;}
+.gp .tiers{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.gp .tier{display:flex;align-items:center;gap:24px;padding:18px 0;border-bottom:1px solid var(--line);}
+.gp .tier .val{width:210px;flex:0 0 210px;font-weight:700;color:var(--cobalt);font-size:17px;letter-spacing:.01em;line-height:1.2;}
 .gp .tier .val.op{color:var(--ink);}
-.gp .tier .cos{font-family:var(--serif);font-size:19px;color:var(--ink-2);}
+.gp .tier .cos{font-family:var(--serif);font-size:22px;color:var(--ink-2);line-height:1.35;}
 .quote-lg{font-family:var(--serif);font-size:30px;line-height:1.18;color:var(--ink);}
 .quote-sub{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.45;color:var(--ink-2);margin-top:12px;}
 .quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
@@ -509,6 +511,7 @@ gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('s
 const MARK='<svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>';
 function chrome(dark){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+'<span class="s-conf">Strictly Confidential</span>';}
 
+const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
 const TEAM=[
  {nm:'Don Stalter',fl:'🇺🇸',rl:'General Partner · San Francisco',pe:'Airbnb · GFC · UChicago',img:'images/team/don.webp'},
  {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',rl:'Partner & COO · Los Angeles',pe:'Credit Suisse · Caltech',img:'images/team/ivan.webp'},
@@ -517,8 +520,8 @@ const TEAM=[
 ];
 const VECTORS=[
  {n:'1',t:'Founding Has Never Been Easier',p:'',ad:[['David Bell','Professor & Advisor — Warby Parker','🇳🇿'],['Esther Wojcicki','Silicon Valley Legend — Stanford','🇺🇸'],['Mike Franklin','Professor & Advisor — Databricks','🇺🇸']]},
- {n:'2',t:'Foundation-building Is Hard',p:'Product–market fit',ad:[['Christopher Muhr','Founder & COO — Auto1','🇩🇪'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸']]},
- {n:'3',t:'Sustainable Growth Is Harder Than Ever',p:'',ad:[['Florian Ingen-Housz','CFO & CSO — Back Market','🇫🇷'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
+ {n:'2',t:'Foundation-building Is Hard',p:'Product–market fit',ad:[['Christopher Muhr','Founder & COO — Auto1','🇩🇪'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸'],['Jamie Feaster','Growth & Brand — brand whisperer to 100+ global clients','🇺🇸']]},
+ {n:'3',t:'Sustainable Growth Is Harder Than Ever',p:'',ad:[['Andrew Hovelson','Storytelling — Broadway & TV actor coaching founders','🇺🇸'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
 ];
 const TRACK=[
  ['deel','Workforce','$1.0','$16.7mm','6.0%','$980','$17.3','356x','$354.9','168%','a16z'],
@@ -690,15 +693,15 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
     <div class="gp" style="margin-top:24px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
       <div class="tiers">
-        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 12px;padding-bottom:10px;border-bottom:2px solid var(--line)">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
+        <div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--line)">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
         <div class="tier"><span class="val">$10Bn+</span><span class="cos">Deel · Figma · Databricks · Brex</span></div>
-        <div class="tier"><span class="val">$1Bn+</span><span class="cos">Culture Amp · Kalshi · Headway · Checkr</span></div>
-        <div class="tier"><span class="val">$100mm+</span><span class="cos">Slope · SpotHero · Wordware · Assured</span></div>
-        <div class="tier"><span class="val op">Operator</span><span class="cos">Handy · Airbnb · Groupon · CityDeal</span></div>
-        <div class="tier"><span class="val op">Global M&amp;A</span><span class="cos">Credit Suisse — Google · B2W · Eltek</span></div>
+        <div class="tier"><span class="val">$1Bn+</span><span class="cos">Fundamental.tech · Kalshi · Headway · Checkr</span></div>
+        <div class="tier"><span class="val">$100mm+</span><span class="cos">Slope · SpotHero · Wordware · Assured · Fieldguide · Federato</span></div>
+        <div class="tier"><span class="val op">Operator</span><span class="cos">Advised Airbnb · Partner @ Handy (acq. Angie's List) · Co-founded CityDeal (acq. Groupon)</span></div>
+        <div class="tier"><span class="val op">Global Bulge Bracket M&amp;A &amp; PE</span><span class="cos">Credit Suisse — Google (Global) · B2W (Brazil) · Eltek/Valere (Norway)</span></div>
       </div>
     </div>
-  </div>${chrome(false)}`});
+  </div>${GROSSNOTE}${chrome(false)}`});
 
 /* 5 — TRACK RECORD TABLE */
 add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:'',html:`
@@ -718,7 +721,7 @@ add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:''
       </div>
       <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
     </div>
-  </div>${chrome(false)}`});
+  </div>${GROSSNOTE}${chrome(false)}`});
 
 /* 6 — BENCHMARKING */
 add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:'',html:`
@@ -752,7 +755,7 @@ add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:''
         <tr><td>Fund Return Percentile</td><td>99%</td><td>99%</td><td>99%</td><td>95%</td></tr>
       </tbody>
     </table>
-    <div class="note" style="margin-top:12px">Benchmark metrics shown net to LPs; track-record metrics shown gross. Sources: AngelList, PitchBook, Cambridge Associates. Seed investments &lt;$33mm valuation.</div>
+    <div class="note" style="margin-top:12px">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses. Benchmark metrics shown net to LPs; track-record metrics shown gross. Sources: AngelList, PitchBook, Cambridge Associates. Seed investments &lt;$33mm valuation.</div>
   </div>${chrome(false)}`});
 
 /* 7 — TEAM + ADVISORS */
@@ -762,10 +765,6 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="team-row" style="margin:14px 0 16px">${teamCardsHTML()}</div>
     <div class="kicker" style="text-align:center;margin-bottom:8px">Advisors — equipping founders across three key vectors</div>
     <div class="vectors">${vectorsHTML()}</div>
-    <div class="vp-strip">
-      <div class="vp-line"><span class="vp-lbl">Venture Partner</span><b>Andrew Hovelson</b> 🇺🇸 — Storytelling. Broadway &amp; TV actor (with Glenn Close) coaching international founders to resonate with their audiences.</div>
-      <div class="vp-line"><span class="vp-lbl">Venture Partner</span><b>Jamie Feaster</b> 🇺🇸 — Growth &amp; Brand. Brand whisperer to 100+ global clients; shapes founder voice, visuals and impact.</div>
-    </div>
   </div>${chrome(false)}`});
 
 /* 8 — SCOUT / SELECT */
@@ -802,14 +801,14 @@ add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',ht
       <div class="panel green"><span class="pnum">3</span><h3>Secure</h3><div class="big">100 pursued with high conviction.</div>
         <div class="row"><i>"Don's the best; he intro'd us to an elite marketer who revolutionized DNP."</i> — Joshua Browder, DoNotPay</div>
         <div class="row"><i>"Early on, Don mapped execution at WW; we scaled fast and had to have him in."</i> — Filip Kozera, Wordware</div>
-        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Afiniti</div>
-        <div class="hl"><b>22 core</b><span>secured into the portfolio</span></div></div>
-      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">22 core investments onboarded &amp; augmented.</div>
+        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Affinity</div>
+        <div class="hl"><b>30 core</b><span>secured into the portfolio</span></div></div>
+      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">30 core investments onboarded &amp; augmented.</div>
         <div class="row"><b>Weeks 1–2 · Storytelling</b> — pro acting skills; founder narratives force-multiply.</div>
         <div class="row"><b>Weeks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
         <div class="row"><b>Weeks 5–6 · Domain Expertise</b> — industry connections &amp; best practices.</div>
         <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div>
-        <div class="hl"><b>7 weeks</b><span>structured path to exit-readiness</span></div></div>
+        <div class="hl"><b style="font-size:23px">Sunshine Lake Acceleration Module</b><span>A 7-week structured path to exit-readiness</span></div></div>
     </div>
   </div>${chrome(false)}`});
 
@@ -851,7 +850,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
     <div class="terms">
       <div><div class="big-num">$50<span style="font-size:46px">mm</span></div><div class="big-lbl">Target Fund Size</div></div>
       <div class="rows">
-        <div class="tr"><span class="k">Number of Deals</span><span class="v">22 core companies + a discretionary sleeve to maximize returns</span></div>
+        <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies + a discretionary sleeve to maximize returns</span></div>
         <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
         <div class="tr"><span class="k">Initial Check Range</span><span class="v">$500k–$1.65mm for core, over a 36-month investment period</span></div>
         <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions (75%–85% of total capital)</span></div>
@@ -891,7 +890,7 @@ add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',
           <div><span class="k">Dedicated reserves — 10%</span><div class="v">Concentrated into ~50% of winners with confirmed PMF and revenue</div></div>
           <div><span class="k">Other non-initial — 20%</span><div class="v">Discretionary "cannonball" reserves (10%) + network "power-law" opportunities (10%)</div></div>
         </div>
-        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">22 core investments · 15 pre-seed, 7 seed</div>
+        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">30 core investments · 20 pre-seed, 10 seed</div>
       </div>
     </div>
     <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
@@ -954,7 +953,7 @@ add({title:'Multifund Strategy',track:'core',teaser:false,dark:false,cls:'',html
     <div class="road">
       <div class="rf past"><div class="yr">2017–19</div><div class="nm">Fund 0A</div><div class="sz"><b>$23mm</b></div><div class="sz">23× TVPI · 100% DPI</div><div class="sz">1 GP · 3 Associates</div></div>
       <div class="rf past"><div class="yr">2019–22</div><div class="nm">Fund 0B</div><div class="sz"><b>$37mm</b></div><div class="sz">20× TVPI · 30% DPI</div><div class="sz">1 GP · 3 Associates</div></div>
-      <div class="rf future"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">22 core · pre-seed &amp; seed</div><div class="sz">1 GP · 1 COO &amp; Partner · +2</div></div>
+      <div class="rf future"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div><div class="sz">1 GP · 1 COO &amp; Partner · +2</div></div>
       <div class="rf future"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">36 core · same early focus</div><div class="sz">2 GPs · 5 FTEs</div></div>
       <div class="rf future"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">47 core · across verticals</div><div class="sz">2 GPs · 6 FTEs</div></div>
     </div>
@@ -966,37 +965,19 @@ add({title:'Multifund Strategy',track:'core',teaser:false,dark:false,cls:'',html
       <div><span class="k" style="font-size:17px">Strategic Partners</span><div class="v" style="font-size:14.5px;margin-top:5px">Trusted by elite LPs and co-investors.</div></div>
       <div><span class="k" style="font-size:17px">Platform for Scale</span><div class="v" style="font-size:14.5px;margin-top:5px">Ops-first playbook to compound over time.</div></div>
     </div>
-  </div>${chrome(false)}`});
+  </div>${GROSSNOTE}${chrome(false)}`});
 
 /* 15 — CLOSING */
-add({title:'Join Sunshine Lake',track:'core',teaser:true,dark:true,cls:'closing',html:`
+add({title:'Dive in.',track:'core',teaser:true,dark:true,cls:'closing',html:`
   <div class="s-pad">
-    <h2>Join Sunshine Lake &amp; make history</h2>
-    <p>Where global founders forge the future.</p>
-    <div class="cta">Donald Stalter · don@sunshinelake.vc · sunshinelake.vc</div>
+    <h2>Dive in.</h2>
+    <p>Global founders forge the future. What better time to build?</p>
+    <div class="cta">Donald Stalter · General Partner<br>don@sunshinelake.vc · sunshinelake.vc · San Francisco</div>
   </div>${chrome(true)}`});
 
 /* ===== APPENDIX ===== */
 add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
-
-/* THESIS — moved to appendix per Don, June 2026 */
-add({title:'Building Beyond Borders',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">The Thesis</div>
-    <h1 class="s-title">Building Beyond Borders</h1>
-    <div class="s-sub" style="color:var(--cobalt)">What better time to build than when the world needs it most?</div>
-    <hr class="s-rule">
-    <div class="thesis-lines">
-      <div class="tl">We back founders at <b>breakthrough moments</b> — founders with the psychology to rewire the world.</div>
-      <div class="tl">They tackle critical global challenges and <b>$100T+ of TAM</b> through fintech and frontier technologies.</div>
-      <div class="tl">From unicorns like <b>Deel</b> to <b>Headway</b> to <b>Kalshi</b>, we invest early — and the world's top funds follow on with billions.</div>
-    </div>
-    <div class="follow">
-      <span class="lbl">Downstream capital that has followed our founders</span>
-      <span>a16z · Accel · Coatue · Felicis · Greylock · ICONIQ · IVP · Kleiner Perkins · monashees · NEA · Ribbit · Sequoia · Spark · USV</span>
-    </div>
-  </div>${chrome(false)}`});
 
 /* PROBLEM SPACE — moved to appendix per Don, June 2026 */
 add({title:'Critical Global Problems',track:'appendix',teaser:false,dark:false,cls:'',html:`
@@ -1097,7 +1078,7 @@ add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:
         ['STEP 1','Founder Assessment','0–6 hrs','<div class="dd-h">Score · Breakout Story (1–5)</div><ul><li>Do they have a tangible impulse to change the world?</li></ul><div class="dd-h">Team analysis</div><ul><li>Are these the best founders in the world for this problem?</li><li>What is the strength and potential of the team?</li></ul>'],
         ['STEP 2','Market &amp; Model Assessment','6–18 hrs','<div class="dd-h">Score (1–5 each)</div><ul><li>Global Ambition &amp; Opportunity</li><li>Emerging Software</li><li>Domain Expertise</li><li>Execution Skills</li></ul><div class="dd-h">Diligence checklist</div><ul><li>Market sizing · Team &amp; key hires</li><li>Financial model · Product roadmap</li><li>Data room · Cap table</li></ul><div class="dd-flag">A 1–5 score; 20/25 advances to Step 3.</div>'],
         ['STEP 3','Reflection &amp; Decision','18+ hrs','<div class="dd-h">Internal discussion &amp; alignment</div><ul><li>Review key findings from Steps 1 &amp; 2</li><li>Evaluate internal conviction</li></ul><div class="dd-h">Competitive analysis &amp; positioning</div><ul><li>Benchmark against comparable startups</li><li>Assess defensibility &amp; differentiation · SWOT</li><li>Introduce founder to 3 ecosystem CEOs / operators</li></ul>'],
-        ['STEP 4','Closing Push','24–72 hrs','<div class="dd-h">Thematic alignment session</div><ul><li>Present findings to the team</li><li>Support via customer &amp; talent intros</li><li>Financial &amp; operational guidance</li></ul><div class="dd-flag">Showcase the Sunshine Lake 6-week program — tailored to Steps 1, 2 &amp; 3.</div>']
+        ['STEP 4','Closing Push','24–72 hrs','<div class="dd-h">Thematic alignment session</div><ul><li>Present findings to the team</li><li>Support via customer &amp; talent intros</li><li>Financial &amp; operational guidance</li></ul><div class="dd-flag">Showcase the Sunshine Lake Acceleration Module — a 7-week program tailored to Steps 1, 2 &amp; 3.</div>']
       ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
     </div>
   </div>${chrome(false)}`});
@@ -1154,7 +1135,7 @@ add({title:'The Numbers',track:'keynote',teaser:false,dark:true,cls:'boom',html:
       <div class="bstat"><div class="bn">1 / $15mm</div><div class="bl">a unicorn for every $15mm deployed</div></div>
     </div>
     <div class="boom-foot">$60mm across two seed funds backed <b>Deel · Kalshi · Headway · Assured</b> — before the world's top funds piled in with billions.</div>
-  </div>${chrome(true)}`});
+  </div>${GROSSNOTE}${chrome(true)}`});
 
 /* helper: 3 big stats */
 function kStat(title,sub,stats){
