@@ -357,11 +357,15 @@ table.tbl.tall td.co{font-size:20px;}
 .closing .cta{margin-top:30px;color:var(--sun);font-size:18px;font-family:var(--serif);}
 
 /* definition */
-.defn{background:radial-gradient(120% 120% at 50% 40%,#1a1d44,#02041F);}
-.defn .s-pad{justify-content:center;align-items:center;text-align:center;}
-.defn .dn{font-weight:700;color:#d8def5;font-size:30px;font-family:var(--serif);}
-.defn .dx{color:#aeb6da;font-size:26px;font-family:var(--serif);margin-top:10px;max-width:760px;line-height:1.4;}
-.defn .dx b{color:#fff;}
+.defn{background:radial-gradient(120% 120% at 25% 30%,#1a1d44,#02041F);}
+.defn .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
+.defn .dn-word{font-family:var(--serif);color:#fff;font-size:78px;line-height:1;letter-spacing:-.015em;}
+.defn .dn-meta{font-family:var(--serif);color:#aeb6da;font-size:27px;margin-top:16px;}
+.defn .dn-meta .pos{color:var(--sun);font-style:italic;}
+.defn .defn-rule{height:2px;width:120px;background:linear-gradient(90deg,var(--sun),transparent);border:0;margin:30px 0;}
+.defn .dx{color:#d8def5;font-size:42px;font-family:var(--serif);line-height:1.28;max-width:1040px;}
+.defn .dx b{color:#fff;font-weight:400;border-bottom:3px solid var(--sun);padding-bottom:2px;}
+.defn .cite{font-family:var(--serif);font-style:italic;color:#8b93bd;font-size:21px;margin-top:28px;}
 
 /* disclaimer */
 .disc .s-pad{padding:54px 72px;}
@@ -1101,8 +1105,12 @@ add({title:'Back Office &amp; Tech Stack',track:'appendix',teaser:false,dark:fal
 /* A6 — DEFINITION */
 add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:`
   <div class="s-pad">
-    <div class="dn">Sunshine Lake /ˈsʌnʃaɪn leɪk/ (noun):</div>
-    <div class="dx">Far-away location where rare entrepreneurial beings are <b>forged by extreme origins</b>. <span style="font-size:18px;color:#8b93bd">(Star Wars: Ewoks #9)</span></div>
+    <div class="eyebrow" style="color:var(--sun)">The Definition</div>
+    <div class="dn-word">Sunshine Lake</div>
+    <div class="dn-meta">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span></div>
+    <hr class="defn-rule">
+    <div class="dx">A far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
+    <div class="cite">— Star Wars: Ewoks #9</div>
   </div><span class="s-conf">Strictly Confidential</span>`});
 
 /* A7 — DISCLAIMER */
