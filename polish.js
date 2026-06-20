@@ -287,7 +287,7 @@
   // absent from this map and fall through to the '#fff' fallback.
   var BRAND_TILE = {
     'figma.com':         '#0D0D0D',  // Figma uses a near-black tile
-    'deel.com':          '#326FEB',  // Deel blue
+    'deel.com':          '#C3B5F0',  // Deel lavender (matches the icon tile)
     'kalshi.com':        '#00D082',  // Kalshi green
     'checkr.com':        '#009BB5',  // Checkr teal
     'brex.com':          '#0F0F0F',  // Brex near-black
