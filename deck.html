@@ -142,7 +142,17 @@ body{
 .statement .eyebrow{color:var(--sun);}
 .statement .sline{font-family:var(--serif);color:#fff;font-size:50px;line-height:1.16;letter-spacing:-.01em;max-width:1080px;}
 .statement .sline.sub{color:rgba(255,255,255,.84);margin-top:26px;font-size:29px;line-height:1.32;max-width:1000px;}
+.statement .sline .forged{color:var(--sun);font-weight:400;}
 .statement .s-mark{opacity:1;}
+/* thesis "trades a founder makes" */
+.trades{margin-top:28px;display:flex;flex-direction:column;gap:13px;max-width:1040px;}
+.trade{display:flex;align-items:baseline;gap:20px;font-family:var(--serif);border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:13px;}
+.trade:last-child{border-bottom:0;}
+.trade .gave{flex:0 0 340px;color:rgba(255,255,255,.6);font-size:21px;}
+.trade .ar{color:var(--sun);font-size:19px;flex:0 0 auto;}
+.trade .got{color:#fff;font-size:24px;}
+.trade-close{margin-top:26px;font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.92);max-width:1040px;line-height:1.4;}
+.trade-close b{color:var(--sun);font-weight:400;}
 
 /* ---------- boom (headline numbers) ---------- */
 .boom{background:radial-gradient(120% 130% at 20% 0%,#1a3fb0 0%,#0a2a82 45%,#02041F 100%);}
@@ -619,7 +629,7 @@ const WORLD=[
  ['Brazil',9,35,58,null,null],['Iran',9,63,40,null,null],['Australia',8,82,66,null,null],
  ['Netherlands',7,50,28,53,18],['New Zealand',6,91,73,90,66],['Denmark',5,52,24,52,13],
  ['Italy',5,51,37,49,46],['Poland',5,53,30,56,46],['Romania',5,55,33,56,79],
- ['South Africa',5,55,67,55,73],['Argentina',5,34,74,35,81],['Portugal',4,45,37,43,43],
+ ['South Africa',5,55,67,55,73],['Argentina',5,31,79,30,87],['Portugal',4,45,37,43,43],
  ['Lebanon',4,60,40,63,21],['Sweden',3,53,23,57,21],['Pakistan',3,64,45,64,69],
  ['Japan',3,86,40,90,45],['Greece',2,54,38,52,62],['Turkey',2,59,36,66,21],
  ['Uzbekistan',2,67,33,69,32],['Guatemala',2,22,50,22,56],['Others',29,null,null,95,40]
@@ -679,11 +689,18 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   <span class="s-conf">Strictly Confidential</span>`});
 
 /* STATEMENT */
-add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
+add({title:'Thesis',track:'core',teaser:true,dark:true,cls:'statement',html:`
   <div class="s-pad">
     <div class="eyebrow">Our Thesis</div>
-    <div class="sline">We believe talent is universal — and invest in the world's best founders at their breakout moments.</div>
-    <div class="sline sub">Our insights into global, economic, and technological shifts help back multiple blockbuster companies a decade.</div>
+    <div class="sline">Talent is universal. <span class="forged">Conviction is forged.</span></div>
+    <div class="sline sub" style="font-size:22px;margin-top:18px">The founders who leave everything familiar make a different set of trades:</div>
+    <div class="trades">
+      <div class="trade"><span class="gave">A safety net</span><span class="ar">→</span><span class="got">no fallback, only forward</span></div>
+      <div class="trade"><span class="gave">A language they'd mastered</span><span class="ar">→</span><span class="got">fluency in being underestimated</span></div>
+      <div class="trade"><span class="gave">A résumé that opened doors</span><span class="ar">→</span><span class="got">the nerve to kick them down</span></div>
+      <div class="trade"><span class="gave">Home-field advantage</span><span class="ar">→</span><span class="got">the habit of winning away</span></div>
+    </div>
+    <div class="trade-close">No one picks the hard version of everything by accident — that's <b>conviction with a passport</b>, and we back it from the first check.</div>
   </div>${chrome(true)}`});
 
 
@@ -1012,7 +1029,7 @@ add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cl
     <h1 class="s-title" style="text-align:center;font-size:40px">Country of Origin of US Unicorn Founders</h1>
     <div style="flex:1;display:flex;align-items:flex-end;min-height:0;margin-top:2px">
       <div style="position:relative;width:100%;aspect-ratio:2/1;max-height:100%;margin:0 auto">
-        <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6">
+        <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transform:translateY(7%)">
         ${worldMap()}
       </div>
     </div>
@@ -1125,9 +1142,6 @@ add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html
   </div>${chrome(false)}`});
 
 /* ===== KEYNOTE SLIDES (drafts recreated from the latest Keynote, for review) ===== */
-add({title:'Keynote Slides',track:'keynote',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">For Review</div><h2>Keynote Slides</h2>
-  <p>Recreated from the latest Keynote for review. Titles and figures are drafts to confirm — fine copy wasn't legible in the source.</p></div>${chrome(true)}`});
 
 /* BOOM — the headline numbers */
 add({title:'The Numbers',track:'keynote',teaser:false,dark:true,cls:'boom',html:`
