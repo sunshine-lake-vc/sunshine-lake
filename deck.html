@@ -370,11 +370,10 @@ table.tbl.tall td.co{font-size:20px;}
 .defn{background:radial-gradient(120% 120% at 25% 30%,#1a1d44,#02041F);}
 .defn .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
 .defn .dn-word{font-family:var(--serif);color:#fff;font-size:78px;line-height:1;letter-spacing:-.015em;}
-.defn .dn-meta{font-family:var(--serif);color:#aeb6da;font-size:27px;margin-top:16px;}
-.defn .dn-meta .pos{color:var(--sun);font-style:italic;}
-.defn .defn-rule{height:2px;width:120px;background:linear-gradient(90deg,var(--sun),transparent);border:0;margin:30px 0;}
-.defn .dx{color:#d8def5;font-size:42px;font-family:var(--serif);line-height:1.28;max-width:1040px;}
-.defn .dx b{color:#fff;font-weight:400;border-bottom:3px solid var(--sun);padding-bottom:2px;}
+.defn .dn-def{color:#d8def5;font-size:36px;font-family:var(--serif);line-height:1.32;max-width:1060px;margin-top:22px;}
+.defn .dn-def .dn-pron{color:#aeb6da;}
+.defn .dn-def .pos{color:var(--sun);font-style:italic;}
+.defn .dn-def b{color:#fff;font-weight:400;border-bottom:3px solid var(--sun);padding-bottom:2px;}
 .defn .cite{font-family:var(--serif);font-style:italic;color:#8b93bd;font-size:21px;margin-top:28px;}
 
 /* disclaimer */
@@ -533,15 +532,15 @@ const TEAM=[
  {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'ESCP · Adyen',img:'images/team/wieger.webp'}
 ];
 const VECTORS=[
- {n:'1',t:'Founding Has Never Been Easier',p:'',ad:[['David Bell','Professor & Advisor — Warby Parker','🇳🇿'],['Esther Wojcicki','Silicon Valley Legend — Stanford','🇺🇸'],['Mike Franklin','Professor & Advisor — Databricks','🇺🇸']]},
- {n:'2',t:'Foundation-building Is Hard',p:'Product–market fit',ad:[['Christopher Muhr','Founder & COO — Auto1','🇩🇪'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸'],['Jamie Feaster','Growth & Brand — brand whisperer to 100+ global clients','🇺🇸']]},
- {n:'3',t:'Sustainable Growth Is Harder Than Ever',p:'',ad:[['Andrew Hovelson','Storytelling — Broadway & TV actor coaching founders','🇺🇸'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
+ {n:'1',t:'Founding',p:'',ad:[['David Bell','Professor & Advisor — Warby Parker','🇳🇿'],['Esther Wojcicki','Godmother of Silicon Valley — Stanford','🇺🇸'],['Mike Franklin','CS Chairman — UChicago & Databricks','🇺🇸']]},
+ {n:'2',t:'Foundation-building',p:'Product–market fit',ad:[['Christopher Muhr','COO — Auto1','🇩🇪'],['Tom Lee','Serial Entrepreneur — One Medical','🇺🇸'],['Jamie Feaster','Growth & Brand — 100+ global clients','🇺🇸']]},
+ {n:'3',t:'Sustainable Growth',p:'',ad:[['Andrew Hovelson','Storytelling — Broadway & TV actor','🇺🇸'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
 ];
 const TRACK=[
+ ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42','$1.0','101x','$60.2','157%','Kleiner Perkins'],
  ['Deel','Workforce','$1.0','$16.7mm','6.0%','$980','$17.3','356x','$354.9','168%','a16z'],
  ['Headway','Mental Health','$0.9','$7.6mm','11.9%','$325','$2.2','115x','$102.5','124%','Accel'],
- ['Kalshi','Markets','$0.5','$10.1mm','4.9%','$2,406','$22.0','831x','$414.8','158%','Sequoia'],
- ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42','$1.0','101x','$60.2','157%','Kleiner Perkins']
+ ['Kalshi','Markets','$0.5','$10.1mm','4.9%','$2,406','$22.0','831x','$414.8','158%','Sequoia']
 ];
 const CASES=[
  {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',banner:'Realized Return on Investment (DPI)',story:'Blocked by visa walls after MIT, these French &amp; Chinese engineers rebuilt how the world hires.',
@@ -692,7 +691,7 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
 add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
   <div class="s-pad">
     <div class="eyebrow">Our Thesis</div>
-    <div class="sline">We believe talent is universal — and invest in the world's best founders at their breakout moments.</div>
+    <div class="sline">We believe talent's universal &amp; invest in the world's best founders at breakout moments.</div>
     <div class="sline sub">Our insights into economic, social, and technological shifts fuel multiple blockbuster companies a decade.</div>
   </div>${chrome(true)}`});
 
@@ -715,9 +714,9 @@ add({title:'Thesis',track:'core',teaser:true,dark:true,cls:'statement',html:`
 /* 4 — GP CREDIBILITY */
 add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Donald Stalter · General Partner</div>
-    <div class="quote-lg">Reading global technological and economic shifts early — and backing the founders who turn them into category-defining companies.</div>
-    <div class="quote-sub">Born in Minnesota, raised globally, and fluent across cultures and languages. Cross-border M&amp;A and operating experience, with <b>13 unicorns</b> backed to date. <b>$60mm</b> deployed across <b>2 seed funds</b> — a <b>21× TVPI</b> and <b>60% DPI; 19× liquid</b>. Now spinning out with <b>$50mm</b> and a <b>5% GP commit</b>.</div>
+    <div class="eyebrow">Donald Stalter · Founder &amp; General Partner</div>
+    <div class="quote-lg">An outsider who lived the thesis — reading global shifts early and backing the founders who turn them into category-defining companies.</div>
+    <div class="quote-sub">Cross-border operator and investor across three continents; a seed portfolio that returned <b>19×</b> and <b>13 unicorns</b> to date.</div>
     <hr class="s-rule">
     <div class="gp" style="margin-top:14px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
@@ -737,11 +736,7 @@ add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:''
   <div class="s-pad">
     <h1 class="s-title">A unicorn for every $15mm deployed</h1>
     <hr class="s-rule">
-    <table class="tbl tall" style="margin-top:18px">
-      <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Downstream</th></tr></thead>
-      <tbody>${trackRowsHTML()}</tbody>
-    </table>
-    <div class="tr-callout">
+    <div class="tr-callout" style="margin:18px 0 0">
       <div class="trc-funds">
         <div><div class="trc-amt">$23mm Fund I</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
         <div class="trc-div"></div>
@@ -749,6 +744,10 @@ add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:''
       </div>
       <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
     </div>
+    <table class="tbl tall" style="margin-top:18px">
+      <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Follow-On Lead</th></tr></thead>
+      <tbody>${trackRowsHTML()}</tbody>
+    </table>
   </div>${GROSSNOTE}${chrome(false)}`});
 
 /* 6 — BENCHMARKING */
@@ -789,6 +788,7 @@ add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:''
 /* 7 — TEAM + ADVISORS */
 add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:46px">
+    <div class="eyebrow">Sunshine Lake Team</div>
     <h1 class="s-title" style="font-size:36px">Decades of relationships — compounding into operational velocity</h1>
     <div class="team-row" style="margin:14px 0 16px">${teamCardsHTML()}</div>
     <div class="kicker" style="text-align:center;margin-bottom:8px">Advisors — equipping founders across three key vectors</div>
@@ -1132,9 +1132,7 @@ add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:
   <div class="s-pad">
     <div class="eyebrow" style="color:var(--sun)">The Definition</div>
     <div class="dn-word">Sunshine Lake</div>
-    <div class="dn-meta">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span></div>
-    <hr class="defn-rule">
-    <div class="dx">A far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
+    <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span>;</span> a far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
     <div class="cite">— Star Wars: Ewoks #9</div>
   </div><span class="s-conf">Strictly Confidential</span>`});
 
