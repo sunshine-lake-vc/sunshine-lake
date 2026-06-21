@@ -239,7 +239,7 @@
     { name: 'Lawrence Lin Murata',role: 'Co-Founder & CEO',   company: 'Slope',      domain: 'slopepay.com',
       quote: "He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world." },
     { name: 'Mark Lawrence',     role: 'Founder & CEO',       company: 'SpotHero',   domain: 'spothero.com',
-      quote: "We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would." },
+      quote: "We've worked through different levers to accelerate growth and optimize the P&L. <b>If I could take money from Don again, I absolutely would.</b>" },
     { name: 'Max Kauderer',      role: 'Co-Founder & CEO',    company: 'Yuzu Health',domain: 'yuzuhealth.com',
       quote: "He could not have been more supportive through our pivots and challenges. We've been able to rely on Don as an independent point of feedback." },
     { name: 'Michael Tannenbaum',role: 'CEO (fmr. COO, Brex)',company: 'Figure',     domain: 'figure.com',
