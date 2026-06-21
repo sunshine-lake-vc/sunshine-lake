@@ -107,19 +107,18 @@ body{
   radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
   linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
 .cover .s-pad{justify-content:center;}
-.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.0;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);}
-.cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:14px;color:#fff;font-family:var(--serif);font-size:30px;z-index:2;}
-.cover-logo svg{width:30px;fill:#fff;}
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:72px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);}
+.cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:18px;color:#fff;font-family:var(--serif);font-size:46px;z-index:2;}
+.cover-logo svg{width:44px;fill:#fff;}
 .cover .meta{position:absolute;left:72px;bottom:74px;z-index:2;}
 .cover .meta .lead{font-weight:700;color:#fff;font-size:18px;letter-spacing:.02em;}
 .cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
 .cover .meta .ln.dim{color:rgba(255,255,255,.55);}
 .cover .s-conf{color:rgba(255,255,255,.65);}
-.cover-ribbon{position:absolute;top:0;right:0;width:340px;height:340px;overflow:hidden;z-index:3;pointer-events:none;}
-.cover-ribbon span{position:absolute;display:block;width:520px;padding:30px 0;top:34px;right:-150px;transform:rotate(45deg);transform-origin:center;
-  background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);text-align:center;
-  font-family:var(--sans);font-weight:700;font-size:20px;letter-spacing:.18em;text-transform:uppercase;
-  box-shadow:0 8px 26px rgba(2,4,31,.45);}
+.cover-band{position:absolute;top:54px;right:64px;z-index:3;
+  background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);
+  font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 24px;border-radius:999px;box-shadow:0 6px 20px rgba(2,4,31,.32);}
 .spark{position:absolute;pointer-events:none;background:
    radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
 .spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -676,12 +675,12 @@ function add(o){SLIDES.push(o);}
 /* 1 — COVER */
 add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   <div class="cover-logo">${MARK} Sunshine Lake</div>
-  <div class="cover-ribbon"><span>$50M Target</span></div>
+  <div class="cover-band">Fund&nbsp;I · $50M Target · 5% GP Commit</div>
   <div class="s-pad">
     <h1>Global Founders<br>forge the future.</h1>
   </div>
   <div class="meta">
-    <div class="lead">Pre-Seed &amp; Seed · Fund&nbsp;I · 5% GP Commit</div>
+    <div class="lead">Pre-Seed &amp; Seed</div>
     <div class="ln">Donald Stalter · don@sunshinelake.vc</div>
     <div class="ln dim">San Francisco</div>
   </div>
@@ -691,23 +690,8 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
 add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
   <div class="s-pad">
     <div class="eyebrow">Our Thesis</div>
-    <div class="sline">We believe talent's universal &amp; invest in the world's best founders at breakout moments.</div>
-    <div class="sline sub">Our insights into economic, social, and technological shifts fuel multiple blockbuster companies a decade.</div>
-  </div>${chrome(true)}`});
-
-/* THESIS — talent is universal / conviction forged (follows the Statement) */
-add({title:'Thesis',track:'core',teaser:true,dark:true,cls:'statement',html:`
-  <div class="s-pad">
-    <div class="eyebrow">Our Thesis</div>
     <div class="sline">Talent is universal. <span class="forged">Conviction is forged.</span></div>
-    <div class="sline sub" style="font-size:22px;margin-top:18px">The founders who leave everything familiar make a different set of trades:</div>
-    <div class="trades">
-      <div class="trade"><span class="gave">A safety net</span><span class="ar">→</span><span class="got">no fallback, only forward</span></div>
-      <div class="trade"><span class="gave">A language they'd mastered</span><span class="ar">→</span><span class="got">fluency in being underestimated</span></div>
-      <div class="trade"><span class="gave">A résumé that opened doors</span><span class="ar">→</span><span class="got">the nerve to kick them down</span></div>
-      <div class="trade"><span class="gave">Home-field advantage</span><span class="ar">→</span><span class="got">the habit of winning away</span></div>
-    </div>
-    <div class="trade-close">No one picks the hard version of everything by accident — that's <b>conviction with a passport</b>, and we back it from the first check.</div>
+    <div class="sline sub">We back the world's best founders at their breakout moments — insights into economic, social, and technological shifts fuel multiple blockbuster companies a decade.</div>
   </div>${chrome(true)}`});
 
 
