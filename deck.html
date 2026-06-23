@@ -210,6 +210,9 @@ body{
 .fw-hub b{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.05;}
 .fw-hub span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);margin-top:7px;}
 .fw-net{position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:13.5px;color:var(--mid-lake);font-family:var(--serif);font-style:italic;}
+.fw-ellipse{animation:fw-flow 2.6s linear infinite;}
+@keyframes fw-flow{to{stroke-dashoffset:-140;}}
+@media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
 
 /* ---------- generic layout helpers ---------- */
 .grow{flex:1;min-height:0;}
@@ -808,7 +811,7 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
 
 /* 8 — SCOUT / SELECT */
 /* ===== MERGED ENGINE — VERSION A (horizontal flow) ===== */
-add({title:'Engine — Flow (A)',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'The Engine',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">How We Build</div>
     <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
@@ -864,82 +867,7 @@ add({title:'Engine — Flow (A)',track:'core',teaser:false,dark:false,cls:'',htm
     <div class="eng-net">Powered by a deep, proprietary network — 250+ unicorn founders · VCs · corporates · incubators · accelerators</div>
   </div>${chrome(false)}`});
 
-/* ===== MERGED ENGINE — VERSION B (abstract flywheel) ===== */
-add({title:'Engine — Flywheel (B)',track:'core',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">How We Build</div>
-    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
-    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">A compounding flywheel — every win feeds the next.</div>
-    <div class="fw-wrap">
-      <div class="fw-stage">
-        <svg class="fw-svg" viewBox="0 0 780 496" aria-hidden="true">
-          <ellipse cx="390" cy="248" rx="315" ry="173" fill="none" stroke="#cdd6ee" stroke-width="2" stroke-dasharray="4 10"/>
-          <g fill="#aab8dc">
-            <polygon points="-7,-6 7,0 -7,6" transform="translate(547,161) rotate(29)"/>
-            <polygon points="-7,-6 7,0 -7,6" transform="translate(547,334) rotate(151)"/>
-            <polygon points="-7,-6 7,0 -7,6" transform="translate(232,334) rotate(209)"/>
-            <polygon points="-7,-6 7,0 -7,6" transform="translate(232,161) rotate(331)"/>
-          </g>
-        </svg>
-        <div class="fw-node s1" style="left:315px;top:0"><span class="fn">Scout</span><span class="fs">5,000+</span><span class="fe">Source</span></div>
-        <div class="fw-node s2" style="left:630px;top:173px"><span class="fn">Select</span><span class="fs">500</span><span class="fe">Score</span></div>
-        <div class="fw-node s3" style="left:315px;top:346px"><span class="fn">Secure</span><span class="fs">100</span><span class="fe">Win</span></div>
-        <div class="fw-node s4" style="left:0;top:173px"><span class="fn">Support</span><span class="fs">30 core</span><span class="fe">Accelerate</span></div>
-        <div class="fw-hub"><b>Sunshine<br>Lake</b><span>The Engine</span></div>
-      </div>
-      <div class="fw-net">Powered by a 250+ relationship network — unicorn founders · VCs · corporates · incubators · accelerators</div>
-    </div>
-  </div>${chrome(false)}`});
-
-add({title:'Scout &amp; Select',track:'core',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:38px">Regimented &amp; purpose-built for market leadership</h1>
-    <div class="engine-nav"><div class="en on"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--sun);color:var(--navy)">2</span><span class="nm">Select</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">4</span><span class="nm">Support</span></div></div>
-    <div class="duo">
-      <div class="panel blue"><span class="pnum">1</span><h3>Scout</h3><div class="big">5,000+ targets identified via a multi-pronged global strategy.</div>
-        <div class="row"><b>Unicorn &amp; alumni groups</b> — Headway, Brex &amp; Deel founders introduce Don to the next breakouts (Marble, PermitFlow, Firstwork, Enshift).</div>
-        <div class="row"><b>Campus programming</b> — UChicago · Stanford · Caltech · NYU · Imperial · Mines Paris · TUM · LSE · NUS · USP.</div>
-        <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
-        <div class="hl"><b>500 advance</b><span>rigorously evaluated in the next stage</span></div></div>
-      <div class="panel gold"><span class="pnum">2</span><h3>Select</h3><div class="big">500 top founders scored 1–5 across five axes.</div>
-        <div class="row" style="padding-bottom:4px"><b>Example — SwiftClaim</b> · ex-Stripe PM automating consumer insurance payouts.</div>
-        <div class="checklist">
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout Story</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global Ambition</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique Inflection</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain Expertise</span><span class="ck-score">5</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
-        </div>
-        <div class="hl"><b>21 / 25</b><span>SwiftClaim — investment selected</span></div></div>
-    </div>
-    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:18px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
-  </div>${chrome(false)}`});
-
-/* 9 — SECURE / SUPPORT */
-add({title:'Secure &amp; Support',track:'core',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:38px">A 5-year blueprint to build a 50-year venture franchise</h1>
-    <div class="engine-nav"><div class="en"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">2</span><span class="nm">Select</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--mid-lake)">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--cobalt)">4</span><span class="nm">Support</span></div></div>
-    <div class="duo">
-      <div class="panel green"><span class="pnum">3</span><h3>Secure</h3><div class="big">100 pursued with high conviction.</div>
-        <div class="row"><i>"Don's the best; he intro'd us to an elite marketer who revolutionized DNP."</i> — Joshua Browder, DoNotPay</div>
-        <div class="row"><i>"Early on, Don mapped execution at WW; we scaled fast and had to have him in."</i> — Filip Kozera, Wordware</div>
-        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Affinity</div>
-        <div class="hl"><b>30 core</b><span>secured into the portfolio</span></div></div>
-      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">30 core investments onboarded &amp; augmented.</div>
-        <div class="row"><b>Weeks 1–2 · Storytelling</b> — pro acting skills; founder narratives force-multiply.</div>
-        <div class="row"><b>Weeks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
-        <div class="row"><b>Weeks 5–6 · Domain Expertise</b> — industry connections &amp; best practices.</div>
-        <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div>
-        <div class="hl"><b style="font-size:23px">Sunshine Lake Acceleration Module</b><span>A 7-week structured path to exit-readiness</span></div></div>
-    </div>
-  </div>${chrome(false)}`});
+/* Engine flywheel (alt) + original Scout/Select & Secure/Support moved to the Appendix (see below). */
 
 /* ECOSYSTEM NETWORK */
 add({title:'A Global Network',track:'core',teaser:false,dark:true,cls:'ecosystem',html:`
@@ -1108,6 +1036,82 @@ add({title:'Dive in.',track:'core',teaser:true,dark:true,cls:'closing',html:`
 /* ===== APPENDIX ===== */
 add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
+
+/* ===== ENGINE FLYWHEEL (alt concept) ===== */
+add({title:'Engine — Flywheel (alt)',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Build</div>
+    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">A compounding flywheel — every win feeds the next.</div>
+    <div class="fw-wrap">
+      <div class="fw-stage">
+        <svg class="fw-svg" viewBox="0 0 780 496" aria-hidden="true">
+          <ellipse class="fw-ellipse" cx="390" cy="248" rx="315" ry="173" fill="none" stroke="#cdd6ee" stroke-width="2" stroke-dasharray="4 10"/>
+          <g fill="#aab8dc">
+            <polygon points="-7,-6 7,0 -7,6" transform="translate(547,161) rotate(29)"/>
+            <polygon points="-7,-6 7,0 -7,6" transform="translate(547,334) rotate(151)"/>
+            <polygon points="-7,-6 7,0 -7,6" transform="translate(232,334) rotate(209)"/>
+            <polygon points="-7,-6 7,0 -7,6" transform="translate(232,161) rotate(331)"/>
+          </g>
+        </svg>
+        <div class="fw-node s1" style="left:315px;top:0"><span class="fn">Scout</span><span class="fs">5,000+</span><span class="fe">Source</span></div>
+        <div class="fw-node s2" style="left:630px;top:173px"><span class="fn">Select</span><span class="fs">500</span><span class="fe">Score</span></div>
+        <div class="fw-node s3" style="left:315px;top:346px"><span class="fn">Secure</span><span class="fs">100</span><span class="fe">Win</span></div>
+        <div class="fw-node s4" style="left:0;top:173px"><span class="fn">Support</span><span class="fs">30 core</span><span class="fe">Accelerate</span></div>
+        <div class="fw-hub"><b>Sunshine<br>Lake</b><span>The Engine</span></div>
+      </div>
+      <div class="fw-net">Powered by a 250+ relationship network — unicorn founders · VCs · corporates · incubators · accelerators</div>
+    </div>
+  </div>${chrome(false)}`});
+
+add({title:'Scout &amp; Select',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="font-size:38px">Regimented &amp; purpose-built for market leadership</h1>
+    <div class="engine-nav"><div class="en on"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
+      <div class="en on"><span class="num" style="background:var(--sun);color:var(--navy)">2</span><span class="nm">Select</span></div><div class="en-line"></div>
+      <div class="en"><span class="num">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
+      <div class="en"><span class="num">4</span><span class="nm">Support</span></div></div>
+    <div class="duo">
+      <div class="panel blue"><span class="pnum">1</span><h3>Scout</h3><div class="big">5,000+ targets identified via a multi-pronged global strategy.</div>
+        <div class="row"><b>Unicorn &amp; alumni groups</b> — Headway, Brex &amp; Deel founders introduce Don to the next breakouts (Marble, PermitFlow, Firstwork, Enshift).</div>
+        <div class="row"><b>Campus programming</b> — UChicago · Stanford · Caltech · NYU · Imperial · Mines Paris · TUM · LSE · NUS · USP.</div>
+        <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
+        <div class="hl"><b>500 advance</b><span>rigorously evaluated in the next stage</span></div></div>
+      <div class="panel gold"><span class="pnum">2</span><h3>Select</h3><div class="big">500 top founders scored 1–5 across five axes.</div>
+        <div class="row" style="padding-bottom:4px"><b>Example — SwiftClaim</b> · ex-Stripe PM automating consumer insurance payouts.</div>
+        <div class="checklist">
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout Story</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global Ambition</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique Inflection</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain Expertise</span><span class="ck-score">5</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
+        </div>
+        <div class="hl"><b>21 / 25</b><span>SwiftClaim — investment selected</span></div></div>
+    </div>
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:18px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
+  </div>${chrome(false)}`});
+
+add({title:'Secure &amp; Support',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="font-size:38px">A 5-year blueprint to build a 50-year venture franchise</h1>
+    <div class="engine-nav"><div class="en"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
+      <div class="en"><span class="num">2</span><span class="nm">Select</span></div><div class="en-line"></div>
+      <div class="en on"><span class="num" style="background:var(--mid-lake)">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
+      <div class="en on"><span class="num" style="background:var(--cobalt)">4</span><span class="nm">Support</span></div></div>
+    <div class="duo">
+      <div class="panel green"><span class="pnum">3</span><h3>Secure</h3><div class="big">100 pursued with high conviction.</div>
+        <div class="row"><i>"Don's the best; he intro'd us to an elite marketer who revolutionized DNP."</i> — Joshua Browder, DoNotPay</div>
+        <div class="row"><i>"Early on, Don mapped execution at WW; we scaled fast and had to have him in."</i> — Filip Kozera, Wordware</div>
+        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Affinity</div>
+        <div class="hl"><b>30 core</b><span>secured into the portfolio</span></div></div>
+      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">30 core investments onboarded &amp; augmented.</div>
+        <div class="row"><b>Weeks 1–2 · Storytelling</b> — pro acting skills; founder narratives force-multiply.</div>
+        <div class="row"><b>Weeks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
+        <div class="row"><b>Weeks 5–6 · Domain Expertise</b> — industry connections &amp; best practices.</div>
+        <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div>
+        <div class="hl"><b style="font-size:23px">Sunshine Lake Acceleration Module</b><span>A 7-week structured path to exit-readiness</span></div></div>
+    </div>
+  </div>${chrome(false)}`});
 
 /* PROBLEM SPACE — moved to appendix per Don, June 2026 */
 add({title:'Critical Global Problems',track:'appendix',teaser:false,dark:false,cls:'',html:`
