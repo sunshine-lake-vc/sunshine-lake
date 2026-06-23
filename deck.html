@@ -298,19 +298,17 @@ table.tbl.tall td.co{font-size:20px;}
 
 /* case study */
 .cs-logo-img{height:46px;width:auto;max-width:280px;object-fit:contain;}
-.cs-founder{display:flex;align-items:center;gap:20px;margin-bottom:18px;}
-.cs-photo{width:172px;height:172px;flex:0 0 172px;border-radius:12px;background:#e3e8f4 center/cover no-repeat;
-  display:flex;align-items:center;justify-content:center;border:1px solid var(--line);position:relative;overflow:hidden;}
-.cs-founder .fn{font-weight:600;color:var(--ink);font-size:24px;line-height:1.2;}
+.cs-photo-col{flex:0 0 210px;align-self:stretch;border-radius:12px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
+.cs-fn{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;background:linear-gradient(transparent,rgba(11,18,117,.82));color:#fff;font-weight:600;font-size:17px;line-height:1.2;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
 .cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
 .cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
 .cs-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
 .cs-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px;}
 .cs-logo{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
-.cs-story{font-family:var(--serif);font-size:27px;line-height:1.2;color:var(--ink);margin:16px 0 20px;max-width:88%;}
-.cs-grid{display:flex;gap:40px;flex:1;min-height:0;}
-.cs-left{flex:1.5;display:flex;flex-direction:column;}
+.cs-story{font-family:var(--serif);font-size:26px;line-height:1.22;color:var(--ink);margin:14px 0 18px;max-width:74%;}
+.cs-grid{display:flex;gap:34px;flex:1;min-height:0;align-items:stretch;}
+.cs-mid{flex:1.5;display:flex;flex-direction:column;min-height:0;}
 .cs-sector{background:#eef3fc;border-radius:10px;padding:12px 16px;font-size:14.5px;color:var(--ink-2);margin-bottom:14px;}
 .cs-steps{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;}
 .cs-steps .st{display:flex;gap:16px;padding:6px 0;font-size:14px;color:var(--ink-2);line-height:1.4;}
@@ -647,8 +645,8 @@ function caseSlide(c){
      <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span>${logo}</div>
      <div class="cs-story">${c.story}</div>
      <div class="cs-grid">
-       <div class="cs-left">
-         <div class="cs-founder"><div class="cs-photo" style="background-image:url('images/cases/${c.key}.webp')"></div><div class="fn">${c.founders}</div></div>
+       <div class="cs-photo-col" style="background-image:url('images/cases/${c.key}.webp')"><div class="cs-fn">${c.founders}</div></div>
+       <div class="cs-mid">
          <div class="cs-sector">${c.sector}</div>
          <div class="cs-steps">${c.steps.map(s=>`<div class="st"><span class="k">${s[0]}</span><span>${s[1]}</span></div>`).join('')}</div>
        </div>
