@@ -172,6 +172,49 @@ body{
 .eco-sat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);}
 .eco-sat .ec-n{font-size:18px;} .eco-sat .ec-s{font-size:12px;color:#aeb6da;font-family:var(--sans);margin-top:3px;}
 
+/* ===== merged SSSS engine — Version A (horizontal flow) ===== */
+.eng-flow{display:flex;gap:12px;flex:1;align-items:stretch;margin-top:16px;}
+.eng-card{flex:1;border-radius:14px;padding:18px 16px;display:flex;flex-direction:column;}
+.eng-card.s1{background:linear-gradient(165deg,#eef3fc,#e4ecfb);}
+.eng-card.s2{background:linear-gradient(165deg,#fdf8ea,#f8efd2);}
+.eng-card.s3{background:linear-gradient(165deg,#e9f5ee,#dfeee7);}
+.eng-card.s4{background:linear-gradient(165deg,#eaf4fb,#dfeef8);}
+.eng-head{display:flex;align-items:center;gap:9px;}
+.eng-num{width:25px;height:25px;border-radius:50%;background:var(--cobalt);color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 25px;}
+.eng-card.s2 .eng-num{background:#b8902a;}.eng-card.s3 .eng-num{background:#2f9d6f;}.eng-card.s4 .eng-num{background:var(--mid-lake);}
+.eng-name{font-family:var(--serif);font-size:24px;color:var(--ink);}
+.eng-stat{margin-left:auto;font-family:var(--serif);font-size:21px;color:var(--cobalt);}
+.eng-card.s2 .eng-stat{color:#b8902a;}.eng-card.s3 .eng-stat{color:#2f9d6f;}.eng-card.s4 .eng-stat{color:var(--mid-lake);}
+.eng-def{font-size:12.5px;color:var(--muted);font-weight:600;margin:6px 0 14px;min-height:32px;}
+.eng-bul{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;}
+.eng-bul li{position:relative;padding-left:15px;font-size:13px;color:var(--ink-2);line-height:1.38;}
+.eng-bul li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--cobalt);}
+.eng-card.s2 .eng-bul li::before{background:#b8902a;}.eng-card.s3 .eng-bul li::before{background:#2f9d6f;}.eng-card.s4 .eng-bul li::before{background:var(--mid-lake);}
+.eng-bul li b{color:var(--ink);font-weight:600;}
+.eng-arrow{align-self:center;color:#c2cae0;font-size:20px;}
+.eng-net{margin-top:14px;text-align:center;font-size:14px;color:var(--mid-lake);font-family:var(--serif);font-style:italic;}
+
+/* ===== merged SSSS engine — Version B (radial flywheel) ===== */
+.fly-grid{position:relative;flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:22px 230px;margin-top:14px;align-content:center;}
+.fly-card{border-radius:14px;padding:15px 18px;}
+.fly-card.s1{background:linear-gradient(165deg,#eef3fc,#e4ecfb);}
+.fly-card.s2{background:linear-gradient(165deg,#fdf8ea,#f8efd2);}
+.fly-card.s3{background:linear-gradient(165deg,#e9f5ee,#dfeee7);}
+.fly-card.s4{background:linear-gradient(165deg,#eaf4fb,#dfeef8);}
+.fly-head{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.fly-num{width:24px;height:24px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 24px;background:var(--cobalt);}
+.fly-card.s2 .fly-num{background:#b8902a;}.fly-card.s3 .fly-num{background:#2f9d6f;}.fly-card.s4 .fly-num{background:var(--mid-lake);}
+.fly-name{font-family:var(--serif);font-size:23px;color:var(--ink);}
+.fly-stat{margin-left:auto;font-family:var(--serif);font-size:18px;color:var(--muted);}
+.fly-bul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.fly-bul li{position:relative;padding-left:14px;font-size:12.5px;color:var(--ink-2);line-height:1.34;}
+.fly-bul li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--cobalt);}
+.fly-bul li b{color:var(--ink);font-weight:600;}
+.fly-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:178px;height:178px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#2f74ff,#155EE8 70%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 0 0 12px rgba(21,94,232,.12);z-index:2;}
+.fly-hub b{font-family:var(--serif);font-size:24px;line-height:1.05;font-weight:400;}
+.fly-hub span{font-size:11px;color:#cfe0ff;margin-top:6px;font-family:var(--sans);letter-spacing:.16em;text-transform:uppercase;}
+.fly-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;pointer-events:none;}
+
 /* ---------- generic layout helpers ---------- */
 .grow{flex:1;min-height:0;}
 .cols{display:flex;gap:34px;}
@@ -768,6 +811,47 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
   </div>${chrome(false)}`});
 
 /* 8 — SCOUT / SELECT */
+/* ===== MERGED ENGINE — VERSION A (horizontal flow) ===== */
+add({title:'Engine — Flow (A)',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Build</div>
+    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Every company runs the same disciplined path — powered by a 250+ relationship network.</div>
+    <hr class="s-rule">
+    <div class="eng-flow">
+      <div class="eng-card s1"><div class="eng-head"><span class="eng-num">1</span><span class="eng-name">Scout</span><span class="eng-stat">5,000+</span></div><div class="eng-def">Multi-pronged global sourcing</div><ul class="eng-bul"><li><b>Unicorn &amp; alumni network</b> surfaces the next breakouts</li><li><b>Campus programming</b> across 10 global schools</li><li><b>Discovery program</b> — 100+ founders &amp; operators</li></ul></div>
+      <span class="eng-arrow">→</span>
+      <div class="eng-card s2"><div class="eng-head"><span class="eng-num">2</span><span class="eng-name">Select</span><span class="eng-stat">500</span></div><div class="eng-def">Scored 1–5 on five axes</div><ul class="eng-bul"><li><b>Five-axis rubric</b> — story, ambition, inflection, domain, execution</li><li><b>20 / 25 to advance</b> — e.g. SwiftClaim, 21/25</li><li><b>Conviction over consensus</b></li></ul></div>
+      <span class="eng-arrow">→</span>
+      <div class="eng-card s3"><div class="eng-head"><span class="eng-num">3</span><span class="eng-name">Secure</span><span class="eng-stat">100</span></div><div class="eng-def">Win the round, high conviction</div><ul class="eng-bul"><li><b>Network wins access</b> to competitive rounds</li><li><b>Lead &amp; protect</b> — safeguard the cap table</li><li><b>Founder trust</b> — "10 fintech leaders early" (Affinity)</li></ul></div>
+      <span class="eng-arrow">→</span>
+      <div class="eng-card s4"><div class="eng-head"><span class="eng-num">4</span><span class="eng-name">Support</span><span class="eng-stat">30 core</span></div><div class="eng-def">Sunshine Lake Acceleration</div><ul class="eng-bul"><li><b>7-week structured path</b> to exit-readiness</li><li><b>Storytelling → execution → domain</b></li><li><b>Plugged into the network</b> at every step</li></ul></div>
+    </div>
+    <div class="eng-net">Powered by a deep, proprietary network — 250+ unicorn founders · VCs · corporates · incubators · accelerators</div>
+  </div>${chrome(false)}`});
+
+/* ===== MERGED ENGINE — VERSION B (radial flywheel) ===== */
+add({title:'Engine — Flywheel (B)',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Build</div>
+    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">A compounding flywheel — Scout to Support — powered by a 250+ relationship network.</div>
+    <div class="fly-grid">
+      <svg class="fly-ring" width="540" height="360" viewBox="0 0 540 360" aria-hidden="true">
+        <ellipse cx="270" cy="180" rx="258" ry="158" fill="none" stroke="#cdd6ee" stroke-width="2" stroke-dasharray="5 9"/>
+        <polygon points="262,14 278,22 262,30" fill="#9fb0d8"/>
+        <polygon points="520,172 528,188 512,188" fill="#9fb0d8"/>
+        <polygon points="278,346 262,338 278,330" fill="#9fb0d8"/>
+        <polygon points="20,188 12,172 28,172" fill="#9fb0d8"/>
+      </svg>
+      <div class="fly-card s1"><div class="fly-head"><span class="fly-num">1</span><span class="fly-name">Scout</span><span class="fly-stat">5,000+</span></div><ul class="fly-bul"><li>Unicorn &amp; alumni network</li><li>Campus programming · 10 schools</li><li>Discovery program · 100+ ops</li></ul></div>
+      <div class="fly-card s2"><div class="fly-head"><span class="fly-num">2</span><span class="fly-name">Select</span><span class="fly-stat">500</span></div><ul class="fly-bul"><li>Five-axis rubric (1–5)</li><li>20 / 25 to advance</li><li>Conviction over consensus</li></ul></div>
+      <div class="fly-card s4"><div class="fly-head"><span class="fly-num">4</span><span class="fly-name">Support</span><span class="fly-stat">30 core</span></div><ul class="fly-bul"><li>7-week Acceleration</li><li>Storytelling → execution → domain</li><li>Network at every step</li></ul></div>
+      <div class="fly-card s3"><div class="fly-head"><span class="fly-num">3</span><span class="fly-name">Secure</span><span class="fly-stat">100</span></div><ul class="fly-bul"><li>Network wins the round</li><li>Lead &amp; protect cap table</li><li>Founder trust (Affinity)</li></ul></div>
+      <div class="fly-hub"><b>Sunshine<br>Lake</b><span>The Engine</span></div>
+    </div>
+  </div>${chrome(false)}`});
+
 add({title:'Scout &amp; Select',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <h1 class="s-title" style="font-size:38px">Regimented &amp; purpose-built for market leadership</h1>
