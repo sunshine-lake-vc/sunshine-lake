@@ -282,6 +282,11 @@ table.tbl.tall td.co{font-size:20px;}
 .panel .hl b{font-family:var(--serif);font-size:28px;color:var(--cobalt);font-weight:400;}
 .panel.gold .hl b{color:#b8902a;}
 .panel .hl span{font-size:13px;color:var(--muted);display:block;margin-top:3px;}
+.checklist{display:flex;flex-direction:column;gap:9px;margin:12px 0 4px;}
+.ck{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--ink-2);}
+.ck-box{width:21px;height:21px;flex:0 0 21px;border-radius:5px;background:#b8902a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.ck-label{flex:1;}
+.ck-score{font-family:var(--serif);font-size:19px;color:#b8902a;}
 
 /* needs-art working marker (corner) */
 .needs-art{position:absolute;top:18px;right:18px;z-index:5;display:inline-flex;align-items:center;gap:6px;
@@ -294,7 +299,7 @@ table.tbl.tall td.co{font-size:20px;}
 /* case study */
 .cs-logo-img{height:46px;width:auto;max-width:280px;object-fit:contain;}
 .cs-founder{display:flex;align-items:center;gap:20px;margin-bottom:18px;}
-.cs-photo{width:138px;height:138px;flex:0 0 138px;border-radius:12px;background:#e3e8f4 center/cover no-repeat;
+.cs-photo{width:172px;height:172px;flex:0 0 172px;border-radius:12px;background:#e3e8f4 center/cover no-repeat;
   display:flex;align-items:center;justify-content:center;border:1px solid var(--line);position:relative;overflow:hidden;}
 .cs-founder .fn{font-weight:600;color:var(--ink);font-size:24px;line-height:1.2;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
@@ -536,10 +541,10 @@ const VECTORS=[
  {n:'3',t:'Sustainable Growth',p:'',ad:[['Andrew Hovelson','Storytelling — Broadway & TV actor','🇺🇸'],['Servaes Tholen','CFO — Headway','🇳🇱'],['Shuo Wang','Serial Entrepreneur & CRO — Deel','🇨🇳']]}
 ];
 const TRACK=[
- ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42','$1.0','101x','$60.2','157%','Kleiner Perkins'],
- ['Deel','Workforce','$1.0','$16.7mm','6.0%','$980','$17.3','356x','$354.9','168%','a16z'],
- ['Headway','Mental Health','$0.9','$7.6mm','11.9%','$325','$2.2','115x','$102.5','124%','Accel'],
- ['Kalshi','Markets','$0.5','$10.1mm','4.9%','$2,406','$22.0','831x','$414.8','158%','Sequoia']
+ ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42.0','$1.0','101x','$60.2','157%','Kleiner Perkins'],
+ ['Deel','Workforce','$1.0','$16.7mm','6.0%','$980.0','$17.3','356x','$354.9','168%','a16z'],
+ ['Headway','Mental Health','$0.9','$7.6mm','11.9%','$325.0','$2.2','115x','$102.5','124%','Accel'],
+ ['Kalshi','Markets','$0.5','$10.1mm','4.9%','$2,406.0','$22.0','831x','$414.8','158%','Sequoia']
 ];
 const CASES=[
  {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',banner:'Realized Return on Investment (DPI)',story:'Blocked by visa walls after MIT, these French &amp; Chinese engineers rebuilt how the world hires.',
@@ -547,7 +552,7 @@ const CASES=[
   steps:[['SCOUT','Spotted early by a UChicago entrepreneur and YC alum with firsthand founder instincts.'],['SELECT','Backed a visionary team targeting the $525B remote payroll / compliance market.'],['SECURE','Accelerated by introducing 5 top hires and 12 partners; broadcast to Daniel Gross and Elad Gil.'],['SUPPORT','Hosted team in-office for 6 months; <b>brought in COO Dan Westgarth from Revolut</b>. Intro\'d hires; facilitated Legalpad acquisition.']],
   metrics:[['Date','Dec 2019'],['Invested','$1mm',''],['Realized Value','$20mm','hot'],['Liquid Position Today','$336mm','hot'],['Post-Money Today','$17Bn'],['Ownership','6%']],
   insight:'Global teams with proper tooling hire faster, access better talent, and raise capital 6 months earlier than competitors.',teaser:true},
- {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',banner:'Liquid Position: Potential for DPI through Secondary Sale',story:'These MIT immigrants built the first CFTC-regulated event exchange for real-world risk — now mainstream.',
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',banner:'Potential to go public',story:'These MIT immigrants built the first CFTC-regulated event exchange for real-world risk — now mainstream.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',sector:'Economic shift — the first CFTC-regulated event exchange, bringing prediction markets mainstream.',
   steps:[['SCOUT','Met through top MIT engineers. Backed early despite regulatory hurdles and geopolitical complexity.'],['SELECT','Believed in Jane Street alumni building a $136B prediction exchange with global-first DNA.'],['SECURE','Leveraged shared EU and Lebanese roots, structured early trust networks, signaled top investors.'],['SUPPORT','Hosted in-office for 6 months. Shared BD and regulatory research; reinforced early GTM.']],
   metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm'],['Liquid Position Today','$559mm','hot'],['Post-Money Today','$22Bn'],['Ownership','5%']],
@@ -571,22 +576,7 @@ const CASES=[
   founders:'Joshua Browder 🇬🇧',sector:'Global Productivity — automated tools for the underserved: fighting fees, fines, and contracts.',
   steps:[['SCOUT','Met through global founder network.'],['SELECT','Saw breakout potential in a product-led growth model with real legal wins; believed in AI-first.'],['SECURE','Supported initial viral content and demand-gen launch strategy.'],['SUPPORT','Helped build brand and narrative; supported the founder on multi-round fundraising.']],
   metrics:[['Date','Feb 2019'],['Invested','$830k'],['Unrealized','$6.8mm'],['Realized','$95k · 11% DPI','hot'],['Post-Money Today','$230mm'],['Ownership','3.5%']],
-  insight:'Regulatory friction can be an asset. Early-stage DoNotPay demonstrated dividends can be created in the space.',teaser:false},
- {key:'draftwise',logo:'DraftWise',logoImg:'images/cases/draftwise-logo.webp',banner:'Unrealized — Marked Position',story:'This Turkish &amp; American team turned contract drafting at elite law firms from manual to data-driven.',
-  founders:'Emre Ozen, James Ding, Ozan Yalti 🇹🇷🇺🇸',sector:'Global Productivity — contract-drafting tech to unlock precedent data for quality and speed.',
-  steps:[['SCOUT','Palantir alumni network.'],['SELECT','Visionary team solving a latent workflow problem; trusted by elite law firms.'],['SECURE','Facilitated strategic intros to top-tier firms and co-investors.'],['SUPPORT','Supported messaging, GTM, and brought on angel advisors like Laszlo Bock.']],
-  metrics:[['Date','Sep 2020'],['Invested','$800k'],['Unrealized','$3.8mm'],['Post-Money Today','$100mm'],['Ownership','4.7%']],
-  insight:'Global AI teams from intelligence and defense outperform in antiquated industries due to first-principles execution.',teaser:false},
- {key:'wordware',logo:'Wordware',logoImg:'images/cases/wordware-logo.webp',banner:'Unrealized — Marked Position',story:'Irked by an insular AI world, these Polish &amp; British Cambridge grads built Wordware to open AI to all.',
-  founders:'Robert Chandler &amp; Filip Kozera 🇬🇧🇵🇱',sector:'Global Productivity — democratizing AI with an IDE to improve workforce efficiency.',
-  steps:[['SCOUT','Global angel network.'],['SELECT','Exceptional international team from Poland and England that met at Cambridge.'],['SECURE','Moved fast leveraging shared EU roots to connect candidates and co-investors.'],['SUPPORT','Market strategy, syndicate building, talent acquisition, key advisors.']],
-  metrics:[['Date','Dec 2021'],['Invested','$500k'],['Unrealized','$5.4mm'],['Post-Money Today','$140mm'],['Ownership','4.2%']],
-  insight:'International founders from EU/MENA achieve 3× the average markup of other early-stage founders.',teaser:false},
- {key:'navier',logo:'NAVIER',logoImg:'images/cases/navier-logo.webp',banner:'Unrealized — Marked Position',story:'This Indian MIT engineer set out to electrify water mobility — replacing the emissions of traditional boats.',
-  founders:'Sampriti Bhattacharyya 🇮🇳',sector:'Global Logistics — reinventing maritime to enable clean, agile water transit.',
-  steps:[['SCOUT','Identified through deeptech and climate circles at MIT.'],['SELECT','Bet on a visionary, highly technical team — naval architecture meets autonomous robotics.'],['SECURE','Introduced strategic climate and mobility angels; supported pilot build and government relationships.'],['SUPPORT','Helped structure early hiring, GTM, and Series A positioning.']],
-  metrics:[['Date','Sep 2021'],['Invested','$1.0mm'],['Unrealized','$3.4mm'],['Post-Money Today','$120mm'],['Ownership','2.9%']],
-  insight:'Waterways represent the final frontier in clean infrastructure for travel and shipping — vast, underutilized, and ripe for transformation.',teaser:false}
+  insight:'Regulatory friction can be an asset. Early-stage DoNotPay demonstrated dividends can be created in the space.',teaser:false}
 ];
 
 /* ============================================================
@@ -794,8 +784,14 @@ add({title:'Scout &amp; Select',track:'core',teaser:false,dark:false,cls:'',html
         <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
         <div class="hl"><b>500 advance</b><span>rigorously evaluated in the next stage</span></div></div>
       <div class="panel gold"><span class="pnum">2</span><h3>Select</h3><div class="big">500 top founders scored 1–5 across five axes.</div>
-        <div class="row"><b>Example — SwiftClaim</b> · an ex-Stripe PM automating consumer insurance payouts.</div>
-        <div class="row">Breakout Story <b>4</b> · Global Ambition <b>4</b> · Unique Inflection <b>4</b> · Domain Expertise <b>5</b> · Execution <b>4</b></div>
+        <div class="row" style="padding-bottom:4px"><b>Example — SwiftClaim</b> · ex-Stripe PM automating consumer insurance payouts.</div>
+        <div class="checklist">
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout Story</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global Ambition</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique Inflection</span><span class="ck-score">4</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain Expertise</span><span class="ck-score">5</span></div>
+          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
+        </div>
         <div class="hl"><b>21 / 25</b><span>SwiftClaim — investment selected</span></div></div>
     </div>
     <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:18px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
@@ -862,7 +858,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
     <div class="terms">
       <div><div class="big-num">$50<span style="font-size:46px">mm</span></div><div class="big-lbl">Target Fund Size</div></div>
       <div class="rows">
-        <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies + a discretionary sleeve to maximize returns</span></div>
+        <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies</span></div>
         <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
         <div class="tr"><span class="k">Initial Check Range</span><span class="v">$500k–$1.65mm for core, over a 36-month investment period</span></div>
         <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions (75%–85% of total capital)</span></div>
@@ -929,7 +925,7 @@ add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:
         </ul>
       </div>
       <div class="col" style="flex:.7">
-        <div style="background:#eef3fc;border-radius:12px;padding:18px;font-size:13.5px;color:var(--ink-2)"><b style="font-family:var(--serif);font-size:17px">Sunshine Lake</b><br>Expand investment set · Optimize co-investors · Engineer exits / returns</div>
+        <div style="background:#eef3fc;border-radius:12px;padding:18px;font-size:13.5px;color:var(--ink-2)">Expand investment set · Optimize co-investors · Engineer exits / returns</div>
         <div style="background:#fdf9ec;border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2);margin-top:14px"><b>Co-Investors</b><br>Seek trusted seed partner · Reputable co-investors · Secondaries partners</div>
         <div style="background:#fdf9ec;border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2);margin-top:14px"><b>PE</b><br>Non-IPO exit pathways · Inform areas of focus · Maintain industry pulse</div>
       </div>
@@ -939,18 +935,19 @@ add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:
 /* 13 — LPs */
 add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <h1 class="s-title">Our LPs are builders, backers &amp; global allies</h1>
-    <div class="lp-grid" style="margin-top:20px">
+    <h1 class="s-title">Our Backers &amp; LPs</h1>
+    <div class="s-sub" style="font-size:16px;color:var(--mid-lake);max-width:1120px;margin-top:10px;line-height:1.45">We are proud to be managing money on behalf of numerous cause-driven organizations — universities, hospitals, foundations, and research organizations — whose missions mirror those of our founders and whose good works make our work all the more meaningful.</div>
+    <div class="lp-grid" style="margin-top:16px">
       <div class="lp-h">Entrepreneurial Expertise</div>
       <div class="lp-h">Institutional Expertise</div>
       ${[
         ['Abhinav Tiwari','Stripe'],['Anish Acharya','Intuit · Credit Karma'],['David Helgason','Unity'],
         ['Alex Langholz-Baikousis','Cherry · Berlin'],['Arthur Patterson','Accel — Midas List'],['Cambridge Associates','Founder Family Office'],
         ['Jason Ai','OpenAI'],['Ola Doudin','BitOasis · Coinbase'],['Filip Dames','Zalando'],
-        ['Arjun Chopra','Floodgate'],['Lucas Swisher','Coatue — Midas List'],['FPV','Midas List Venture Fund'],
-        ['Jon Lonsdale','Ender'],['Sebastian Tonkin','Glide · Compass'],['Jon Britton','GitHub'],
-        ['Andrew Schoen','NEA'],['Nic Ingraham','EQT · Hong Kong'],['Heliad','Conglomerate'],
-        ['Samuel Adeyamo','Aurora'],['Thiago da Costa','Autodesk · Lagoa'],['&nbsp;',''],
+        ['Garry Tan','Midas List'],['Lucas Swisher','Coatue — Midas List'],['JIMCO','Institutional Fund'],
+        ['Lonsdale Family','Jon Lonsdale'],['Sebastian Tonkin','Glide · Compass'],['Jon Britton','GitHub'],
+        ['Andrew Schoen','NEA'],['Nic Ingram','EQT · Hong Kong'],['Heliad','Conglomerate'],
+        ['Samuel Adeyamo','Aurora'],['Thiago da Costa','Autodesk · Lagoa'],['Mickey Arabelovic','Telescope Partners'],
         ['Katia Ameri','a16z'],['Rohan Kodialam','Citadel'],['Y Combinator','Fund of Funds']
       ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="og">${l[1]}</div></div>`).join('')}
     </div>
@@ -1001,7 +998,6 @@ add({title:'Critical Global Problems',track:'appendix',teaser:false,dark:false,c
     <div class="prob">
       <div class="pc"><div class="prob-shift"><b>The shift</b>Critical systems going software-first &amp; sovereign</div><h3>Infrastructure</h3><ul>
         <li><span class="co">GovDash</span><span class="se">Government</span></li>
-        <li><span class="co">Pachama</span><span class="se">Energy</span></li>
         <li><span class="co">Centaur Labs</span><span class="se">Health</span></li></ul></div>
       <div class="pc"><div class="prob-shift"><b>The shift</b>AI collapsing the cost of expert work</div><h3>Productivity</h3><ul>
         <li><span class="co">PermitFlow</span><span class="se">Construction</span></li>
