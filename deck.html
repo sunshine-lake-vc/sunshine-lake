@@ -214,6 +214,34 @@ body{
 @keyframes fw-flow{to{stroke-dashoffset:-140;}}
 @media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
 
+/* ===== aperture rubric (Option 1) ===== */
+.ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;}
+.ap-col{flex:1;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+.ap-head{padding:12px 16px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-family:var(--sans);}
+.ap-col.e .ap-head{background:#0A3DAE;}.ap-col.s .ap-head{background:#2f9d6f;}.ap-col.t .ap-head{background:#155EE8;}
+.ap-body{flex:1;padding:16px;display:flex;flex-direction:column;}
+.ap-col.e .ap-body{background:#eef3fc;}.ap-col.s .ap-body{background:#ecf6f0;}.ap-col.t .ap-body{background:#eff4fd;}
+.ap-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.ap-infl{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12;}
+.ap-arrow{color:#aab6d4;font-size:20px;margin:12px 0;}
+.ap-open{font-size:14px;color:var(--ink-2);line-height:1.42;}
+.ap-ex{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:16px;}
+.ap-ex span{font-size:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink-2);}
+
+/* ===== inflection timeline (Option 2) ===== */
+.tl{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:8px;}
+.tl-line{position:absolute;left:11%;right:11%;top:7px;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 70%,var(--sun));}
+.tl-cols{display:flex;gap:16px;position:relative;}
+.tl-col{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
+.tl-yr{font-family:var(--serif);font-size:21px;color:var(--cobalt);margin-top:16px;}
+.tl-shift{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+.tl-infl{font-size:15.5px;color:var(--ink);margin-top:10px;line-height:1.3;font-weight:600;max-width:230px;}
+.tl-co{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.55;}
+.tl-col.future .tl-dot{background:var(--sun);box-shadow:0 0 0 2px var(--sun);}
+.tl-col.future .tl-yr{color:#b8902a;}
+.tl-q{font-family:var(--serif);font-size:46px;color:var(--sun);line-height:1;margin-top:6px;}
+
 /* ---------- generic layout helpers ---------- */
 .grow{flex:1;min-height:0;}
 .cols{display:flex;gap:34px;}
@@ -254,6 +282,19 @@ body{
 .gp .tier .val.op{color:var(--ink);}
 .gp .tier .cos{font-family:var(--serif);font-size:19px;color:var(--ink-2);line-height:1.3;}
 .quote-lg{font-family:var(--serif);font-size:27px;line-height:1.18;color:var(--ink);}
+/* statement verified-track-record stats */
+.stmt-tr{margin-top:42px;}
+.stmt-lbl{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px;}
+.stmt-stats{display:flex;gap:60px;}
+.stmt-stats .ssn{font-family:var(--serif);font-size:58px;line-height:1;color:#fff;}
+.stmt-stats .ssl{font-size:14px;color:rgba(255,255,255,.72);margin-top:8px;letter-spacing:.02em;}
+/* GP credibility — track-record-style table */
+.gp-track{width:100%;border-collapse:collapse;}
+.gp-track th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.02em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.gp-track td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.gp-track td.tk{font-family:var(--serif);font-size:18px;color:var(--cobalt);width:230px;}
+.gp-track td.tk.op{color:var(--ink);}
+.gp-track td.tv{font-family:var(--serif);font-size:18px;color:var(--ink-2);}
 .quote-sub{font-family:var(--serif);font-style:italic;font-size:15.5px;line-height:1.45;color:var(--ink-2);margin-top:10px;}
 .quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
 
@@ -722,6 +763,15 @@ add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
     <div class="eyebrow">Our Thesis</div>
     <div class="sline">Talent is universal. <span class="forged">Conviction is forged.</span></div>
     <div class="sline sub">We back the world's best founders at their breakout moments.<br>Our insights into economic, social, and technology shifts fuel multiple blockbuster companies a decade.</div>
+    <div class="stmt-tr">
+      <div class="stmt-lbl">Verified track record</div>
+      <div class="stmt-stats">
+        <div><div class="ssn">$60M</div><div class="ssl">Invested</div></div>
+        <div><div class="ssn">2</div><div class="ssl">Funds</div></div>
+        <div><div class="ssn">21×</div><div class="ssl">Multiple</div></div>
+        <div><div class="ssn">13</div><div class="ssl">Unicorns</div></div>
+      </div>
+    </div>
   </div>${chrome(true)}`});
 
 
@@ -729,18 +779,23 @@ add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
 add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Donald Stalter · Founder &amp; General Partner</div>
-    <div class="quote-lg">An outsider who lived the thesis — reading global shifts early and backing the founders who turn them into category-defining companies.</div>
+    <div class="quote-lg">An outsider who reads global shifts early — and backs the founders who define them.</div>
     <div class="quote-sub">Cross-border operator and investor across three continents; a seed portfolio that returned <b>19×</b> and <b>13 unicorns</b> to date.</div>
     <hr class="s-rule">
     <div class="gp" style="margin-top:14px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
       <div class="tiers">
-        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 8px;padding-bottom:8px;border-bottom:2px solid var(--line)">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
-        <div class="tier"><span class="val">$10Bn+</span><span class="cos">Deel · Figma · Databricks · Brex</span></div>
-        <div class="tier"><span class="val">$1Bn+</span><span class="cos">Fundamental.tech · Kalshi · Headway · Checkr</span></div>
-        <div class="tier"><span class="val">$100mm+</span><span class="cos">Slope · SpotHero · Wordware · Assured · Fieldguide · Federato</span></div>
-        <div class="tier"><span class="val op">Operator</span><span class="cos">Advised Airbnb · Partner @ Handy (acq. Angie's List) · Co-founded CityDeal (acq. Groupon)</span></div>
-        <div class="tier"><span class="val op">Global Bulge Bracket M&amp;A &amp; PE</span><span class="cos">Credit Suisse — Google (Global) · B2W (Brazil) · Eltek/Valere (Norway)</span></div>
+        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 6px">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
+        <table class="gp-track">
+          <thead><tr><th>Tier</th><th>Companies</th></tr></thead>
+          <tbody>
+            <tr><td class="tk">$10Bn+</td><td class="tv">Deel · Figma · Databricks · Brex</td></tr>
+            <tr><td class="tk">$1Bn+</td><td class="tv">Fundamental.tech · Kalshi · Headway · Checkr</td></tr>
+            <tr><td class="tk">$100mm+</td><td class="tv">Slope · SpotHero · Wordware · Assured · Fieldguide · Federato</td></tr>
+            <tr><td class="tk op">Operator</td><td class="tv">Advised Airbnb · Partner @ Handy (acq. Angie's List) · Co-founded CityDeal (acq. Groupon)</td></tr>
+            <tr><td class="tk op">Global Bulge Bracket M&amp;A &amp; PE</td><td class="tv">Credit Suisse — Google (Global) · B2W (Brazil) · Eltek/Valere (Norway)</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>${GROSSNOTE}${chrome(false)}`});
@@ -997,7 +1052,8 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
         ['Lonsdale Family','Jon Lonsdale'],['Sebastian Tonkin','Glide · Compass'],['Wesley Chan','Google · Midas List'],
         ['Andrew Schoen','NEA'],['Nic Ingram','EQT · Hong Kong'],['Heliad','Conglomerate'],
         ['Samuel Adeyamo','Aurora'],['Thiago da Costa','Autodesk · Lagoa'],['Mickey Arabelovic','Telescope Partners'],
-        ['Katia Ameri','a16z'],['Rohan Kodialam','Citadel'],['Y Combinator','Fund of Funds']
+        ['Katia Ameri','a16z'],['Rohan Kodialam','Citadel'],['Y Combinator','Fund of Funds'],
+        ['&nbsp;',''],['&nbsp;',''],['Shawn O\'Neill','Silver Lake']
       ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="og">${l[1]}</div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">Investments directly from individual GPs and founders of select institutional investment funds.</div>
@@ -1114,6 +1170,52 @@ add({title:'Secure &amp; Support',track:'appendix',teaser:false,dark:false,cls:'
   </div>${chrome(false)}`});
 
 /* PROBLEM SPACE — moved to appendix per Don, June 2026 */
+/* ===== APERTURE — Option 1 (rubric) ===== */
+add({title:'Aperture — Rubric (1)',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Aperture</div>
+    <h1 class="s-title" style="font-size:36px">We invest behind economic, social &amp; technological shifts</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Global founders spot these inflections first — we back them at the moment they turn.</div>
+    <hr class="s-rule">
+    <div class="ap-grid">
+      <div class="ap-col e"><div class="ap-head">Economic Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Tariffs &amp; re-globalization</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">The opening</div><div class="ap-open">Supply chains &amp; logistics rewire around new trade routes and reshoring.</div>
+        <div class="ap-ex"><span>Cedar</span><span>Navier</span><span>MightyFly</span></div>
+      </div></div>
+      <div class="ap-col s"><div class="ap-head">Social Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Aging, loneliness &amp; mental-health demand</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">The opening</div><div class="ap-open">Care &amp; companionship delivered at scale, software- and robotics-native.</div>
+        <div class="ap-ex"><span>Headway</span><span>Companion robotics</span></div>
+      </div></div>
+      <div class="ap-col t"><div class="ap-head">Technological Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">AI collapses expert work; physical intelligence arrives</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">The opening</div><div class="ap-open">Agents and robots enter the physical world and antiquated industries.</div>
+        <div class="ap-ex"><span>Overview</span><span>GovDash</span><span>Centaur Labs</span></div>
+      </div></div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* ===== APERTURE — Option 2 (inflection timeline) ===== */
+add({title:'Aperture — Timeline (2)',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Aperture</div>
+    <h1 class="s-title" style="font-size:36px">We invest at inflection points — before the wave</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Each economic, social &amp; technological shift opens a decade of blockbuster companies. We back global founders first.</div>
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-cols">
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2008–14</div><div class="tl-shift">Social · Economic</div><div class="tl-infl">Mobile &amp; marketplaces</div><div class="tl-co">Airbnb · Groupon</div></div>
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2015–19</div><div class="tl-shift">Economic</div><div class="tl-infl">Cloud, fintech &amp; global work</div><div class="tl-co">Deel · Brex · Kalshi</div></div>
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2020–24</div><div class="tl-shift">Technological</div><div class="tl-infl">AI-native software</div><div class="tl-co">Wordware · Minimal · Dedalus</div></div>
+        <div class="tl-col future"><div class="tl-dot"></div><div class="tl-yr">2025 +</div><div class="tl-shift">What's next</div><div class="tl-q">?</div><div class="tl-co">Physical intelligence · companion robotics · re-globalized supply chains</div></div>
+      </div>
+    </div>
+  </div>${chrome(false)}`});
+
 add({title:'Critical Global Problems',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Riding global technological &amp; economic shifts</div>
