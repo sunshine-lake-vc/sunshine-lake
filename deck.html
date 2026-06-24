@@ -219,7 +219,7 @@ body{
 @media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
 
 /* ===== aperture rubric (Option 1) ===== */
-.ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;}
+.ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;align-items:flex-start;}
 .ap-col{flex:1;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
 .ap-head{padding:12px 16px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-family:var(--sans);}
 .ap-col.e .ap-head{background:#0A3DAE;}.ap-col.s .ap-head{background:#2f9d6f;}.ap-col.t .ap-head{background:#155EE8;}
@@ -229,7 +229,7 @@ body{
 .ap-infl{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12;}
 .ap-arrow{color:#aab6d4;font-size:20px;margin:12px 0;}
 .ap-open{font-size:14px;color:var(--ink-2);line-height:1.42;}
-.ap-ex{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:16px;}
+.ap-ex{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px;}
 .ap-ex span{font-size:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink-2);}
 
 /* ===== inflection timeline (Option 2) ===== */
@@ -385,7 +385,7 @@ table.tbl.tall td.co{font-size:20px;}
 
 /* case study */
 .cs-logo-img{height:46px;width:auto;max-width:280px;object-fit:contain;}
-.cs-photo-col{flex:0 0 290px;align-self:stretch;border-radius:12px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
+.cs-photo-col{flex:0 0 340px;align-self:stretch;border-radius:12px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
 .cs-fn{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;background:linear-gradient(transparent,rgba(11,18,117,.82));color:#fff;font-weight:600;font-size:17px;line-height:1.2;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
 .cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
@@ -904,6 +904,35 @@ add({title:'The Engine',track:'core',teaser:true,dark:false,cls:'',html:`
 
 /* Engine boxed (alt) + original Scout/Select & Secure/Support live in the Appendix. Deep-network slide retired — folded into The Engine. */
 
+/* ===== OUR APERTURE (graduated to core, before case studies) ===== */
+add({title:'Our Aperture',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Aperture</div>
+    <h1 class="s-title" style="font-size:36px">We invest behind economic, social &amp; technological shifts</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Global founders spot these inflections first — we back them at the moment they turn.</div>
+    <hr class="s-rule">
+    <div class="ap-grid">
+      <div class="ap-col e"><div class="ap-head">Economic Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Tariffs &amp; re-globalization</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Supply chains &amp; logistics rewire around new trade routes and reshoring.</div>
+        <div class="ap-ex"><span>Cedar</span><span>Navier</span><span>MightyFly</span></div>
+      </div></div>
+      <div class="ap-col s"><div class="ap-head">Social Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Aging, loneliness &amp; mental-health demand</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Care &amp; companionship delivered at scale, software- and robotics-native.</div>
+        <div class="ap-ex"><span>Headway</span><span>Companion robotics</span></div>
+      </div></div>
+      <div class="ap-col t"><div class="ap-head">Technological Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">AI collapses expert work; physical intelligence arrives</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Agents and robots enter the physical world and antiquated industries.</div>
+        <div class="ap-ex"><span>Overview</span><span>GovDash</span><span>Centaur Labs</span></div>
+      </div></div>
+    </div>
+  </div>${chrome(false)}`});
+
 /* CASE STUDIES (data-driven) */
 CASES.forEach(c=>add(caseSlide(c)));
 
@@ -1096,84 +1125,10 @@ add({title:'Engine — Boxed (alt)',track:'appendix',teaser:false,dark:false,cls
     <div class="eng-net">Powered by a deep, proprietary network — 250+ unicorn founders · VCs · corporates · incubators · accelerators</div>
   </div>${chrome(false)}`});
 
-add({title:'Scout &amp; Select',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:38px">Regimented &amp; purpose-built for market leadership</h1>
-    <div class="engine-nav"><div class="en on"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--sun);color:var(--navy)">2</span><span class="nm">Select</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">4</span><span class="nm">Support</span></div></div>
-    <div class="duo">
-      <div class="panel blue"><span class="pnum">1</span><h3>Scout</h3><div class="big">5,000+ targets identified via a multi-pronged global strategy.</div>
-        <div class="row"><b>Unicorn &amp; alumni groups</b> — Headway, Brex &amp; Deel founders introduce Don to the next breakouts (Marble, PermitFlow, Firstwork, Enshift).</div>
-        <div class="row"><b>Campus programming</b> — UChicago · Stanford · Caltech · NYU · Imperial · Mines Paris · TUM · LSE · NUS · USP.</div>
-        <div class="row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
-        <div class="hl"><b>500 advance</b><span>rigorously evaluated in the next stage</span></div></div>
-      <div class="panel gold"><span class="pnum">2</span><h3>Select</h3><div class="big">500 top founders scored 1–5 across five axes.</div>
-        <div class="row" style="padding-bottom:4px"><b>Example — SwiftClaim</b> · ex-Stripe PM automating consumer insurance payouts.</div>
-        <div class="checklist">
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout Story</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global Ambition</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique Inflection</span><span class="ck-score">4</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain Expertise</span><span class="ck-score">5</span></div>
-          <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
-        </div>
-        <div class="hl"><b>21 / 25</b><span>SwiftClaim — investment selected</span></div></div>
-    </div>
-    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin-top:18px;text-align:center">A global proprietary Slack channel unites 250+ founders, advisors, VCs, and corporates across every step.</div>
-  </div>${chrome(false)}`});
-
-add({title:'Secure &amp; Support',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <h1 class="s-title" style="font-size:38px">A 5-year blueprint to build a 50-year venture franchise</h1>
-    <div class="engine-nav"><div class="en"><span class="num">1</span><span class="nm">Scout</span></div><div class="en-line"></div>
-      <div class="en"><span class="num">2</span><span class="nm">Select</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--mid-lake)">3</span><span class="nm">Secure</span></div><div class="en-line"></div>
-      <div class="en on"><span class="num" style="background:var(--cobalt)">4</span><span class="nm">Support</span></div></div>
-    <div class="duo">
-      <div class="panel green"><span class="pnum">3</span><h3>Secure</h3><div class="big">100 pursued with high conviction.</div>
-        <div class="row"><i>"Don's the best; he intro'd us to an elite marketer who revolutionized DNP."</i> — Joshua Browder, DoNotPay</div>
-        <div class="row"><i>"Early on, Don mapped execution at WW; we scaled fast and had to have him in."</i> — Filip Kozera, Wordware</div>
-        <div class="row"><i>"Don connected us with 10 fintech leaders early; we achieved market dominance."</i> — Aaron Bai, Affinity</div>
-        <div class="hl"><b>30 core</b><span>secured into the portfolio</span></div></div>
-      <div class="panel sky"><span class="pnum">4</span><h3>Support</h3><div class="big">30 core investments onboarded &amp; augmented.</div>
-        <div class="row"><b>Weeks 1–2 · Storytelling</b> — pro acting skills; founder narratives force-multiply.</div>
-        <div class="row"><b>Weeks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
-        <div class="row"><b>Weeks 5–6 · Domain Expertise</b> — industry connections &amp; best practices.</div>
-        <div class="row"><b>Week 7 · Exit-readiness</b> — rigorous operational &amp; market support.</div>
-        <div class="hl"><b style="font-size:23px">Sunshine Lake Acceleration Module</b><span>A 7-week structured path to exit-readiness</span></div></div>
-    </div>
-  </div>${chrome(false)}`});
+/* Original Scout/Select & Secure/Support slides retired — superseded by The Engine (flywheel) + Engine — Boxed (alt). */
 
 /* PROBLEM SPACE — moved to appendix per Don, June 2026 */
-/* ===== APERTURE — Option 1 (rubric) ===== */
-add({title:'Aperture — Rubric (1)',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">Our Aperture</div>
-    <h1 class="s-title" style="font-size:36px">We invest behind economic, social &amp; technological shifts</h1>
-    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Global founders spot these inflections first — we back them at the moment they turn.</div>
-    <hr class="s-rule">
-    <div class="ap-grid">
-      <div class="ap-col e"><div class="ap-head">Economic Shift</div><div class="ap-body">
-        <div class="ap-lbl">The inflection</div><div class="ap-infl">Tariffs &amp; re-globalization</div>
-        <div class="ap-arrow">↓</div>
-        <div class="ap-lbl">Breakout</div><div class="ap-open">Supply chains &amp; logistics rewire around new trade routes and reshoring.</div>
-        <div class="ap-ex"><span>Cedar</span><span>Navier</span><span>MightyFly</span></div>
-      </div></div>
-      <div class="ap-col s"><div class="ap-head">Social Shift</div><div class="ap-body">
-        <div class="ap-lbl">The inflection</div><div class="ap-infl">Aging, loneliness &amp; mental-health demand</div>
-        <div class="ap-arrow">↓</div>
-        <div class="ap-lbl">Breakout</div><div class="ap-open">Care &amp; companionship delivered at scale, software- and robotics-native.</div>
-        <div class="ap-ex"><span>Headway</span><span>Companion robotics</span></div>
-      </div></div>
-      <div class="ap-col t"><div class="ap-head">Technological Shift</div><div class="ap-body">
-        <div class="ap-lbl">The inflection</div><div class="ap-infl">AI collapses expert work; physical intelligence arrives</div>
-        <div class="ap-arrow">↓</div>
-        <div class="ap-lbl">Breakout</div><div class="ap-open">Agents and robots enter the physical world and antiquated industries.</div>
-        <div class="ap-ex"><span>Overview</span><span>GovDash</span><span>Centaur Labs</span></div>
-      </div></div>
-    </div>
-  </div>${chrome(false)}`});
+/* Aperture (rubric) graduated to the core deck — see before the case studies. */
 
 /* ===== APERTURE — Option 2 (inflection timeline) ===== */
 add({title:'Aperture — Timeline (2)',track:'appendix',teaser:false,dark:false,cls:'',html:`
