@@ -106,8 +106,8 @@ body{
   radial-gradient(46% 46% at 28% 80%, rgba(242,216,49,.42), transparent 56%),
   radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
   linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
-.cover .s-pad{justify-content:center;}
-.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:72px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);}
+.cover .s-pad{justify-content:center;align-items:center;text-align:center;}
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);width:100%;}
 .cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:18px;color:#fff;font-family:var(--serif);font-size:46px;z-index:2;}
 .cover-logo svg{width:44px;fill:#fff;}
 .cover .meta{position:absolute;left:72px;bottom:74px;z-index:2;}
@@ -750,13 +750,12 @@ function add(o){SLIDES.push(o);}
 /* 1 — COVER */
 add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   <div class="cover-logo">${MARK} Sunshine Lake</div>
-  <div class="cover-band">Fund&nbsp;I · $50M Target · 5% GP Commit</div>
+  <div class="cover-band">Pre-Seed &amp; Seed · Fund&nbsp;I · $50M Target · 5% GP Commit</div>
   <div class="s-pad">
     <h1>Global Founders<br>forge the future.</h1>
   </div>
   <div class="meta">
-    <div class="lead">Pre-Seed &amp; Seed</div>
-    <div class="ln">Donald Stalter · don@sunshinelake.vc</div>
+    <div class="ln">Donald Stalter</div>
     <div class="ln dim">San Francisco</div>
   </div>
   <span class="s-conf">Strictly Confidential</span>`});
