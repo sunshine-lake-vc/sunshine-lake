@@ -152,6 +152,12 @@ body{
 .trade .got{color:#fff;font-size:24px;}
 .trade-close{margin-top:26px;font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.92);max-width:1040px;line-height:1.4;}
 .trade-close b{color:var(--sun);font-weight:400;}
+/* ---------- archetype: cross-border founder (navy statement + grid) ---------- */
+.statement .arch-lead{font-family:var(--serif);font-size:21px;line-height:1.4;color:rgba(255,255,255,.86);max-width:1040px;margin-top:16px;}
+.statement .arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;margin-top:30px;}
+.arch-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:15px 16px;}
+.arch-card .ac-h{font-family:var(--serif);font-size:19px;color:#fff;line-height:1.12;}
+.arch-card .ac-d{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.36;}
 
 /* ---------- boom (headline numbers) ---------- */
 .boom{background:radial-gradient(120% 130% at 20% 0%,#1a3fb0 0%,#0a2a82 45%,#02041F 100%);}
@@ -781,14 +787,14 @@ add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
 /* 4 — GP CREDIBILITY */
 add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Donald Stalter · Founder &amp; General Partner</div>
-    <div class="quote-lg">An outsider who reads global shifts early — and backs the founders who define them.</div>
-    <div class="quote-sub">Cross-border operator and investor across three continents; a seed portfolio that returned <b>19×</b> and <b>13 unicorns</b> to date.</div>
+    <div class="eyebrow">Founder &amp; General Partner · Don Stalter</div>
+    <div class="quote-lg">An outsider who reads global shifts early — and backs the founders who cross oceans to define them.</div>
+    <div class="quote-sub">Raised across continents and multilingual, Don ran bulge-bracket M&amp;A out of the University of Chicago — Google buy-side and multibillion-dollar deals across Brazil and Europe — then London private equity, before founding a software company acquired by Groupon and scaled internationally. An early Airbnb operator, he launched new markets and products and advised Handy through its Angie's List exit. At <b>Global Founders Capital ($2.4B AUM)</b> he led North America — <b>$256mm</b> deployed multistage at <b>6.8×</b> — and his dedicated seed program returned <b>21×</b> across two funds, backing <b>10+ unicorns &amp; decacorns</b>.</div>
     <hr class="s-rule">
     <div class="gp" style="margin-top:14px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
       <div class="tiers">
-        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 6px">Global Founders Capital ($2.4B AUM) &amp; Angel — $256mm &amp; 6.8× multistage</div>
+        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 6px">Selected track record — by company tier</div>
         <table class="gp-track">
           <thead><tr><th>Tier</th><th>Companies</th></tr></thead>
           <tbody>
@@ -931,6 +937,24 @@ add({title:'Our Aperture',track:'core',teaser:true,dark:false,cls:'',html:`
       </div></div>
     </div>
   </div>${chrome(false)}`});
+
+/* ARCHETYPE — the cross-border founder (immediately before case studies) */
+add({title:'The Cross-Border Founder',track:'core',teaser:true,dark:true,cls:'statement',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Archetype</div>
+    <div class="sline">The cross-border founder.</div>
+    <div class="arch-lead">The founders who change categories rarely build from comfort. They cross borders — physical and mental — to where their idea can actually happen, compounding advantages most builders never develop.</div>
+    <div class="arch-grid">
+      <div class="arch-card"><div class="ac-h">Higher velocity</div><div class="ac-d">Build and ship faster than the field.</div></div>
+      <div class="arch-card"><div class="ac-h">Scrappy &amp; resourceful</div><div class="ac-d">Make a lot from very little.</div></div>
+      <div class="arch-card"><div class="ac-h">Bias to risk</div><div class="ac-d">Asymmetric bets feel normal.</div></div>
+      <div class="arch-card"><div class="ac-h">Forged by adversity</div><div class="ac-d">Many rise from hardship or upheaval.</div></div>
+      <div class="arch-card"><div class="ac-h">Opportunity migrants</div><div class="ac-d">Move to where the idea is buildable.</div></div>
+      <div class="arch-card"><div class="ac-h">Fast relearners</div><div class="ac-d">Rebuild fluency in a new world, quickly.</div></div>
+      <div class="arch-card"><div class="ac-h">Brave by default</div><div class="ac-d">At home outside the comfort zone.</div></div>
+      <div class="arch-card"><div class="ac-h">Unburdened by orthodoxy</div><div class="ac-d">See what locals overlook.</div></div>
+    </div>
+  </div>${chrome(true)}`});
 
 /* CASE STUDIES (data-driven) */
 CASES.forEach(c=>add(caseSlide(c)));
