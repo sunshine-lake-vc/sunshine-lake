@@ -305,6 +305,7 @@ body{
 .gp-track td.tk{font-family:var(--serif);font-size:18px;color:var(--cobalt);width:230px;}
 .gp-track td.tk.op{color:var(--ink);}
 .gp-track td.tv{font-family:var(--serif);font-size:18px;color:var(--ink-2);}
+.gp-track .cos{display:flex;flex-wrap:wrap;gap:7px 34px;}
 .quote-sub{font-family:var(--serif);font-style:normal;font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:14px;max-width:1100px;}
 .quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
 
@@ -793,15 +794,14 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
     <div class="gp" style="margin-top:14px">
       <div class="photo" style="background-image:url('images/team/don.webp')"></div>
       <div class="tiers">
-        <div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin:0 0 6px">Selected track record — by company tier</div>
         <table class="gp-track">
           <thead><tr><th>Tier</th><th>Companies</th></tr></thead>
           <tbody>
-            <tr><td class="tk">$10Bn+</td><td class="tv">Deel · Figma · Databricks · Brex</td></tr>
-            <tr><td class="tk">$1Bn+</td><td class="tv">Fundamental.tech · Kalshi · Headway · Checkr</td></tr>
-            <tr><td class="tk">$100mm+</td><td class="tv">Slope · SpotHero · Wordware · Assured · Fieldguide · Federato</td></tr>
-            <tr><td class="tk op">Operator</td><td class="tv">Advised Airbnb · Partner @ Handy (acq. Angie's List) · Co-founded CityDeal (acq. Groupon)</td></tr>
-            <tr><td class="tk op">Global Bulge Bracket M&amp;A &amp; PE</td><td class="tv">Credit Suisse — Google (Global) · B2W (Brazil) · Eltek/Valere (Norway)</td></tr>
+            <tr><td class="tk">$10Bn+</td><td class="tv"><div class="cos"><span>Deel</span><span>Figma</span><span>Databricks</span><span>Brex</span></div></td></tr>
+            <tr><td class="tk">$1Bn+</td><td class="tv"><div class="cos"><span>Fundamental.tech</span><span>Kalshi</span><span>Headway</span><span>Checkr</span></div></td></tr>
+            <tr><td class="tk">$100mm+</td><td class="tv"><div class="cos"><span>Slope</span><span>SpotHero</span><span>Wordware</span><span>Assured</span><span>Fieldguide</span><span>Federato</span></div></td></tr>
+            <tr><td class="tk op">Operator</td><td class="tv"><div class="cos"><span>Advised Airbnb</span><span>Partner @ Handy (acq. Angie's List)</span><span>Co-founded CityDeal (acq. Groupon)</span></div></td></tr>
+            <tr><td class="tk op">Global Bulge Bracket M&amp;A &amp; PE</td><td class="tv"><div class="cos"><span>Credit Suisse — Google (Global)</span><span>B2W (Brazil)</span><span>Eltek/Valere (Norway)</span></div></td></tr>
           </tbody>
         </table>
       </div>
