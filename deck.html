@@ -1014,9 +1014,9 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
         <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies</span></div>
         <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
         <div class="tr"><span class="k">Initial Check Size</span><span class="v">$1mm</span></div>
-        <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions (75%–85% of total capital)</span></div>
-        <div class="tr"><span class="k">Reserves</span><span class="v">10% dedicated reserves · 20% for other non-initial checks</span></div>
-        <div class="tr"><span class="k">Discovery Strategy</span><span class="v">5% of capital; convert ~25% of these to "core"</span></div>
+        <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions · ~85% of total capital</span></div>
+        <div class="tr"><span class="k">Reserves</span><span class="v">10% dedicated (winners only) · 10% discretionary "cannonball" follow-on</span></div>
+        <div class="tr"><span class="k">Non-core</span><span class="v">15% — 5% scout/discovery · 5% network · 5% power law</span></div>
         <div class="tr"><span class="k">Structure</span><span class="v">2.5% management fee (stepping to 1.5%) · 20% carry · 5% GP commitment</span></div>
         <div class="tr"><span class="k">Term</span><span class="v">10-year fund term (+2-year extension)</span></div>
       </div>
@@ -1026,7 +1026,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 /* 11 — PORTFOLIO CONSTRUCTION */
-const PC1=[{label:'Core: initial check',pct:65,color:'#155EE8'},{label:'Core: allocated reserves',pct:10,color:'#4f86ea'},{label:'Discovery program',pct:5,color:'#9cc0f7'},{label:'Other non-initial',pct:20,color:'#F2D831'}];
+const PC1=[{label:'Core: initial checks',pct:65,color:'#155EE8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Core: discretionary reserves',pct:10,color:'#7aa6f2'},{label:'Scout / discovery',pct:5,color:'#F2D831'},{label:'Network',pct:5,color:'#81e77a'},{label:'Power law',pct:5,color:'#f6a23c'}];
 const PC2=[{label:'Product signal only',pct:50,color:'#0A3DAE'},{label:'Pre-PMF & traction',pct:30,color:'#2f6fea'},{label:'Post-PMF & traction',pct:20,color:'#7aa6f2'}];
 add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -1045,13 +1045,14 @@ add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',
         ${donutLegend(PC2)}
       </div>
       <div class="col" style="flex:.95">
-        <div class="kicker">Non-initial check strategy</div>
+        <div class="kicker">Reserves &amp; non-core — 35%</div>
         <div class="kv" style="grid-template-columns:1fr;margin-top:10px">
-          <div><span class="k">Discovery — 5%</span><div class="v">~25% objective to convert into "core"</div></div>
-          <div><span class="k">Dedicated reserves — 10%</span><div class="v">Concentrated into ~50% of winners with confirmed PMF and revenue</div></div>
-          <div><span class="k">Other non-initial — 20%</span><div class="v">Discretionary "cannonball" reserves (10%) + network "power-law" opportunities (10%)</div></div>
+          <div><span class="k">Dedicated reserves — 10%</span><div class="v">Reserved per deal; deployed only to the winners with confirmed PMF (~half).</div></div>
+          <div><span class="k">Discretionary reserves — 10%</span><div class="v">"Cannonball" follow-on, concentrated into breakout outliers.</div></div>
+          <div><span class="k">Scout / discovery — 5%</span><div class="v">Small early checks that source the next core wins.</div></div>
+          <div><span class="k">Network &amp; power law — 10%</span><div class="v">5% network access + 5% power-law opportunities.</div></div>
         </div>
-        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">30 core investments · 20 pre-seed, 10 seed</div>
+        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">85% core · 15% non-core · 30 core investments (20 pre-seed, 10 seed)</div>
       </div>
     </div>
     <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
@@ -1069,7 +1070,6 @@ add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:
         <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:8px">Rather than competing with later-stage investors, we build a strong network of early-stage and sector-focused co-investors — mitigating capital risk while enhancing access to high-quality deals.</p>
       </div>
       <div class="col">
-        <div class="kicker">Critical Global Problems</div>
         <ul style="list-style:none;font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:8px;display:flex;flex-direction:column;gap:12px">
           <li>Designed for high-multiple returns — targeting IPOs and $100mm–$500mm exits while securing strong early ownership.</li>
           <li>We drive value connecting portfolio companies with enterprise incumbents and PE firms for M&amp;A, buyouts, and scaling.</li>
