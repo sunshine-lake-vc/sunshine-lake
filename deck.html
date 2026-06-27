@@ -747,8 +747,8 @@ function uniScale(){
   items.forEach(c=>{const y=yOf(c.v);const hot=c.v>=15;
     s+=`<line x1="${axisX}" y1="${y}" x2="${c.x-12}" y2="${y}" stroke="#dbe3f3" stroke-width="1.5" stroke-dasharray="2 4"/>`;
     s+=`<circle cx="${c.x}" cy="${y}" r="7" fill="${hot?'#F2A03C':'#155EE8'}"/>`;
-    s+=`<text x="${c.x+15}" y="${y-3}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" fill="#0B1275">${c.n}</text>`;
-    s+=`<text x="${c.x+15}" y="${y+20}" font-size="16" fill="#5a6685">${c.s}</text>`;});
+    s+=`<text x="${c.x+15}" y="${y-4}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" fill="#0B1275">${c.n}</text>`;
+    s+=`<text x="${c.x+15}" y="${y+21}" font-size="20" font-weight="700" fill="${hot?'#D97A14':'#155EE8'}">${c.s}</text>`;});
   s+=`</svg>`;
   return s;
 }
@@ -763,6 +763,29 @@ function donut(segs,r,sw,center){
   return `<svg viewBox="0 0 ${vb} ${vb}" width="100%" style="max-width:${vb}px;display:block;margin:0 auto">${arcs}${ctr}</svg>`;
 }
 function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl-row"><span class="dl-sw" style="background:${s.color}"></span><span class="dl-lb">${s.label}</span><span class="dl-pct">${s.pct}%</span></div>`).join('')+`</div>`;}
+/* donut with callout labels around the ring (no separate legend) */
+function donutLabeled(segs,center){
+  const r=66, sw=26, vbW=440, vbH=240, cx=220, cy=120;
+  const C=2*Math.PI*r, ringOuter=r+sw/2; let off=0, cum=0, arcs='', pts=[];
+  segs.forEach(s=>{const dash=s.pct/100*C;
+    arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"/>`;
+    const mid=(cum+s.pct/2)/100, ang=-Math.PI/2+mid*2*Math.PI;
+    pts.push({s,px:cx+Math.cos(ang)*ringOuter,py:cy+Math.sin(ang)*ringOuter,side:Math.cos(ang)>=0?1:-1});
+    cum+=s.pct; off+=dash;});
+  const minGap=18, topY=14, botY=vbH-12;
+  [-1,1].forEach(side=>{const arr=pts.filter(p=>p.side===side).sort((a,b)=>a.py-b.py);
+    arr.forEach(p=>p.ly=p.py);
+    for(let i=1;i<arr.length;i++) if(arr[i].ly-arr[i-1].ly<minGap) arr[i].ly=arr[i-1].ly+minGap;
+    if(arr.length){const over=arr[arr.length-1].ly-botY; if(over>0) arr.forEach(p=>p.ly-=over);
+      const under=topY-arr[0].ly; if(under>0) arr.forEach(p=>p.ly+=under);}});
+  let labels='';
+  pts.forEach(p=>{const outX=cx+p.side*(ringOuter+11), textX=cx+p.side*(ringOuter+15);
+    const anchor=p.side>0?'start':'end';
+    labels+=`<polyline points="${p.px.toFixed(1)},${p.py.toFixed(1)} ${outX.toFixed(1)},${p.ly.toFixed(1)}" fill="none" stroke="#c5cee2" stroke-width="1.3"/>`;
+    labels+=`<text x="${textX.toFixed(1)}" y="${(p.ly+4).toFixed(1)}" text-anchor="${anchor}" font-size="14.5" fill="#39456a">${p.s.label} <tspan font-weight="700" fill="#0B1275">${p.s.pct}%</tspan></text>`;});
+  const ctr=center?`<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="23" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vbW} ${vbH}" width="100%" style="display:block;margin:0 auto" font-family="Segoe UI,sans-serif">${arcs}${labels}${ctr}</svg>`;
+}
 
 /* world bubble map over real grey map (positions matched to original) */
 /* [name, count, x%, y%, labelX% , labelY%]  — labelX null => label inside bubble */
@@ -1077,35 +1100,31 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 /* 11 — PORTFOLIO CONSTRUCTION */
-const PC1=[{label:'Core: initial checks',pct:65,color:'#155EE8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Core: discretionary reserves',pct:10,color:'#7aa6f2'},{label:'Scout / discovery',pct:5,color:'#F2D831'},{label:'Network',pct:5,color:'#81e77a'},{label:'Power law',pct:5,color:'#f6a23c'}];
-const PC2=[{label:'Product signal only',pct:50,color:'#0A3DAE'},{label:'Pre-PMF & traction',pct:30,color:'#2f6fea'},{label:'Post-PMF & traction',pct:20,color:'#7aa6f2'}];
+const PC1=[{label:'Initial checks',pct:65,color:'#155EE8'},{label:'Dedicated',pct:10,color:'#4f86ea'},{label:'Discretionary',pct:10,color:'#7aa6f2'},{label:'Scout',pct:5,color:'#F2D831'},{label:'Network',pct:5,color:'#81e77a'},{label:'Power law',pct:5,color:'#f6a23c'}];
+const PC2=[{label:'Product signal',pct:50,color:'#0A3DAE'},{label:'Pre-PMF',pct:30,color:'#2f6fea'},{label:'Post-PMF',pct:20,color:'#7aa6f2'}];
 add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">$50mm · Target Portfolio Construction</div>
     <h1 class="s-title" style="font-size:34px">Strategic capital deployment</h1>
     <hr class="s-rule">
-    <div class="cols" style="margin-top:14px;flex:1;align-items:center;gap:30px">
+    <div class="cols" style="margin-top:6px;align-items:flex-start;gap:36px">
       <div class="col" style="text-align:center">
-        <div class="kicker" style="margin-bottom:8px">Capital deployment</div>
-        <div style="max-width:210px;margin:0 auto">${donut(PC1,78,30,'$50mm')}</div>
-        ${donutLegend(PC1)}
+        <div class="kicker" style="margin-bottom:2px">Capital deployment</div>
+        <div style="max-width:430px;margin:0 auto">${donutLabeled(PC1,'$50mm')}</div>
       </div>
       <div class="col" style="text-align:center">
-        <div class="kicker" style="margin-bottom:8px">Core initial-check signal mix</div>
-        <div style="max-width:210px;margin:0 auto">${donut(PC2,78,30,'Core')}</div>
-        ${donutLegend(PC2)}
-      </div>
-      <div class="col" style="flex:.95">
-        <div class="kicker">Reserves &amp; non-core — 35%</div>
-        <div class="kv" style="grid-template-columns:1fr;margin-top:10px">
-          <div><span class="k">Dedicated reserves — 10%</span><div class="v">Reserved per deal; deployed only to the winners with confirmed PMF (~half).</div></div>
-          <div><span class="k">Discretionary reserves — 10%</span><div class="v">"Cannonball" follow-on, concentrated into breakout outliers.</div></div>
-          <div><span class="k">Scout / discovery — 5%</span><div class="v">Small early checks that source the next core wins.</div></div>
-          <div><span class="k">Network &amp; power law — 10%</span><div class="v">5% network access + 5% power-law opportunities.</div></div>
-        </div>
-        <div style="margin-top:14px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">85% core · 15% non-core · 30 core investments (20 pre-seed, 10 seed)</div>
+        <div class="kicker" style="margin-bottom:2px">Core initial-check signal mix</div>
+        <div style="max-width:430px;margin:0 auto">${donutLabeled(PC2,'Core')}</div>
       </div>
     </div>
+    <div class="kicker" style="margin-top:2px">Reserves &amp; non-core — 35%</div>
+    <div class="kv" style="grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px">
+      <div><span class="k">Dedicated reserves — 10%</span><div class="v">Reserved per deal; deployed only to the winners with confirmed PMF (~half).</div></div>
+      <div><span class="k">Discretionary reserves — 10%</span><div class="v">"Cannonball" follow-on, concentrated into breakout outliers.</div></div>
+      <div><span class="k">Scout / discovery — 5%</span><div class="v">Small early checks that source the next core wins.</div></div>
+      <div><span class="k">Network &amp; power law — 10%</span><div class="v">5% network access + 5% power-law opportunities.</div></div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">85% core · 15% non-core · 30 core investments (20 pre-seed, 10 seed)</div>
     <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
   </div>${chrome(false)}`});
 
@@ -1145,8 +1164,8 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
       ${[
         ['Abhinav Tiwari','stripe.png',0,28],['Anish Acharya','creditkarma.png',0,30],['David Helgason','unity.png',0,28],['Alex Langholz-Baikousis','cherry.png',0,32],['Arthur Patterson','accel.png',1,27],
         ['Cambridge Associates','cambridge.png',0,32],['Jason Ai','openai.png',0,24],['Ola Doudin','coinbase.png',0,25],['Filip Dames','zalando.svg',0,28],['Garry Tan','yc.png',1,30],
-        ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.png',0,42],['Jon Lonsdale','8vc.png',0,30],['Sebastian Tonkin','glide.png',0,27],['Wesley Chan','google.png',1,27],
-        ['Andrew Schoen','nea.png',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.png',0,27],['Thiago da Costa','autodesk.png',0,42],
+        ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.png',0,42],['Jon Lonsdale','8vc.png',0,30],['Sebastian Tonkin','glide.png',0,27],['Wesley Chan','google.png',1,40],
+        ['Andrew Schoen','nea.png',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.png',0,27],['Thiago da Costa','autodesk.png',0,54],
         ['Mickey Arabelovic','telescope.png',0,27],['Katia Ameri','a16z.png',0,25],['Rohan Kodialam','citadel.png',0,30],['Y Combinator','yc.png',0,30],['Shawn O\'Neill','silverlake.png',0,27]
       ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><img src="images/lp/${l[1]}" alt="" style="max-height:${l[3]||32}px"></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
     </div>
@@ -1322,7 +1341,7 @@ add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cl
 
 /* A2 — STORIES DRIVE MOMENTUM */
 function cogIcon(cx,cy,r){let t='';const n=8,tw=0.26,C=Math.cos,S=Math.sin;for(let k=0;k<n;k++){const a=k*2*Math.PI/n;t+=`<polygon points="${(cx+C(a-tw)*r).toFixed(1)},${(cy+S(a-tw)*r).toFixed(1)} ${(cx+C(a-tw)*(r+5)).toFixed(1)},${(cy+S(a-tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*(r+5)).toFixed(1)},${(cy+S(a+tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*r).toFixed(1)},${(cy+S(a+tw)*r).toFixed(1)}" fill="#155EE8"/>`;}return t+`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="#155EE8" stroke-width="2.4"/><circle cx="${cx}" cy="${cy}" r="${(r*0.36).toFixed(1)}" fill="#155EE8"/>`;}
-function zig(c,y){return `<polyline points="${c-13},${y-7} ${c-5},${y+7} ${c+3},${y-7} ${c+9},${y+2}" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M${c+9},${y+2} l-6,-3 m6,3 l-5,4" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round"/>`;}
+function zig(c,y){return `<line x1="${c-15}" y1="${y}" x2="${c+8}" y2="${y}" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round"/><path d="M${c+2},${y-6} L${c+12},${y} L${c+2},${y+6}" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;}
 add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:40px">
     <h1 class="s-title" style="text-align:center">Global Breakout Founders Change the World</h1>
