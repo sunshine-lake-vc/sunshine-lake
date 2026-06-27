@@ -106,7 +106,7 @@ body{
   radial-gradient(46% 46% at 28% 80%, rgba(242,216,49,.42), transparent 56%),
   radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
   linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
-.cover .s-pad{justify-content:center;align-items:center;text-align:center;}
+.cover .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
 .cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);width:100%;}
 .cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:18px;color:#fff;font-family:var(--serif);font-size:46px;z-index:2;}
 .cover-logo svg{width:44px;fill:#fff;}
@@ -484,7 +484,7 @@ table.tbl.tall td.co{font-size:20px;}
 .lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
 .lpc .ann{font-size:11px;color:#9aa3bd;}
 .lpc .lp-logo{height:44px;margin-top:8px;display:flex;align-items:center;}
-.lpc .lp-logo .m{display:block;width:142px;background:var(--ink);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:left center;mask-position:left center;-webkit-mask-size:contain;mask-size:contain;}
+.lpc .lp-logo img{max-width:150px;width:auto;object-fit:contain;display:block;}
 .lpc .lp-midas{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
 
 /* closing */
@@ -1148,7 +1148,7 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
         ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.png',0,42],['Jon Lonsdale','8vc.png',0,30],['Sebastian Tonkin','glide.png',0,27],['Wesley Chan','google.png',1,27],
         ['Andrew Schoen','nea.png',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.png',0,27],['Thiago da Costa','autodesk.png',0,42],
         ['Mickey Arabelovic','telescope.png',0,27],['Katia Ameri','a16z.png',0,25],['Rohan Kodialam','citadel.png',0,30],['Y Combinator','yc.png',0,30],['Shawn O\'Neill','silverlake.png',0,27]
-      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><span class="m" style="height:${l[3]||32}px;-webkit-mask-image:url('images/lp/${l[1]}');mask-image:url('images/lp/${l[1]}')"></span></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
+      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><img src="images/lp/${l[1]}" alt="" style="max-height:${l[3]||32}px"></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">Investments directly from individual GPs and founders of select institutional investment funds.</div>
   </div>${chrome(false)}`});
