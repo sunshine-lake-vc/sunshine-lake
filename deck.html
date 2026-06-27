@@ -478,11 +478,14 @@ table.tbl.tall td.co{font-size:20px;}
 .bm .hl{background:#eaf1fb;}
 
 /* LP grid */
-.lp-grid{display:grid;grid-template-columns:repeat(5,1fr);column-gap:20px;row-gap:34px;margin-top:30px;align-content:flex-start;}
+.lp-grid{display:grid;grid-template-columns:repeat(5,1fr);column-gap:20px;row-gap:22px;margin-top:30px;align-content:flex-start;}
 .lp-h{grid-column:span 3;font-family:var(--serif);font-size:25px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:10px;}
 .lpc .nm{font-size:16px;color:var(--ink);font-weight:600;}
 .lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
 .lpc .ann{font-size:11px;color:#9aa3bd;}
+.lpc .lp-logo{height:38px;margin-top:8px;display:flex;align-items:center;}
+.lpc .lp-logo img{max-width:150px;width:auto;object-fit:contain;display:block;}
+.lpc .lp-midas{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
 
 /* closing */
 .closing{background:#0c1024;}
@@ -1138,14 +1141,14 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
   <div class="s-pad">
     <h1 class="s-title">Our Backers &amp; LPs</h1>
     <div class="s-sub" style="font-size:16px;color:var(--mid-lake);max-width:1120px;margin-top:10px;line-height:1.45">We are proud to be managing money on behalf of numerous cause-driven organizations — universities, hospitals, foundations, and research organizations — whose missions mirror those of our founders and whose good works make our work all the more meaningful.</div>
-    <div class="lp-grid" style="margin-top:44px">
+    <div class="lp-grid" style="margin-top:26px">
       ${[
-        ['Abhinav Tiwari','Stripe'],['Anish Acharya','Intuit · Credit Karma'],['David Helgason','Unity'],['Alex Langholz-Baikousis','Cherry · Berlin'],['Arthur Patterson','Accel — Midas List'],
-        ['Cambridge Associates','Founder Family Office'],['Jason Ai','OpenAI'],['Ola Doudin','BitOasis · Coinbase'],['Filip Dames','Zalando'],['Garry Tan','Midas List'],
-        ['Lucas Swisher','Coatue — Midas List'],['JIMCO','Institutional Fund'],['Lonsdale Family','Jon Lonsdale'],['Sebastian Tonkin','Glide · Compass'],['Wesley Chan','Google · Midas List'],
-        ['Andrew Schoen','NEA'],['Nic Ingram','EQT · Hong Kong'],['Heliad','Conglomerate'],['Samuel Adeyamo','Aurora'],['Thiago da Costa','Autodesk · Lagoa'],
-        ['Mickey Arabelovic','Telescope Partners'],['Katia Ameri','a16z'],['Rohan Kodialam','Citadel'],['Y Combinator','Fund of Funds'],['Shawn O\'Neill','Silver Lake']
-      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="og">${l[1]}</div></div>`).join('')}
+        ['Abhinav Tiwari','stripe.png',0,28],['Anish Acharya','creditkarma.png',0,30],['David Helgason','unity.png',0,24],['Alex Langholz-Baikousis','cherry.png',0,32],['Arthur Patterson','accel.png',1,30],
+        ['Cambridge Associates','cambridge.png',0,32],['Jason Ai','openai.png',0,24],['Ola Doudin','coinbase.png',0,28],['Filip Dames','zalando.svg',0,40],['Garry Tan','yc.png',1,30],
+        ['Lucas Swisher','coatue.png',1,26],['JIMCO','jimco.jpg',0,36],['Lonsdale Family','8vc.png',0,30],['Sebastian Tonkin','glide.jpg',0,27],['Wesley Chan','google.webp',1,27],
+        ['Andrew Schoen','nea.webp',0,32],['Nic Ingram','eqt.png',0,30],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.jpg',0,27],['Thiago da Costa','autodesk.webp',0,34],
+        ['Mickey Arabelovic','telescope.png',0,27],['Katia Ameri','a16z.png',0,25],['Rohan Kodialam','citadel.png',0,30],['Y Combinator','yc.png',0,30],['Shawn O\'Neill','silverlake.png',0,30]
+      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><img src="images/lp/${l[1]}" alt="" style="max-height:${l[3]||32}px"></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">Investments directly from individual GPs and founders of select institutional investment funds.</div>
   </div>${chrome(false)}`});
