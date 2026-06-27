@@ -119,8 +119,10 @@ body{
   background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);
   font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.07em;text-transform:uppercase;
   padding:12px 24px;border-radius:999px;box-shadow:0 6px 20px rgba(2,4,31,.32);}
-.spark{position:absolute;pointer-events:none;background:
+.spark{position:absolute;pointer-events:none;will-change:transform,opacity;animation:twinkle 2.6s ease-in-out infinite;background:
    radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
+@keyframes twinkle{0%,100%{opacity:.28;transform:scale(.6);}50%{opacity:1;transform:scale(1);}}
+@media (prefers-reduced-motion:reduce){.spark{animation:none;}}
 .spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
    background:linear-gradient(var(--sun),rgba(242,216,49,0));}
 .spark::before{width:1.5px;height:100%;}
@@ -321,6 +323,16 @@ body{
 .gp-track td.tv{font-family:var(--serif);font-size:18px;color:var(--ink-2);}
 .gp-track .cos{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:flex-start;}
 .gp-track .cos .sub{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:2px;}
+/* unicorn valuation ladder */
+.uni-wrap{display:flex;gap:30px;flex:1;align-items:stretch;margin-top:8px;min-height:0;}
+.uni-chart{flex:2.5;min-width:0;display:flex;align-items:center;}
+.uni-chart svg{width:100%;height:100%;}
+.uni-box{flex:1;background:linear-gradient(160deg,#F7DF47,#F2D831);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;color:var(--navy);box-shadow:0 12px 34px rgba(2,4,31,.18);}
+.uni-box .ub-top{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(11,18,117,.6);}
+.uni-box .ub-n{font-family:var(--serif);font-size:86px;line-height:.95;margin-top:10px;}
+.uni-box .ub-x{font-family:var(--serif);font-size:74px;line-height:.95;}
+.uni-box .ub-l{font-family:var(--serif);font-size:18px;color:rgba(11,18,117,.82);margin-top:4px;}
+.uni-box .ub-rule{width:58px;height:2px;background:rgba(11,18,117,.25);margin:20px 0;}
 .quote-sub{font-family:var(--serif);font-style:normal;font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:14px;max-width:1100px;}
 .quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
 
@@ -702,6 +714,39 @@ function trackRowsHTML(){
 }
 function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
 
+/* unicorn valuation ladder — log scale $0.5B → $100B */
+function uniScale(){
+  const top=28, bot=512, vmin=0.5, vmax=100, axisX=96;
+  const L=v=>Math.log10(v);
+  const yOf=v=>bot-(L(v)-L(vmin))/(L(vmax)-L(vmin))*(bot-top);
+  const ticks=[0.5,1,5,20,100];
+  const items=[
+    {n:'Airbnb',v:80,s:'IPO · $80B',x:150},
+    {n:'Kalshi',v:22,s:'$22B',x:150},
+    {n:'Deel',v:17.3,s:'$17.3B',x:560},
+    {n:'Checkr',v:5,s:'$5B',x:150},
+    {n:'Assured',v:5,s:'$5B',x:400},
+    {n:'Brex / Capital One',v:5,s:'sold · $5B',x:640},
+    {n:'Headway',v:2.3,s:'$2.3B',x:150},
+    {n:'Fundamental.tech',v:1.5,s:'$1.5B',x:150},
+    {n:'SpotHero / Uber',v:1,s:'sold · $1B',x:150},
+    {n:'Fieldguide',v:0.7,s:'$700M',x:150},
+    {n:'Federato',v:0.7,s:'$700M',x:470}
+  ];
+  let s=`<svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI,sans-serif">`;
+  s+=`<line x1="${axisX}" y1="${top-6}" x2="${axisX}" y2="${bot+6}" stroke="#cdd6ee" stroke-width="2"/>`;
+  ticks.forEach(t=>{const y=yOf(t);const lb=t>=1?'$'+t+'B':'$'+(t*1000)+'M';
+    s+=`<line x1="${axisX-7}" y1="${y}" x2="${axisX}" y2="${y}" stroke="#cdd6ee" stroke-width="2"/>`;
+    s+=`<text x="${axisX-13}" y="${y+5}" text-anchor="end" font-size="15" fill="#7a84a6">${lb}</text>`;});
+  items.forEach(c=>{const y=yOf(c.v);const hot=c.v>=15;
+    s+=`<line x1="${axisX}" y1="${y}" x2="${c.x-10}" y2="${y}" stroke="#dbe3f3" stroke-width="1.5" stroke-dasharray="2 4"/>`;
+    s+=`<circle cx="${c.x}" cy="${y}" r="5.5" fill="${hot?'#F2A03C':'#155EE8'}"/>`;
+    s+=`<text x="${c.x+13}" y="${y-2}" font-size="18" font-family="DomaineDisp,Times New Roman,serif" fill="#0B1275">${c.n}</text>`;
+    s+=`<text x="${c.x+13}" y="${y+16}" font-size="13" fill="#5a6685">${c.s}</text>`;});
+  s+=`</svg>`;
+  return s;
+}
+
 /* SVG donut from [{label,pct,color}] */
 function donut(segs,r,sw,center){
   r=r||78; sw=sw||30; const pad=4, cx=r+sw/2+pad, vb=cx*2, C=2*Math.PI*r; let off=0;
@@ -838,18 +883,17 @@ add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:''
   <div class="s-pad">
     <h1 class="s-title">A unicorn for every $15mm deployed</h1>
     <hr class="s-rule">
-    <div class="tr-callout" style="margin:18px 0 0">
-      <div class="trc-funds">
-        <div><div class="trc-amt">$23mm Fund I</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
-        <div class="trc-div"></div>
-        <div><div class="trc-amt">$37mm Fund II</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
+    <div class="uni-wrap">
+      <div class="uni-chart">${uniScale()}</div>
+      <div class="uni-box">
+        <div class="ub-top">Institutional · seed</div>
+        <div class="ub-n">$60M</div>
+        <div class="ub-l">invested at seed</div>
+        <div class="ub-rule"></div>
+        <div class="ub-x">21×</div>
+        <div class="ub-l">aggregate return</div>
       </div>
-      <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
     </div>
-    <table class="tbl tall" style="margin-top:18px">
-      <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Follow-On Lead</th></tr></thead>
-      <tbody>${trackRowsHTML()}</tbody>
-    </table>
   </div>${GROSSNOTE}${chrome(false)}`});
 
 /* 6 — BENCHMARKING */
@@ -1136,6 +1180,25 @@ add({title:'Dive in.',track:'core',teaser:true,dark:true,cls:'closing',html:`
 /* ===== APPENDIX ===== */
 add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
+
+/* ===== TRACK RECORD — full table (moved to appendix) ===== */
+add({title:'Track Record — Table',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">A unicorn for every $15mm deployed</h1>
+    <hr class="s-rule">
+    <div class="tr-callout" style="margin:18px 0 0">
+      <div class="trc-funds">
+        <div><div class="trc-amt">$23mm Fund I</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
+        <div class="trc-div"></div>
+        <div><div class="trc-amt">$37mm Fund II</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
+      </div>
+      <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
+    </div>
+    <table class="tbl tall" style="margin-top:18px">
+      <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Follow-On Lead</th></tr></thead>
+      <tbody>${trackRowsHTML()}</tbody>
+    </table>
+  </div>${GROSSNOTE}${chrome(false)}`});
 
 /* ===== ENGINE — BOXED (alt concept) ===== */
 add({title:'Engine — Boxed (alt)',track:'appendix',teaser:false,dark:false,cls:'',html:`
@@ -1494,7 +1557,7 @@ addEventListener('touchend',e=>{
 function sparkles(){
   const cover=stage.querySelector('.cover'); if(!cover)return;
   const pts=[[78,12,16],[86,8,11],[82,30,22],[68,46,14],[71,54,11],[91,58,10],[18,8,12],[8,30,14],[24,72,12],[88,80,10],[40,84,12],[60,16,9]];
-  pts.forEach(p=>{const s=document.createElement('div');s.className='spark';s.style.cssText=`left:${p[0]}%;top:${p[1]}%;width:${p[2]}px;height:${p[2]}px;`;cover.appendChild(s);});
+  pts.forEach((p,i)=>{const s=document.createElement('div');s.className='spark';s.style.cssText=`left:${p[0]}%;top:${p[1]}%;width:${p[2]}px;height:${p[2]}px;animation-delay:${(i*0.43).toFixed(2)}s;animation-duration:${(2.2+(i%4)*0.45).toFixed(2)}s;`;cover.appendChild(s);});
 }
 
 let booted=false;
