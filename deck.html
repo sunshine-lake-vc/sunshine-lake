@@ -484,7 +484,7 @@ table.tbl.tall td.co{font-size:20px;}
 .lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
 .lpc .ann{font-size:11px;color:#9aa3bd;}
 .lpc .lp-logo{height:44px;margin-top:8px;display:flex;align-items:center;}
-.lpc .lp-logo img{max-width:150px;width:auto;object-fit:contain;display:block;}
+.lpc .lp-logo .m{display:block;width:142px;background:var(--ink);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:left center;mask-position:left center;-webkit-mask-size:contain;mask-size:contain;}
 .lpc .lp-midas{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
 
 /* closing */
@@ -1143,12 +1143,12 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
     <div class="s-sub" style="font-size:16px;color:var(--mid-lake);max-width:1120px;margin-top:10px;line-height:1.45">We are proud to be managing money on behalf of numerous cause-driven organizations — universities, hospitals, foundations, and research organizations — whose missions mirror those of our founders and whose good works make our work all the more meaningful.</div>
     <div class="lp-grid" style="margin-top:26px">
       ${[
-        ['Abhinav Tiwari','stripe.png',0,28],['Anish Acharya','creditkarma.png',0,30],['David Helgason','unity.png',0,24],['Alex Langholz-Baikousis','cherry.png',0,32],['Arthur Patterson','accel.png',1,27],
+        ['Abhinav Tiwari','stripe.png',0,28],['Anish Acharya','creditkarma.png',0,30],['David Helgason','unity.png',0,28],['Alex Langholz-Baikousis','cherry.png',0,32],['Arthur Patterson','accel.png',1,27],
         ['Cambridge Associates','cambridge.png',0,32],['Jason Ai','openai.png',0,24],['Ola Doudin','coinbase.png',0,25],['Filip Dames','zalando.svg',0,28],['Garry Tan','yc.png',1,30],
-        ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.jpg',0,42],['Lonsdale Family','8vc.png',0,30],['Sebastian Tonkin','glide.jpg',0,27],['Wesley Chan','google.webp',1,27],
-        ['Andrew Schoen','nea.webp',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.jpg',0,27],['Thiago da Costa','autodesk.webp',0,42],
+        ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.png',0,42],['Jon Lonsdale','8vc.png',0,30],['Sebastian Tonkin','glide.png',0,27],['Wesley Chan','google.png',1,27],
+        ['Andrew Schoen','nea.png',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.png',0,27],['Thiago da Costa','autodesk.png',0,42],
         ['Mickey Arabelovic','telescope.png',0,27],['Katia Ameri','a16z.png',0,25],['Rohan Kodialam','citadel.png',0,30],['Y Combinator','yc.png',0,30],['Shawn O\'Neill','silverlake.png',0,27]
-      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><img src="images/lp/${l[1]}" alt="" style="max-height:${l[3]||32}px"></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
+      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><span class="m" style="height:${l[3]||32}px;-webkit-mask-image:url('images/lp/${l[1]}');mask-image:url('images/lp/${l[1]}')"></span></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">Investments directly from individual GPs and founders of select institutional investment funds.</div>
   </div>${chrome(false)}`});
