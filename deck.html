@@ -358,10 +358,10 @@ table.tbl.tall td.co{font-size:20px;}
 .trc-quality b{font-family:var(--serif);font-size:22px;color:var(--sun);font-weight:400;margin-right:4px;}
 
 /* team */
-.team-row{display:flex;gap:28px;margin:10px 0 22px;}
+.team-row{display:flex;gap:16px;margin:10px 0 22px;}
 .tm{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;}
 .tm .av{width:88px;height:88px;border-radius:50%;background:#dfe4f2 center/cover no-repeat;border:2px solid var(--cobalt);margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:34px;color:var(--cobalt);}
-.tm .nm{font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.18;min-height:1.4em;display:flex;align-items:center;justify-content:center;}
+.tm .nm{font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.18;min-height:1.4em;display:flex;align-items:center;justify-content:center;text-align:center;}
 .tm .rl{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.35;min-height:1.4em;display:flex;align-items:center;justify-content:center;}
 .tm .pe{font-size:13px;color:var(--cobalt);font-weight:600;margin-top:6px;letter-spacing:.02em;line-height:1.35;}
 .vectors{display:flex;gap:22px;flex:1;}
@@ -439,6 +439,8 @@ table.tbl.tall td.co{font-size:20px;}
 .cs-metric:last-child{border-bottom:none;}
 .cs-metric .ml{font-size:12.5px;color:var(--muted);}
 .cs-metric .mv{font-family:var(--serif);font-size:29px;color:var(--ink);line-height:1.1;margin-top:2px;}
+.cs-metric .msub{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.32;margin-top:3px;}
+.cs-metric .msub:first-of-type{margin-top:5px;}
 .cs-metric.hot .ml{color:#3f9d6f;} .cs-metric.hot .mv{color:#3f9d6f;}
 .cs-insight{border-top:1px solid var(--line);padding:14px 56px 20px;}
 .slide:has(.cs-insight) .s-mark{display:none;}
@@ -649,9 +651,10 @@ function chrome(dark){return (dark?'<svg class="s-mark" style="fill:#fff" viewBo
 
 const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
 const TEAM=[
- {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',rl:'Partner & COO · Los Angeles',pe:'Global Founders Capital DD · Stanford',img:'images/team/ivan.webp'},
+ {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',rl:'Partner & COO · Los Angeles',pe:'GFC Due Diligence · Stanford',img:'images/team/ivan.webp'},
  {nm:'Suhail Younus',fl:'🇦🇫',rl:'Investor · New York City',pe:'Private Equity · Cornell',img:'images/team/suhail.webp'},
- {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'Adyen · ESCP',img:'images/team/wieger.webp'}
+ {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'Adyen · ESCP',img:'images/team/wieger.webp'},
+ {nm:'Karambir Singh',fl:'🇮🇳',rl:'Venture Partner · Mumbai',pe:'Sector Researcher · Amazon',img:''}
 ];
 const VECTORS=[
  {n:'1',t:'Founding',p:'Idea to company',ad:[['David Bell','Wharton professor & unicorn advisor','🇳🇿'],['Mike Franklin','Databricks founding advisor · UChicago Data Science chair','🇺🇸'],['Esther Wojcicki','Godmother of Silicon Valley','🇺🇸']]},
@@ -688,8 +691,8 @@ const CASES=[
  {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',banner:'News of a forthcoming IPO',story:'Tarek and Luana — from Lebanon and Brazil by way of MIT — ride the economic shift to build the first CFTC-regulated event exchange, bringing prediction markets mainstream.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',
   steps:[['SCOUT','Top MIT engineers connected us; we backed them despite regulatory hurdles.'],['SELECT','We backed Jane Street alumni building a $136B prediction exchange with global-first DNA.'],['SECURE','We leaned on shared EU and Lebanese roots to build early trust and signal top investors.'],['SUPPORT','We hosted the team in-office for 6 months and shared BD and regulatory research.']],
-  metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm'],['Liquid Position Today','$1.1Bn','hot'],['Post-Money Today','$40.0Bn'],['Ownership','5.0%']],
-  insight:'International founders spot regulatory gaps and build durable infrastructure the world depends on.',teaser:false},
+  metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm<div class="msub">$500k at $10mm post-money</div><div class="msub">$500k at $23mm post-money</div>'],['Liquid Position Today','$1.1Bn','hot'],['Post-Money Today','$40.0Bn'],['Ownership','5.0%']],
+  insight:'Conviction compounds — a first $500k at a $10mm cap, then doubling down at $23mm as the thesis proved out.',teaser:false},
  {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',banner:'Realized return on investment (DPI)',story:'Andy Su rides the AI-productivity shift to replace clunky spreadsheets with real-time FP&amp;A that founders actually use — built for operators everywhere.',
   founders:'Andy Su 🇨🇳',
   steps:[['SCOUT','The Brex product-alumni network surfaced Andy.'],['SELECT','We moved fast on an engineering-led team with deep empathy for the pain.'],['SECURE','We aligned Pry\'s roadmap with the market.'],['SUPPORT','We guided M&amp;A strategy and coached the team to a Brex acquisition.']],
@@ -1058,7 +1061,7 @@ add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
       <div class="rows">
         <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies</span></div>
         <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
-        <div class="tr"><span class="k">Initial Check Size</span><span class="v">$1mm</span></div>
+        <div class="tr"><span class="k">Initial Check Size</span><span class="v">$1mm average</span></div>
         <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions · ~85% of total capital</span></div>
         <div class="tr"><span class="k">Reserves</span><span class="v">10% dedicated (winners only) · 10% discretionary "cannonball" follow-on</span></div>
         <div class="tr"><span class="k">Non-core</span><span class="v">15% — 5% scout/discovery · 5% network · 5% power law</span></div>
