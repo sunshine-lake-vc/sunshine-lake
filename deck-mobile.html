@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1275">
+<title>Sunshine Lake — Fund I (Mobile)</title>
+<link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{
+  font-family:'DomaineDisp';
+  src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'),
+      url('fonts/DomaineDisp-Regular.otf') format('opentype');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+:root{
+  --cobalt:#155EE8; --mid-lake:#0A3DAE; --navy:#0B1275; --abyss:#02041F;
+  --sun:#F2D831; --light-blue:#19BDE8;
+  --ink:#0B1275; --ink-2:#1d2a4d; --muted:#5a6685; --line:#e7eaf3;
+  --serif:'DomaineDisp','Times New Roman',serif;
+  --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{font-family:var(--sans);color:var(--ink);background:#0b1024;-webkit-font-smoothing:antialiased;}
+
+/* ---------- password gate ---------- */
+#gate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(180deg,#155EE8 0%,#0A3DAE 55%,#0032A8 100%);}
+.gate-card{width:100%;max-width:420px;background:rgba(255,255,255,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:34px 28px;color:#fff;}
+.gate-card .mk{width:36px;display:block;margin:0 0 22px;fill:#fff;}
+.gate-card h1{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.05;margin:0 0 12px;}
+.gate-card p{font-family:var(--serif);font-size:1rem;line-height:1.5;color:rgba(255,255,255,.78);margin:0 0 24px;}
+.gate-card label{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:6px;}
+.gate-card input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:14px 16px;color:#fff;font:inherit;font-size:16px;}
+.gate-card input:focus{outline:none;border-color:rgba(242,216,49,.6);}
+.gate-card button{width:100%;margin-top:14px;background:var(--sun);color:var(--navy);border:none;border-radius:999px;padding:15px 22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;}
+.gate-err{color:var(--sun);font-size:13px;margin-top:12px;min-height:18px;opacity:0;transition:opacity .2s;}
+.gate-err.show{opacity:1;}
+
+/* ---------- deck ---------- */
+#deck{display:none;}
+#deck.ready{display:block;}
+.phone{max-width:480px;margin:0 auto;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;background:#fff;position:relative;}
+.phone::-webkit-scrollbar{display:none;}
+.phone{scrollbar-width:none;}
+.ms{min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:64px 32px 70px;}
+.ms.center{justify-content:center;}
+.ms .conf{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:10px;letter-spacing:.04em;color:#9aa3bd;}
+.ms.dark .conf{color:rgba(255,255,255,.5);}
+
+/* tokens */
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);}
+.ms.dark .eyebrow{color:var(--sun);}
+.eyebrow.ctr{text-align:center;}
+.h-serif{font-family:var(--serif);font-weight:400;color:var(--ink);line-height:1.08;letter-spacing:-.01em;}
+.ms.dark .h-serif{color:#fff;}
+.lede{font-family:var(--serif);font-size:18px;line-height:1.4;color:var(--ink-2);}
+.ms.dark .lede{color:rgba(255,255,255,.84);}
+.muted{color:var(--muted);}
+.foot-italic{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.4;color:var(--cobalt);text-align:center;}
+
+/* cover / dark gradient */
+.cover{background:
+  radial-gradient(50% 36% at 20% 22%, rgba(242,216,49,.55), transparent 62%),
+  radial-gradient(46% 40% at 82% 16%, rgba(25,189,232,.5), transparent 60%),
+  radial-gradient(80% 60% at 60% 84%, rgba(21,94,232,.6), transparent 62%),
+  radial-gradient(46% 36% at 26% 82%, rgba(242,216,49,.4), transparent 56%),
+  linear-gradient(150deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
+.statement{background:linear-gradient(160deg,#1a6bff 0%,#155EE8 45%,#0A3DAE 100%);}
+.closing{background:radial-gradient(120% 120% at 25% 20%,#13183d,#02041F);}
+
+.brand{display:flex;align-items:center;gap:11px;color:#fff;font-family:var(--serif);font-size:24px;}
+.brand .mk{width:26px;fill:#fff;flex:0 0 26px;}
+
+/* cover */
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:54px;line-height:1.05;letter-spacing:-.015em;text-shadow:0 2px 24px rgba(2,4,31,.3);}
+.cover .band{margin-top:30px;}
+.cover .band .b1{display:inline-block;background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:9px 16px;border-radius:999px;}
+.cover .band .b2{color:rgba(255,255,255,.8);font-size:14px;margin-top:12px;letter-spacing:.02em;}
+
+/* stat blocks */
+.bignum{font-family:var(--serif);color:var(--cobalt);line-height:.95;}
+.statrow{display:flex;gap:14px;margin-top:8px;}
+.statrow .st{flex:1;}
+.statrow .st .n{font-family:var(--serif);font-size:30px;color:var(--ink);line-height:1;}
+.statrow .st .l{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.3;}
+
+/* MOIC rows */
+.moic{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);}
+.moic .x{font-family:var(--serif);font-size:42px;color:var(--cobalt);line-height:1;flex:0 0 116px;}
+.moic .co{font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1.05;}
+.moic .se{font-size:13px;color:var(--muted);margin-top:5px;}
+
+/* bullets */
+.blist{list-style:none;margin-top:6px;}
+.blist li{position:relative;padding-left:18px;font-size:15.5px;color:var(--ink-2);line-height:1.5;margin-bottom:11px;}
+.blist li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--cobalt);}
+
+/* chips */
+.chips{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+.chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:14px 18px;}
+.chip .t{font-family:var(--serif);font-size:21px;color:var(--sun);}
+.chip .d{font-size:13px;color:rgba(255,255,255,.78);margin-top:4px;line-height:1.4;}
+
+/* archetypes */
+.arch{margin-top:6px;}
+.arch .a{padding:15px 0;border-bottom:1px solid var(--line);}
+.arch .a:last-child{border-bottom:0;}
+.arch .a .t{font-family:var(--serif);font-size:21px;color:var(--ink);}
+.arch .a .d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+/* term rows */
+.terms{margin-top:8px;}
+.terms .tr{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);}
+.terms .tr .k{font-weight:700;color:var(--ink);font-size:14px;}
+.terms .tr .v{color:var(--ink-2);font-size:14px;text-align:right;}
+
+/* GP portrait */
+.gp-photo{width:96px;height:116px;border-radius:14px;background:#e7ebf6 center/cover no-repeat;border:1px solid var(--line);}
+
+/* progress dots */
+#dots{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:8px;}
+#dots .d{width:7px;height:7px;border-radius:50%;background:rgba(11,18,117,.18);transition:background .2s,transform .2s;}
+#dots .d.on{background:var(--cobalt);transform:scale(1.35);}
+@media (max-width:520px){#dots{right:6px;}}
+
+.hint{position:fixed;left:0;right:0;bottom:14px;text-align:center;font-size:11px;color:rgba(11,18,117,.4);z-index:40;pointer-events:none;transition:opacity .4s;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <svg class="mk" viewBox="0 0 394.94 375.26" aria-hidden="true"><use href="#mark"/></svg>
+    <h1>Sunshine Lake</h1>
+    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter the access password to continue.</p>
+    <form id="gateForm" autocomplete="off">
+      <label for="gp">Password</label>
+      <input id="gp" type="password" required autofocus>
+      <button type="submit">Enter</button>
+      <div class="gate-err" id="ge">Incorrect password.</div>
+    </form>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="mark"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></g></defs></svg>
+
+<div id="deck">
+  <div class="phone" id="phone">
+
+    <!-- 1 — COVER -->
+    <section class="ms cover dark center">
+      <div class="brand" style="position:absolute;top:34px;left:32px"><svg class="mk" viewBox="0 0 394.94 375.26"><use href="#mark"/></svg> Sunshine Lake</div>
+      <h1>Global founders forge the future.</h1>
+      <div class="band">
+        <span class="b1">Pre-Seed &amp; Seed · Fund&nbsp;I</span>
+        <div class="b2">$50M target · 5% GP commit</div>
+      </div>
+      <div style="position:absolute;left:32px;bottom:46px;color:rgba(255,255,255,.82);font-size:14px">Donald Stalter · San Francisco</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 2 — THE TRACK RECORD -->
+    <section class="ms center">
+      <div class="eyebrow">The Track Record</div>
+      <div class="bignum" style="font-size:96px;margin-top:14px">21×</div>
+      <div class="muted" style="font-size:15px;margin-top:4px">gross TVPI on $60M deployed</div>
+      <h2 class="h-serif" style="font-size:38px;margin-top:30px">A unicorn for every $15M deployed.</h2>
+      <div class="statrow" style="margin-top:34px">
+        <div class="st"><div class="n">Top 1%</div><div class="l">Cambridge</div></div>
+        <div class="st"><div class="n">4</div><div class="l">unicorns</div></div>
+        <div class="st"><div class="n">60%</div><div class="l">DPI</div></div>
+      </div>
+      <div class="muted" style="font-size:13.5px;margin-top:30px;line-height:1.5">Across two seed funds at Global Founders Capital.</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 3 — FOUNDER & GP -->
+    <section class="ms">
+      <div class="eyebrow">Founder &amp; General Partner</div>
+      <div style="display:flex;align-items:center;gap:18px;margin-top:18px">
+        <div class="gp-photo" style="background-image:url('images/team/don.webp')"></div>
+        <div>
+          <div class="h-serif" style="font-size:34px">Don Stalter</div>
+          <div class="muted" style="font-size:13px;margin-top:4px">San Francisco</div>
+        </div>
+      </div>
+      <div class="lede" style="font-size:18px;margin-top:22px">A global dealmaker, operator and top-1% seed investor: raised across continents, multilingual.</div>
+      <ul class="blist" style="margin-top:22px">
+        <li>Credit Suisse M&amp;A · Google buyside</li>
+        <li>Airbnb, early operator across EU &amp; APAC</li>
+        <li>CityDeal → Groupon</li>
+        <li>Global Founders Capital, North America</li>
+      </ul>
+      <div style="margin-top:auto;font-family:var(--serif);font-size:17px;color:var(--cobalt);line-height:1.4">$60M at 21× · top 1% Cambridge · 4 unicorns.</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 4 — OUR THESIS -->
+    <section class="ms statement dark">
+      <div class="eyebrow">Our Thesis</div>
+      <h2 class="h-serif" style="font-size:40px;margin-top:18px">We invest at founders' <span style="color:var(--sun)">breakout moments.</span></h2>
+      <div class="lede" style="margin-top:20px">Talent is universal. Opportunity isn't.</div>
+      <div class="lede" style="margin-top:16px;font-size:16px;color:rgba(255,255,255,.78)">Our insights into economic, social &amp; technological shifts fuel multiple blockbuster companies a decade.</div>
+      <div class="chips" style="margin-top:auto">
+        <div class="chip"><div class="t">Economic</div><div class="d">Tariffs · sovereignty · re-globalized supply chains</div></div>
+        <div class="chip"><div class="t">Social</div><div class="d">Aging · mental health · the reskilling of work</div></div>
+        <div class="chip"><div class="t">Technological</div><div class="d">AI collapses expert work · physical intelligence</div></div>
+      </div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 5 — FIRST CHECKS, THEN THE GIANTS -->
+    <section class="ms">
+      <div class="eyebrow ctr">First checks · then the giants followed</div>
+      <div style="margin-top:20px">
+        <div class="moic"><div class="x">831×</div><div><div class="co">Kalshi</div><div class="se">Sequoia led the Series A</div></div></div>
+        <div class="moic"><div class="x">505×</div><div><div class="co">Assured</div><div class="se">Kleiner Perkins led</div></div></div>
+        <div class="moic"><div class="x">356×</div><div><div class="co">Deel</div><div class="se">a16z led</div></div></div>
+        <div class="moic" style="border-bottom:0"><div class="x">115×</div><div><div class="co">Headway</div><div class="se">Accel led</div></div></div>
+      </div>
+      <div class="muted" style="text-align:center;font-style:italic;font-family:var(--serif);font-size:14px;margin-top:18px;line-height:1.4">First &amp; largest checks at seed: gross MOIC on the first check.</div>
+      <div class="foot-italic" style="margin-top:auto">We earn the first check. Then a16z, Sequoia and Accel compete to lead the next round.</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 6 — WHO WE BACK -->
+    <section class="ms">
+      <div class="eyebrow">Who We Back</div>
+      <h2 class="h-serif" style="font-size:36px;margin-top:16px">Talent is universal. Opportunity isn't.</h2>
+      <div style="margin-top:26px"><span class="bignum" style="font-size:74px">59%</span></div>
+      <div class="muted" style="font-size:14.5px;margin-top:6px;line-height:1.45">of U.S. unicorns have an immigrant founder. <span style="color:#9aa3bd">(NFAP, 2026)</span></div>
+      <div class="arch" style="margin-top:auto">
+        <div class="a"><div class="t">The world-class operator</div><div class="d">Forged in the world's most rigorous schools and companies.</div></div>
+        <div class="a"><div class="t">The safety-net leaver</div><div class="d">Walking away from comfort takes a real impulse to build.</div></div>
+        <div class="a"><div class="t">The groupthink breaker</div><div class="d">Outsiders see what the Valley's insiders miss.</div></div>
+      </div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 7 — THE FUND -->
+    <section class="ms">
+      <div class="eyebrow">The Fund</div>
+      <h2 class="h-serif" style="font-size:38px;margin-top:16px">$50M. 30 breakout companies. 5% ownership in each.</h2>
+      <div class="lede" style="font-size:16px;margin-top:16px">Small by design: sized so a single unicorn can return the fund many times over.</div>
+      <div class="terms" style="margin-top:auto">
+        <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
+        <div class="tr"><span class="k">Check</span><span class="v">$1M initial</span></div>
+        <div class="tr"><span class="k">Reserves</span><span class="v">20% for follow-on</span></div>
+        <div class="tr"><span class="k">Terms</span><span class="v">2.5% mgmt · 20% carry · 5% GP commit</span></div>
+      </div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 8 — SUNSHINE LAKE I -->
+    <section class="ms center">
+      <div class="eyebrow">Sunshine Lake I · Already in motion</div>
+      <div class="bignum" style="font-size:92px;margin-top:14px">1.2×</div>
+      <div class="muted" style="font-size:15px;margin-top:4px">portfolio markup since first close</div>
+      <div class="statrow" style="margin-top:34px">
+        <div class="st"><div class="n">Aug 2025</div><div class="l">first close</div></div>
+        <div class="st"><div class="n">+$1.9M</div><div class="l">unrealized gain</div></div>
+        <div class="st"><div class="n">9</div><div class="l">companies marked up</div></div>
+      </div>
+      <div class="foot-italic" style="margin-top:34px">The strategy is compounding from day one.</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+    <!-- 9 — CLOSING -->
+    <section class="ms closing dark center">
+      <div class="brand" style="margin-bottom:26px"><svg class="mk" viewBox="0 0 394.94 375.26"><use href="#mark"/></svg> Sunshine Lake</div>
+      <h2 class="h-serif" style="font-size:38px">The next decade of category leaders is being founded now.</h2>
+      <div class="lede" style="margin-top:16px;color:rgba(255,255,255,.82)">And we back them first.</div>
+      <div style="font-family:var(--serif);color:var(--sun);font-size:17px;margin-top:26px">$60M → 21× · top 1% Cambridge · four unicorns.</div>
+      <div style="margin-top:30px;color:#fff;font-family:var(--serif);font-size:17px">Donald Stalter · General Partner</div>
+      <div style="color:rgba(255,255,255,.7);font-size:13.5px;margin-top:6px">don@sunshinelake.vc · sunshinelake.vc</div>
+      <div class="conf">Strictly Confidential</div>
+    </section>
+
+  </div>
+</div>
+
+<div id="dots"></div>
+<div class="hint" id="hint">Swipe up to continue</div>
+
+<script>
+/* password gate — same as desktop (password: "forge") */
+const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),ge=document.getElementById('ge');
+function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');boot();}
+gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');
+  if(await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');unlock();}
+  else{ge.classList.add('show');gpw.value='';gpw.focus();}});
+
+let booted=false;
+function boot(){
+  if(booted) return; booted=true;
+  const phone=document.getElementById('phone');
+  const slides=[...phone.querySelectorAll('.ms')];
+  const dots=document.getElementById('dots');
+  slides.forEach((s,i)=>{const d=document.createElement('div');d.className='d'+(i===0?' on':'');d.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'});dots.appendChild(d);});
+  const dotEls=[...dots.children];
+  const hint=document.getElementById('hint');
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){const i=slides.indexOf(e.target);dotEls.forEach((d,j)=>d.classList.toggle('on',j===i));
+      if(i>0) hint.style.opacity='0';}});
+  },{root:phone,threshold:0.55});
+  slides.forEach(s=>io.observe(s));
+  // keyboard support (desktop preview)
+  let cur=0;
+  window.addEventListener('keydown',ev=>{
+    if(ev.key==='ArrowDown'||ev.key==='ArrowRight'||ev.key===' '){cur=Math.min(slides.length-1,cur+1);slides[cur].scrollIntoView({behavior:'smooth'});ev.preventDefault();}
+    if(ev.key==='ArrowUp'||ev.key==='ArrowLeft'){cur=Math.max(0,cur-1);slides[cur].scrollIntoView({behavior:'smooth'});ev.preventDefault();}
+  });
+}
+if(sessionStorage.getItem('slDeckAuth')==='1'){unlock();}
+</script>
+</body>
+</html>
