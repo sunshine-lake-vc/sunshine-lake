@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sunshine Lake — Fund I</title>
+<link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* ============================================================
+   SUNSHINE LAKE — Fund I deck
+   Single-file HTML deck. Keyboard ◄ ► to page. Teaser / Full
+   modes. Password-gated (separate from the LP portal). Print
+   to PDF via the Export button (each slide → one landscape page).
+   Design: white content slides, cobalt section breaks, abyss
+   hero cover. Mirrors the site design system, polished up.
+   ============================================================ */
+@font-face{
+  font-family:'DomaineDisp';
+  src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'),
+      url('fonts/DomaineDisp-Regular.otf') format('opentype');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+:root{
+  --cobalt:#155EE8; --mid-lake:#0A3DAE; --navy:#0B1275; --abyss:#02041F;
+  --sun:#F2D831; --sun-soft:#FFF1B6; --cream:#FFFBEB; --pill:#F6ECC0;
+  --light-blue:#19BDE8;
+  --ink:#0B1275; --ink-2:#1d2a4d; --muted:#5a6685; --line:#e7eaf3;
+  --teal:#2ed9c3; --green:#81e77a; --coral:#f68d6c;
+  --serif:'DomaineDisp','Times New Roman',serif;
+  --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+  --stageW:1280px; --stageH:720px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  background:#0e1330;
+  font-family:var(--sans);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+
+/* ---------- password gate ---------- */
+#gate{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(180deg,#155EE8 0%,#0A3DAE 55%,#0032A8 100%);
+}
+.gate-card{
+  width:100%;max-width:440px;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.14);border-radius:20px;
+  padding:clamp(30px,5vw,52px);color:#fff;
+}
+.gate-card svg{width:38px;height:auto;display:block;margin:0 0 24px;fill:#fff;}
+.gate-card h1{font-family:var(--serif);font-weight:400;font-size:2.3rem;line-height:1.05;margin:0 0 12px;}
+.gate-card p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:rgba(255,255,255,.78);margin:0 0 26px;}
+.gate-card label{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:6px;}
+.gate-card input{
+  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:10px;padding:14px 16px;color:#fff;font:inherit;font-size:15px;
+}
+.gate-card input:focus{outline:none;border-color:rgba(242,216,49,.6);background:rgba(255,255,255,.1);}
+.gate-card button{
+  width:100%;margin-top:14px;background:var(--sun);color:var(--navy);border:none;border-radius:999px;
+  padding:14px 22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.gate-card button:hover{background:#F7DF47;transform:translateY(-1px);}
+.gate-err{color:var(--sun);font-size:13px;margin-top:12px;min-height:18px;opacity:0;transition:opacity .2s;}
+.gate-err.show{opacity:1;}
+
+/* ---------- deck shell ---------- */
+#deck{position:fixed;inset:0;display:none;align-items:center;justify-content:center;}
+#deck.ready{display:flex;}
+.stage{
+  position:relative;width:var(--stageW);height:var(--stageH);
+  transform-origin:center center;flex:0 0 auto;
+}
+.slide{
+  position:absolute;inset:0;width:var(--stageW);height:var(--stageH);
+  background:#fff;overflow:hidden;
+  opacity:0;visibility:hidden;
+  display:flex;flex-direction:column;
+}
+.slide.active{opacity:1;visibility:visible;}
+.slide.hide-in-mode{display:none !important;}
+
+/* slide chrome */
+.s-pad{padding:64px 72px 56px;flex:1;display:flex;flex-direction:column;min-height:0;}
+.s-mark{position:absolute;left:40px;bottom:30px;width:34px;height:auto;opacity:.9;}
+.s-conf{position:absolute;right:44px;bottom:32px;font-size:11px;letter-spacing:.04em;color:#9aa3bd;}
+.slide.dark .s-conf{color:rgba(255,255,255,.5);}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px;}
+.s-title{font-family:var(--serif);font-weight:400;color:var(--ink);line-height:1.04;letter-spacing:-.01em;font-size:46px;}
+.s-sub{font-family:var(--serif);font-size:23px;color:var(--mid-lake);margin-top:14px;line-height:1.25;}
+.s-rule{height:2px;background:linear-gradient(90deg,var(--cobalt),transparent);margin:22px 0 0;border:0;}
+
+/* ---------- cover (abyss hero) ---------- */
+.cover{background:
+  radial-gradient(48% 42% at 18% 26%, rgba(242,216,49,.62), transparent 62%),
+  radial-gradient(46% 50% at 78% 20%, rgba(25,189,232,.5), transparent 60%),
+  radial-gradient(70% 70% at 64% 82%, rgba(21,94,232,.65), transparent 62%),
+  radial-gradient(46% 46% at 28% 80%, rgba(242,216,49,.42), transparent 56%),
+  radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
+  linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
+.cover .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);width:100%;}
+.cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:18px;color:#fff;font-family:var(--serif);font-size:46px;z-index:2;}
+.cover-logo svg{width:44px;fill:#fff;}
+.cover .meta{position:absolute;left:72px;bottom:74px;z-index:2;}
+.cover .meta .lead{font-weight:700;color:#fff;font-size:18px;letter-spacing:.02em;}
+.cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
+.cover .meta .ln.dim{color:rgba(255,255,255,.55);}
+.cover .s-conf{color:rgba(255,255,255,.65);}
+.cover-band{position:absolute;top:54px;right:64px;z-index:3;
+  background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);
+  font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 24px;border-radius:999px;box-shadow:0 6px 20px rgba(2,4,31,.32);}
+.spark{position:absolute;pointer-events:none;will-change:transform,opacity;animation:twinkle 2.6s ease-in-out infinite;background:
+   radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
+@keyframes twinkle{0%,100%{opacity:.28;transform:scale(.6);}50%{opacity:1;transform:scale(1);}}
+@media (prefers-reduced-motion:reduce){.spark{animation:none;}}
+.spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+   background:linear-gradient(var(--sun),rgba(242,216,49,0));}
+.spark::before{width:1.5px;height:100%;}
+.spark::after{width:100%;height:1.5px;background:linear-gradient(90deg,rgba(242,216,49,0),var(--sun),rgba(242,216,49,0));}
+
+/* ---------- navy section break (formal, ICONIQ-restrained) ---------- */
+.section{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
+.section .s-pad{justify-content:center;}
+.section .sec-no{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--sun);letter-spacing:.34em;text-transform:uppercase;margin-bottom:24px;}
+.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:66px;line-height:1.05;letter-spacing:.015em;}
+.section h2::after{content:"";display:block;width:60px;height:2px;background:var(--sun);margin:28px 0 0;}
+.section p{font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.74);max-width:700px;line-height:1.4;margin-top:26px;}
+.section .s-mark{opacity:1;}
+
+/* ---------- navy statement slide ---------- */
+.statement{background:linear-gradient(155deg,#1a6bff 0%,#155EE8 45%,#0A3DAE 100%);}
+.statement .s-pad{justify-content:center;align-items:flex-start;}
+.statement .eyebrow{color:var(--sun);}
+.statement .sline{font-family:var(--serif);color:#fff;font-size:50px;line-height:1.16;letter-spacing:-.01em;max-width:1080px;}
+.statement .sline.sub{color:rgba(255,255,255,.84);margin-top:26px;font-size:29px;line-height:1.32;max-width:860px;}
+.statement .sline .forged{color:var(--sun);font-weight:400;}
+.statement .s-mark{opacity:1;}
+/* thesis "trades a founder makes" */
+.trades{margin-top:28px;display:flex;flex-direction:column;gap:13px;max-width:1040px;}
+.trade{display:flex;align-items:baseline;gap:20px;font-family:var(--serif);border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:13px;}
+.trade:last-child{border-bottom:0;}
+.trade .gave{flex:0 0 340px;color:rgba(255,255,255,.6);font-size:21px;}
+.trade .ar{color:var(--sun);font-size:19px;flex:0 0 auto;}
+.trade .got{color:#fff;font-size:24px;}
+.trade-close{margin-top:26px;font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.92);max-width:1040px;line-height:1.4;}
+.trade-close b{color:var(--sun);font-weight:400;}
+/* ---------- archetype: cross-border founder (navy statement + grid) ---------- */
+.statement .arch-lead{font-family:var(--serif);font-size:21px;line-height:1.4;color:rgba(255,255,255,.86);max-width:1040px;margin-top:16px;}
+.statement .arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;margin-top:30px;}
+.arch-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:15px 16px;}
+.arch-card .ac-ic{display:block;height:26px;margin-bottom:10px;}
+.arch-card .ac-ic svg{width:26px;height:26px;stroke:var(--sun);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.arch-card .ac-h{font-family:var(--serif);font-size:19px;color:var(--sun);line-height:1.12;}
+.arch-card .ac-d{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.36;}
+
+/* ---------- boom (headline numbers) ---------- */
+.boom{background:radial-gradient(120% 130% at 20% 0%,#1a3fb0 0%,#0a2a82 45%,#02041F 100%);}
+.boom .s-pad{justify-content:center;}
+.boom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 24px;margin:18px 0 22px;}
+.boom .bstat{text-align:center;}
+.boom .bn{font-family:var(--serif);font-size:78px;line-height:.95;color:#fff;letter-spacing:-.01em;}
+.boom .bstat:nth-child(1) .bn,.boom .bstat:nth-child(5) .bn{color:var(--sun);}
+.boom .bl{font-size:13.5px;color:#b6bee0;margin-top:8px;letter-spacing:.01em;}
+.boom-foot{text-align:center;font-family:var(--serif);font-size:23px;color:#eaeeff;line-height:1.35;max-width:1000px;margin:0 auto;}
+.boom-foot b{color:var(--sun);font-weight:400;}
+
+/* ---------- ecosystem network ---------- */
+.ecosystem{background:radial-gradient(120% 120% at 70% 30%,#13183d,#02041F);}
+.eco-node{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--serif);color:#fff;line-height:1.15;padding:10px;}
+.eco-center{background:radial-gradient(circle at 38% 32%,#2f74ff,#155EE8 70%);box-shadow:0 0 0 8px rgba(21,94,232,.16);}
+.eco-sat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);}
+.eco-sat .ec-n{font-size:18px;} .eco-sat .ec-s{font-size:12px;color:#aeb6da;font-family:var(--sans);margin-top:3px;}
+
+/* ===== merged SSSS engine — Version A (content-rich colorful boxes) ===== */
+.eng-flow{display:flex;gap:14px;flex:1;align-items:stretch;margin-top:16px;}
+.eng-card{flex:1;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line);}
+.eng-top{display:flex;align-items:center;gap:9px;padding:11px 14px;color:#fff;}
+.eng-card.s1 .eng-top{background:#155EE8;}.eng-card.s2 .eng-top{background:#BE922A;}.eng-card.s3 .eng-top{background:#2f9d6f;}.eng-card.s4 .eng-top{background:#0A3DAE;}
+.eng-num{width:23px;height:23px;border-radius:50%;background:rgba(255,255,255,.25);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 23px;}
+.eng-name{font-family:var(--serif);font-size:22px;}
+.eng-stat{margin-left:auto;font-family:var(--serif);font-size:20px;}
+.eng-body{flex:1;padding:13px 14px;display:flex;flex-direction:column;gap:9px;}
+.eng-card.s1 .eng-body{background:#eff4fd;}.eng-card.s2 .eng-body{background:#fdf8ea;}.eng-card.s3 .eng-body{background:#ecf6f0;}.eng-card.s4 .eng-body{background:#eef3fc;}
+.eng-def{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.eng-row{font-size:12.5px;color:var(--ink-2);line-height:1.4;}
+.eng-row b{color:var(--ink);font-weight:600;}
+.eng-q{font-size:12px;color:var(--ink-2);line-height:1.38;}
+.eng-foot{margin-top:auto;padding-top:8px;font-family:var(--serif);font-size:16px;}
+.eng-card.s1 .eng-foot{color:#155EE8;}.eng-card.s2 .eng-foot{color:#b8902a;}.eng-card.s3 .eng-foot{color:#2f9d6f;}.eng-card.s4 .eng-foot{color:#0A3DAE;}
+.eng-card .checklist{margin:0;gap:7px;}
+.eng-card .ck{font-size:13px;}
+.eng-card .ck-box{width:19px;height:19px;flex:0 0 19px;}
+.eng-card .ck-score{font-size:16px;}
+.eng-net{margin-top:12px;text-align:center;font-size:13.5px;color:var(--mid-lake);font-family:var(--serif);}
+/* engine as a funnel — cards taper in height; Select shows a live scorecard */
+.eng-funnel{align-items:center;gap:6px;}
+.eng-arrow{flex:0 0 auto;align-self:center;display:flex;}
+.eng-arrow svg{width:22px;height:22px;stroke:#9aa6c8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.eng-row.ic-row{display:flex;gap:8px;align-items:flex-start;}
+.eng-row .row-ic{flex:0 0 auto;margin-top:1px;}
+.eng-row .row-ic svg{width:17px;height:17px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block;}
+.eng-card.s1 .row-ic svg{stroke:#155EE8;}
+.eng-card.s4 .row-ic svg{stroke:#0A3DAE;}
+.eng-example{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;box-shadow:0 4px 14px rgba(11,18,117,.06);}
+.eng-example .ex-h{font-family:var(--sans);font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--ink);display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.eng-example .ex-tag{font-size:8.5px;font-weight:700;letter-spacing:.08em;color:#b8902a;background:#fdf8ea;border-radius:999px;padding:3px 7px;text-transform:uppercase;}
+
+/* ===== merged SSSS engine — Version B (abstract flywheel) ===== */
+.fw-wrap{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:4px;}
+.fw-stage{position:relative;width:780px;height:450px;flex:0 0 auto;}
+.fw-svg{position:absolute;inset:0;width:100%;height:100%;}
+.fw-node{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;box-shadow:0 10px 28px rgba(2,4,31,.20);z-index:2;}
+.fw-node .fn{font-family:var(--serif);font-size:23px;line-height:1;}
+.fw-node .fs{font-family:var(--serif);font-size:15px;opacity:.92;margin-top:4px;}
+.fw-node .fe{font-size:10px;text-transform:uppercase;letter-spacing:.16em;margin-top:6px;opacity:.85;}
+.fw-node.s1{background:radial-gradient(circle at 38% 32%,#3f78ff,#155EE8);}
+.fw-node.s2{background:radial-gradient(circle at 38% 32%,#e3b441,#BE922A);}
+.fw-node.s3{background:radial-gradient(circle at 38% 32%,#46b487,#2f9d6f);}
+.fw-node.s4{background:radial-gradient(circle at 38% 32%,#33a9d6,#1488c4);}
+.fw-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:172px;height:172px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;}
+.fw-hub b{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.05;}
+.fw-hub span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);margin-top:7px;}
+.fw-net{margin-top:12px;text-align:center;font-size:16px;color:var(--mid-lake);font-family:var(--serif);}
+.fw-detail{display:flex;flex-wrap:nowrap;justify-content:center;gap:32px;margin-top:12px;font-size:13px;color:var(--muted);font-family:var(--sans);}
+.fw-detail span{white-space:nowrap;}
+.fw-detail b{font-weight:700;}
+.fw-detail .d1 b{color:#155EE8;}.fw-detail .d2 b{color:#BE922A;}.fw-detail .d3 b{color:#2f9d6f;}.fw-detail .d4 b{color:#1488c4;}
+.fw-ellipse{animation:fw-flow 2.6s linear infinite;}
+@keyframes fw-flow{to{stroke-dashoffset:-140;}}
+@media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
+
+/* ===== aperture rubric (Option 1) ===== */
+.ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;align-items:flex-start;}
+.ap-col{flex:1;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+.ap-head{padding:12px 16px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-family:var(--sans);}
+.ap-col.e .ap-head{background:#0A3DAE;}.ap-col.s .ap-head{background:#2f9d6f;}.ap-col.t .ap-head{background:#155EE8;}
+.ap-body{flex:1;padding:16px;display:flex;flex-direction:column;}
+.ap-col.e .ap-body{background:#eef3fc;}.ap-col.s .ap-body{background:#ecf6f0;}.ap-col.t .ap-body{background:#eff4fd;}
+.ap-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.ap-infl{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12;}
+.ap-arrow{color:#aab6d4;font-size:20px;margin:12px 0;}
+.ap-open{font-size:14px;color:var(--ink-2);line-height:1.42;}
+.ap-ex{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px;}
+.ap-ex span{font-size:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink-2);}
+
+/* ===== inflection timeline (Option 2) ===== */
+.tl{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:8px;}
+.tl-line{position:absolute;left:11%;right:11%;top:7px;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 70%,var(--sun));}
+.tl-cols{display:flex;gap:16px;position:relative;}
+.tl-col{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
+.tl-yr{font-family:var(--serif);font-size:21px;color:var(--cobalt);margin-top:16px;}
+.tl-shift{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+.tl-infl{font-size:15.5px;color:var(--ink);margin-top:10px;line-height:1.3;font-weight:600;max-width:230px;}
+.tl-co{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.55;}
+.tl-col.future .tl-dot{background:var(--sun);box-shadow:0 0 0 2px var(--sun);}
+.tl-col.future .tl-yr{color:#b8902a;}
+.tl-q{font-family:var(--serif);font-size:46px;color:var(--sun);line-height:1;margin-top:6px;}
+
+/* ---------- generic layout helpers ---------- */
+.grow{flex:1;min-height:0;}
+.cols{display:flex;gap:34px;}
+.col{flex:1;}
+.center{display:flex;align-items:center;justify-content:center;text-align:center;}
+.lede{font-family:var(--serif);font-size:26px;line-height:1.35;color:var(--ink-2);}
+.note{font-size:11px;line-height:1.45;color:#9aa3bd;max-width:880px;}
+.gross-note{position:absolute;left:0;right:0;bottom:32px;text-align:center;font-size:9.5px;line-height:1.3;letter-spacing:.02em;color:#9aa3bd;z-index:4;pointer-events:none;padding:0 210px;}
+.slide.dark .gross-note{color:rgba(255,255,255,.5);}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);}
+
+/* thesis */
+.thesis-lines{display:flex;flex-direction:column;gap:22px;margin-top:8px;}
+.thesis-lines .tl{font-family:var(--serif);font-size:27px;line-height:1.3;color:var(--ink-2);}
+.thesis-lines .tl b{color:var(--cobalt);font-weight:400;}
+.follow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:auto;align-items:center;}
+.follow .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9aa3bd;width:100%;margin-bottom:2px;}
+.follow span{font-family:var(--serif);font-size:18px;color:#7a84a6;}
+
+/* problem space columns */
+.prob{display:flex;gap:30px;margin-top:30px;flex:1;}
+.prob .pc{flex:1;border-top:2px solid var(--line);padding-top:18px;}
+.prob .prob-shift{font-size:12px;line-height:1.4;color:var(--cobalt);font-weight:600;text-align:center;min-height:50px;margin-bottom:6px;}
+.prob .prob-shift b{color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:3px;}
+.prob h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:18px;text-align:center;}
+.prob ul{list-style:none;display:flex;flex-direction:column;gap:16px;}
+.prob li{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.prob li .co{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;}
+.prob li .se{font-size:13px;color:var(--muted);margin-top:2px;}
+.prob-foot{font-family:var(--serif);font-size:24px;text-align:center;color:var(--mid-lake);margin-top:24px;}
+
+/* GP credibility */
+.gp{display:flex;gap:34px;flex:1;min-height:0;}
+.gp .photo{width:250px;flex:0 0 250px;border-radius:6px;background:#dfe4f2 center/cover no-repeat;}
+.gp .tiers{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.gp .tier{display:flex;align-items:center;gap:22px;padding:10px 0;border-bottom:1px solid var(--line);}
+.gp .tier .val{width:200px;flex:0 0 200px;font-weight:700;color:var(--cobalt);font-size:20px;letter-spacing:.01em;line-height:1.2;}
+.gp .tier .val.op{color:var(--ink);}
+.gp .tier .cos{font-family:var(--serif);font-size:19px;color:var(--ink-2);line-height:1.3;}
+.quote-lg{font-family:var(--serif);font-size:27px;line-height:1.18;color:var(--ink);}
+/* statement verified-track-record stats */
+.stmt-tr{margin-top:42px;}
+.stmt-lbl{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px;}
+.stmt-stats{display:flex;gap:60px;}
+.stmt-stats .ssn{font-family:var(--serif);font-size:58px;line-height:1;color:#fff;}
+.stmt-stats .ssl{font-size:14px;color:rgba(255,255,255,.72);margin-top:8px;letter-spacing:.02em;}
+/* GP credibility — track-record-style table */
+.gp-track{width:100%;border-collapse:collapse;}
+.gp-track th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.02em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.gp-track td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.gp-track td.tk{font-family:var(--serif);font-size:18px;color:var(--cobalt);width:230px;}
+.gp-track td.tk.op{color:var(--ink);}
+.gp-track td.tv{font-family:var(--serif);font-size:18px;color:var(--ink-2);}
+.gp-track .cos{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:flex-start;}
+.gp-track .cos .sub{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:2px;}
+/* unicorn valuation ladder */
+.uni-wrap{display:flex;gap:30px;flex:1;align-items:stretch;margin-top:8px;min-height:0;}
+.uni-chart{flex:2.5;min-width:0;display:flex;align-items:center;}
+.uni-chart svg{width:100%;height:100%;}
+.uni-box{flex:1;align-self:center;background:linear-gradient(160deg,#F7DF47,#F2D831);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 26px;color:var(--navy);box-shadow:0 12px 34px rgba(2,4,31,.18);}
+.uni-box .ub-top{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(11,18,117,.6);}
+.uni-box .ub-n{font-family:var(--serif);font-size:74px;line-height:.95;margin-top:8px;}
+.uni-box .ub-x{font-family:var(--serif);font-size:60px;line-height:.95;}
+.uni-box .ub-l{font-family:var(--serif);font-size:17px;color:rgba(11,18,117,.82);margin-top:4px;}
+.uni-box .ub-rule{width:54px;height:2px;background:rgba(11,18,117,.25);margin:14px 0;}
+.quote-sub{font-family:var(--serif);font-style:normal;font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:14px;max-width:1100px;}
+.quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
+
+/* tables */
+table.tbl{width:100%;border-collapse:collapse;font-size:15px;}
+table.tbl th{font-weight:600;color:var(--muted);text-align:right;padding:10px 10px;border-bottom:2px solid var(--line);font-size:12px;letter-spacing:.02em;}
+table.tbl th:first-child,table.tbl td:first-child{text-align:left;}
+table.tbl td{padding:13px 10px;text-align:right;border-bottom:1px solid var(--line);color:var(--ink-2);}
+table.tbl td.co{font-family:var(--serif);font-size:18px;color:var(--ink);}
+table.tbl td.pos{color:#1f9d6b;font-weight:600;}
+table.tbl td.mult{color:var(--cobalt);font-weight:700;}
+table.tbl.tall td{padding:24px 10px;}
+table.tbl.tall td.co{font-size:20px;}
+.tr-callout{margin:auto 0 24px;background:linear-gradient(150deg,#1a6bff,#0a3dae);border-radius:14px;padding:18px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:28px;}
+.trc-funds{display:flex;align-items:center;gap:28px;}
+.trc-amt{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sun);margin-bottom:5px;}
+.trc-nums{display:flex;align-items:baseline;gap:8px;}
+.trc-n{font-family:var(--serif);font-size:46px;line-height:1;color:#fff;}
+.trc-u{font-size:14.5px;color:#cfd9ff;}
+.trc-dot{color:rgba(255,255,255,.35);margin:0 2px;font-size:20px;}
+.trc-div{width:1px;height:56px;background:rgba(255,255,255,.2);}
+.trc-quality{display:flex;flex-direction:column;gap:7px;text-align:right;font-size:15.5px;color:#cfd9ff;}
+.trc-quality b{font-family:var(--serif);font-size:22px;color:var(--sun);font-weight:400;margin-right:4px;}
+
+/* team */
+.team-row{display:flex;gap:16px;margin:10px 0 22px;}
+.tm{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.tm .av{width:88px;height:88px;border-radius:50%;background:#dfe4f2 center/cover no-repeat;border:2px solid var(--cobalt);margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:34px;color:var(--cobalt);}
+.tm .nm{font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.18;min-height:1.4em;display:flex;align-items:center;justify-content:center;text-align:center;}
+.tm .rl{font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.35;min-height:1.4em;display:flex;align-items:center;justify-content:center;}
+.tm .pe{font-size:13px;color:var(--cobalt);font-weight:600;margin-top:6px;letter-spacing:.02em;line-height:1.35;}
+.vectors{display:flex;gap:22px;flex:1;}
+.vec{flex:1;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;}
+.vec:nth-child(2){background:#eef3fc;}
+.vec:nth-child(3){background:#e7eefb;}
+.vec .vn{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.vec .dot{width:24px;height:24px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.vec:nth-child(1) .dot{background:#5b8def;}
+.vec:nth-child(2) .dot{background:#2f6fea;}
+.vec:nth-child(3) .dot{background:#0A3DAE;}
+.vec h4{font-size:15px;color:var(--ink);}
+.vec .ph{font-size:12px;color:var(--muted);margin:3px 0 10px;}
+.vec .ad{font-size:13px;color:var(--ink-2);padding:6px 0;border-top:1px solid rgba(0,0,0,.06);}
+.vec .ad b{font-weight:600;}
+.vec .ad span{color:var(--muted);}
+
+/* engine (scout/select/secure/support) */
+.engine-nav{display:flex;align-items:center;gap:8px;margin:6px 0 26px;}
+.en{display:flex;align-items:center;gap:10px;}
+.en .num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;}
+.en .nm{font-family:var(--serif);font-size:22px;color:#b9c0d6;}
+.en.on .nm{color:var(--ink);}
+.en .num{background:#c7cee2;}
+.en.on:nth-child(1) .num{background:var(--cobalt);} .en.on:nth-child(1) .nm{color:var(--cobalt);}
+.en-line{flex:1;height:1px;background:var(--line);}
+.duo{display:flex;gap:26px;flex:1;}
+.panel{position:relative;flex:1;border-radius:16px;padding:32px 36px;display:flex;flex-direction:column;}
+.panel.blue{background:linear-gradient(165deg,#eef3fc,#e6eefb);} .panel.gold{background:linear-gradient(165deg,#fdf8ea,#faf1d8);}
+.panel.green{background:linear-gradient(165deg,#eef4fb,#e6eefb);} .panel.sky{background:linear-gradient(165deg,#eef6fb,#e6f1f8);}
+.panel .pnum{position:absolute;top:26px;right:28px;width:50px;height:50px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:25px;color:var(--cobalt);box-shadow:0 3px 16px rgba(11,18,117,.1);}
+.panel.gold .pnum{color:#b8902a;}
+.panel h3{font-family:var(--serif);font-size:29px;font-weight:400;color:var(--ink);}
+.panel .big{font-size:18px;color:var(--ink-2);margin:8px 0 20px;line-height:1.35;}
+.panel .row{font-size:15px;color:var(--ink-2);padding:9px 0;line-height:1.48;}
+.panel .row b{font-weight:600;color:var(--ink);}
+.panel .score{margin-top:auto;font-weight:600;color:var(--cobalt);font-size:15px;}
+.panel .hl{margin-top:auto;padding-top:18px;border-top:1px solid rgba(11,18,117,.08);}
+.panel .hl b{font-family:var(--serif);font-size:28px;color:var(--cobalt);font-weight:400;}
+.panel.gold .hl b{color:#b8902a;}
+.panel .hl span{font-size:13px;color:var(--muted);display:block;margin-top:3px;}
+.checklist{display:flex;flex-direction:column;gap:9px;margin:12px 0 4px;}
+.ck{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--ink-2);}
+.ck-box{width:21px;height:21px;flex:0 0 21px;border-radius:5px;background:#b8902a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.ck-label{flex:1;}
+.ck-score{font-family:var(--serif);font-size:19px;color:#b8902a;}
+
+/* needs-art working marker (corner) */
+.needs-art{position:absolute;top:18px;right:18px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#b4530c;background:#fff5e6;border:1px dashed #e09a3e;border-radius:999px;padding:5px 11px;}
+.needs-art::before{content:"";width:7px;height:7px;border-radius:50%;background:#e88c1a;}
+.slide.dark .needs-art{color:#ffd98a;background:rgba(255,180,60,.12);border-color:rgba(255,190,90,.5);}
+.slide.dark .needs-art::before{background:var(--sun);}
+
+/* case study */
+.cs-logo-img{height:46px;width:auto;max-width:280px;object-fit:contain;}
+.cs-photo-col{flex:0 0 340px;align-self:stretch;border-radius:12px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
+.cs-fn{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;background:linear-gradient(transparent,rgba(11,18,117,.82));color:#fff;font-weight:600;font-size:17px;line-height:1.2;}
+.cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
+.cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
+.cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
+.cs-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+.cs-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px;}
+.cs-logo{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+.cs-story{font-family:var(--serif);font-size:26px;line-height:1.22;color:var(--ink);margin:14px 0 18px;max-width:74%;}
+.cs-grid{display:flex;gap:34px;flex:1;min-height:0;align-items:stretch;}
+.cs-mid{flex:1.5;display:flex;flex-direction:column;min-height:0;}
+.cs-sector{background:#eef3fc;border-radius:10px;padding:12px 16px;font-size:14.5px;color:var(--ink-2);margin-bottom:14px;}
+.cs-steps{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;}
+.cs-steps .st{display:flex;gap:16px;padding:6px 0;font-size:14px;color:var(--ink-2);line-height:1.4;}
+.cs-steps .st .k{flex:0 0 82px;font-weight:700;letter-spacing:.06em;color:var(--cobalt);font-size:12.5px;padding-top:1px;}
+.cs-right{flex:1;border-left:1px solid var(--line);padding-left:34px;display:flex;flex-direction:column;justify-content:space-evenly;}
+.cs-metric{padding:8px 0;border-bottom:1px solid var(--line);}
+.cs-metric:last-child{border-bottom:none;}
+.cs-metric .ml{font-size:12.5px;color:var(--muted);}
+.cs-metric .mv{font-family:var(--serif);font-size:29px;color:var(--ink);line-height:1.1;margin-top:2px;}
+.cs-metric .msub{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.32;margin-top:3px;}
+.cs-metric .msub:first-of-type{margin-top:5px;}
+.cs-metric.hot .ml{color:#3f9d6f;} .cs-metric.hot .mv{color:#3f9d6f;}
+.cs-insight{border-top:1px solid var(--line);padding:14px 56px 20px;}
+.slide:has(.cs-insight) .s-mark{display:none;}
+.cs-insight .kk{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--light-blue);}
+.cs-insight .tx{font-family:var(--serif);font-size:19px;color:var(--ink);margin-top:4px;max-width:1040px;line-height:1.25;}
+
+/* fund terms */
+.terms{display:flex;gap:48px;flex:1;}
+.terms .big-num{font-family:var(--serif);font-size:92px;color:var(--ink);line-height:.9;}
+.terms .big-lbl{font-weight:700;font-size:15px;color:var(--ink-2);margin-top:6px;}
+.terms .rows{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.terms .tr{display:flex;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);}
+.terms .tr .k{flex:0 0 220px;font-weight:700;color:var(--ink);font-size:15px;}
+.terms .tr .v{color:var(--ink-2);font-size:15px;}
+.terms-foot{font-family:var(--serif);font-size:20px;color:var(--mid-lake);margin-top:20px;}
+
+/* generic def list / KV grid */
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:24px;}
+.kv .k{font-weight:700;color:var(--ink);font-size:15px;}
+.kv .v{color:var(--ink-2);font-size:14px;margin-top:3px;line-height:1.4;}
+
+/* roadmap */
+.road{display:flex;gap:14px;margin:22px 0 16px;}
+.rf{flex:1;border-radius:12px;padding:20px 18px;text-align:center;display:flex;flex-direction:column;}
+.rf.past{background:#f1f2f6;} .rf.future{background:#fdf9ec;}
+.rf .yr{font-family:var(--serif);font-size:21px;color:var(--cobalt);}
+.rf .nm{font-family:var(--serif);font-size:20px;color:var(--ink);margin:2px 0 14px;}
+.rf .sz{font-size:13px;color:var(--ink-2);padding:8px 0;border-top:1px solid rgba(0,0,0,.07);}
+.rf .sz b{font-weight:700;}
+
+/* benchmarking two tables */
+.bm{display:flex;gap:40px;flex:1;}
+.bm .lead-col{flex:0 0 320px;}
+.bm table{font-size:13.5px;}
+.bm .hl{background:#eaf1fb;}
+
+/* LP grid */
+.lp-grid{display:grid;grid-template-columns:repeat(5,1fr);column-gap:20px;row-gap:16px;margin-top:30px;align-content:flex-start;}
+.lp-h{grid-column:span 3;font-family:var(--serif);font-size:25px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:10px;}
+.lpc .nm{font-size:16px;color:var(--ink);font-weight:600;}
+.lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
+.lpc .ann{font-size:11px;color:#9aa3bd;}
+.lpc .lp-logo{height:44px;margin-top:8px;display:flex;align-items:center;}
+.lpc .lp-logo img{max-width:150px;width:auto;object-fit:contain;display:block;}
+.lpc .lp-midas{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
+
+/* closing */
+.closing{background:#0c1024;}
+.closing .s-pad{justify-content:center;align-items:center;text-align:center;}
+.closing h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:62px;}
+.closing p{color:#aeb6da;font-size:20px;margin-top:18px;}
+.closing .cta{margin-top:30px;color:var(--sun);font-size:18px;font-family:var(--serif);}
+
+/* definition */
+.defn{background:radial-gradient(120% 120% at 25% 30%,#1a1d44,#02041F);}
+.defn .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
+.defn .dn-word{font-family:var(--serif);color:#fff;font-size:78px;line-height:1;letter-spacing:-.015em;}
+.defn .dn-def{color:#d8def5;font-size:36px;font-family:var(--serif);line-height:1.32;max-width:1060px;margin-top:22px;}
+.defn .dn-def .dn-pron{color:#aeb6da;}
+.defn .dn-def .pos{color:var(--sun);font-style:italic;}
+.defn .dn-def b{color:#fff;font-weight:400;border-bottom:3px solid var(--sun);padding-bottom:2px;}
+.defn .cite{font-family:var(--serif);font-style:italic;color:#8b93bd;font-size:21px;margin-top:28px;}
+
+/* disclaimer */
+.disc .s-pad{padding:54px 72px;}
+.disc .cols{gap:30px;}
+.disc p{font-size:10.5px;line-height:1.5;color:#7a84a6;margin-bottom:12px;}
+
+/* venture partner strip (team slide) */
+.vp-strip{display:flex;gap:32px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px;}
+.vp-line{flex:1;font-size:13px;color:var(--ink-2);line-height:1.5;}
+.vp-line b{color:var(--ink);}
+.vp-lbl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);background:#eef3fc;border-radius:4px;padding:2px 7px;margin-right:7px;vertical-align:middle;}
+
+/* due-diligence columns */
+.dd-row{display:flex;flex:1;margin-top:18px;align-items:stretch;}
+.dd-col{flex:1;display:flex;flex-direction:column;}
+.dd-arrow{display:flex;align-items:center;color:#aebfe6;font-size:30px;padding:0 10px;}
+.dd-title{font-family:var(--serif);font-size:21px;color:var(--ink);margin:4px 0 8px;line-height:1.1;}
+.dd-chip{display:inline-block;align-self:flex-start;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:4px 12px;margin-bottom:14px;}
+.dd-h{font-size:14px;font-weight:700;color:var(--ink);margin:11px 0 5px;}
+.dd-col ul{list-style:none;margin:0;}
+.dd-col li{position:relative;padding-left:15px;font-size:14px;color:var(--ink-2);line-height:1.5;margin-bottom:5px;}
+.dd-col li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--cobalt);}
+.dd-flag{margin-top:auto;padding-top:14px;color:var(--cobalt);font-weight:600;font-size:13.5px;line-height:1.45;}
+
+/* donut legend */
+.dl{margin-top:16px;display:inline-block;text-align:left;}
+.dl-row{display:flex;align-items:center;gap:9px;padding:3.5px 0;font-size:13px;color:var(--ink-2);}
+.dl-sw{width:11px;height:11px;border-radius:3px;flex:0 0 11px;}
+.dl-lb{flex:1;white-space:nowrap;}
+.dl-pct{font-weight:700;color:var(--ink);}
+/* world map legend */
+.wm-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 16px;margin-top:16px;}
+.wm-legend span{font-size:12.5px;color:var(--muted);}
+.wm-legend b{color:var(--cobalt);font-weight:700;}
+
+/* ---------- top control bar ---------- */
+#bar{
+  position:fixed;top:0;left:0;right:0;height:46px;z-index:60;
+  display:flex;align-items:center;gap:18px;padding:0 18px;
+  background:rgba(8,10,30,.66);backdrop-filter:blur(8px);
+  color:#cfd6f5;font-size:12px;opacity:0;transition:opacity .25s;pointer-events:none;
+}
+#bar.show{opacity:1;pointer-events:auto;}
+#bar .brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:15px;color:#fff;}
+#bar .brand svg{width:20px;fill:#fff;}
+#bar .spacer{flex:1;}
+#bar .seg{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:3px;}
+#bar .seg button{background:none;border:none;color:#aeb6da;font:inherit;font-weight:600;padding:5px 14px;border-radius:999px;cursor:pointer;letter-spacing:.04em;}
+#bar .seg button.on{background:var(--sun);color:var(--navy);}
+#bar .btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:600;padding:6px 14px;border-radius:999px;cursor:pointer;}
+#bar .btn:hover{background:rgba(255,255,255,.2);}
+#bar .count{font-variant-numeric:tabular-nums;color:#aeb6da;min-width:54px;text-align:center;}
+#bar .ttl{color:#fff;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* progress dots */
+#progress{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:6px;opacity:0;transition:opacity .25s;}
+#progress.show{opacity:.85;}
+#progress .pd{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:background .2s,transform .2s;}
+#progress .pd.on{background:var(--sun);transform:scale(1.25);}
+#progress .pd.sec{background:rgba(255,255,255,.5);border-radius:1px;width:8px;}
+
+/* click nav zones */
+.navzone{position:fixed;top:46px;bottom:0;width:14%;z-index:40;cursor:pointer;}
+.navzone.left{left:0;} .navzone.right{right:0;}
+
+/* hint */
+#hint{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);z-index:55;color:#aeb6da;font-size:12px;letter-spacing:.04em;background:rgba(8,10,30,.6);padding:7px 16px;border-radius:999px;transition:opacity .5s;}
+
+/* ---------- print ---------- */
+@media print{
+  @page{size:1280px 720px;margin:0;}
+  html,body{overflow:visible;background:#fff;}
+  #bar,#progress,.navzone,#hint,#gate{display:none !important;}
+  #deck{position:static;display:block;}
+  .stage{position:static;width:1280px;height:auto;transform:none !important;}
+  .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;
+    page-break-after:always;break-after:page;display:flex !important;}
+  .slide.print-skip{display:none !important;}
+  .slide.dark,.cover,.section,.closing,.defn,.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div id="gate">
+  <div class="gate-card">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" aria-hidden="true">
+      <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+      <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+    </svg>
+    <h1>Sunshine Lake</h1>
+    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter the access password to continue.</p>
+    <form id="gateForm" autocomplete="off">
+      <label for="gp">Password</label>
+      <input id="gp" type="password" required autofocus>
+      <button type="submit">Enter</button>
+      <div class="gate-err" id="ge">Incorrect password.</div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<div id="bar">
+  <div class="brand">
+    <svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>
+    Sunshine Lake
+  </div>
+  <span class="ttl" id="barTitle"></span>
+  <div class="spacer"></div>
+  <div class="seg" id="modeSeg">
+    <button data-mode="teaser">Teaser</button>
+    <button data-mode="full" class="on">Full</button>
+  </div>
+  <span class="count" id="count">1 / 1</span>
+  <button class="btn" id="exportBtn">Export PDF</button>
+</div>
+
+<div class="navzone left" id="navLeft"></div>
+<div class="navzone right" id="navRight"></div>
+
+<!-- ============ DECK ============ -->
+<div id="deck">
+  <div class="stage" id="stage"><!-- slides injected here --></div>
+</div>
+
+<div id="progress"></div>
+<div id="hint">Use ← → to navigate · press F for fullscreen</div>
+
+<script>
+/* ============================================================
+   PASSWORD GATE  (separate from the LP portal password)
+   Deck password: "forge"
+   Rotate:  printf '%s' 'new-pw' | shasum -a 256
+   …then replace DECK_HASH below.
+   ============================================================ */
+const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),ge=document.getElementById('ge');
+function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');boot();}
+gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');if(await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');unlock();}else{ge.classList.add('show');gpw.value='';gpw.focus();}});
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const MARK='<svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>';
+function chrome(dark){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+'<span class="s-conf">Strictly Confidential</span>';}
+
+const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
+const TEAM=[
+ {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',rl:'Partner & COO · Los Angeles',pe:'GFC Due Diligence · Stanford',img:'images/team/ivan.webp'},
+ {nm:'Suhail Younus',fl:'🇦🇫',rl:'Investor · New York City',pe:'Private Equity · Cornell',img:'images/team/suhail.webp'},
+ {nm:'Wieger Lamers',fl:'🇳🇱',rl:'Investor · London',pe:'Adyen · ESCP',img:'images/team/wieger.webp'},
+ {nm:'Karambir Singh',fl:'🇮🇳',rl:'Venture Partner · Mumbai',pe:'Sector Researcher · Amazon',img:'images/team/karambir.webp'}
+];
+const VECTORS=[
+ {n:'1',t:'Founding',p:'Idea to company',ad:[['David Bell','Wharton professor & unicorn advisor','🇳🇿'],['Mike Franklin','Databricks founding advisor · UChicago Data Science chair','🇺🇸'],['Esther Wojcicki','Godmother of Silicon Valley','🇺🇸']]},
+ {n:'2',t:'Foundation-building',p:'Product–market fit',ad:[['Jamie Feaster','Serial entrepreneur & world-class marketer','🇺🇸'],['Tom Lee','Serial entrepreneur · One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Serial entrepreneur · Auto1 COO (IPO)','🇩🇪']]},
+ {n:'3',t:'Sustainable Growth',p:'Scale & durability',ad:[['Andrew Hovelson','TV & Broadway star (Tom Hanks, Glenn Close)','🇺🇸'],['Servaes Tholen','Elite CFO · Headway, Thumbtack & more','🇳🇱'],['Shuo Wang','Founder (exit to iRobot) · Deel co-founder','🇨🇳']]}
+];
+const TRACK=[
+ ['Assured','Insurance','$0.6','$7.0mm','8.6%','$42.0','$1.0','101x','$60.2','157%','Kleiner Perkins'],
+ ['Deel','Workforce','$1.0','$16.7mm','6.0%','$980.0','$17.3','356x','$354.9','168%','a16z'],
+ ['Headway','Mental Health','$0.9','$7.6mm','11.9%','$325.0','$2.2','115x','$102.5','124%','Accel'],
+ ['Kalshi','Markets','$0.5','$10.1mm','4.9%','$2,406.0','$22.0','831x','$414.8','158%','Sequoia']
+];
+const CASES=[
+ {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',banner:'Liquid position · potential DPI via secondary',story:'Justin and Theo ride the AI shift into a broken, global market — building ML that rebuilds how the world settles auto-insurance claims, worldwide from day one.',
+  founders:'Justin &amp; Theo',
+  steps:[['SCOUT','A fellow founder — DoNotPay\'s — introduced the team.'],['SELECT','We backed relentless founders attacking a massive global auto-claims market.'],['SECURE','We led the syndicate and protected the cap table from problematic investors.'],['SUPPORT','We opened customer pipelines and deep ecosystem support.']],
+  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Liquid Position Today','$84.5mm','hot'],['Post-Money Today','$1.0Bn'],['Ownership','8.6%']],
+  insight:'Founders with deep personal experience carry the grit to endure multi-year sales cycles against all odds.',teaser:false},
+ {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',banner:'Realized return on investment via secondary (DPI)',story:'Visa walls blocked Shuo and Alex after MIT, so they rode the remote-work shift and rebuilt how the world hires — global by necessity, then by design.',
+  founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',
+  steps:[['SCOUT','A UChicago founder and YC alum spotted them early.'],['SELECT','We backed a visionary team chasing the $525B global payroll &amp; compliance market.'],['SECURE','We introduced 5 key hires and 12 partners and broadcast the team to Daniel Gross and Elad Gil.'],['SUPPORT','We hosted the team in-office for 6 months, recruited <b>COO Dan Westgarth from Revolut</b>, and drove the Legalpad acquisition.']],
+  metrics:[['Date','Dec 2019'],['Invested','$1mm',''],['Realized Value','$20.0mm','hot'],['Liquid Position Today','$336.0mm','hot'],['Post-Money Today','$17.3Bn · IPO ahead'],['Ownership','6.0%']],
+  insight:'Global teams with proper tooling hire faster, access better talent, and raise capital 6 months earlier than competitors.',teaser:true},
+ {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',banner:'Realized return on investment (DPI)',story:'Joshua Browder crossed from London to build the world\'s first AI lawyer, riding the automation shift to fight fees, fines, and contracts for everyone.',
+  founders:'Joshua Browder 🇬🇧',
+  steps:[['SCOUT','Our global founder network surfaced Joshua.'],['SELECT','We saw breakout potential in a product-led, AI-first model with real legal wins.'],['SECURE','We shaped the early viral content and demand-gen launch.'],['SUPPORT','We built the brand and narrative and backed Joshua across multiple rounds.']],
+  metrics:[['Date','Feb 2019'],['Invested','$830k'],['Unrealized','$6.8mm'],['Realized','$95k · 11.0% DPI','hot'],['Post-Money Today','$230.0mm'],['Ownership','3.5%']],
+  insight:'Regulatory friction can be an asset — early DoNotPay showed dividends can be created in the space.',teaser:false},
+ {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',banner:'Liquid position · potential DPI via secondary',story:'Shaped by years in Europe and the Czech Republic, Andrew Adams rides the mental-health shift home — making therapy work on insurance at national scale.',
+  founders:'Andrew Adams 🇺🇸',
+  steps:[['SCOUT','NYC angels who passed on the founder still sent him our way.'],['SELECT','We backed a bold, personal vision to transform a $240B market.'],['SECURE','We built a high-impact syndicate, including One Medical founder Tom Lee.'],['SUPPORT','We introduced 10+ candidates, shared market insight, and refined the model with the CFO.']],
+  metrics:[['Date','Sep 2018'],['Invested','$900k'],['Liquid Position Today','$103.0mm','hot'],['Post-Money Today','$2.2Bn'],['Ownership','11.9%']],
+  insight:'Founders who overcome deep personal challenges reach product-market fit 59% faster — and lead their markets.',teaser:false},
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',banner:'News of a forthcoming IPO',story:'Tarek and Luana — from Lebanon and Brazil by way of MIT — ride the economic shift to build the first CFTC-regulated event exchange, bringing prediction markets mainstream.',
+  founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',
+  steps:[['SCOUT','Top MIT engineers connected us; we backed them despite regulatory hurdles.'],['SELECT','We backed Jane Street alumni building a $136B prediction exchange with global-first DNA.'],['SECURE','We leaned on shared EU and Lebanese roots to build early trust and signal top investors.'],['SUPPORT','We hosted the team in-office for 6 months and shared BD and regulatory research.']],
+  metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm<div class="msub">$500k at $10mm post-money</div><div class="msub">$500k at $23mm post-money</div>'],['Liquid Position Today','$1.1Bn','hot'],['Post-Money Today','$40.0Bn'],['Ownership','5.0%']],
+  insight:'Conviction compounds — a first $500k at a $10mm cap, then doubling down at $23mm as the thesis proved out.',teaser:false},
+ {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',banner:'Realized return on investment (DPI)',story:'Andy Su rides the AI-productivity shift to replace clunky spreadsheets with real-time FP&amp;A that founders actually use — built for operators everywhere.',
+  founders:'Andy Su 🇨🇳',
+  steps:[['SCOUT','The Brex product-alumni network surfaced Andy.'],['SELECT','We moved fast on an engineering-led team with deep empathy for the pain.'],['SECURE','We aligned Pry\'s roadmap with the market.'],['SUPPORT','We guided M&amp;A strategy and coached the team to a Brex acquisition.']],
+  metrics:[['Date','Dec 2019 → Apr 2022'],['Invested','$1.5mm'],['Realized Value','$10.6mm · 7.1× DPI','hot'],['Exit','Acquired by Brex'],['Ownership','12.0% (at exit)']],
+  insight:'Startup finance is universally broken — tools built for CFOs don\'t work for founders. Founders need clarity, not complexity.',teaser:false}
+];
+
+/* ============================================================
+   SLIDE BUILDERS  (return {title, track, teaser, dark, html})
+   track: core | appendix   teaser: include in teaser mode
+   ============================================================ */
+function avatar(t){return t.img?`<div class="av" style="background-image:url('${t.img}')"></div>`:`<div class="av">${t.nm.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>`;}
+
+function teamCardsHTML(){
+  return TEAM.map(t=>`<div class="tm">${avatar(t)}<div class="nm">${t.nm} ${t.fl}</div><div class="rl">${t.rl}</div><div class="pe">${t.pe}</div></div>`).join('');
+}
+function vectorsHTML(){
+  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.p?`<div class="ph">${v.p}</div>`:'<div class="ph">&nbsp;</div>'}${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
+}
+function trackRowsHTML(){
+  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td class="mult">${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
+}
+function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
+
+/* unicorn valuation ladder — log scale $0.5B → $100B */
+function uniScale(){
+  const top=28, bot=512, vmin=0.5, vmax=100, axisX=96;
+  const L=v=>Math.log10(v);
+  const yOf=v=>bot-(L(v)-L(vmin))/(L(vmax)-L(vmin))*(bot-top);
+  const ticks=[0.5,1,5,20,100];
+  const items=[
+    {n:'Airbnb',v:80,s:'IPO · $80B',x:150},
+    {n:'Kalshi',v:22,s:'$22B',x:150},
+    {n:'Deel',v:17.3,s:'$17.3B',x:430},
+    {n:'Checkr',v:5,s:'$5B',x:150},
+    {n:'Assured',v:5,s:'$5B',x:430},
+    {n:'Brex / Capital One',v:5,s:'sold · $5B',x:700},
+    {n:'Headway',v:2.3,s:'$2.3B',x:150},
+    {n:'Fundamental.tech',v:1.5,s:'$1.5B',x:430},
+    {n:'SpotHero / Uber',v:1,s:'sold · $1B',x:150},
+    {n:'Fieldguide',v:0.7,s:'$700M',x:430},
+    {n:'Federato',v:0.7,s:'$700M',x:700}
+  ];
+  let s=`<svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI,sans-serif">`;
+  s+=`<line x1="${axisX}" y1="${top-6}" x2="${axisX}" y2="${bot+6}" stroke="#cdd6ee" stroke-width="2"/>`;
+  ticks.forEach(t=>{const y=yOf(t);const lb=t>=1?'$'+t+'B':'$'+(t*1000)+'M';
+    s+=`<line x1="${axisX-7}" y1="${y}" x2="${axisX}" y2="${y}" stroke="#cdd6ee" stroke-width="2"/>`;
+    s+=`<text x="${axisX-13}" y="${y+5}" text-anchor="end" font-size="17" fill="#7a84a6">${lb}</text>`;});
+  items.forEach(c=>{const y=yOf(c.v);const hot=c.v>=15;
+    s+=`<line x1="${axisX}" y1="${y}" x2="${c.x-12}" y2="${y}" stroke="#dbe3f3" stroke-width="1.5" stroke-dasharray="2 4"/>`;
+    s+=`<circle cx="${c.x}" cy="${y}" r="7" fill="${hot?'#F2A03C':'#155EE8'}"/>`;
+    s+=`<text x="${c.x+15}" y="${y-4}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" fill="#0B1275">${c.n}</text>`;
+    s+=`<text x="${c.x+15}" y="${y+21}" font-size="20" font-weight="700" fill="${hot?'#D97A14':'#155EE8'}">${c.s}</text>`;});
+  s+=`</svg>`;
+  return s;
+}
+
+/* SVG donut from [{label,pct,color}] */
+function donut(segs,r,sw,center){
+  r=r||78; sw=sw||30; const pad=4, cx=r+sw/2+pad, vb=cx*2, C=2*Math.PI*r; let off=0;
+  const arcs=segs.map(s=>{const dash=s.pct/100*C;
+    const a=`<circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-linecap="butt" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cx})"/>`;
+    off+=dash; return a;}).join('');
+  const ctr=center?`<text x="${cx}" y="${cx}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vb} ${vb}" width="100%" style="max-width:${vb}px;display:block;margin:0 auto">${arcs}${ctr}</svg>`;
+}
+function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl-row"><span class="dl-sw" style="background:${s.color}"></span><span class="dl-lb">${s.label}</span><span class="dl-pct">${s.pct}%</span></div>`).join('')+`</div>`;}
+/* donut with callout labels around the ring (no separate legend) */
+function donutLabeled(segs,center){
+  const r=66, sw=26, vbW=440, vbH=240, cx=220, cy=120;
+  const C=2*Math.PI*r, ringOuter=r+sw/2; let off=0, cum=0, arcs='', pts=[];
+  segs.forEach(s=>{const dash=s.pct/100*C;
+    arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"/>`;
+    const mid=(cum+s.pct/2)/100, ang=-Math.PI/2+mid*2*Math.PI;
+    pts.push({s,px:cx+Math.cos(ang)*ringOuter,py:cy+Math.sin(ang)*ringOuter,side:Math.cos(ang)>=0?1:-1});
+    cum+=s.pct; off+=dash;});
+  const minGap=18, topY=14, botY=vbH-12;
+  [-1,1].forEach(side=>{const arr=pts.filter(p=>p.side===side).sort((a,b)=>a.py-b.py);
+    arr.forEach(p=>p.ly=p.py);
+    for(let i=1;i<arr.length;i++) if(arr[i].ly-arr[i-1].ly<minGap) arr[i].ly=arr[i-1].ly+minGap;
+    if(arr.length){const over=arr[arr.length-1].ly-botY; if(over>0) arr.forEach(p=>p.ly-=over);
+      const under=topY-arr[0].ly; if(under>0) arr.forEach(p=>p.ly+=under);}});
+  let labels='';
+  pts.forEach(p=>{const outX=cx+p.side*(ringOuter+11), textX=cx+p.side*(ringOuter+15);
+    const anchor=p.side>0?'start':'end';
+    labels+=`<polyline points="${p.px.toFixed(1)},${p.py.toFixed(1)} ${outX.toFixed(1)},${p.ly.toFixed(1)}" fill="none" stroke="#c5cee2" stroke-width="1.3"/>`;
+    labels+=`<text x="${textX.toFixed(1)}" y="${(p.ly+4).toFixed(1)}" text-anchor="${anchor}" font-size="14.5" fill="#39456a">${p.s.label} <tspan font-weight="700" fill="#0B1275">${p.s.pct}%</tspan></text>`;});
+  const ctr=center?`<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="23" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vbW} ${vbH}" width="100%" style="display:block;margin:0 auto" font-family="Segoe UI,sans-serif">${arcs}${labels}${ctr}</svg>`;
+}
+
+/* world bubble map over real grey map (positions matched to original) */
+/* [name, count, x%, y%, labelX% , labelY%]  — labelX null => label inside bubble */
+const WORLD=[
+ ['India',90,68,54,null,null],['Israel',52,58,40,null,null],['Canada',42,20,34,null,null],
+ ['UK',31,46,30,null,null],['China',27,76,43,null,null],['Germany',18,51,31,null,null],
+ ['France',17,48,35,null,null],['Russia',14,74,25,null,null],['Ukraine',12,56,31,null,null],
+ ['Taiwan',12,83,52,null,null],['Ireland',10,43,31,null,null],['Belgium',9,49,27,null,null],
+ ['Brazil',9,35,58,null,null],['Iran',9,63,40,null,null],['Australia',8,82,66,null,null],
+ ['Netherlands',7,50,28,53,18],['New Zealand',6,91,73,90,66],['Denmark',5,52,24,52,13],
+ ['Italy',5,51,37,49,46],['Poland',5,53,30,56,46],['Romania',5,55,33,56,79],
+ ['South Africa',5,55,67,55,73],['Argentina',5,31,79,30,87],['Portugal',4,45,37,43,43],
+ ['Lebanon',4,60,40,63,21],['Sweden',3,53,23,57,21],['Pakistan',3,64,45,64,69],
+ ['Japan',3,86,40,90,45],['Greece',2,54,38,52,62],['Turkey',2,59,36,66,21],
+ ['Uzbekistan',2,67,33,69,32],['Guatemala',2,22,50,22,56],['Others',29,null,null,95,40]
+];
+function worldMap(){
+  const W=1000,H=500, rOf=c=>Math.max(11,Math.sqrt(c)*8.2);
+  const els=WORLD.map(c=>{
+    const [name,n,x,y,lx,ly]=c, X=x==null?null:x/100*W, Y=y==null?null:y/100*H, r=rOf(n);
+    if(lx===null){ // big bubble, label inside
+      return `<circle cx="${X}" cy="${Y}" r="${r}" fill="rgba(47,116,255,.92)"/>`+
+        `<text x="${X}" y="${Y-r*0.32}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.42,15).toFixed(0)}" font-weight="600" fill="#fff">${name}</text>`+
+        `<text x="${X}" y="${Y+r*0.42}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.6,22).toFixed(0)}" font-weight="700" fill="#fff">${n}</text>`;
+    }
+    const LX=lx/100*W, LY=ly/100*H;
+    const dot=X==null?'':`<line x1="${X}" y1="${Y}" x2="${LX}" y2="${LY}" stroke="#9bb6e8" stroke-width="1"/><circle cx="${X}" cy="${Y}" r="${Math.max(3,r*0.7).toFixed(0)}" fill="rgba(47,116,255,.85)"/>`;
+    return dot+`<text x="${LX}" y="${LY-1}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#1d3a8a">${name}</text>`+
+      `<text x="${LX}" y="${LY+12}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#155EE8">${n}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%">${els}</svg>`;
+}
+
+function caseSlide(c){
+  const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
+  return {title:`Case Study — ${c.logo}`,track:'core',teaser:!!c.teaser,dark:false,cls:'',html:`
+   <div class="cs-banner liquid">${c.banner}</div>
+   <div class="cs-body">
+     <div class="cs-top"><span class="cs-tag">★ Breakout Founder Story</span>${logo}</div>
+     <div class="cs-story">${c.story}</div>
+     <div class="cs-grid">
+       <div class="cs-photo-col" style="background-image:url('images/cases/${c.key}.webp')"><div class="cs-fn">${c.founders}</div></div>
+       <div class="cs-mid">
+         <div class="cs-steps">${c.steps.map(s=>`<div class="st"><span class="k">${s[0]}</span><span>${s[1]}</span></div>`).join('')}</div>
+       </div>
+       <div class="cs-right">${c.metrics.map(m=>`<div class="cs-metric ${m[2]||''}"><div class="ml">${m[0]}</div><div class="mv">${m[1]}</div></div>`).join('')}</div>
+     </div>
+   </div>
+   <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
+   ${chrome(false)}`};
+}
+
+const SLIDES=[];
+function add(o){SLIDES.push(o);}
+
+/* 1 — COVER */
+add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
+  <div class="cover-logo">${MARK} Sunshine Lake</div>
+  <div class="cover-band">Pre-Seed &amp; Seed · Fund&nbsp;I · $50M Target · 5% GP Commit</div>
+  <div class="s-pad">
+    <h1>Global Founders<br>forge the future.</h1>
+  </div>
+  <div class="meta">
+    <div class="ln">Donald Stalter</div>
+    <div class="ln dim">San Francisco</div>
+  </div>
+  <span class="s-conf">Strictly Confidential</span>`});
+
+/* STATEMENT */
+add({title:'Statement',track:'core',teaser:true,dark:true,cls:'statement',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Thesis</div>
+    <div class="sline">Talent is universal. <span class="forged">Conviction is forged.</span></div>
+    <div class="sline sub">We back the world's best founders at their breakout moments.<br>Our insights into economic, social, and technology shifts fuel multiple blockbuster companies a decade.</div>
+    <div class="stmt-tr">
+      <div class="stmt-lbl">Verified track record</div>
+      <div class="stmt-stats">
+        <div><div class="ssn">$60M</div><div class="ssl">Invested</div></div>
+        <div><div class="ssn">2</div><div class="ssl">Funds</div></div>
+        <div><div class="ssn">21×</div><div class="ssl">Multiple</div></div>
+        <div><div class="ssn">13</div><div class="ssl">Unicorns</div></div>
+      </div>
+    </div>
+  </div>${chrome(true)}`});
+
+
+/* 4 — GP CREDIBILITY */
+add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Founder &amp; General Partner</div>
+    <h1 class="s-title">Don Stalter</h1>
+    <div class="quote-sub">Raised across continents and multilingual, Don ran bulge-bracket M&amp;A out of the University of Chicago — Google buy-side and multibillion deals across Brazil and Europe — then London private equity, before founding a software company acquired by Groupon and scaled internationally. An early Airbnb operator, he launched new markets and products and advised Handy through its Angie's List exit. At <b>Global Founders Capital ($2.4B AUM)</b> he led North America — <b>$256mm</b> deployed multistage at <b>6.8×</b> — and his seed program returned <b>21×</b> across two funds, backing <b>10+ unicorns &amp; decacorns</b>.</div>
+    <hr class="s-rule">
+    <div class="gp" style="margin-top:14px">
+      <div class="photo" style="background-image:url('images/team/don.webp')"></div>
+      <div class="tiers">
+        <table class="gp-track">
+          <thead><tr><th>Tier</th><th>Companies</th></tr></thead>
+          <tbody>
+            <tr><td class="tk">$10Bn+</td><td class="tv"><div class="cos"><span>Deel</span><span>Figma</span><span>Databricks</span><span>Brex</span></div></td></tr>
+            <tr><td class="tk">$1Bn+</td><td class="tv"><div class="cos"><span>Fundamental.tech</span><span>Kalshi</span><span>Headway</span><span>Checkr</span></div></td></tr>
+            <tr><td class="tk">$100mm+</td><td class="tv"><div class="cos"><span>Slope</span><span>SpotHero</span><span>Wordware</span><span>Assured</span><span>Fieldguide</span><span>Federato</span><span>Yuzu Health</span></div></td></tr>
+            <tr><td class="tk op">Operator</td><td class="tv"><div class="cos"><span>Advised Airbnb</span><span>Partner @ Handy<span class="sub">acq. Angie's List</span></span><span>Co-founded CityDeal<span class="sub">acq. Groupon</span></span></div></td></tr>
+            <tr><td class="tk op">Global Bulge Bracket M&amp;A &amp; PE</td><td class="tv"><div class="cos"><span>Credit Suisse — Google (Global)</span><span>B2W (Brazil)</span><span>Eltek/Valere (Norway)</span></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>${GROSSNOTE}${chrome(false)}`});
+
+/* 4b — TEAM + ADVISORS (moved to sit right behind the GP slide) */
+add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding:34px 72px 50px">
+    <div class="eyebrow">Sunshine Lake Team</div>
+    <h1 class="s-title" style="font-size:38px">Decades of relationships compounding into operational velocity</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:8px;white-space:nowrap">Don Stalter and the team have worked together for years — relationships that compound into immense value for founders.</div>
+    <div class="team-row" style="margin:14px 0 14px">${teamCardsHTML()}</div>
+    <div style="text-align:center;font-family:var(--serif);font-size:15.5px;color:var(--mid-lake);max-width:1000px;margin:0 auto 8px;line-height:1.32">Advisors of many nationalities and disciplines across three key vectors, bringing the operational momentum, experience, and domain expertise founders need to build through this platform shift.</div>
+    <div class="vectors">${vectorsHTML()}</div>
+  </div>${chrome(false)}`});
+
+/* 5 — TRACK RECORD TABLE */
+add({title:'Top 1% Seed Track Record',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">A unicorn for every $15mm deployed</h1>
+    <hr class="s-rule">
+    <div class="uni-wrap">
+      <div class="uni-chart">${uniScale()}</div>
+      <div class="uni-box">
+        <div class="ub-top">Institutional · seed</div>
+        <div class="ub-n">$60M</div>
+        <div class="ub-l">invested at seed</div>
+        <div class="ub-rule"></div>
+        <div class="ub-x">21×</div>
+        <div class="ub-l">aggregate return</div>
+      </div>
+    </div>
+  </div>${GROSSNOTE}${chrome(false)}`});
+
+/* 6 — BENCHMARKING */
+add({title:'Benchmarking — Top 1%',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">Top 1% of all seed-stage funds</h1>
+    <div class="s-sub" style="font-size:20px;color:var(--mid-lake)">Don's two legacy seed funds returned roughly <b style="font-weight:400;color:var(--cobalt)">13×</b> the average top-5% venture fund.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:32px;margin:22px 0 18px">
+      <div style="flex:1;background:linear-gradient(160deg,#155EE8,#0A3DAE);border-radius:14px;padding:24px 30px;color:#fff">
+        <div class="kicker" style="color:var(--sun);margin-bottom:14px">Sunshine Lake GP · legacy seed</div>
+        <div style="display:flex;gap:44px">
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">~21×</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross TVPI</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">61%</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross IRR</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1">99th</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">percentile</div></div>
+        </div>
+      </div>
+      <div style="flex:1;background:#f1f3f8;border-radius:14px;padding:24px 30px">
+        <div class="kicker" style="color:var(--muted);margin-bottom:14px">Top-5% venture fund · Cambridge</div>
+        <div style="display:flex;gap:44px">
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1;color:#8a93b0">1.6×</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross TVPI</div></div>
+          <div><div style="font-family:var(--serif);font-size:56px;line-height:1;color:#8a93b0">22%</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross IRR</div></div>
+        </div>
+      </div>
+    </div>
+    <table class="tbl" style="font-size:14.5px">
+      <thead><tr><th>Legacy Seed Track Record</th><th>GFC&nbsp;1</th><th>GFC&nbsp;2</th><th>All</th><th>Top-5% Venture</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>Gross TVPI</td><td>23.0×</td><td>20.4×</td><td class="mult">20.8×</td><td>1.63×</td></tr>
+        <tr class="hl"><td>Gross DPI</td><td>1.00×</td><td>0.30×</td><td class="mult">0.56×</td><td>0.25×</td></tr>
+        <tr class="hl"><td>Gross IRR</td><td>55%</td><td>67%</td><td class="mult">61%</td><td>22.4%</td></tr>
+        <tr><td>Fund Return Percentile</td><td>99%</td><td>99%</td><td>99%</td><td>95%</td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:12px">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses. Benchmark metrics shown net to LPs; track-record metrics shown gross. Sources: AngelList, PitchBook, Cambridge Associates. Seed investments &lt;$33mm valuation.</div>
+  </div>${chrome(false)}`});
+
+/* TEAM + ADVISORS — moved up to sit right behind the GP slide (see after slide 4). */
+
+/* 8 — SCOUT / SELECT */
+/* ===== MERGED ENGINE — VERSION A (horizontal flow) ===== */
+add({title:'The Engine',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Build</div>
+    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
+    <div class="eng-flow eng-funnel">
+      <div class="eng-card s1" style="height:464px">
+        <div class="eng-top"><span class="eng-num">1</span><span class="eng-name">Scout</span><span class="eng-stat">5,000+</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Multi-pronged global sourcing</div>
+          <div class="eng-row">Identify founders at their breakout moments during global economic, social &amp; technological shifts.</div>
+          <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18"/></svg></span><div><b>Unicorn &amp; alumni network</b><br>Deel · Kalshi · Headway · Brex · Databricks · Figma</div></div>
+          <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><path d="M2 8l10-4 10 4-10 4L2 8z"/><path d="M6 10.5V15c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5"/></svg></span><div><b>Campus programming</b><br>MIT · Harvard · Stanford · ETH · École Polytechnique · CDTM · TU Munich · Delft</div></div>
+          <div class="eng-foot">↓ all feed Select</div>
+        </div>
+      </div>
+      <div class="eng-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <div class="eng-card s2" style="height:446px">
+        <div class="eng-top"><span class="eng-num">2</span><span class="eng-name">Select</span><span class="eng-stat">500</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Scored 1–5 across five axes</div>
+          <div class="eng-example">
+            <div class="ex-h">SWIFTCLAIM <span class="ex-tag">Live example</span></div>
+            <div class="checklist">
+              <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout story</span><span class="ck-score">4</span></div>
+              <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global ambition</span><span class="ck-score">4</span></div>
+              <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique inflection</span><span class="ck-score">4</span></div>
+              <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain expertise</span><span class="ck-score">5</span></div>
+              <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
+            </div>
+          </div>
+          <div class="eng-foot">21 / 25 · advances to Secure</div>
+        </div>
+      </div>
+      <div class="eng-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <div class="eng-card s3" style="height:430px">
+        <div class="eng-top"><span class="eng-num">3</span><span class="eng-name">Secure</span><span class="eng-stat">~30</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Win the round · earn founder trust</div>
+          <div class="eng-q">“He hustled harder for me than anyone else did.” — Jake Sussman, Headway</div>
+          <div class="eng-q">“Would I work with Don again? I already did — twice.” — Aaron Bai, Affiniti</div>
+          <div class="eng-q">“With us from day zero through every twist and turn.” — Tarek Mansour, Kalshi</div>
+          <div class="eng-q">“If I could take money from Don again, I absolutely would.” — Mark Lawrence, SpotHero</div>
+          <div class="eng-q">“He believes in you more than you believe in yourself.” — Filip Kozera, Wordware</div>
+          <div class="eng-q">“A fantastic partner and ally since our earliest days.” — Alex Bouaziz, Deel</div>
+          <div class="eng-q">“He hustles harder than any investor I’ve met.” — Lawrence Lin Murata, Slope</div>
+        </div>
+      </div>
+      <div class="eng-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <div class="eng-card s4" style="height:430px">
+        <div class="eng-top"><span class="eng-num">4</span><span class="eng-name">Support</span><span class="eng-stat">30 core</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Sunshine Lake Acceleration</div>
+          <div class="eng-row">We pair founders with unicorn founders, top operators &amp; our advisors for modular 1–2 hr weekly sessions, each ending in a concrete deliverable.</div>
+          <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a7.5 7.5 0 0 1-10.7 6.8L4 20l1.7-5.3A7.5 7.5 0 1 1 21 11.5z"/></svg></span><div><b>Storytelling</b> → a tight 10-minute talk track that lands the next round.</div></div>
+          <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><path d="M4 19a8 8 0 1 1 16 0"/><path d="M12 19l4.5-5.5"/></svg></span><div><b>Execution</b> → financial model, ops cadence &amp; global hiring.</div></div>
+          <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.1 11l7.8-3.8M8.1 13l7.8 3.8"/></svg></span><div><b>Domain</b> → warm intros to industry leaders &amp; best practices.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="eng-net">Powered by a 250+ network of unicorn founders, operators, VCs &amp; advisors.</div>
+  </div>${chrome(false)}`});
+
+/* Engine boxed (alt) + original Scout/Select & Secure/Support live in the Appendix. Deep-network slide retired — folded into The Engine. */
+
+/* ===== OUR APERTURE (graduated to core, before case studies) ===== */
+add({title:'Our Aperture',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Aperture</div>
+    <h1 class="s-title" style="font-size:36px">We invest behind economic, social &amp; technological shifts</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Global founders spot these inflections first — we back them at the moment they turn.</div>
+    <hr class="s-rule">
+    <div class="ap-grid">
+      <div class="ap-col e"><div class="ap-head">Economic Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Tariffs &amp; re-globalization</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Supply chains &amp; logistics rewire around new trade routes and reshoring.</div>
+        <div class="ap-ex"><span>Cedar</span><span>Navier</span><span>MightyFly</span></div>
+      </div></div>
+      <div class="ap-col s"><div class="ap-head">Social Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">Aging, loneliness &amp; mental-health demand</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Care &amp; companionship delivered at scale, software- and robotics-native.</div>
+        <div class="ap-ex"><span>Headway</span><span>Companion robotics</span></div>
+      </div></div>
+      <div class="ap-col t"><div class="ap-head">Technological Shift</div><div class="ap-body">
+        <div class="ap-lbl">The inflection</div><div class="ap-infl">AI collapses expert work; physical intelligence arrives</div>
+        <div class="ap-arrow">↓</div>
+        <div class="ap-lbl">Breakout</div><div class="ap-open">Agents and robots enter the physical world and antiquated industries.</div>
+        <div class="ap-ex"><span>Overview</span><span>GovDash</span><span>Centaur Labs</span></div>
+      </div></div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* ARCHETYPE — the cross-border founder (immediately before case studies) */
+add({title:'The Cross-Border Founder',track:'core',teaser:true,dark:true,cls:'statement',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Archetype</div>
+    <div class="sline">The cross-border founder.</div>
+    <div class="arch-lead">The founders who change categories rarely build from comfort. They cross borders — physical and mental — to where their idea can actually happen, compounding advantages most builders never develop.</div>
+    <div class="arch-grid">
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><polyline points="6 5 13 12 6 19"/><polyline points="13 5 20 12 13 19"/></svg></span><div class="ac-h">Higher velocity</div><div class="ac-d">Build and ship faster than the field.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"/></svg></span><div class="ac-h">Scrappy &amp; resourceful</div><div class="ac-d">Make a lot from very little.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></span><div class="ac-h">Bias to risk</div><div class="ac-d">Asymmetric bets feel normal.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><path d="M12 21a5 5 0 0 0 5-5c0-3.2-2.6-4.6-2.6-8.2C11 9 10.4 11 10.6 13.2 9.4 12.7 9 11.2 9.4 9.6 8 11 7 13 7 16a5 5 0 0 0 5 5z"/></svg></span><div class="ac-h">Forged by adversity</div><div class="ac-d">Many rise from hardship or upheaval.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 2.6 15.4 0 18M12 3c-2.6 2.6-2.6 15.4 0 18"/></svg></span><div class="ac-h">Opportunity migrants</div><div class="ac-d">Move to where the idea is buildable.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><polyline points="20 4 20 9 15 9"/></svg></span><div class="ac-h">Fast relearners</div><div class="ac-d">Rebuild fluency in a new world, quickly.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.8-3.4 7.9-8 9-4.6-1.1-8-4.2-8-9V6l8-3z"/></svg></span><div class="ac-h">Brave by default</div><div class="ac-d">At home outside the comfort zone.</div></div>
+      <div class="arch-card"><span class="ac-ic"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><div class="ac-h">Unburdened by orthodoxy</div><div class="ac-d">See what locals overlook.</div></div>
+    </div>
+  </div>${chrome(true)}`});
+
+/* CASE STUDIES (data-driven) */
+CASES.forEach(c=>add(caseSlide(c)));
+
+/* 10 — FUND TERMS */
+add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Fund Overview</div>
+    <div class="terms">
+      <div><div class="big-num">$50<span style="font-size:46px">mm</span></div><div class="big-lbl">Target Fund Size</div></div>
+      <div class="rows">
+        <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core companies</span></div>
+        <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
+        <div class="tr"><span class="k">Initial Check Size</span><span class="v">$1mm average</span></div>
+        <div class="tr"><span class="k">Target Ownership</span><span class="v">5% for core positions · ~85% of total capital</span></div>
+        <div class="tr"><span class="k">Reserves</span><span class="v">10% dedicated (winners only) · 10% discretionary "cannonball" follow-on</span></div>
+        <div class="tr"><span class="k">Non-core</span><span class="v">15% — 5% scout/discovery · 5% network · 5% power law</span></div>
+        <div class="tr"><span class="k">Structure</span><span class="v">2.5% management fee (stepping to 1.5%) · 20% carry · 5% GP commitment</span></div>
+        <div class="tr"><span class="k">Term</span><span class="v">10-year fund term (+2-year extension)</span></div>
+      </div>
+    </div>
+    <div class="terms-foot">Sunshine Lake drives DPI through founder-friendly secondaries and opportunistic M&amp;A.</div>
+    <div class="note" style="margin-top:10px">Terms are preliminary and subject to change. Not an offer to sell or a solicitation of an offer to buy any security.</div>
+  </div>${chrome(false)}`});
+
+/* 11 — PORTFOLIO CONSTRUCTION */
+const PC1=[{label:'Initial checks',pct:65,color:'#155EE8'},{label:'Dedicated',pct:10,color:'#4f86ea'},{label:'Discretionary',pct:10,color:'#7aa6f2'},{label:'Scout',pct:5,color:'#F2D831'},{label:'Network',pct:5,color:'#81e77a'},{label:'Power law',pct:5,color:'#f6a23c'}];
+const PC2=[{label:'Product signal',pct:50,color:'#0A3DAE'},{label:'Pre-PMF',pct:30,color:'#2f6fea'},{label:'Post-PMF',pct:20,color:'#7aa6f2'}];
+add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">$50mm · Target Portfolio Construction</div>
+    <h1 class="s-title" style="font-size:34px">Strategic capital deployment</h1>
+    <hr class="s-rule">
+    <div class="cols" style="margin-top:6px;align-items:flex-start;gap:36px">
+      <div class="col" style="text-align:center">
+        <div class="kicker" style="margin-bottom:2px">Capital deployment</div>
+        <div style="max-width:430px;margin:0 auto">${donutLabeled(PC1,'$50mm')}</div>
+      </div>
+      <div class="col" style="text-align:center">
+        <div class="kicker" style="margin-bottom:2px">Core initial-check signal mix</div>
+        <div style="max-width:430px;margin:0 auto">${donutLabeled(PC2,'Core')}</div>
+      </div>
+    </div>
+    <div class="kicker" style="margin-top:2px">Reserves &amp; non-core — 35%</div>
+    <div class="kv" style="grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px">
+      <div><span class="k">Dedicated reserves — 10%</span><div class="v">Reserved per deal; deployed only to the winners with confirmed PMF (~half).</div></div>
+      <div><span class="k">Discretionary reserves — 10%</span><div class="v">"Cannonball" follow-on, concentrated into breakout outliers.</div></div>
+      <div><span class="k">Scout / discovery — 5%</span><div class="v">Small early checks that source the next core wins.</div></div>
+      <div><span class="k">Network &amp; power law — 10%</span><div class="v">5% network access + 5% power-law opportunities.</div></div>
+    </div>
+    <div style="margin-top:10px;font-family:var(--serif);font-size:16px;color:var(--mid-lake)">85% core · 15% non-core · 30 core investments (20 pre-seed, 10 seed)</div>
+    <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
+  </div>${chrome(false)}`});
+
+/* 12 — ASSET POSITIONING */
+add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">Asset positioning</h1>
+    <div class="cols" style="margin-top:22px;flex:1">
+      <div class="col">
+        <div class="kicker">Sunshine Lake</div>
+        <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin:8px 0 18px">A $50mm fund size allows for minimum-viable ownership (5%) while expanding top-of-funnel into a greater critical-global-problem set — more, and better, shots on goal.</p>
+        <div class="kicker">Co-Investors</div>
+        <p style="font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:8px">Rather than competing with later-stage investors, we build a strong network of early-stage and sector-focused co-investors — mitigating capital risk while enhancing access to high-quality deals.</p>
+      </div>
+      <div class="col">
+        <ul style="list-style:none;font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:8px;display:flex;flex-direction:column;gap:12px">
+          <li>Designed for high-multiple returns — targeting IPOs and $100mm–$500mm exits while securing strong early ownership.</li>
+          <li>We drive value connecting portfolio companies with enterprise incumbents and PE firms for M&amp;A, buyouts, and scaling.</li>
+          <li>Leveraging a <b>$15T+ TAM</b> and strong precedent: at GFC, Don backed 4 unicorns across 42 core investments — <b>top 1% of Cambridge Associates benchmarks</b>.</li>
+          <li>We co-lead or lead, co-invest, and take board-observer seats selectively to actively support founders.</li>
+        </ul>
+      </div>
+      <div class="col" style="flex:.7">
+        <div style="background:#eef3fc;border-radius:12px;padding:18px;font-size:13.5px;color:var(--ink-2)">Expand investment set · Optimize co-investors · Engineer exits / returns</div>
+        <div style="background:#fdf9ec;border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2);margin-top:14px"><b>Co-Investors</b><br>Seek trusted seed partner · Reputable co-investors · Secondaries partners</div>
+        <div style="background:#fdf9ec;border-radius:12px;padding:16px;font-size:13px;color:var(--ink-2);margin-top:14px"><b>PE</b><br>Non-IPO exit pathways · Inform areas of focus · Maintain industry pulse</div>
+      </div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* 13 — LPs */
+add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">Our Backers &amp; LPs</h1>
+    <div class="s-sub" style="font-size:16px;color:var(--mid-lake);max-width:1120px;margin-top:10px;line-height:1.45">We are proud to be managing money on behalf of numerous cause-driven organizations — universities, hospitals, foundations, and research organizations — whose missions mirror those of our founders and whose good works make our work all the more meaningful.</div>
+    <div class="lp-grid" style="margin-top:26px">
+      ${[
+        ['Abhinav Tiwari','stripe.png',0,28],['Anish Acharya','creditkarma.png',0,30],['David Helgason','unity.png',0,28],['Alex Langholz-Baikousis','cherry.png',0,32],['Arthur Patterson','accel.png',1,27],
+        ['Cambridge Associates','cambridge.png',0,32],['Jason Ai','openai.png',0,24],['Ola Doudin','coinbase.png',0,25],['Filip Dames','zalando.svg',0,28],['Garry Tan','yc.png',1,30],
+        ['Lucas Swisher','coatue.png',1,23],['JIMCO','jimco.png',0,42],['Jon Lonsdale','8vc.png',0,30],['Sebastian Tonkin','glide.png',0,27],['Wesley Chan','google.png',1,40],
+        ['Andrew Schoen','nea.png',0,28],['Nic Ingram','eqt.png',0,27],['Heliad','heliad.png',0,27],['Samuel Adeyamo','aurora.png',0,27],['Thiago da Costa','autodesk.png',0,54],
+        ['Mickey Arabelovic','telescope.png',0,27],['Katia Ameri','a16z.png',0,25],['Rohan Kodialam','citadel.png',0,30],['Y Combinator','yc.png',0,30],['Shawn O\'Neill','silverlake.png',0,27]
+      ].map(l=>`<div class="lpc"><div class="nm">${l[0]}</div><div class="lp-logo"><img src="images/lp/${l[1]}" alt="" style="max-height:${l[3]||32}px"></div>${l[2]?'<div class="lp-midas">★ Midas List</div>':''}</div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px">Investments directly from individual GPs and founders of select institutional investment funds.</div>
+  </div>${chrome(false)}`});
+
+/* 14 — MULTIFUND ROADMAP */
+add({title:'Multifund Strategy',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="font-size:38px">Sunshine Lake multifund strategy</h1>
+    <div class="s-sub" style="font-size:19px">A 5-year roadmap for a 50-year franchise · <b style="color:var(--cobalt)">$60mm deployed across 2 funds to date</b></div>
+    <div class="road">
+      <div class="rf past"><div class="yr">2017–19</div><div class="nm">Fund 0A</div><div class="sz"><b>$23mm</b></div><div class="sz">23× TVPI · 100% DPI</div><div class="sz">1 GP · 3 Associates</div></div>
+      <div class="rf past"><div class="yr">2019–22</div><div class="nm">Fund 0B</div><div class="sz"><b>$37mm</b></div><div class="sz">20× TVPI · 30% DPI</div><div class="sz">1 GP · 3 Associates</div></div>
+      <div class="rf future"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div><div class="sz">1 GP · 1 COO &amp; Partner · +2</div></div>
+      <div class="rf future"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div><div class="sz">2 GPs · 5 FTEs</div></div>
+      <div class="rf future"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · across verticals</div><div class="sz">2 GPs · 6 FTEs</div></div>
+    </div>
+    <div class="kicker" style="margin-top:30px;font-size:13px">Earning the right to scale</div>
+    <div class="kv" style="grid-template-columns:repeat(5,1fr);gap:28px 24px;margin-top:18px">
+      <div><span class="k" style="font-size:17px">Market Opportunity</span><div class="v" style="font-size:14.5px;margin-top:5px">$15T+ global TAM in flux. Disruption inevitable.</div></div>
+      <div><span class="k" style="font-size:17px">Proven Execution</span><div class="v" style="font-size:14.5px;margin-top:5px">Unicorn-backed record with world-class founder support.</div></div>
+      <div><span class="k" style="font-size:17px">Founder Magnet</span><div class="v" style="font-size:14.5px;margin-top:5px">International talent solving $100B+ global problems.</div></div>
+      <div><span class="k" style="font-size:17px">Strategic Partners</span><div class="v" style="font-size:14.5px;margin-top:5px">Trusted by elite LPs and co-investors.</div></div>
+      <div><span class="k" style="font-size:17px">Platform for Scale</span><div class="v" style="font-size:14.5px;margin-top:5px">Ops-first playbook to compound over time.</div></div>
+    </div>
+  </div>${GROSSNOTE}${chrome(false)}`});
+
+/* 15 — CLOSING */
+add({title:'Dive in.',track:'core',teaser:true,dark:true,cls:'closing',html:`
+  <div class="s-pad">
+    <h2>Dive in.</h2>
+    <p>Global founders forge the future. What better time to build?</p>
+    <div class="cta">Donald Stalter · General Partner<br>don@sunshinelake.vc · sunshinelake.vc · San Francisco</div>
+  </div>${chrome(true)}`});
+
+/* ===== APPENDIX ===== */
+add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
+  <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
+
+/* ===== TRACK RECORD — full table (moved to appendix) ===== */
+add({title:'Track Record — Table',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">A unicorn for every $15mm deployed</h1>
+    <hr class="s-rule">
+    <div class="tr-callout" style="margin:18px 0 0">
+      <div class="trc-funds">
+        <div><div class="trc-amt">$23mm Fund I</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
+        <div class="trc-div"></div>
+        <div><div class="trc-amt">$37mm Fund II</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
+      </div>
+      <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
+    </div>
+    <table class="tbl tall" style="margin-top:18px">
+      <thead><tr><th>Company</th><th>Problem</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Follow-On Lead</th></tr></thead>
+      <tbody>${trackRowsHTML()}</tbody>
+    </table>
+  </div>${GROSSNOTE}${chrome(false)}`});
+
+/* ===== ENGINE — BOXED (alt concept) ===== */
+add({title:'Engine — Boxed (alt)',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Build</div>
+    <h1 class="s-title" style="font-size:38px">A regimented engine for building a top-1% portfolio</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Every company runs the same disciplined path — powered by a 250+ relationship network.</div>
+    <hr class="s-rule">
+    <div class="eng-flow">
+      <div class="eng-card s1">
+        <div class="eng-top"><span class="eng-num">1</span><span class="eng-name">Scout</span><span class="eng-stat">5,000+</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Multi-pronged global sourcing</div>
+          <div class="eng-row"><b>Unicorn &amp; alumni network</b> — Headway, Brex &amp; Deel founders surface the next breakouts (Marble, PermitFlow, Firstwork).</div>
+          <div class="eng-row"><b>Campus programming</b> — UChicago · Stanford · Caltech · NYU · Imperial · TUM · LSE · NUS.</div>
+          <div class="eng-row"><b>Discovery program</b> — 100+ founders &amp; operators.</div>
+          <div class="eng-foot">→ 500 advance</div>
+        </div>
+      </div>
+      <div class="eng-card s2">
+        <div class="eng-top"><span class="eng-num">2</span><span class="eng-name">Select</span><span class="eng-stat">500</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Scored 1–5 across five axes · SwiftClaim</div>
+          <div class="checklist">
+            <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Breakout Story</span><span class="ck-score">4</span></div>
+            <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Global Ambition</span><span class="ck-score">4</span></div>
+            <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Unique Inflection</span><span class="ck-score">4</span></div>
+            <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Domain Expertise</span><span class="ck-score">5</span></div>
+            <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Execution</span><span class="ck-score">4</span></div>
+          </div>
+          <div class="eng-foot">21 / 25 · selected</div>
+        </div>
+      </div>
+      <div class="eng-card s3">
+        <div class="eng-top"><span class="eng-num">3</span><span class="eng-name">Secure</span><span class="eng-stat">100</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Win the round, high conviction</div>
+          <div class="eng-q">"Don connected us with 10 fintech leaders early; we achieved market dominance." — Aaron Bai, Affinity</div>
+          <div class="eng-q">"He intro'd us to an elite marketer who revolutionized DNP." — Joshua Browder, DoNotPay</div>
+          <div class="eng-row"><b>Lead &amp; protect</b> — safeguard the cap table; board-observer seats.</div>
+          <div class="eng-foot">→ 30 core secured</div>
+        </div>
+      </div>
+      <div class="eng-card s4">
+        <div class="eng-top"><span class="eng-num">4</span><span class="eng-name">Support</span><span class="eng-stat">30 core</span></div>
+        <div class="eng-body">
+          <div class="eng-def">Sunshine Lake Acceleration</div>
+          <div class="eng-row"><b>Wks 1–2 · Storytelling</b> — pro narrative coaching.</div>
+          <div class="eng-row"><b>Wks 3–4 · Execution</b> — financial strategy, ops, global talent.</div>
+          <div class="eng-row"><b>Wks 5–6 · Domain</b> — industry connections &amp; best practices.</div>
+          <div class="eng-row"><b>Wk 7 · Exit-readiness</b> — operational &amp; market support.</div>
+          <div class="eng-foot">7-week module</div>
+        </div>
+      </div>
+    </div>
+    <div class="eng-net">Powered by a deep, proprietary network — 250+ unicorn founders · VCs · corporates · incubators · accelerators</div>
+  </div>${chrome(false)}`});
+
+/* Original Scout/Select & Secure/Support slides retired — superseded by The Engine (flywheel) + Engine — Boxed (alt). */
+
+/* PROBLEM SPACE — moved to appendix per Don, June 2026 */
+/* Aperture (rubric) graduated to the core deck — see before the case studies. */
+
+/* ===== APERTURE — Option 2 (inflection timeline) ===== */
+add({title:'Aperture — Timeline (2)',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Aperture</div>
+    <h1 class="s-title" style="font-size:36px">We invest at inflection points — before the wave</h1>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:4px">Each economic, social &amp; technological shift opens a decade of blockbuster companies. We back global founders first.</div>
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-cols">
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2008–14</div><div class="tl-shift">Social · Economic</div><div class="tl-infl">Mobile &amp; marketplaces</div><div class="tl-co">Airbnb · Groupon</div></div>
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2015–19</div><div class="tl-shift">Economic</div><div class="tl-infl">Cloud, fintech &amp; global work</div><div class="tl-co">Deel · Brex · Kalshi</div></div>
+        <div class="tl-col"><div class="tl-dot"></div><div class="tl-yr">2020–24</div><div class="tl-shift">Technological</div><div class="tl-infl">AI-native software</div><div class="tl-co">Wordware · Minimal · Dedalus</div></div>
+        <div class="tl-col future"><div class="tl-dot"></div><div class="tl-yr">2025 +</div><div class="tl-shift">What's next</div><div class="tl-q">?</div><div class="tl-co">Physical intelligence · companion robotics · re-globalized supply chains</div></div>
+      </div>
+    </div>
+  </div>${chrome(false)}`});
+
+add({title:'Critical Global Problems',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Riding global technological &amp; economic shifts</div>
+    <h1 class="s-title">Backing founders solving critical global problems</h1>
+    <div class="s-sub" style="font-size:20px;color:var(--mid-lake)">Three tectonic shifts are rewiring the global economy. We back the founders building the infrastructure for each.</div>
+    <hr class="s-rule">
+    <div class="prob">
+      <div class="pc"><div class="prob-shift"><b>The shift</b>Critical systems going software-first &amp; sovereign</div><h3>Infrastructure</h3><ul>
+        <li><span class="co">GovDash</span><span class="se">Government</span></li>
+        <li><span class="co">Centaur Labs</span><span class="se">Health</span></li></ul></div>
+      <div class="pc"><div class="prob-shift"><b>The shift</b>AI collapsing the cost of expert work</div><h3>Productivity</h3><ul>
+        <li><span class="co">PermitFlow</span><span class="se">Construction</span></li>
+        <li><span class="co">DraftWise</span><span class="se">Legal</span></li>
+        <li><span class="co">Overview</span><span class="se">Manufacturing</span></li></ul></div>
+      <div class="pc"><div class="prob-shift"><b>The shift</b>Supply chains re-globalizing &amp; automating the physical world</div><h3>Supply Chain &amp; Logistics</h3><ul>
+        <li><span class="co">Cedar</span><span class="se">Rail</span></li>
+        <li><span class="co">Navier</span><span class="se">Maritime</span></li>
+        <li><span class="co">MightyFly</span><span class="se">Aviation</span></li></ul></div>
+    </div>
+    <div class="prob-foot">Fintech and frontier underpin every shift we invest behind.</div>
+  </div>${chrome(false)}`});
+
+/* A1 — GLOBAL FOUNDERS */
+add({title:'Global Unicorn Founders',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:32px">
+    <h1 class="s-title" style="text-align:center;font-size:40px">Country of Origin of US Unicorn Founders</h1>
+    <div style="flex:1;display:flex;align-items:flex-end;min-height:0;margin-top:2px">
+      <div style="position:relative;width:100%;aspect-ratio:2/1;max-height:100%;margin:0 auto">
+        <img src="images/worldmap.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;transform:translateY(7%)">
+        ${worldMap()}
+      </div>
+    </div>
+    <div class="note" style="text-align:center;margin-top:6px">Based on data from 531 U.S. unicorns (1997–2019). Stanford University Research (02/2022).</div>
+  </div>${chrome(false)}`});
+
+/* A2 — STORIES DRIVE MOMENTUM */
+function cogIcon(cx,cy,r){let t='';const n=8,tw=0.26,C=Math.cos,S=Math.sin;for(let k=0;k<n;k++){const a=k*2*Math.PI/n;t+=`<polygon points="${(cx+C(a-tw)*r).toFixed(1)},${(cy+S(a-tw)*r).toFixed(1)} ${(cx+C(a-tw)*(r+5)).toFixed(1)},${(cy+S(a-tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*(r+5)).toFixed(1)},${(cy+S(a+tw)*(r+5)).toFixed(1)} ${(cx+C(a+tw)*r).toFixed(1)},${(cy+S(a+tw)*r).toFixed(1)}" fill="#155EE8"/>`;}return t+`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="#155EE8" stroke-width="2.4"/><circle cx="${cx}" cy="${cy}" r="${(r*0.36).toFixed(1)}" fill="#155EE8"/>`;}
+function zig(c,y){return `<line x1="${c-15}" y1="${y}" x2="${c+8}" y2="${y}" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round"/><path d="M${c+2},${y-6} L${c+12},${y} L${c+2},${y+6}" fill="none" stroke="#9aa6c8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`;}
+add({title:'Stories Drive Momentum',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:40px">
+    <h1 class="s-title" style="text-align:center">Global Breakout Founders Change the World</h1>
+    <div style="flex:1;position:relative;min-height:0">
+      <svg viewBox="0 0 1280 600" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" font-family="Segoe UI,sans-serif">
+        <defs>
+          <filter id="sh" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="7" flood-color="#0b1275" flood-opacity="0.13"/></filter>
+          <marker id="ya" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#F2D831"/></marker>
+          <marker id="ca" markerWidth="9" markerHeight="9" refX="4" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#7e8bb0"/></marker>
+        </defs>
+        <!-- expanding overlapping fields: blue -> yellow -->
+        <circle cx="1060" cy="300" r="285" fill="rgba(242,216,49,.30)"/>
+        <circle cx="905" cy="300" r="250" fill="rgba(176,198,236,.34)"/>
+        <circle cx="770" cy="300" r="210" fill="rgba(138,174,236,.30)"/>
+        <circle cx="645" cy="300" r="172" fill="rgba(86,139,239,.22)"/>
+        <!-- right outcome text -->
+        <text x="1168" y="270" text-anchor="middle" font-weight="700" font-size="19" fill="#0B1275"><tspan x="1168">STORIES FORCE</tspan><tspan x="1168" dy="25">MULTIPLY, FORGING</tspan><tspan x="1168" dy="25">N-OF-1 COMPANIES</tspan></text>
+        <!-- feedback loop arrow -->
+        <path d="M 935,455 C 800,585 560,580 482,418" fill="none" stroke="#F2D831" stroke-width="11" stroke-linecap="round" marker-end="url(#ya)"/>
+        <!-- zigzag connectors -->
+        ${zig(587,300)}${zig(725,300)}${zig(875,300)}${zig(1028,300)}
+        <!-- central solid circle -->
+        <circle cx="470" cy="300" r="103" fill="#2f74ff"/>
+        <text x="470" y="300" text-anchor="middle" font-family="DomaineDisp,Times New Roman,serif" font-size="27" fill="#fff"><tspan x="470" dy="-6">Stories Drive</tspan><tspan x="470" dy="32">Momentum</tspan></text>
+        <!-- stage icon circles -->
+        <g filter="url(#sh)"><circle cx="650" cy="300" r="50" fill="#fff"/><circle cx="800" cy="300" r="50" fill="#fff"/><circle cx="950" cy="300" r="50" fill="#fff"/></g>
+        <g transform="translate(650,300)" stroke="#155EE8" stroke-width="2.2" fill="none"><circle r="17"/><ellipse rx="17" ry="6.5"/><line x1="0" y1="-17" x2="0" y2="17"/><path d="M-15,-8 Q0,-2 15,-8 M-15,8 Q0,2 15,8"/></g>
+        ${cogIcon(800,300,14)}
+        ${cogIcon(944,295,11)}${cogIcon(960,311,7)}
+        <text text-anchor="middle" font-weight="700" font-size="16" fill="#0B1275">
+          <tspan x="650" y="378">Product</tspan><tspan x="650" y="397">Emerges</tspan>
+          <tspan x="800" y="378">Execution</tspan><tspan x="800" y="397">Accelerates</tspan>
+          <tspan x="950" y="378">Domain</tspan><tspan x="950" y="397">Expertise</tspan>
+        </text>
+        <!-- left origins cluster -->
+        <text x="120" y="284" text-anchor="middle" font-family="DomaineDisp,Times New Roman,serif" font-size="21" fill="#0B1275"><tspan x="120">From Extreme</tspan><tspan x="120" dy="26">Origins to</tspan><tspan x="120" dy="26">Extraordinary</tspan><tspan x="120" dy="26">Journeys</tspan></text>
+        <g filter="url(#sh)"><circle cx="255" cy="300" r="33" fill="#fff"/><circle cx="222" cy="180" r="50" fill="#fff"/><circle cx="350" cy="148" r="55" fill="#fff"/><circle cx="245" cy="428" r="50" fill="#fff"/></g>
+        <g transform="translate(255,300)" stroke="#155EE8" stroke-width="2" fill="none"><circle r="15"/><circle cx="-5" cy="-3" r="1.6" fill="#155EE8" stroke="none"/><circle cx="5" cy="-3" r="1.6" fill="#155EE8" stroke="none"/><path d="M-7,4 Q0,11 7,4"/></g>
+        <text text-anchor="middle" font-size="10.5" fill="#41507a" font-style="italic">
+          <tspan x="222" y="166">My roots are</tspan><tspan x="222" y="180">extreme — my</tspan><tspan x="222" y="194">ambition, even</tspan><tspan x="222" y="208">greater.</tspan>
+          <tspan x="350" y="128">I left it all behind</tspan><tspan x="350" y="142">to build a future</tspan><tspan x="350" y="156">the world can't</tspan><tspan x="350" y="170">ignore.</tspan>
+          <tspan x="245" y="414">Borders mean</tspan><tspan x="245" y="428">nothing when</tspan><tspan x="245" y="442">your mission is</tspan><tspan x="245" y="456">boundless.</tspan>
+        </text>
+      </svg>
+    </div>
+    <div class="s-sub" style="text-align:center;color:var(--mid-lake)">We Help Make their Dreams a Reality</div>
+  </div>${chrome(false)}`});
+
+/* A3 — STORY / VENTURE PARTNERS */
+/* A4 — DUE DILIGENCE */
+add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title">Select: high-conviction due-diligence process</h1>
+    <hr class="s-rule">
+    <div class="dd-row">
+      ${[
+        ['STEP 1','Founder Assessment','0–6 hrs','<div class="dd-h">Score · Breakout Story (1–5)</div><ul><li>Do they have a tangible impulse to change the world?</li></ul><div class="dd-h">Team analysis</div><ul><li>Are these the best founders in the world for this problem?</li><li>What is the strength and potential of the team?</li></ul>'],
+        ['STEP 2','Market &amp; Model Assessment','6–18 hrs','<div class="dd-h">Score (1–5 each)</div><ul><li>Global Ambition &amp; Opportunity</li><li>Unique Inflection</li><li>Domain Expertise</li><li>Execution Skills</li></ul><div class="dd-h">Diligence checklist</div><ul><li>Market sizing · Team &amp; key hires</li><li>Financial model · Product roadmap</li><li>Data room · Cap table</li></ul><div class="dd-flag">A 1–5 score; 20/25 advances to Step 3.</div>'],
+        ['STEP 3','Reflection &amp; Decision','18+ hrs','<div class="dd-h">Internal discussion &amp; alignment</div><ul><li>Review key findings from Steps 1 &amp; 2</li><li>Evaluate internal conviction</li></ul><div class="dd-h">Competitive analysis &amp; positioning</div><ul><li>Benchmark against comparable startups</li><li>Assess defensibility &amp; differentiation · SWOT</li><li>Introduce founder to 3 ecosystem CEOs / operators</li></ul>'],
+        ['STEP 4','Closing Push','24–72 hrs','<div class="dd-h">Thematic alignment session</div><ul><li>Present findings to the team</li><li>Support via customer &amp; talent intros</li><li>Financial &amp; operational guidance</li></ul><div class="dd-flag">Showcase the Sunshine Lake Acceleration Module — a 7-week program tailored to Steps 1, 2 &amp; 3.</div>']
+      ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
+    </div>
+  </div>${chrome(false)}`});
+
+/* A5 — BACK OFFICE / STACK */
+add({title:'Back Office &amp; Tech Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="text-align:center">Best-in-class back office</h1>
+    <div class="cols" style="margin-top:18px">
+      ${[['Fund Counsel','Morrison Foerster'],['Deal Counsel','Cooley'],['Fund Admin','Vector'],['Banking','Citizens']].map(c=>`<div class="col" style="background:#fdf9ec;border-radius:10px;padding:16px;text-align:center"><div class="kicker">${c[0]}</div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);margin-top:6px">${c[1]}</div></div>`).join('')}
+    </div>
+    <h2 style="font-family:var(--serif);font-weight:400;text-align:center;font-size:26px;color:var(--ink);margin:26px 0 4px">Internal technology stack</h2>
+    <div style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:14px">Tools consolidate app data into one system</div>
+    <div class="kv" style="grid-template-columns:1fr;gap:14px">
+      <div><span class="k">Apps</span><div class="v">Gmail · Google Drive · Slack · Zoom · LinkedIn · Vidyard</div></div>
+      <div><span class="k">Tooling</span><div class="v">OpenAI (chat &amp; summarization) · Grok (sentiment) · AWS (market analytics) · Linux · Python (automation) · Zapier</div></div>
+      <div><span class="k">Systems of record</span><div class="v">Airtable (database, reports, decks) · Notion (PM, DD/memos, research) · Affinity (CRM, sourcing, portfolio, LP) · Vector (fund admin, benchmarking, LP reporting) · Deel (HR, payroll, compliance)</div></div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* A6 — DEFINITION */
+add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:`
+  <div class="s-pad">
+    <div class="eyebrow" style="color:var(--sun)">The Definition</div>
+    <div class="dn-word">Sunshine Lake</div>
+    <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span>;</span> a far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
+    <div class="cite">— Star Wars: Ewoks #9</div>
+  </div><span class="s-conf">Strictly Confidential</span>`});
+
+/* A7 — DISCLAIMER */
+add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="font-size:40px;margin-bottom:18px">Disclaimer</h1>
+    <div class="cols">
+      <div class="col"><p>This presentation contains selected information about Sunshine Lake ("Adviser") and its affiliates and certain funds the Adviser manages or plans to manage. It is furnished solely for informational purposes for use in preliminary discussions. It is not, and is not intended to be, an offer to sell, or a solicitation of an offer to purchase, any securities or interest in any fund.</p><p>This presentation contains information as of the date on the cover and is subject to change. It should not be assumed to be complete. Information relating to third-party companies has been provided by such companies or sourced from publicly available information; no representation is made as to its accuracy or completeness.</p></div>
+      <div class="col"><p>The information is based in part on past performance and certain assumptions about future growth. These assumptions have inherent limitations and will be affected by changes in structure, criteria, or assets. Actual performance may differ substantially.</p><p>Certain information constitutes "forward-looking statements." Due to various risks and uncertainties, actual events or results may differ materially. The contents are not to be construed as legal, regulatory, business, accounting, or tax advice.</p></div>
+      <div class="col"><p>This presentation is confidential. Any reproduction or distribution, in whole or in part, without the prior written consent of the Adviser is prohibited. By receiving it, you acknowledge and agree that it is confidential, non-public, and/or proprietary information.</p><p>The distribution of this presentation in certain jurisdictions may be restricted by law. You should inform yourself as to the legal requirements and tax consequences of an investment within the countries of your citizenship, residence, domicile, and place of business.</p></div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* ===== KEYNOTE SLIDES (drafts recreated from the latest Keynote, for review) ===== */
+
+/* BOOM — the headline numbers */
+add({title:'The Numbers',track:'keynote',teaser:false,dark:true,cls:'boom',html:`
+  <div class="s-pad">
+    <div class="eyebrow" style="color:var(--sun);text-align:center;margin-bottom:6px">What a $1mm check can become</div>
+    <div class="boom-grid">
+      <div class="bstat"><div class="bn">831×</div><div class="bl">best outcome — Kalshi</div></div>
+      <div class="bstat"><div class="bn">356×</div><div class="bl">Deel — $1mm → $17B</div></div>
+      <div class="bstat"><div class="bn">61%</div><div class="bl">gross IRR</div></div>
+      <div class="bstat"><div class="bn">4</div><div class="bl">unicorns from two small seed funds</div></div>
+      <div class="bstat"><div class="bn">~21×</div><div class="bl">gross TVPI · top 1% of all seed funds</div></div>
+      <div class="bstat"><div class="bn">1 / $15mm</div><div class="bl">a unicorn for every $15mm deployed</div></div>
+    </div>
+    <div class="boom-foot">$60mm across two seed funds backed <b>Deel · Kalshi · Headway · Assured</b> — before the world's top funds piled in with billions.</div>
+  </div>${GROSSNOTE}${chrome(true)}`});
+
+/* helper: 3 big stats */
+function kStat(title,sub,stats){
+  return {title:'Keynote · '+title.replace(/<[^>]+>/g,''),track:'keynote',teaser:false,dark:false,cls:'',html:`
+   <span class="needs-art">Keynote draft · confirm copy</span>
+   <div class="s-pad">
+     <h1 class="s-title">${title}</h1>
+     ${sub?`<div class="s-sub" style="font-size:20px;color:var(--mid-lake)">${sub}</div>`:''}
+     <hr class="s-rule">
+     <div style="display:flex;gap:46px;flex:1;align-items:center">
+       ${stats.map(s=>`<div style="flex:1;text-align:center"><div style="font-family:var(--serif);font-size:66px;color:var(--cobalt);line-height:1">${s[0]}</div><div style="font-size:15px;color:var(--ink-2);margin-top:12px;line-height:1.45;max-width:260px;margin-left:auto;margin-right:auto">${s[1]}</div></div>`).join('')}
+     </div>
+   </div>${chrome(false)}`};
+}
+add(kStat('Three live inflections','Why now — three forces converging',[['244,000','New AI-native companies founded globally since 2023 [confirm]'],['50%','Share of knowledge work now automatable [confirm]'],['0%','The zero-rate era is over — capital discipline rewarded [confirm]']]));
+add(kStat('Resets mint category leaders','Downturns forge the most durable companies',[['90%+','Of category leaders founded in or near a downturn [confirm]'],['’08–’10','Airbnb · Uber · Stripe · Square born in the last reset [confirm]'],['2,500x','Best-case outcomes seeded at the bottom of the cycle [confirm]']]));
+add(kStat('Sized so the math works','Fund construction built for high-multiple returns',[['$3B','Realizable gross value from the legacy track record [confirm]'],['$42B','Aggregate FMV of legacy-backed companies today [confirm]'],['5%','Target ownership per core position [confirm]']]));
+add({title:'Pipeline is global &amp; compounding',track:'keynote',teaser:false,dark:false,cls:'',html:`
+  <span class="needs-art">Keynote draft · confirm copy</span>
+  <div class="s-pad">
+    <h1 class="s-title">The pipeline is global — and compounding</h1>
+    <div class="s-sub" style="font-size:19px;color:var(--mid-lake)">Bars below are illustrative (global founder pipeline by origin) — confirm against Keynote.</div>
+    <hr class="s-rule">
+    <div class="cols" style="flex:1;align-items:center;gap:40px;margin-top:8px">
+      <div class="col" style="flex:.5">
+        <div style="margin-bottom:22px"><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">59%</div><div style="font-size:13px;color:var(--ink-2)">referrals from prior founders [confirm]</div></div>
+        <div style="margin-bottom:22px"><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">$15T+</div><div style="font-size:13px;color:var(--ink-2)">addressable global problem set [confirm]</div></div>
+        <div><div style="font-family:var(--serif);font-size:48px;color:var(--cobalt);line-height:1">80%</div><div style="font-size:13px;color:var(--ink-2)">of deals sourced proprietarily [confirm]</div></div>
+      </div>
+      <div class="col" style="flex:1">
+        ${[['India',90],['Israel',52],['Canada',42],['UK',31],['China',27],['Germany',18],['France',17],['Russia',14]].map(b=>`<div style="display:flex;align-items:center;gap:12px;margin-bottom:9px"><div style="width:78px;text-align:right;font-size:13px;color:var(--ink-2)">${b[0]}</div><div style="height:18px;width:${b[1]/90*100}%;background:linear-gradient(90deg,#2f74ff,#155EE8);border-radius:3px"></div><div style="font-size:12px;color:var(--muted)">${b[1]}</div></div>`).join('')}
+        <div class="note" style="margin-top:8px">Illustrative — U.S. unicorn founders by country of origin (Stanford, 2022).</div>
+      </div>
+    </div>
+  </div>${chrome(false)}`});
+
+/* ============================================================
+   RENDER + NAVIGATION
+   ============================================================ */
+const stage=document.getElementById('stage');
+SLIDES.forEach((s,i)=>{
+  const el=document.createElement('section');
+  el.className='slide '+(s.cls||'')+(s.dark?' dark':'');
+  el.dataset.track=s.track; el.dataset.teaser=s.teaser?'1':'0'; el.dataset.idx=i;
+  el.innerHTML=s.html;
+  stage.appendChild(el);
+});
+const slideEls=[...stage.querySelectorAll('.slide')];
+
+let mode='full', order=[], cur=0;
+function rebuildOrder(){
+  order=SLIDES.map((s,i)=>i).filter(i=> mode==='full' ? true : SLIDES[i].teaser);
+  slideEls.forEach((el,i)=>el.classList.toggle('hide-in-mode', !order.includes(i)));
+  buildProgress();
+}
+function show(posInOrder){
+  cur=Math.max(0,Math.min(order.length-1,posInOrder));
+  const idx=order[cur];
+  slideEls.forEach((el,i)=>el.classList.toggle('active', i===idx));
+  document.getElementById('count').textContent=`${cur+1} / ${order.length}`;
+  document.getElementById('barTitle').textContent=SLIDES[idx].title.replace(/&amp;/g,'&');
+  [...document.querySelectorAll('#progress .pd')].forEach((d,i)=>d.classList.toggle('on',i===cur));
+  location.hash=idx;
+}
+function next(){show(cur+1);} function prev(){show(cur-1);}
+function buildProgress(){
+  const p=document.getElementById('progress'); p.innerHTML='';
+  order.forEach((idx,i)=>{const d=document.createElement('div');d.className='pd'+(SLIDES[idx].cls==='section'?' sec':'');d.onclick=()=>show(i);p.appendChild(d);});
+}
+
+/* scale stage to viewport */
+function fit(){
+  const pad=58;
+  const sw=(innerWidth)/1280, sh=(innerHeight-pad)/720;
+  stage.style.transform=`scale(${Math.min(sw,sh)})`;
+}
+addEventListener('resize',fit);
+
+/* controls */
+document.getElementById('navRight').onclick=next;
+document.getElementById('navLeft').onclick=prev;
+document.getElementById('modeSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  mode=b.dataset.mode;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+  rebuildOrder(); show(0);
+});
+document.getElementById('exportBtn').onclick=()=>{
+  // print only slides in the current mode
+  slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
+  window.print();
+};
+addEventListener('keydown',e=>{
+  if(document.getElementById('gate').style.display==='none'){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(order.length-1);}
+    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  }
+});
+
+/* show chrome on mouse move */
+let hideTimer;
+function flashChrome(){
+  document.getElementById('bar').classList.add('show');
+  document.getElementById('progress').classList.add('show');
+  clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>{document.getElementById('bar').classList.remove('show');document.getElementById('progress').classList.remove('show');},2600);
+}
+addEventListener('mousemove',flashChrome);
+
+/* touch swipe navigation (mobile) */
+let tsx=0,tsy=0,tst=0;
+addEventListener('touchstart',e=>{const t=e.changedTouches[0];tsx=t.clientX;tsy=t.clientY;tst=Date.now();},{passive:true});
+addEventListener('touchend',e=>{
+  if(document.getElementById('gate').style.display!=='none')return;
+  const t=e.changedTouches[0],dx=t.clientX-tsx,dy=t.clientY-tsy;
+  if(Date.now()-tst<800 && Math.abs(dx)>48 && Math.abs(dx)>Math.abs(dy)*1.4){ dx<0?next():prev(); }
+},{passive:true});
+
+/* sparkle starfield on the cover */
+function sparkles(){
+  const cover=stage.querySelector('.cover'); if(!cover)return;
+  const pts=[[78,12,16],[86,8,11],[82,30,22],[68,46,14],[71,54,11],[91,58,10],[18,8,12],[8,30,14],[24,72,12],[88,80,10],[40,84,12],[60,16,9]];
+  pts.forEach((p,i)=>{const s=document.createElement('div');s.className='spark';s.style.cssText=`left:${p[0]}%;top:${p[1]}%;width:${p[2]}px;height:${p[2]}px;animation-delay:${(i*0.43).toFixed(2)}s;animation-duration:${(2.2+(i%4)*0.45).toFixed(2)}s;`;cover.appendChild(s);});
+}
+
+let booted=false;
+function boot(){
+  if(booted)return; booted=true;
+  sparkles();
+  rebuildOrder();
+  const h=parseInt(location.hash.replace('#',''));
+  const startPos=(!isNaN(h)&&order.includes(h))?order.indexOf(h):0;
+  show(startPos);
+  fit(); flashChrome();
+  setTimeout(()=>{const el=document.getElementById('hint');if(el)el.style.opacity='0';setTimeout(()=>el&&el.remove(),600);},4200);
+}
+
+/* auto-unlock if already authed this session (runs last, after all vars/fns are defined) */
+if(sessionStorage.getItem('slDeckAuth')==='1'){unlock();}
+</script>
+</body>
+</html>
