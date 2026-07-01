@@ -668,7 +668,7 @@ gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('s
    DATA
    ============================================================ */
 const MARK='<svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>';
-function chrome(dark){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+'<span class="s-conf">Strictly Confidential</span>';}
+function chrome(dark,noConf){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+(noConf?'':'<span class="s-conf">Strictly Confidential</span>');}
 
 const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
 const TEAM=[
@@ -678,7 +678,7 @@ const TEAM=[
 ];
 const VECTORS=[
  {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['David Bell','Wharton Prof & Unicorn Advisor','🇺🇸']]},
- {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','Serial entrepreneur','🇺🇸']]},
+ {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','Serial entrepreneur / advisor','🇺🇸']]},
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway costar with Tom Hanks, Glenn Close','🇺🇸'],['Servaes Tholen','CFO, Headway & Thumbtack','🇳🇱'],['Shuo Wang','Serial entrepreneur, Deel founder','🇨🇳']]}
 ];
 const TRACK=[
@@ -730,7 +730,7 @@ function teamCardsHTML(){
   return TEAM.map(t=>`<div class="tm">${avatar(t)}<div class="nm">${t.nm} ${t.fl}</div>${t.na?`<div class="na">${t.na}</div>`:''}<div class="rl">${t.rl}</div><div class="pe">${t.pe}</div></div>`).join('');
 }
 function vectorsHTML(){
-  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.p?`<div class="ph">${v.p}</div>`:'<div class="ph">&nbsp;</div>'}${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
+  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
 }
 function trackRowsHTML(){
   return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td class="mult">${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
@@ -994,9 +994,9 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:8px">A KPI-driven team built for full market coverage, and, like the founders we back, forged across continents.</div>
     <div class="team-row" style="margin:20px 0 20px">${teamCardsHTML()}</div>
     <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">An advisory bench that rivals far larger funds, matched to every stage</div>
-    <div class="vectors">${vectorsHTML()}</div>
+    <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
     <div style="font-family:var(--serif);font-size:15.5px;color:var(--mid-lake);text-align:center;margin-top:14px">Multicultural by design: fluent in the markets and cultures our founders build across.</div>
-  </div>${chrome(false)}`});
+  </div>${chrome(false,true)}`});
 
 /* 9 — WHERE WE INVEST */
 add({title:'Where We Invest',track:'core',teaser:true,dark:false,cls:'',html:`
