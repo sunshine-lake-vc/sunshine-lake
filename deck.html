@@ -613,12 +613,14 @@ table.tbl.tall td.co{font-size:20px;}
       <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
     </svg>
     <h1>Sunshine Lake</h1>
-    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter the access password to continue.</p>
+    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter your email and the access password to continue.</p>
     <form id="gateForm" autocomplete="off">
-      <label for="gp">Password</label>
-      <input id="gp" type="password" required autofocus>
+      <label for="gm">Your email</label>
+      <input id="gm" type="email" required autofocus placeholder="you@firm.com" autocomplete="email">
+      <label for="gp" style="margin-top:16px">Password</label>
+      <input id="gp" type="password" required>
       <button type="submit">Enter</button>
-      <div class="gate-err" id="ge">Incorrect password.</div>
+      <div class="gate-err" id="ge">Please check your email and password.</div>
     </form>
   </div>
 </div>
@@ -650,6 +652,7 @@ table.tbl.tall td.co{font-size:20px;}
 
 <div id="progress"></div>
 <div id="hint">Use ← → to navigate · press F for fullscreen</div>
+<div id="wm" style="position:fixed;inset:0;pointer-events:none;z-index:60;background-repeat:repeat;display:none"></div>
 
 <script>
 /* ============================================================
@@ -659,10 +662,35 @@ table.tbl.tall td.co{font-size:20px;}
    …then replace DECK_HASH below.
    ============================================================ */
 const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
+/* ============================================================
+   VIEWER TRACKING
+   Set LOG_ENDPOINT to a URL that accepts a JSON POST to record
+   who opens the deck (e.g. a Formspree form endpoint like
+   'https://formspree.io/f/xxxxxxx', or a Google Apps Script
+   web-app URL). Leave '' to skip logging — the email watermark
+   still applies. Best-effort; never blocks the viewer.
+   ============================================================ */
+const LOG_ENDPOINT='';
 async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
-const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),ge=document.getElementById('ge');
-function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');boot();}
-gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');if(await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');unlock();}else{ge.classList.add('show');gpw.value='';gpw.focus();}});
+const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),gm=document.getElementById('gm'),ge=document.getElementById('ge');
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+function applyWatermark(email){
+  if(!email)return;
+  const svg="<svg xmlns='http://www.w3.org/2000/svg' width='440' height='300'>"
+    +"<text x='30' y='150' transform='rotate(-30 220 150)' fill='rgba(120,128,158,0.13)' "
+    +"font-family='Segoe UI, Helvetica, Arial, sans-serif' font-size='17' font-weight='600'>"
+    +email.replace(/[<>&]/g,'')+"</text></svg>";
+  const wm=document.getElementById('wm');
+  wm.style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent(svg)+"\")";
+  wm.style.display='block';
+}
+function logView(email){
+  if(!LOG_ENDPOINT)return;
+  try{fetch(LOG_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,deck:'Sunshine Lake Fund I',ts:new Date().toISOString(),ua:navigator.userAgent,ref:document.referrer||''})}).catch(function(){});}catch(e){}
+}
+function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');applyWatermark(sessionStorage.getItem('slDeckEmail'));boot();}
+gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');const email=(gm.value||'').trim();if(validEmail(email)&&await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');sessionStorage.setItem('slDeckEmail',email);logView(email);unlock();}else{ge.classList.add('show');gpw.value='';if(!validEmail(email)){gm.focus();}else{gpw.focus();}}});
 
 /* ============================================================
    DATA
