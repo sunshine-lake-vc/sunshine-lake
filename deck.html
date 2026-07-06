@@ -710,7 +710,7 @@ const VECTORS=[
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · Tom Hanks','🇺🇸'],['Servaes Tholen','CFO, Headway & Thumbtack','🇳🇱'],['Shuo Wang','Serial entrepreneur, Deel founder','🇨🇳']]}
 ];
 const TRACK=[
- ['Assured','Technological','$0.6','$7.0mm','8.6%','$42.0','$5.0','505x','$303.0','157%','Kleiner Perkins'],
+ ['Assured','Technological','$0.6','$7.0mm','8.6%','$42.0','$1.0','101x','$60.0','116%','Kleiner Perkins'],
  ['Deel','Economic','$1.0','$16.7mm','6.0%','$980.0','$17.3','356x','$354.9','168%','a16z'],
  ['Headway','Social','$0.9','$7.6mm','11.9%','$325.0','$2.2','115x','$102.5','124%','Accel'],
  ['Kalshi','Economic','$0.5','$10.1mm','4.9%','$2,406.0','$22.0','831x','$414.8','158%','Sequoia']
@@ -719,7 +719,7 @@ const CASES=[
  {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',shift:'Technological Shift · AI',pill:'First &amp; Largest Check at Seed',story:'Justin and Theo rebuilt global auto-insurance claims.',
   founders:'Justin &amp; Theo',
   steps:[['SCOUT','A fellow founder we backed, DoNotPay\'s, sent them to us pre-seed.'],['SELECT','We backed two globally competitive Stanford serial builders — Theo, an international grand-prize coder — on a $30B+ worldwide claims market.'],['SECURE','We led the syndicate and protected the cap table.'],['SUPPORT','We opened customer pipelines and ecosystem support.']],
-  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Position Today','$303mm · 505×','hot'],['Current FMV','~$5B'],['Ownership','8.6%']],
+  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Position Today','$60mm · 101×','hot'],['Current FMV','~$1B'],['Ownership','8.6%']],
   insight:'Founders with lived experience carry the grit to endure multi-year sales cycles.',teaser:false},
  {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',shift:'Economic Shift · Global Work',pill:'First &amp; Largest Check at Seed',story:'Shuo and Alex rebuilt how the world hires after MIT visa walls blocked them.',
   founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',
@@ -776,9 +776,9 @@ function uniScale(){
   const items=[
     {n:'Airbnb',v:80,s:'operated · $80B',x:A,t:'op'},
     {n:'Handy',v:55,s:'advised',x:C,t:'op'},
-    {n:'Kalshi',v:22,s:'$22B · 831×',x:A,t:'uni'},
+    {n:'Kalshi',v:22,s:'$22B · 831×',x:A,t:'uni',badge:'Seeking $40B · 2× in 2 months'},
     {n:'Deel',v:17.3,s:'$17.3B · 356×',x:C,t:'uni'},
-    {n:'Assured',v:5.5,s:'$5B · 505×',x:B,t:'uni'},
+    {n:'Assured',v:1,s:'$1B · 101×',x:590,t:'uni'},
     {n:'Checkr',v:4.3,s:'$5B · angel',x:A,t:''},
     {n:'Brex / Capital One',v:5,s:'sold · $5B',x:D,t:''},
     {n:'Headway',v:2.3,s:'$2.3B · 115×',x:B,t:'uni'},
@@ -802,7 +802,11 @@ function uniScale(){
     s+=`<line x1="${axisX}" y1="${y}" x2="${c.x-12}" y2="${y}" stroke="#dbe3f3" stroke-width="1.5" stroke-dasharray="2 4"/>`;
     s+=`<circle cx="${c.x}" cy="${y}" r="${c.t==='op'?6:7}" fill="${dot}"/>`;
     s+=`<text x="${c.x+15}" y="${y-4}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" font-weight="${wt}" fill="${nameFill}">${c.n}</text>`;
-    s+=`<text x="${c.x+15}" y="${y+21}" font-size="18" font-weight="700" fill="${subFill}">${c.s}</text>`;});
+    s+=`<text x="${c.x+15}" y="${y+21}" font-size="18" font-weight="700" fill="${subFill}">${c.s}</text>`;
+    if(c.badge){const bw=286,bh=38,bx=c.x+168,by=y-19;
+      s+=`<path d="M${bx} ${y} L${bx+14} ${y-9} L${bx+14} ${y+9} Z" fill="#F2D831"/>`;
+      s+=`<rect x="${bx+12}" y="${by}" width="${bw}" height="${bh}" rx="19" fill="#F2D831"/>`;
+      s+=`<text x="${bx+12+bw/2}" y="${by+25}" text-anchor="middle" font-size="17" font-weight="700" fill="#0B1275">${c.badge}</text>`;}});
   s+=`</svg>`;
   return s;
 }
@@ -920,7 +924,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
         <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:10px;line-height:1.34">A global dealmaker, operator and top-1% seed investor.</div>
         <div class="eyebrow" style="margin:20px 0 0">Verified Institutional Seed Track Record</div>
         <div style="display:flex;gap:44px;margin:14px 0 66px">
-          ${[['$60mm','across 2 GFC funds'],['21×','gross TVPI'],['60%','DPI'],['Top 1%','Cambridge'],['4','unicorns']].map((s,i)=>`<div style="${i===4?'position:relative':''}"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--ink)">${s[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px">${s[1]}</div>${i===4?`<div style="position:absolute;top:100%;left:0;margin-top:16px;display:flex;gap:22px;align-items:center;white-space:nowrap">${[['deel',22],['kalshi',22],['headway',27],['assured',27]].map(([k,h])=>`<img src="images/cases/${k}-logo.webp?v=2" alt="" style="height:${h}px;width:auto;max-width:126px;object-fit:contain;filter:grayscale(1);opacity:.68">`).join('')}</div>`:''}</div>`).join('')}
+          ${[['$60mm','across 2 GFC funds'],['21×','gross TVPI'],['60%','DPI'],['Top 1%','Cambridge'],['4','unicorns']].map((s,i)=>`<div style="${i===4?'position:relative':''}"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--ink)">${s[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px">${s[1]}</div>${i===4?`<div style="position:absolute;top:100%;left:0;margin-top:16px;display:flex;gap:22px;align-items:center;white-space:nowrap">${[['deel',22],['kalshi',22],['headway',27],['assured',27]].map(([k,h])=>`<img src="images/cases/${k}-mono.webp?v=1" alt="" style="height:${h}px;width:auto;max-width:126px;object-fit:contain">`).join('')}</div>`:''}</div>`).join('')}
         </div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
@@ -932,14 +936,14 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       ${[
         ['Schooled abroad','Interdisciplinary and multilingual'],
         ['UChicago','Economics, with honors · taught by Nobel laureates'],
-        ['Credit Suisse &amp; Jefferies','Credit Suisse M&amp;A · Jefferies growth equity<br>Google multibillion-dollar buy-side transactions'],
+        ['Credit Suisse M&amp;A · Jefferies growth equity','Google multibillion-dollar buy-side transactions'],
         ['CityDeal','Founded, then sold to Groupon ($200mm+)'],
         ['Airbnb','Very early operator · built EU &amp; APAC'],
         ['Global Founders Capital','Led North America · $250mm+ multistage'],
         ['Sunshine Lake',`${MARK.replace('<svg ','<svg style="height:22px;width:auto;fill:var(--cobalt);display:block;margin-top:4px" ')}`]
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div>`).join('')}
     </div>
-    <div style="margin-top:auto;padding-top:20px;padding-bottom:8px;font-family:var(--serif);font-style:italic;font-size:18.5px;color:var(--cobalt);line-height:1.36;max-width:1120px">Phenomenal seed track record backing history-making international founders — $250mm+ of multistage and growth experience ensures he backs only the best.</div>
+    <div style="margin-top:auto;padding-top:20px;padding-bottom:8px;font-family:var(--serif);font-style:italic;font-size:17.5px;color:var(--cobalt);line-height:1.36;max-width:none;white-space:nowrap">Phenomenal seed track record backing history-making international founders — $250mm of multistage and growth experience.</div>
   </div>${chrome(false)}`});
 
 /* 3 — TRACK RECORD LADDER (before Sunshine Lake) */
@@ -947,16 +951,16 @@ add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:
   <div class="s-pad">
     <div class="eyebrow">Track Record · Before Sunshine Lake</div>
     <h1 class="s-title">Founded, advised, and invested.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Global founders, global ambition: first checks at seed, then <b style="color:var(--cobalt);font-weight:600">$5B+</b> follows on (a16z · Sequoia · Accel · Kleiner Perkins · Coatue).</div>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Global founders, global ambition: first checks at seed, then <b style="color:var(--cobalt);font-weight:600">$5B+</b> in follow-ons from the most storied Silicon Valley VC funds.</div>
     <div style="flex:1;min-height:0;margin-top:4px;display:flex">${uniScale()}</div>
-    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC &amp; LA to Europe, LATAM &amp; APAC — Don built this KPI-driven, full-coverage sourcing machine at GFC, and is rebuilding it at Sunshine Lake.</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">Don built a global, KPI-driven sourcing engine at GFC — from SF to APAC — and is bringing it to Sunshine Lake.</div>
     <div style="text-align:center;margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.5"><b style="color:var(--cobalt);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;font-weight:700">Thought leadership</b> &nbsp; Quoted across press · Jason Calacanis' podcast · keynotes at Slush (Helsinki) &amp; IVS (Tokyo).</div>
-    <div class="note" style="margin-top:8px">$60mm → 21× gross · top 1% (Cambridge) · × = MOIC on first check · *Kalshi at ~$22B; a ~$40B raise reportedly underway.</div>
+    <div class="note" style="margin-top:8px">$60mm → 21× gross · top 1% (Cambridge) · × = MOIC on first check.</div>
   </div>${chrome(false)}`});
 
 add({title:'Track Record — Table',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <h1 class="s-title">A unicorn for every $15mm deployed.</h1>
+    <h1 class="s-title">A unicorn for every $15mm deployed &amp; meaningful DPI.</h1>
     <hr class="s-rule">
     <div class="tr-callout" style="margin:18px 0 0">
       <div class="trc-funds">
