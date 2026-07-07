@@ -932,12 +932,12 @@ function caseSlide(c){
        <div style="align-self:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);text-align:center">${c.origin}</div>
        <div style="text-align:right"><div>${logo}</div>${c.alert?`<div class="cs-alert">↑ ${c.alert}</div>`:''}</div>
      </div>
-     <div style="display:flex;align-items:center;gap:20px;margin:18px 0 4px">
+     <div style="display:flex;align-items:center;gap:20px;margin:${c.alert?'18px':'34px'} 0 4px">
        <div style="width:120px;height:120px;flex:0 0 120px;border-radius:14px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
        <div class="cs-story" style="margin:0">${c.headline}</div>
      </div>
      <div class="cs-grid" style="align-items:stretch;gap:40px">
-       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:30px;padding:6px 0">
+       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:32px;padding:6px 0">
          ${rows.map(r=>`<div style="display:flex;gap:20px;align-items:baseline"><div style="flex:0 0 78px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:16.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div></div>`).join('')}
        </div>
        <div style="flex:0 0 214px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
