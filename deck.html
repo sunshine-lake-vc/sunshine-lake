@@ -997,45 +997,27 @@ add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls
     <div class="note" style="margin-top:12px">Gross, before fees &amp; expenses. × = MOIC on first check. *Kalshi: inbound at ~$40B (FT, June 2026) — ~1,500× on our first check at that mark. Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
   </div>${chrome(false)}`});
 
-/* 4 — OUR THESIS */
-add({title:'Our Thesis',track:'core',teaser:true,dark:true,cls:'statement',html:`
-  <div class="s-pad">
+/* 4 — OUR THESIS (three truths) */
+add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:38px">
     <div class="eyebrow">Our Thesis</div>
-    <div class="sline">We back international founders with global ambition, at their <span class="forged">breakout moments.</span></div>
-    <div class="sline sub" style="margin-top:20px;max-width:none">We invest in the world's best founders wherever they're from — their read on economic, social &amp; technological shifts fuels multiple blockbuster companies a decade.</div>
-    <div style="font-family:var(--serif);font-size:21px;color:#fff;margin-top:18px;line-height:1.35;max-width:none">Most funds bet on one sector; because we invest behind shifts, we back several multi-billion-dollar companies a decade — with a prepared mind.</div>
-    <div style="display:flex;gap:18px;margin-top:32px;width:100%">
+    <h1 class="s-title" style="font-size:40px">We back international founders at their breakout moments.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.45;max-width:1090px">Three truths about people who cross the world to build, each proven by the record. <b style="color:var(--cobalt);font-weight:600">"International" is a mindset, not a passport</b>: founders who have lived and built across borders, whatever their flag.</div>
+    <div style="margin-top:20px;display:flex;flex-direction:column;flex:1">
       ${[
-        ['Economic','Tariffs · sovereignty · re-globalized supply chains','<path d="M3 18h18"/><path d="M6 18V9M11 18V5M16 18v-6M21 18V7"/>'],
-        ['Social','Aging · mental health · the reskilling of work','<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8M21 20a5 5 0 0 0-4-4.9"/>'],
-        ['Technological','AI collapses expert work · physical intelligence','<rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M10 3.5v3M14 3.5v3M10 17.5v3M14 17.5v3M3.5 10h3M3.5 14h3M17.5 10h3M17.5 14h3"/>']
-      ].map(c=>`<div style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:18px 20px"><div style="display:flex;align-items:center;gap:11px"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--sun)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${c[2]}</svg><div style="font-family:var(--serif);font-size:24px;color:var(--sun)">${c[0]}</div></div><div style="font-size:14px;color:rgba(255,255,255,.78);margin-top:10px;line-height:1.4">${c[1]}</div></div>`).join('')}
+        ['They live the change first.','Distance is information: outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
+        ['They build revenue, not toys.','No safety net exists for them, so revenue is a survival instinct, not a strategy.','$1.4B+','Deel\'s revenue today; it charged from year one','Two companies sent cash back before any IPO: DoNotPay paid dividends; Pry returned 7.1× our money.'],
+        ['They create new markets.','They don\'t enter categories; they imagine them: event contracts, global payroll, insured access.','$1T+','the global end markets we underwrite from day one','Our first checks are marked up 831× (Kalshi), 115× (Headway) and 101× (Assured).']
+      ].map((r,i)=>`<div style="display:flex;align-items:center;gap:30px;padding:14px 0;${i<2?'border-bottom:1px solid var(--line)':''};flex:1">
+        <div style="flex:1.25"><div style="font-family:var(--serif);font-size:23px;color:var(--ink);line-height:1.15">${r[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45">${r[1]}</div></div>
+        <div style="flex:0 0 196px;text-align:center"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--cobalt)">${r[2]}</div><div style="font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.35">${r[3]}</div></div>
+        <div style="flex:1.15;border-left:3px solid var(--sun);padding-left:18px"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8902a">Proof</div><div style="font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.45">${r[4]}</div></div>
+      </div>`).join('')}
     </div>
-  </div>${chrome(true)}`});
-
-/* 5 — THE OPPORTUNITY AHEAD ($15.7T) */
-
-
-/* 6 — WHO WE BACK */
-add({title:'Who We Back',track:'core',teaser:true,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">Who We Back</div>
-    <h1 class="s-title">The overlooked founders who outperform.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Talent is universal; the network and capital are not. We find these founders first and back the ones forged by constraint.</div>
-    <hr class="s-rule">
-    <div style="display:flex;gap:30px;margin-top:22px;flex:1;align-items:stretch">
-      <div style="flex:0 0 210px;display:flex;flex-direction:column;justify-content:center;gap:28px">
-        <div><div style="font-family:var(--serif);font-size:62px;line-height:1;color:var(--cobalt)">59%</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4">of U.S. unicorns have an immigrant founder (NFAP, 2026)</div></div>
-        <div><div style="font-family:var(--serif);font-size:62px;line-height:1;color:var(--cobalt)">39%</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4">more likely to outperform: top-quartile diverse teams (McKinsey)</div></div>
-      </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:14px;justify-content:center">
-        ${[['The world-class operator','Forged in the world\'s most rigorous schools and companies, with discipline rooted in their communities and global fluency, they build products the world adopts.'],['The all-in founder','Walking away from a comfortable safety net takes uncommon conviction. It selects for builders with extraordinary grit.'],['The groupthink breaker','Outsiders arbitrage ideas between Silicon Valley and the rest of the world. Unburdened by the Valley\'s echo chamber, they spot what insiders miss.']].map(a=>`<div style="background:#f6f8fd;border-left:3px solid var(--cobalt);border-radius:0 10px 10px 0;padding:15px 20px"><div style="font-family:var(--serif);font-size:22px;color:var(--ink)">${a[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:5px;line-height:1.42">${a[1]}</div></div>`).join('')}
-      </div>
-    </div>
-    <div style="margin-top:14px;padding-bottom:12px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)">Global founders chase <b style="font-weight:400;color:var(--cobalt)">$1T+ global TAMs</b>, not regional niches.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:14px">Three themes, one psychology: multiple unicorns and decacorns a decade. A sector fund is lucky to back one.</div>
   </div>${chrome(false)}`});
 
-/* 7 — WHY GLOBAL FOUNDERS WIN ($5.0T) */
+/* (Who We Back merged into Our Thesis; Opportunity/Why-Global redistributed to Why Now + The Evidence) */
 
 
 /* 8 — TEAM + ADVISORS */
