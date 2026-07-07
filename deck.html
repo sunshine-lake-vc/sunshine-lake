@@ -1039,19 +1039,17 @@ add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls
     <div class="eyebrow">The Record · Funds I &amp; II</div>
     <h1 class="s-title">$60mm deployed. Four unicorns. One per $15mm.</h1>
     <hr class="s-rule">
-    <div class="tr-callout" style="margin:18px 0 0">
-      <div class="trc-funds">
-        <div><div class="trc-amt">$23mm Fund I · 2017–19</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
-        <div class="trc-div"></div>
-        <div><div class="trc-amt">$37mm Fund II · 2019–22</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
-      </div>
-      <div class="trc-quality"><span><b>6%</b> avg first-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
+    <div style="display:flex;gap:64px;margin:20px 0 4px">
+      ${[['Fund I* · 2017–19','$23mm · 23× TVPI · 100% DPI'],['Fund II* · 2019–22','$37mm · 20× TVPI · 30% DPI']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:23px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
     </div>
-    <table class="tbl tall" style="margin-top:18px">
+    <table class="tbl tall" style="margin-top:16px">
       <thead><tr><th>Company</th><th>Theme</th><th>1st Check</th><th>Entry</th><th>FMV Today</th><th>Multiple</th><th>Gross IRR</th><th>Own.</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
-    <div class="note" style="margin-top:12px">Gross, before fees &amp; expenses. × = MOIC on first check. *Kalshi: inbound at ~$40B (FT, June 2026), roughly 1,500× on our first check at that mark. Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
+    <div style="display:flex;justify-content:center;gap:56px;margin-top:18px;font-size:15.5px">
+      ${[['6%','avg first-check ownership'],['43%','seed-to-A graduation'],['10%','loss ratio']].map(q=>`<span><b style="color:var(--cobalt);font-weight:700">${q[0]}</b> <span style="color:var(--ink-2)">${q[1]}</span></span>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px;text-align:center">Gross, before fees &amp; expenses. × = MOIC on first check. *Kalshi: inbound at ~$40B (FT, June 2026), roughly 1,500× on our first check at that mark. Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
   </div>${chrome(false)}`});
 
 
