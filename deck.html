@@ -710,10 +710,10 @@ const VECTORS=[
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · Tom Hanks','🇺🇸'],['Servaes Tholen','CFO, Headway & Thumbtack','🇳🇱'],['Shuo Wang','Serial entrepreneur, Deel founder','🇨🇳']]}
 ];
 const TRACK=[
- ['Assured','Technological','$0.6','$7.0mm','8.6%','$42.0','$1.0','101x','$60.0','116%','Kleiner Perkins'],
- ['Deel','Economic','$1.0','$16.7mm','6.0%','$980.0','$17.3','356x','$354.9','168%','a16z'],
- ['Headway','Social','$0.9','$7.6mm','11.9%','$325.0','$2.2','115x','$102.5','124%','Accel'],
- ['Kalshi','Economic','$0.5','$10.1mm','4.9%','$2,406.0','$22.0','831x','$414.8','158%','Sequoia']
+ ['Kalshi','Economic · reg. markets','$0.5mm','$10.1mm','~$22B','831×','158%','5.0%'],
+ ['Assured','Technological · AI','$0.6mm','$7.0mm','~$1B','101×','~101%','8.6%'],
+ ['Deel','Economic · global work','$1.0mm','$16.7mm','$17.3B','356×','168%','6.0%'],
+ ['Headway','Social · mental health','$0.9mm','$7.6mm','$2.3B','115×','124%','11.9%']
 ];
 const CASES=[
  {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',shift:'Technological Shift · AI',pill:'First &amp; Largest Check at Seed',story:'Justin and Theo rebuilt global auto-insurance claims.',
@@ -761,7 +761,7 @@ function vectorsHTML(){
   return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
 }
 function trackRowsHTML(){
-  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td class="mult">${r[7]}</td><td class="pos">${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td></tr>`).join('');
+  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td class="mult">${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td></tr>`).join('');
 }
 function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
 
@@ -776,7 +776,7 @@ function uniScale(){
   const items=[
     {n:'Airbnb',v:80,s:'operated · $80B',x:A,t:'op'},
     {n:'Handy',v:55,s:'advised',x:C,t:'op'},
-    {n:'Kalshi',v:22,s:'$22B · 831×',x:A,t:'uni',badge:'Seeking $40B · 2× in 2 months'},
+    {n:'Kalshi',v:22,s:'$22B · 831×',x:A,t:'uni',badge:'Inbound at ~$40B · 2× in 2 months'},
     {n:'Deel',v:17.3,s:'$17.3B · 356×',x:C,t:'uni'},
     {n:'Assured',v:1,s:'$1B · 101×',x:590,t:'uni'},
     {n:'Checkr',v:4.3,s:'$5B · angel',x:A,t:''},
@@ -914,6 +914,30 @@ add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
   </div>
   <span class="s-conf">Strictly Confidential</span>`});
 
+/* NEW — DON STALTER · THE RECORD (stat wall) */
+add({title:'The Record — Top 1% Twice',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Don Stalter · The Record</div>
+    <h1 class="s-title">Top 1% of seed. Twice.</h1>
+    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1040px;line-height:1.4">A $60mm seed record: every mark is a seed first check Don sourced and led, benchmarked by Cambridge Associates.</div>
+    <hr class="s-rule">
+    <div style="display:flex;flex-wrap:wrap;gap:26px 44px;margin-top:28px">
+      ${[
+        ['21×','gross TVPI across $60mm, two funds'],
+        ['100%','DPI on Fund I: returned, not marked'],
+        ['61%','blended gross IRR'],
+        ['99th','percentile (Cambridge Associates), both funds'],
+        ['$15mm','deployed per unicorn: four from first checks, two now decacorns'],
+        ['831×','best first check (Kalshi); ~1,500× at the ~$40B inbound']
+      ].map(s=>`<div style="flex:0 0 calc(33.333% - 30px);min-width:240px"><div style="font-family:var(--serif);font-size:56px;line-height:1;color:var(--ink)">${s[0]}</div><div style="font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4">${s[1]}</div></div>`).join('')}
+    </div>
+    <div style="margin-top:auto;padding-top:16px;display:flex;align-items:center;gap:30px">
+      <div style="display:flex;gap:26px;align-items:center">${[['deel',20],['kalshi',20],['headway',24],['assured',24]].map(([k,h])=>`<img src="images/cases/${k}-mono.webp?v=1" alt="" style="height:${h}px;width:auto;max-width:112px;object-fit:contain">`).join('')}</div>
+      <div style="font-size:13px;color:var(--mid-lake);font-style:italic;font-family:var(--serif);flex:1;line-height:1.35">Every number verified: audited financials, a full portfolio schedule and CFO references, in the data room.</div>
+    </div>
+    <div class="note" style="margin-top:10px">Gross, unaudited, as of July 2026, before fees &amp; expenses. Sources: AngelList, PitchBook, Cambridge Associates. Funds I &amp; II: Don's dedicated North America portfolio within Global Founders Capital. Kalshi inbound at ~$40B (FT, June 2026); ~1,500× is illustrative at that mark, before dilution. Position held at ~$22B.</div>
+  </div>${chrome(false)}`});
+
 /* 2 — GP: DON STALTER + THE ARC */
 add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:46px">
@@ -921,60 +945,59 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       <div style="flex:1">
         <div class="eyebrow">Founder &amp; General Partner</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:10px;line-height:1.34">A global dealmaker, operator and top-1% seed investor.</div>
-        <div class="eyebrow" style="margin:20px 0 0">Verified Institutional Seed Track Record</div>
-        <div style="display:flex;gap:44px;margin:14px 0 66px">
-          ${[['$60mm','across 2 GFC funds'],['21×','gross TVPI'],['60%','DPI'],['Top 1%','Cambridge'],['4','unicorns']].map((s,i)=>`<div style="${i===4?'position:relative':''}"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--ink)">${s[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:6px">${s[1]}</div>${i===4?`<div style="position:absolute;top:100%;left:0;margin-top:16px;display:flex;gap:22px;align-items:center;white-space:nowrap">${[['deel',22],['kalshi',22],['headway',27],['assured',27]].map(([k,h])=>`<img src="images/cases/${k}-mono.webp?v=1" alt="" style="height:${h}px;width:auto;max-width:126px;object-fit:contain">`).join('')}</div>`:''}</div>`).join('')}
-        </div>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:10px;line-height:1.36">Founded CityDeal (sold to Groupon); Head of International BD at Airbnb, 2011; $60mm at seed across two funds, top 1% twice.</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px">Referenced by Nate Blecharczyk, Airbnb co-founder.</div>
+        <div style="margin-top:16px;font-size:14.5px;color:var(--ink-2);line-height:1.5;max-width:640px"><b style="color:var(--cobalt);font-weight:600">The breakouts:</b> Deel &amp; Kalshi (decacorns) · Headway &amp; Assured (unicorns). All from first checks he sourced and led.</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
         <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
       </div>
     </div>
-    <div class="eyebrow" style="margin:26px 0 16px">The Arc</div>
+    <div class="eyebrow" style="margin:64px 0 18px">The Arc</div>
     <div class="arc">
       ${[
         ['Schooled abroad','Interdisciplinary and multilingual'],
-        ['UChicago','Economics, with honors · taught by Nobel laureates'],
-        ['Credit Suisse M&amp;A · Jefferies growth equity','Google multibillion-dollar buy-side transactions'],
-        ['CityDeal','Founded, then sold to Groupon ($200mm+)'],
-        ['Airbnb','Very early operator · built EU &amp; APAC'],
-        ['Global Founders Capital','Led North America · $250mm+ multistage'],
+        ['UChicago','Economics, with honors'],
+        ['Credit Suisse &amp; Jefferies','CS M&amp;A (San Francisco) · Jefferies growth spinout fund (London)'],
+        ['CityDeal','Sold to Groupon · built its international offices'],
+        ['Airbnb','2011 · intl BD &amp; growth · long-term stays, now ~20% of revenue'],
+        ['Global Founders Capital','Led North America · his $60mm seed record'],
         ['Sunshine Lake',`${MARK.replace('<svg ','<svg style="height:22px;width:auto;fill:var(--cobalt);display:block;margin-top:4px" ')}`]
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div>`).join('')}
     </div>
-    <div style="margin-top:auto;padding-top:20px;padding-bottom:8px;font-family:var(--serif);font-style:italic;font-size:17.5px;color:var(--cobalt);line-height:1.36;max-width:none;white-space:nowrap">Phenomenal seed track record backing history-making international founders — $250mm of multistage and growth experience.</div>
+    <div style="margin-top:auto;padding-top:22px;padding-bottom:8px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--cobalt);line-height:1.36;max-width:1120px">Forged through 2008 and 2022, he underwrites monthly burn, never froth, and saves conviction for the double-down.</div>
   </div>${chrome(false)}`});
 
 /* 3 — TRACK RECORD LADDER (before Sunshine Lake) */
 add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Track Record · Before Sunshine Lake</div>
-    <h1 class="s-title">Founded, advised, and invested.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Global founders, global ambition: first checks at seed, then <b style="color:var(--cobalt);font-weight:600">$5B+</b> in follow-ons from the most storied Silicon Valley VC funds.</div>
+    <div class="eyebrow">The Record · Before Sunshine Lake</div>
+    <h1 class="s-title">Founded, operated, and invested.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Global founders, global ambition: first checks at seed, then <b style="color:var(--cobalt);font-weight:600">$5B+</b> of follow-on demand behind them.</div>
     <div style="flex:1;min-height:0;margin-top:4px;display:flex">${uniScale()}</div>
-    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">Don built a global, KPI-driven sourcing engine at GFC — from SF to APAC — and is bringing it to Sunshine Lake.</div>
-    <div style="text-align:center;margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.5"><b style="color:var(--cobalt);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;font-weight:700">Thought leadership</b> &nbsp; Quoted across press · Jason Calacanis' podcast · keynotes at Slush (Helsinki) &amp; IVS (Tokyo).</div>
-    <div class="note" style="margin-top:8px">$60mm → 21× gross · top 1% (Cambridge) · × = MOIC on first check.</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC and LA to Europe, LATAM and APAC, a KPI-driven, full-coverage sourcing machine, rebuilt at Sunshine Lake.</div>
+    <div style="text-align:center;margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.5"><b style="color:var(--cobalt);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;font-weight:700">Follow-on demand across the portfolio</b> &nbsp; a16z · Sequoia · Accel · Kleiner Perkins · Coatue</div>
+    <div class="note" style="margin-top:8px">$60mm → 21× gross · top 1% (Cambridge) · × = MOIC on first check · *Kalshi at ~$22B; inbound at ~$40B.</div>
   </div>${chrome(false)}`});
 
-add({title:'Track Record — Table',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <h1 class="s-title">A unicorn for every $15mm deployed &amp; meaningful DPI.</h1>
+    <div class="eyebrow">The Record · Funds I &amp; II</div>
+    <h1 class="s-title">$60mm deployed. Four unicorns. One per $15mm.</h1>
     <hr class="s-rule">
     <div class="tr-callout" style="margin:18px 0 0">
       <div class="trc-funds">
-        <div><div class="trc-amt">$23mm Fund I</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
+        <div><div class="trc-amt">$23mm Fund I · 2017–19</div><div class="trc-nums"><span class="trc-n">23×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">100%</span><span class="trc-u">DPI</span></div></div>
         <div class="trc-div"></div>
-        <div><div class="trc-amt">$37mm Fund II</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
+        <div><div class="trc-amt">$37mm Fund II · 2019–22</div><div class="trc-nums"><span class="trc-n">20×</span><span class="trc-u">TVPI</span><span class="trc-dot">·</span><span class="trc-n">30%</span><span class="trc-u">DPI</span></div></div>
       </div>
-      <div class="trc-quality"><span><b>6%</b> avg 1st-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
+      <div class="trc-quality"><span><b>6%</b> avg first-check ownership</span><span><b>43%</b> seed-to-A graduation</span><span><b>10%</b> loss ratio</span></div>
     </div>
     <table class="tbl tall" style="margin-top:18px">
-      <thead><tr><th>Company</th><th>Shift</th><th>Initial Check</th><th>Entry Price</th><th>O/S %</th><th>Follow-Ons</th><th>FMV ($Bn)</th><th>Multiple</th><th>Gain ($mm)</th><th>IRR</th><th>Follow-On Lead</th></tr></thead>
+      <thead><tr><th>Company</th><th>Theme</th><th>1st Check</th><th>Entry</th><th>FMV Today</th><th>Multiple</th><th>Gross IRR</th><th>Own.</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
-    <div class="note" style="margin-top:12px">Gross basis, before fees &amp; expenses. Kalshi shown at ~$22B; a ~$40B round is reportedly in process (per media).</div>
+    <div class="note" style="margin-top:12px">Gross, before fees &amp; expenses. × = MOIC on first check. *Kalshi: inbound at ~$40B (FT, June 2026) — ~1,500× on our first check at that mark. Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
   </div>${chrome(false)}`});
 
 /* 4 — OUR THESIS */
