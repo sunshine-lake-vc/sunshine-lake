@@ -705,9 +705,9 @@ const TEAM=[
  {nm:'Wieger Lamers',fl:'🇳🇱',na:'Dutch',rl:'EMEA & Platforms Lead',pe:'Adyen · ESCP (Paris)',img:'images/team/wieger.webp'}
 ];
 const VECTORS=[
- {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['David Bell','Wharton Prof & Unicorn Advisor','🇺🇸']]},
- {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','Serial entrepreneur / advisor','🇺🇸']]},
- {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · Tom Hanks','🇺🇸'],['Servaes Tholen','CFO, Headway & Thumbtack','🇳🇱'],['Shuo Wang','Serial entrepreneur, Deel founder','🇨🇳']]}
+ {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['Prof. Bell','Wharton unicorn advisor','🇺🇸']]},
+ {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','serial growth operator','🇺🇸']]},
+ {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · storytelling coach','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel co-founder','🇨🇳']]}
 ];
 const TRACK=[
  ['Kalshi','Economic · reg. markets','$0.5mm','$10.1mm','~$22B','831×','158%','5.0%'],
@@ -1046,9 +1046,9 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
   <div class="s-pad" style="padding:38px 72px 46px">
     <div class="eyebrow">Sunshine Lake Team</div>
     <h1 class="s-title" style="font-size:42px">International and multicultural, by design.</h1>
-    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:8px">A KPI-driven team built for full market coverage. Like the founders we back, we're forged across continents.</div>
+    <div class="s-sub" style="font-size:18px;color:var(--mid-lake);margin-top:8px">A Silicon Valley firm with native reach into every region our founders come from.</div>
     <div class="team-row" style="margin:16px 0 14px">${teamCardsHTML()}</div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">An advisory bench that rivals far larger funds, matched to every stage</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">The bench — operators who made the same journey, matched to every stage</div>
     <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
   </div>${chrome(false,true)}`});
 
@@ -1131,24 +1131,21 @@ add({title:'The Engine',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 /* 11 — FUND OVERVIEW */
-add({title:'Fund Overview',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Fund Overview</div>
-    <div class="terms">
-      <div style="flex:0 0 300px"><div class="big-num">$50<span style="font-size:46px">mm</span></div><div class="big-lbl">Target Fund Size</div><div style="font-family:var(--serif);font-size:22px;color:var(--mid-lake);margin-top:24px;line-height:1.2">Small by design.</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:8px;line-height:1.5">Minimum-viable 5% ownership across 30 breakout companies, sized so a single unicorn can return the fund many times over.</div></div>
-      <div class="rows">
-        <div class="tr"><span class="k">Number of Deals</span><span class="v">30 core</span></div>
-        <div class="tr"><span class="k">Stage</span><span class="v">Pre-seed &amp; seed</span></div>
-        <div class="tr"><span class="k">Check Size</span><span class="v">$1mm initial</span></div>
-        <div class="tr"><span class="k">Status</span><span class="v">First close complete · actively deploying · selectively adding LPs</span></div>
-        <div class="tr"><span class="k">Ownership Target</span><span class="v">5% for core positions</span></div>
-        <div class="tr"><span class="k">Fund Construction</span><span class="v">75% core · 25% non-core</span></div>
-        <div class="tr"><span class="k">Reserves</span><span class="v">20% — 10% dedicated · 10% discretionary follow-on</span></div>
-        <div class="tr"><span class="k">Structure</span><span class="v">2.5% mgmt (steps down to 1.5%) · 20% carry · 5% GP commit</span></div>
-        <div class="tr"><span class="k">Term</span><span class="v">10-year fund (+2-year extension)</span></div>
-      </div>
+    <div class="eyebrow">Fund I · $50mm</div>
+    <h1 class="s-title" style="font-size:42px">Concentrated by design. Strictly seed.</h1>
+    <div class="s-sub" style="font-size:17px;color:var(--mid-lake);margin-top:8px">The arithmetic: $1mm first checks, 5% ownership, 30 companies. One breakout returns the fund.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:28px;margin-top:26px;flex:1">
+      ${[
+        ['Construction',[['30 core','pre-seed &amp; seed only'],['$1mm first checks','5% target ownership'],['75% core','incl. dedicated &amp; discretionary reserves'],['25% non-core','cannonballs, network, discovery &amp; power-law checks']]],
+        ['Economics',[['2.5% mgmt','stepping to 1.5%'],['20% carry',''],['5% GP commit',''],['10-year term','(+2)']]],
+        ['Status',[['First close complete',''],['Actively deploying',''],['Selectively adding LPs','']]]
+      ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:14px">Terms are preliminary and subject to change. Not an offer to sell or a solicitation of an offer to buy any security.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">No style drift: the fund never follows on past seed. Co-investments carry that upside instead.</div>
+    <div class="note" style="margin-top:12px">Preliminary and subject to change. Not an offer to sell, or a solicitation of an offer to buy, any security.</div>
   </div>${chrome(false)}`});
 
 /* 12 — PORTFOLIO CONSTRUCTION */
