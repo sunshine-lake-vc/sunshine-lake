@@ -240,6 +240,10 @@ body{
 .fw-ellipse{animation:fw-flow 2.6s linear infinite;}
 @keyframes fw-flow{to{stroke-dashoffset:-140;}}
 @media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
+/* appendix flywheel — arrow ring orbiting the Speakeasy hub */
+.fwr-svg{position:absolute;left:50%;top:50%;width:242px;height:242px;transform:translate(-50%,-50%);transform-origin:50% 50%;animation:fwr-spin 26s linear infinite;z-index:1;pointer-events:none;}
+@keyframes fwr-spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+@media (prefers-reduced-motion:reduce){.fwr-svg{animation:none;}}
 
 /* ===== aperture rubric (Option 1) ===== */
 .ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;align-items:flex-start;}
@@ -971,13 +975,13 @@ add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Chips, search, space, social, AI: the giants of every era, built by international founders.</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:22px;flex:1">
       ${[
-        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.0T'],
-        ['Taiwan → US · 1993','Jensen Huang','Founder &amp; CEO, Nvidia','~$4.7T'],
-        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.3T'],
-        ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T'],
-        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.7T'],
-        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI','~$1T*']
-      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);background:#f6f8fd;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:24px;color:var(--ink);margin-top:8px">${f[1]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:2px">${f[2]}</div><div style="font-family:var(--serif);font-size:34px;color:var(--cobalt);margin-top:auto;padding-top:10px">${f[3]}</div></div>`).join('')}
+        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.0T','chang','MC'],
+        ['Taiwan → US · 1993','Jensen Huang','Founder &amp; CEO, Nvidia','~$4.7T','huang','JH'],
+        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.3T','brin','SB'],
+        ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T','musk','EM'],
+        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.7T','saverin','ES'],
+        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI','~$1T*','sutskever','IS']
+      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;display:flex;flex-direction:column"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 72px;align-self:center;position:relative;width:72px;height:72px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:23px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
     </div>
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:20px">
       <div style="font-family:var(--serif);font-size:19px;color:var(--ink)">Six outsiders. Four decades. Every platform shift, lived first and built first. <b style="color:var(--cobalt)">$17T+.</b></div>
@@ -1418,6 +1422,46 @@ add({title:'The Evidence',track:'appendix',teaser:false,dark:false,cls:'',html:`
     <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The market still prices this evidence at zero. We price it first, at the first check.</div>
   </div>${chrome(false)}`});
 
+/* NEW — THE CAPITAL STACK (early-stage focus) */
+add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Early-Stage Focus · Pre-Seed &amp; Seed</div>
+    <h1 class="s-title">Seed is where the multiples are made.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">We enter at the first check and own the highest-multiple rung of the stack. Later capital pays up for de-risking.</div>
+    <div style="display:flex;gap:12px;flex:1;margin-top:18px">
+      <div style="flex:0 0 92px;display:flex;align-items:stretch;gap:6px">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5–7yr return potential</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:30px 0 50px;text-align:right;font-family:var(--serif)">
+          <div style="font-size:22px;color:var(--cobalt)">50×</div><div style="font-size:19px;color:var(--ink)">10×</div><div style="font-size:16px;color:var(--muted)">5×</div><div style="font-size:15px;color:var(--muted)">2×</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px">
+          ${[['Pre-Seed',1,3,'#155EE8'],['Seed',4,6,'#2657e8'],['Venture',7,9,'#5a6685'],['Growth',10,12,'#9aa1b6']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:#fff;text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
+        </div>
+        <div style="position:relative;flex:1;margin-top:10px">
+          <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);pointer-events:none"><div style="grid-column:1/7;background:rgba(242,216,49,.16);border:1px solid rgba(242,216,49,.55);border-radius:10px"></div></div>
+          <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-evenly;padding:8px 0">
+            ${[
+              ['Friends &amp; family',1,3,false],
+              ['Accelerators',2,4,false],
+              ['Angels',3,5,false],
+              ['Sunshine Lake — first checks',1,6,true],
+              ['Early &amp; late-stage venture',6,9,false],
+              ['Late-stage growth',9,11,false],
+              ['Public equity markets',10,12,false]
+            ].map(v=>`<div style="display:grid;grid-template-columns:repeat(12,1fr)"><div style="grid-column:${v[1]}/${v[2]+1};height:${v[3]?'30px':'24px'};background:${v[3]?'#F2D831':'#eef1f7'};border:1px solid ${v[3]?'#e0c53a':'var(--line)'};border-radius:999px;display:flex;align-items:center;padding:0 14px;font-size:12.5px;font-weight:${v[3]?'700':'600'};color:${v[3]?'var(--ink)':'var(--ink-2)'};white-space:nowrap;overflow:hidden">${v[0]}</div></div>`).join('')}
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:8px;border-top:1px solid var(--line);padding-top:8px">
+          ${['$50k','$100k','$250k','$500k','$1M','$2M','$5M','$10M','$20M','$50M','$100M','$200M'].map(l=>`<div style="text-align:center;font-size:10.5px;color:var(--muted)">${l}</div>`).join('')}
+        </div>
+        <div style="text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px">Average raise</div>
+      </div>
+    </div>
+    <div style="font-family:var(--serif);font-size:16.5px;color:var(--mid-lake);text-align:center;margin-top:14px">One 5% first check into a breakout returns the fund. Every later round pays up for the certainty we underwrite first.</div>
+  </div>${chrome(false)}`});
+
 
 /* (The Opportunity Ahead $15.7T and Why Global Founders Win $5.0T removed; redistributed to Why Now + The Evidence.) */
 
@@ -1528,15 +1572,21 @@ add({title:'The Flywheel',track:'appendix',teaser:false,dark:false,cls:'',html:`
     <h1 class="s-title">One system. Every turn compounds.</h1>
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Founders arrive from everywhere; returns flow to LPs everywhere. The Speakeasy sits at the hub.</div>
     <div style="position:relative;flex:1;margin-top:20px;display:flex;align-items:center;justify-content:center">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 236px;width:100%">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 250px;width:100%">
         ${[
-          ['1 · Find','↗','From MIT to ETH to IIT: scouts and alumni send founders before they incorporate.','5,000+ scouted a year','#155EE8'],
-          ['2 · Forge','↘','We write the first check, then run the 7-week sprint. Company and bond built together.','30 companies · 5% owned','#BE922A'],
-          ['4 · Return','↖','LPs on five continents co-invest; secondaries pay early DPI; wins pull in the next wave.','100% DPI on Fund I','#7a5cd6'],
-          ['3 · Break out','↙','They scale into trillion-dollar global end markets, and the sprint earns us the next-round seat.','4 unicorns · 2 decacorns','#2f9d6f']
-        ].map(c=>`<div style="background:#f6f8fd;border-left:3px solid ${c[4]};border-radius:0 12px 12px 0;padding:16px 20px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${c[4]}">${c[0]}</div><div style="font-size:18px;color:${c[4]}">${c[1]}</div></div><div style="font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.42">${c[2]}</div><div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:8px">${c[3]}</div></div>`).join('')}
+          ['1 · Find','From MIT to ETH to IIT: scouts and alumni send founders before they incorporate.','5,000+ scouted a year','#155EE8'],
+          ['2 · Forge','We write the first check, then run the 7-week sprint. Company and bond built together.','30 companies · 5% owned','#BE922A'],
+          ['4 · Return','LPs on five continents co-invest; secondaries pay early DPI; wins pull in the next wave.','100% DPI on Fund I','#7a5cd6'],
+          ['3 · Break out','They scale into trillion-dollar global end markets, and the sprint earns us the next-round seat.','4 unicorns · 2 decacorns','#2f9d6f']
+        ].map(c=>`<div style="background:#f6f8fd;border-left:3px solid ${c[3]};border-radius:0 12px 12px 0;padding:16px 20px"><div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${c[3]}">${c[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.42">${c[1]}</div><div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:8px">${c[2]}</div></div>`).join('')}
       </div>
-      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:152px;height:152px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 10px 30px rgba(11,18,117,.28)">
+      <svg class="fwr-svg" viewBox="0 0 240 240" fill="none" stroke="#aab6d6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g id="fwarc"><path d="M62.64 38.08 A100 100 0 0 1 166.95 31.71"/><path d="M156.65 31.9 L166.95 31.71 L161.35 23.1"/></g>
+        <use href="#fwarc" transform="rotate(90 120 120)"/>
+        <use href="#fwarc" transform="rotate(180 120 120)"/>
+        <use href="#fwarc" transform="rotate(270 120 120)"/>
+      </svg>
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:152px;height:152px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 10px 30px rgba(11,18,117,.28);z-index:3">
         <div style="font-family:var(--serif);font-size:19px;line-height:1.1">The<br>Speakeasy</div><div style="font-size:11px;color:var(--sun);margin-top:6px;letter-spacing:.08em">SAN FRANCISCO</div>
       </div>
     </div>
