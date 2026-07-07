@@ -1035,17 +1035,20 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
 add({title:'Where We Invest',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Where We Invest</div>
-    <h1 class="s-title">We back founders rebuilding critical global systems.</h1>
-    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1000px;line-height:1.4">We back the few ahead-of-the-curve openings in each global shift, led by international founders.</div>
+    <h1 class="s-title">Three lenses. A new opening every few years.</h1>
+    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1040px;line-height:1.4">We watch the world through economic, social and technological lenses, and back each opening the moment it appears.</div>
     <hr class="s-rule">
-    <div style="display:flex;gap:24px;margin-top:24px;flex:1">
+    <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
-        ['Economic Shift','Re-globalized supply chains','e',[['Cedar','Rail'],['MightyFly','Aviation'],['Navier','Maritime']]],
-        ['Social Shift','Aging, health &amp; mental health','s',[['Centaur Labs','Health'],['Headway','Mental health'],['Yuzu Health','Benefits']]],
-        ['Technological Shift','AI collapses expert work','t',[['DraftWise','Legal'],['Overview','Manufacturing'],['PermitFlow','Construction']]]
-      ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div class="ap-infl" style="font-size:23px">${c[1]}</div><div style="margin-top:26px;display:flex;flex-direction:column;gap:22px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:24px;color:var(--ink)">${co[0]}</div><div style="font-size:13.5px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
+        ['Economic','Tariffs and re-shoring re-route $33T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
+        ['Social','By 2050, 2B people will be over 60, and untreated mental illness costs $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
+        ['Technological','AI collapses $4.4T a year of expert work: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
+      ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="margin-top:22px;display:flex;flex-direction:column;gap:20px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-style:italic;font-size:15px;color:var(--mid-lake);text-align:center;margin-top:18px">International founders, backed by Don, chasing shifts that add trillions to global GDP this decade (PwC · McKinsey).</div>
+    <div style="margin-top:18px;background:#f6f8fd;border-radius:12px;padding:14px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <span style="font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt)">Openings we caught, and what's next</span>
+      <span style="font-size:13.5px;color:var(--ink-2)">Mental-health access <b>Headway</b> · Regulated markets <b>Kalshi</b> · Global work <b>Deel</b> · Re-shored logistics <b>Cedar · Navier</b> · Expert-work AI <b>DraftWise · PermitFlow</b> · <span style="color:#b8902a;font-weight:700">Next: Energy transition</span></span>
+    </div>
   </div>${chrome(false)}`});
 
 /* 10 — HOW WE BUILD (the engine) */
@@ -1206,21 +1209,7 @@ add({title:'Earning the Right to Scale',track:'core',teaser:false,dark:false,cls
 add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
   <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
 
-add({title:'The Opportunity Ahead',track:'appendix',teaser:false,dark:true,cls:'statement',html:`
-  <div class="s-pad">
-    <div class="eyebrow">The Opportunity Ahead</div>
-    <div style="font-family:var(--serif);font-size:168px;line-height:.9;color:#fff;letter-spacing:-.02em">$15.7T</div>
-    <div class="sline sub" style="margin-top:24px;max-width:960px">AI's projected addition to global GDP by 2030 — the technological shift that compounds the economic and social ones we invest behind. Evolutionary, and only beginning.</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:22px">Source: PwC, "Sizing the Prize."</div>
-  </div>${chrome(true)}`});
-
-add({title:'Why Global Founders Win',track:'appendix',teaser:false,dark:true,cls:'statement',html:`
-  <div class="s-pad">
-    <div class="eyebrow">Why Global Founders Win</div>
-    <div style="font-family:var(--serif);font-size:168px;line-height:.9;color:#fff;letter-spacing:-.02em">$5.0T</div>
-    <div class="sline sub" style="margin-top:24px;max-width:940px">The combined value of immigrant-founded U.S. unicorns, up <span style="color:var(--sun)">2,876%</span> since 2016. Immigrants are only one slice: we back global citizens of every permutation, a far larger pool.</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:22px">Source: National Foundation for American Policy, June 2026.</div>
-  </div>${chrome(true)}`});
+/* (The Opportunity Ahead $15.7T and Why Global Founders Win $5.0T removed; redistributed to Why Now + The Evidence.) */
 
 /* CASE STUDIES (data-driven) */
 CASES.forEach(c=>add(caseSlide(c)));
