@@ -325,13 +325,16 @@ body{
 .gp-track .cos{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:flex-start;}
 .gp-track .cos .sub{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:2px;}
 /* GP "the arc" timeline */
-.arc{display:flex;gap:10px;position:relative;}
-.arc::before{content:"";position:absolute;left:7px;right:7px;top:6px;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 88%,var(--sun));}
-.arc-node{flex:1;position:relative;padding-top:20px;}
-.arc-dot{position:absolute;top:0;left:0;width:13px;height:13px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
+.arc{display:flex;gap:10px;position:relative;min-height:206px;align-items:center;}
+.arc::before{content:"";position:absolute;left:7px;right:7px;top:50%;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 88%,var(--sun));}
+.arc-node{flex:1;position:relative;height:100%;}
+.arc-dot{position:absolute;top:50%;left:0;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
 .arc-node:last-child .arc-dot{background:var(--sun);box-shadow:0 0 0 2px var(--sun);}
-.arc-t{font-family:var(--serif);font-size:16px;color:var(--ink);line-height:1.12;}
-.arc-d{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.35;}
+.arc-c{position:absolute;left:0;right:8px;}
+.arc-node:nth-child(odd) .arc-c{bottom:calc(50% + 15px);}
+.arc-node:nth-child(even) .arc-c{top:calc(50% + 15px);}
+.arc-t{font-family:var(--serif);font-size:15px;color:var(--ink);line-height:1.14;}
+.arc-d{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.32;}
 
 /* unicorn valuation ladder */
 .uni-wrap{display:flex;gap:30px;flex:1;align-items:stretch;margin-top:8px;min-height:0;}
@@ -705,7 +708,7 @@ const TEAM=[
  {nm:'Wieger Lamers',fl:'🇳🇱',na:'Dutch',rl:'EMEA & Platforms Lead',pe:'Adyen · ESCP (Paris)',img:'images/team/wieger.webp'}
 ];
 const VECTORS=[
- {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['Prof. Bell','Wharton unicorn advisor','🇺🇸']]},
+ {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['Prof. Bell','Wharton unicorn advisor','🇳🇿']]},
  {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','serial growth operator','🇺🇸']]},
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · storytelling coach','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel co-founder','🇨🇳']]}
 ];
@@ -921,21 +924,24 @@ function caseSlide(c){
   return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
    <div class="cs-body" style="padding-top:26px">
      <div class="cs-top">
-       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       <div style="display:flex;align-items:center;gap:15px">
+         <div style="width:66px;height:66px;flex:0 0 66px;border-radius:12px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
+         <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       </div>
        <div style="align-self:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);text-align:center">${c.origin}</div>
        <div style="text-align:right"><div>${logo}</div>${c.alert?`<div class="cs-alert">↑ ${c.alert}</div>`:''}</div>
      </div>
-     <div class="cs-story">${c.headline}</div>
-     <div class="cs-grid" style="align-items:center">
-       <div style="flex:1.35;display:flex;flex-direction:column;gap:13px">
-         ${rows.map(r=>`<div><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:2px;line-height:1.42">${r[1]}</div></div>`).join('')}
+     <div class="cs-story" style="margin:16px 0 2px">${c.headline}</div>
+     <div style="font-size:13px;color:var(--muted);margin-bottom:10px">${c.founders}</div>
+     <div class="cs-grid" style="align-items:center;gap:44px">
+       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px">
+         ${rows.map(r=>`<div style="display:flex;gap:18px;align-items:baseline"><div style="flex:0 0 72px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:15px;color:var(--ink-2);line-height:1.4">${r[1]}</div></div>`).join('')}
        </div>
-       <div class="cs-photo-col" style="flex:0 0 240px;background-image:url('images/cases/${c.key}.webp')"><div class="cs-fn">${c.founders}</div></div>
-       <div style="flex:0 0 214px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
+       <div style="flex:0 0 210px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
          ${rail.map(m=>`<div class="cs-metric ${m[2]==='hot'?'hot':''}"><div class="ml">${m[0]}</div><div class="mv" style="font-size:${m[2]==='em'?'21px':'22px'};${m[2]==='em'?'color:var(--cobalt)':''}">${m[1]}</div></div>`).join('')}
        </div>
      </div>
-     ${c.footnote?`<div class="note" style="margin-top:4px;font-size:11px">${c.footnote}</div>`:''}
+     ${c.footnote?`<div class="note" style="margin-top:6px;font-size:11px">${c.footnote}</div>`:''}
    </div>
    <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
    ${chrome(false)}`};
@@ -1010,15 +1016,14 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       <div style="flex:1">
         <div class="eyebrow">Founder &amp; General Partner</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:10px;line-height:1.44">Founded CityDeal (sold to Groupon) · Head of International BD at Airbnb, 2011<br>$60mm at seed across two funds, top 1% twice.</div>
-        <div style="font-size:13px;color:var(--muted);margin-top:8px">Referenced by Nate Blecharczyk, Airbnb co-founder.</div>
-        <div style="margin-top:18px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap">The breakouts: <b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Founded CityDeal (sold to Groupon) · Head of International BD at Airbnb, 2011<br>$60mm at seed across two funds, top 1% twice.</div>
+        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap">The breakouts: <b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
         <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
       </div>
     </div>
-    <div class="eyebrow" style="margin:64px 0 18px">The Arc</div>
+    <div class="eyebrow" style="margin:40px 0 6px">The Arc</div>
     <div class="arc">
       ${[
         ['Schooled abroad','Interdisciplinary and multilingual'],
@@ -1027,17 +1032,17 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
         ['CityDeal','Sold to Groupon · built its international offices'],
         ['Airbnb','2011 · intl BD &amp; growth · long-term stays, now ~20% of revenue'],
         ['Global Founders Capital','Led North America · his $60mm seed record'],
-        ['Sunshine Lake',`${MARK.replace('<svg ','<svg style="height:22px;width:auto;fill:var(--cobalt);display:block;margin-top:4px" ')}`]
-      ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div>`).join('')}
+        ['Sunshine Lake','His independent spinout']
+      ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
     </div>
-    <div style="margin-top:auto;padding-top:22px;padding-bottom:8px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--cobalt);line-height:1.36;max-width:1120px">Forged through 2008 and 2022, he underwrites monthly burn — never froth — and saves conviction for the double-down.</div>
+    <div style="margin-top:auto;padding-top:22px;padding-bottom:44px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--cobalt);line-height:1.36;text-align:center">Forged through 2008 and 2022, he underwrites monthly burn — never froth — and saves conviction for the double-down.</div>
   </div>${chrome(false)}`});
 
 
 add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Record · Funds I &amp; II</div>
-    <h1 class="s-title">$60mm deployed. Four unicorns. One per $15mm.</h1>
+    <h1 class="s-title">A unicorn for every $15mm deployed &amp; meaningful DPI.</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
       ${[['Fund I* · 2017–19','$23mm · 23× TVPI · 100% DPI'],['Fund II* · 2019–22','$37mm · 20× TVPI · 30% DPI']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:23px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
