@@ -1170,35 +1170,36 @@ add({title:'Asset Positioning',track:'core',teaser:false,dark:false,cls:'',html:
 add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Our LPs</div>
-    <h1 class="s-title">Backed by the people who build, fund &amp; acquire.</h1>
+    <h1 class="s-title">Backed by the people who build, fund and acquire.</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">A global LP base across MENA, Europe, APAC, LATAM and the US.</div>
     <div style="display:flex;gap:34px;margin-top:26px">
       ${[
-        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis founder (M&A) → Coinbase · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','Siggi\'s founder (M&A) · groundbreaking CPG'],['Thiago da Costa','Lagoa founder (M&A) → Autodesk · LATAM']]],
+        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis, sold to Coinbase · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','siggi\'s (CPG), sold · Europe'],['Thiago da Costa','Lagoa founder (M&A) → Autodesk · LATAM']]],
         ['Leading VCs',[['Anish Acharya','a16z · US'],['Arthur Patterson','Accel Partners founder · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
         ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds · US'],['Cambridge Associates','US'],['JIMCO','Jameel family office · MENA'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]],
         ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading · US'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder'],['Nic Ingram','EQT · Hong Kong'],['Rohan Kodialam','Citadel · US'],['Shawn O\'Neill','Silver Lake · US']]]
       ].map(col=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:18px;color:var(--cobalt);margin-bottom:18px;min-height:2.4em">${col[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${col[1].map(p=>`<div><div style="font-size:15px;font-weight:600;color:var(--ink)">${p[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:3px">${p[1]}</div></div>`).join('')}</div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:auto;padding-bottom:22px">Partial list. Investments directly from individual GPs and founders of select institutional funds.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:auto;padding-top:14px">Our LPs help us win: the people who fund, scale and acquire the next trillion-dollar outsiders.</div>
+    <div class="note" style="margin-top:10px;padding-bottom:14px">Investments made personally by individual GPs and founders of select institutional funds.</div>
   </div>${chrome(false)}`});
 
 /* 15 — EARNING THE RIGHT TO SCALE */
-add({title:'Earning the Right to Scale',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Earning the Right to Scale</div>
+    <div class="eyebrow">The Franchise</div>
     <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
-    <div class="s-sub" style="font-size:18px">$60mm deployed, top-1% returns — the proof behind a deliberate scale-up.</div>
-    <div style="display:flex;margin-top:18px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
+    <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund 0A</div><div class="sz"><b>$23mm</b></div><div class="sz">23× TVPI · 100% DPI</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund 0B</div><div class="sz"><b>$37mm</b></div><div class="sz">20× TVPI · 30% DPI</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm</b></div><div class="sz">23× TVPI · 100% DPI</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm</b></div><div class="sz">20× TVPI · 30% DPI</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
     </div>
-    <div style="font-family:var(--serif);font-size:21px;color:var(--mid-lake);text-align:center;margin-top:28px">Each fund earns the next: proven returns, disciplined construction, and a magnet for global founders.</div>
-  </div>${GROSSNOTE}${chrome(false)}`});
+    <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);text-align:center;margin-top:26px">Sunshine Lake is a Fund I on paper, and a Fund III in evidence. Priced like the former, de-risked like the latter.</div>
+    <div class="note" style="margin-top:12px;text-align:center">Gross, before fees and expenses. *Funds I &amp; II: Don's dedicated North America portfolio within Global Founders Capital; Sunshine Lake is the independent spinout.</div>
+  </div>${chrome(false)}`});
 
 /* 16 — SUNSHINE LAKE I PORTFOLIO — removed per request (Jun 2026) */
 
