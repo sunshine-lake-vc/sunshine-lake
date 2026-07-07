@@ -716,36 +716,73 @@ const TRACK=[
  ['Headway','Social · mental health','$0.9mm','$7.6mm','$2.3B','115×','124%','11.9%']
 ];
 const CASES=[
- {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',shift:'Technological Shift · AI',pill:'First &amp; Largest Check at Seed',story:'Justin and Theo rebuilt global auto-insurance claims.',
-  founders:'Justin &amp; Theo',
-  steps:[['SCOUT','A fellow founder we backed, DoNotPay\'s, sent them to us pre-seed.'],['SELECT','We backed two globally competitive Stanford serial builders — Theo, an international grand-prize coder — on a $30B+ worldwide claims market.'],['SECURE','We led the syndicate and protected the cap table.'],['SUPPORT','We opened customer pipelines and ecosystem support.']],
-  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Position Today','$60mm · 101×','hot'],['Current FMV','~$1B'],['Ownership','8.6%']],
-  insight:'Founders with lived experience carry the grit to endure multi-year sales cycles.',teaser:false},
- {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',shift:'Economic Shift · Global Work',pill:'First &amp; Largest Check at Seed',story:'Shuo and Alex rebuilt how the world hires after MIT visa walls blocked them.',
-  founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',
-  steps:[['SCOUT','A UChicago founder in our YC network flagged them pre-launch.'],['SELECT','We backed Shuo (China → MIT) and Alex (France → MIT) on the $525B global-payroll wedge.'],['SECURE','We introduced 5 hires &amp; 12 partners; broadcast them to Daniel Gross and Elad Gil.'],['SUPPORT','We recruited COO Dan Westgarth and drove the Legalpad acquisition.']],
-  metrics:[['Date','Dec 2019'],['Invested','$1mm'],['Realized + Liquid','$356mm · 356×','hot'],['Post-Money','$17.3B · IPO ahead'],['Ownership','6.0%']],
-  insight:'Global work is here to stay. Deel now hires and pays workers in 150+ countries.',teaser:true},
- {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',shift:'Technological Shift · Automation',pill:'Dividends',story:'Joshua Browder crossed from London to automate fees, fines and red tape.',
-  founders:'Joshua Browder 🇬🇧',
-  steps:[['SCOUT','Our global founder network surfaced Joshua early.'],['SELECT','Backed a British founder (London → US) on a viral, consumer-rights product with real traction.'],['SECURE','We shaped the early viral content and demand-gen launch.'],['SUPPORT','We built the brand and narrative and backed Joshua across multiple rounds.']],
-  metrics:[['Date','Feb 2019'],['Invested','$830K'],['Realized · DPI','$95K · 11% DPI','hot'],['Post-Money','$230mm'],['Ownership','3.5%']],
-  insight:'Dividends from a profitable business: early DoNotPay returned cash to the fund, real DPI.',teaser:false},
- {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',shift:'Social Shift · Global Mental Health',pill:'First &amp; Largest Check at Seed',story:'Andrew and Jake fixed a $1T problem: no therapist would take insurance.',
-  founders:'Andrew &amp; Jake',
-  steps:[['SCOUT','NYC angels who passed on the founders still sent Andrew our way.'],['SELECT','Backed globally-minded founders, with an international leadership bench (Dutch CFO &amp; CTO), on a $240B market.'],['SECURE','We built a syndicate including One Medical founder Tom Lee, and brought in HelloFresh\'s CMO to scale demand generation.'],['SUPPORT','We introduced 10+ hires and an international leadership bench.']],
-  metrics:[['Date','Sep 2018'],['Invested','$900K'],['Position Today','$103mm · 115×','hot'],['Post-Money','$2.3B'],['Ownership','11.9%']],
-  insight:'Mental illness costs ~$1T a year. Headway built the access model the world will copy.',teaser:false},
- {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',shift:'Economic Shift · Regulated Markets',pill:'First &amp; Largest Check at Seed',alert:'~$40B raise in process',story:'Tarek and Luana built the first regulated prediction market.',
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',teaser:true,alert:'~$40B raise inbound',
+  theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco',
+  headline:'Tarek and Luana built the first regulated prediction market.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',
-  steps:[['SCOUT','Top MIT engineers connected us; we leaned in despite regulation.'],['SELECT','We backed Jane Street alumni Tarek (Lebanon) &amp; Luana (Brazil) on a global-first $136B exchange.'],['SECURE','We leaned on shared EU &amp; Lebanese roots to build early trust.'],['SUPPORT','We hosted the team in-office and shared regulatory research.']],
-  metrics:[['1st / 2nd Check','Apr 2019 · Feb 2020'],['Invested','$1mm'],['Position Today','$1.1B · 831×','hot'],['Current FMV','~$22B'],['Ownership','5.0%']],
-  insight:'International founders spot regulatory gaps and build the infrastructure the world depends on.',teaser:false},
- {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',shift:'Technological Shift · AI Productivity',pill:'Exited · Acquired by Brex',story:'Andy Su replaced clunky spreadsheets with real-time FP&amp;A founders use.',
+  lived:'Tarek grew up in Lebanon; Luana trained at Brazil\'s Bolshoi. They met in MIT\'s international crowd.',
+  sourced:'Top MIT engineers connected us, and we leaned in despite the regulatory overhang.',
+  backed:'Two global citizens on a global-first $136B exchange. Risk wasn\'t abstract to them; it was home.',
+  built:'We shared regulatory research through the CFTC fight. Kalshi sued and won, legalizing its own category.',
+  endMarket:'$600T+ risk transfer',
+  metrics:[['First Check','Apr 2019'],['Invested','$1.0mm'],['Position Today','$1.1B · 831×','hot'],['Current FMV','~$22B*'],['Ownership','5.0%']],
+  footnote:'*Seeking ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
+  insight:'Kalshi created a federally regulated asset class. Incumbents now pay nine figures just to enter it.'},
+ {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',
+  theme:'Technological Theme · AI',origin:'Silicon Valley → a worldwide market',
+  headline:'Justin and Theo rebuilt global auto-insurance claims.',
+  founders:'Justin &amp; Theo',
+  lived:'Global citizens sizing for the world: claims are broken everywhere, not just in the US.',
+  sourced:'A founder we backed, DoNotPay\'s, sent them to us pre-seed.',
+  backed:'Two Stanford serial builders, Theo an international grand-prize coder, on a $30B+ worldwide market.',
+  built:'We led the syndicate, protected the cap table, and opened customer pipelines and ecosystem support.',
+  endMarket:'$7T insurance premiums',
+  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Position Today','$61mm · 101×','hot'],['Current FMV','~$1B'],['Ownership','8.6%']],
+  insight:'Assured: lived-experience grit for the multi-year cycles of a $7T-premium industry (Swiss Re).'},
+ {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',teaser:true,
+  theme:'Economic Theme · Global Work',origin:'China &amp; France → San Francisco',
+  headline:'Shuo and Alex rebuilt how the world hires.',
+  founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇫🇷',
+  lived:'Blocked by America\'s visa wall at MIT, they lived the global-work problem they now solve.',
+  sourced:'A UChicago founder in our YC network flagged them pre-launch.',
+  backed:'We backed Shuo from China and Alex from France on the $525B global-payroll wedge.',
+  built:'5 hires, 12 partners, COO Dan Westgarth recruited, and we drove the Legalpad acquisition.',
+  endMarket:'World payroll — tens of $T',
+  metrics:[['First Check','Dec 2019'],['Invested','$1.0mm'],['Realized + Liquid','$356mm · 356×','hot'],['Post-Money','$17.3B · IPO ahead'],['Ownership','6.0%']],
+  insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
+ {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',
+  theme:'Social Theme · Mental Health',origin:'New York → a global access model',
+  headline:'Andrew and Jake fixed a $1T problem: no therapist took insurance.',
+  founders:'Andrew &amp; Jake',
+  lived:'Globally-minded builders with an international bench (Dutch CFO &amp; CTO). Access is a worldwide crisis.',
+  sourced:'NYC angels who passed on the round still sent Andrew our way.',
+  backed:'Global citizens on a $240B market. The US was the beachhead, not the boundary.',
+  built:'A syndicate with One Medical\'s founder; HelloFresh\'s CMO for demand gen; 10+ introductions and hires.',
+  endMarket:'$10T global healthcare',
+  metrics:[['First Check','Sep 2018'],['Invested','$900K'],['Position Today','$103mm · 115×','hot'],['Post-Money','$2.3B'],['Ownership','11.9%']],
+  insight:'Mental illness costs ~$1T a year in lost productivity (WHO). Headway built the access model the world will copy.'},
+ {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',
+  theme:'Technological Theme · Automation',origin:'London → San Francisco',
+  headline:'Joshua crossed from London to automate fees, fines and red tape.',
+  founders:'Joshua Browder 🇬🇧',
+  lived:'A London teenager buried in parking tickets. He lived the red tape, then crossed over to automate it.',
+  sourced:'Our global founder network surfaced Joshua early.',
+  backed:'A British founder (London → US) with a viral consumer-rights product and real traction.',
+  built:'We shaped the viral launch and demand gen, built the brand, and backed Joshua across multiple rounds.',
+  endMarket:'Red tape — every country',
+  metrics:[['First Check','Feb 2019'],['Invested','$830K'],['Realized · DPI','$95K · 11% DPI','hot'],['Post-Money','$230mm'],['Ownership','3.5%']],
+  insight:'DoNotPay paid cash dividends from a profitable business, returning real DPI to the fund.'},
+ {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
+  theme:'Technological Theme · AI Productivity',origin:'China → San Francisco',
+  headline:'Andy replaced clunky spreadsheets with real-time FP&amp;A founders use.',
   founders:'Andy Su 🇨🇳',
-  steps:[['SCOUT','The Brex product-alumni network surfaced Andy.'],['SELECT','Backed an immigrant, engineering-led founder (China) with deep empathy for the pain.'],['SECURE','We aligned Pry\'s roadmap with the market.'],['SUPPORT','We guided M&amp;A strategy and coached the team to a Brex acquisition.']],
-  metrics:[['Date','Dec 2019 → Apr 2022'],['Invested','$1.5mm'],['Realized · DPI','$10.6mm · 7.1× DPI','hot'],['Exit','Acquired by Brex'],['Ownership','12.0% (at exit)']],
-  insight:'A clean exit and real DPI: startup finance is universally broken; founders need clarity.',teaser:false}
+  lived:'An immigrant engineer who lived the founder-finance pain. A universal problem, not a Valley one.',
+  sourced:'The Brex product-alumni network surfaced Andy.',
+  backed:'We backed an engineering-led founder from China with deep empathy for the pain.',
+  built:'We aligned the roadmap with the market, guided M&amp;A strategy, and coached the team to a Brex acquisition.',
+  endMarket:'Office of the CFO — global',
+  metrics:[['Checks','Dec 2019 → Apr 2022'],['Invested','$1.5mm'],['Realized · DPI','$10.6mm · 7.1× DPI','hot'],['Exit','Acquired by Brex'],['Ownership','12.0% at exit']],
+  insight:'Pry: a clean exit and real DPI. Startup finance is universally broken, and founders need clarity.'}
 ];
 
 /* ============================================================
@@ -879,21 +916,26 @@ function worldMap(){
 
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
+  const rows=[['Lived',c.lived],['Sourced',c.sourced],['Backed',c.backed],['Built',c.built]];
+  const rail=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
   return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
-   <div class="cs-body" style="padding-top:30px">
+   <div class="cs-body" style="padding-top:26px">
      <div class="cs-top">
-       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.shift}</div></div>
-       <div class="cs-pill${/dividend/i.test(c.pill)?' gold':''}">${c.pill}</div>
+       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       <div style="align-self:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);text-align:center">${c.origin}</div>
        <div style="text-align:right"><div>${logo}</div>${c.alert?`<div class="cs-alert">↑ ${c.alert}</div>`:''}</div>
      </div>
-     <div class="cs-story">${c.story}</div>
-     <div class="cs-grid">
-       <div class="cs-mid">
-         <div class="cs-steps">${c.steps.map(s=>`<div class="st"><span class="k">${s[0]}</span><span>${s[1]}</span></div>`).join('')}</div>
+     <div class="cs-story">${c.headline}</div>
+     <div class="cs-grid" style="align-items:center">
+       <div style="flex:1.35;display:flex;flex-direction:column;gap:13px">
+         ${rows.map(r=>`<div><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:2px;line-height:1.42">${r[1]}</div></div>`).join('')}
        </div>
-       <div class="cs-photo-col" style="background-image:url('images/cases/${c.key}.webp')"><div class="cs-fn">${c.founders}</div></div>
-       <div class="cs-right">${c.metrics.map(m=>`<div class="cs-metric ${m[2]||''}"><div class="ml">${m[0]}</div><div class="mv">${m[1]}</div></div>`).join('')}</div>
+       <div class="cs-photo-col" style="flex:0 0 240px;background-image:url('images/cases/${c.key}.webp')"><div class="cs-fn">${c.founders}</div></div>
+       <div style="flex:0 0 214px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
+         ${rail.map(m=>`<div class="cs-metric ${m[2]==='hot'?'hot':''}"><div class="ml">${m[0]}</div><div class="mv" style="font-size:${m[2]==='em'?'21px':'22px'};${m[2]==='em'?'color:var(--cobalt)':''}">${m[1]}</div></div>`).join('')}
+       </div>
      </div>
+     ${c.footnote?`<div class="note" style="margin-top:4px;font-size:11px">${c.footnote}</div>`:''}
    </div>
    <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
    ${chrome(false)}`};
