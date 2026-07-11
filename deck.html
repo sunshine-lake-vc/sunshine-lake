@@ -1579,65 +1579,74 @@ add({title:'Acceleration',track:'appendix',teaser:false,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 
-/* NEW — THE SPRINT DEEP-DIVES (weeks 1-2, 3-4, 5-6, 7) */
+/* NEW — THE SPRINT DEEP-DIVES (weeks 1-2, 3-4, 5-6, 7) — styled to match the top-level 7-week sprint */
 function sprintSlide(o){
+  const ac=o.colors[0], dk=o.colors[1], lt=o.colors[2];
   return {title:o.title,track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">${o.eyebrow}</div>
-    <h1 class="s-title" style="font-size:40px">${o.h}</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1100px;line-height:1.4">${o.sub}</div>
-    <hr class="s-rule">
-    <div style="display:flex;gap:40px;margin-top:28px;flex:1">
-      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:22px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:14px 0 18px"></div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
+  <div class="s-pad" style="padding-top:34px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <span style="flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,${ac},${dk});color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;box-shadow:0 6px 16px ${ac}44">${o.n}</span>
+      <div>
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">The Sprint · ${o.weeks}</div>
+        <div style="font-family:var(--serif);font-size:19px;color:var(--ink);line-height:1.05;margin-top:2px">${o.phase}</div>
+      </div>
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:16px">${o.foot}</div>
+    <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1090px;line-height:1.4">${o.sub}</div>
+    <div style="display:flex;gap:20px;margin-top:22px;flex:1;align-items:stretch">
+      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:22px 22px 24px;display:flex;flex-direction:column"><div style="width:46px;height:46px;border-radius:13px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:16px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
+    </div>
+    <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
+      <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">Deliverable</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
+      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--mid-lake)">${o.foot}</div>
+    </div>
   </div>${chrome(false)}`};
 }
 add(sprintSlide({
-  title:'The Sprint · Weeks 1–2',
-  eyebrow:'The Sprint, Weeks 1–2 · Storytelling',
+  title:'The Sprint · Weeks 1–2', n:1, weeks:'Weeks 1–2', phase:'Storytelling',
+  colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
   h:'The narrative gap is the cheapest alpha we own.',
   sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
   cols:[
-    ['The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
-    ['The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy), opposite Glenn Close at The Public, The Father with Frank Langella. NYU Tisch. He coached Wordware to its $30mm seed.'],
-    ['The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
+    ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
+    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy), opposite Glenn Close at The Public, The Father with Frank Langella. NYU Tisch. He coached Wordware to its $30mm seed.'],
+    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
   ],
   foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 3–4',
-  eyebrow:'The Sprint, Weeks 3–4 · Execution',
+  title:'The Sprint · Weeks 3–4', n:2, weeks:'Weeks 3–4', phase:'Execution',
+  colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'An operating plan &amp; financial model',
   h:'Operating momentum, installed.',
   sub:'The people who ran the machines install the machinery.',
   cols:[
-    ['Org &amp; cadence','Don and Christopher Muhr (Auto1 COO through its IPO) install the weekly operating rhythm: roles, KPIs, review cadence, the way they ran teams of hundreds.'],
-    ['The model','Ivan (CFO &amp; COO) and Servaes Tholen (CFO of Headway and Thumbtack) rebuild the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
-    ['Global hiring','Shuo Wang (Deel co-founder) maps the first ten hires across borders; Wieger opens EMEA talent, and the company runs payroll on Deel from day one.']
+    ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org &amp; cadence','Don and Christopher Muhr (Auto1 COO through its IPO) install the weekly operating rhythm: roles, KPIs, review cadence, the way they ran teams of hundreds.'],
+    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','The model','Ivan (CFO &amp; COO) and Servaes Tholen (CFO of Headway and Thumbtack) rebuild the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
+    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring','Shuo Wang (Deel co-founder) maps the first ten hires across borders; Wieger opens EMEA talent, and the company runs payroll on Deel from day one.']
   ],
   foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 5–6',
-  eyebrow:'The Sprint, Weeks 5–6 · Domain',
+  title:'The Sprint · Weeks 5–6', n:3, weeks:'Weeks 5–6', phase:'Domain',
+  colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'A live network &amp; advisor bench',
   h:'The network goes to work.',
   sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
   cols:[
-    ['Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie Feaster\'s growth playbooks, positioning tuned until it converts to pipeline.'],
-    ['Domain councils','Rotating sessions with people who built the category: Prof. Franklin (data &amp; AI), David Helgason (dev tools), Siggi Hilmarsson (consumer &amp; CPG), Thiago da Costa (engineering software), Ola Doudin (fintech).'],
-    ['Regional doors','Market entry with Ryoto Matsuzaki (Japan &amp; APAC), Wieger Lamers (EMEA), and Ola Doudin with JIMCO (MENA): the fund\'s map, opened company by company.']
+    ['<path d="M5 21h14M7 21V4h8v17M15 4l3 2v15M12 12h.01"/>','Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie Feaster\'s growth playbooks, positioning tuned until it converts to pipeline.'],
+    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','Domain councils','Rotating sessions with people who built the category: Prof. Franklin (data &amp; AI), David Helgason (dev tools), Siggi Hilmarsson (consumer &amp; CPG), Thiago da Costa (engineering software), Ola Doudin (fintech).'],
+    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','Regional doors','Market entry with Ryoto Matsuzaki (Japan &amp; APAC), Wieger Lamers (EMEA), and Ola Doudin with JIMCO (MENA): the fund\'s map, opened company by company.']
   ],
   foot:'By week 6, every company has named customers in pipeline, and an advisor bench of its own.'
 }));
 add(sprintSlide({
-  title:'The Sprint · Week 7',
-  eyebrow:'The Sprint, Week 7 · Fundraising Readiness',
+  title:'The Sprint · Week 7', n:4, weeks:'Week 7', phase:'Fundraising Readiness',
+  colors:['#0A3DAE','#06266e','#eaeff8'], deliverable:'A Series A-ready data room',
   h:'Ready to raise, long before they raise.',
   sub:'Companies don\'t fundraise in week 7. They leave ready, and the round comes when the numbers do.',
   cols:[
-    ['The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
-    ['Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
-    ['Demo night at the Speakeasy','Hovelson stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
+    ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
+    ['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/>','Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
+    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Demo night at the Speakeasy','Hovelson stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
   ],
   foot:'When the milestone hits, the round assembles itself, that\'s why 43% graduate seed-to-A.'
 }));
