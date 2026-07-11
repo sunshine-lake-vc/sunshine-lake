@@ -990,6 +990,40 @@ add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 
+/* 2 — GP: DON STALTER + THE ARC */
+add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:46px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:36px">
+      <div style="flex:1">
+        <div class="eyebrow">Founder &amp; General Partner</div>
+        <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Founded CityDeal (sold to Groupon) · International growth at Airbnb, 2011<br>$60mm at seed across two funds, top 1% twice.</div>
+        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap">His outsiders, already: <b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
+      </div>
+      <div style="flex:0 0 auto;margin-right:40px">
+        <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
+      </div>
+    </div>
+    <div class="eyebrow" style="margin:40px 0 6px">The Arc</div>
+    <div class="arc">
+      ${[
+        ['Schooled abroad','Interdisciplinary and multilingual'],
+        ['UChicago','Economics, with honors'],
+        ['Credit Suisse &amp; Jefferies','CS M&amp;A (San Francisco) · Jefferies growth spinout fund (London)'],
+        ['CityDeal','Sold to Groupon · built its international offices'],
+        ['Airbnb','2011 · international growth · long-term stays, now ~1 in 5 nights booked'],
+        ['Global Founders Capital','Led North America · his $60mm seed record'],
+        ['Sunshine Lake','His independent spinout']
+      ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
+    </div>
+    <div style="margin-top:auto;padding-top:18px;padding-bottom:30px;text-align:center">
+      <div style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--cobalt);line-height:1.42;max-width:980px;margin:0 auto">"Extremely persistent, with a very high win rate — balanced with great intellect and consistently structured, in-depth analysis."</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:.03em;text-transform:uppercase">The founder of Global Founders Capital, in his attribution letter</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);margin-top:13px">Forged through 2008 and 2022: monthly burn, never froth, conviction saved for the double-down.</div>
+    </div>
+  </div>${chrome(false)}`});
+
+
 /* NEW — DON STALTER · THE RECORD (stat wall) */
 add({title:'The Record — Top 1% Twice',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -1009,36 +1043,6 @@ add({title:'The Record — Top 1% Twice',track:'core',teaser:true,dark:false,cls
     </div>
     <div style="margin-top:auto;padding-top:20px;text-align:center;font-size:16px;color:var(--mid-lake);font-style:italic;font-family:var(--serif);line-height:1.4">What one person did with $60mm, Fund I now runs as a system.</div>
     <div class="note" style="margin-top:12px;text-align:center;max-width:1080px;margin-left:auto;margin-right:auto">Gross, unaudited, as of July 2026, before fees &amp; expenses. Sources: AngelList, PitchBook, Cambridge Associates. *Fund I &amp; II: Don's dedicated North America portfolio within Global Founders Capital. **Kalshi inbound interest at ~$40B (FT, June 2026); ~1,500× is illustrative at that mark, before dilution from any new round. Position held at ~$22B.</div>
-  </div>${chrome(false)}`});
-
-
-/* 2 — GP: DON STALTER + THE ARC */
-add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
-  <div class="s-pad" style="padding-top:46px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:36px">
-      <div style="flex:1">
-        <div class="eyebrow">Founder &amp; General Partner</div>
-        <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Founded CityDeal (sold to Groupon) · Head of International BD at Airbnb, 2011<br>$60mm at seed across two funds, top 1% twice.</div>
-        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap">The breakouts: <b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
-      </div>
-      <div style="flex:0 0 auto;margin-right:40px">
-        <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
-      </div>
-    </div>
-    <div class="eyebrow" style="margin:40px 0 6px">The Arc</div>
-    <div class="arc">
-      ${[
-        ['Schooled abroad','Interdisciplinary and multilingual'],
-        ['UChicago','Economics, with honors'],
-        ['Credit Suisse &amp; Jefferies','CS M&amp;A (San Francisco) · Jefferies growth spinout fund (London)'],
-        ['CityDeal','Sold to Groupon · built its international offices'],
-        ['Airbnb','2011 · international growth · long-term stays, now ~1 in 5 nights booked'],
-        ['Global Founders Capital','Led North America · his $60mm seed record'],
-        ['Sunshine Lake','His independent spinout']
-      ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
-    </div>
-    <div style="margin-top:auto;padding-top:22px;padding-bottom:44px;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--cobalt);line-height:1.36;text-align:center">Forged through 2008 and 2022, he underwrites monthly burn — never froth — and saves conviction for the double-down.</div>
   </div>${chrome(false)}`});
 
 
@@ -1157,17 +1161,17 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
 
 
 /* 10 — HOW WE BUILD (the engine) */
-add({title:'How We Build',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'How We Get There First',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">How We Build</div>
-    <h1 class="s-title" style="font-size:40px">5,000 scouted. 500 scored. 30 backed.</h1>
-    <div class="s-sub" style="font-size:16px;color:var(--mid-lake);margin-top:6px">A machine, not a scramble: every stage measured, scored and reviewed.</div>
+    <div class="eyebrow">How We Get There First</div>
+    <h1 class="s-title" style="font-size:40px">5,000 sourced. 500 scored. 30 backed.</h1>
+    <div class="s-sub" style="font-size:16px;color:var(--mid-lake);margin-top:6px">Every week is designed: ~25 first-touches per investor, every deal scored in pipeline review, comp paid on results.</div>
     <div class="eng-flow eng-funnel" style="margin-top:20px">
       <div class="eng-card s1" style="height:352px">
-        <div class="eng-top"><span class="eng-num">1</span><span class="eng-name">Scout</span><span class="eng-stat">5,000+</span></div>
+        <div class="eng-top"><span class="eng-num">1</span><span class="eng-name">Sourcing</span><span class="eng-stat">5,000+</span></div>
         <div class="eng-body">
           <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">The universe</div>
-          <div class="eng-row">Unicorns yield unicorns: Deel sent us FirstWork; Headway sent Marble. AirAngels (Airbnb alumni) and campus scouts flag founders pre-incorporation.</div>
+          <div class="eng-row">Every investor owns ~25 first-touches a week, tracked in the CRM. Unicorns refer (Deel sent FirstWork); AirAngels and campus programs feed the top.</div>
           <div class="eng-row ic-row"><span class="row-ic"><svg viewBox="0 0 24 24"><path d="M2 8l10-4 10 4-10 4L2 8z"/><path d="M6 10.5V15c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5"/></svg></span><div><b>Campus scouts, pre-incorporation</b><br>MIT · Stanford · Caltech · ETH · IIT · Harvard · TU Munich</div></div>
         </div>
       </div>
@@ -1176,7 +1180,7 @@ add({title:'How We Build',track:'core',teaser:true,dark:false,cls:'',html:`
         <div class="eng-top"><span class="eng-num">2</span><span class="eng-name">Select</span><span class="eng-stat">500</span></div>
         <div class="eng-body">
           <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Top 10%</div>
-          <div class="eng-def">Scored 1–5 on the five thesis axes.</div>
+          <div class="eng-def">Weekly pipeline review scores every deal 1–5 on the five thesis axes.</div>
           <div class="eng-example" style="margin-top:10px">
             <div class="checklist">
               <div class="ck"><span class="ck-box">✓</span><span class="ck-label">Story</span><span class="ck-score">4</span></div>
@@ -1191,20 +1195,39 @@ add({title:'How We Build',track:'core',teaser:true,dark:false,cls:'',html:`
       </div>
       <div class="eng-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
       <div class="eng-card s3" style="height:352px">
-        <div class="eng-top"><span class="eng-num">3</span><span class="eng-name">Secure &amp; Support</span><span class="eng-stat">30</span></div>
+        <div class="eng-top"><span class="eng-num">3</span><span class="eng-name">Support</span><span class="eng-stat">30</span></div>
         <div class="eng-body">
           <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Top 0.6%</div>
-          <div class="eng-row">Founders pick us before funds court them. A 7-week sprint leaves them Series A-ready.</div>
+          <div class="eng-row">Founders pick us before funds court them; a 7-week sprint follows.</div>
+          <div class="eng-row" style="margin-top:8px">Comp is a friendly meritocracy: base, sourcing bonuses and personal carry pools. You share in what you bring in.</div>
           <div class="eng-q" style="margin-top:6px">“With us from day zero, through every twist and turn.” — Tarek Mansour, Kalshi</div>
-          <div class="eng-q">“He believes in you more than you believe in yourself.” — Filip Kozera, Wordware</div>
         </div>
       </div>
     </div>
     <div style="margin-top:18px;background:#0B1275;border-radius:12px;padding:14px 24px;display:flex;align-items:center;gap:22px;color:#fff">
       <div style="flex:0 0 auto"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">The Sunshine Lake Speakeasy</div><div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:2px">San Francisco · virtual worldwide</div></div>
-      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.35">In-person check-ins and events; virtual programming worldwide. Where "too direct, too deadpan" founders speak easy.</div>
+      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.35">Sourcing events run here, the sprint stages here, demo night graduates here. Our founder clubhouse, where "too direct, too deadpan" founders speak easy.</div>
     </div>
     <div class="eng-net" style="font-size:18px;font-family:var(--serif);color:var(--mid-lake);margin-top:14px;text-align:center">We earn the first check, and the relationship that wins the next one.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — SOURCING · THE APERTURE */
+add({title:'The Aperture',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Sourcing · The Aperture</div>
+    <h1 class="s-title" style="font-size:38px">We know where outsiders surface. We are already there.</h1>
+    <div class="s-sub" style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1100px;line-height:1.4">Fifteen years of dense founder networks, run as five named channels, each with an owner, a weekly quota, and comp on results. None of it auctioned.</div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:12px">
+      ${[
+        ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate; the Speakeasy handles the landing.'],
+        ['First-50 Alumni','The next wave is working inside the last one. We track the first fifty employees of Deel, Kalshi, Headway and Assured, from their own cap tables, and get the first call when one steps out.'],
+        ['Campus Nations','Every top campus holds nations within it. International student societies at MIT, Stanford, ETH, IIT and Waterloo: we host their demo days; their presidents keep sourcing as alumni.'],
+        ['Home-Market Winners','The strongest signal: already won once, somewhere harder. Founders who built real revenue in constrained home markets and relocate to go global, surfaced through a founder diaspora fifteen years dense.'],
+        ['The Speakeasy Door','Inbound, engineered: the softest landing in San Francisco. O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.']
+      ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:13px 0;border-top:1px solid var(--line)"><div style="flex:0 0 214px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1;font-size:14px;color:var(--ink-2);line-height:1.5">${r[1]}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:12px">Seen first, never auctioned: <b style="color:var(--cobalt);font-weight:400">Kalshi entered at a $10mm valuation, Assured at $7mm.</b> The aperture is where the multiples come from.</div>
   </div>${chrome(false)}`});
 
 
@@ -1227,6 +1250,35 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
       <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune). Global founders already live at that frontier; we fund them as the wave crests.</div>
     </div>
     <div class="note" style="margin-top:10px">*Goldman Sachs, The State of Software (March 2026).</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — THE FLYWHEEL */
+add({title:'The Flywheel',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Flywheel</div>
+    <h1 class="s-title">One system. Every turn compounds.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Founders arrive from everywhere; returns flow to LPs everywhere. The Speakeasy sits at the hub.</div>
+    <div style="position:relative;flex:1;margin-top:20px;display:flex;align-items:center;justify-content:center">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 250px;width:100%">
+        ${[
+          ['1 · Sourcing','From MIT to ETH to IIT: referrals and campus programs send founders; they land at the Speakeasy.','5,000+ sourced a year','#155EE8'],
+          ['2 · Support','First check, then the 7-week sprint, staged at the Speakeasy; company and bond built together.','30 companies · 5% owned','#BE922A'],
+          ['4 · Return','LP salons at the Speakeasy; co-invests and secondaries pay early DPI; wins pull in the next wave.','100% DPI on Fund I','#7a5cd6'],
+          ['3 · Break out','Demo night seeds the next round; they scale into trillion-dollar global end markets.','4 unicorns · 2 decacorns','#2f9d6f']
+        ].map(c=>`<div style="background:#f6f8fd;border-left:3px solid ${c[3]};border-radius:0 12px 12px 0;padding:16px 20px"><div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${c[3]}">${c[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.42">${c[1]}</div><div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:8px">${c[2]}</div></div>`).join('')}
+      </div>
+      <svg class="fwr-svg" viewBox="0 0 240 240" fill="none" stroke="#aab6d6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g id="fwarc"><path d="M62.64 38.08 A100 100 0 0 1 166.95 31.71"/><path d="M156.65 31.9 L166.95 31.71 L161.35 23.1"/></g>
+        <use href="#fwarc" transform="rotate(90 120 120)"/>
+        <use href="#fwarc" transform="rotate(180 120 120)"/>
+        <use href="#fwarc" transform="rotate(270 120 120)"/>
+      </svg>
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:152px;height:152px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 10px 30px rgba(11,18,117,.28);z-index:3">
+        <div style="font-family:var(--serif);font-size:19px;line-height:1.1">The<br>Speakeasy</div><div style="font-size:11px;color:var(--sun);margin-top:6px;letter-spacing:.08em">SAN FRANCISCO</div>
+      </div>
+    </div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">The record is the output of a replicable system, and the system is what compounds.</div>
   </div>${chrome(false)}`});
 
 
@@ -1527,6 +1579,70 @@ add({title:'Acceleration',track:'appendix',teaser:false,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 
+/* NEW — THE SPRINT DEEP-DIVES (weeks 1-2, 3-4, 5-6, 7) */
+function sprintSlide(o){
+  return {title:o.title,track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">${o.eyebrow}</div>
+    <h1 class="s-title" style="font-size:40px">${o.h}</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1100px;line-height:1.4">${o.sub}</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:40px;margin-top:28px;flex:1">
+      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:22px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:14px 0 18px"></div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:16px">${o.foot}</div>
+  </div>${chrome(false)}`};
+}
+add(sprintSlide({
+  title:'The Sprint · Weeks 1–2',
+  eyebrow:'The Sprint, Weeks 1–2 · Storytelling',
+  h:'The narrative gap is the cheapest alpha we own.',
+  sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
+  cols:[
+    ['The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
+    ['The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy), opposite Glenn Close at The Public, The Father with Frank Langella. NYU Tisch. He coached Wordware to its $30mm seed.'],
+    ['The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
+  ],
+  foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Weeks 3–4',
+  eyebrow:'The Sprint, Weeks 3–4 · Execution',
+  h:'Operating momentum, installed.',
+  sub:'The people who ran the machines install the machinery.',
+  cols:[
+    ['Org &amp; cadence','Don and Christopher Muhr (Auto1 COO through its IPO) install the weekly operating rhythm: roles, KPIs, review cadence, the way they ran teams of hundreds.'],
+    ['The model','Ivan (CFO &amp; COO) and Servaes Tholen (CFO of Headway and Thumbtack) rebuild the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
+    ['Global hiring','Shuo Wang (Deel co-founder) maps the first ten hires across borders; Wieger opens EMEA talent, and the company runs payroll on Deel from day one.']
+  ],
+  foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Weeks 5–6',
+  eyebrow:'The Sprint, Weeks 5–6 · Domain',
+  h:'The network goes to work.',
+  sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
+  cols:[
+    ['Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie Feaster\'s growth playbooks, positioning tuned until it converts to pipeline.'],
+    ['Domain councils','Rotating sessions with people who built the category: Prof. Franklin (data &amp; AI), David Helgason (dev tools), Siggi Hilmarsson (consumer &amp; CPG), Thiago da Costa (engineering software), Ola Doudin (fintech).'],
+    ['Regional doors','Market entry with Ryoto Matsuzaki (Japan &amp; APAC), Wieger Lamers (EMEA), and Ola Doudin with JIMCO (MENA): the fund\'s map, opened company by company.']
+  ],
+  foot:'By week 6, every company has named customers in pipeline, and an advisor bench of its own.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Week 7',
+  eyebrow:'The Sprint, Week 7 · Fundraising Readiness',
+  h:'Ready to raise, long before they raise.',
+  sub:'Companies don\'t fundraise in week 7. They leave ready, and the round comes when the numbers do.',
+  cols:[
+    ['The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
+    ['Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
+    ['Demo night at the Speakeasy','Hovelson stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
+  ],
+  foot:'When the milestone hits, the round assembles itself, that\'s why 43% graduate seed-to-A.'
+}));
+
+
 /* NEW — THE SPEAKEASY */
 add({title:'The Speakeasy',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -1564,32 +1680,21 @@ add({title:'LP Co-Investment Proof',track:'appendix',teaser:false,dark:false,cls
   </div>${chrome(false)}`});
 
 
-/* NEW — THE FLYWHEEL */
-add({title:'The Flywheel',track:'appendix',teaser:false,dark:false,cls:'',html:`
+/* NEW — THE LPA AT A GLANCE */
+add({title:'LPA at a Glance',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">The Flywheel</div>
-    <h1 class="s-title">One system. Every turn compounds.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Founders arrive from everywhere; returns flow to LPs everywhere. The Speakeasy sits at the hub.</div>
-    <div style="position:relative;flex:1;margin-top:20px;display:flex;align-items:center;justify-content:center">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 250px;width:100%">
-        ${[
-          ['1 · Find','From MIT to ETH to IIT: scouts and alumni send founders before they incorporate.','5,000+ scouted a year','#155EE8'],
-          ['2 · Forge','We write the first check, then run the 7-week sprint. Company and bond built together.','30 companies · 5% owned','#BE922A'],
-          ['4 · Return','LPs on five continents co-invest; secondaries pay early DPI; wins pull in the next wave.','100% DPI on Fund I','#7a5cd6'],
-          ['3 · Break out','They scale into trillion-dollar global end markets, and the sprint earns us the next-round seat.','4 unicorns · 2 decacorns','#2f9d6f']
-        ].map(c=>`<div style="background:#f6f8fd;border-left:3px solid ${c[3]};border-radius:0 12px 12px 0;padding:16px 20px"><div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${c[3]}">${c[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.42">${c[1]}</div><div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:8px">${c[2]}</div></div>`).join('')}
-      </div>
-      <svg class="fwr-svg" viewBox="0 0 240 240" fill="none" stroke="#aab6d6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <g id="fwarc"><path d="M62.64 38.08 A100 100 0 0 1 166.95 31.71"/><path d="M156.65 31.9 L166.95 31.71 L161.35 23.1"/></g>
-        <use href="#fwarc" transform="rotate(90 120 120)"/>
-        <use href="#fwarc" transform="rotate(180 120 120)"/>
-        <use href="#fwarc" transform="rotate(270 120 120)"/>
-      </svg>
-      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:152px;height:152px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 10px 30px rgba(11,18,117,.28);z-index:3">
-        <div style="font-family:var(--serif);font-size:19px;line-height:1.1">The<br>Speakeasy</div><div style="font-size:11px;color:var(--sun);margin-top:6px;letter-spacing:.08em">SAN FRANCISCO</div>
-      </div>
+    <div class="eyebrow">Appendix · The LPA at a Glance</div>
+    <h1 class="s-title">Institutional terms, already signed.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">A summary of the executed LPA. The full document sits in the data room.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:40px;margin-top:26px;flex:1">
+      ${[
+        ['Economics',['2.5% management fee, stepping down 0.20%/yr to a 1.5% floor','20% carried interest · 80/20 split after return of LP capital','GP clawback provision']],
+        ['Governance',['Key Person clause tied to the Principal\'s time and effort','LP Advisory Committee with defined consent rights','GP removal provisions · ≤20% of commitments in any single company']],
+        ['Mechanics',['10-year term · two one-year extensions with Advisory Committee consent','5-year investment period from final close','Recycling permitted · ~80% deployed over 3.5 years; reserves in the final 1.5']]
+      ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:20px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${c[1].map(it=>`<div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:7px;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:14.5px;color:var(--ink);line-height:1.5">${it}</div></div>`).join('')}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">A global engine with a San Francisco hub: more founders → better selection → earlier access → faster DPI.</div>
+    <div class="note" style="margin-top:14px;text-align:center">A summary only, the LPA governs. Full signed documents in the data room.</div>
   </div>${chrome(false)}`});
 
 
