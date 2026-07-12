@@ -1565,9 +1565,10 @@ function sprintSlide(o){
   <div class="s-pad" style="padding-top:34px">
     <div style="display:flex;align-items:center;gap:14px">
       <span style="flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,${ac},${dk});color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;box-shadow:0 6px 16px ${ac}44">${o.n}</span>
-      <div>
-        <div style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">The Sprint · ${o.weeks}</div>
-        <div style="font-family:var(--serif);font-size:19px;color:var(--ink);line-height:1.05;margin-top:2px">${o.phase}</div>
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">The Sprint · ${o.weeks}</span>
+        <span style="width:1px;height:15px;background:var(--line);transform:translateY(2px)"></span>
+        <span style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1">${o.phase}</span>
       </div>
     </div>
     <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
