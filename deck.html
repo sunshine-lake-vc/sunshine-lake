@@ -847,10 +847,10 @@ function uniScale(){
     s+=`<circle cx="${c.x}" cy="${y}" r="${c.t==='op'?6:7}" fill="${dot}"/>`;
     s+=`<text x="${c.x+15}" y="${y-4}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" font-weight="${wt}" fill="${nameFill}">${c.n}</text>`;
     s+=`<text x="${c.x+15}" y="${y+21}" font-size="18" font-weight="700" fill="${subFill}">${c.s}</text>`;
-    if(c.badge){const bw=286,bh=38,bx=c.x+168,by=y-19;
+    if(c.badge){const bw=330,bh=38,bx=c.x+168,by=y-19;
       s+=`<path d="M${bx} ${y} L${bx+14} ${y-9} L${bx+14} ${y+9} Z" fill="#F2D831"/>`;
       s+=`<rect x="${bx+12}" y="${by}" width="${bw}" height="${bh}" rx="19" fill="#F2D831"/>`;
-      s+=`<text x="${bx+12+bw/2}" y="${by+25}" text-anchor="middle" font-size="17" font-weight="700" fill="#0B1275">${c.badge}</text>`;}});
+      s+=`<text x="${bx+12+bw/2}" y="${by+25}" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0B1275">${c.badge}</text>`;}});
   s+=`</svg>`;
   return s;
 }
