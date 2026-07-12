@@ -717,13 +717,13 @@ const VECTORS=[
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · storytelling coach','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel co-founder','🇨🇳']]}
 ];
 const TRACK=[
- ['Kalshi','Economic · reg. markets','$0.5mm','$10.1mm','~$22B','831×','158%','5.0%'],
- ['Assured','Technological · AI','$0.6mm','$7.0mm','~$1B','101×','~101%','8.6%'],
- ['Deel','Economic · global work','$1.0mm','$16.7mm','$17.3B','356×','168%','6.0%'],
- ['Headway','Social · mental health','$0.9mm','$7.6mm','$2.3B','115×','124%','11.9%']
+ ['Kalshi','Economic · reg. markets','Seed · Apr 2019','~$22B*','Series F · May 2026','Coatue · Sequoia · a16z'],
+ ['Assured','Technological · AI','Seed · Dec 2019','~$1B','Bloomberg · Mar 2025','Iconiq · Kleiner Perkins'],
+ ['Deel','Economic · global work','Seed · Dec 2019','$17.3B','Series E · Oct 2025','Ribbit · a16z · Coatue'],
+ ['Headway','Social · mental health','Seed · Sep 2018','$2.3B','Series D · Jul 2024','Spark · a16z · Thrive']
 ];
 const CASES=[
- {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',teaser:true,alert:'~$40B raise inbound',
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',teaser:true,alert:'~$40B round reported (FT)',
   theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco',
   headline:'Tarek and Luana built the first regulated prediction market.',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',
@@ -731,9 +731,9 @@ const CASES=[
   sourced:'Top MIT engineers connected us, and we leaned in despite the regulatory overhang.',
   backed:'Two global citizens on a global-first $136B exchange. Risk wasn\'t abstract to them; it was home.',
   built:'We shared regulatory research through the CFTC fight. Kalshi sued and won, legalizing its own category.',
-  endMarket:'$600T+ risk transfer',
-  metrics:[['First Check','Apr 2019'],['Invested','$1.0mm'],['Position Today','$1.1B · 831×','hot'],['Current FMV','~$22B*'],['Ownership','5.0%']],
-  footnote:'*Seeking ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
+  endMarket:'~$850T risk transfer (BIS)',
+  metrics:[['First Check','Seed · Apr 2019'],['Current Mark','~$22B · Series F 2026*'],['Reported','~$40B talks (FT)'],['Round led by','Coatue · Sequoia · a16z']],
+  footnote:'*Reported round talks at ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
   insight:'Kalshi created a federally regulated asset class. Incumbents now pay nine figures just to enter it.'},
  {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',
   theme:'Technological Theme · AI',origin:'Silicon Valley → a worldwide market',
@@ -743,9 +743,9 @@ const CASES=[
   sourced:'A founder we backed, DoNotPay\'s, sent them to us pre-seed.',
   backed:'Two Stanford serial builders, Theo an international grand-prize coder, on a $30B+ worldwide market.',
   built:'We led the syndicate, protected the cap table, and opened customer pipelines and ecosystem support.',
-  endMarket:'$7T insurance premiums',
-  metrics:[['1st / 2nd Check','Dec 2019 · Dec 2020'],['Invested','$1.6mm'],['Position Today','$61mm · 101×','hot'],['Current FMV','~$1B'],['Ownership','8.6%']],
-  insight:'Assured: lived-experience grit for the multi-year cycles of a $7T-premium industry (Swiss Re).'},
+  endMarket:'$7.6T insurance premiums',
+  metrics:[['1st / 2nd Check','Seed · Dec 2019 · Dec 2020'],['Current Mark','~$1B (Bloomberg, 2025)'],['Backed by','Iconiq · Kleiner Perkins'],['We led','The seed syndicate']],
+  insight:'Assured: lived-experience grit for the multi-year cycles of a $7.6T-premium industry (Swiss Re, 2024).'},
  {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',teaser:true,
   theme:'Economic Theme · Global Work',origin:'China &amp; France → San Francisco',
   headline:'Shuo and Alex rebuilt how the world hires.',
@@ -754,8 +754,8 @@ const CASES=[
   sourced:'A UChicago founder in our YC network flagged them pre-launch.',
   backed:'We backed Shuo from China and Alex from France on the $525B global-payroll wedge.',
   built:'5 hires, 12 partners, COO Dan Westgarth recruited, and we drove the Legalpad acquisition.',
-  endMarket:'World payroll — tens of $T',
-  metrics:[['First Check','Dec 2019'],['Invested','$1.0mm'],['Realized + Liquid','$356mm · 356×','hot'],['Post-Money','$17.3B · IPO ahead'],['Ownership','6.0%']],
+  endMarket:'$55T+ world labour income',
+  metrics:[['First Check','Seed · Dec 2019'],['Current Mark','$17.3B · Series E 2025'],['Status','IPO filing reported'],['Round led by','Ribbit · a16z · Coatue']],
   insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
  {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',
   theme:'Social Theme · Mental Health',origin:'New York → a global access model',
@@ -765,8 +765,8 @@ const CASES=[
   sourced:'NYC angels who passed on the round still sent Andrew our way.',
   backed:'Global citizens on a $240B market. The US was the beachhead, not the boundary.',
   built:'A syndicate with One Medical\'s founder; HelloFresh\'s CMO for demand gen; 10+ introductions and hires.',
-  endMarket:'$10T global healthcare',
-  metrics:[['First Check','Sep 2018'],['Invested','$900K'],['Position Today','$103mm · 115×','hot'],['Post-Money','$2.3B'],['Ownership','11.9%']],
+  endMarket:'~$10T global healthcare (WHO)',
+  metrics:[['First Check','Seed · Sep 2018'],['Current Mark','$2.3B · Series D 2024'],['Round led by','Spark Capital'],['Also on cap table','a16z · Thrive · Accel']],
   insight:'Mental illness costs ~$1T a year in lost productivity (WHO). Headway built the access model the world will copy.'},
  {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',
   theme:'Technological Theme · Automation',origin:'London → San Francisco',
@@ -777,8 +777,8 @@ const CASES=[
   backed:'A British founder (London → US) with a viral consumer-rights product and real traction.',
   built:'We shaped the viral launch and demand gen, built the brand, and backed Joshua across multiple rounds.',
   endMarket:'Red tape — every country',
-  metrics:[['First Check','Feb 2019'],['Invested','$830K'],['Realized · DPI','$95K · 11% DPI','hot'],['Post-Money','$230mm'],['Ownership','3.5%']],
-  insight:'DoNotPay paid cash dividends from a profitable business, returning real DPI to the fund.'},
+  metrics:[['First Check','Seed · Feb 2019'],['Current Mark','$230mm post-money'],['Status','Partially realized']],
+  insight:'DoNotPay paid cash dividends from a profitable business, returning capital before any IPO.'},
  {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
   theme:'Technological Theme · AI Productivity',origin:'China → San Francisco',
   headline:'Andy replaced clunky spreadsheets with real-time FP&amp;A founders use.',
@@ -788,8 +788,8 @@ const CASES=[
   backed:'We backed an engineering-led founder from China with deep empathy for the pain.',
   built:'We aligned the roadmap with the market, guided M&amp;A strategy, and coached the team to a Brex acquisition.',
   endMarket:'Office of the CFO — global',
-  metrics:[['Checks','Dec 2019 → Apr 2022'],['Invested','$1.5mm'],['Realized · DPI','$10.6mm · 7.1× DPI','hot'],['Exit','Acquired by Brex'],['Ownership','12.0% at exit']],
-  insight:'Pry: a clean exit and real DPI. Startup finance is universally broken, and founders need clarity.'}
+  metrics:[['Checks','Seed · Dec 2019 → Apr 2022'],['Exit','Acquired by Brex — 2021'],['Status','Fully realized']],
+  insight:'Pry: a clean, fully-realized exit. Startup finance is universally broken, and founders need clarity.'}
 ];
 
 /* ============================================================
@@ -805,7 +805,7 @@ function vectorsHTML(){
   return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> ${a[2]} <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
 }
 function trackRowsHTML(){
-  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td class="mult">${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td></tr>`).join('');
+  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="mult">${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
 }
 function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
 
@@ -820,18 +820,18 @@ function uniScale(){
   const items=[
     {n:'Airbnb',v:80,s:'operated · $80B',x:A,t:'op'},
     {n:'Handy',v:55,s:'advised',x:C,t:'op'},
-    {n:'Kalshi',v:22,s:'$22B · 831×',x:A,t:'uni',badge:'Inbound at ~$40B · 2× in 2 months'},
-    {n:'Deel',v:17.3,s:'$17.3B · 356×',x:C,t:'uni'},
-    {n:'Assured',v:1,s:'$1B · 101×',x:590,t:'uni'},
+    {n:'Kalshi',v:22,s:'$22B · Series F',x:A,t:'uni',badge:'Reported at ~$40B (FT) · 2× in 2 months'},
+    {n:'Deel',v:17.3,s:'$17.3B · IPO filing rptd',x:C,t:'uni'},
+    {n:'Assured',v:1,s:'~$1B · 2025',x:590,t:'uni'},
     {n:'Checkr',v:4.3,s:'$5B · angel',x:A,t:''},
     {n:'Brex / Capital One',v:5,s:'sold · $5B',x:D,t:''},
-    {n:'Headway',v:2.3,s:'$2.3B · 115×',x:B,t:'uni'},
+    {n:'Headway',v:2.3,s:'$2.3B · Series D',x:B,t:'uni'},
     {n:'Fundamental.tech',v:1.5,s:'$1.5B · angel',x:C,t:''},
-    {n:'SpotHero / Uber',v:1.12,s:'sold · $1B',x:D,t:''},
+    {n:'SpotHero',v:1.12,s:'sold · $1B',x:D,t:''},
     {n:'Fieldguide',v:0.78,s:'$700mm',x:A,t:''},
     {n:'Federato',v:0.7,s:'$700mm',x:B,t:''},
     {n:'Yuzu Health',v:0.62,s:'$700mm · angel',x:C,t:''},
-    {n:'CityDeal',v:0.5,s:'founded → Groupon ($200mm+)',x:D,t:'op'}
+    {n:'CityDeal',v:0.5,s:'co-founded → Groupon ($200mm+)',x:D,t:'op'}
   ];
   let s=`<svg viewBox="0 0 1280 520" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI,sans-serif" style="width:100%;height:100%">`;
   s+=`<line x1="${axisX}" y1="${top-6}" x2="${axisX}" y2="${bot+6}" stroke="#cdd6ee" stroke-width="2"/>`;
@@ -941,7 +941,7 @@ function caseSlide(c){
          ${rows.map(r=>`<div style="display:flex;gap:20px;align-items:baseline"><div style="flex:0 0 78px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:16.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div></div>`).join('')}
        </div>
        <div style="flex:0 0 214px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
-         ${rail.map(m=>`<div class="cs-metric ${m[2]==='hot'?'hot':''}"><div class="ml">${m[0]}</div><div class="mv" style="font-size:${m[2]==='em'?'21px':'22px'};${m[2]==='em'?'color:var(--cobalt)':''}">${m[1]}</div></div>`).join('')}
+         ${rail.map(m=>`<div class="cs-metric ${m[2]==='hot'?'hot':''}"><div class="ml">${m[0]}</div><div class="mv" style="font-size:${m[2]==='em'?'20px':'18px'};line-height:1.25;${m[2]==='em'?'color:var(--cobalt)':''}">${m[1]}</div></div>`).join('')}
        </div>
      </div>
      ${c.footnote?`<div class="note" style="margin-top:6px;font-size:11px">${c.footnote}</div>`:''}
@@ -974,19 +974,19 @@ add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Chips, search, space, social, AI: the giants of every era, built by international founders.</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:22px;flex:1">
       ${[
-        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.0T','chang','MC'],
+        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.2T','chang','MC'],
         ['Taiwan → US · 1993','Jensen Huang','Founder &amp; CEO, Nvidia','~$4.7T','huang','JH'],
-        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.3T','brin','SB'],
+        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.4T','brin','SB'],
         ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T','musk','EM'],
-        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.7T','saverin','ES'],
-        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI','~$1T*','sutskever','IS']
+        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.5T','saverin','ES'],
+        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI · Founder, SSI','~$1T*','sutskever','IS']
       ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
     </div>
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:20px">
       <div style="font-family:var(--serif);font-size:19px;color:var(--ink)">Six outsiders. Four decades. Every platform shift, lived first and built first. <b style="color:var(--cobalt)">$17T+.</b></div>
       <div style="font-family:var(--serif);font-style:italic;font-size:16px;color:var(--mid-lake);text-align:right">Before they worked, they looked like outliers — that is the window. Underwrite it at the first check.</div>
     </div>
-    <div class="note" style="margin-top:8px">Public market caps and reported valuations, July 2026. *OpenAI IPO ahead. Immigrants found companies at ~80% higher rates, at every firm size (AER: Insights, 2022).</div>
+    <div class="note" style="margin-top:8px">Public market caps &amp; reported valuations, July 2026; years mark company founding. *OpenAI IPO ~$1T per press reports. Immigrants found companies at ~80% higher rates, at every firm size (AER: Insights, 2022).</div>
   </div>${chrome(false)}`});
 
 
@@ -997,8 +997,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       <div style="flex:1">
         <div class="eyebrow">Founder &amp; General Partner</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Founded CityDeal (sold to Groupon) · International growth at Airbnb, 2011<br>$60mm at seed across two funds, top 1% twice.</div>
-        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap">His outsiders, already: <b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Co-founded CityDeal (sold to Groupon) · International growth at Airbnb, 2011<br>Led North America for Global Founders Capital.</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
         <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
@@ -1012,7 +1011,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
         ['Credit Suisse &amp; Jefferies','CS M&amp;A (San Francisco) · Jefferies growth spinout fund (London)'],
         ['CityDeal','Sold to Groupon · built its international offices'],
         ['Airbnb','2011 · international growth · long-term stays, now ~1 in 5 nights booked'],
-        ['Global Founders Capital','Led North America · his $60mm seed record'],
+        ['Global Founders Capital','Led NA · first checks: Deel · Kalshi'],
         ['Sunshine Lake','His independent spinout']
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
     </div>
@@ -1025,43 +1024,41 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
 
 
 /* NEW — DON STALTER · THE RECORD (stat wall) */
-add({title:'The Record — Top 1% Twice',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'The Record — Four Unicorns',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Don Stalter · The Record</div>
-    <h1 class="s-title">Top 1% of seed. Twice.</h1>
-    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1040px;line-height:1.4">Built from the outside, no franchise brand behind it: every mark a first check Don sourced and led, benchmarked by Cambridge Associates.</div>
+    <h1 class="s-title">Four unicorns. All from first checks at seed.</h1>
+    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1090px;line-height:1.4">Built from the outside, no franchise brand behind it: every company below sits at a public mark, first check sourced and led by Don.</div>
     <hr class="s-rule">
     <div style="display:flex;flex-wrap:wrap;gap:26px 44px;margin-top:28px">
       ${[
-        ['21×','gross TVPI across $60mm, two funds'],
-        ['100%','DPI on Fund I* — returned, not marked'],
-        ['61%','blended gross IRR'],
-        ['99th','percentile (Cambridge Associates), both funds'],
-        ['$15mm','deployed per unicorn: four from first checks, two now decacorns'],
-        ['831×','best first check (Kalshi); ~1,500× at the ~$40B inbound**']
-      ].map(s=>`<div style="flex:0 0 calc(33.333% - 30px);min-width:240px"><div style="font-family:var(--serif);font-size:56px;line-height:1;color:var(--ink)">${s[0]}</div><div style="font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4">${s[1]}</div></div>`).join('')}
+        ['$22B','<b style="color:var(--ink)">Kalshi</b> — seed first check, Apr 2019 · Series F, May 2026**'],
+        ['$17.3B','<b style="color:var(--ink)">Deel</b> — seed first check, Dec 2019 · IPO filing reported'],
+        ['$2.3B','<b style="color:var(--ink)">Headway</b> — seed first check, Sep 2018 · Series D, 2024'],
+        ['~$1B','<b style="color:var(--ink)">Assured</b> — seed first check, Dec 2019 (Bloomberg, 2025)'],
+        ['2','decacorns among the four — Kalshi and Deel'],
+        ['$5B+','of follow-on capital behind them — Coatue · Sequoia · a16z · Ribbit · Spark']
+      ].map(s=>`<div style="flex:0 0 calc(33.333% - 30px);min-width:240px"><div style="font-family:var(--serif);font-size:52px;line-height:1;color:var(--cobalt)">${s[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4">${s[1]}</div></div>`).join('')}
     </div>
-    <div style="margin-top:auto;padding-top:20px;text-align:center;font-size:16px;color:var(--mid-lake);font-style:italic;font-family:var(--serif);line-height:1.4">What one person did with $60mm, Fund I now runs as a system.</div>
-    <div class="note" style="margin-top:12px;text-align:center;max-width:1080px;margin-left:auto;margin-right:auto">Gross, unaudited, as of July 2026, before fees &amp; expenses. Sources: AngelList, PitchBook, Cambridge Associates. *Fund I &amp; II: Don's dedicated North America portfolio within Global Founders Capital. **Kalshi inbound interest at ~$40B (FT, June 2026); ~1,500× is illustrative at that mark, before dilution from any new round. Position held at ~$22B.</div>
+    <div style="margin-top:auto;padding-top:20px;text-align:center;font-size:16px;color:var(--mid-lake);font-style:italic;font-family:var(--serif);line-height:1.4">What one person built from the outside, Fund I now runs as a system.</div>
+    <div class="note" style="margin-top:12px;text-align:center;max-width:1090px;margin-left:auto;margin-right:auto">First checks written at Global Founders Capital, where Don led North America; attribution confirmed in writing by GFC's founder. All valuations are public rounds and press reports, July 2026. **Kalshi: $1B Series F at $22B, May 2026 (Coatue-led); reported round talks at ~$40B (FT, June 2026).</div>
   </div>${chrome(false)}`});
 
 
 add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Record · Funds I &amp; II</div>
-    <h1 class="s-title">A unicorn for every $15mm deployed &amp; meaningful DPI.</h1>
+    <h1 class="s-title">Four unicorns. Two exits. All public marks.</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
-      ${[['Fund I* · 2017–19','$23mm · 23× TVPI · 100% DPI'],['Fund II* · 2019–22','$37mm · 20× TVPI · 30% DPI']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:23px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
+      ${[['Fund I* · 2017–19','First checks: Headway · Kalshi'],['Fund II* · 2019–22','First checks: Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
     </div>
     <table class="tbl tall" style="margin-top:16px">
-      <thead><tr><th>Company</th><th>Theme</th><th>1st Check</th><th>Entry</th><th>FMV Today</th><th>Multiple</th><th>Gross IRR</th><th>Own.</th></tr></thead>
+      <thead><tr><th>Company</th><th>Theme</th><th>Our First Check</th><th>Latest Public Mark</th><th>Round · Date</th><th>Round Investors</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
-    <div style="display:flex;justify-content:center;gap:56px;margin-top:18px;font-size:15.5px">
-      ${[['6%','avg first-check ownership'],['43%','seed-to-A graduation'],['10%','loss ratio']].map(q=>`<span><b style="color:var(--cobalt);font-weight:700">${q[0]}</b> <span style="color:var(--ink-2)">${q[1]}</span></span>`).join('')}
-    </div>
-    <div class="note" style="margin-top:14px;text-align:center">Gross, before fees &amp; expenses. × = MOIC on first check. *Kalshi: inbound at ~$40B (FT, June 2026), roughly 1,500× on our first check at that mark. Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
+    <div style="text-align:center;margin-top:18px;font-size:15px;color:var(--ink-2)"><b style="color:var(--cobalt);letter-spacing:.08em;text-transform:uppercase;font-size:11px;font-weight:700">Behind every row</b> &nbsp; a16z ×3 · Coatue ×2 · Sequoia · Ribbit · Spark · Thrive · Iconiq · Kleiner Perkins</div>
+    <div class="note" style="margin-top:14px;text-align:center">Company marks shown are public rounds and press reports. *Kalshi: reported round talks at ~$40B (FT, June 2026). Funds I &amp; II: Don's North America portfolios within Global Founders Capital; attribution letter available in diligence.</div>
   </div>${chrome(false)}`});
 
 
@@ -1074,7 +1071,7 @@ add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:
     <div style="flex:1;min-height:0;margin-top:4px;display:flex">${uniScale()}</div>
     <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC and LA to Europe, LATAM and APAC, a sourcing machine run on weekly quotas, rebuilt at Sunshine Lake.</div>
     <div style="text-align:center;margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.5"><b style="color:var(--cobalt);letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;font-weight:700">Follow-on demand across the portfolio</b> &nbsp; a16z · Sequoia · Accel · Kleiner Perkins · Coatue</div>
-    <div class="note" style="margin-top:8px">$60mm → 21× gross · top 1% (Cambridge) · × = MOIC on first check · *Kalshi at ~$22B; inbound at ~$40B.</div>
+    <div class="note" style="margin-top:8px">All company marks are public rounds &amp; press reports · *Kalshi at ~$22B; reported talks at ~$40B (FT). SpotHero price per SEC filing (Crain's, May 2026).</div>
   </div>${chrome(false)}`});
 
 
@@ -1083,19 +1080,19 @@ add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:38px">
     <div class="eyebrow">Our Thesis</div>
     <h1 class="s-title" style="font-size:40px">We back international founders at their breakout moments.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.45;max-width:1090px">Three truths about people who cross the world to build, each proven by the record. <b style="color:var(--cobalt);font-weight:600">"International" is a mindset, not a passport</b>: founders forged by extreme origins, whatever their flag.</div>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.45;max-width:1090px">Three truths about people who cross the world to build, each proven by the record.</div>
     <div style="margin-top:20px;display:flex;flex-direction:column;flex:1">
       ${[
-        ['They live the change first.','Distance is information: outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
-        ['They build revenue, not toys.','No safety net exists for them, so revenue is a survival instinct, not a strategy.','$1.4B+','Deel\'s revenue today; it charged from year one','Two companies sent cash back before any IPO: DoNotPay paid dividends; Pry returned 7.1× our money.'],
-        ['They create new markets.','They don\'t enter categories; they imagine them: event contracts, global payroll, insured access.','$1T+','the global end markets we underwrite from day one','Our first checks are marked up 831× (Kalshi), 115× (Headway) and 101× (Assured).']
+        ['They live the change first.','Outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
+        ['They build revenue, not toys.','No safety net exists for them.','$1.4B+','Deel\'s revenue today; it charged from year one','Two companies sent cash back before any IPO: DoNotPay paid dividends; Pry was acquired by Brex, fully realized.'],
+        ['They create new markets.','They don\'t enter categories; they imagine them.','$1T+','the global end markets we underwrite from day one','Our seed first checks now mark at $22B (Kalshi), $2.3B (Headway) and ~$1B (Assured), all public rounds.']
       ].map((r,i)=>`<div style="display:flex;align-items:center;gap:30px;padding:14px 0;${i<2?'border-bottom:1px solid var(--line)':''};flex:1">
         <div style="flex:1.25"><div style="font-family:var(--serif);font-size:23px;color:var(--ink);line-height:1.15">${r[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45">${r[1]}</div></div>
         <div style="flex:0 0 196px;text-align:center"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--cobalt)">${r[2]}</div><div style="font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.35">${r[3]}</div></div>
         <div style="flex:1.15;border-left:3px solid var(--sun);padding-left:18px"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8902a">Proof</div><div style="font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.45">${r[4]}</div></div>
       </div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:14px">Three themes, one psychology: multiple unicorns and decacorns a decade. A sector fund is lucky to back one.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:14px">Three themes, one psychology, that lead to multiple unicorns and decacorns a decade.</div>
   </div>${chrome(false)}`});
 
 
@@ -1108,9 +1105,9 @@ add({title:'Where Breakout Moments Come From',track:'core',teaser:true,dark:fals
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
-        ['Economic','Tariffs and re-shoring re-route $33T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
-        ['Social','By 2050, 2B people will be over 60, and untreated mental illness costs $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
-        ['Technological','AI collapses $4.4T a year of expert work: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
+        ['Economic','Tariffs and re-shoring re-route $35T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
+        ['Social','By 2050, 2.1B people will be over 60, and depression and anxiety cost $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
+        ['Technological','AI puts up to $4.4T a year of expert work in play: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
       ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="margin-top:22px;display:flex;flex-direction:column;gap:20px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
     </div>
     <div style="margin-top:18px;background:#f6f8fd;border-radius:12px;padding:14px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
@@ -1125,19 +1122,19 @@ add({title:'The Map · End Markets',track:'core',teaser:true,dark:false,cls:'',h
   <div class="s-pad" style="padding-top:36px">
     <div class="eyebrow">The Map · End Markets</div>
     <h1 class="s-title" style="font-size:40px">Ahead of the curve, on purpose.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">SaaS is &lt;0.5% of global GDP. The prize is the other 99.5%: <b style="color:var(--cobalt);font-weight:600">$100T+</b> of real economy.*</div>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">SaaS is still under 0.5% of the <b style="color:var(--cobalt);font-weight:600">~$115T</b> world economy: the prize is everything software hasn't reached.*</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;flex:1">
       ${[
-        ['Supply chain &amp; logistics','Now','Tariffs and sanctions re-route trade; founders rebuild rail, air and sea.','$33T global trade (UNCTAD)','Cedar · MightyFly · Navier'],
-        ['Applied AI &amp; expert work','Now','Software absorbs professional services: legal, factory, permits.','$4.4T a year (McKinsey)','DraftWise · Overview · PermitFlow'],
-        ['Health, aging &amp; benefits','Now','Two billion people age out; access models break everywhere.','$10T healthcare (WHO)','Centaur Labs · Headway · Yuzu'],
+        ['Supply chain &amp; logistics','Now','Tariffs and sanctions re-route trade; founders rebuild rail, air and sea.','$35T global trade (UNCTAD, 2025)','Cedar · MightyFly · Navier'],
+        ['Applied AI &amp; expert work','Now','Software absorbs professional services: legal, factory, permits.','up to $4.4T a year (McKinsey)','DraftWise · Overview · PermitFlow'],
+        ['Health, aging &amp; benefits','Now','2.1 billion people age out by 2050; access models break everywhere.','~$10T healthcare (WHO)','Centaur Labs · Headway · Yuzu'],
         ['Global work &amp; money','Now','Borders blur for labor and payments; compliance becomes the moat.','Tens of $T in wages (ILO)','Deel (record + co-invest)'],
-        ['Risk &amp; regulated markets','Now','Prediction markets and new insurance reprice the world\'s risk.','$600T+ notional (BIS)','Kalshi · Assured (record)'],
-        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3T a year invested (IEA)','Actively sourcing']
+        ['Risk &amp; regulated markets','Now','Prediction markets and new insurance reprice the world\'s risk.','~$850T notional (BIS, 2025)','Kalshi · Assured (record)'],
+        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3.3T a year invested (IEA, 2025)','Actively sourcing']
       ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[1]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[2]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[3]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[4]}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">We map the breaks before the market names the category, then back the outsider who lived them.</div>
-    <div class="note" style="margin-top:8px">*Goldman Sachs, The State of Software (March 2026). Also on the watchlist: space logistics · sovereign compute.</div>
+    <div class="note" style="margin-top:8px">*SaaS spend ~$400B (Gartner) vs ~$115T world GDP (IMF). Also on the watchlist: space logistics · sovereign compute.</div>
   </div>${chrome(false)}`});
 
 
@@ -1155,7 +1152,7 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
     <div style="margin:10px 0 0 32px;background:#0B1275;border-radius:12px;padding:11px 22px;display:flex;align-items:center;gap:18px;color:#fff">
       <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPAC Member</span>
-      <span style="font-size:15px;line-height:1.3"><b style="font-weight:700">Nate Mitchell</b> · Managing Partner, Ontario Teachers' Pension Plan</span>
+      <span style="font-size:15px;line-height:1.3"><b style="font-weight:700">Nate Mitchell</b> · Managing Director, Teachers' Venture Growth · Ontario Teachers' Pension Plan</span>
     </div>
   </div>${chrome(false,true)}`});
 
@@ -1227,7 +1224,7 @@ add({title:'The Aperture',track:'core',teaser:false,dark:false,cls:'',html:`
         ['The Speakeasy Door','Inbound, engineered: the softest landing in San Francisco. O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.']
       ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:13px 0;border-top:1px solid var(--line)"><div style="flex:0 0 214px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1;font-size:14px;color:var(--ink-2);line-height:1.5">${r[1]}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:12px">Seen first, never auctioned: <b style="color:var(--cobalt);font-weight:400">Kalshi entered at a $10mm valuation, Assured at $7mm.</b> The aperture is where the multiples come from.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:12px">Seen first, never auctioned: <b style="color:var(--cobalt);font-weight:400">in Kalshi, Deel and Headway at seed, years before Coatue, Ribbit and Spark arrived.</b></div>
   </div>${chrome(false)}`});
 
 
@@ -1247,9 +1244,9 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
     </div>
     <div style="margin-top:20px;border-left:3px solid var(--sun);padding-left:20px">
       <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
-      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune). Global founders already live at that frontier; we fund them as the wave crests.</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune, Oct 2025 · condensed). Global founders already live at that frontier; we fund them as the wave crests.</div>
     </div>
-    <div class="note" style="margin-top:10px">*Goldman Sachs, The State of Software (March 2026).</div>
+    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?" — Top of Mind #146 (March 2026).</div>
   </div>${chrome(false)}`});
 
 
@@ -1263,8 +1260,8 @@ add({title:'The Flywheel',track:'core',teaser:false,dark:false,cls:'',html:`
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px 250px;width:100%">
         ${[
           ['1 · Sourcing','From MIT to ETH to IIT: referrals and campus programs send founders; they land at the Speakeasy.','5,000+ sourced a year','#155EE8'],
-          ['2 · Support','First check, then the 7-week sprint, staged at the Speakeasy; company and bond built together.','30 companies · 5% owned','#BE922A'],
-          ['4 · Return','LP salons at the Speakeasy; co-invests and secondaries pay early DPI; wins pull in the next wave.','100% DPI on Fund I','#7a5cd6'],
+          ['2 · Support','First check, then the 7-week sprint, staged at the Speakeasy; company and bond built together.','30 companies at seed','#BE922A'],
+          ['4 · Return','LP salons at the Speakeasy; co-invests and secondaries pay early DPI; wins pull in the next wave.','Exits banked: Pry → Brex','#7a5cd6'],
           ['3 · Break out','Demo night seeds the next round; they scale into trillion-dollar global end markets.','4 unicorns · 2 decacorns','#2f9d6f']
         ].map(c=>`<div style="background:#f6f8fd;border-left:3px solid ${c[3]};border-radius:0 12px 12px 0;padding:16px 20px"><div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${c[3]}">${c[0]}</div><div style="font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.42">${c[1]}</div><div style="font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:8px">${c[2]}</div></div>`).join('')}
       </div>
@@ -1332,8 +1329,8 @@ add({title:'Return Architecture',track:'core',teaser:false,dark:false,cls:'',htm
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:26px;flex:1">
       ${[
-        ['Multiples','#155EE8','A 5% stake in one $1B outcome returns the fund; a $5B outcome returns it five times over.','Kalshi marks at 831× our first check; Headway at 115×.'],
-        ['Early DPI','#2f9d6f','Secondaries and founder dividends return principal early, without surrendering the upside.','DoNotPay paid cash dividends; Pry\'s sale returned 7.1× in cash.'],
+        ['Multiples','#155EE8','A 5% stake in one $1B outcome returns the fund; a $5B outcome returns it five times over.','Kalshi re-rated from our seed to a $22B public round; Headway from seed to $2.3B.'],
+        ['Early DPI','#2f9d6f','Secondaries and founder dividends return principal early, without surrendering the upside.','DoNotPay paid cash dividends; Pry\'s sale to Brex returned cash before any IPO.'],
         ['Co-investment','#b8902a','LPs invest alongside our breakouts, fee- and carry-light.','We already syndicated Deel and Fieldguide allocations to LPs.']
       ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:14px;padding:26px 26px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:24px;color:${c[1]};line-height:1.14">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:16px;flex:1">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:12px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">Proof</div><div style="font-size:13.5px;color:var(--ink);margin-top:4px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
     </div>
@@ -1367,7 +1364,7 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
     <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">A global LP base across MENA, Europe, APAC, LATAM and the US.</div>
     <div style="display:flex;gap:34px;margin-top:26px">
       ${[
-        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis, sold to Coinbase · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','siggi\'s (CPG), sold · Europe'],['Thiago da Costa','Lagoa, sold to Autodesk · LATAM']]],
+        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis, sold to CoinDCX · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','siggi\'s (CPG), sold · Europe'],['Thiago da Costa','Lagoa, sold to Autodesk · LATAM']]],
         ['Leading VCs',[['Anish Acharya','a16z · US'],['Arthur Patterson','Accel Partners founder · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
         ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds · US'],['Cambridge Associates','US'],['JIMCO','Jameel family office · followed Don from GFC'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]],
         ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading · US'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder'],['Nic Ingram','EQT · Hong Kong'],['Rohan Kodialam','Citadel · US'],['Shawn O\'Neill','Silver Lake · US']]]
@@ -1385,14 +1382,14 @@ add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
     <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
     <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm</b></div><div class="sz">23× TVPI · 100% DPI</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm</b></div><div class="sz">20× TVPI · 30% DPI</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Headway &amp; Kalshi first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Deel &amp; Assured first checks</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
     </div>
     <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);text-align:center;margin-top:26px">Sunshine Lake is a Fund I on paper, and a Fund III in evidence. Priced like the former, de-risked like the latter.</div>
-    <div class="note" style="margin-top:12px;text-align:center">Gross, before fees and expenses. *Funds I &amp; II: Don's dedicated North America portfolio within Global Founders Capital; Sunshine Lake is the independent spinout.</div>
+    <div class="note" style="margin-top:12px;text-align:center">*Funds I &amp; II: Don's dedicated North America portfolios within Global Founders Capital; Sunshine Lake is the independent spinout. Fund II &amp; III figures are targets, not commitments.</div>
   </div>${chrome(false)}`});
 
 
@@ -1416,39 +1413,21 @@ add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html
 
 
 /* BENCHMARKING */
-add({title:'Benchmarking — Top 1%',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Benchmark · Cambridge Associates</div>
-    <h1 class="s-title">Top 1% of all seed-stage funds.</h1>
-    <hr class="s-rule">
-    <div style="display:flex;gap:32px;margin:22px 0 18px">
-      <div style="flex:1;background:linear-gradient(160deg,#155EE8,#0A3DAE);border-radius:14px;padding:24px 30px;color:#fff">
-        <div class="kicker" style="color:var(--sun);margin-bottom:14px">Sunshine Lake GP · legacy seed</div>
-        <div style="display:flex;gap:40px">
-          <div><div style="font-family:var(--serif);font-size:52px;line-height:1">~21×</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross TVPI</div></div>
-          <div><div style="font-family:var(--serif);font-size:52px;line-height:1">61%</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">gross IRR</div></div>
-          <div><div style="font-family:var(--serif);font-size:52px;line-height:1">99th</div><div style="font-size:13px;color:#cfd9ff;margin-top:5px">percentile</div></div>
-        </div>
-      </div>
-      <div style="flex:1;background:#f1f3f8;border-radius:14px;padding:24px 30px">
-        <div class="kicker" style="color:var(--muted);margin-bottom:14px">Top-5% venture fund · Cambridge</div>
-        <div style="display:flex;gap:40px">
-          <div><div style="font-family:var(--serif);font-size:52px;line-height:1;color:#8a93b0">1.6×</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross TVPI</div></div>
-          <div><div style="font-family:var(--serif);font-size:52px;line-height:1;color:#8a93b0">22%</div><div style="font-size:13px;color:var(--muted);margin-top:5px">gross IRR</div></div>
-        </div>
-      </div>
+    <div class="eyebrow">Validation · The Market's Verdict</div>
+    <h1 class="s-title">Every first check was re-priced upward, by the best.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">The public funding trail behind each seed position: who paid up, and when.</div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:8px">
+      ${[
+        ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series B · ’22'],['$5B','Oct ’25'],['$11B','Dec ’25'],['$22B','Coatue · May ’26'],['~$40B','reported talks · FT']]],
+        ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO','filing reported']]],
+        ['Headway','Seed · Sep 2018','#2f9d6f',[['Thrive','early'],['a16z','growth'],['$2.3B','Spark · Series D ’24'],['Accel · Forerunner','on cap table']]],
+        ['Assured','Seed · Dec 2019','#BE922A',[['Kleiner Perkins','early'],['Iconiq','growth'],['~$1B','Bloomberg · Mar ’25']]]
+      ].map(r=>`<div style="display:flex;align-items:center;gap:20px;padding:15px 0;border-top:1px solid var(--line)"><div style="flex:0 0 148px"><div style="font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:7px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:15px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:6px 13px;border-radius:9px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:15.5px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:10px;color:var(--muted);margin-top:1px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
     </div>
-    <table class="tbl" style="font-size:14.5px">
-      <thead><tr><th>Legacy Seed Record</th><th>Fund&nbsp;I*</th><th>Fund&nbsp;II*</th><th>All</th><th>Top-5% Venture</th></tr></thead>
-      <tbody>
-        <tr><td>Gross TVPI</td><td>23.0×</td><td>20.4×</td><td class="mult">20.8×</td><td>1.6×</td></tr>
-        <tr><td>Gross DPI</td><td>1.00×</td><td>0.30×</td><td class="mult">0.56×</td><td>—</td></tr>
-        <tr><td>Gross IRR</td><td>55%</td><td>67%</td><td class="mult">61%</td><td>22%</td></tr>
-        <tr><td>Percentile</td><td>99th</td><td>99th</td><td>99th</td><td>—</td></tr>
-      </tbody>
-    </table>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">The psychology thesis isn't a bet. It has already produced top-1% returns, twice.</div>
-    <div class="note" style="margin-top:10px;text-align:center">Gross, before fees &amp; expenses. Sources: AngelList, PitchBook, Cambridge Associates. *Funds I &amp; II: Don's North America portfolio within Global Founders Capital.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The psychology thesis isn't a bet: the market keeps paying up behind it, round after round.</div>
+    <div class="note" style="margin-top:10px;text-align:center">All rounds and valuations per public announcements and press reports.</div>
   </div>${chrome(false)}`});
 
 
@@ -1609,7 +1588,7 @@ add(sprintSlide({
   sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
   cols:[
     ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
-    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy), opposite Glenn Close at The Public, The Father with Frank Langella. NYU Tisch. He coached Wordware to its $30mm seed.'],
+    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy) and Frank Langella (The Father). NYU Tisch. He coached Wordware to its $30mm seed.'],
     ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
   ],
   foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
@@ -1681,7 +1660,7 @@ add({title:'LP Co-Investment Proof',track:'appendix',teaser:false,dark:false,cls
     <hr class="s-rule">
     <div style="display:flex;gap:30px;margin-top:26px;flex:1">
       ${[
-        ['Fieldguide','Marked up','AI for the $6T professional-services economy · Jin Chang (Korea)','Marked up','since our allocation','Bessemer sits on the board, and our LPs invested right beside them.','#2f9d6f'],
+        ['Fieldguide','Marked up','AI for the $6T professional-services economy · Jin Chang (Korea)','$700mm Series C','Goldman-led · Feb 2026','Bessemer sits on the board, and our LPs invested right beside them.','#2f9d6f'],
         ['Deel','IPO on horizon','Payroll for the world\'s workforce, tens of $T · Shuo &amp; Alex','$17.3B','post-money · $1.4B+ ARR, held at cost and growing fast','On the cap table: Ribbit · a16z · Coatue','#155EE8']
       ].map(c=>`<div style="flex:1;background:#fafbfe;border:1px solid var(--line);border-radius:16px;padding:30px 34px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:var(--serif);font-size:36px;color:var(--ink)">${c[0]}</div><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:${c[6]};border-radius:999px;padding:7px 16px">${c[1]}</div></div><div style="font-size:14px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:14px">${c[2]}</div><div style="margin-top:auto;padding-top:22px"><div style="font-family:var(--serif);font-size:52px;color:${c[6]};line-height:1">${c[3]}</div><div style="font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.5">${c[4]}</div><div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.45">${c[5]}</div></div></div>`).join('')}
     </div>
@@ -1716,7 +1695,7 @@ add({title:'Back Office &amp; Tech Stack',track:'appendix',teaser:false,dark:fal
       ${[['Fund counsel','Morrison Foerster'],['Deal counsel','Cooley'],['Fund admin','Vector'],['Audit','Sensiba'],['Banking','Citizens']].map(c=>`<div style="flex:1;background:#fdf3df;border-radius:12px;padding:22px 16px;text-align:center"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a">${c[0]}</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:10px">${c[1]}</div></div>`).join('')}
     </div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;margin-top:14px">
-      ${[['The data room','LPA · audited financials · portfolio schedule · CFO &amp; founder references · attribution letter · press kit'],['Systems of record','Airtable · Notion · Affinity (CRM) · Vector (fund admin) · Deel (HR &amp; compliance)'],['AI &amp; tooling','OpenAI · Anthropic · Grok · AWS · Python · Zapier'],['Collaboration','Gmail · Google Drive · Slack · Zoom · LinkedIn']].map(r=>`<div style="display:flex;align-items:center;gap:30px;padding:18px 0;border-bottom:1px solid var(--line)"><div style="flex:0 0 230px;font-family:var(--serif);font-size:20px;color:var(--ink)">${r[0]}</div><div style="flex:1;font-size:16px;color:var(--ink-2)">${r[1]}</div></div>`).join('')}
+      ${[['The data room','LPA · audited financials · CFO &amp; founder references · attribution letter · press kit'],['Systems of record','Airtable · Notion · Affinity (CRM) · Vector (fund admin) · Deel (HR &amp; compliance)'],['AI &amp; tooling','OpenAI · Anthropic · Grok · AWS · Python · Zapier'],['Collaboration','Gmail · Google Drive · Slack · Zoom · LinkedIn']].map(r=>`<div style="display:flex;align-items:center;gap:30px;padding:18px 0;border-bottom:1px solid var(--line)"><div style="flex:0 0 230px;font-family:var(--serif);font-size:20px;color:var(--ink)">${r[0]}</div><div style="flex:1;font-size:16px;color:var(--ink-2)">${r[1]}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">LPs frequently note Sunshine Lake operates with the maturity of a Fund II.</div>
   </div>${chrome(false)}`});
@@ -1738,7 +1717,7 @@ add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html
     <h1 class="s-title" style="font-size:40px;margin-bottom:18px">Disclaimer</h1>
     <div class="cols">
       <div class="col"><p>This presentation contains selected information about Sunshine Lake ("Adviser") and its affiliates and certain funds the Adviser manages or plans to manage. It is furnished solely for informational purposes for use in preliminary discussions. It is not, and is not intended to be, an offer to sell, or a solicitation of an offer to purchase, any securities or interest in any fund.</p><p>This presentation contains information as of the date on the cover and is subject to change. It should not be assumed to be complete. Information relating to third-party companies has been provided by such companies or sourced from publicly available information; no representation is made as to its accuracy or completeness.</p></div>
-      <div class="col"><p>The information is based in part on past performance and certain assumptions about future growth. These assumptions have inherent limitations and will be affected by changes in structure, criteria, or assets. Actual performance may differ substantially.</p><p>Certain information constitutes "forward-looking statements." Due to various risks and uncertainties, actual events or results may differ materially. The contents are not to be construed as legal, regulatory, business, accounting, or tax advice.</p></div>
+      <div class="col"><p>The information is based in part on past performance and certain assumptions about future growth. These assumptions have inherent limitations and will be affected by changes in structure, criteria, or assets. Actual performance may differ substantially.</p><p>Certain information constitutes "forward-looking statements." Due to various risks and uncertainties, actual events or results may differ materially. The contents are not to be construed as legal, regulatory, business, accounting, or tax advice. Any performance-related figures, where provided, are gross of fees and expenses unless otherwise noted; company valuations reflect publicly reported financing rounds and press reports and are not indicative of fund performance.</p></div>
       <div class="col"><p>This presentation is confidential. Any reproduction or distribution, in whole or in part, without the prior written consent of the Adviser is prohibited. By receiving it, you acknowledge and agree that it is confidential, non-public, and/or proprietary information.</p><p>The distribution of this presentation in certain jurisdictions may be restricted by law. You should inform yourself as to the legal requirements and tax consequences of an investment within the countries of your citizenship, residence, domicile, and place of business.</p><p>References to San Francisco describe the location of the Sunshine Lake Speakeasy, a community venue, and the firm's network; they do not indicate the residence of any individual or the principal office of the Adviser. The Adviser's personnel are distributed across multiple states and countries.</p></div>
     </div>
   </div>${chrome(false)}`});
