@@ -925,27 +925,28 @@ function worldMap(){
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
   const rows=[['Lived',c.lived],['Sourced',c.sourced],['Backed',c.backed],['Built',c.built]];
-  const rail=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
+  const kpis=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
   return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
-   <div class="cs-body" style="padding-top:26px">
+   <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
      <div class="cs-top">
        <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
-       <div style="align-self:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);text-align:center">${c.origin}</div>
-       <div style="text-align:right"><div>${logo}</div>${c.alert?`<div class="cs-alert">↑ ${c.alert}</div>`:''}</div>
+       <div style="align-self:center;text-align:center">${c.alert?`<span class="cs-alert" style="margin-top:0">↑ ${c.alert}</span>`:''}</div>
+       <div style="text-align:right">${logo}<div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);margin-top:6px">${c.origin}</div></div>
      </div>
-     <div style="display:flex;align-items:center;gap:20px;margin:${c.alert?'18px':'34px'} 0 4px">
-       <div style="width:136px;height:136px;flex:0 0 136px;border-radius:14px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
-       <div class="cs-story" style="margin:0">${c.headline}</div>
-     </div>
-     <div class="cs-grid" style="align-items:stretch;gap:40px">
-       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:32px;padding:6px 0">
-         ${rows.map(r=>`<div style="display:flex;gap:20px;align-items:baseline"><div style="flex:0 0 78px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:16.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div></div>`).join('')}
+     <h1 class="cs-story" style="white-space:normal;margin:16px 0 0;font-size:31px;line-height:1.12;max-width:1130px">${c.headline}</h1>
+     <div style="flex:1;display:flex;align-items:center;gap:36px;margin:16px 0 0;min-height:0">
+       <div style="flex:0 0 248px">
+         <div style="width:248px;height:248px;border-radius:16px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
+         <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:9px;font-family:var(--serif)">${c.founders}</div>
        </div>
-       <div style="flex:0 0 214px;border-left:1px solid var(--line);padding-left:26px;display:flex;flex-direction:column;justify-content:center">
-         ${rail.map(m=>`<div class="cs-metric ${m[2]==='hot'?'hot':''}"><div class="ml">${m[0]}</div><div class="mv" style="font-size:${m[2]==='em'?'20px':'18px'};line-height:1.25;${m[2]==='em'?'color:var(--cobalt)':''}">${m[1]}</div></div>`).join('')}
+       <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+         ${rows.map((r,i)=>`<div style="display:flex;gap:22px;align-items:baseline;padding:13px 0;${i<rows.length-1?'border-bottom:1px solid var(--line)':''}"><div style="flex:0 0 84px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:15px;color:var(--ink-2);line-height:1.45">${r[1]}</div></div>`).join('')}
        </div>
      </div>
-     ${c.footnote?`<div class="note" style="margin-top:6px;font-size:11px">${c.footnote}</div>`:''}
+     <div style="display:grid;grid-template-columns:repeat(${kpis.length},1fr);margin-top:16px">
+       ${kpis.map((m,i)=>`<div style="padding:2px 20px;${i?'border-left:1px solid var(--line)':''}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">${m[0]}</div><div style="font-family:var(--serif);font-size:${m[2]==='em'?'18px':'19px'};line-height:1.2;margin-top:6px;color:${m[2]==='em'?'var(--cobalt)':'var(--ink)'}">${m[1]}</div></div>`).join('')}
+     </div>
+     ${c.footnote?`<div class="note" style="margin-top:9px;font-size:10.5px;text-align:right">${c.footnote}</div>`:''}
    </div>
    <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
    ${chrome(false)}`};
