@@ -540,15 +540,16 @@ table.tbl.tall td.co{font-size:20px;}
 .vp-lbl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);background:#eef3fc;border-radius:4px;padding:2px 7px;margin-right:7px;vertical-align:middle;}
 
 /* due-diligence columns */
-.dd-row{display:flex;flex:1;margin-top:18px;align-items:stretch;}
-.dd-col{flex:1;display:flex;flex-direction:column;}
-.dd-arrow{display:flex;align-items:center;color:#aebfe6;font-size:30px;padding:0 10px;}
-.dd-title{font-family:var(--serif);font-size:21px;color:var(--ink);margin:4px 0 8px;line-height:1.1;}
-.dd-chip{display:inline-block;align-self:flex-start;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:4px 12px;margin-bottom:14px;}
+.dd-row{display:flex;flex:1;margin-top:24px;align-items:stretch;}
+.dd-col{flex:1;display:flex;flex-direction:column;background:#f8faff;border:1px solid var(--line);border-radius:14px;padding:24px 22px;}
+.dd-arrow{display:flex;align-items:center;color:#aebfe6;font-size:26px;padding:0 8px;}
+.dd-title{font-family:var(--serif);font-size:23px;color:var(--ink);margin:5px 0 10px;line-height:1.1;}
+.dd-chip{display:inline-block;align-self:flex-start;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:4px 12px;margin-bottom:18px;}
 .dd-h{font-size:14px;font-weight:700;color:var(--ink);margin:11px 0 5px;}
 .dd-col ul{list-style:none;margin:0;}
-.dd-col li{position:relative;padding-left:15px;font-size:14px;color:var(--ink-2);line-height:1.5;margin-bottom:5px;}
-.dd-col li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--cobalt);}
+.dd-col ul{display:flex;flex-direction:column;gap:14px;flex:1;justify-content:center;}
+.dd-col li{position:relative;padding-left:17px;font-size:15.5px;color:var(--ink-2);line-height:1.5;}
+.dd-col li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--cobalt);}
 .dd-flag{margin-top:auto;padding-top:14px;color:var(--cobalt);font-weight:600;font-size:13.5px;line-height:1.45;}
 
 /* donut legend */
@@ -1058,7 +1059,8 @@ add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:38px">
     <div class="eyebrow">Our Thesis</div>
     <h1 class="s-title" style="font-size:40px">We back international founders at their breakout moments.</h1>
-    <div style="margin-top:20px;display:flex;flex-direction:column;flex:1">
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">Forged by extreme origins</b>, then handed Silicon Valley: the network, craft and capital that turn outsiders into category leaders. That bridge is what we are.</div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;flex:1">
       ${[
         ['They live the change first.','Outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
         ['They build revenue, not toys.','No safety net exists for them.','$1.4B+','Deel\'s revenue today; it charged from year one','Two companies sent cash back before any IPO: DoNotPay paid dividends; Pry was acquired by Brex, fully realized.'],
@@ -1073,24 +1075,40 @@ add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 
+/* NEW — THE EVIDENCE (peer-reviewed) */
+add({title:'The Evidence',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Evidence</div>
+    <h1 class="s-title">The outsider edge is peer-reviewed.</h1>
+    <hr class="s-rule">
+    <div style="display:flex;flex-direction:column;gap:0;margin-top:8px;flex:1">
+      ${[
+        ['~80%','Immigrants found companies at ~80% higher rates than the native-born, at every firm size, and act as job creators, not job takers.','Azoulay, Jones, Kim &amp; Miranda — American Economic Review: Insights (2022)'],
+        ['$5.0T','59% of U.S. unicorns have an immigrant founder; immigrant-founded U.S. unicorns are worth $5.0T, up 2,876% since 2016.','National Foundation for American Policy (2026)'],
+        ['+','Living across cultures measurably increases creative problem-solving: multicultural experience builds the cognitive flexibility that invention requires.','Maddux &amp; Galinsky — Journal of Personality and Social Psychology (2009), replicated across the literature'],
+        ['39%','Top-quartile culturally diverse teams are 39% more likely to outperform on profitability.','McKinsey &amp; Company — Diversity Wins']
+      ].map((r,i)=>`<div style="display:flex;align-items:center;gap:28px;padding:15px 0;${i<3?'border-bottom:1px solid var(--line)':''};flex:1">
+        <div style="flex:0 0 130px;font-family:var(--serif);font-size:40px;color:var(--cobalt);line-height:1;text-align:center">${r[0]}</div>
+        <div style="flex:1"><div style="font-size:15px;color:var(--ink);line-height:1.45">${r[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:5px;font-style:italic">${r[2]}</div></div>
+      </div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The market still prices this evidence at zero. We price it first, at the first check.</div>
+  </div>${chrome(false)}`});
+
 /* 9 — WHERE WE INVEST */
 add({title:'Where Breakout Moments Come From',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Where Breakout Moments Come From</div>
     <h1 class="s-title">Three lenses. A new opening every few years.</h1>
-    <div style="font-size:16px;color:var(--mid-lake);margin-top:8px;max-width:1040px;line-height:1.4">Lenses, not bets: we don't predict categories, we find the founders creating them. The lenses tell us where to listen.</div>
     <hr class="s-rule">
-    <div style="display:flex;gap:24px;margin-top:22px;flex:1">
+    <div style="display:flex;gap:24px;margin-top:26px;flex:1">
       ${[
         ['Economic','Tariffs and re-shoring re-route $35T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
         ['Social','By 2050, 2.1B people will be over 60, and depression and anxiety cost $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
         ['Technological','AI puts up to $4.4T a year of expert work in play: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
       ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="margin-top:22px;display:flex;flex-direction:column;gap:20px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
     </div>
-    <div style="margin-top:18px;background:#f6f8fd;border-radius:12px;padding:14px 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-      <span style="font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt)">Openings we caught, and what's next</span>
-      <span style="font-size:13.5px;color:var(--ink-2)">Mental-health access <b>Headway</b> · Regulated markets <b>Kalshi</b> · Global work <b>Deel</b> · Re-shored logistics <b>Cedar · Navier</b> · Expert-work AI <b>DraftWise · PermitFlow</b> · <span style="color:#b8902a;font-weight:700">Next: Energy transition</span></span>
-    </div>
+    <div style="text-align:center;margin-top:20px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)"><span style="background:var(--sun);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 14px;margin-right:12px">What's next</span>Energy transition · space logistics · sovereign compute.</div>
   </div>${chrome(false)}`});
 
 
@@ -1105,13 +1123,13 @@ add({title:'The Map · End Markets',track:'core',teaser:true,dark:false,cls:'',h
         ['Supply chain &amp; logistics','Now','Tariffs and sanctions re-route trade; founders rebuild rail, air and sea.','$35T global trade (UNCTAD, 2025)','Cedar · MightyFly · Navier'],
         ['Applied AI &amp; expert work','Now','Software absorbs professional services: legal, factory, permits.','up to $4.4T a year (McKinsey)','DraftWise · Overview · PermitFlow'],
         ['Health, aging &amp; benefits','Now','2.1 billion people age out by 2050; access models break everywhere.','~$10T healthcare (WHO)','Centaur Labs · Headway · Yuzu'],
-        ['Global work &amp; money','Now','Borders blur for labor and payments; compliance becomes the moat.','Tens of $T in wages (ILO)','Deel (record + co-invest)'],
-        ['Risk &amp; regulated markets','Now','Prediction markets and new insurance reprice the world\'s risk.','~$850T notional (BIS, 2025)','Kalshi · Assured (record)'],
-        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3.3T a year invested (IEA, 2025)','Actively sourcing']
-      ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[1]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[2]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[3]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[4]}</div></div>`).join('')}
+        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3.3T a year invested (IEA, 2025)','Actively sourcing'],
+        ['Space logistics','Next','Launch costs collapse; the orbital economy needs delivery and infrastructure.','~$1.8T by 2035 (WEF · McKinsey)','Actively sourcing'],
+        ['Sovereign compute','Next','Every nation wants its own AI stack; compute becomes strategic infrastructure.','$1T+ AI capex by 2030 (est.)','Actively sourcing']
+      ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column;${t[1]==='Next'?'background:#fdfbf3':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[1]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[2]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[3]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[4]}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">We map the breaks before the market names the category, then back the outsider who lived them.</div>
-    <div class="note" style="margin-top:8px">*SaaS spend ~$400B (Gartner) vs ~$115T world GDP (IMF). Also on the watchlist: space logistics · sovereign compute.</div>
+    <div class="note" style="margin-top:8px">*SaaS spend ~$400B (Gartner) vs ~$115T world GDP (IMF). Also on the watchlist: longevity · defense tech · climate adaptation.</div>
   </div>${chrome(false)}`});
 
 
@@ -1258,9 +1276,9 @@ add({title:'Return Architecture',track:'core',teaser:false,dark:false,cls:'',htm
         ['Multiples','#155EE8','A 5% stake in one $1B outcome returns the fund; a $5B outcome returns it five times over.','Kalshi re-rated from our seed to a $22B public round; Headway from seed to $2.3B.'],
         ['Early DPI','#2f9d6f','Secondaries and founder dividends return principal early, without surrendering the upside.','Multiple secondaries have been taken over time.'],
         ['Co-investment','#b8902a','LPs invest alongside our breakouts, fee- and carry-light.','We already syndicated Deel and Fieldguide allocations to LPs.']
-      ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:14px;padding:26px 26px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:24px;color:${c[1]};line-height:1.14">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:16px;flex:1">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:12px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">Proof</div><div style="font-size:13.5px;color:var(--ink);margin-top:4px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
+      ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;text-align:center"><div style="font-family:var(--serif);font-size:28px;color:${c[1]};line-height:1.12">${c[0]}</div><div style="font-size:18.5px;color:var(--ink-2);line-height:1.5;margin-top:22px;flex:1;display:flex;align-items:center;justify-content:center">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:16px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">Proof</div><div style="font-size:15px;color:var(--ink);margin-top:6px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">We back sectors incumbents must acquire into, and we know how the process runs.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:20px">We back sectors incumbents must acquire into, and we know how the process runs.</div>
   </div>${chrome(false)}`});
 
 
@@ -1271,12 +1289,12 @@ add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'
     <h1 class="s-title">We open our breakouts to our LPs.</h1>
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">With the growth judgment of a serial entrepreneur and operator who has sat on 10+ boards, including exited SpotHero (to Uber).</div>
     <hr class="s-rule">
-    <div style="display:flex;gap:34px;margin-top:26px;flex:1">
+    <div style="display:flex;gap:30px;margin-top:30px;flex:1">
       ${[
-        ['Access across the lifecycle','Invest alongside our best companies from seed to growth, names the brand funds can\'t reach early, like the Anthropics, OpenAIs and Kalshis.'],
-        ['Aligned economics','Fee- and carry-light. We earn when you earn, the same incentive that drives the fund.'],
-        ['Full transparency','Our investment memos, data and post-close monitoring, shared with LPs in real time.']
-      ].map(c=>`<div style="flex:1"><div style="font-family:var(--serif);font-size:24px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:14px 0 16px"></div><div style="font-size:15px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
+        ['Access across the lifecycle','Invest alongside our best companies from seed to growth, the names brand funds cannot reach early. The next Deels and Kalshis, opened to the LPs who backed us first.'],
+        ['Aligned economics','Fee- and carry-light, reserved for Fund I LPs. We earn when you earn, the same incentive that drives the fund itself. No blind pools, no hidden layers.'],
+        ['Full transparency','The same investment memos, data and post-close monitoring the fund runs on, shared with participating LPs in real time. You see what we see, when we see it.']
+      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:25px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:16px 0 18px"></div><div style="font-size:17px;color:var(--ink-2);line-height:1.65">${c[1]}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);text-align:center;margin-top:20px">Already syndicated to our LPs: <b style="font-weight:400;color:var(--cobalt)">Deel</b> and <b style="font-weight:400;color:var(--cobalt)">Fieldguide</b>, with more in the pipeline.</div>
   </div>${chrome(false)}`});
@@ -1355,26 +1373,6 @@ add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls
   </div>${chrome(false)}`});
 
 
-/* NEW — THE EVIDENCE (peer-reviewed) */
-add({title:'The Evidence',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">The Evidence</div>
-    <h1 class="s-title">The outsider edge is peer-reviewed.</h1>
-    <hr class="s-rule">
-    <div style="display:flex;flex-direction:column;gap:0;margin-top:8px;flex:1">
-      ${[
-        ['~80%','Immigrants found companies at ~80% higher rates than the native-born, at every firm size, and act as job creators, not job takers.','Azoulay, Jones, Kim &amp; Miranda — American Economic Review: Insights (2022)'],
-        ['$5.0T','59% of U.S. unicorns have an immigrant founder; immigrant-founded U.S. unicorns are worth $5.0T, up 2,876% since 2016.','National Foundation for American Policy (2026)'],
-        ['+','Living across cultures measurably increases creative problem-solving: multicultural experience builds the cognitive flexibility that invention requires.','Maddux &amp; Galinsky — Journal of Personality and Social Psychology (2009), replicated across the literature'],
-        ['39%','Top-quartile culturally diverse teams are 39% more likely to outperform on profitability.','McKinsey &amp; Company — Diversity Wins']
-      ].map((r,i)=>`<div style="display:flex;align-items:center;gap:28px;padding:15px 0;${i<3?'border-bottom:1px solid var(--line)':''};flex:1">
-        <div style="flex:0 0 130px;font-family:var(--serif);font-size:40px;color:var(--cobalt);line-height:1;text-align:center">${r[0]}</div>
-        <div style="flex:1"><div style="font-size:15px;color:var(--ink);line-height:1.45">${r[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:5px;font-style:italic">${r[2]}</div></div>
-      </div>`).join('')}
-    </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The market still prices this evidence at zero. We price it first, at the first check.</div>
-  </div>${chrome(false)}`});
-
 /* NEW — THE CAPITAL STACK (early-stage focus) */
 add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
@@ -1390,7 +1388,7 @@ add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',h
       </div>
       <div style="flex:1;display:flex;flex-direction:column">
         <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px">
-          ${[['Pre-Seed',1,3,'#155EE8'],['Seed',4,6,'#2657e8'],['Venture',7,9,'#5a6685'],['Growth',10,12,'#9aa1b6']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:#fff;text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
+          ${[['Pre-Seed',1,3,'#0B1275'],['Seed',4,6,'#155EE8'],['Venture',7,9,'#5a8de8'],['Growth',10,12,'#a9c2ee']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:${s[3]==='#a9c2ee'?'var(--navy)':'#fff'};text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
         </div>
         <div style="position:relative;flex:1;margin-top:10px">
           <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);pointer-events:none"><div style="grid-column:1/7;background:rgba(242,216,49,.16);border:1px solid rgba(242,216,49,.55);border-radius:10px"></div></div>
@@ -1497,7 +1495,7 @@ function sprintSlide(o){
     <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1090px;line-height:1.4">${o.sub}</div>
     <div style="display:flex;gap:20px;margin-top:22px;flex:1;align-items:stretch">
-      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:22px 22px 24px;display:flex;flex-direction:column"><div style="width:46px;height:46px;border-radius:13px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:16px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
+      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:30px 26px;display:flex;flex-direction:column;justify-content:center"><div style="width:50px;height:50px;border-radius:14px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:20px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
     </div>
     <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
       <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">Deliverable</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
