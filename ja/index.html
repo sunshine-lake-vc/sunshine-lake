@@ -380,7 +380,7 @@ table.tbl.tall td.co{font-size:20px;}
 .tm .rl{font-size:15px;color:var(--cobalt);font-weight:600;margin-top:7px;line-height:1.35;min-height:1.4em;display:flex;align-items:center;justify-content:center;}
 .tm .pe{font-size:13px;color:var(--muted);font-weight:400;margin-top:7px;letter-spacing:.01em;line-height:1.35;}
 .vectors{display:flex;gap:22px;flex:1;}
-.vec{flex:1;background:#f6f8fd;border-radius:12px;padding:18px 20px 20px;display:flex;flex-direction:column;}
+.vec{flex:1;background:#f6f8fd;border-radius:12px;padding:13px 18px 14px;display:flex;flex-direction:column;}
 .vec:nth-child(2){background:#eef3fc;}
 .vec:nth-child(3){background:#e7eefb;}
 .vec .vn{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
@@ -390,7 +390,7 @@ table.tbl.tall td.co{font-size:20px;}
 .vec:nth-child(3) .dot{background:#0A3DAE;}
 .vec h4{font-size:15px;color:var(--ink);}
 .vec .ph{font-size:12px;color:var(--muted);margin:3px 0 10px;}
-.vec .ad{font-size:13px;color:var(--ink-2);padding:10px 0;border-top:1px solid rgba(0,0,0,.06);}
+.vec .ad{font-size:12.5px;color:var(--ink-2);padding:6px 0;border-top:1px solid rgba(0,0,0,.06);line-height:1.35;}
 .vec .ad b{font-weight:600;}
 .vec .ad span{color:var(--muted);}
 
@@ -616,14 +616,14 @@ table.tbl.tall td.co{font-size:20px;}
       <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
     </svg>
     <h1>Sunshine Lake</h1>
-    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter your email and the access password to continue.</p>
+    <p>ファンドI 投資家向け資料。極秘につき、続行するにはメールアドレスとアクセスパスワードを入力してください。</p>
     <form id="gateForm" autocomplete="off">
-      <label for="gm">Your email</label>
+      <label for="gm">メールアドレス</label>
       <input id="gm" type="email" required autofocus placeholder="you@firm.com" autocomplete="email">
-      <label for="gp" style="margin-top:16px">Password</label>
+      <label for="gp" style="margin-top:16px">パスワード</label>
       <input id="gp" type="password" required>
       <button type="submit">Enter</button>
-      <div class="gate-err" id="ge">Please check your email and password.</div>
+      <div class="gate-err" id="ge">メールアドレスとパスワードをご確認ください。</div>
     </form>
   </div>
 </div>
@@ -637,12 +637,12 @@ table.tbl.tall td.co{font-size:20px;}
   <span class="ttl" id="barTitle"></span>
   <div class="spacer"></div>
   <div class="seg" id="modeSeg">
-    <button data-mode="teaser">Teaser</button>
-    <button data-mode="full" class="on">Full</button>
+    <button data-mode="teaser">ティザー</button>
+    <button data-mode="full" class="on">フル</button>
   </div>
   <span class="count" id="count">1 / 1</span>
-  <a class="btn" href="/ja" style="text-decoration:none" title="日本語版">日本語</a>
-  <button class="btn" id="exportBtn">Export PDF</button>
+  <a class="btn" href="/deck.html" style="text-decoration:none" title="English">English</a>
+  <button class="btn" id="exportBtn">PDF出力</button>
 </div>
 
 <div class="navzone left" id="navLeft"></div>
@@ -654,7 +654,7 @@ table.tbl.tall td.co{font-size:20px;}
 </div>
 
 <div id="progress"></div>
-<div id="hint">Use ← → to navigate · press F for fullscreen</div>
+<div id="hint">← → で移動 · F で全画面</div>
 <div id="wm" style="position:fixed;inset:0;pointer-events:none;z-index:60;background-repeat:repeat;display:none"></div>
 
 <script>
@@ -690,7 +690,7 @@ function applyWatermark(email){
 function logView(email){
   if(!LOG_ENDPOINT)return;
   try{fetch(LOG_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({email:email,deck:'Sunshine Lake Fund I',ts:new Date().toISOString(),ua:navigator.userAgent,ref:document.referrer||''})}).catch(function(){});}catch(e){}
+    body:JSON.stringify({email:email,deck:'Sunshine Lake Fund I (JA)',ts:new Date().toISOString(),ua:navigator.userAgent,ref:document.referrer||''})}).catch(function(){});}catch(e){}
 }
 function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');applyWatermark(sessionStorage.getItem('slDeckEmail'));boot();}
 gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');const email=(gm.value||'').trim();if(validEmail(email)&&await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');sessionStorage.setItem('slDeckEmail',email);logView(email);unlock();}else{ge.classList.add('show');gpw.value='';if(!validEmail(email)){gm.focus();}else{gpw.focus();}}});
@@ -699,93 +699,93 @@ gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('s
    DATA
    ============================================================ */
 const MARK='<svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>';
-function chrome(dark,noConf){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+(noConf?'':'<span class="s-conf">Strictly Confidential</span>');}
+function chrome(dark,noConf){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+(noConf?'':'<span class="s-conf">極秘</span>');}
 
-const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
+const GROSSNOTE='<div class="gross-note">注：TVPI・DPI・IRRはグロス（手数料・費用控除前）で表示。</div>';
 const TEAM=[
- {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',na:'Mexican-American · California',rl:'Partner, CFO & COO',pe:'SolarCity · GFC · Stanford & Caltech',ow:'Owns: fund ops, reporting & model reviews',img:'images/team/ivan.webp'},
- {nm:'Suhail Younus',fl:'🇦🇫',na:'Afghan-American · NYC',rl:'Partner',pe:'Private equity · Cornell',ow:'Owns: pipeline coverage & deal scoring',img:'images/team/suhail.webp'},
- {nm:'Wieger Lamers',fl:'🇳🇱',na:'Dutch · EMEA',rl:'EMEA & Platforms Lead',pe:'Adyen · ESCP (Paris)',ow:'Owns: EMEA sourcing quota & platform',img:'images/team/wieger.webp'}
+ {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',na:'メキシコ系アメリカ人 · カリフォルニア',rl:'パートナー / CFO / COO',pe:'SolarCity · GFC · Stanford & Caltech',ow:'担当：ファンド運営・レポーティング・モデルレビュー',img:'/images/team/ivan.webp'},
+ {nm:'Suhail Younus',fl:'🇦🇫',na:'アフガン系アメリカ人 · NYC',rl:'パートナー',pe:'プライベートエクイティ · Cornell',ow:'担当：パイプライン網羅・案件スコアリング',img:'/images/team/suhail.webp'},
+ {nm:'Wieger Lamers',fl:'🇳🇱',na:'オランダ人 · EMEA',rl:'EMEA・プラットフォーム責任者',pe:'Adyen · ESCP（パリ）',ow:'担当：EMEAソーシング枠・プラットフォーム',img:'/images/team/wieger.webp'}
 ];
 const VECTORS=[
- {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['Prof. Bell','Wharton unicorn advisor','🇳🇿']]},
- {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','serial growth operator','🇺🇸']]},
- {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · storytelling coach','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel co-founder','🇨🇳']]}
+ {n:'1',t:'アイデア → 会社',p:'Founding',ad:[['E. Wojcicki','「シリコンバレーの母」','🇺🇸'],['Franklin教授','Databricks初期アドバイザー','🇺🇸'],['Bell教授','ウォートン教授 / ユニコーン顧問','🇳🇿']]},
+ {n:'2',t:'プロダクト → PMF',p:'PMF',ad:[['Tom Lee','One Medical創業者（IPO）','🇺🇸'],['Christopher Muhr','Auto1 COO（IPO）','🇩🇪'],['Jamie Feaster','連続グロース経営者','🇺🇸']]},
+ {n:'3',t:'スケール → 持続性',p:'Scale',ad:[['A. Hovelson','ブロードウェイ · ストーリーテリングコーチ','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel共同創業者','🇨🇳']]}
 ];
 const TRACK=[
- ['Kalshi','Economic · reg. markets','Seed · Apr 2019','~$22B*','Series F · May 2026','Coatue · Sequoia · a16z'],
- ['Assured','Technological · AI','Seed · Dec 2019','~$1B','Bloomberg · Mar 2025','Iconiq · Kleiner Perkins'],
- ['Deel','Economic · global work','Seed · Dec 2019','$17.3B','Series E · Oct 2025','Ribbit · a16z · Coatue'],
- ['Headway','Social · mental health','Seed · Sep 2018','$2.3B','Series D · Jul 2024','Spark · a16z · Thrive']
+ ['Kalshi','経済 · 規制市場','シード · 2019年4月','~$22B*','シリーズF · 2026年5月','Coatue · Sequoia · a16z'],
+ ['Assured','技術 · AI','シード · 2019年12月','~$1B','Bloomberg · 2025年3月','Iconiq · Kleiner Perkins'],
+ ['Deel','経済 · グローバルワーク','シード · 2019年12月','$17.3B','シリーズE · 2025年10月','Ribbit · a16z · Coatue'],
+ ['Headway','社会 · メンタルヘルス','シード · 2018年9月','$2.3B','シリーズD · 2024年7月','Spark · a16z · Thrive']
 ];
 const CASES=[
- {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-logo.webp',teaser:true,alert:'~$40B round reported (FT)',
-  theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco',
-  headline:'Tarek and Luana built the first regulated prediction market.',
+ {key:'kalshi',logo:'Kalshi',logoImg:'/images/cases/kalshi-logo.webp',teaser:true,alert:'約$40Bでのラウンドと報道（FT）',
+  theme:'経済テーマ · 規制市場',origin:'レバノン &amp; ブラジル → サンフランシスコ',
+  headline:'タレクとルアナは、世界初の規制された予測市場を築いた。',
   founders:'Tarek Mansour 🇱🇧 &amp; Luana Lopes Lara 🇧🇷',
-  lived:'Tarek grew up in Lebanon; Luana trained at Brazil\'s Bolshoi. They met in MIT\'s international crowd.',
-  sourced:'Top MIT engineers connected us, and we leaned in despite the regulatory overhang.',
-  backed:'Two global citizens on a global-first $136B exchange. Risk wasn\'t abstract to them; it was home.',
-  built:'We shared regulatory research through the CFTC fight. Kalshi sued and won, legalizing its own category.',
-  endMarket:'~$850T risk transfer (BIS)',
-  metrics:[['First Check','Seed · Apr 2019'],['Current Mark','~$22B · Series F 2026*'],['Reported','~$40B talks (FT)'],['Round led by','Coatue · Sequoia · a16z']],
-  footnote:'*Reported round talks at ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
-  insight:'Kalshi created a federally regulated asset class. Incumbents now pay nine figures just to enter it.'},
- {key:'assured',logo:'Assured',logoImg:'images/cases/assured-logo.webp',
-  theme:'Technological Theme · AI',origin:'Silicon Valley → a worldwide market',
-  headline:'Justin and Theo rebuilt global auto-insurance claims.',
+  lived:'タレクはレバノンで育ち、ルアナはブラジルのボリショイでバレエを学んだ。二人はMITの留学生コミュニティで出会った。',
+  sourced:'MITトップクラスのエンジニアが私たちを繋ぎ、規制の不透明さをものともせず踏み込んだ。',
+  backed:'グローバルを第一に据えた$136Bの取引所に挑む二人の世界市民。リスクは抽象概念ではなく、彼らにとっては故郷そのものだった。',
+  built:'CFTCとの闘いを通じて規制調査を共有した。Kalshiは提訴して勝訴し、自らのカテゴリーを合法化した。',
+  endMarket:'リスク移転 約$850T（BIS）',
+  metrics:[['初回投資','シード · 2019年4月'],['現在の評価','約$22B · シリーズF 2026*'],['報道','約$40Bで協議（FT）'],['ラウンド主導','Coatue · Sequoia · a16z']],
+  footnote:'*2026年6月にFTが約$40Bでのラウンド協議を報道。PolymarketはCFTCライセンスに$112mmを支払い、RobinhoodはKalshiの契約を提供している。',
+  insight:'Kalshiは連邦規制下の新たな資産クラスを創出した。今や既存企業は参入するだけで9桁の金額を支払う。'},
+ {key:'assured',logo:'Assured',logoImg:'/images/cases/assured-logo.webp',
+  theme:'技術テーマ · AI',origin:'シリコンバレー → 世界市場',
+  headline:'ジャスティンとテオは、世界の自動車保険請求を再構築した。',
   founders:'Justin &amp; Theo',
-  lived:'Global citizens sizing for the world: claims are broken everywhere, not just in the US.',
-  sourced:'A founder we backed, DoNotPay\'s, sent them to us pre-seed.',
-  backed:'Two Stanford serial builders, Theo an international grand-prize coder, on a $30B+ worldwide market.',
-  built:'We led the syndicate, protected the cap table, and opened customer pipelines and ecosystem support.',
-  endMarket:'$7.6T insurance premiums',
-  metrics:[['1st / 2nd Check','Seed · Dec 2019 · Dec 2020'],['Current Mark','~$1B (Bloomberg, 2025)'],['Backed by','Iconiq · Kleiner Perkins'],['We led','The seed syndicate']],
-  insight:'Assured: lived-experience grit for the multi-year cycles of a $7.6T-premium industry (Swiss Re, 2024).'},
- {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-logo.webp',teaser:true,
-  theme:'Economic Theme · Global Work',origin:'China &amp; Israel → San Francisco',
-  headline:'Shuo and Alex rebuilt how the world hires.',
+  lived:'世界を見据える世界市民。保険金請求の非効率は米国に限らず、どこでも壊れている。',
+  sourced:'私たちが支援した創業者（DoNotPay）が、プレシードで彼らを紹介した。',
+  backed:'スタンフォード出身の連続起業家二人（テオは国際大会優勝のコーダー）を、$30B超の世界市場で支援。',
+  built:'シンジケートをリードし、資本構成を守り、顧客パイプラインとエコシステム支援を開いた。',
+  endMarket:'保険料 $7.6T',
+  metrics:[['1回目 / 2回目','シード · 2019年12月 · 2020年12月'],['現在の評価','約$1B（Bloomberg, 2025）'],['出資','Iconiq · Kleiner Perkins'],['当社の役割','シードシンジケートを主導']],
+  insight:'Assured：$7.6Tの保険料規模を持つ業界の、複数年サイクルに耐える原体験の胆力（Swiss Re, 2024）。'},
+ {key:'deel',logo:'Deel.',logoImg:'/images/cases/deel-logo.webp',teaser:true,
+  theme:'経済テーマ · グローバルワーク',origin:'中国 &amp; イスラエル → サンフランシスコ',
+  headline:'シュオとアレックスは、世界の採用の仕組みを再構築した。',
   founders:'Shuo Wang 🇨🇳 &amp; Alex Bouaziz 🇮🇱',
-  lived:'Blocked by America\'s visa wall at MIT, they lived the global-work problem they now solve.',
-  sourced:'A UChicago founder in our YC network flagged them pre-launch.',
-  backed:'We backed Shuo from China and Alex from Israel on the $525B global-payroll wedge.',
-  built:'5 hires, 12 partners, a public-fintech COO recruited, and we drove the Legalpad acquisition.',
-  endMarket:'$55T+ world labour income',
-  metrics:[['First Check','Seed · Dec 2019'],['Current Mark','$17.3B · Series E 2025'],['Status','IPO filing reported'],['Round led by','Ribbit · a16z · Coatue']],
-  insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
- {key:'headway',logo:'Headway',logoImg:'images/cases/headway-logo.webp',
-  theme:'Social Theme · Mental Health',origin:'New York → a global access model',
-  headline:'Andrew and Jake fixed a $1T problem: no therapist took insurance.',
+  lived:'MITで米国のビザの壁に阻まれ、彼らは今解決しているグローバルワークの課題を自ら経験していた。',
+  sourced:'YC人脈のシカゴ大出身創業者が、ローンチ前に彼らを推薦した。',
+  backed:'中国出身のシュオとイスラエル出身のアレックスを、$525Bのグローバル給与の切り口で支援した。',
+  built:'5名の採用、12社のパートナー、上場フィンテックのCOO招聘を実現し、Legalpad買収を主導した。',
+  endMarket:'世界の労働所得 $55T超',
+  metrics:[['初回投資','シード · 2019年12月'],['現在の評価','$17.3B · シリーズE 2025'],['ステータス','IPO申請と報道'],['ラウンド主導','Ribbit · a16z · Coatue']],
+  insight:'Deelはその瞬間を生き、解決策を築いた。150か国超、数十兆ドルの賃金が流れる市場で（ILO）。'},
+ {key:'headway',logo:'Headway',logoImg:'/images/cases/headway-logo.webp',
+  theme:'社会テーマ · メンタルヘルス',origin:'ニューヨーク → 世界規模のアクセスモデルへ',
+  headline:'アンドリューとジェイクは、$1Tの課題を解決した——保険を受け付けるセラピストが一人もいなかった。',
   founders:'Andrew &amp; Jake',
-  lived:'Globally-minded builders with an international bench (Dutch CFO &amp; CTO). Access is a worldwide crisis.',
-  sourced:'NYC angels who passed on the round still sent Andrew our way.',
-  backed:'Global citizens on a $240B market. The US was the beachhead, not the boundary.',
-  built:'A syndicate with One Medical\'s founder; HelloFresh\'s CMO for demand gen; 10+ introductions and hires.',
-  endMarket:'~$10T global healthcare (WHO)',
-  metrics:[['First Check','Seed · Sep 2018'],['Current Mark','$2.3B · Series D 2024'],['Round led by','Spark Capital'],['Also on cap table','a16z · Thrive · Accel']],
-  insight:'Mental illness costs ~$1T a year in lost productivity (WHO). Headway built the access model the world will copy.'},
- {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',
-  theme:'Technological Theme · Automation',origin:'London → San Francisco',
-  headline:'Joshua crossed from London to automate fees, fines and red tape.',
+  lived:'国際色豊かな布陣（オランダ人のCFO &amp; CTO）を擁するグローバル志向の起業家たち。アクセスは世界共通の危機だ。',
+  sourced:'このラウンドを見送ったNYCのエンジェルたちも、アンドリューを私たちに紹介した。',
+  backed:'$240B市場に挑む世界市民。米国は橋頭堡であって、境界ではなかった。',
+  built:'One Medical創業者とのシンジケート、HelloFreshのCMOによる需要創出、10件超の紹介と採用を実現した。',
+  endMarket:'世界の医療 約$10T（WHO）',
+  metrics:[['初回投資','シード · 2018年9月'],['現在の評価','$2.3B · シリーズD 2024'],['ラウンド主導','Spark Capital'],['資本参加','a16z · Thrive · Accel']],
+  insight:'メンタル不調は生産性損失として年間約$1Tのコストを生む（WHO）。Headwayは、世界が模倣するアクセスモデルを築いた。'},
+ {key:'donotpay',logo:'DoNotPay',logoImg:'/images/cases/donotpay-logo.webp',
+  theme:'技術テーマ · 自動化',origin:'ロンドン → サンフランシスコ',
+  headline:'ジョシュアはロンドンから渡り、手数料・罰金・お役所仕事を自動化した。',
   founders:'Joshua Browder 🇬🇧',
-  lived:'A London teenager buried in parking tickets. He lived the red tape, then crossed over to automate it.',
-  sourced:'Our global founder network surfaced Joshua early.',
-  backed:'A British founder (London → US) with a viral consumer-rights product and real traction.',
-  built:'We shaped the viral launch and demand gen, built the brand, and backed Joshua across multiple rounds.',
-  endMarket:'Red tape — every country',
-  metrics:[['First Check','Seed · Feb 2019'],['Current Mark','$230mm post-money'],['Status','Partially realized']],
-  insight:'DoNotPay paid cash dividends from a profitable business, returning capital before any IPO.'},
- {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
-  theme:'Technological Theme · AI Productivity',origin:'China → San Francisco',
-  headline:'Andy replaced clunky spreadsheets with real-time FP&amp;A founders use.',
+  lived:'駐車違反切符に埋もれたロンドンの10代。彼はお役所仕事を身をもって経験し、それを自動化するために渡った。',
+  sourced:'当社のグローバル創業者ネットワークが、早期にジョシュアを発掘した。',
+  backed:'バイラルな消費者権利プロダクトと確かなトラクションを持つ英国出身の創業者（ロンドン → 米国）。',
+  built:'バイラルなローンチと需要創出を設計し、ブランドを築き、複数ラウンドにわたりジョシュアを支援した。',
+  endMarket:'お役所仕事 — あらゆる国で',
+  metrics:[['初回投資','シード · 2019年2月'],['現在の評価','ポストマネー $230mm'],['ステータス','一部回収済み']],
+  insight:'DoNotPayは黒字事業から現金配当を行い、IPO前に資本を還元した。'},
+ {key:'pry',logo:'Pry',logoImg:'/images/cases/pry-logo.webp',
+  theme:'技術テーマ · AI生産性',origin:'中国 → サンフランシスコ',
+  headline:'アンディは、使いにくい表計算を、創業者が実際に使うリアルタイムFP&amp;Aに置き換えた。',
   founders:'Andy Su 🇨🇳',
-  lived:'An immigrant engineer who lived the founder-finance pain. A universal problem, not a Valley one.',
-  sourced:'The Brex product-alumni network surfaced Andy.',
-  backed:'We backed an engineering-led founder from China with deep empathy for the pain.',
-  built:'We aligned the roadmap with the market, guided M&amp;A strategy, and coached the team to a Brex acquisition.',
-  endMarket:'Office of the CFO — global',
-  metrics:[['Checks','Seed · Dec 2019 → Apr 2022'],['Exit','Acquired by Brex — 2021'],['Status','Fully realized']],
-  insight:'Pry: a clean, fully-realized exit. Startup finance is universally broken, and founders need clarity.'}
+  lived:'創業者の財務の痛みを自ら経験した移民エンジニア。バレー特有ではなく、普遍的な課題だ。',
+  sourced:'Brexのプロダクト出身者ネットワークが、アンディを発掘した。',
+  backed:'その痛みへの深い共感を持つ、中国出身のエンジニア主導の創業者を支援した。',
+  built:'ロードマップを市場に合わせ、M&amp;A戦略を助言し、Brexによる買収までチームを導いた。',
+  endMarket:'CFO業務 — グローバル',
+  metrics:[['投資','シード · 2019年12月 → 2022年4月'],['イグジット','Brexが買収 — 2021'],['ステータス','全額回収済み']],
+  insight:'Pry：クリーンで全額回収済みのイグジット。スタートアップの財務はどこでも壊れており、創業者は明快さを必要としている。'}
 ];
 
 /* ============================================================
@@ -814,20 +814,20 @@ function uniScale(){
   const ticks=[0.5,1,5,20,100];
   const A=150, B=450, C=735, D=1000;
   const items=[
-    {n:'Airbnb',v:80,s:'operated · $80B',x:A,t:'op'},
-    {n:'Handy',v:55,s:'advised',x:C,t:'op'},
-    {n:'Kalshi',v:22,s:'$22B · Series F',x:A,t:'uni',badge:'Reported at ~$40B (FT) · 2× in 2 months'},
-    {n:'Deel',v:17.3,s:'$17.3B · IPO filing rptd',x:C,t:'uni'},
-    {n:'Assured',v:1,s:'~$1B · 2025',x:590,t:'uni'},
-    {n:'Checkr',v:4.3,s:'$5B · angel',x:A,t:''},
-    {n:'Brex / Capital One',v:5,s:'sold · $5B',x:D,t:''},
-    {n:'Headway',v:2.3,s:'$2.3B · Series D',x:B,t:'uni'},
-    {n:'Fundamental.tech',v:1.5,s:'$1.5B · angel',x:C,t:''},
-    {n:'SpotHero',v:1.12,s:'sold · $1B',x:D,t:''},
+    {n:'Airbnb',v:80,s:'経営 · $80B',x:A,t:'op'},
+    {n:'Handy',v:55,s:'アドバイザー',x:C,t:'op'},
+    {n:'Kalshi',v:22,s:'$22B · シリーズF',x:A,t:'uni',badge:'約$40Bと報道（FT）· 2か月で2倍'},
+    {n:'Deel',v:17.3,s:'$17.3B · IPO申請報道',x:C,t:'uni'},
+    {n:'Assured',v:1,s:'約$1B · 2025',x:590,t:'uni'},
+    {n:'Checkr',v:4.3,s:'$5B · エンジェル',x:A,t:''},
+    {n:'Brex / Capital One',v:5,s:'売却 · $5B',x:D,t:''},
+    {n:'Headway',v:2.3,s:'$2.3B · シリーズD',x:B,t:'uni'},
+    {n:'Fundamental.tech',v:1.5,s:'$1.5B · エンジェル',x:C,t:''},
+    {n:'SpotHero',v:1.12,s:'売却 · $1B',x:D,t:''},
     {n:'Fieldguide',v:0.78,s:'$700mm',x:A,t:''},
     {n:'Federato',v:0.7,s:'$700mm',x:B,t:''},
-    {n:'Yuzu Health',v:0.62,s:'$700mm · angel',x:C,t:''},
-    {n:'CityDeal',v:0.5,s:'co-founded → Groupon ($200mm+)',x:D,t:'op'}
+    {n:'Yuzu Health',v:0.62,s:'$700mm · エンジェル',x:C,t:''},
+    {n:'CityDeal',v:0.5,s:'共同創業 → Groupon（$200mm+）',x:D,t:'op'}
   ];
   let s=`<svg viewBox="0 0 1280 520" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI,sans-serif" style="width:100%;height:100%">`;
   s+=`<line x1="${axisX}" y1="${top-6}" x2="${axisX}" y2="${bot+6}" stroke="#cdd6ee" stroke-width="2"/>`;
@@ -919,19 +919,19 @@ function worldMap(){
 
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}">`:`<span class="cs-logo">${c.logo}</span>`;
-  const rows=[['Lived',c.lived],['Sourced',c.sourced],['Backed',c.backed],['Built',c.built]];
-  const kpis=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
-  return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
+  const rows=[['原体験',c.lived],['発掘',c.sourced],['支援対象',c.backed],['共に構築',c.built]];
+  const kpis=[['グローバル最終市場',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
+  return {title:`ケーススタディ — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
    <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
      <div class="cs-top">
-       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       <div><span class="cs-tag">★ 突出した創業者ストーリー</span><div class="cs-shift">${c.theme}</div></div>
        <div style="align-self:center;text-align:center">${c.alert?`<span class="cs-alert" style="margin-top:0">↑ ${c.alert}</span>`:''}</div>
        <div style="text-align:right">${logo}<div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);margin-top:6px">${c.origin}</div></div>
      </div>
      <h1 class="cs-story" style="white-space:normal;margin:16px 0 0;font-size:31px;line-height:1.12;max-width:1130px">${c.headline}</h1>
      <div style="flex:1;display:flex;align-items:center;gap:36px;margin:16px 0 0;min-height:0">
        <div style="flex:0 0 248px">
-         <div style="width:248px;height:248px;border-radius:16px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
+         <div style="width:248px;height:248px;border-radius:16px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('/images/cases/${c.key}.webp')"></div>
          <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:9px;font-family:var(--serif)">${c.founders}</div>
        </div>
        <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
@@ -941,9 +941,9 @@ function caseSlide(c){
      <div style="display:grid;grid-template-columns:repeat(${kpis.length},1fr);margin-top:14px;margin-bottom:10px">
        ${kpis.map((m,i)=>`<div style="padding:2px 20px;${i?'border-left:1px solid var(--line)':''}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">${m[0]}</div><div style="font-family:var(--serif);font-size:${m[2]==='em'?'18px':'19px'};line-height:1.2;margin-top:6px;color:${m[2]==='em'?'var(--cobalt)':'var(--ink)'}">${m[1]}</div></div>`).join('')}
      </div>
-     ${c.footnote?`<div class="note" style="margin-top:9px;font-size:10.5px;text-align:right">${c.footnote}</div>`:''}
+     <div class="note" style="margin-top:9px;font-size:10.5px;text-align:right;min-height:14px">${c.footnote||''}</div>
    </div>
-   <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
+   <div class="cs-insight"><div class="kk">世界水準のインサイト</div><div class="tx">${c.insight}</div></div>
    ${chrome(false)}`};
 }
 
@@ -951,38 +951,38 @@ const SLIDES=[];
 function add(o){SLIDES.push(o);}
 
 /* 1 — COVER */
-add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
+add({title:'表紙',track:'core',teaser:true,dark:true,cls:'cover',html:`
   <div class="cover-logo">${MARK} Sunshine Lake</div>
-  <div class="cover-band">Pre-Seed &amp; Seed · Fund&nbsp;I · $50mm Target · 5% GP Commit</div>
+  <div class="cover-band">プレシード &amp; シード · ファンドI · 目標$50mm · GPコミット5%</div>
   <div class="s-pad">
-    <h1>Global founders<br>forge the future.</h1>
+    <h1>グローバル創業者が、<br>未来を鍛える。</h1>
   </div>
   <div class="meta">
     <div class="ln">Donald Stalter</div>
   </div>
-  <span class="s-conf">Strictly Confidential</span>`});
+  <span class="s-conf">極秘</span>`});
 
 
 /* NEW — WHY NOW (outsiders) */
-add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'なぜ今か',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:36px">
-    <div class="eyebrow">Why Now</div>
-    <h1 class="s-title" style="font-size:36px">Billion- and trillion-dollar industries are built by outsiders.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Chips, search, space, social, AI: the giants of every era, built by international founders.</div>
+    <div class="eyebrow">なぜ今か</div>
+    <h1 class="s-title" style="font-size:36px">兆ドル規模の産業は、アウトサイダーが築く。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">半導体、検索、宇宙、ソーシャル、AI——各時代の巨人は、国際的な創業者が築いてきた。</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:22px;flex:1">
       ${[
-        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.2T','chang','MC'],
-        ['Taiwan → US · 1993','Jensen Huang','Founder &amp; CEO, Nvidia','~$4.7T','huang','JH'],
-        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.4T','brin','SB'],
-        ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T','musk','EM'],
-        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.5T','saverin','ES'],
-        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI · Founder, SSI','~$1T*','sutskever','IS']
-      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
+        ['中国 → 米国 → 台湾 · 1987','Morris Chang','TSMC創業者（55歳で）','~$2.2T','chang','MC'],
+        ['台湾 → 米国 · 1993','Jensen Huang','Nvidia創業者兼CEO','~$4.7T','huang','JH'],
+        ['ソビエト連邦 → 米国 · 1998','Sergey Brin','Google共同創業者','~$4.4T','brin','SB'],
+        ['南アフリカ → 米国 · 2002','Elon Musk','SpaceX &amp; Tesla創業者','~$3.4T','musk','EM'],
+        ['ブラジル → 米国 → シンガポール · 2004','Eduardo Saverin','Meta共同創業者','~$1.5T','saverin','ES'],
+        ['ソ連 → イスラエル → カナダ · 2015','Ilya Sutskever','OpenAI共同創業者 · SSI創業者','~$1T*','sutskever','IS']
+      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="/images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
     </div>
     <div style="margin-top:16px">
-      <div style="font-family:var(--serif);font-size:19px;color:var(--ink)">Six Silicon Valley outsiders. Four decades. Every platform shift, lived first and built first. <b style="color:var(--cobalt)">$17T+.</b></div>
+      <div style="font-family:var(--serif);font-size:19px;color:var(--ink)">シリコンバレーのアウトサイダー6人。40年間。あらゆるプラットフォーム転換を、誰より先に生き、誰より先に築いた。<b style="color:var(--cobalt)">$17T超。</b></div>
     </div>
-    <div class="note" style="margin-top:8px">Public market caps &amp; reported valuations, July 2026; years mark company founding. *OpenAI IPO ~$1T per press reports. Immigrants found companies at ~80% higher rates, at every firm size (AER: Insights, 2022).</div>
+    <div class="note" style="margin-top:8px">公開市場の時価総額および報道された評価額（2026年7月時点）。年は会社設立年。*OpenAIのIPOは報道ベースで約$1T。移民はあらゆる企業規模において約80%高い比率で会社を設立する（AER: Insights, 2022）。</div>
   </div>${chrome(false)}`});
 
 
@@ -991,141 +991,141 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
   <div class="s-pad" style="padding-top:46px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:36px">
       <div style="flex:1">
-        <div class="eyebrow">Founder &amp; General Partner</div>
+        <div class="eyebrow">創業者 &amp; ゼネラルパートナー</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Co-founded CityDeal (sold to Groupon) · International growth at Airbnb in its very early days<br>Led North America for Global Founders Capital.</div>
-        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">CityDealを共同創業（Grouponへ売却）· Airbnbのごく初期に国際グロースを担当<br>Global Founders Capitalで北米を統括。</div>
+        <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — デカコーン · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — ユニコーン。いずれも彼が発掘・主導した初回投資から。</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
-        <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
+        <div class="gp-portrait" style="background-image:url('/images/team/don.webp')"></div>
       </div>
     </div>
-    <div class="eyebrow" style="margin:40px 0 6px">The Arc</div>
+    <div class="eyebrow" style="margin:40px 0 6px">その軌跡</div>
     <div class="arc">
       ${[
-        ['Schooled abroad','Interdisciplinary and multilingual'],
-        ['UChicago','Economics, with honors'],
-        ['Credit Suisse &amp; Jefferies','CS M&amp;A (San Francisco) · Jefferies growth spinout fund (London)'],
-        ['CityDeal','Sold to Groupon · built its international offices'],
-        ['Airbnb','very early days · international growth · long-term stays, now ~1 in 5 nights booked'],
-        ['Global Founders Capital','Led NA · first checks: Deel · Kalshi'],
-        ['Sunshine Lake','His independent spinout']
+        ['海外で就学','学際的かつ多言語'],
+        ['シカゴ大学','経済学（優等）'],
+        ['Credit Suisse &amp; Jefferies','CS M&amp;A（サンフランシスコ）· Jefferisのグロース・スピンアウトファンド（ロンドン）'],
+        ['CityDeal','Grouponへ売却 · 国際拠点を構築'],
+        ['Airbnb','ごく初期 · 国際グロース · 長期滞在は今や予約の約5泊に1泊'],
+        ['Global Founders Capital','北米を統括 · 初回投資：Deel · Kalshi'],
+        ['Sunshine Lake','彼の独立スピンアウト']
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
     </div>
     <div style="margin-top:auto;padding-top:18px;padding-bottom:30px;text-align:center">
-      <div style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--cobalt);line-height:1.42;max-width:980px;margin:0 auto">"Extremely persistent, with a very high win rate — balanced with great intellect and consistently structured, in-depth analysis."</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:.03em;text-transform:uppercase">The founder of Global Founders Capital, in his attribution letter</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--cobalt);line-height:1.42;max-width:980px;margin:0 auto">「並外れて粘り強く、極めて高い勝率を誇る——優れた知性と、一貫して構造化された緻密な分析とを兼ね備えている。」</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:.03em;text-transform:uppercase">Global Founders Capital創業者、貢献実績レターより</div>
       <div style="width:46px;height:1px;background:var(--line);margin:18px auto 0"></div>
-      <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);margin-top:14px">Companies and portfolios steered through 2008 and 2022: runway, metrics, hard pivots. When markets froth, that discipline matters most.</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);margin-top:14px">2008年と2022年を乗り越えて導いた企業とポートフォリオ——ランウェイ、指標、大胆なピボット。市場が過熱するときこそ、その規律が最も効く。</div>
     </div>
   </div>${chrome(false)}`});
 
 
-add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'実績 — ファンドI &amp; II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">The Record · Funds I &amp; II</div>
-    <h1 class="s-title">The first checks, now public marks.</h1>
+    <div class="eyebrow">実績 · ファンドI &amp; II</div>
+    <h1 class="s-title">初回投資が、今や公開市場の評価に。</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
-      ${[['Fund I* · 2017–19','First checks: Headway · Kalshi'],['Fund II* · 2019–22','First checks: Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
+      ${[['ファンドI* · 2017–19','初回投資：Headway · Kalshi'],['ファンドII* · 2019–22','初回投資：Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
     </div>
     <table class="tbl tall" style="margin-top:16px">
-      <thead><tr><th>Company</th><th>Theme</th><th>Our First Check</th><th>Latest Public Mark</th><th>Round · Date</th><th>Follow-on investors</th></tr></thead>
+      <thead><tr><th>企業</th><th>テーマ</th><th>当社の初回投資</th><th>直近の公開市場評価</th><th>ラウンド · 時期</th><th>フォローオン投資家</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
-    <div style="text-align:center;margin-top:18px;font-size:15px;color:var(--ink-2)"><b style="color:var(--cobalt);letter-spacing:.06em;text-transform:uppercase;font-size:11px;font-weight:700">$5B+ follow-on capital behind them</b> &nbsp; a16z ×3 · Coatue ×2 · Sequoia · Ribbit · Spark · Thrive · Iconiq · Kleiner Perkins</div>
-    <div class="note" style="margin-top:14px;text-align:center">Company marks shown are public rounds and press reports. *Kalshi: reported round talks at ~$40B (FT, June 2026). Funds I &amp; II: Don's North America portfolios within Global Founders Capital; attribution letter available in diligence.</div>
+    <div style="text-align:center;margin-top:18px;font-size:15px;color:var(--ink-2)"><b style="color:var(--cobalt);letter-spacing:.06em;text-transform:uppercase;font-size:11px;font-weight:700">$5B超のフォローオン資本が後ろ盾</b> &nbsp; a16z ×3 · Coatue ×2 · Sequoia · Ribbit · Spark · Thrive · Iconiq · Kleiner Perkins</div>
+    <div class="note" style="margin-top:14px;text-align:center">記載の企業評価は公開ラウンドおよび報道に基づく。*Kalshi：約$40Bでのラウンド協議と報道（FT, 2026年6月）。ファンドI &amp; II：Global Founders Capital内におけるDonの北米ポートフォリオ。貢献実績レターはデューデリジェンスで開示可能。</div>
   </div>${chrome(false)}`});
 
 
 /* 3 — TRACK RECORD LADDER (before Sunshine Lake) */
-add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'トラックレコード · Sunshine Lake以前',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Before Sunshine Lake</div>
-    <h1 class="s-title">Founded, operated, and invested.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">Global founders, global ambition: first checks at seed, then <b style="color:var(--cobalt);font-weight:600">$5B+</b> of follow-on demand behind them.</div>
+    <div class="eyebrow">Sunshine Lake以前</div>
+    <h1 class="s-title">創業し、経営し、投資した。</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;line-height:1.4">グローバル創業者、グローバルな野心——シードでの初回投資、その後ろ盾には<b style="color:var(--cobalt);font-weight:600">$5B超</b>のフォローオン需要。</div>
     <div style="flex:1;min-height:0;margin-top:4px;display:flex">${uniScale()}</div>
-    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC and LA to Europe, LATAM and APAC, a sourcing machine run on weekly quotas, rebuilt at Sunshine Lake.</div>
-    <div class="note" style="margin-top:8px">All company marks are public rounds &amp; press reports · *Kalshi at ~$22B; reported talks at ~$40B (FT). SpotHero price per SEC filing (Crain's, May 2026).</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">SF、NYC、LAから欧州、中南米、アジア太平洋まで、週次ノルマで回すソーシングマシン。それをSunshine Lakeで再構築した。</div>
+    <div class="note" style="margin-top:8px">全ての企業評価は公開ラウンドおよび報道に基づく · *Kalshiは約$22B、約$40Bでの協議と報道（FT）。SpotHeroの価格はSEC提出書類に基づく（Crain's, 2026年5月）。</div>
   </div>${chrome(false)}`});
 
 
 /* 4 — OUR THESIS (three truths) */
-add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'投資テーゼ',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:38px">
-    <div class="eyebrow">Our Thesis</div>
-    <h1 class="s-title" style="font-size:40px">We back international founders at their breakout moments.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">Forged by extreme origins</b>, then handed Silicon Valley: the network, craft and capital that turn outsiders into category leaders. That bridge is what we are, and the Speakeasy is where we build it.</div>
+    <div class="eyebrow">投資テーゼ</div>
+    <h1 class="s-title" style="font-size:40px">私たちは、国際的な創業者をその飛躍の瞬間に支援する。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">極限の出自に鍛えられた</b>創業者に、シリコンバレーを託す——アウトサイダーをカテゴリーの王者へと変える、ネットワーク、技巧、そして資本。その架け橋こそが私たちであり、Speakeasyこそがそれを築く場だ。</div>
     <div style="margin-top:16px;display:flex;flex-direction:column;flex:1">
       ${[
-        ['They live the change first.','Outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
-        ['They build revenue, not toys.','No safety net exists for them.','$1.5B+','Deel\'s revenue today; it charged from year one','Deel charged customers from day one; DoNotPay ran profitably and paid cash dividends, no venture life-support required.'],
-        ['They create new markets.','They don\'t enter categories; they imagine them.','$1T+','the global end markets we underwrite from day one','Our seed first checks now mark at $22B (Kalshi), $2.3B (Headway) and ~$1B (Assured), all public rounds.']
+        ['彼らは変化を、誰より先に生きる。','アウトサイダーは、バレーが気づく前にグローバルな地殻変動を感じ取る。','59%','が移民創業者を擁する米国ユニコーンの割合（NFAP）','Deelの創業者は米国の就労ビザを取得できず、だからこそ世界が今採用に使うプラットフォームを築いた。評価額$17.3B。'],
+        ['彼らは玩具ではなく、収益を築く。','彼らには、セーフティネットが存在しない。','$1.5B+','Deelの現在の収益。初年度から課金してきた','Deelは初日から顧客に課金し、DoNotPayは黒字経営で現金配当を行った——ベンチャーの延命装置は不要だった。'],
+        ['彼らは、新しい市場を創る。','彼らはカテゴリーに参入するのではなく、それを構想する。','$1T+','初日から引き受けるグローバル最終市場','当社のシード初回投資は今、$22B（Kalshi）、$2.3B（Headway）、約$1B（Assured）——いずれも公開ラウンドで評価されている。']
       ].map((r,i)=>`<div style="display:flex;align-items:center;gap:30px;padding:14px 0;${i<2?'border-bottom:1px solid var(--line)':''};flex:1">
         <div style="flex:1.25"><div style="font-family:var(--serif);font-size:23px;color:var(--ink);line-height:1.15">${r[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45">${r[1]}</div></div>
         <div style="flex:0 0 196px;text-align:center"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--cobalt)">${r[2]}</div><div style="font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.35">${r[3]}</div></div>
-        <div style="flex:1.15;border-left:3px solid var(--sun);padding-left:18px"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8902a">Proof</div><div style="font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.45">${r[4]}</div></div>
+        <div style="flex:1.15;border-left:3px solid var(--sun);padding-left:18px"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8902a">証拠</div><div style="font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.45">${r[4]}</div></div>
       </div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:14px">Three themes, one psychology, that lead to multiple unicorns and decacorns a decade.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:14px">3つのテーマ、1つの心理。それが10年ごとに複数のユニコーンとデカコーンを生む。</div>
   </div>${chrome(false)}`});
 
 
 /* NEW — THE EVIDENCE (peer-reviewed) */
-add({title:'The Evidence',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'エビデンス',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">The Evidence</div>
-    <h1 class="s-title">The outsider edge is peer-reviewed.</h1>
+    <div class="eyebrow">エビデンス</div>
+    <h1 class="s-title">アウトサイダーの優位性は、査読済みだ。</h1>
     <hr class="s-rule">
     <div style="display:flex;flex-direction:column;gap:0;margin-top:8px;flex:1">
       ${[
-        ['~80%','Immigrants start companies at ~80% higher rates than the native-born, at every firm size, and are net job creators, not takers.','Azoulay, Jones, Kim &amp; Miranda — American Economic Review: Insights (2022)'],
-        ['45%','of Fortune 500 companies were founded by immigrants or their children, from Apple and Google to Nvidia and Tesla.','National Foundation for American Policy'],
-        ['+','Living across cultures measurably increases creative problem-solving: multicultural experience builds the cognitive flexibility that invention requires.','Maddux &amp; Galinsky — Journal of Personality and Social Psychology (2009), replicated across the literature'],
-        ['39%','Top-quartile culturally diverse teams are 39% more likely to outperform on profitability.','McKinsey &amp; Company — Diversity Wins']
+        ['~80%','移民は、あらゆる企業規模において、米国生まれより約80%高い比率で会社を設立し、雇用を奪うのではなく生み出す純創出者である。','Azoulay, Jones, Kim &amp; Miranda — American Economic Review: Insights (2022)'],
+        ['45%','がフォーチュン500企業のうち移民またはその子が創業した割合——AppleやGoogleからNvidia、Teslaまで。','National Foundation for American Policy'],
+        ['+','複数の文化にまたがって生きることは、創造的な問題解決能力を測定可能なほど高める——多文化経験は、発明が要求する認知的柔軟性を育む。','Maddux &amp; Galinsky — Journal of Personality and Social Psychology (2009)、後続研究で再現'],
+        ['39%','文化的多様性が上位四分位のチームは、収益性で上回る可能性が39%高い。','McKinsey &amp; Company — Diversity Wins']
       ].map((r,i)=>`<div style="display:flex;align-items:center;gap:28px;padding:15px 0;${i<3?'border-bottom:1px solid var(--line)':''};flex:1">
         <div style="flex:0 0 130px;font-family:var(--serif);font-size:40px;color:var(--cobalt);line-height:1;text-align:center">${r[0]}</div>
         <div style="flex:1"><div style="font-size:15px;color:var(--ink);line-height:1.45">${r[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:5px;font-style:italic">${r[2]}</div></div>
       </div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The market still prices this evidence at zero. We price it first, at the first check.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">市場は今なお、この証拠をゼロと値付けする。私たちは初回投資で、真っ先にそれを値付けする。</div>
   </div>${chrome(false)}`});
 
 /* 9 — WHERE WE INVEST */
-add({title:'Where Breakout Moments Come From',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'飛躍の瞬間はどこから来るか',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Where Breakout Moments Come From</div>
-    <h1 class="s-title">Three lenses. A new opening every few years.</h1>
+    <div class="eyebrow">飛躍の瞬間はどこから来るか</div>
+    <h1 class="s-title">3つのレンズ。数年ごとに、新たな扉が開く。</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:26px;flex:1">
       ${[
-        ['Economic','Tariffs and re-shoring re-route $35T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
-        ['Social','By 2050, 2.1B people will be over 60, and depression and anxiety cost $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
-        ['Technological','AI puts up to $4.4T a year of expert work in play: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
+        ['経済','関税と生産回帰が$35Tの貿易を再ルート化し、貨物輸送そのものが再構築される——鉄道、空、海。 <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','鉄道貨物'],['MightyFly','自律型航空貨物'],['Navier','海運']]],
+        ['社会','2050年までに21億人が60歳超となり、うつと不安は年間$1Tのコストを生む。ケアへのアクセスがソフトウェアになる。 <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','医療データ'],['Headway','保険適用のセラピー'],['Yuzu Health','福利厚生']]],
+        ['技術','AIが年間最大$4.4Tの専門業務を動かす——契約、検査、許認可がソフトウェアになる。 <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','法務契約'],['Overview','工場検査'],['PermitFlow','建設許認可']]]
       ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="margin-top:22px;display:flex;flex-direction:column;gap:20px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
     </div>
-    <div style="text-align:center;margin-top:20px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)"><span style="background:var(--sun);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 14px;margin-right:12px">What's next</span>Energy transition · space logistics · sovereign compute.</div>
+    <div style="text-align:center;margin-top:20px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)"><span style="background:var(--sun);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 14px;margin-right:12px">次に来るもの</span>エネルギー転換 · 宇宙物流 · ソブリンコンピュート。</div>
   </div>${chrome(false)}`});
 
 
 /* NEW — THE MAP · END MARKETS */
-add({title:'The Map · End Markets',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'地図 · 最終市場',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:36px">
-    <div class="eyebrow">The Map · End Markets</div>
-    <h1 class="s-title" style="font-size:40px">Ahead of the curve, on purpose.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">SaaS is still under 0.5% of the <b style="color:var(--cobalt);font-weight:600">~$115T</b> world economy: the prize is everything software hasn't reached.*</div>
+    <div class="eyebrow">地図 · 最終市場</div>
+    <h1 class="s-title" style="font-size:40px">意図して、カーブの先回りを。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">SaaSは今なお<b style="color:var(--cobalt);font-weight:600">約$115T</b>の世界経済の0.5%未満——狙う獲物は、ソフトウェアがまだ届いていないすべてだ。*</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;flex:1">
       ${[
-        ['Supply chain &amp; logistics','Now','Tariffs and sanctions re-route trade; founders rebuild rail, air and sea.','$35T global trade (UNCTAD, 2025)','Cedar · MightyFly · Navier'],
-        ['Applied AI &amp; expert work','Now','Software absorbs professional services: legal, factory, permits.','up to $4.4T a year (McKinsey)','DraftWise · Overview · PermitFlow'],
-        ['Robotics &amp; physical AI','Next','Foundation models leave the screen; machines take on the physical work of the real economy.','$15T+ physical labour (ILO)','Actively sourcing'],
-        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3.3T a year invested (IEA, 2025)','Actively sourcing'],
-        ['Space logistics','Next','Launch costs collapse; the orbital economy needs delivery and infrastructure.','~$1.8T by 2035 (WEF · McKinsey)','Actively sourcing'],
-        ['Sovereign compute','Next','Every nation wants its own AI stack; compute becomes strategic infrastructure.','$1T+ AI capex by 2030 (est.)','Actively sourcing']
-      ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column;${t[1]==='Next'?'background:#fdfbf3':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[1]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[2]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[3]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[4]}</div></div>`).join('')}
+        ['サプライチェーン &amp; 物流','Now','今','関税と制裁が貿易を再ルート化し、創業者が鉄道・空・海を再構築する。','世界貿易$35T（UNCTAD, 2025）','Cedar · MightyFly · Navier'],
+        ['応用AI &amp; 専門業務','Now','今','ソフトウェアが専門サービスを取り込む——法務、工場、許認可。','年間最大$4.4T（McKinsey）','DraftWise · Overview · PermitFlow'],
+        ['ロボティクス &amp; フィジカルAI','Next','次','基盤モデルが画面を離れ、機械が実体経済の物理的な仕事を担う。','物理労働$15T超（ILO）','積極的にソーシング中'],
+        ['エネルギー転換','Next','次','世界が石油を見つめる間に、創業者は静かに送電網を再構築する。','年間$3.3Tを投資（IEA, 2025）','積極的にソーシング中'],
+        ['宇宙物流','Next','次','打ち上げコストが崩壊し、軌道経済が配送とインフラを必要とする。','2035年までに約$1.8T（WEF · McKinsey）','積極的にソーシング中'],
+        ['ソブリンコンピュート','Next','次','各国が自国のAIスタックを求め、コンピュートが戦略的インフラになる。','2030年までにAI設備投資$1T超（推計）','積極的にソーシング中']
+      ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column;${t[1]==='Next'?'background:#fdfbf3':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[2]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[3]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[4]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[5]}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">We map the breaks before the market names the category, then back the outsider who lived them.</div>
-    <div class="note" style="margin-top:8px">*SaaS spend ~$400B (Gartner) vs ~$115T world GDP (IMF). Also on the watchlist: longevity · defense tech · climate adaptation.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">市場がカテゴリーに名前を付ける前に地殻変動を地図化し、それを生き抜いたアウトサイダーを支援する。</div>
+    <div class="note" style="margin-top:8px">*SaaS支出 約$400B（Gartner）対 世界GDP 約$115T（IMF）。ウォッチリストには他に：長寿 · 防衛テック · 気候適応。</div>
   </div>${chrome(false)}`});
 
 
@@ -1133,240 +1133,240 @@ add({title:'The Map · End Markets',track:'core',teaser:true,dark:false,cls:'',h
 
 
 /* 8 — TEAM + ADVISORS */
-add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'チーム &amp; アドバイザー',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding:30px 72px 34px">
-    <div class="eyebrow">Who Runs the System</div>
-    <h1 class="s-title" style="font-size:40px">International and multicultural, by design.</h1>
-    <div class="team-row" style="margin:16px 0 16px">${teamCardsHTML()}</div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">The bench — operators who made the same journey, matched to every stage</div>
+    <div class="eyebrow">システムを動かす人々</div>
+    <h1 class="s-title" style="font-size:40px">国際的で多文化——それは設計思想だ。</h1>
+    <div class="team-row" style="margin:12px 0 12px">${teamCardsHTML()}</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">ベンチ——同じ道を歩んだ経営者たちを、各ステージに合わせて配置</div>
     <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
-    <div style="margin:14px 0 0 32px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:18px;color:#fff">
-      <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPAC Member</span>
-      <span style="font-size:15px;line-height:1.3"><b style="font-weight:700">Nate Mitchell</b> · Managing Director, Teachers' Venture Growth · Ontario Teachers' Pension Plan</span>
+    <div style="margin:10px 0 0 32px;background:#0B1275;border-radius:12px;padding:10px 22px;display:flex;align-items:center;gap:18px;color:#fff">
+      <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPACメンバー</span>
+      <span style="font-size:15px;line-height:1.3"><b style="font-weight:700">Nate Mitchell</b> · マネージングディレクター, Teachers' Venture Growth · Ontario Teachers' Pension Plan</span>
     </div>
   </div>${chrome(false,true)}`});
 
 
 /* 10 — SOURCING (consolidated: engine + aperture + scout proof) */
-add({title:'How We Get There First',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'誰よりも先に辿り着く方法',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:34px">
-    <div class="eyebrow">Sourcing · How We Get There First</div>
-    <h1 class="s-title" style="font-size:38px">5,000 sourced. 500 scored. 30 backed.</h1>
-    <div class="s-sub" style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1120px;line-height:1.4">Fifteen years of dense founder networks, run as five named channels, each with an owner, a weekly quota, and comp on results.</div>
+    <div class="eyebrow">ソーシング · 誰よりも先に辿り着く方法</div>
+    <h1 class="s-title" style="font-size:38px">5,000社を発掘。500社を評価。30社に投資。</h1>
+    <div class="s-sub" style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1120px;line-height:1.4">15年かけて築いた密度の高い創業者ネットワークを、5つの名前付きチャネルとして運営。それぞれに責任者、週次ノルマ、成果連動の報酬を紐づけている。</div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:10px">
       ${[
-        ['First-50 Alumni','The next wave works inside the last. We track the first fifty of Deel, Kalshi, Headway and Assured, from their own cap tables, and get the first call when one steps out.','pills:Deel → FirstWork|Brex → PermitFlow|Headway → Marble'],
-        ['Home-Market Winners','The strongest signal: already won once, somewhere harder. Founders who built real revenue in constrained home markets and relocate to go global, surfaced through a founder diaspora fifteen years dense.',''],
-        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b> — we host their demo days; their presidents keep sourcing as alumni.',''],
-        ['The Speakeasy Door','Inbound, engineered: O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.',''],
-        ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate.','']
-      ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:11px 0;border-top:1px solid var(--line)"><div style="flex:0 0 210px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1"><div style="font-size:13.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div>${r[2].startsWith('pills:')?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${r[2].slice(6).split('|').map(p=>`<span style="font-size:11.5px;font-weight:600;color:var(--cobalt);background:#eef3fd;border-radius:999px;padding:4px 11px">${p}</span>`).join('')}<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:2px">unicorn founders refer, pre-incorporation</span></div>`:''}</div></div>`).join('')}
+        ['First-50 卒業生','次の波は、前の波の内側から生まれる。私たちはDeel、Kalshi、Headway、Assuredの最初の50人を、彼ら自身の資本構成から追い、独立する際には最初の一本の連絡をもらう。','pills:Deel → FirstWork|Brex → PermitFlow|Headway → Marble'],
+        ['母国市場の勝者','最も強いシグナル——より過酷な場所で、既に一度勝っている。制約の多い母国市場で実際の収益を築き、グローバル化のために移住する創業者。15年分の密度を持つ創業者ディアスポラを通じて発掘する。',''],
+        ['キャンパス・ネーションズ','<b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b>の留学生団体——私たちがそのデモデーを主催し、会長たちは卒業後もソーシングを続ける。',''],
+        ['Speakeasyの扉','設計されたインバウンド——O-1ビザ支援、初日からのDeelでの給与運用、最初の50人への紹介。最良のアウトサイダーは、どのファンドが口説くよりも先に、自ら私たちの元へ辿り着く。',''],
+        ['ビザ・リスト','O-1は、政府が運営する非凡なアウトサイダーの事前選抜だ。移民弁護士とビザスポンサーが、法人設立の数か月前に創業者を教えてくれる。','']
+      ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:11px 0;border-top:1px solid var(--line)"><div style="flex:0 0 210px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1"><div style="font-size:13.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div>${r[2].startsWith('pills:')?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${r[2].slice(6).split('|').map(p=>`<span style="font-size:11.5px;font-weight:600;color:var(--cobalt);background:#eef3fd;border-radius:999px;padding:4px 11px">${p}</span>`).join('')}<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:2px">ユニコーン創業者が、法人設立前に紹介</span></div>`:''}</div></div>`).join('')}
     </div>
     <div style="margin-top:12px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:20px;color:#fff">
-      <div style="flex:0 0 auto"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">The Sunshine Lake Speakeasy</div><div style="font-size:12.5px;color:rgba(255,255,255,.7);margin-top:2px">San Francisco · virtual worldwide</div></div>
-      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.35">One system, and every turn compounds: sourcing events run here; a 100+ operator discovery program feeds the top. Seen first, never auctioned: in Kalshi, Deel and Headway at seed, years before Coatue, Ribbit and Spark arrived.</div>
+      <div style="flex:0 0 auto"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">The Sunshine Lake Speakeasy</div><div style="font-size:12.5px;color:rgba(255,255,255,.7);margin-top:2px">サンフランシスコ · 世界中からオンラインで</div></div>
+      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.35">1つのシステム、そのすべての回転が複利で効いていく——ソーシングイベントはここで開催し、100人超の経営者による発掘プログラムが最上流を潤す。誰より先に見つけ、決して競売にかけない——Coatue、Ribbit、Sparkが現れる何年も前に、Kalshi、Deel、Headwayをシードで。</div>
     </div>
   </div>${chrome(false)}`});
 
 
 /* NEW — HOW WE HELP (momentum) */
-add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'初回投資の、その後',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:38px">
-    <div class="eyebrow">After the First Check</div>
-    <h1 class="s-title" style="font-size:40px">AI just made technology a commodity. Momentum isn't.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1050px;line-height:1.4">As the cost of writing code collapses, the ambition of what gets built expands.* Winners out-operate.</div>
+    <div class="eyebrow">初回投資の、その後</div>
+    <h1 class="s-title" style="font-size:40px">AIは技術をコモディティにした。だが勢いは、そうではない。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1050px;line-height:1.4">コードを書くコストが崩壊するにつれ、何を築くかの野心は広がる。*勝者は、運営で上回る。</div>
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
-        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We coach the cadence.','chip:Cadence · years → quarters'],
-        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into narratives that close customers, hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach — on Broadway with Glenn Close'],
-        ['Sleeves rolled up','We build alongside: pipelines opened, executives recruited, M&amp;A run, by a GP who sold his company to Groupon and drove Airbnb\'s early international growth (now nearly 1 in 5 nights booked).','chip:Groupon exit · Airbnb growth']
+        ['運営の勢い','市場が模倣できるより速く、出荷し、売り、採用する。プロダクトサイクルは今や数年から四半期へ圧縮され、国際的な創業者は既にこの流儀で動く。私たちはそのリズムをコーチする。','chip:リズム · 数年 → 四半期'],
+        ['物語 → ミッション → 事業','生きた物語はミッションになり、ミッションは持続的な収益になる。当社のブロードウェイのベテランが、創業者の真実を、顧客・採用・ラウンドを決める物語へと変える。','photo:/images/team/andrew-hovelson.webp|Andrew Hovelson、当社のナラティブコーチ——ブロードウェイでGlenn Closeと共演'],
+        ['袖をまくって共に','私たちは並走して築く——パイプラインを開き、経営幹部を採用し、M&amp;Aを回す。自社をGrouponへ売却し、Airbnbの初期の国際グロースを牽引した（今や予約の約5泊に1泊）GPが。','chip:Grouponへのイグジット · Airbnbのグロース']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.58;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:140px;border-radius:10px;background:#dfe5f2 center 18%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:`<div style="margin-top:14px;display:inline-flex;align-self:flex-start;background:#eef3fd;border-radius:999px;padding:6px 13px;font-size:11px;font-weight:600;color:var(--cobalt)">${c[2].slice(5)}</div>`}</div>`).join('')}
     </div>
     <div style="margin-top:20px;border-left:3px solid var(--sun);padding-left:20px">
-      <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
-      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune, Oct 2025 · condensed). Global founders already live at that frontier; we fund them as the wave crests.</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">「まさにその最前線で生き、うねり立つ波とともに動け。」</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI、今の創業者を分けるものについて（Fortune, 2025年10月 · 要約）。グローバル創業者は既にその最前線に生きている。波が立ち上がるその瞬間に、私たちは彼らへ投資する。</div>
     </div>
-    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?" — Top of Mind #146 (March 2026).</div>
+    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?" — Top of Mind #146 (2026年3月)。</div>
   </div>${chrome(false)}`});
 
 
 /* 11 — FUND OVERVIEW */
-add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'ファンドI · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Fund I · $50mm</div>
-    <h1 class="s-title" style="font-size:42px">Concentrated by design. Strictly seed.</h1>
-    <div class="s-sub" style="font-size:17px;color:var(--mid-lake);margin-top:8px">The arithmetic: $1mm first checks, 5% ownership, 30 companies. One breakout returns the fund.</div>
+    <div class="eyebrow">ファンドI · $50mm</div>
+    <h1 class="s-title" style="font-size:42px">設計思想としての集中。徹底してシード。</h1>
+    <div class="s-sub" style="font-size:17px;color:var(--mid-lake);margin-top:8px">その算術——$1mmの初回投資、5%の持分、30社。1社の飛躍が、ファンドを回収する。</div>
     <hr class="s-rule">
     <div style="display:flex;gap:28px;margin-top:26px;flex:1">
       ${[
-        ['Construction',[['30 core','pre-seed &amp; seed only'],['$1mm first checks','5% target ownership'],['75%+ core','incl. dedicated &amp; discretionary reserves'],['20% other non-initial checks','cannonball follow ons, network &amp; power-law checks'],['5% discovery','']]],
-        ['Economics',[['2.5% mgmt','stepping to 1.5%'],['20% carry',''],['5% GP commit',''],['10-year term','(+2)']]],
-        ['Status',[['First close complete',''],['Actively deploying',''],['Expected ~80% deployed','over 3.5 years; reserves in the final 1.5']]]
+        ['ポートフォリオ構成',[['コア30社','プレシード &amp; シードのみ'],['$1mmの初回投資','目標持分5%'],['コア75%+','専用・裁量リザーブを含む'],['その他の非初回投資20%','キャノンボール型フォローオン、ネットワーク・べき乗則投資'],['ディスカバリー5%','']]],
+        ['エコノミクス',[['管理報酬2.5%','1.5%へ逓減'],['キャリー20%',''],['GPコミット5%',''],['10年満期','（+2）']]],
+        ['ステータス',[['ファーストクローズ完了',''],['積極的に投資中',''],['約80%を投資予定','3.5年かけて。残り1.5年はリザーブ']]]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">Co-investment opportunities for LPs.</div>
-    <div class="note" style="margin-top:12px">Preliminary and subject to change. Not an offer to sell, or a solicitation of an offer to buy, any security.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">LP向けの共同投資機会。</div>
+    <div class="note" style="margin-top:12px">暫定的であり変更の可能性があります。いかなる証券の売却の申込み、または購入の申込みの勧誘でもありません。</div>
   </div>${chrome(false)}`});
 
 
 /* 12 — PORTFOLIO CONSTRUCTION */
-const PC1=[{label:'Core: initial checks',pct:55,color:'#2657e8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Core: discretionary reserves',pct:10,color:'#86b3f0'},{label:'Discovery',pct:10,color:'#F2D831'},{label:'Network',pct:10,color:'#7cc24f'},{label:'Power law',pct:5,color:'#f2a03c'}];
-add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
+const PC1=[{label:'コア：初回投資',pct:55,color:'#2657e8'},{label:'コア：専用リザーブ',pct:10,color:'#4f86ea'},{label:'コア：裁量リザーブ',pct:10,color:'#86b3f0'},{label:'ディスカバリー',pct:10,color:'#F2D831'},{label:'ネットワーク',pct:10,color:'#7cc24f'},{label:'べき乗則',pct:5,color:'#f2a03c'}];
+add({title:'ポートフォリオ構成',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">$50mm · Target Portfolio Construction</div>
-    <h1 class="s-title" style="font-size:38px">Strategic capital deployment.</h1>
+    <div class="eyebrow">$50mm · 目標ポートフォリオ構成</div>
+    <h1 class="s-title" style="font-size:38px">戦略的な資本配分。</h1>
     <div class="cols" style="margin-top:30px;align-items:center;gap:80px;flex:1">
       <div style="flex:0 0 300px;position:relative;display:flex;justify-content:center">
         ${donut(PC1,120,40,'')}
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);line-height:1.15">
-          <div style="font-size:27px;color:var(--ink);font-weight:700">75% core</div>
-          <div style="font-size:21px;color:var(--muted)">25% non-core</div>
+          <div style="font-size:27px;color:var(--ink);font-weight:700">コア75%</div>
+          <div style="font-size:21px;color:var(--muted)">非コア25%</div>
         </div>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:4px">
         ${PC1.map(s=>`<div style="display:flex;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="width:16px;height:16px;border-radius:4px;flex:0 0 16px;background:${s.color}"></span><span style="flex:1;font-size:17px;color:var(--ink-2)">${s.label}</span><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink)">${s.pct}%</span></div>`).join('')}
       </div>
     </div>
-    <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
+    <div class="note">すべての数値は目標値です。これらの目標が達成される保証はありません。</div>
   </div>${chrome(false)}`});
 
 
 /* 13 — ASSET POSITIONING */
-add({title:'Return Architecture',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'リターンの設計',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Return Architecture</div>
-    <h1 class="s-title">Every exit path.</h1>
+    <div class="eyebrow">リターンの設計</div>
+    <h1 class="s-title">あらゆるイグジット経路を。</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:26px;flex:1">
       ${[
-        ['Multiples','#155EE8','A 5% stake in one $1B outcome returns the fund; a $5B outcome returns it five times over.','Kalshi re-rated from our seed to a $22B public round; Headway from seed to $2.3B.'],
-        ['Early DPI','#2f9d6f','Secondaries and founder dividends return principal early, without surrendering the upside.','Multiple secondaries have been taken over time.'],
-        ['Co-investment','#b8902a','LPs invest alongside our breakouts, fee- and carry-light.','We already syndicated Deel and Fieldguide allocations to LPs.']
-      ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;text-align:center"><div style="font-family:var(--serif);font-size:28px;color:${c[1]};line-height:1.12">${c[0]}</div><div style="font-size:18.5px;color:var(--ink-2);line-height:1.5;margin-top:22px;flex:1;display:flex;align-items:center;justify-content:center">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:16px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">Proof</div><div style="font-size:15px;color:var(--ink);margin-top:6px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
+        ['倍率','#155EE8','$1Bの成果に対する5%の持分でファンドを回収し、$5Bの成果ならその5倍を回収する。','Kalshiは当社のシードから$22Bの公開ラウンドへ、Headwayはシードから$2.3Bへ再評価された。'],
+        ['早期のDPI','#2f9d6f','セカンダリーと創業者配当が、アップサイドを手放すことなく、元本を早期に返す。','時間をかけて複数回のセカンダリーを実施済み。'],
+        ['共同投資','#b8902a','LPは、手数料・キャリー軽減で当社の飛躍企業に並走投資する。','既にDeelとFieldguideの配分をLPへシンジケート済み。']
+      ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;text-align:center"><div style="font-family:var(--serif);font-size:28px;color:${c[1]};line-height:1.12">${c[0]}</div><div style="font-size:18.5px;color:var(--ink-2);line-height:1.5;margin-top:22px;flex:1;display:flex;align-items:center;justify-content:center">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:16px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">証拠</div><div style="font-size:15px;color:var(--ink);margin-top:6px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:20px">We back sectors incumbents must acquire into, and we know how the process runs.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:20px">既存企業が買収せざるを得ないセクターに投資し、そのプロセスの回り方を熟知している。</div>
   </div>${chrome(false)}`});
 
 
 /* LP CO-INVESTMENT PROGRAM */
-add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'LP共同投資プログラム',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">LP Co-Investment Program</div>
-    <h1 class="s-title">We open our breakouts to our LPs.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">With the growth judgment of a serial entrepreneur and operator who has sat on 10+ boards, including exited SpotHero (to Uber).</div>
+    <div class="eyebrow">LP共同投資プログラム</div>
+    <h1 class="s-title">当社の飛躍企業を、LPに開く。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">SpotHero（Uberへ売却）を含む10社超の取締役会に加わってきた、連続起業家であり経営者のグロース判断とともに。</div>
     <hr class="s-rule">
     <div style="display:flex;gap:30px;margin-top:30px;flex:1">
       ${[
-        ['Exclusive co-investment opportunities','When we open a breakout, we open it here first, the names brand funds cannot reach early. The next Deels and Kalshis, offered to the LPs who backed us before anyone else.'],
-        ['Aligned economics','Fee- and carry-light, reserved for Fund I LPs. We earn when you earn, the same incentive that drives the fund itself. No blind pools, no hidden layers.'],
-        ['Full transparency','The same investment memos, data and post-close monitoring the fund runs on, shared with participating LPs in real time. You see what we see, when we see it.']
+        ['限定的な共同投資機会','飛躍企業を開くとき、私たちはまずここで開く——ブランドファンドが早期には手の届かない銘柄を。次のDeelやKalshiを、誰よりも先に私たちを支援したLPへ提供する。'],
+        ['整合したエコノミクス','手数料・キャリー軽減で、ファンドIのLP専用。あなたが儲かるとき私たちも儲かる——ファンドそのものを動かすのと同じインセンティブ。ブラインドプールも、隠れた階層もない。'],
+        ['完全な透明性','ファンドが運用に用いるのと同じ投資メモ、データ、クローズ後のモニタリングを、参加LPとリアルタイムで共有する。私たちが見るものを、私たちが見る時に、あなたも見る。']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:25px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:16px 0 18px"></div><div style="font-size:17px;color:var(--ink-2);line-height:1.65">${c[1]}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);text-align:center;margin-top:20px">Already syndicated to our LPs: <b style="font-weight:400;color:var(--cobalt)">Deel</b> and <b style="font-weight:400;color:var(--cobalt)">Fieldguide</b>, with more in the pipeline.</div>
+    <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);text-align:center;margin-top:20px">既にLPへシンジケート済み：<b style="font-weight:400;color:var(--cobalt)">Deel</b>と<b style="font-weight:400;color:var(--cobalt)">Fieldguide</b>。さらにパイプラインに控える。</div>
   </div>${chrome(false)}`});
 
 
 /* 14 — OUR LPs (text) */
-add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'当社のリミテッド・パートナー',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Who Stands Behind It</div>
-    <h1 class="s-title">Backed by the people who build, fund and acquire.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">A global LP base.</div>
+    <div class="eyebrow">誰が後ろ盾か</div>
+    <h1 class="s-title">築き、資金を供給し、買収する人々が支える。</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">グローバルなLP基盤。</div>
     <div style="display:flex;gap:34px;margin-top:26px">
       ${[
-        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis, sold to Coinbase · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','Siggi\'s (innovative CPG brand) · Europe'],['Thiago da Costa','Lagoa, sold to Autodesk · LATAM']]],
-        ['Leading VCs',[['Anish Acharya','a16z'],['Arthur Patterson','Accel Partners founder · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
-        ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder'],['Nic Ingram','EQT · Hong Kong'],['Rohan Kodialam','Citadel'],['Shawn O\'Neill','Silver Lake']]],
-        ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds'],['Cambridge Associates','Institutional advisor'],['JIMCO','Jameel family office · followed on from GFC'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]]
+        ['創業者 &amp; 経営者',[['David Helgason','Unity創業者（IPO）· 欧州'],['Ola Doudin','BitOasis、Coinbaseへ売却 · MENA'],['Ryota Matsuzaki','楽天 経営幹部（IPO）· アジア太平洋'],['Siggi Hilmarsson','Siggi\'s（革新的CPGブランド）· 欧州'],['Thiago da Costa','Lagoa、Autodeskへ売却 · 中南米']]],
+        ['一流VC',[['Anish Acharya','a16z'],['Arthur Patterson','Accel Partners創業者 · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
+        ['ヘッジファンド &amp; PE',[['Francesco Rivera','Hudson River Trading'],['Mickey Arabelovic','元Sequoia · Telescope Partners創業者'],['Nic Ingram','EQT · 香港'],['Rohan Kodialam','Citadel'],['Shawn O\'Neill','Silver Lake']]],
+        ['機関投資家 &amp; ファンド・オブ・ファンズ',[['Breaker Cove','元Google社員のファンド・オブ・ファンズ'],['Cambridge Associates','機関投資家向けアドバイザー'],['JIMCO','Jameelファミリーオフィス · GFCから継続'],['RSJ','ファンド・オブ・ファンズ · 東欧'],['Taplow Blue','ファンド・オブ・ファンズ · 西欧']]]
       ].map(col=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:18px;color:var(--cobalt);margin-bottom:18px;min-height:2.4em">${col[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${col[1].map(p=>`<div><div style="font-size:15px;font-weight:600;color:var(--ink)">${p[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:3px">${p[1]}</div></div>`).join('')}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:auto;padding-top:14px">Our LPs help us win: the people who fund, scale and acquire the next trillion-dollar outsiders.</div>
-    <div class="note" style="margin-top:10px;padding-bottom:14px">The insiders re-upped: JIMCO and several Global Founders Capital partners followed Don to Sunshine Lake.</div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:auto;padding-top:14px">当社のLPは、勝利を後押しする——次の兆ドル級アウトサイダーに資金を供給し、スケールさせ、買収する人々だ。</div>
+    <div class="note" style="margin-top:10px;padding-bottom:14px">インサイダーは再出資した——JIMCOと数名のGlobal Founders CapitalのパートナーがDonに続いてSunshine Lakeへ。</div>
   </div>${chrome(false)}`});
 
 
 /* 15 — EARNING THE RIGHT TO SCALE */
-add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'フランチャイズ',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">The Franchise</div>
-    <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
-    <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
+    <div class="eyebrow">フランチャイズ</div>
+    <h1 class="s-title" style="font-size:42px">実証済みの2ファンド。この先に50年のフランチャイズ。</h1>
+    <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ 実績</span><span style="flex:3;text-align:right">計画 ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Headway &amp; Kalshi first checks</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Deel &amp; Assured first checks</div></div>
-      <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
-      <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
-      <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">ファンドI*</div><div class="sz"><b>GFC · 北米</b></div><div class="sz">Headway &amp; Kalshi 初回投資</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">ファンドII*</div><div class="sz"><b>GFC · 北米</b></div><div class="sz">Deel &amp; Assured 初回投資</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">コア30社 · プレシード &amp; シード</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">コア45社 · 同じ初期フォーカス</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">コア60社 · マルチバーティカル</div></div>
     </div>
-    <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);text-align:center;margin-top:26px">Sunshine Lake is a Fund I on paper, and a Fund III in evidence. Priced like the former, de-risked like the latter.</div>
-    <div class="note" style="margin-top:12px;text-align:center">*Funds I &amp; II: Don's North America portfolios within GFC. Fund II &amp; III are targets. Further details available upon request.</div>
+    <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);text-align:center;margin-top:26px">Sunshine Lakeは、紙の上ではファンドIだが、実証ではファンドIIIだ。前者のように値付けされ、後者のようにリスクが軽減されている。</div>
+    <div class="note" style="margin-top:12px;text-align:center">*ファンドI &amp; II：GFC内におけるDonの北米ポートフォリオ。ファンドII &amp; IIIは目標値。詳細はご請求に応じて開示。</div>
   </div>${chrome(false)}`});
 
 
 /* ===== APPENDIX ===== */
-add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
-  <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
+add({title:'付録',track:'appendix',teaser:false,dark:true,cls:'section',html:`
+  <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>付録</h2></div>${chrome(true)}`});
 
 
 /* UNICORN TABLE */
 
 
 /* BENCHMARKING */
-add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'市場の評価',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Validation · The Market's Verdict</div>
-    <h1 class="s-title">Every first check was re-priced upward, by the best.</h1>
+    <div class="eyebrow">検証 · 市場の評価</div>
+    <h1 class="s-title">すべての初回投資が、最高の投資家によって上方修正された。</h1>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:16px">
       ${[
-        ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series A · ’21'],['YC Growth','$750m'],['Paradigm','$2B · Series C ’25'],['$11B','Paradigm · Dec ’25'],['$22B','Coatue · May ’26'],['IPO?','~$40B talks (FT)']]],
-        ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO?','filing reported']]],
-        ['Headway','Seed · Sep 2018','#2f9d6f',[['a16z','Series A/B'],['$1B','Spark · Series C'],['$2.3B','Spark · Series D ’24']]],
-        ['Assured','Seed · Dec 2019','#BE922A',[['Cortana','Series A'],['Kleiner · Iconiq','Series B'],['~$1B','Bloomberg · Mar ’25']]]
+        ['Kalshi','シード · 2019年4月','#155EE8',[['Sequoia','シリーズA · ’21'],['YC Growth','$750m'],['Paradigm','$2B · シリーズC ’25'],['$11B','Paradigm · ’25年12月'],['$22B','Coatue · ’26年5月'],['IPO?','約$40Bで協議（FT）']]],
+        ['Deel','シード · 2019年12月','#155EE8',[['a16z','シリーズA · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · ’25年10月'],['IPO?','申請報道']]],
+        ['Headway','シード · 2018年9月','#2f9d6f',[['a16z','シリーズA/B'],['$1B','Spark · シリーズC'],['$2.3B','Spark · シリーズD ’24']]],
+        ['Assured','シード · 2019年12月','#BE922A',[['Cortana','シリーズA'],['Kleiner · Iconiq','シリーズB'],['~$1B','Bloomberg · ’25年3月']]]
       ].map(r=>`<div style="display:flex;align-items:center;gap:24px;padding:23px 0;border-top:1px solid var(--line)"><div style="flex:0 0 162px"><div style="font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:8px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:17px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:9px 16px;border-radius:10px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:17px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:11px;color:var(--muted);margin-top:2px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:14px;text-align:center">All rounds and valuations per public announcements and press reports.</div>
+    <div class="note" style="margin-top:14px;text-align:center">すべてのラウンドおよび評価額は、公表および報道に基づく。</div>
   </div>${chrome(false)}`});
 
 
 /* NEW — THE CAPITAL STACK (early-stage focus) */
-add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'キャピタルスタック',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Early-Stage Focus · Pre-Seed &amp; Seed</div>
-    <h1 class="s-title">Seed is where the multiples are made.</h1>
-    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">We enter at the first check and own the highest-multiple rung of the stack. Later capital pays up for de-risking.</div>
+    <div class="eyebrow">アーリーステージ特化 · プレシード &amp; シード</div>
+    <h1 class="s-title">倍率が生まれるのは、シードだ。</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">私たちは初回投資で参入し、スタックの中で最も高い倍率の段を保有する。後続の資本は、リスク低減の対価を上乗せして支払う。</div>
     <div style="display:flex;gap:12px;flex:1;margin-top:18px">
       <div style="flex:0 0 92px;display:flex;align-items:stretch;gap:6px">
-        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5–7yr return potential</div>
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5〜7年のリターン潜在力</div>
         <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:30px 0 50px;text-align:right;font-family:var(--serif)">
           <div style="font-size:22px;color:var(--cobalt)">50×</div><div style="font-size:19px;color:var(--ink)">10×</div><div style="font-size:16px;color:var(--muted)">5×</div><div style="font-size:15px;color:var(--muted)">2×</div>
         </div>
       </div>
       <div style="flex:1;display:flex;flex-direction:column">
         <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px">
-          ${[['Pre-Seed',1,3,'#0B1275'],['Seed',4,6,'#155EE8'],['Venture',7,9,'#5a8de8'],['Growth',10,12,'#a9c2ee']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:${s[3]==='#a9c2ee'?'var(--navy)':'#fff'};text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
+          ${[['プレシード',1,3,'#0B1275'],['シード',4,6,'#155EE8'],['ベンチャー',7,9,'#5a8de8'],['グロース',10,12,'#a9c2ee']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:${s[3]==='#a9c2ee'?'var(--navy)':'#fff'};text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
         </div>
         <div style="position:relative;flex:1;margin-top:10px">
           <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);pointer-events:none"><div style="grid-column:1/7;background:rgba(21,94,232,.08);border:1.5px dashed rgba(21,94,232,.5);border-radius:10px"></div></div>
           <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-evenly;padding:8px 0">
             ${[
-              ['Friends &amp; family',1,3,false],
-              ['Accelerators',2,4,false],
-              ['Angels',3,5,false],
-              ['Sunshine Lake — first checks',1,6,true],
-              ['Early &amp; late-stage venture',6,9,false],
-              ['Late-stage growth',9,11,false],
-              ['Public equity markets',10,12,false]
+              ['家族・友人',1,3,false],
+              ['アクセラレーター',2,4,false],
+              ['エンジェル',3,5,false],
+              ['Sunshine Lake — 初回投資',1,6,true],
+              ['アーリー・レイターステージのベンチャー',6,9,false],
+              ['レイターステージのグロース',9,11,false],
+              ['公開株式市場',10,12,false]
             ].map(v=>`<div style="display:grid;grid-template-columns:repeat(12,1fr)"><div style="grid-column:${v[1]}/${v[2]+1};height:${v[3]?'32px':'24px'};background:${v[3]?'#0B1275':'#eef1f7'};border:1px solid ${v[3]?'#0B1275':'var(--line)'};${v[3]?'border-left:5px solid #F2D831;':''}border-radius:999px;display:flex;align-items:center;padding:0 14px;font-size:${v[3]?'13px':'12.5px'};font-weight:${v[3]?'700':'600'};color:${v[3]?'#fff':'var(--ink-2)'};white-space:nowrap;overflow:hidden">${v[0]}</div></div>`).join('')}
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:8px;border-top:1px solid var(--line);padding-top:8px">
           ${['$50k','$100k','$250k','$500k','$1M','$2M','$5M','$10M','$20M','$50M','$100M','$200M'].map(l=>`<div style="text-align:center;font-size:10.5px;color:var(--muted)">${l}</div>`).join('')}
         </div>
-        <div style="text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px">Average raise</div>
+        <div style="text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px">平均調達額</div>
       </div>
     </div>
-    <div style="font-family:var(--serif);font-size:16.5px;color:var(--mid-lake);text-align:center;margin-top:14px">One 5% first check into a breakout returns the fund. Every later round pays up for the certainty we underwrite first.</div>
+    <div style="font-family:var(--serif);font-size:16.5px;color:var(--mid-lake);text-align:center;margin-top:14px">飛躍企業への5%の初回投資1本が、ファンドを回収する。後続のどのラウンドも、私たちが真っ先に引き受ける確度の対価を上乗せして支払う。</div>
   </div>${chrome(false)}`});
 
 
@@ -1377,61 +1377,61 @@ CASES.forEach(c=>add(caseSlide(c)));
 
 
 /* DUE DILIGENCE */
-add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'デューデリジェンスのプロセス',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">How We Decide</div>
-    <h1 class="s-title">A high-conviction diligence process.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Every axis maps to the thesis: story, ambition, theme, domain, execution.</div>
+    <div class="eyebrow">意思決定の方法</div>
+    <h1 class="s-title">高い確信度のデューデリジェンス・プロセス。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">すべての軸がテーゼに対応する——物語、野心、テーマ、専門領域、実行力。</div>
     <hr class="s-rule">
     <div class="dd-row">
       ${[
-        ['Step 1','Founder assessment','2–6 hrs','<ul><li>Breakout story, scored 1–5.</li><li>Are these the best founders in the world for this problem?</li><li>Score global ambition, theme, domain, execution.</li></ul>'],
-        ['Step 2','Market &amp; model','6–18 hrs','<ul><li>Market sizing and model.</li><li>Data room and cap table.</li><li>Benchmark vs comps; product roadmap.</li></ul>'],
-        ['Step 3','Reflection &amp; decision','18+ hrs','<ul><li>Internal alignment and conviction.</li><li>SWOT and competitive positioning.</li><li>3 ecosystem intros (customers &amp; operators).</li></ul>'],
-        ['Step 4','Closing push','24–72 hrs','<ul><li>Thematic alignment session.</li><li>Support via customer &amp; talent intros.</li><li>Financial &amp; ops guidance.</li></ul>']
+        ['ステップ1','創業者の評価','2〜6時間','<ul><li>飛躍の物語を、1〜5で採点。</li><li>この課題に対して、世界最高の創業者たちか？</li><li>グローバルな野心、テーマ、専門領域、実行力を採点。</li></ul>'],
+        ['ステップ2','市場 &amp; モデル','6〜18時間','<ul><li>市場規模とモデル。</li><li>データルームと資本構成。</li><li>類似企業とのベンチマーク、プロダクトロードマップ。</li></ul>'],
+        ['ステップ3','熟考 &amp; 意思決定','18時間以上','<ul><li>社内の合意形成と確信。</li><li>SWOTと競争ポジショニング。</li><li>エコシステムからの3件の紹介（顧客 &amp; 経営者）。</li></ul>'],
+        ['ステップ4','クロージングの追い込み','24〜72時間','<ul><li>テーマ整合セッション。</li><li>顧客 &amp; 人材の紹介による支援。</li><li>財務 &amp; オペレーションの助言。</li></ul>']
       ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">Scored 1–5 across five axes. 20/25 advances, then the 7-week Acceleration begins.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">5つの軸で1〜5点を採点。25点中20点で通過し、7週間のアクセラレーションが始まる。</div>
   </div>${chrome(false)}`});
 
 
 /* SUPPORT — 7-WEEK ACCELERATION */
-add({title:'Speakeasy Program',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'Speakeasyプログラム',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Support · Sunshine Lake Speakeasy Program</div>
-    <h1 class="s-title">A 7-week sprint. Every week, a deliverable.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Sunshine Lake matches operators with founders on a bespoke and rotating basis to create the best outcomes possible.</div>
+    <div class="eyebrow">支援 · Sunshine Lake Speakeasyプログラム</div>
+    <h1 class="s-title">7週間のスプリント。毎週、1つの成果物を。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Sunshine Lakeは、可能な限り最良の成果を生むため、経営者と創業者をオーダーメイドかつローテーション制でマッチングする。</div>
 
     <hr class="s-rule">
     <div style="display:flex;gap:16px;margin-top:22px;flex:1;align-items:stretch">
       ${[
-        ['Weeks 1–2','Storytelling','#155EE8','#0B3FA8','#eef3fd','A fundable narrative &amp; pitch deck',[
-          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Narrative & positioning','The arc: problem, why-now, why-you.'],
-          ['<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.1V17h6v-1.4c0-.8.2-1.4 1-2.1A6 6 0 0 0 12 3z"/>','Investor psychology','What makes a partner lean in.'],
-          ['<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>','10-minute talk track','Delivery, pacing, the demo moment.'],
-          ['<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/>','Fundraising assets','Deck, memo, data-backed story.']
+        ['第1〜2週','ストーリーテリング','#155EE8','#0B3FA8','#eef3fd','資金調達可能な物語 &amp; ピッチデック',[
+          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','物語 &amp; ポジショニング','起承転結——課題、なぜ今、なぜあなたか。'],
+          ['<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.1V17h6v-1.4c0-.8.2-1.4 1-2.1A6 6 0 0 0 12 3z"/>','投資家心理','パートナーを前のめりにさせるもの。'],
+          ['<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>','10分のトークトラック','話し方、間合い、デモの見せ場。'],
+          ['<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/>','資金調達資料','デック、メモ、データに裏打ちされた物語。']
         ]],
-        ['Weeks 3–4','Execution','#BE922A','#8f6d15','#f8f0dd','An operating plan &amp; financial model',[
-          ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org design & cadence','Roles, rhythm, weekly KPIs.'],
-          ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring plan','The first ten hires across borders.'],
-          ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','Financial model','Unit economics and a defensible plan.'],
-          ['<circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/>','Ops systems','Tooling and metrics that scale.']
+        ['第3〜4週','実行','#BE922A','#8f6d15','#f8f0dd','事業運営計画 &amp; 財務モデル',[
+          ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','組織設計 &amp; リズム','役割、リズム、週次KPI。'],
+          ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','グローバル採用計画','国境を越えた最初の10名の採用。'],
+          ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','財務モデル','ユニットエコノミクスと、守り抜ける計画。'],
+          ['<circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/>','オペレーション基盤','スケールするツールと指標。']
         ]],
-        ['Weeks 5–6','Domain','#2f9d6f','#1f7a54','#e9f6f0','A live network &amp; advisor bench',[
-          ['<path d="M9 12a3 3 0 0 1 3-3h2.5a3 3 0 0 1 0 6M15 12a3 3 0 0 1-3 3H9.5a3 3 0 0 1 0-6"/>','Warm intros & hiring','Customers, key hires, partners.'],
-          ['<path d="M12 3c2.8 1 4.5 3.8 4.5 7.5L15 14H9l-1.5-3.5C7.5 6.8 9.2 4 12 3z"/><circle cx="12" cy="9" r="1.3"/><path d="M9.5 16l-2 4M14.5 16l2 4"/>','BD & GTM strategy','Positioning to pipeline.'],
-          ['<path d="M12 3l7 3v5c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/>','Competitive moat','Where you win, why it holds.'],
-          ['<circle cx="8" cy="9" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.2M21.5 20a5 5 0 0 0-4-4.9"/>','Board & advisor bench','Operators matched to your stage.']
+        ['第5〜6週','専門領域','#2f9d6f','#1f7a54','#e9f6f0','稼働するネットワーク &amp; アドバイザー陣',[
+          ['<path d="M9 12a3 3 0 0 1 3-3h2.5a3 3 0 0 1 0 6M15 12a3 3 0 0 1-3 3H9.5a3 3 0 0 1 0-6"/>','温かい紹介 &amp; 採用','顧客、重要な採用、パートナー。'],
+          ['<path d="M12 3c2.8 1 4.5 3.8 4.5 7.5L15 14H9l-1.5-3.5C7.5 6.8 9.2 4 12 3z"/><circle cx="12" cy="9" r="1.3"/><path d="M9.5 16l-2 4M14.5 16l2 4"/>','BD &amp; GTM戦略','ポジショニングからパイプラインへ。'],
+          ['<path d="M12 3l7 3v5c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/>','競争優位の堀','どこで勝ち、なぜ持続するか。'],
+          ['<circle cx="8" cy="9" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.2M21.5 20a5 5 0 0 0-4-4.9"/>','取締役 &amp; アドバイザー陣','あなたのステージに合った経営者。']
         ]],
-        ['Week 7','Raise-readiness','#0A3DAE','#06266e','#eaeff8','A Series A-ready data room',[
-          ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','Series A forecasting','Milestones that clear the bar.'],
-          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Round strategy','Target list, timing, and process.'],
-          ['<path d="M3 6h6l2 2h10v11H3z"/>','Diligence-ready','Data room and clean cap table.'],
-          ['<path d="M4 5h16v11H9l-4 3v-3H4z"/>','Investor intros','Warm paths to the right leads.']
+        ['第7週','調達準備','#0A3DAE','#06266e','#eaeff8','シリーズA対応のデータルーム',[
+          ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','シリーズA予測','基準を超えるマイルストーン。'],
+          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','ラウンド戦略','ターゲットリスト、タイミング、プロセス。'],
+          ['<path d="M3 6h6l2 2h10v11H3z"/>','デューデリ対応','データルームと整った資本構成。'],
+          ['<path d="M4 5h16v11H9l-4 3v-3H4z"/>','投資家への紹介','適切なリード投資家への温かい道筋。']
         ]]
-      ].map((w,i)=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.07)"><div style="background:linear-gradient(135deg,${w[2]},${w[3]});color:#fff;padding:14px 16px 12px;display:flex;align-items:center;gap:11px"><span style="flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px">${i+1}</span><div><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85">${w[0]}</div><div style="font-family:var(--serif);font-size:22px;margin-top:1px;line-height:1.05">${w[1]}</div></div></div><div style="flex:1;background:#f8faff;padding:16px 15px;display:flex;flex-direction:column;justify-content:center;gap:17px">${w[6].map(b=>`<div style="display:flex;gap:10px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:1px;color:${w[2]}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${b[0]}</svg></span><div><div style="font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25">${b[1]}</div><div style="font-size:11px;color:var(--muted);margin-top:1px;line-height:1.3">${b[2]}</div></div></div>`).join('')}</div><div style="background:${w[4]};padding:11px 15px 12px;border-top:2px solid ${w[2]}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${w[2]}">Deliverable</div><div style="font-family:var(--serif);font-size:14px;color:var(--ink);margin-top:3px;line-height:1.25">${w[5]}</div></div></div>`).join('')}
+      ].map((w,i)=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.07)"><div style="background:linear-gradient(135deg,${w[2]},${w[3]});color:#fff;padding:14px 16px 12px;display:flex;align-items:center;gap:11px"><span style="flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px">${i+1}</span><div><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85">${w[0]}</div><div style="font-family:var(--serif);font-size:22px;margin-top:1px;line-height:1.05">${w[1]}</div></div></div><div style="flex:1;background:#f8faff;padding:16px 15px;display:flex;flex-direction:column;justify-content:center;gap:17px">${w[6].map(b=>`<div style="display:flex;gap:10px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:1px;color:${w[2]}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${b[0]}</svg></span><div><div style="font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25">${b[1]}</div><div style="font-size:11px;color:var(--muted);margin-top:1px;line-height:1.3">${b[2]}</div></div></div>`).join('')}</div><div style="background:${w[4]};padding:11px 15px 12px;border-top:2px solid ${w[2]}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${w[2]}">成果物</div><div style="font-family:var(--serif);font-size:14px;color:var(--ink);margin-top:3px;line-height:1.25">${w[5]}</div></div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">The sprint earns more than readiness: the relationship that wins follow-ons and co-invest allocations.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">スプリントが生むのは、準備以上のもの——フォローオンと共同投資枠を勝ち取る、その関係性だ。</div>
   </div>${chrome(false)}`});
 
 
@@ -1443,11 +1443,11 @@ function sprintSlide(o){
     <div style="display:flex;align-items:center;gap:14px">
       <span style="flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,${ac},${dk});color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;box-shadow:0 6px 16px ${ac}44">${o.n}</span>
       <div style="display:flex;align-items:baseline;gap:14px">
-        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">The Sprint · ${o.weeks}</span>
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">スプリント · ${o.weeks}</span>
         <span style="width:1px;height:15px;background:var(--line);transform:translateY(2px)"></span>
         <span style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1">${o.phase}</span>
       </div>
-      <span style="margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px">Example case</span>
+      <span style="margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px">事例</span>
     </div>
     <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1090px;line-height:1.4">${o.sub}</div>
@@ -1455,146 +1455,146 @@ function sprintSlide(o){
       ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:30px 26px;display:flex;flex-direction:column;justify-content:center"><div style="width:50px;height:50px;border-radius:14px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:20px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
     </div>
     <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
-      <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">Deliverable</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
+      <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">成果物</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
       <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--mid-lake)">${o.foot}</div>
     </div>
   </div>${chrome(false)}`};
 }
 add(sprintSlide({
-  title:'The Sprint · Weeks 1–2', n:1, weeks:'Weeks 1–2', phase:'Storytelling',
-  colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
-  h:'The narrative gap is the cheapest alpha we own.',
-  sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
+  title:'スプリント · 第1〜2週', n:1, weeks:'第1〜2週', phase:'ストーリーテリング',
+  colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'資金調達可能な物語 &amp; ピッチデック',
+  h:'物語のギャップこそ、私たちが握る最も安いアルファだ。',
+  sub:'エコーチェンバーの創業者は誇張話が母国語だが、アウトサイダーは世界水準の仕事を過小に語る。私たちはまずそのギャップを埋める。',
   cols:[
-    ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
-    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy) and Frank Langella (The Father). NYU Tisch. He coached Wordware to its $30mm seed.'],
-    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
+    ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','そのギャップ','第二言語でのピッチ、謙遜の規範、淡々とした語り口——アウトサイダーを優れた作り手にする特性が、物語を控えめに語らせる。市場は彼らを二重に見誤る。'],
+    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','そのコーチ','Andrew Hovelson：ブロードウェイでTom Hanks（Lucky Guy）やFrank Langella（The Father）と共演。NYU Tisch出身。Wordwareを$30mmのシードへと導いた。'],
+    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','その技巧','スプリントの第1〜2週——物語の起承転結、投資家心理、10分のトークトラックを、Speakeasyで、伝わるまで書き、練習し、舞台にかける。']
   ],
-  foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
+  foot:'物語はミッションになり、ミッションは収益になる。そしてラウンドは、物語に続く。'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 3–4', n:2, weeks:'Weeks 3–4', phase:'Execution',
-  colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'An operating plan &amp; financial model',
-  h:'Operating momentum, installed.',
-  sub:'The people who ran the machines install the machinery.',
+  title:'スプリント · 第3〜4週', n:2, weeks:'第3〜4週', phase:'実行',
+  colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'事業運営計画 &amp; 財務モデル',
+  h:'運営の勢いを、インストールする。',
+  sub:'マシンを回してきた人々が、その機構を組み込む。',
   cols:[
-    ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org &amp; cadence','Don and Christopher Muhr (Auto1 COO through its IPO) install the weekly operating rhythm: roles, KPIs, review cadence, the way they ran teams of hundreds.'],
-    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','The model','Ivan (CFO &amp; COO) rebuilds the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
-    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring','A Deel co-founder maps the first ten hires across borders, and the company runs payroll on Deel from day one.']
+    ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','組織 &amp; リズム','DonとChristopher Muhr（Auto1のCOOとしてIPOまで牽引）が、週次の運営リズムをインストールする——役割、KPI、レビューのリズム。数百人規模のチームを率いてきたそのやり方で。'],
+    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','そのモデル','Ivan（CFO &amp; COO）が、シリーズAのデューデリを乗り切るまで財務モデルを再構築する——ユニットエコノミクス、バーン、追加投資のケース。'],
+    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','グローバル採用','Deelの共同創業者が国境を越えた最初の10名の採用を設計し、会社は初日からDeelで給与を運用する。']
   ],
-  foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
+  foot:'創業者は第4週を、投資家が監査できる運営計画と、維持できるリズムを携えて後にする。'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 5–6', n:3, weeks:'Weeks 5–6', phase:'Domain',
-  colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'A live network &amp; advisor bench',
-  h:'The network goes to work.',
-  sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
+  title:'スプリント · 第5〜6週', n:3, weeks:'第5〜6週', phase:'専門領域',
+  colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'稼働するネットワーク &amp; アドバイザー陣',
+  h:'ネットワークが、動き出す。',
+  sub:'固定カリキュラムはない——ユニコーン創業者、LP、カテゴリーのベテランを、各社固有のニーズに合わせてマッチングし、ローテーションする。',
   cols:[
-    ['<path d="M5 21h14M7 21V4h8v17M15 4l3 2v15M12 12h.01"/>','Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie\'s growth playbooks, positioning tuned until it converts to pipeline.'],
-    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','Domain councils','Rotating sessions with the operators and LPs who built the category, matched to each company: dev tools, consumer, fintech, data &amp; AI.'],
-    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','Regional doors','Market entry through the fund\'s own map: Japan &amp; APAC, EMEA and MENA, opened company by company.']
+    ['<path d="M5 21h14M7 21V4h8v17M15 4l3 2v15M12 12h.01"/>','顧客への扉','Donのパイプラインと、Jamieのグロース・プレイブックから、最初の顧客とパートナーへの温かい道筋。パイプラインに転換するまでポジショニングを調整する。'],
+    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','専門領域カウンシル','カテゴリーを築いた経営者やLPとの、各社に合わせたローテーション制セッション——開発者ツール、消費者、フィンテック、データ &amp; AI。'],
+    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','地域への扉','ファンド独自の地図を通じた市場参入——日本 &amp; アジア太平洋、EMEA、MENAを、1社ずつ開いていく。']
   ],
-  foot:'By week 6, every company has named customers in pipeline, and an advisor bench of its own.'
+  foot:'第6週までに、どの会社もパイプラインに名の挙がる顧客と、自前のアドバイザー陣を持つ。'
 }));
 add(sprintSlide({
-  title:'The Sprint · Week 7', n:4, weeks:'Week 7', phase:'Fundraising Readiness',
-  colors:['#0A3DAE','#06266e','#eaeff8'], deliverable:'A Series A-ready data room',
-  h:'Ready to raise, long before they raise.',
-  sub:'Companies don\'t fundraise in week 7. They leave ready, and the round comes when the numbers do.',
+  title:'スプリント · 第7週', n:4, weeks:'第7週', phase:'資金調達の準備',
+  colors:['#0A3DAE','#06266e','#eaeff8'], deliverable:'シリーズA対応のデータルーム',
+  h:'調達するずっと前から、調達できる状態に。',
+  sub:'企業は第7週に資金調達をするわけではない。準備が整った状態で卒業し、数字が揃ったときにラウンドが来る。',
   cols:[
-    ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
-    ['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/>','Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
-    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Demo night at the Speakeasy','Our Broadway veteran stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
+    ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','その計画','Donがマルチステージの規律でマイルストーン、価格ロジック、ターゲットリストを設定し、Ivanが当社のLPが受け取るのと同じ水準でデューデリ資料一式を仕上げる。'],
+    ['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/>','資本構成を積み上げる','ラウンドに創業者エンジェルを加える——多くは一流ベンチャーファンドのLPであり、多くは当社Sunshine LakeのLPだ。だから次のリード投資家は、その会社について自らのLP基盤の内側から耳にする。'],
+    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Speakeasyでのデモナイト','当社のブロードウェイのベテランが10分のトークトラックを舞台化し、コホートはユニコーン創業者と選ばれたLPにピッチする。数か月後、その関係がラウンドへと熟していく。']
   ],
-  foot:'When the milestone hits, the round assembles itself, that\'s why 43% graduate seed-to-A.'
+  foot:'マイルストーンに到達すれば、ラウンドはひとりでに組み上がる——だからこそ43%がシードからシリーズAへと巣立つ。'
 }));
 
 
 /* NEW — THE SPEAKEASY */
 add({title:'The Speakeasy',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">The Sunshine Lake Speakeasy · San Francisco</div>
-    <h1 class="s-title">Not a founder house. A speakeasy.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1060px;line-height:1.4">We back founders anywhere, and hand them Silicon Valley: the network, craft and capital no local fund can.</div>
+    <div class="eyebrow">The Sunshine Lake Speakeasy · サンフランシスコ</div>
+    <h1 class="s-title">ファウンダーハウスではない。スピークイージーだ。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1060px;line-height:1.4">私たちは世界中どこの創業者でも支援し、彼らにシリコンバレーを託す——どのローカルファンドにも渡せない、ネットワーク、技巧、資本を。</div>
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:24px;flex:1">
       ${[
-        ['In the community','San Francisco is where technology compounds fastest. Our founders live in the middle of it: embedded, not enclosed.'],
-        ['A speakeasy, properly','Offsites, unicorn-founder talks, LP salons. A home where "too direct, too deadpan" founders can be vulnerable and solve real problems together.'],
-        ['The landing','Arriving founders get a soft landing: a desk, O-1 visa support, payroll on Deel, and the first fifty intros, before the first check clears.']
+        ['コミュニティの只中に','サンフランシスコは、技術が最も速く複利で育つ場所だ。当社の創業者は、その真ん中に生きる——囲い込まれるのではなく、埋め込まれて。'],
+        ['本物のスピークイージー','オフサイト、ユニコーン創業者の講演、LPサロン。「率直すぎ、淡々としすぎ」の創業者たちが、弱さをさらけ出し、実際の課題を共に解けるホームだ。'],
+        ['そのランディング','到着した創業者はソフトランディングを得る——デスク、O-1ビザ支援、Deelでの給与運用、そして最初の50人への紹介。初回投資の入金より先に。']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:24px 26px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:14px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:20px">Shaped alongside our LP community, Accel's founder among them. In person in SF; virtual worldwide.</div>
+    <div class="note" style="margin-top:20px">当社のLPコミュニティ（Accelの創業者を含む）とともに形づくった。SFでは対面、世界中へはオンラインで。</div>
   </div>${chrome(false)}`});
 
 
 /* LP CO-INVESTMENT PROOF */
-add({title:'LP Co-Investment Proof',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'LP共同投資の実証',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Co-Investment · Proof</div>
-    <h1 class="s-title">Our co-invests are compounding.</h1>
+    <div class="eyebrow">共同投資 · 実証</div>
+    <h1 class="s-title">当社の共同投資は、複利で増えている。</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:30px;margin-top:26px;flex:1">
       ${[
-        ['Fieldguide','Marked up 1.6×','AI for the $6T professional-services economy · Jin Chang (Korea)','$700mm Series C','Goldman-led · Feb 2026','<b style="color:var(--ink);font-weight:600">Offered to existing LPs at a 25% discount to the last round.</b> Already marked up to 1.6× after investment.* Bessemer sits on the board.','#2f9d6f'],
-        ['Deel','IPO on horizon','Payroll for the world\'s workforce, tens of $T · Shuo &amp; Alex','$17.3B','post-money · $1.5B+ ARR, held at cost and growing fast','<b style="color:var(--ink);font-weight:600">A discount to intrinsic value</b> — the same price as the 2025 Series E, though substantial growth has occurred since. On the cap table: Ribbit · a16z · Coatue.','#155EE8']
+        ['Fieldguide','1.6×に評価上昇','$6Tの専門サービス経済に向けたAI · Jin Chang（韓国）','$700mm シリーズC','Goldman主導 · 2026年2月','<b style="color:var(--ink);font-weight:600">直近ラウンドから25%ディスカウントで既存LPへ提供。</b>投資後、既に1.6×へ評価上昇。*Bessemerが取締役に就く。','#2f9d6f'],
+        ['Deel','IPOが視野に','世界の労働力向けの給与、数十兆ドル規模 · Shuo &amp; Alex','$17.3B','ポストマネー · ARR $1.5B超、簿価で保有し急成長中','<b style="color:var(--ink);font-weight:600">本源的価値に対するディスカウント</b>——2025年のシリーズEと同じ価格だが、それ以降に大幅な成長が生じている。資本構成には：Ribbit · a16z · Coatue。','#155EE8']
       ].map(c=>`<div style="flex:1;background:#fafbfe;border:1px solid var(--line);border-radius:16px;padding:30px 34px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:var(--serif);font-size:36px;color:var(--ink)">${c[0]}</div><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:${c[6]};border-radius:999px;padding:7px 16px">${c[1]}</div></div><div style="font-size:14px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:14px">${c[2]}</div><div style="margin-top:auto;padding-top:22px"><div style="font-family:var(--serif);font-size:52px;color:${c[6]};line-height:1">${c[3]}</div><div style="font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.5">${c[4]}</div><div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.45">${c[5]}</div></div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:14px">*Fieldguide markup based on subsequent secondary transactions.</div>
+    <div class="note" style="margin-top:14px">*Fieldguideの評価上昇は、その後のセカンダリー取引に基づく。</div>
   </div>${chrome(false)}`});
 
 
 /* NEW — THE LPA AT A GLANCE */
-add({title:'LPA at a Glance',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'LPAの概要',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Appendix · The LPA at a Glance</div>
-    <h1 class="s-title">Institutional terms, already signed.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">A summary of the executed LPA. The full document sits in the data room.</div>
+    <div class="eyebrow">付録 · LPAの概要</div>
+    <h1 class="s-title">機関投資家水準の条件を、既に締結済み。</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">締結済みLPAの要約。全文はデータルームにあります。</div>
     <hr class="s-rule">
     <div style="display:flex;gap:40px;margin-top:26px;flex:1">
       ${[
-        ['Economics',['2.5% management fee, stepping down 0.20%/yr to a 1.5% floor','20% carried interest · 80/20 split after return of LP capital','GP clawback provision']],
-        ['Governance',['Key Person clause tied to the Principal\'s time and effort','LP Advisory Committee with oversight of critical decisions','≤20% of commitments in any single company']],
-        ['Mechanics',['10-year term · two one-year extensions with Advisory Committee consent','5-year investment period from final close','Recycling permitted · expected ~80% deployed over 3.5 years; reserves in the final 1.5']]
+        ['エコノミクス',['管理報酬2.5%、年0.20%ずつ逓減し1.5%を下限とする','キャリードインタレスト20% · LP資本返還後は80/20の配分','GPクローバック条項']],
+        ['ガバナンス',['プリンシパルの時間と労力に紐づくキーパーソン条項','重要な意思決定を監督するLPアドバイザリー委員会','単一企業へのコミットメントは20%以下']],
+        ['メカニクス',['10年満期 · アドバイザリー委員会の同意により1年延長を2回','ファイナルクローズから5年の投資期間','リサイクリング可 · 3.5年で約80%を投資予定、残り1.5年はリザーブ']]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:20px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${c[1].map(it=>`<div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:7px;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:14.5px;color:var(--ink);line-height:1.5">${it}</div></div>`).join('')}</div></div>`).join('')}
     </div>
-    <div class="note" style="margin-top:14px;text-align:center">A summary only, the LPA governs. Full signed documents in the data room.</div>
+    <div class="note" style="margin-top:14px;text-align:center">これは要約に過ぎず、LPAが優先します。署名済みの全文書はデータルームにあります。</div>
   </div>${chrome(false)}`});
 
 
 /* BACK OFFICE / STACK */
-add({title:'Back Office &amp; Tech Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+add({title:'バックオフィス &amp; テックスタック',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
-    <div class="eyebrow">Institutional from day one</div>
-    <h1 class="s-title">A best-in-class back office.</h1>
+    <div class="eyebrow">初日から機関投資家水準</div>
+    <h1 class="s-title">ベストインクラスのバックオフィス。</h1>
     <div style="display:flex;gap:20px;margin-top:36px">
-      ${[['Fund counsel','Morrison Foerster'],['Deal counsel','Cooley'],['Fund admin','Vector'],['Audit','Sensiba'],['Banking','Citizens']].map(c=>`<div style="flex:1;background:#fdf3df;border-radius:12px;padding:22px 16px;text-align:center"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a">${c[0]}</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:10px">${c[1]}</div></div>`).join('')}
+      ${[['ファンド法務','Morrison Foerster'],['ディール法務','Cooley'],['ファンド管理','Vector'],['監査','Sensiba'],['銀行','Citizens']].map(c=>`<div style="flex:1;background:#fdf3df;border-radius:12px;padding:22px 16px;text-align:center"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a">${c[0]}</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:10px">${c[1]}</div></div>`).join('')}
     </div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;margin-top:14px">
-      ${[['The data room','LPA · audited financials · CFO &amp; founder references · attribution letter · press kit'],['Systems of record','Airtable · Notion · Affinity (CRM) · Vector (fund admin) · Deel (HR &amp; compliance)'],['AI &amp; tooling','OpenAI · Anthropic · Grok · AWS · Python · Zapier'],['Collaboration','Gmail · Google Drive · Slack · Zoom · LinkedIn']].map(r=>`<div style="display:flex;align-items:center;gap:30px;padding:18px 0;border-bottom:1px solid var(--line)"><div style="flex:0 0 230px;font-family:var(--serif);font-size:20px;color:var(--ink)">${r[0]}</div><div style="flex:1;font-size:16px;color:var(--ink-2)">${r[1]}</div></div>`).join('')}
+      ${[['データルーム','LPA · 監査済み財務諸表 · CFO &amp; 創業者のリファレンス · 貢献実績レター · プレスキット'],['記録システム','Airtable · Notion · Affinity（CRM）· Vector（ファンド管理）· Deel（人事 &amp; コンプライアンス）'],['AI &amp; ツール','OpenAI · Anthropic · Grok · AWS · Python · Zapier'],['コラボレーション','Gmail · Google Drive · Slack · Zoom · LinkedIn']].map(r=>`<div style="display:flex;align-items:center;gap:30px;padding:18px 0;border-bottom:1px solid var(--line)"><div style="flex:0 0 230px;font-family:var(--serif);font-size:20px;color:var(--ink)">${r[0]}</div><div style="flex:1;font-size:16px;color:var(--ink-2)">${r[1]}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">LPs frequently note Sunshine Lake operates with the maturity of a Fund II.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">LPはしばしば、Sunshine LakeがファンドII級の成熟度で運営されていると指摘する。</div>
   </div>${chrome(false)}`});
 
 
 /* DEFINITION */
-add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:`
+add({title:'定義',track:'appendix',teaser:false,dark:true,cls:'defn',html:`
   <div class="s-pad">
-    <div class="eyebrow" style="color:var(--sun)">The Definition</div>
+    <div class="eyebrow" style="color:var(--sun)">その定義</div>
     <div class="dn-word">Sunshine Lake</div>
-    <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span>;</span> a far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
+    <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">名詞</span>；</span>稀有な起業家的存在が<b>極限の出自に鍛えられる</b>、遥か彼方の地。</div>
     <div class="cite">— Star Wars: Ewoks #9</div>
-  </div><span class="s-conf">Strictly Confidential</span>`});
+  </div><span class="s-conf">極秘</span>`});
 
 
 /* DISCLAIMER */
-add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html:`
+add({title:'免責事項',track:'appendix',teaser:false,dark:false,cls:'disc',html:`
   <div class="s-pad">
-    <h1 class="s-title" style="font-size:40px;margin-bottom:18px">Disclaimer</h1>
+    <h1 class="s-title" style="font-size:40px;margin-bottom:18px">免責事項</h1>
     <div class="cols">
-      <div class="col"><p>This presentation contains selected information about Sunshine Lake ("Adviser") and its affiliates and certain funds the Adviser manages or plans to manage. It is furnished solely for informational purposes for use in preliminary discussions. It is not, and is not intended to be, an offer to sell, or a solicitation of an offer to purchase, any securities or interest in any fund.</p><p>This presentation contains information as of the date on the cover and is subject to change. It should not be assumed to be complete. Information relating to third-party companies has been provided by such companies or sourced from publicly available information; no representation is made as to its accuracy or completeness.</p></div>
-      <div class="col"><p>The information is based in part on past performance and certain assumptions about future growth. These assumptions have inherent limitations and will be affected by changes in structure, criteria, or assets. Actual performance may differ substantially.</p><p>Certain information constitutes "forward-looking statements." Due to various risks and uncertainties, actual events or results may differ materially. The contents are not to be construed as legal, regulatory, business, accounting, or tax advice. Any performance-related figures, where provided, are gross of fees and expenses unless otherwise noted; company valuations reflect publicly reported financing rounds and press reports and are not indicative of fund performance.</p></div>
-      <div class="col"><p>This presentation is confidential. Any reproduction or distribution, in whole or in part, without the prior written consent of the Adviser is prohibited. By receiving it, you acknowledge and agree that it is confidential, non-public, and/or proprietary information.</p><p>The distribution of this presentation in certain jurisdictions may be restricted by law. You should inform yourself as to the legal requirements and tax consequences of an investment within the countries of your citizenship, residence, domicile, and place of business.</p><p>References to San Francisco describe the location of the Sunshine Lake Speakeasy, a community venue, and the firm's network; they do not indicate the residence of any individual or the principal office of the Adviser. The Adviser's personnel are distributed across multiple states and countries.</p></div>
+      <div class="col"><p>本資料には、Sunshine Lake（以下「運用者」）およびその関連会社、ならびに運用者が運用するまたは運用を予定する特定のファンドに関する一部の情報が含まれています。本資料は、予備的な協議に用いる情報提供のみを目的として提供されるものです。本資料は、いかなる証券またはファンドの持分の売却の申込み、または購入の申込みの勧誘ではなく、またそれを意図するものでもありません。</p><p>本資料には、表紙記載の日付時点の情報が含まれており、変更される可能性があります。網羅的であると想定すべきではありません。第三者企業に関する情報は、当該企業から提供されたか、または公開情報から入手したものであり、その正確性または完全性についていかなる表明も行いません。</p></div>
+      <div class="col"><p>本情報は、過去の実績および将来の成長に関する一定の前提に部分的に基づいています。これらの前提には固有の限界があり、構造、基準、または資産の変化により影響を受けます。実際の実績は大きく異なる可能性があります。</p><p>一部の情報は「将来予測に関する記述」に該当します。様々なリスクおよび不確実性により、実際の事象または結果は大きく異なる可能性があります。本内容は、法務、規制、事業、会計、または税務に関する助言と解釈されるべきものではありません。実績に関する数値は、提供される場合、特に記載がない限り手数料および費用控除前（グロス）であり、企業評価額は公表された資金調達ラウンドおよび報道を反映したものであって、ファンドの実績を示すものではありません。</p></div>
+      <div class="col"><p>本資料は秘密情報です。運用者の事前の書面による同意なく、全部または一部を複製または配布することは禁止されています。本資料を受領することにより、あなたはこれが秘密情報、非公開情報、および／または専有情報であることを認識し、同意するものとします。</p><p>特定の法域における本資料の配布は、法律により制限される場合があります。あなたは、自らの国籍、居住地、住所、および事業所在地の国における投資の法的要件および税務上の影響について、自ら確認する必要があります。</p><p>サンフランシスコへの言及は、コミュニティの場であるSunshine Lake Speakeasyの所在地および当社のネットワークを指すものであり、いかなる個人の居住地または運用者の主たる事務所を示すものではありません。運用者の人員は、複数の州および国に分散しています。</p></div>
     </div>
   </div>${chrome(false)}`});
 
