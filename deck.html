@@ -442,7 +442,7 @@ table.tbl.tall td.co{font-size:20px;}
 .cs-shift{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);margin-top:7px;}
 .cs-pill{align-self:flex-start;background:var(--cobalt);color:#fff;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:11px 28px;}
 .cs-pill.gold{background:var(--sun);color:var(--navy);}
-.cs-alert{display:inline-block;background:var(--sun);color:var(--navy);font-size:14px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:9px 18px;margin-top:12px;}
+.cs-alert{display:inline-block;background:#eef3fd;color:var(--cobalt);border:1px solid #cfddf7;font-size:13.5px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:8px 17px;margin-top:12px;}
 .cs-photo-col{flex:0 0 340px;align-self:stretch;border-radius:14px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
 .cs-fn{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;background:linear-gradient(transparent,rgba(11,18,117,.82));color:#fff;font-weight:600;font-size:17px;line-height:1.2;}
 .cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
@@ -754,7 +754,7 @@ const CASES=[
   lived:'Blocked by America\'s visa wall at MIT, they lived the global-work problem they now solve.',
   sourced:'A UChicago founder in our YC network flagged them pre-launch.',
   backed:'We backed Shuo from China and Alex from Israel on the $525B global-payroll wedge.',
-  built:'5 hires, 12 partners, COO Dan Westgarth recruited, and we drove the Legalpad acquisition.',
+  built:'5 hires, 12 partners, a public-fintech COO recruited, and we drove the Legalpad acquisition.',
   endMarket:'$55T+ world labour income',
   metrics:[['First Check','Seed · Dec 2019'],['Current Mark','$17.3B · Series E 2025'],['Status','IPO filing reported'],['Round led by','Ribbit · a16z · Coatue']],
   insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
@@ -929,7 +929,7 @@ function caseSlide(c){
   return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
    <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
      <div class="cs-top">
-       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       <div><span class="cs-tag">Example Case</span><div class="cs-shift">${c.theme}</div></div>
        <div style="align-self:center;text-align:center">${c.alert?`<span class="cs-alert" style="margin-top:0">↑ ${c.alert}</span>`:''}</div>
        <div style="text-align:right">${logo}<div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);margin-top:6px">${c.origin}</div></div>
      </div>
@@ -1181,12 +1181,12 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
     <h1 class="s-title" style="font-size:40px">AI just made technology a commodity. Momentum isn't.</h1>
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1050px;line-height:1.4">As the cost of writing code collapses, the ambition of what gets built expands.* Winners out-operate.</div>
     <hr class="s-rule">
-    <div style="display:flex;gap:24px;margin-top:24px;flex:1">
+    <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
-        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We coach the cadence.'],
-        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Andrew Hovelson, our Broadway veteran, turns founder truth into narratives that close customers, hires and rounds.'],
-        ['Sleeves rolled up','We build alongside: pipelines opened, executives recruited, M&amp;A run, by a GP who sold his company to Groupon and drove Airbnb\'s early international growth (long-term stays, now nearly 1 in 5 nights booked).']
-      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:24px 26px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:14px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
+        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We coach the cadence.','chip:Cadence · years → quarters'],
+        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into narratives that close customers, hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach — on Broadway with Glenn Close'],
+        ['Sleeves rolled up','We build alongside: pipelines opened, executives recruited, M&amp;A run, by a GP who sold his company to Groupon and drove Airbnb\'s early international growth (now nearly 1 in 5 nights booked).','chip:Groupon exit · Airbnb growth']
+      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.58;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:118px;border-radius:10px;background:#dfe5f2 center 28%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:`<div style="margin-top:14px;display:inline-flex;align-self:flex-start;background:#eef3fd;border-radius:999px;padding:6px 13px;font-size:11px;font-weight:600;color:var(--cobalt)">${c[2].slice(5)}</div>`}</div>`).join('')}
     </div>
     <div style="margin-top:20px;border-left:3px solid var(--sun);padding-left:20px">
       <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
@@ -1236,7 +1236,7 @@ add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
       ${[
         ['Construction',[['30 core','pre-seed &amp; seed only'],['$1mm first checks','5% target ownership'],['75%+ core','incl. dedicated &amp; discretionary reserves'],['20% other non-initial checks','cannonball follow ons, network &amp; power-law checks'],['5% discovery','']]],
         ['Economics',[['2.5% mgmt','stepping to 1.5%'],['20% carry',''],['5% GP commit',''],['10-year term','(+2)']]],
-        ['Status',[['First close complete',''],['Actively deploying',''],['~80% deployed','over 3.5 years; reserves in the final 1.5']]]
+        ['Status',[['First close complete',''],['Actively deploying',''],['Expected ~80% deployed','over 3.5 years; reserves in the final 1.5']]]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">Co-investment opportunities for LPs.</div>
@@ -1439,25 +1439,25 @@ add({title:'Speakeasy Program',track:'appendix',teaser:false,dark:false,cls:'',h
     <hr class="s-rule">
     <div style="display:flex;gap:16px;margin-top:22px;flex:1;align-items:stretch">
       ${[
-        ['Weeks 1–2','Storytelling','#155EE8','#0B3FA8','#eef3fd','A fundable narrative &amp; pitch deck',[
+        ['Weeks 1–2','Storytelling','#2F6FEA','#1A50C0','#eef3fd','A fundable narrative &amp; pitch deck',[
           ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Narrative & positioning','The arc: problem, why-now, why-you.'],
           ['<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.1V17h6v-1.4c0-.8.2-1.4 1-2.1A6 6 0 0 0 12 3z"/>','Investor psychology','What makes a partner lean in.'],
           ['<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>','10-minute talk track','Delivery, pacing, the demo moment.'],
           ['<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/>','Fundraising assets','Deck, memo, data-backed story.']
         ]],
-        ['Weeks 3–4','Execution','#BE922A','#8f6d15','#f8f0dd','An operating plan &amp; financial model',[
+        ['Weeks 3–4','Execution','#155EE8','#0B3FA8','#e9f0fc','An operating plan &amp; financial model',[
           ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org design & cadence','Roles, rhythm, weekly KPIs.'],
           ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring plan','The first ten hires across borders.'],
           ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','Financial model','Unit economics and a defensible plan.'],
           ['<circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/>','Ops systems','Tooling and metrics that scale.']
         ]],
-        ['Weeks 5–6','Domain','#2f9d6f','#1f7a54','#e9f6f0','A live network &amp; advisor bench',[
+        ['Weeks 5–6','Domain','#0A3DAE','#06266e','#e6ecf8','A live network &amp; advisor bench',[
           ['<path d="M9 12a3 3 0 0 1 3-3h2.5a3 3 0 0 1 0 6M15 12a3 3 0 0 1-3 3H9.5a3 3 0 0 1 0-6"/>','Warm intros & hiring','Customers, key hires, partners.'],
           ['<path d="M12 3c2.8 1 4.5 3.8 4.5 7.5L15 14H9l-1.5-3.5C7.5 6.8 9.2 4 12 3z"/><circle cx="12" cy="9" r="1.3"/><path d="M9.5 16l-2 4M14.5 16l2 4"/>','BD & GTM strategy','Positioning to pipeline.'],
           ['<path d="M12 3l7 3v5c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/>','Competitive moat','Where you win, why it holds.'],
           ['<circle cx="8" cy="9" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.2M21.5 20a5 5 0 0 0-4-4.9"/>','Board & advisor bench','Operators matched to your stage.']
         ]],
-        ['Week 7','Raise-readiness','#0A3DAE','#06266e','#eaeff8','A Series A-ready data room',[
+        ['Week 7','Raise-readiness','#0B1275','#070d54','#e5e7f4','A Series A-ready data room',[
           ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','Series A forecasting','Milestones that clear the bar.'],
           ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Round strategy','Target list, timing, and process.'],
           ['<path d="M3 6h6l2 2h10v11H3z"/>','Diligence-ready','Data room and clean cap table.'],
@@ -1495,7 +1495,7 @@ function sprintSlide(o){
 }
 add(sprintSlide({
   title:'The Sprint · Weeks 1–2', n:1, weeks:'Weeks 1–2', phase:'Storytelling',
-  colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
+  colors:['#2F6FEA','#1A50C0','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
   h:'The narrative gap is the cheapest alpha we own.',
   sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
   cols:[
@@ -1507,7 +1507,7 @@ add(sprintSlide({
 }));
 add(sprintSlide({
   title:'The Sprint · Weeks 3–4', n:2, weeks:'Weeks 3–4', phase:'Execution',
-  colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'An operating plan &amp; financial model',
+  colors:['#155EE8','#0B3FA8','#e9f0fc'], deliverable:'An operating plan &amp; financial model',
   h:'Operating momentum, installed.',
   sub:'The people who ran the machines install the machinery.',
   cols:[
@@ -1519,7 +1519,7 @@ add(sprintSlide({
 }));
 add(sprintSlide({
   title:'The Sprint · Weeks 5–6', n:3, weeks:'Weeks 5–6', phase:'Domain',
-  colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'A live network &amp; advisor bench',
+  colors:['#0A3DAE','#06266e','#e6ecf8'], deliverable:'A live network &amp; advisor bench',
   h:'The network goes to work.',
   sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
   cols:[
@@ -1531,7 +1531,7 @@ add(sprintSlide({
 }));
 add(sprintSlide({
   title:'The Sprint · Week 7', n:4, weeks:'Week 7', phase:'Fundraising Readiness',
-  colors:['#0A3DAE','#06266e','#eaeff8'], deliverable:'A Series A-ready data room',
+  colors:['#0B1275','#070d54','#e5e7f4'], deliverable:'A Series A-ready data room',
   h:'Ready to raise, long before they raise.',
   sub:'Companies don\'t fundraise in week 7. They leave ready, and the round comes when the numbers do.',
   cols:[
@@ -1586,8 +1586,8 @@ add({title:'LPA at a Glance',track:'appendix',teaser:false,dark:false,cls:'',htm
     <div style="display:flex;gap:40px;margin-top:26px;flex:1">
       ${[
         ['Economics',['2.5% management fee, stepping down 0.20%/yr to a 1.5% floor','20% carried interest · 80/20 split after return of LP capital','GP clawback provision']],
-        ['Governance',['Key Person clause tied to the Principal\'s time and effort','LP Advisory Committee with defined consent rights','GP removal provisions · ≤20% of commitments in any single company']],
-        ['Mechanics',['10-year term · two one-year extensions with Advisory Committee consent','5-year investment period from final close','Recycling permitted · ~80% deployed over 3.5 years; reserves in the final 1.5']]
+        ['Governance',['Key Person clause tied to the Principal\'s time and effort','LP Advisory Committee with oversight of critical decisions','≤20% of commitments in any single company']],
+        ['Mechanics',['10-year term · two one-year extensions with Advisory Committee consent','5-year investment period from final close','Recycling permitted · expected ~80% deployed over 3.5 years; reserves in the final 1.5']]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:20px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${c[1].map(it=>`<div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:7px;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:14.5px;color:var(--ink);line-height:1.5">${it}</div></div>`).join('')}</div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px;text-align:center">A summary only, the LPA governs. Full signed documents in the data room.</div>
