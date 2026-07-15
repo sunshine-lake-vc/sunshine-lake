@@ -941,7 +941,7 @@ function caseSlide(c){
      <div style="display:grid;grid-template-columns:repeat(${kpis.length},1fr);margin-top:14px;margin-bottom:10px">
        ${kpis.map((m,i)=>`<div style="padding:2px 20px;${i?'border-left:1px solid var(--line)':''}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">${m[0]}</div><div style="font-family:var(--serif);font-size:${m[2]==='em'?'18px':'19px'};line-height:1.2;margin-top:6px;color:${m[2]==='em'?'var(--cobalt)':'var(--ink)'}">${m[1]}</div></div>`).join('')}
      </div>
-     ${c.footnote?`<div class="note" style="margin-top:9px;font-size:10.5px;text-align:right">${c.footnote}</div>`:''}
+     <div class="note" style="margin-top:9px;font-size:10.5px;text-align:right;min-height:14px">${c.footnote||''}</div>
    </div>
    <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
    ${chrome(false)}`};
