@@ -714,7 +714,7 @@ const TEAM=[
 ];
 const VECTORS=[
  {n:'1',t:'Idea → company',p:'Founding',ad:[['E. Wojcicki','"Godmother of Silicon Valley"','🇺🇸'],['Prof. Franklin','Databricks early advisor','🇺🇸'],['Prof. Bell','Wharton unicorn advisor','🇳🇿']]},
- {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie','serial growth operator','🇺🇸']]},
+ {n:'2',t:'Product → market fit',p:'PMF',ad:[['Tom Lee','One Medical founder (IPO)','🇺🇸'],['Christopher Muhr','Auto1 COO (IPO)','🇩🇪'],['Jamie Feaster','serial growth operator','🇺🇸']]},
  {n:'3',t:'Scale → durability',p:'Scale',ad:[['A. Hovelson','Broadway · storytelling coach','🇺🇸'],['Servaes Tholen','CFO, Headway','🇳🇱'],['Shuo Wang','Deel co-founder','🇨🇳']]}
 ];
 const TRACK=[
@@ -998,7 +998,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       <div style="flex:1">
         <div class="eyebrow">Founder &amp; General Partner</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
-        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Co-founded CityDeal (sold to Groupon) · International growth at Airbnb, 2011<br>Led North America for Global Founders Capital.</div>
+        <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);margin-top:12px;line-height:1.44">Co-founded CityDeal (sold to Groupon) · International growth at Airbnb in its very early days<br>Led North America for Global Founders Capital.</div>
         <div style="margin-top:20px;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--ink-2);line-height:1.5;white-space:nowrap"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
@@ -1029,7 +1029,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
 add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Record · Funds I &amp; II</div>
-    <h1 class="s-title">Four unicorns. Two exits. All public marks.</h1>
+    <h1 class="s-title">The first checks, now public marks.</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
       ${[['Fund I* · 2017–19','First checks: Headway · Kalshi'],['Fund II* · 2019–22','First checks: Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
@@ -1160,11 +1160,11 @@ add({title:'How We Get There First',track:'core',teaser:true,dark:false,cls:'',h
     <div class="s-sub" style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1120px;line-height:1.4">Fifteen years of dense founder networks, run as five named channels, each with an owner, a weekly quota, and comp on results.</div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:10px">
       ${[
-        ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate.',''],
         ['First-50 Alumni','The next wave works inside the last. We track the first fifty of Deel, Kalshi, Headway and Assured, from their own cap tables, and get the first call when one steps out.','pills:Deel → FirstWork|Brex → PermitFlow|Headway → Marble'],
-        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b> — we host their demo days; their presidents keep sourcing as alumni.',''],
         ['Home-Market Winners','The strongest signal: already won once, somewhere harder. Founders who built real revenue in constrained home markets and relocate to go global, surfaced through a founder diaspora fifteen years dense.',''],
-        ['The Speakeasy Door','Inbound, engineered: O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.','']
+        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b> — we host their demo days; their presidents keep sourcing as alumni.',''],
+        ['The Speakeasy Door','Inbound, engineered: O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.',''],
+        ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate.','']
       ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:11px 0;border-top:1px solid var(--line)"><div style="flex:0 0 210px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1"><div style="font-size:13.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div>${r[2].startsWith('pills:')?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${r[2].slice(6).split('|').map(p=>`<span style="font-size:11.5px;font-weight:600;color:var(--cobalt);background:#eef3fd;border-radius:999px;padding:4px 11px">${p}</span>`).join('')}<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:2px">unicorn founders refer, pre-incorporation</span></div>`:''}</div></div>`).join('')}
     </div>
     <div style="margin-top:12px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:20px;color:#fff">
@@ -1236,7 +1236,7 @@ add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
       ${[
         ['Construction',[['30 core','pre-seed &amp; seed only'],['$1mm first checks','5% target ownership'],['75%+ core','incl. dedicated &amp; discretionary reserves'],['20% other non-initial checks','cannonball follow ons, network &amp; power-law checks'],['5% discovery','']]],
         ['Economics',[['2.5% mgmt','stepping to 1.5%'],['20% carry',''],['5% GP commit',''],['10-year term','(+2)']]],
-        ['Status',[['First close complete',''],['Actively deploying',''],['Selectively adding LPs',''],['~80% deployed','over 3.5 years; reserves in the final 1.5']]]
+        ['Status',[['First close complete',''],['Actively deploying',''],['~80% deployed','over 3.5 years; reserves in the final 1.5']]]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">Co-investment opportunities for LPs.</div>
@@ -1292,7 +1292,7 @@ add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'
     <hr class="s-rule">
     <div style="display:flex;gap:30px;margin-top:30px;flex:1">
       ${[
-        ['Access across the lifecycle','Invest alongside our best companies from seed to growth, the names brand funds cannot reach early. The next Deels and Kalshis, opened to the LPs who backed us first.'],
+        ['Exclusive co-investment opportunities','When we open a breakout, we open it here first, the names brand funds cannot reach early. The next Deels and Kalshis, offered to the LPs who backed us before anyone else.'],
         ['Aligned economics','Fee- and carry-light, reserved for Fund I LPs. We earn when you earn, the same incentive that drives the fund itself. No blind pools, no hidden layers.'],
         ['Full transparency','The same investment memos, data and post-close monitoring the fund runs on, shared with participating LPs in real time. You see what we see, when we see it.']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:25px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:16px 0 18px"></div><div style="font-size:17px;color:var(--ink-2);line-height:1.65">${c[1]}</div></div>`).join('')}
@@ -1310,9 +1310,9 @@ add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',ht
     <div style="display:flex;gap:34px;margin-top:26px">
       ${[
         ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe'],['Ola Doudin','BitOasis, sold to Coinbase · MENA'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC'],['Siggi Hilmarsson','Siggi\'s (innovative CPG brand) · Europe'],['Thiago da Costa','Lagoa, sold to Autodesk · LATAM']]],
-        ['Leading VCs',[['Anish Acharya','a16z · US'],['Arthur Patterson','Accel Partners founder · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
-        ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading · US'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder'],['Nic Ingram','EQT · Hong Kong'],['Rohan Kodialam','Citadel · US'],['Shawn O\'Neill','Silver Lake · US']]],
-        ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds · US'],['Cambridge Associates','US'],['JIMCO','Jameel family office · followed on from GFC'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]]
+        ['Leading VCs',[['Anish Acharya','a16z'],['Arthur Patterson','Accel Partners founder · Midas List'],['Garry Tan','Y Combinator · Midas List'],['Lucas Swisher','Coatue · Midas List'],['Wesley Chan','FPV · Midas List']]],
+        ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder'],['Nic Ingram','EQT · Hong Kong'],['Rohan Kodialam','Citadel'],['Shawn O\'Neill','Silver Lake']]],
+        ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds'],['Cambridge Associates','Institutional advisor'],['JIMCO','Jameel family office · followed on from GFC'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]]
       ].map(col=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:18px;color:var(--cobalt);margin-bottom:18px;min-height:2.4em">${col[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${col[1].map(p=>`<div><div style="font-size:15px;font-weight:600;color:var(--ink)">${p[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:3px">${p[1]}</div></div>`).join('')}</div></div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:auto;padding-top:14px">Our LPs help us win: the people who fund, scale and acquire the next trillion-dollar outsiders.</div>
@@ -1353,10 +1353,10 @@ add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls
     <h1 class="s-title">Every first check was re-priced upward, by the best.</h1>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:16px">
       ${[
-        ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series A · ’21'],['YC Growth','$750m'],['Paradigm','$2B · Series C ’25'],['$11B','Paradigm · Dec ’25'],['$22B','May ’26 · ~$40B talks (FT)']]],
-        ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO','filing reported']]],
-        ['Headway','Seed · Sep 2018','#2f9d6f',[['a16z','Series A/B'],['$1B','Spark · Series C'],['$2.3B','Spark · Series D ’24'],['Accel · Thrive · Forerunner','on cap table']]],
-        ['Assured','Seed · Dec 2019','#BE922A',[['Kleiner Perkins','early'],['Iconiq','growth'],['~$1B','Bloomberg · Mar ’25']]]
+        ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series A · ’21'],['YC Growth','$750m'],['Paradigm','$2B · Series C ’25'],['$11B','Paradigm · Dec ’25'],['$22B','Coatue · May ’26'],['IPO?','~$40B talks (FT)']]],
+        ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO?','filing reported']]],
+        ['Headway','Seed · Sep 2018','#2f9d6f',[['a16z','Series A/B'],['$1B','Spark · Series C'],['$2.3B','Spark · Series D ’24']]],
+        ['Assured','Seed · Dec 2019','#BE922A',[['Cortana','Series A'],['Kleiner · Iconiq','Series B'],['~$1B','Bloomberg · Mar ’25']]]
       ].map(r=>`<div style="display:flex;align-items:center;gap:20px;padding:15px 0;border-top:1px solid var(--line)"><div style="flex:0 0 148px"><div style="font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:7px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:15px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:6px 13px;border-radius:9px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:15.5px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:10px;color:var(--muted);margin-top:1px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px;text-align:center">All rounds and valuations per public announcements and press reports.</div>
@@ -1512,8 +1512,8 @@ add(sprintSlide({
   sub:'The people who ran the machines install the machinery.',
   cols:[
     ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org &amp; cadence','Don and Christopher Muhr (Auto1 COO through its IPO) install the weekly operating rhythm: roles, KPIs, review cadence, the way they ran teams of hundreds.'],
-    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','The model','Ivan (CFO &amp; COO) and Servaes Tholen (CFO of Headway and Thumbtack) rebuild the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
-    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring','Shuo Wang (Deel co-founder) maps the first ten hires across borders; Wieger opens EMEA talent, and the company runs payroll on Deel from day one.']
+    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','The model','Ivan (CFO &amp; COO) rebuilds the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
+    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring','A Deel co-founder maps the first ten hires across borders, and the company runs payroll on Deel from day one.']
   ],
   foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
 }));
@@ -1524,8 +1524,8 @@ add(sprintSlide({
   sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
   cols:[
     ['<path d="M5 21h14M7 21V4h8v17M15 4l3 2v15M12 12h.01"/>','Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie\'s growth playbooks, positioning tuned until it converts to pipeline.'],
-    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','Domain councils','Rotating sessions with people who built the category: Prof. Franklin (data &amp; AI), David Helgason (dev tools), Siggi Hilmarsson (consumer &amp; CPG), Thiago da Costa (engineering software), Ola Doudin (fintech).'],
-    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','Regional doors','Market entry with Ryoto Matsuzaki (Japan &amp; APAC), Wieger Lamers (EMEA), and Ola Doudin with JIMCO (MENA): the fund\'s map, opened company by company.']
+    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','Domain councils','Rotating sessions with the operators and LPs who built the category, matched to each company: dev tools, consumer, fintech, data &amp; AI.'],
+    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','Regional doors','Market entry through the fund\'s own map: Japan &amp; APAC, EMEA and MENA, opened company by company.']
   ],
   foot:'By week 6, every company has named customers in pipeline, and an advisor bench of its own.'
 }));
@@ -1537,7 +1537,7 @@ add(sprintSlide({
   cols:[
     ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
     ['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/>','Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
-    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Demo night at the Speakeasy','Hovelson stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
+    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Demo night at the Speakeasy','Our Broadway veteran stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
   ],
   foot:'When the milestone hits, the round assembles itself, that\'s why 43% graduate seed-to-A.'
 }));
