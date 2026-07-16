@@ -599,9 +599,9 @@ table.tbl.tall td.co{font-size:20px;}
   #deck{position:static;display:block;}
   .stage{position:static;width:1280px;height:auto;transform:none !important;}
   .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;
-    page-break-after:always;break-after:page;display:flex !important;}
+    page-break-before:always;break-before:page;page-break-after:auto;break-after:auto;display:flex !important;}
   .slide.print-skip{display:none !important;}
-  .slide.print-end{page-break-after:avoid !important;break-after:avoid !important;}
+  .slide.print-start{page-break-before:avoid !important;break-before:avoid !important;}
   .slide.dark,.cover,.section,.closing,.defn,.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;text-shadow:none !important;}
 }
@@ -1659,9 +1659,9 @@ document.getElementById('modeSeg').addEventListener('click',e=>{
 document.getElementById('exportBtn').onclick=()=>{
   // print only slides in the current mode
   slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
-  // no page-break after the last printed slide (avoids a trailing blank page)
-  const lastIdx=order[order.length-1];
-  slideEls.forEach((el,i)=>el.classList.toggle('print-end',i===lastIdx));
+  // break BEFORE each slide (not after) so there is no trailing blank page; first printed slide gets no break-before
+  const firstIdx=order[0];
+  slideEls.forEach((el,i)=>el.classList.toggle('print-start',i===firstIdx));
   window.print();
 };
 addEventListener('keydown',e=>{
