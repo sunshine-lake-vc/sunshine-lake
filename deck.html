@@ -601,6 +601,7 @@ table.tbl.tall td.co{font-size:20px;}
   .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;
     page-break-after:always;break-after:page;display:flex !important;}
   .slide.print-skip{display:none !important;}
+  .slide.print-end{page-break-after:avoid !important;break-after:avoid !important;}
   .slide.dark,.cover,.section,.closing,.defn,.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;text-shadow:none !important;}
 }
@@ -1031,7 +1032,7 @@ add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls
     <h1 class="s-title">The first checks, now public marks.</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
-      ${[['Fund I* · 2017–19','First checks: Headway · Kalshi'],['Fund II* · 2019–22','First checks: Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
+      ${[['Fund I* · 2017–19 · $23mm','First checks: Deel · Headway'],['Fund II* · 2019–22 · $37mm','First checks: Kalshi · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
     </div>
     <table class="tbl tall" style="margin-top:16px">
       <thead><tr><th>Company</th><th>Theme</th><th>Our First Check</th><th>Latest Public Mark</th><th>Round · Date</th><th>Follow-on investors</th></tr></thead>
@@ -1298,8 +1299,8 @@ add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
     <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
     <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Headway &amp; Kalshi first checks</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>GFC · NA</b></div><div class="sz">Deel &amp; Assured first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm · GFC</b></div><div class="sz">Deel &amp; Headway first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm · GFC</b></div><div class="sz">Kalshi &amp; Assured first checks</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
@@ -1658,6 +1659,9 @@ document.getElementById('modeSeg').addEventListener('click',e=>{
 document.getElementById('exportBtn').onclick=()=>{
   // print only slides in the current mode
   slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
+  // no page-break after the last printed slide (avoids a trailing blank page)
+  const lastIdx=order[order.length-1];
+  slideEls.forEach((el,i)=>el.classList.toggle('print-end',i===lastIdx));
   window.print();
 };
 addEventListener('keydown',e=>{

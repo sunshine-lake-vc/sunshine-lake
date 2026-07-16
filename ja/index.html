@@ -601,6 +601,7 @@ table.tbl.tall td.co{font-size:20px;}
   .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;
     page-break-after:always;break-after:page;display:flex !important;}
   .slide.print-skip{display:none !important;}
+  .slide.print-end{page-break-after:avoid !important;break-after:avoid !important;}
   .slide.dark,.cover,.section,.closing,.defn,.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;text-shadow:none !important;}
 }
@@ -1031,7 +1032,7 @@ add({title:'実績 — ファンドI &amp; II',track:'core',teaser:true,dark:fal
     <h1 class="s-title">初回投資が、今や公開市場の評価に。</h1>
     <hr class="s-rule">
     <div style="display:flex;gap:64px;margin:20px 0 4px">
-      ${[['ファンドI* · 2017–19','初回投資：Headway · Kalshi'],['ファンドII* · 2019–22','初回投資：Deel · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
+      ${[['ファンドI* · 2017–19 · $23mm','初回投資：Deel · Headway'],['ファンドII* · 2019–22 · $37mm','初回投資：Kalshi · Assured']].map(f=>`<div><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:20px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
     </div>
     <table class="tbl tall" style="margin-top:16px">
       <thead><tr><th>企業</th><th>テーマ</th><th>当社の初回投資</th><th>直近の公開市場評価</th><th>ラウンド · 時期</th><th>フォローオン投資家</th></tr></thead>
@@ -1298,8 +1299,8 @@ add({title:'フランチャイズ',track:'core',teaser:false,dark:false,cls:'',h
     <h1 class="s-title" style="font-size:42px">実証済みの2ファンド。この先に50年のフランチャイズ。</h1>
     <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ 実績</span><span style="flex:3;text-align:right">計画 ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">ファンドI*</div><div class="sz"><b>GFC · 北米</b></div><div class="sz">Headway &amp; Kalshi 初回投資</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">ファンドII*</div><div class="sz"><b>GFC · 北米</b></div><div class="sz">Deel &amp; Assured 初回投資</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">ファンドI*</div><div class="sz"><b>$23mm · GFC</b></div><div class="sz">Deel &amp; Headway 初回投資</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">ファンドII*</div><div class="sz"><b>$37mm · GFC</b></div><div class="sz">Kalshi &amp; Assured 初回投資</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">コア30社 · プレシード &amp; シード</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">コア45社 · 同じ初期フォーカス</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">コア60社 · マルチバーティカル</div></div>
@@ -1658,6 +1659,9 @@ document.getElementById('modeSeg').addEventListener('click',e=>{
 document.getElementById('exportBtn').onclick=()=>{
   // print only slides in the current mode
   slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
+  // no page-break after the last printed slide (avoids a trailing blank page)
+  const lastIdx=order[order.length-1];
+  slideEls.forEach((el,i)=>el.classList.toggle('print-end',i===lastIdx));
   window.print();
 };
 addEventListener('keydown',e=>{
