@@ -1211,7 +1211,7 @@ add({title:'ファンドI · $50mm',track:'core',teaser:true,dark:false,cls:'',h
 
 
 /* 12 — PORTFOLIO CONSTRUCTION */
-const PC1=[{label:'コア：初回投資',pct:55,color:'#2657e8'},{label:'コア：専用リザーブ',pct:10,color:'#4f86ea'},{label:'コア：裁量リザーブ',pct:10,color:'#86b3f0'},{label:'ディスカバリー',pct:10,color:'#F2D831'},{label:'ネットワーク',pct:10,color:'#7cc24f'},{label:'べき乗則',pct:5,color:'#f2a03c'}];
+const PC1=[{label:'コア：初回投資',pct:55,color:'#2657e8'},{label:'コア：専用リザーブ',pct:10,color:'#4f86ea'},{label:'コア：裁量リザーブ',pct:10,color:'#86b3f0'},{label:'キャノンボール型フォローオン（コアへ）',pct:10,color:'#7cc24f'},{label:'ネットワーク・べき乗則投資',pct:10,color:'#f2a03c'},{label:'ディスカバリー',pct:5,color:'#F2D831'}];
 add({title:'ポートフォリオ構成',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">$50mm · 目標ポートフォリオ構成</div>
@@ -1220,8 +1220,9 @@ add({title:'ポートフォリオ構成',track:'core',teaser:false,dark:false,cl
       <div style="flex:0 0 300px;position:relative;display:flex;justify-content:center">
         ${donut(PC1,120,40,'')}
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);line-height:1.15">
-          <div style="font-size:27px;color:var(--ink);font-weight:700">コア75%</div>
-          <div style="font-size:21px;color:var(--muted)">非コア25%</div>
+          <div style="font-size:25px;color:var(--ink);font-weight:700">コア75%+</div>
+          <div style="font-size:13.5px;color:var(--muted);margin-top:5px">その他の非初回投資20%</div>
+          <div style="font-size:13.5px;color:var(--muted)">ディスカバリー5%</div>
         </div>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:4px">
