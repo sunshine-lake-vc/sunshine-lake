@@ -665,6 +665,10 @@ table.tbl.tall td.co{font-size:20px;}
    …then replace DECK_HASH below.
    ============================================================ */
 const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
+/* Internal password "ewok" — unlocks WITHOUT the email watermark (clean PDF export).
+   Any @sunshinelake.vc email also unlocks clean. Rotate via: printf '%s' 'new-pw' | shasum -a 256 */
+const CLEAN_HASH='8e83635d4cba5a262b09c1900b06b8190d677faa2b9de53ef23401dc157f6ac7';
+const CLEAN_DOMAIN='@sunshinelake.vc';
 /* ============================================================
    VIEWER TRACKING
    Set LOG_ENDPOINT to a URL that accepts a JSON POST to record
@@ -692,8 +696,8 @@ function logView(email){
   try{fetch(LOG_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({email:email,deck:'Sunshine Lake Fund I (JA)',ts:new Date().toISOString(),ua:navigator.userAgent,ref:document.referrer||''})}).catch(function(){});}catch(e){}
 }
-function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');applyWatermark(sessionStorage.getItem('slDeckEmail'));boot();}
-gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');const email=(gm.value||'').trim();if(validEmail(email)&&await sha256(gpw.value)===DECK_HASH){sessionStorage.setItem('slDeckAuth','1');sessionStorage.setItem('slDeckEmail',email);logView(email);unlock();}else{ge.classList.add('show');gpw.value='';if(!validEmail(email)){gm.focus();}else{gpw.focus();}}});
+function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');if(sessionStorage.getItem('slDeckClean')!=='1'){applyWatermark(sessionStorage.getItem('slDeckEmail'));}boot();}
+gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');const email=(gm.value||'').trim();const h=await sha256(gpw.value);const pwOK=(h===DECK_HASH||h===CLEAN_HASH);if(validEmail(email)&&pwOK){const clean=(h===CLEAN_HASH)||email.toLowerCase().endsWith(CLEAN_DOMAIN);sessionStorage.setItem('slDeckAuth','1');sessionStorage.setItem('slDeckEmail',email);sessionStorage.setItem('slDeckClean',clean?'1':'0');if(!clean){logView(email);}unlock();}else{ge.classList.add('show');gpw.value='';if(!validEmail(email)){gm.focus();}else{gpw.focus();}}});
 
 /* ============================================================
    DATA
