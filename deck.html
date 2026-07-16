@@ -1211,7 +1211,7 @@ add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
 
 
 /* 12 — PORTFOLIO CONSTRUCTION */
-const PC1=[{label:'Core: initial checks',pct:55,color:'#2657e8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Core: discretionary reserves',pct:10,color:'#86b3f0'},{label:'Discovery',pct:10,color:'#F2D831'},{label:'Network',pct:10,color:'#7cc24f'},{label:'Power law',pct:5,color:'#f2a03c'}];
+const PC1=[{label:'Core: initial checks',pct:55,color:'#2657e8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Core: discretionary reserves',pct:10,color:'#86b3f0'},{label:'Cannonball follow-ons (into core)',pct:10,color:'#7cc24f'},{label:'Network &amp; power-law checks',pct:10,color:'#f2a03c'},{label:'Discovery',pct:5,color:'#F2D831'}];
 add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">$50mm · Target Portfolio Construction</div>
@@ -1220,8 +1220,9 @@ add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',
       <div style="flex:0 0 300px;position:relative;display:flex;justify-content:center">
         ${donut(PC1,120,40,'')}
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);line-height:1.15">
-          <div style="font-size:27px;color:var(--ink);font-weight:700">75% core</div>
-          <div style="font-size:21px;color:var(--muted)">25% non-core</div>
+          <div style="font-size:25px;color:var(--ink);font-weight:700">75%+ core</div>
+          <div style="font-size:13.5px;color:var(--muted);margin-top:5px">20% other non-initial</div>
+          <div style="font-size:13.5px;color:var(--muted)">5% discovery</div>
         </div>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:4px">
