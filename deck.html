@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2D831">
 <title>Sunshine Lake — Fund I</title>
 <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
 <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -725,8 +726,8 @@ const TRACK=[
 ];
 const CASES=[
  {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-mono.webp',teaser:true,alert:'~$40B round reported (FT)',
-  theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco',
-  headline:'Tarek and Luana built the first regulated prediction market.',
+  theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco · 2019',
+  headline:'At Goldman, Tarek saw the world overpay to hedge Brexit, so they built the market for the event itself.',
   founders:'Tarek Mansour &amp; Luana Lopes Lara',
   lived:'Tarek grew up in Lebanon; Luana, from Brazil, trained at the Bolshoi in Russia. They met in MIT\'s international crowd.',
   sourced:'Top MIT engineers connected us, and we leaned in despite the regulatory overhang.',
@@ -737,8 +738,8 @@ const CASES=[
   footnote:'*Reported round talks at ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
   insight:'Kalshi created a federally regulated asset class. Incumbents now pay nine figures just to enter it.'},
  {key:'assured',logo:'Assured',logoImg:'images/cases/assured-mono.webp',
-  theme:'Technological Theme · AI',origin:'Silicon Valley → a worldwide market',
-  headline:'Justin and Theo rebuilt global auto-insurance claims.',
+  theme:'Technological Theme · AI',origin:'US → global → US · 2019',
+  headline:'Justin and Theo saw insurance claims break the same way in every country, and rebuilt them with AI.',
   founders:'Justin &amp; Theo',
   lived:'Global citizens sizing for the world: claims are broken everywhere, not just in the US.',
   sourced:'A founder we backed, DoNotPay\'s, sent them to us pre-seed.',
@@ -748,8 +749,8 @@ const CASES=[
   metrics:[['1st / 2nd Check','Seed · Dec 2019 · Dec 2020'],['Current Mark','~$1B (Bloomberg, 2025)'],['Backed by','Iconiq · Kleiner Perkins'],['We led','The seed syndicate']],
   insight:'Assured: lived-experience grit for the multi-year cycles of a $7.6T-premium industry (Swiss Re, 2024).'},
  {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-mono.webp',teaser:true,
-  theme:'Economic Theme · Global Work',origin:'China &amp; Israel → San Francisco',
-  headline:'Shuo and Alex rebuilt how the world hires.',
+  theme:'Economic Theme · Global Work',origin:'China &amp; Israel → San Francisco · 2019',
+  headline:'Same work, same MIT degree: $300K in the Valley, $30K back home. So they rebuilt how the world hires.',
   founders:'Shuo Wang &amp; Alex Bouaziz',
   lived:'Blocked by America\'s visa wall at MIT, they lived the global-work problem they now solve.',
   sourced:'A UChicago founder in our YC network flagged them pre-launch.',
@@ -759,8 +760,8 @@ const CASES=[
   metrics:[['First Check','Seed · Dec 2019'],['Current Mark','$17.3B · Series E 2025'],['Status','IPO filing reported']],
   insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
  {key:'headway',logo:'Headway',logoImg:'images/cases/headway-mono.webp',
-  theme:'Social Theme · Mental Health',origin:'New York → a global access model',
-  headline:'Andrew and Jake fixed a $1T problem: no therapist took insurance.',
+  theme:'Social Theme · Mental Health',origin:'US → Europe → US · 2018',
+  headline:'Andrew and Jake fixed the reason no therapist takes insurance, and unlocked a $1T market.',
   founders:'Andrew &amp; Jake',
   lived:'Globally-minded builders with an international bench (Dutch CFO &amp; CTO). Access is a worldwide crisis.',
   sourced:'NYC angels who passed on the round still sent Andrew our way.',
@@ -770,8 +771,8 @@ const CASES=[
   metrics:[['First Check','Seed · Sep 2018'],['Current Mark','$2.3B · Series D 2024'],['Also on cap table','a16z · Thrive · Accel']],
   insight:'Mental illness costs ~$1T a year in lost productivity (WHO). Headway built the access model the world will copy.'},
  {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',
-  theme:'Technological Theme · Automation',origin:'London → San Francisco',
-  headline:'Joshua crossed from London to automate fees, fines and red tape.',
+  theme:'Technological Theme · Automation',origin:'London → San Francisco · 2019',
+  headline:'Buried in parking tickets as a London teenager, Joshua built the robot lawyer to beat the system.',
   founders:'Joshua Browder',
   lived:'A London teenager buried in parking tickets. He lived the red tape, then crossed over to automate it.',
   sourced:'Our global founder network surfaced Joshua early.',
@@ -781,8 +782,8 @@ const CASES=[
   metrics:[['First Check','Seed · Feb 2019'],['Current Mark','$230mm post-money'],['Status','Partially realized']],
   insight:'DoNotPay paid cash dividends from a profitable business, returning capital before any IPO.'},
  {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
-  theme:'Technological Theme · AI Productivity',origin:'China → San Francisco',
-  headline:'Andy replaced clunky spreadsheets with real-time FP&amp;A founders use.',
+  theme:'Technological Theme · AI Productivity',origin:'China → San Francisco · 2019',
+  headline:'Andy hated how founders modeled their finances, rebuilt it, and Brex bought the answer.',
   founders:'Andy Su',
   lived:'An immigrant engineer who lived the founder-finance pain. A universal problem, not a Valley one.',
   sourced:'The Brex product-alumni network surfaced Andy.',
@@ -924,7 +925,7 @@ function worldMap(){
 
 function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}"${c.logoImg.includes('-mono')?'':' style="filter:grayscale(1)"'}>`:`<span class="cs-logo">${c.logo}</span>`;
-  const rows=[['Lived',c.lived],['Sourced',c.sourced],['Backed',c.backed],['Built',c.built]];
+  const rows=[['Scout',c.sourced],['Select',c.lived],['Secure',c.backed],['Support',c.built]];
   const kpis=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
   return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
    <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
@@ -981,7 +982,7 @@ add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
         ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T','musk','EM'],
         ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.5T','saverin','ES'],
         ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI · Founder, SSI','~$1T*','sutskever','IS']
-      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
+      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div class="why-cap" data-cap="${f[3]}" style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">Public market caps &amp; reported valuations, July 2026; years mark company founding. *OpenAI IPO ~$1T per press reports. Immigrants found companies at ~80% higher rates, at every firm size (AER: Insights, 2022).</div>
   </div>${chrome(false)}`});
@@ -1010,7 +1011,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
         ['CityDeal','Sold to Groupon · built its international offices'],
         ['Airbnb','very early days · international growth · long-term stays, now ~1 in 5 nights booked'],
         ['Global Founders Capital','Led North America'],
-        ['Sunshine Lake','His independent spinout']
+        ['Sunshine Lake','A Silicon Valley hub for international founders']
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
     </div>
     <div style="margin-top:auto;padding-top:18px;padding-bottom:30px;text-align:center">
@@ -1516,7 +1517,7 @@ add({title:'The Speakeasy',track:'appendix',teaser:false,dark:false,cls:'',html:
   <div class="s-pad">
     <div class="eyebrow">The Sunshine Lake Speakeasy · San Francisco</div>
     <h1 class="s-title">Not a founder house. A speakeasy.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1060px;line-height:1.4">We back founders anywhere, and hand them Silicon Valley: the network, craft and capital no local fund can.</div>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">For fifteen years Don has made a home for international founders in San Francisco. At Sunshine Lake it is the Speakeasy: the network, craft and capital no local fund can hand them.</div>
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:24px;flex:1">
       ${[
@@ -1627,6 +1628,25 @@ function show(posInOrder){
   document.getElementById('barTitle').textContent=SLIDES[idx].title.replace(/&amp;/g,'&');
   [...document.querySelectorAll('#progress .pd')].forEach((d,i)=>d.classList.toggle('on',i===cur));
   location.hash=idx;
+  if(SLIDES[idx].title==='Why Now') runWhyCountUp(slideEls[idx]);
+}
+function runWhyCountUp(slide){
+  if(!slide) return;
+  const caps=[...slide.querySelectorAll('.why-cap')];
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  caps.forEach((el,i)=>{
+    const raw=el.getAttribute('data-cap')||el.textContent;
+    const m=raw.match(/^(\D*)([\d.]+)(.*)$/);
+    if(!m||reduce){el.textContent=raw;return;}
+    const pre=m[1], target=parseFloat(m[2]), suf=m[3], dec=(m[2].split('.')[1]||'').length;
+    const dur=760, start=performance.now()+i*230;
+    el.textContent=pre+(0).toFixed(dec)+suf;
+    (function frame(now){
+      const t=Math.min(1,Math.max(0,(now-start)/dur)), e=1-Math.pow(1-t,3);
+      el.textContent=t<=0?pre+(0).toFixed(dec)+suf:pre+(target*e).toFixed(dec)+suf;
+      if(t<1) requestAnimationFrame(frame); else el.textContent=raw;
+    })(performance.now());
+  });
 }
 function next(){show(cur+1);} function prev(){show(cur-1);}
 function buildProgress(){
