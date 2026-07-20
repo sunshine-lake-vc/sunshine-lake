@@ -1639,7 +1639,7 @@ function runWhyCountUp(slide){
     const m=raw.match(/^(\D*)([\d.]+)(.*)$/);
     if(!m||reduce){el.textContent=raw;return;}
     const pre=m[1], target=parseFloat(m[2]), suf=m[3], dec=(m[2].split('.')[1]||'').length;
-    const dur=760, start=performance.now()+i*230;
+    const dur=440, start=performance.now()+i*(dur+70);
     el.textContent=pre+(0).toFixed(dec)+suf;
     (function frame(now){
       const t=Math.min(1,Math.max(0,(now-start)/dur)), e=1-Math.pow(1-t,3);
