@@ -1256,8 +1256,8 @@ add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'
     <hr class="s-rule">
     <div style="display:flex;gap:30px;margin-top:30px;flex:1">
       ${[
-        ['Exclusive co-investment opportunities','When we open a breakout, we open it here first, the names brand funds cannot reach early. The next Deels and Kalshis, offered to the LPs who backed us before anyone else.'],
-        ['Aligned economics','Fee- and carry-light, reserved for Fund I LPs. We earn when you earn, the same incentive that drives the fund itself. No blind pools, no hidden layers.'],
+        ['Exclusive co-investment opportunities','When one of our breakouts raises, we offer our LPs the co-investment first, into names brand funds cannot reach early. The next Deels and Kalshis, open to those who backed us before anyone else.'],
+        ['Aligned economics','Reduced fees and carry, reserved for Fund I LPs. We earn when you earn, the same alignment that drives the fund itself, with full transparency on every co-investment.'],
         ['Full transparency','The same investment memos, data and post-close monitoring the fund runs on, shared with participating LPs in real time. You see what we see, when we see it.']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:25px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:16px 0 18px"></div><div style="font-size:17px;color:var(--ink-2);line-height:1.65">${c[1]}</div></div>`).join('')}
     </div>
@@ -1320,7 +1320,7 @@ add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls
         ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series A · ’21'],['YC Growth','$750m'],['Paradigm','$2B · Series C ’25'],['$11B','Paradigm · Dec ’25'],['$22B','Coatue · May ’26'],['IPO?','~$40B talks (FT)']]],
         ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO?','filing reported']]],
         ['Headway','Seed · Sep 2018','#2f9d6f',[['a16z','Series A/B'],['$1B','Spark · Series C'],['$2.3B','Spark · Series D ’24']]],
-        ['Assured','Seed · Dec 2019','#BE922A',[['Cortana','Series A'],['Kleiner · Iconiq','Series B'],['~$1B','Bloomberg · Mar ’25']]]
+        ['Assured','Seed · Dec 2019','#BE922A',[['Costanoa','Series A'],['Kleiner · Iconiq','Series B'],['~$1B','Bloomberg · Mar ’25']]]
       ].map(r=>`<div style="display:flex;align-items:center;gap:24px;padding:23px 0;border-top:1px solid var(--line)"><div style="flex:0 0 162px"><div style="font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:8px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:17px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:9px 16px;border-radius:10px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:17px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:11px;color:var(--muted);margin-top:2px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px;text-align:center">All rounds and valuations per public announcements and press reports.</div>
