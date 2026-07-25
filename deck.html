@@ -715,8 +715,8 @@ const TEAM=[
 ];
 const VECTORS=[
  {n:'1',t:'Idea → company',p:'Founding',ad:[['Prof. Mike Franklin','Databricks early advisor','🇺🇸']]},
- {n:'2',t:'Product → market fit',p:'PMF',ad:[['Jamie Feaster','serial growth operator','🇺🇸']]},
- {n:'3',t:'Scale → durability',p:'Scale',ad:[['Andrew Hovelson','Broadway · storytelling coach','🇺🇸']]}
+ {n:'2',t:'Product → market fit',p:'PMF',ad:[['Andrew Hovelson','Broadway · storytelling coach','🇺🇸']]},
+ {n:'3',t:'Scale → durability',p:'Scale',ad:[['Jamie Feaster','serial growth operator','🇺🇸']]}
 ];
 const TRACK=[
  ['Kalshi','Economic · reg. markets','Seed · Apr 2019','~$22B*','Series F · May 2026','Coatue · Sequoia · a16z'],
@@ -1052,7 +1052,7 @@ add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:38px">
     <div class="eyebrow">Our Thesis</div>
     <h1 class="s-title" style="font-size:40px">We back international founders at their breakout moments.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">Forged by extreme origins</b>, then handed Silicon Valley: the network, craft and capital that turn outsiders into category leaders. That bridge is what we are, and the Speakeasy is where we build it.</div>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">Forged by extreme origins</b>, then handed Silicon Valley: the network, craft and capital that turn outsiders into category leaders.</div>
     <div style="margin-top:16px;display:flex;flex-direction:column;flex:1">
       ${[
         ['They live the change first.','Outsiders feel global breaks before the Valley reads them.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
@@ -1093,13 +1093,14 @@ add({title:'Where Breakout Moments Come From',track:'core',teaser:true,dark:fals
   <div class="s-pad">
     <div class="eyebrow">Where Breakout Moments Come From</div>
     <h1 class="s-title">Three lenses. A new opening every few years.</h1>
-    <hr class="s-rule">
-    <div style="display:flex;gap:24px;margin-top:26px;flex:1">
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.4">For fifteen years Don has backed economic, social and technological change before the market named it. The founders below are ours, one in each lens.</div>
+    <hr class="s-rule" style="margin-top:12px">
+    <div style="display:flex;gap:24px;margin-top:20px;flex:1">
       ${[
         ['Economic','Tariffs and re-shoring re-route $35T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
         ['Social','By 2050, 2.1B people will be over 60, and depression and anxiety cost $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
         ['Technological','AI puts up to $4.4T a year of expert work in play: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
-      ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="margin-top:22px;display:flex;flex-direction:column;gap:20px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
+      ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);margin-top:20px">Founders we&rsquo;ve backed</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:18px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
     </div>
     <div style="text-align:center;margin-top:20px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)"><span style="background:var(--sun);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 14px;margin-right:12px">What's next</span>Energy transition · space logistics · sovereign compute.</div>
   </div>${chrome(false)}`});
@@ -1135,7 +1136,7 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="eyebrow">Who Runs the System</div>
     <h1 class="s-title" style="font-size:40px">International and multicultural, by design.</h1>
     <div class="team-row" style="margin:16px 0 16px">${teamCardsHTML()}</div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">The bench — operators who made the same journey, matched to every stage</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;text-align:center">The bench — operators who made the same journey, matched to every stage</div>
     <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
     <div style="margin:14px 0 0 32px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:18px;color:#fff">
       <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPAC Member</span>
@@ -1175,10 +1176,10 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
     <hr class="s-rule">
     <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
-        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We coach the cadence.','chip:Cadence · years → quarters'],
-        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into narratives that close customers, hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach — on Broadway with Glenn Close'],
-        ['Sleeves rolled up','We build alongside: pipelines opened, executives recruited, M&amp;A run, by a GP who sold his company to Groupon and drove Airbnb\'s early international growth (now nearly 1 in 5 nights booked).','chip:Groupon exit · Airbnb growth']
-      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.58;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:140px;border-radius:10px;background:#dfe5f2 center 18%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:`<div style="margin-top:14px;display:inline-flex;align-self:flex-start;background:#eef3fd;border-radius:999px;padding:6px 13px;font-size:11px;font-weight:600;color:var(--cobalt)">${c[2].slice(5)}</div>`}</div>`).join('')}
+        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We install the operating rhythm, weekly roles, KPIs and review cadence, and coach the pace until it holds under pressure. The habits that separate a fast company from a frantic one.',''],
+        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into the narrative that closes customers, key hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach — on Broadway with Glenn Close'],
+        ['Sleeves rolled up','We build alongside the founder, not from the sideline: pipelines opened, executives recruited, M&amp;A run, board work done. By a GP who co-founded a company sold to Groupon and drove Airbnb\'s early international growth, where long-term stays are now nearly 1 in 5 nights booked. The unglamorous work that compounds.','']
+      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.62;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:140px;border-radius:10px;background:#dfe5f2 center 18%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:''}</div>`).join('')}
     </div>
     <div style="margin-top:20px;border-left:3px solid var(--sun);padding-left:20px">
       <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
@@ -1202,8 +1203,7 @@ add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
         ['Status',[['First close complete',''],['Actively deploying',''],['Expected ~80% deployed','over 3.5 years; reserves in the final 1.5']]]
       ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:18px">Co-investment opportunities for LPs.</div>
-    <div class="note" style="margin-top:12px">Preliminary and subject to change. Not an offer to sell, or a solicitation of an offer to buy, any security.</div>
+    <div class="note" style="margin-top:20px">Preliminary and subject to change. Not an offer to sell, or a solicitation of an offer to buy, any security.</div>
   </div>${chrome(false)}`});
 
 
