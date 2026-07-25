@@ -637,10 +637,6 @@ table.tbl.tall td.co{font-size:20px;}
   </div>
   <span class="ttl" id="barTitle"></span>
   <div class="spacer"></div>
-  <div class="seg" id="modeSeg">
-    <button data-mode="teaser">ティザー</button>
-    <button data-mode="full" class="on">フル</button>
-  </div>
   <span class="count" id="count">1 / 1</span>
   <a class="btn" href="/deck.html" style="text-decoration:none" title="English">English</a>
   <button class="btn" id="exportBtn">PDF出力</button>
@@ -1326,8 +1322,8 @@ add({title:'市場の評価',track:'appendix',teaser:false,dark:false,cls:'',htm
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:16px">
       ${[
         ['Kalshi','シード · 2019年4月','#155EE8',[['Sequoia','シリーズA · ’21'],['YC Growth','$750m'],['Paradigm','$2B · シリーズC ’25'],['$11B','Paradigm · ’25年12月'],['$22B','Coatue · ’26年5月'],['IPO?','約$40Bで協議（FT）']]],
-        ['Deel','シード · 2019年12月','#155EE8',[['a16z','シリーズA · ’20'],['$12B','2022'],['$17.3B','Ribbit · a16z · Coatue · ’25年10月'],['IPO?','申請報道']]],
-        ['Headway','シード · 2018年9月','#2f9d6f',[['a16z','シリーズA/B'],['$1B','Spark · シリーズC'],['$2.3B','Spark · シリーズD ’24']]],
+        ['Deel','シード · 2019年12月','#155EE8',[['a16z','シリーズA · ’20'],['Spark','シリーズB'],['YC Growth','シリーズC'],['$17.3B','Ribbit · a16z · Coatue · ’25年10月'],['IPO?','申請報道']]],
+        ['Headway','シード · 2018年9月','#2f9d6f',[['Accel','シード'],['a16z','シリーズA'],['a16z','~$750m'],['$2.3B','Spark · シリーズD ’24']]],
         ['Assured','シード · 2019年12月','#BE922A',[['Costanoa','シリーズA'],['Kleiner · Iconiq','シリーズB'],['~$1B','Bloomberg · ’25年3月']]]
       ].map(r=>`<div style="display:flex;align-items:center;gap:24px;padding:23px 0;border-top:1px solid var(--line)"><div style="flex:0 0 162px"><div style="font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:8px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:17px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:9px 16px;border-radius:10px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:17px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:11px;color:var(--muted);margin-top:2px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
     </div>
@@ -1457,8 +1453,10 @@ function sprintSlide(o){
     </div>
     <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1090px;line-height:1.4">${o.sub}</div>
-    <div style="display:flex;gap:20px;margin-top:22px;flex:1;align-items:stretch">
-      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:30px 26px;display:flex;flex-direction:column;justify-content:center"><div style="width:50px;height:50px;border-radius:14px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:20px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
+    <div style="flex:1;display:flex;align-items:center;margin-top:22px">
+    <div style="display:flex;gap:20px;width:100%;align-items:stretch">
+      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:26px 26px;display:flex;flex-direction:column;justify-content:center"><div style="width:50px;height:50px;border-radius:14px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:20px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
+    </div>
     </div>
     <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
       <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">成果物</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
@@ -1650,12 +1648,6 @@ addEventListener('resize',fit);
 /* controls */
 document.getElementById('navRight').onclick=next;
 document.getElementById('navLeft').onclick=prev;
-document.getElementById('modeSeg').addEventListener('click',e=>{
-  const b=e.target.closest('button'); if(!b)return;
-  mode=b.dataset.mode;
-  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
-  rebuildOrder(); show(0);
-});
 document.getElementById('exportBtn').onclick=()=>{
   // print only slides in the current mode
   slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
