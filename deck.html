@@ -991,6 +991,7 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       <div style="flex:1">
         <div class="eyebrow">Founder &amp; General Partner</div>
         <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
+        <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);margin-top:8px;line-height:1.35">Has backed <b style="color:var(--cobalt);font-weight:600">ten companies that reached $1B+</b>.</div>
       </div>
       <div style="flex:0 0 auto;margin-right:40px">
         <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
@@ -1082,6 +1083,25 @@ add({title:'The Evidence',track:'core',teaser:false,dark:false,cls:'',html:`
       </div>`).join('')}
     </div>
     <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">The market still prices this evidence at zero. We price it first, at the first check.</div>
+  </div>${chrome(false)}`});
+
+/* NEW — OUR EDGE · THE SPEAKEASY (early "edge" beat; fuller Speakeasy stays in appendix) */
+add({title:'Our Edge — The Speakeasy',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Edge · The Speakeasy</div>
+    <h1 class="s-title">The edge isn't the thesis. It's the Speakeasy.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1110px;line-height:1.42">Anyone can write a thesis; few have backed the giants. Our unfair advantage is a room where international founders <b style="color:var(--cobalt);font-weight:600">speak easy</b> — they name the gaps a pitch is built to hide, and we fill them.</div>
+    <hr class="s-rule" style="margin-top:14px">
+    <div style="flex:1;display:flex;align-items:center;margin-top:22px">
+    <div style="display:flex;gap:24px;width:100%;align-items:stretch">
+      ${[
+        ['Speak easy','Outsiders are trained to under-tell and over-prove. In the Speakeasy they drop the performance: real problems, real doubts, no posture.'],
+        ['Name the gaps','Strengths, weaknesses and blind spots laid bare — the things a data room never shows and a first-time founder rarely sees alone.'],
+        ['We fill them','Narrative, operating cadence, hiring across borders, the first fifty intros. Don and the network close each gap, one by one.']
+      ].map((c,i)=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column"><div style="width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;margin-bottom:16px">${i+1}</div><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:12px">${c[1]}</div></div>`).join('')}
+    </div>
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:20px">The idea and the record get us the meeting. The Speakeasy is why founders choose us, and why they compound.</div>
   </div>${chrome(false)}`});
 
 /* 9 — WHERE WE INVEST */
