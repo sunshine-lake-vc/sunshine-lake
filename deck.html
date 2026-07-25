@@ -1025,12 +1025,9 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
 add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Record · Funds I &amp; II</div>
-    <h1 class="s-title">The first checks, now public marks.</h1>
+    <h1 class="s-title">First checks into today's giants.</h1>
     <hr class="s-rule">
-    <div style="display:flex;gap:64px;margin:22px 0 6px">
-      ${[['Fund I*','2017–19 · $23mm'],['Fund II*','2019–22 · $37mm']].map(f=>`<div><div style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">${f[0]}</div><div style="font-size:19px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em">${f[1]}</div></div>`).join('')}
-    </div>
-    <table class="tbl tall" style="margin-top:16px">
+    <table class="tbl tall" style="margin-top:26px">
       <thead><tr><th>Company</th><th>Theme</th><th>First Check</th><th>Latest Public Mark</th><th>Round · Date</th><th>Follow-on investors</th></tr></thead>
       <tbody>${trackRowsHTML()}</tbody>
     </table>
@@ -1046,7 +1043,7 @@ add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:
     <h1 class="s-title">Founded, operated, and invested.</h1>
     <div style="flex:1;min-height:0;margin-top:14px;display:flex">${uniScale()}</div>
     <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC and LA to Europe, LATAM and APAC, a sourcing machine run on weekly quotas, rebuilt at Sunshine Lake.</div>
-    <div class="note" style="margin-top:8px">All company marks are public rounds &amp; press reports · *Kalshi at ~$22B; reported talks at ~$40B (FT). SpotHero price per SEC filing (Crain's, May 2026).</div>
+    <div class="note" style="margin-top:8px;text-align:center;max-width:none">All company marks are public rounds &amp; press reports · *Kalshi at ~$22B; reported talks at ~$40B (FT). SpotHero price per SEC filing (Crain's, May 2026).</div>
   </div>${chrome(false)}`});
 
 
@@ -1272,7 +1269,7 @@ add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'
 add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Who Stands Behind It</div>
-    <h1 class="s-title">Backed by the people who build, fund and acquire.</h1>
+    <h1 class="s-title">Backed by the people who build, fund and support.</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">A global LP base.</div>
     <div style="display:flex;gap:34px;margin-top:26px">
       ${[
