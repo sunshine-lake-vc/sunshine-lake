@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Founder Voices — layout test</title>
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face{
+    font-family:'DomaineDisp';
+    src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+    font-weight:400 600; font-display:swap;
+  }
+  :root{
+    --navy:#02041F; --ink:#0B1275; --cobalt:#155EE8; --mid:#0A3DAE; --sun:#F2D831;
+    --serif:'DomaineDisp','Times New Roman',Times,serif;
+    --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans); color:#fff; -webkit-font-smoothing:antialiased;
+    background:radial-gradient(120% 90% at 50% -10%, #123a86 0%, #0a2258 34%, #050d34 68%, #02041F 100%);
+    min-height:100vh; padding:0 0 120px;
+  }
+  .wrap{max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,64px)}
+
+  /* ── test banner ── */
+  .testbar{
+    background:var(--sun); color:#0a1740; font-size:13px; font-weight:600;
+    text-align:center; padding:9px 16px; letter-spacing:.01em;
+  }
+  .testbar b{font-weight:800}
+
+  /* ── header ── */
+  header{padding:clamp(56px,8vw,104px) 0 clamp(30px,4vw,50px)}
+  .eyebrow{
+    font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--sun); margin-bottom:20px;
+  }
+  h1{
+    font-family:var(--serif); font-weight:500; line-height:1.04; letter-spacing:-.02em;
+    font-size:clamp(2.6rem,6vw,5rem); color:#fff;
+  }
+  .lede{
+    font-family:var(--serif); font-size:clamp(1.1rem,1.5vw,1.5rem); line-height:1.45;
+    color:rgba(255,255,255,.8); margin-top:22px; max-width:720px;
+  }
+
+  .section-label{
+    font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    color:rgba(255,255,255,.5); margin:clamp(48px,6vw,80px) 0 26px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .section-label::after{content:""; flex:1; height:1px; background:rgba(255,255,255,.14)}
+
+  /* ── featured hero quotes ── */
+  .featured{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+  .fq{
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.1); border-radius:22px;
+    padding:34px 32px 30px; display:flex; flex-direction:column;
+  }
+  .fq .mark{font-family:var(--serif); font-size:64px; line-height:.6; color:var(--sun); height:34px}
+  .fq blockquote{
+    font-family:var(--serif); font-size:clamp(1.35rem,1.7vw,1.65rem); line-height:1.32;
+    color:#fff; margin:14px 0 auto; letter-spacing:-.01em;
+  }
+  .fq .attr{display:flex; align-items:center; gap:14px; margin-top:26px; padding-top:22px; border-top:1px solid rgba(255,255,255,.12)}
+  .fq .photo{flex:0 0 auto; width:56px; height:56px; border-radius:50%; object-fit:cover; background:rgba(255,255,255,.08)}
+  .fq .who .n{font-family:var(--serif); font-size:19px; color:#fff; line-height:1.1}
+  .fq .who .r{font-size:12.5px; color:rgba(255,255,255,.62); margin-top:4px}
+
+  /* ── supporting voices grid ── */
+  .voices{display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:20px}
+  .vq{
+    background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    border-radius:18px; padding:28px 26px; display:flex; flex-direction:column;
+    transition:border-color .2s, background .2s;
+  }
+  .vq:hover{border-color:rgba(242,216,49,.4); background:rgba(255,255,255,.055)}
+  .vq blockquote{
+    font-family:var(--serif); font-size:clamp(1.1rem,1.25vw,1.28rem); line-height:1.4;
+    color:rgba(255,255,255,.95); margin:0 0 auto;
+  }
+  .vq blockquote::before{content:"\201C"; color:var(--sun); font-family:var(--serif)}
+  .vq blockquote::after{content:"\201D"; color:var(--sun); font-family:var(--serif)}
+  .vq .attr{display:flex; align-items:center; gap:12px; margin-top:22px}
+  .vq .photo{flex:0 0 auto; width:46px; height:46px; border-radius:50%; object-fit:cover; background:rgba(255,255,255,.08)}
+  .vq .who .n{font-size:14.5px; font-weight:600; color:#fff}
+  .vq .who .r{font-size:12px; color:rgba(255,255,255,.55); margin-top:2px}
+  .vq .tag{
+    margin-left:auto; align-self:flex-start; font-size:10px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--sun); border:1px solid rgba(242,216,49,.4);
+    border-radius:999px; padding:4px 10px;
+  }
+  .demo-note{font-size:11px; color:rgba(242,216,49,.75); margin-top:10px; font-style:italic}
+
+  @media(max-width:860px){
+    .featured{grid-template-columns:1fr}
+    .voices{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="testbar">TEST PAGE — not linked from the live site. Founder voices, quote-forward layout for review. <b>Photos are placeholders where shown.</b></div>
+
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">The founders keep the receipts</div>
+      <h1>In their words.</h1>
+      <p class="lede">The people who worked with Don, in their own words. Quotes lead; a photo rides alongside wherever we have one, and stands on its own where we don't.</p>
+    </header>
+
+    <div class="section-label">Featured</div>
+    <div class="featured" id="featured"></div>
+
+    <div class="section-label">More voices</div>
+    <div class="voices" id="voices"></div>
+  </div>
+
+<script>
+  /* ── Data (from redesign.js). `photo` is optional: present → shown; absent → quote stands alone. ──
+     A couple of entries carry a PLACEHOLDER candid photo purely to preview the paired treatment
+     Don described ("pics of me with these founders"). Swap for real founder photos later.        */
+  var featured = [
+    { company:'Deel',    logo:'images/cases/deel-logo.webp',
+      quote:'A fantastic partner and ally to Deel since its early days.',
+      name:'Alex Bouaziz', role:'Co-Founder & CEO, Deel',
+      photo:'images/snapshots/snap-3.webp', placeholder:true },
+    { company:'Headway', logo:'images/cases/headway-logo.webp',
+      quote:'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.',
+      name:'Jake Sussman', role:'Co-Founder, Headway' },
+    { company:'Kalshi',  logo:'images/cases/kalshi-logo.webp',
+      quote:'With us from day zero — a tremendous supporter through the twists and turns.',
+      name:'Tarek Mansour', role:'Co-Founder & CEO, Kalshi' }
+  ];
+
+  var voices = [
+    { name:'Aaron Bai', role:'Founder & CEO, Affiniti',
+      quote:"It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice." },
+    { name:'Ankit Jain', role:'Co-Founder & CEO, Aviator', tag:'SVB',
+      quote:"When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation." },
+    { name:'Filip Kozera', role:'Founder & CEO, Wordware',
+      quote:"Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.",
+      photo:'images/snapshots/snap-9.webp', placeholder:true },
+    { name:'James Ding', role:"Co-Founder & CEO, DraftWise",
+      quote:"He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again." },
+    { name:'Lawrence Lin Murata', role:'Co-Founder & CEO, Slope',
+      quote:"He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world." },
+    { name:'Mark Lawrence', role:'Founder & CEO, SpotHero', tag:'Exit',
+      quote:"We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would." },
+    { name:'Max Kauderer', role:'Co-Founder & CEO, Yuzu Health',
+      quote:"He could not have been more supportive through our pivots and challenges. We've relied on Don as an independent point of feedback." },
+    { name:'Michael Tannenbaum', role:'CEO (fmr. COO, Brex), Figure', tag:'SVB',
+      quote:"When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches." },
+    { name:'Nick Evans', role:'Co-Founder & CEO, Avocado',
+      quote:"Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately." },
+    { name:'Sean Doherty', role:'CEO, GovDash',
+      quote:"He's been a great sounding board, especially during uncertain moments. We're backed by strong funds — but Don stands out." },
+    { name:'Thiago Da Costa', role:'Co-Founder & CEO, Datagrid', tag:'Acquired',
+      quote:"He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered." },
+    { name:'Thomas Dowling', role:'Co-Founder, TaxProper', tag:'Acquired',
+      quote:"From day one through to TaxProper's acquisition, Don was more than an investor. He's one of those rare investors who actually makes your business better." },
+    { name:'Todd Heine', role:'Founder & CEO, Legalpad', tag:'Acquired',
+      quote:"He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition." }
+  ];
+
+  function photoTag(v, cls){
+    if(!v.photo) return '';
+    return '<img class="photo '+cls+'" src="'+v.photo+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+  }
+
+  document.getElementById('featured').innerHTML = featured.map(function(f){
+    return '<article class="fq">'
+      + '<div class="mark">“</div>'
+      + '<blockquote>'+f.quote+'</blockquote>'
+      + '<div class="attr">'
+      +   photoTag(f,'')
+      +   '<div class="who"><div class="n">'+f.name+'</div><div class="r">'+f.role+'</div></div>'
+      + '</div>'
+      + (f.placeholder ? '<div class="demo-note">↑ placeholder photo — replace with real founder image</div>' : '')
+      + '</article>';
+  }).join('');
+
+  document.getElementById('voices').innerHTML = voices.map(function(v){
+    return '<article class="vq">'
+      + '<blockquote>'+v.quote+'</blockquote>'
+      + '<div class="attr">'
+      +   photoTag(v,'')
+      +   '<div class="who"><div class="n">'+v.name+'</div><div class="r">'+v.role+'</div></div>'
+      +   (v.tag ? '<span class="tag">'+v.tag+'</span>' : '')
+      + '</div>'
+      + (v.placeholder ? '<div class="demo-note">↑ placeholder photo</div>' : '')
+      + '</article>';
+  }).join('');
+</script>
+</body>
+</html>
