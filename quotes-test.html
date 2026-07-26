@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Founder Voices + Partner bios — layout test</title>
+<title>Founder Voices — carousel test</title>
 <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face{
@@ -20,124 +20,131 @@
   body{
     font-family:var(--sans); color:#fff; -webkit-font-smoothing:antialiased;
     background:radial-gradient(120% 90% at 50% -10%, #123a86 0%, #0a2258 34%, #050d34 68%, #02041F 100%);
-    min-height:100vh; padding:0 0 120px;
+    min-height:100vh; padding:0 0 110px;
   }
-  .wrap{max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,64px)}
-
+  .wrap{max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,64px)}
   .testbar{background:var(--sun); color:#0a1740; font-size:13px; font-weight:600; text-align:center; padding:9px 16px}
-  .testbar b{font-weight:800}
 
-  header{padding:clamp(56px,8vw,104px) 0 clamp(20px,3vw,36px)}
-  .eyebrow{font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--sun); margin-bottom:20px}
-  h1{font-family:var(--serif); font-weight:500; line-height:1.04; letter-spacing:-.02em; font-size:clamp(2.6rem,6vw,5rem); color:#fff}
-  .lede{font-family:var(--serif); font-size:clamp(1.1rem,1.5vw,1.5rem); line-height:1.45; color:rgba(255,255,255,.8); margin-top:22px; max-width:760px}
+  header{padding:clamp(52px,7vw,92px) 0 clamp(20px,3vw,30px)}
+  .eyebrow{font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--sun); margin-bottom:18px}
+  h1{font-family:var(--serif); font-weight:500; line-height:1.03; letter-spacing:-.02em; font-size:clamp(2.6rem,6vw,5rem); color:#fff}
 
-  .section-label{font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:clamp(48px,6vw,80px) 0 26px; display:flex; align-items:center; gap:16px}
+  /* ══ CAROUSEL — one big high-contrast card at a time ══ */
+  .carousel{position:relative; margin-top:clamp(20px,3vw,34px)}
+  .stage{
+    position:relative; overflow:hidden; border-radius:26px;
+    background:linear-gradient(158deg,#0c2560 0%,#081a45 52%,#05122f 100%);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 30px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+    min-height:clamp(410px,44vw,520px);
+  }
+  .slide{
+    position:absolute; inset:0; padding:clamp(38px,5vw,72px);
+    display:flex; flex-direction:column; justify-content:center;
+    opacity:0; transform:translateX(28px); pointer-events:none;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .slide.on{opacity:1; transform:none; pointer-events:auto}
+  .slide .mark{font-family:var(--serif); font-size:clamp(70px,9vw,130px); line-height:.5; color:var(--sun); height:.4em; margin-bottom:8px}
+  .slide blockquote{
+    font-family:var(--serif); font-weight:500; color:#fff; letter-spacing:-.015em;
+    font-size:clamp(1.5rem,2.5vw,2.35rem); line-height:1.26; max-width:34ch; margin:0;
+  }
+  .slide .attr{display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 18px; margin-top:clamp(26px,3vw,40px)}
+  .slide .n{font-family:var(--serif); font-size:clamp(1.15rem,1.5vw,1.5rem); color:#fff}
+  .slide .c{font-size:clamp(.8rem,1vw,.95rem); font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--sun)}
+  .slide .r{font-size:.9rem; color:rgba(255,255,255,.62)}
+  .slide .tag{margin-left:auto; align-self:center; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#0a1740; background:var(--sun); border-radius:999px; padding:6px 14px}
+
+  /* controls */
+  .ctrls{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:26px}
+  .navbtn{
+    width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.05); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .2s, border-color .2s;
+  }
+  .navbtn:hover{background:var(--sun); border-color:var(--sun); color:#0a1740}
+  .navbtn svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .counter{font-family:var(--serif); font-size:1.15rem; color:rgba(255,255,255,.85); min-width:74px; text-align:center; letter-spacing:.04em}
+  .dots{display:flex; gap:9px; justify-content:center; margin-top:20px; flex-wrap:wrap}
+  .dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.24); border:0; padding:0; cursor:pointer; transition:background .2s, transform .2s}
+  .dot.on{background:var(--sun); transform:scale(1.35)}
+
+  /* ── partner cards (bio, no quote) ── */
+  .section-label{font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:clamp(60px,7vw,96px) 0 26px; display:flex; align-items:center; gap:16px}
   .section-label::after{content:""; flex:1; height:1px; background:rgba(255,255,255,.14)}
-
-  /* ── attribution: name + company are the highlight ── */
-  .who .n{font-family:var(--serif); color:#fff; line-height:1.1}
-  .who .c{font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--sun); margin-top:7px}
-  .who .r{font-size:12.5px; color:rgba(255,255,255,.58); margin-top:4px}
-
-  /* ── featured hero quotes ── */
-  .featured{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
-  .fq{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1); border-radius:22px; padding:34px 32px 30px; display:flex; flex-direction:column}
-  .fq .mark{font-family:var(--serif); font-size:64px; line-height:.6; color:var(--sun); height:34px}
-  .fq blockquote{font-family:var(--serif); font-size:clamp(1.35rem,1.7vw,1.65rem); line-height:1.32; color:#fff; margin:14px 0 auto; letter-spacing:-.01em}
-  .fq .attr{margin-top:26px; padding-top:22px; border-top:1px solid rgba(255,255,255,.12)}
-  .fq .who .n{font-size:20px}
-
-  /* ── supporting voices grid ── */
-  .voices{display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:20px}
-  .vq{background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:28px 26px; display:flex; flex-direction:column; transition:border-color .2s, background .2s}
-  .vq:hover{border-color:rgba(242,216,49,.4); background:rgba(255,255,255,.055)}
-  .vq blockquote{font-family:var(--serif); font-size:clamp(1.1rem,1.25vw,1.28rem); line-height:1.4; color:rgba(255,255,255,.95); margin:0 0 auto}
-  .vq blockquote::before{content:"\201C"; color:var(--sun); font-family:var(--serif)}
-  .vq blockquote::after{content:"\201D"; color:var(--sun); font-family:var(--serif)}
-  .vq .attr{display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; margin-top:22px}
-  .vq .who{display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px}
-  .vq .who .n{font-size:15.5px}
-  .vq .who .c{margin-top:0}
-  .vq .who .r{margin-top:0; width:100%}
-  .vq .tag{margin-left:auto; align-self:flex-start; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--sun); border:1px solid rgba(242,216,49,.4); border-radius:999px; padding:4px 10px}
-
-  /* ── partner cards: short bio, NO quote ── */
   .partners{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
-  .pc{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:26px 24px; display:flex; flex-direction:column}
+  .pc{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:26px 24px; display:flex; flex-direction:column}
   .pc .photo{width:84px; height:84px; border-radius:16px; object-fit:cover; background:rgba(255,255,255,.08); margin-bottom:18px}
   .pc .pn{font-family:var(--serif); font-size:22px; color:#fff; line-height:1.1}
-  .pc .pr{font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--cobalt); margin-top:8px}
-  .pc .pr, .pc.gp .pr{color:var(--sun)}
-  .pc .pb{font-size:14px; line-height:1.55; color:rgba(255,255,255,.75); margin-top:16px}
+  .pc .pr{font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--sun); margin-top:8px}
+  .pc .pb{font-size:14px; line-height:1.55; color:rgba(255,255,255,.78); margin-top:16px}
 
   @media(max-width:980px){.partners{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:860px){.featured{grid-template-columns:1fr} .voices{grid-template-columns:1fr}}
-  @media(max-width:560px){.partners{grid-template-columns:1fr}}
+  @media(max-width:560px){.partners{grid-template-columns:1fr} .slide .tag{display:none}}
 </style>
 </head>
 <body>
-  <div class="testbar">TEST PAGE — not linked from the live site. Quote-forward voices (no photos, name + company highlighted) &amp; partner cards with short bios in place of quotes.</div>
+  <div class="testbar">TEST PAGE — not linked from the live homepage. Founder-voices as one large, high-contrast carousel (auto-advances; arrows / dots to move).</div>
 
   <div class="wrap">
     <header>
       <div class="eyebrow">The founders keep the receipts</div>
       <h1>In their words.</h1>
-      <p class="lede">The people who worked with Don, in their own words. No photos — the quote leads, and the founder's name and company carry the attribution.</p>
     </header>
 
-    <div class="section-label">Featured</div>
-    <div class="featured" id="featured"></div>
-
-    <div class="section-label">More voices</div>
-    <div class="voices" id="voices"></div>
+    <div class="carousel">
+      <div class="stage" id="stage"></div>
+      <div class="ctrls">
+        <button class="navbtn" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="counter" id="counter">1 / 1</span>
+        <button class="navbtn" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
 
     <div class="section-label">Team — short bios (quotes removed)</div>
     <div class="partners" id="partners"></div>
   </div>
 
 <script>
-  var featured = [
+  var quotes = [
     { quote:'A fantastic partner and ally to Deel since its early days.',
       name:'Alex Bouaziz', role:'Co-Founder & CEO', company:'Deel' },
     { quote:'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.',
       name:'Jake Sussman', role:'Co-Founder', company:'Headway' },
     { quote:'With us from day zero — a tremendous supporter through the twists and turns.',
-      name:'Tarek Mansour', role:'Co-Founder & CEO', company:'Kalshi' }
+      name:'Tarek Mansour', role:'Co-Founder & CEO', company:'Kalshi' },
+    { quote:"It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice.",
+      name:'Aaron Bai', role:'Founder & CEO', company:'Affiniti' },
+    { quote:"When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.",
+      name:'Ankit Jain', role:'Co-Founder & CEO', company:'Aviator', tag:'SVB' },
+    { quote:"Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.",
+      name:'Filip Kozera', role:'Founder & CEO', company:'Wordware' },
+    { quote:"He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again.",
+      name:'James Ding', role:'Co-Founder & CEO', company:'DraftWise' },
+    { quote:"He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world.",
+      name:'Lawrence Lin Murata', role:'Co-Founder & CEO', company:'Slope' },
+    { quote:"We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would.",
+      name:'Mark Lawrence', role:'Founder & CEO', company:'SpotHero', tag:'Exit' },
+    { quote:"He could not have been more supportive through our pivots and challenges. We've relied on Don as an independent point of feedback.",
+      name:'Max Kauderer', role:'Co-Founder & CEO', company:'Yuzu Health' },
+    { quote:"When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.",
+      name:'Michael Tannenbaum', role:'CEO (fmr. COO, Brex)', company:'Figure', tag:'SVB' },
+    { quote:"Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately.",
+      name:'Nick Evans', role:'Co-Founder & CEO', company:'Avocado' },
+    { quote:"He's been a great sounding board, especially during uncertain moments. We're backed by strong funds — but Don stands out.",
+      name:'Sean Doherty', role:'CEO', company:'GovDash' },
+    { quote:"He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered.",
+      name:'Thiago Da Costa', role:'Co-Founder & CEO', company:'Datagrid', tag:'Acquired' },
+    { quote:"From day one through to TaxProper's acquisition, Don was more than an investor. He's one of those rare investors who actually makes your business better.",
+      name:'Thomas Dowling', role:'Co-Founder', company:'TaxProper', tag:'Acquired' },
+    { quote:"He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition.",
+      name:'Todd Heine', role:'Founder & CEO', company:'Legalpad', tag:'Acquired' }
   ];
 
-  var voices = [
-    { name:'Aaron Bai', role:'Founder & CEO', company:'Affiniti',
-      quote:"It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice." },
-    { name:'Ankit Jain', role:'Co-Founder & CEO', company:'Aviator', tag:'SVB',
-      quote:"When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation." },
-    { name:'Filip Kozera', role:'Founder & CEO', company:'Wordware',
-      quote:"Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again." },
-    { name:'James Ding', role:'Co-Founder & CEO', company:'DraftWise',
-      quote:"He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again." },
-    { name:'Lawrence Lin Murata', role:'Co-Founder & CEO', company:'Slope',
-      quote:"He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world." },
-    { name:'Mark Lawrence', role:'Founder & CEO', company:'SpotHero', tag:'Exit',
-      quote:"We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would." },
-    { name:'Max Kauderer', role:'Co-Founder & CEO', company:'Yuzu Health',
-      quote:"He could not have been more supportive through our pivots and challenges. We've relied on Don as an independent point of feedback." },
-    { name:'Michael Tannenbaum', role:'CEO (fmr. COO, Brex)', company:'Figure', tag:'SVB',
-      quote:"When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches." },
-    { name:'Nick Evans', role:'Co-Founder & CEO', company:'Avocado',
-      quote:"Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately." },
-    { name:'Sean Doherty', role:'CEO', company:'GovDash',
-      quote:"He's been a great sounding board, especially during uncertain moments. We're backed by strong funds — but Don stands out." },
-    { name:'Thiago Da Costa', role:'Co-Founder & CEO', company:'Datagrid', tag:'Acquired',
-      quote:"He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered." },
-    { name:'Thomas Dowling', role:'Co-Founder', company:'TaxProper', tag:'Acquired',
-      quote:"From day one through to TaxProper's acquisition, Don was more than an investor. He's one of those rare investors who actually makes your business better." },
-    { name:'Todd Heine', role:'Founder & CEO', company:'Legalpad', tag:'Acquired',
-      quote:"He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition." }
-  ];
-
-  /* Short bios summarised from the full bio pages — no performance figures. */
   var partners = [
-    { photo:'images/team/don.webp', name:'Don Stalter', role:'Founder, Sunshine Lake', gp:true,
+    { photo:'images/team/don.webp', name:'Don Stalter', role:'Founder, Sunshine Lake',
       bio:"Spent nearly a decade as North American Managing Partner at Global Founders Capital. Earlier he co-founded CityDeal (sold to Groupon) and scaled Airbnb across Europe and Asia-Pacific, after starting his career in San Francisco M&A and London private equity." },
     { photo:'images/team/ivan.webp', name:'Ivan La Frinere-Sandoval', role:'Partner, CFO & COO',
       bio:"A Caltech- and Stanford-trained engineer and financier who worked on large-scale clean energy at SolarCity before founding and building multiple Bay Area companies. Runs fund operations, model reviews and sits on the investment committee." },
@@ -147,31 +154,56 @@
       bio:"Grew up alongside Adyen's rise from a small team to one of Europe's defining IPOs, then built his venture experience at Valia Ventures and Unlock (Antler). Runs EMEA sourcing and platform, from London." }
   ];
 
-  function attr(v){
-    return '<div class="who">'
-      + '<span class="n">'+v.name+'</span>'
-      + '<span class="c">'+v.company+'</span>'
-      + '<span class="r">'+v.role+'</span>'
-      + '</div>';
+  /* ── carousel ── */
+  var stage = document.getElementById('stage');
+  var dotsWrap = document.getElementById('dots');
+  var counter = document.getElementById('counter');
+  stage.innerHTML = quotes.map(function(q,i){
+    return '<article class="slide" data-i="'+i+'">'
+      + '<div class="mark">“</div>'
+      + '<blockquote>'+q.quote+'</blockquote>'
+      + '<div class="attr">'
+      +   '<span class="n">'+q.name+'</span>'
+      +   '<span class="c">'+q.company+'</span>'
+      +   '<span class="r">'+q.role+'</span>'
+      +   (q.tag ? '<span class="tag">'+q.tag+'</span>' : '')
+      + '</div></article>';
+  }).join('');
+  dotsWrap.innerHTML = quotes.map(function(q,i){ return '<button class="dot" data-i="'+i+'" aria-label="Go to '+(i+1)+'"></button>'; }).join('');
+
+  var slides = [].slice.call(stage.children);
+  var dots = [].slice.call(dotsWrap.children);
+  var idx = 0, timer;
+
+  function go(n){
+    idx = (n + quotes.length) % quotes.length;
+    slides.forEach(function(s,i){ s.classList.toggle('on', i===idx); });
+    dots.forEach(function(d,i){ d.classList.toggle('on', i===idx); });
+    counter.textContent = (idx+1) + ' / ' + quotes.length;
   }
+  function nextS(){ go(idx+1); }
+  function prevS(){ go(idx-1); }
+  function restart(){ clearInterval(timer); timer = setInterval(nextS, 6000); }
 
-  document.getElementById('featured').innerHTML = featured.map(function(f){
-    return '<article class="fq"><div class="mark">“</div><blockquote>'+f.quote+'</blockquote>'
-      + '<div class="attr">'+attr(f)+'</div></article>';
-  }).join('');
+  document.getElementById('next').addEventListener('click', function(){ nextS(); restart(); });
+  document.getElementById('prev').addEventListener('click', function(){ prevS(); restart(); });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.i); restart(); }); });
+  document.addEventListener('keydown', function(e){ if(e.key==='ArrowRight'){nextS();restart();} if(e.key==='ArrowLeft'){prevS();restart();} });
+  var car = document.querySelector('.carousel');
+  car.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  car.addEventListener('mouseleave', restart);
+  // swipe
+  var sx=0; car.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});
+  car.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>44){ dx<0?nextS():prevS(); restart(); }},{passive:true});
 
-  document.getElementById('voices').innerHTML = voices.map(function(v){
-    return '<article class="vq"><blockquote>'+v.quote+'</blockquote>'
-      + '<div class="attr">'+attr(v)+(v.tag ? '<span class="tag">'+v.tag+'</span>' : '')+'</div></article>';
-  }).join('');
+  go(0); restart();
 
+  /* ── partners ── */
   document.getElementById('partners').innerHTML = partners.map(function(p){
-    return '<article class="pc'+(p.gp?' gp':'')+'">'
-      + '<img class="photo" src="'+p.photo+'" alt="'+p.name+'" loading="lazy">'
-      + '<div class="pn">'+p.name+'</div>'
-      + '<div class="pr">'+p.role+'</div>'
-      + '<p class="pb">'+p.bio+'</p>'
-      + '</article>';
+    return '<article class="pc">'
+      + '<img class="photo" src="'+p.photo+'" alt="'+p.name+'">'
+      + '<div class="pn">'+p.name+'</div><div class="pr">'+p.role+'</div>'
+      + '<p class="pb">'+p.bio+'</p></article>';
   }).join('');
 </script>
 </body>
