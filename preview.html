@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunshine Lake — Founder Voices (preview)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face{
+    font-family:'DomaineDisp';
+    src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+    font-weight:400 600; font-display:swap;
+  }
+  :root{
+    --navy:#02041F; --ink:#0B1275; --cobalt:#155EE8; --mid:#0A3DAE; --sun:#F2D831;
+    --serif:'DomaineDisp','Times New Roman',Times,serif;
+    --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--sans); color:#fff; -webkit-font-smoothing:antialiased;
+    background:radial-gradient(120% 90% at 50% -10%, #123a86 0%, #0a2258 34%, #050d34 68%, #02041F 100%);
+    min-height:100vh; padding:0 0 110px;
+  }
+  .wrap{max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,64px)}
+
+  /* ── clean top bar ── */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1200px; margin:0 auto; padding:22px clamp(20px,5vw,64px);
+  }
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--serif); font-size:20px; letter-spacing:.01em; color:#fff}
+  .brand svg{width:26px; height:26px; fill:var(--sun)}
+  .pill{font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:6px 13px}
+
+  header{padding:clamp(40px,6vw,72px) 0 clamp(18px,3vw,28px)}
+  .eyebrow{font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--sun); margin-bottom:18px}
+  h1{font-family:var(--serif); font-weight:500; line-height:1.03; letter-spacing:-.02em; font-size:clamp(2.6rem,6vw,5rem); color:#fff}
+  .sub{font-family:var(--serif); font-size:clamp(1.05rem,1.4vw,1.4rem); color:rgba(255,255,255,.72); margin-top:18px; max-width:640px; line-height:1.45}
+
+  /* ══ CAROUSEL ══ */
+  .carousel{position:relative; margin-top:clamp(20px,3vw,34px)}
+  .stage{
+    position:relative; overflow:hidden; border-radius:26px;
+    background:linear-gradient(158deg,#0c2560 0%,#081a45 52%,#05122f 100%);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 30px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+    min-height:clamp(410px,44vw,520px);
+  }
+  .slide{
+    position:absolute; inset:0; padding:clamp(38px,5vw,72px) clamp(38px,5vw,72px) clamp(48px,5vw,80px);
+    display:flex; flex-direction:column; justify-content:center;
+    opacity:0; transform:translateX(28px); pointer-events:none;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .slide.on{opacity:1; transform:none; pointer-events:auto}
+  .slide .mark{font-family:var(--serif); font-size:clamp(70px,9vw,130px); line-height:.5; color:var(--sun); height:.4em; margin-bottom:8px}
+  .slide blockquote{
+    font-family:var(--serif); font-weight:500; color:#fff; letter-spacing:-.015em;
+    font-size:clamp(1.5rem,2.5vw,2.35rem); line-height:1.26; max-width:34ch; margin:0;
+  }
+  .slide .attr{display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 18px; margin-top:clamp(26px,3vw,40px)}
+  .slide .n{font-family:var(--serif); font-size:clamp(1.15rem,1.5vw,1.5rem); color:#fff}
+  .slide .c{font-size:clamp(.8rem,1vw,.95rem); font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--sun)}
+  .slide .r{font-size:.9rem; color:rgba(255,255,255,.62)}
+  .slide .tag{margin-left:auto; align-self:center; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#0a1740; background:var(--sun); border-radius:999px; padding:6px 14px}
+
+  /* auto-advance progress bar */
+  .bar{position:absolute; left:0; right:0; bottom:0; height:3px; background:rgba(255,255,255,.1); border-radius:0 0 26px 26px; overflow:hidden}
+  .bar-fill{height:100%; width:0; background:var(--sun)}
+  .bar-fill.run{animation:fill 6s linear forwards}
+  .carousel.paused .bar-fill.run{animation-play-state:paused}
+  @keyframes fill{from{width:0}to{width:100%}}
+
+  .ctrls{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:26px}
+  .navbtn{width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.05); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s}
+  .navbtn:hover{background:var(--sun); border-color:var(--sun); color:#0a1740}
+  .navbtn svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .counter{font-family:var(--serif); font-size:1.15rem; color:rgba(255,255,255,.85); min-width:74px; text-align:center; letter-spacing:.04em}
+  .dots{display:flex; gap:9px; justify-content:center; margin-top:20px; flex-wrap:wrap}
+  .dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.24); border:0; padding:0; cursor:pointer; transition:background .2s, transform .2s}
+  .dot.on{background:var(--sun); transform:scale(1.35)}
+
+  /* ── partner cards ── */
+  .section-label{font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:clamp(60px,7vw,96px) 0 26px; display:flex; align-items:center; gap:16px}
+  .section-label::after{content:""; flex:1; height:1px; background:rgba(255,255,255,.14)}
+  .partners{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+  .pc{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:26px 24px; display:flex; flex-direction:column}
+  .pc .photo{width:84px; height:84px; border-radius:16px; object-fit:cover; background:rgba(255,255,255,.08); margin-bottom:18px}
+  .pc .pn{font-family:var(--serif); font-size:22px; color:#fff; line-height:1.1}
+  .pc .pr{font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--sun); margin-top:8px}
+  .pc .pb{font-size:14px; line-height:1.55; color:rgba(255,255,255,.78); margin-top:16px}
+
+  @media(max-width:980px){.partners{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.partners{grid-template-columns:1fr} .slide .tag{display:none}}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>
+      Sunshine Lake
+    </div>
+    <span class="pill">Draft preview</span>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">The founders keep the receipts</div>
+      <h1>In their words.</h1>
+      <p class="sub">The founders who worked with Don, in their own words.</p>
+    </header>
+
+    <div class="carousel">
+      <div class="stage" id="stage"></div>
+      <div class="ctrls">
+        <button class="navbtn" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="counter" id="counter">1 / 1</span>
+        <button class="navbtn" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <div class="section-label">The team</div>
+    <div class="partners" id="partners"></div>
+  </div>
+
+<script>
+  var quotes = [
+    { quote:'A fantastic partner and ally to Deel since its early days.',
+      name:'Alex Bouaziz', role:'Co-Founder & CEO', company:'Deel' },
+    { quote:'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.',
+      name:'Jake Sussman', role:'Co-Founder', company:'Headway' },
+    { quote:'With us from day zero — a tremendous supporter through the twists and turns.',
+      name:'Tarek Mansour', role:'Co-Founder & CEO', company:'Kalshi' },
+    { quote:"It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice.",
+      name:'Aaron Bai', role:'Founder & CEO', company:'Affiniti' },
+    { quote:"When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.",
+      name:'Ankit Jain', role:'Co-Founder & CEO', company:'Aviator', tag:'SVB' },
+    { quote:"Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.",
+      name:'Filip Kozera', role:'Founder & CEO', company:'Wordware' },
+    { quote:"He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again.",
+      name:'James Ding', role:'Co-Founder & CEO', company:'DraftWise' },
+    { quote:"He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world.",
+      name:'Lawrence Lin Murata', role:'Co-Founder & CEO', company:'Slope' },
+    { quote:"We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would.",
+      name:'Mark Lawrence', role:'Founder & CEO', company:'SpotHero', tag:'Exit' },
+    { quote:"He could not have been more supportive through our pivots and challenges. We've relied on Don as an independent point of feedback.",
+      name:'Max Kauderer', role:'Co-Founder & CEO', company:'Yuzu Health' },
+    { quote:"When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.",
+      name:'Michael Tannenbaum', role:'CEO (fmr. COO, Brex)', company:'Figure', tag:'SVB' },
+    { quote:"Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately.",
+      name:'Nick Evans', role:'Co-Founder & CEO', company:'Avocado' },
+    { quote:"He's been a great sounding board, especially during uncertain moments. We're backed by strong funds — but Don stands out.",
+      name:'Sean Doherty', role:'CEO', company:'GovDash' },
+    { quote:"He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered.",
+      name:'Thiago Da Costa', role:'Co-Founder & CEO', company:'Datagrid', tag:'Acquired' },
+    { quote:"From day one through to TaxProper's acquisition, Don was more than an investor. He's one of those rare investors who actually makes your business better.",
+      name:'Thomas Dowling', role:'Co-Founder', company:'TaxProper', tag:'Acquired' },
+    { quote:"He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition.",
+      name:'Todd Heine', role:'Founder & CEO', company:'Legalpad', tag:'Acquired' }
+  ];
+
+  var partners = [
+    { photo:'images/team/don.webp', name:'Don Stalter', role:'Founder, Sunshine Lake',
+      bio:"Spent nearly a decade as North American Managing Partner at Global Founders Capital. Earlier he co-founded CityDeal (sold to Groupon) and scaled Airbnb across Europe and Asia-Pacific, after starting his career in San Francisco M&A and London private equity." },
+    { photo:'images/team/ivan.webp', name:'Ivan La Frinere-Sandoval', role:'Partner, CFO & COO',
+      bio:"A Caltech- and Stanford-trained engineer and financier who worked on large-scale clean energy at SolarCity before founding and building multiple Bay Area companies. Runs fund operations, model reviews and sits on the investment committee." },
+    { photo:'images/team/suhail.webp', name:'Suhail Younus', role:'Partner',
+      bio:"Cornell-educated, with a background spanning venture capital, private-equity co-investment and emerging-technology research. Leads pipeline coverage and deal scoring at Sunshine Lake, from San Francisco." },
+    { photo:'images/team/wieger.webp', name:'Wieger Lamers', role:'EMEA & Platforms Lead',
+      bio:"Grew up alongside Adyen's rise from a small team to one of Europe's defining IPOs, then built his venture experience at Valia Ventures and Unlock (Antler). Runs EMEA sourcing and platform, from London." }
+  ];
+
+  var stage = document.getElementById('stage');
+  var dotsWrap = document.getElementById('dots');
+  var counter = document.getElementById('counter');
+  stage.innerHTML = quotes.map(function(q,i){
+    return '<article class="slide" data-i="'+i+'">'
+      + '<div class="mark">“</div>'
+      + '<blockquote>'+q.quote+'</blockquote>'
+      + '<div class="attr">'
+      +   '<span class="n">'+q.name+'</span>'
+      +   '<span class="c">'+q.company+'</span>'
+      +   '<span class="r">'+q.role+'</span>'
+      +   (q.tag ? '<span class="tag">'+q.tag+'</span>' : '')
+      + '</div></article>';
+  }).join('') + '<div class="bar"><div class="bar-fill" id="barFill"></div></div>';
+  dotsWrap.innerHTML = quotes.map(function(q,i){ return '<button class="dot" data-i="'+i+'" aria-label="Go to '+(i+1)+'"></button>'; }).join('');
+
+  var slides = [].slice.call(stage.querySelectorAll('.slide'));
+  var dots = [].slice.call(dotsWrap.children);
+  var barFill = document.getElementById('barFill');
+  var carousel = document.querySelector('.carousel');
+  var idx = 0, timer;
+
+  function resetBar(){ barFill.classList.remove('run'); void barFill.offsetWidth; barFill.classList.add('run'); }
+  function go(n){
+    idx = (n + quotes.length) % quotes.length;
+    slides.forEach(function(s,i){ s.classList.toggle('on', i===idx); });
+    dots.forEach(function(d,i){ d.classList.toggle('on', i===idx); });
+    counter.textContent = (idx+1) + ' / ' + quotes.length;
+    resetBar();
+  }
+  function nextS(){ go(idx+1); }
+  function prevS(){ go(idx-1); }
+  function restart(){ clearInterval(timer); timer = setInterval(nextS, 6000); }
+
+  document.getElementById('next').addEventListener('click', function(){ nextS(); restart(); });
+  document.getElementById('prev').addEventListener('click', function(){ prevS(); restart(); });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.i); restart(); }); });
+  document.addEventListener('keydown', function(e){ if(e.key==='ArrowRight'){nextS();restart();} if(e.key==='ArrowLeft'){prevS();restart();} });
+  carousel.addEventListener('mouseenter', function(){ clearInterval(timer); carousel.classList.add('paused'); });
+  carousel.addEventListener('mouseleave', function(){ carousel.classList.remove('paused'); restart(); });
+  var sx=0; carousel.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});
+  carousel.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>44){ dx<0?nextS():prevS(); restart(); }},{passive:true});
+
+  go(0); restart();
+
+  document.getElementById('partners').innerHTML = partners.map(function(p){
+    return '<article class="pc">'
+      + '<img class="photo" src="'+p.photo+'" alt="'+p.name+'">'
+      + '<div class="pn">'+p.name+'</div><div class="pr">'+p.role+'</div>'
+      + '<p class="pb">'+p.bio+'</p></article>';
+  }).join('');
+</script>
+</body>
+</html>
