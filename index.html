@@ -3069,6 +3069,245 @@
         </div>
     </div>
 
+    <!-- ════════ Snapshots photo grid — brought back to the homepage bottom (ported from polish-don.html) ════════ -->
+    <style>
+        .snapshots-wrap{background:#02041F;padding:clamp(52px,7vw,96px) clamp(20px,5vw,64px) clamp(64px,8vw,112px)}
+        .snapshots-inner{max-width:1200px;margin:0 auto}
+        .snapshots-eyebrow{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#F2D831;text-align:center;margin-bottom:clamp(20px,3vw,34px)}
+        .snapshots-wrap .snapshots-section{margin-top:0}
+        /* Snapshots grid — tiny tiled photos beneath the case studies.
+           6-col on desktop, 4-col on tablet, 3-col on mobile. Each tile
+           is square-aspect with a translucent cobalt "shallow water"
+           overlay at rest. On hover (or focus / touch), the water
+           clears and a caption slides up from the bottom naming the
+           people in the shot. */
+        .snapshots-section {
+            margin: clamp(36px, 4vw, 56px) 0 0 0;
+        }
+        .snapshots-grid {
+            display: grid;
+            /* 5-col instead of 6 so tiles feel substantial on desktop
+               (was reading as a thumbnail strip). Tablet drops to 4,
+               mobile to 3 via the media queries below. */
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(8px, 1vw, 14px);
+        }
+        .snapshots-cell {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: clamp(8px, 0.7vw, 12px);
+            overflow: hidden;
+            margin: 0;
+            background: #0A3DAE;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: default;
+        }
+        .snapshots-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 0.6s ease;
+            /* At rest: blue monochrome — grayscale → sepia → rotate
+               hue 180° → bump saturation produces a deep cobalt
+               duotone, like the snapshots were printed in cyan ink.
+               The SVG turbulence still warps the photo ON TOP of the
+               monochrome so the surface still moves like water. */
+            filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.4) brightness(0.92) contrast(1.05) url(#snapshotsWaterWarp);
+        }
+        /* ::after = water DEPTH tint. Multiply blend so it sits over
+           the photo as a cobalt veil — light at the surface, deeper
+           at the bottom. Slightly stronger than the previous pass. */
+        .snapshots-cell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(140, 200, 255, 0.28) 0%,
+                rgba(21, 94, 232, 0.30) 55%,
+                rgba(8, 30, 78, 0.38) 100%
+            );
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+        /* ::before = surface CAUSTICS. Brighter highlights + faster
+           drift than before so the field reads as moving water rather
+           than a static gradient. Two stacked layers on different
+           timings keep the pattern from ever lining up. */
+        .snapshots-cell::before {
+            content: '';
+            position: absolute;
+            inset: -12%;
+            background:
+                radial-gradient(ellipse 55% 28% at 28% 18%, rgba(230, 245, 255, 0.55), transparent 58%),
+                radial-gradient(ellipse 42% 22% at 78% 58%, rgba(255, 255, 255, 0.42), transparent 60%),
+                radial-gradient(ellipse 36% 20% at 18% 82%, rgba(180, 220, 245, 0.45), transparent 60%),
+                radial-gradient(ellipse 28% 14% at 62% 28%, rgba(255, 255, 255, 0.32), transparent 64%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 1;
+            animation: waterCaustic 6.5s ease-in-out infinite alternate;
+            transform-origin: center;
+        }
+        @keyframes waterCaustic {
+            0%   { transform: translate(0, 0)     scale(1)     rotate(0deg); }
+            50%  { transform: translate(-6%, 4%)  scale(1.08)  rotate(0.5deg); }
+            100% { transform: translate(5%, -3%)  scale(1.04)  rotate(-0.5deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .snapshots-cell::before { animation: none; }
+        }
+        .snapshots-cap {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: clamp(8px, 0.8vw, 14px) clamp(8px, 0.8vw, 12px);
+            background: linear-gradient(180deg, transparent, rgba(2, 6, 26, 0.85));
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(9.5px, 0.65vw, 11px);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        .snapshots-cell:hover,
+        .snapshots-cell:focus-within { transform: translateY(-2px); }
+        .snapshots-cell:hover img,
+        .snapshots-cell:focus-within img {
+            /* Hover: drop ALL the effects — kill the monochrome, drop
+               the turbulence warp, restore full color. The photo
+               snaps into focus. */
+            filter: grayscale(0%) sepia(0%) hue-rotate(0deg) saturate(1) brightness(1) contrast(1);
+            transform: scale(1.04);
+        }
+        .snapshots-cell:hover::before,
+        .snapshots-cell:focus-within::before,
+        .snapshots-cell:hover::after,
+        .snapshots-cell:focus-within::after { opacity: 0; }
+        .snapshots-cell:hover .snapshots-cap,
+        .snapshots-cell:focus-within .snapshots-cap {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 1024px) {
+            .snapshots-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .snapshots-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            /* Touch devices don't have hover — soften the water tint
+               at rest so users can still see the photos clearly. SVG
+               turbulence is also expensive on mobile GPUs, so drop
+               the filter to just the cool cast. */
+            .snapshots-cell::before { opacity: 0.55; }
+            .snapshots-cell::after { opacity: 0.5; }
+            .snapshots-cell img {
+                /* Skip the expensive SVG turbulence on mobile — keep
+                   the monochrome look without the per-frame warp. */
+                filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94) contrast(1.05);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            /* Pause the warp AND the caustics for users who opt out. */
+            .snapshots-cell img { filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94); }
+            .snapshots-cell::before { animation: none; }
+            #snapshotsWaterWarp feTurbulence animate { display: none; }
+        }
+    </style>
+    <section class="snapshots-wrap" aria-label="In good company">
+      <div class="snapshots-inner">
+        <div class="snapshots-eyebrow">In good company</div>
+            <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
+                <!-- SVG water-warp filter — animated turbulence drives
+                     a small displacement map so every photo visibly
+                     ripples beneath the surface at rest. Shared by all
+                     tiles. width=0 + position:absolute keeps it
+                     invisible in the document flow. -->
+                <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+                    <filter id="snapshotsWaterWarp" x="-10%" y="-10%" width="120%" height="120%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.022" numOctaves="2" seed="3" result="noise">
+                            <animate attributeName="baseFrequency" dur="14s" values="0.012 0.022;0.018 0.014;0.012 0.022" repeatCount="indefinite"/>
+                        </feTurbulence>
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                    </filter>
+                </svg>
+                <div class="snapshots-grid" id="snapshotsGrid"></div>
+            </div>
+      </div>
+    </section>
+            <script>
+            (function () {
+                // Captions extracted from "Image and overlay.docx".
+                // Files snap-doc-01.webp through snap-doc-26.webp are
+                // the 26 photos that were embedded in the doc, converted
+                // to webp and dropped into images/snapshots/.
+                //
+                // The image-to-caption mapping below follows the doc's
+                // markdown serialization. I verified a few by sight
+                // (#3 Alex/Don/Tarek, #4 Esther, #5 Mark Cuban) — the
+                // rest are best-effort, so please spot-check and tell
+                // me which to swap.
+                //
+                // The original snap-1…snap-18 + snapshot9/11/13/14 files
+                // are appended at the end without captions in case they
+                // overlap with any of the doc images. Tap one to add a
+                // name, or tell me to drop it from the feed.
+                var SNAPSHOTS_DATA = [
+                    { src: 'snap-doc-03.webp', caption: 'Alex Bouaziz (Deel), Don, &amp; Tarek Mansour (Kalshi)' },
+                    { src: 'snap-doc-13.webp', caption: 'Julien Bek (Sequoia)' },
+                    { src: 'snap-doc-06.webp', caption: 'Garry Tan (YC)' },
+                    { src: 'snap-doc-09.webp', caption: 'Nicolas Dessaigne (YC)' },
+                    { src: 'snap-doc-24.webp', caption: 'Jeannette zu F&uuml;rstenberg (General Catalyst)' },
+                    { src: 'snap-doc-26.webp', caption: 'Thomas Dohmke (GitHub)' },
+                    { src: 'snap-doc-25.webp', caption: 'Lip-Bu Tan (Intel CEO)' },
+                    { src: 'snap-doc-19.webp', caption: 'Oliver Samwer (Global Entrepreneur)' },
+                    { src: 'snap-doc-18.webp', caption: 'Shardul Shah (Index Ventures)' },
+                    { src: 'snap-doc-22.webp', caption: 'Evan Spiegel (Snap)' },
+                    { src: 'snap-doc-21.webp', caption: 'Justin Lewis-Weber (Assured)' },
+                    { src: 'snap-doc-20.webp', caption: 'Francis Thumpasery (PermitFlow)' },
+                    { src: 'snap-doc-12.webp', caption: 'Emil Michael' },
+                    { src: 'snap-doc-04.webp', caption: 'Esther Wojcicki (Godmother of Silicon Valley)' },
+                    { src: 'snap-doc-23.webp', caption: 'David Helgason (Unity Software)' },
+                    { src: 'snap-doc-10.webp', caption: 'Josh Browder' },
+                    { src: 'snap-doc-14.webp', caption: 'Mark Kvamme' },
+                    { src: 'snap-doc-07.webp', caption: 'Michael Tannenbaum (Figure)' },
+                    { src: 'snap-doc-02.webp', caption: 'Henrique Dubugras (Brex)' },
+                    { src: 'snap-doc-17.webp', caption: 'Jeremy Levine (Underdog)' },
+                    { src: 'snap-doc-01.webp', caption: 'Carsten Maschmeyer (German Shark Tank)' },
+                    { src: 'snap-doc-15.webp', caption: 'Dan Perez (Hinge Health)' },
+                    { src: 'snap-doc-05.webp', caption: 'Mark Cuban' },
+                    { src: 'snap-doc-08.webp', caption: 'Ben Silbermann (Pinterest)' },
+                    { src: 'snap-doc-11.webp', caption: 'Brian Chesky (Airbnb)' },
+                    // snap-doc-16 (the neon sign + "Don" caption) was
+                    // removed per Don's call — felt redundant alongside
+                    // the actual portraits.
+                    // The pre-existing snap-1…snap-18 + snapshot9/11/13/14
+                    // tiles were dropped because they were duplicates of
+                    // the doc photos. To re-add any individual one with
+                    // a real caption, append it here.
+                ];
+                var grid = document.getElementById('snapshotsGrid');
+                if (!grid) return;
+                var html = '';
+                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) {
+                    var s = SNAPSHOTS_DATA[i];
+                    html += ''
+                        + '<figure class="snapshots-cell">'
+                        + '  <img src="images/snapshots/' + s.src + '" alt="" loading="lazy">'
+                        + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
+                        + '</figure>';
+                }
+                grid.innerHTML = html;
+            })();
+            </script>
+
+
     </main>
 
     <!-- Footer (photo grid removed from here — moved to polish-don.html
