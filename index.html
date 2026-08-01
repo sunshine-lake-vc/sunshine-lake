@@ -3074,6 +3074,143 @@
                mobile to 3 via the media queries below. */
             grid-template-columns: repeat(5, 1fr);
             gap: clamp(8px, 1vw, 14px);
+            /* dense so the interspersed 2×2 quote flip-cards backfill
+               any gaps left in the photo mosaic. */
+            grid-auto-flow: row dense;
+        }
+
+        /* ── Testimonial flip-cards (2×2 "double-wide") woven into the
+              photo wall. Front: the quote on a navy card, enlarged to
+              fill the space. Back (hover / tap / focus): the group shot
+              of that founder with Don. ── */
+        .snapshots-cell--quote {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1 / 1;          /* 2 cols + gap ≈ 2 rows + gap → square footprint */
+            background: transparent;
+            perspective: 1400px;
+            cursor: pointer;
+        }
+        /* Kill the photo-tile water overlays (caustics + depth tint) on
+           the quote card — they'd bleed over the navy quote face. */
+        .snapshots-cell--quote::before,
+        .snapshots-cell--quote::after { content: none; display: none; }
+        /* The revealed founder photo shows in true color (not the wall's
+           cobalt duotone) so the flip reads as a real reveal. */
+        .snapshots-cell--quote .flip-back img { filter: none; }
+        .snapshots-cell--quote .flip-inner {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+        }
+        .snapshots-cell--quote:hover .flip-inner,
+        .snapshots-cell--quote:focus-within .flip-inner,
+        .snapshots-cell--quote.is-flipped .flip-inner { transform: rotateY(180deg); }
+        .snapshots-cell--quote .flip-face {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .snapshots-cell--quote .flip-front {
+            background: linear-gradient(158deg, #1b3d7a 0%, #0a1f45 100%);
+            border: 1px solid rgba(242, 216, 49, 0.35);
+            padding: clamp(20px, 2.2vw, 40px);
+            justify-content: flex-end;
+        }
+        .snapshots-cell--quote .flip-front .q-mark {
+            font-family: 'DomaineDisp', serif;
+            color: #F2D831;
+            font-size: clamp(40px, 4vw, 72px);
+            line-height: 0.4;
+            height: 0.5em;
+        }
+        .snapshots-cell--quote .flip-front .q {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-weight: 500;
+            color: #fff;
+            /* Enlarged to fill the card (per Don) — the front is quote-only,
+               so it can run big. */
+            font-size: clamp(1.35rem, 2.05vw, 2.35rem);
+            line-height: 1.22;
+            margin: 0.35em 0 auto;
+        }
+        .snapshots-cell--quote .flip-front .attr {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .snapshots-cell--quote .flip-front .attr .n {
+            display: block;
+            font-family: 'DomaineDisp', serif;
+            color: #fff;
+            font-size: 1.05rem;
+        }
+        .snapshots-cell--quote .flip-front .attr .c {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #F2D831;
+            margin-top: 5px;
+        }
+        /* small "flip" affordance, top-right of the front face */
+        .snapshots-cell--quote .flip-front::after {
+            content: '⤿';
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            color: rgba(242, 216, 49, 0.75);
+            font-size: 18px;
+            line-height: 1;
+        }
+        .snapshots-cell--quote .flip-back {
+            transform: rotateY(180deg);
+            background: #0a1f45;
+        }
+        .snapshots-cell--quote .flip-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .snapshots-cell--quote .flip-back-cap {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: clamp(12px, 1.2vw, 18px);
+            background: linear-gradient(180deg, transparent, rgba(2, 6, 26, 0.9));
+        }
+        .snapshots-cell--quote .flip-back-cap .n {
+            display: block;
+            font-family: 'DomaineDisp', serif;
+            color: #fff;
+            font-size: 1rem;
+        }
+        .snapshots-cell--quote .flip-back-cap .c {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #F2D831;
+            margin-top: 3px;
+        }
+        /* On phones the wall is only 3 cols — a 2×2 quote card still
+           fits (2 of 3 cols). Tighter padding + a smaller quote so the
+           longest testimonials don't overflow the square. */
+        @media (max-width: 600px) {
+            .snapshots-cell--quote .flip-front { padding: 14px; justify-content: center; }
+            .snapshots-cell--quote .flip-front .q-mark { font-size: 34px; }
+            .snapshots-cell--quote .flip-front .q { font-size: clamp(0.9rem, 3.7vw, 1.2rem); line-height: 1.2; margin: 0.3em 0 auto; }
+            .snapshots-cell--quote .flip-front .attr { margin-top: 12px; padding-top: 10px; }
+            .snapshots-cell--quote .flip-front .attr .n { font-size: 0.9rem; }
+            .snapshots-cell--quote .flip-front .attr .c { font-size: 0.62rem; }
         }
         .snapshots-cell {
             position: relative;
@@ -3277,16 +3414,64 @@
                 ];
                 var grid = document.getElementById('snapshotsGrid');
                 if (!grid) return;
-                var html = '';
-                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) {
-                    var s = SNAPSHOTS_DATA[i];
-                    html += ''
+
+                // ── Testimonial flip-cards woven into the photo wall as
+                //    2×2 "double-wide" tiles. Front = the quote; back =
+                //    the group shot of that founder with Don. `photo` is
+                //    a file in images/snapshots/; `after` places the card
+                //    into the mosaic right after that many photo tiles.
+                //    Only founders we actually have a group shot for are
+                //    listed — add more as photos are mapped.
+                var QUOTES = [
+                    { after: 4,  photo: 'snap-doc-03.webp',
+                      q: 'With us from day zero — a tremendous supporter through the twists and turns.',
+                      n: 'Tarek Mansour', c: 'Kalshi' },
+                    { after: 12, photo: 'snap-doc-07.webp',
+                      q: "When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.",
+                      n: 'Michael Tannenbaum', c: 'Figure' }
+                ];
+
+                function photoCell(s) {
+                    return ''
                         + '<figure class="snapshots-cell">'
                         + '  <img src="images/snapshots/' + s.src + '" alt="" loading="lazy">'
                         + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
                         + '</figure>';
                 }
+                function quoteCell(v) {
+                    return ''
+                        + '<div class="snapshots-cell snapshots-cell--quote" tabindex="0" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
+                        + '  <div class="flip-inner">'
+                        + '    <div class="flip-face flip-front">'
+                        + '      <div class="q-mark">&ldquo;</div>'
+                        + '      <p class="q">' + v.q + '</p>'
+                        + '      <div class="attr"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
+                        + '    </div>'
+                        + '    <div class="flip-face flip-back">'
+                        + '      <img src="images/snapshots/' + v.photo + '" alt="' + v.n + ' with Don" loading="lazy">'
+                        + '      <div class="flip-back-cap"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
+                        + '    </div>'
+                        + '  </div>'
+                        + '</div>';
+                }
+
+                var html = '';
+                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) {
+                    html += photoCell(SNAPSHOTS_DATA[i]);
+                    for (var j = 0; j < QUOTES.length; j++) {
+                        if (QUOTES[j].after === i + 1) html += quoteCell(QUOTES[j]);
+                    }
+                }
                 grid.innerHTML = html;
+
+                // Touch / click flip (hover + keyboard focus are handled
+                // in CSS). Tapping a card toggles its flipped state.
+                [].slice.call(grid.querySelectorAll('.snapshots-cell--quote')).forEach(function (card) {
+                    card.addEventListener('click', function () { card.classList.toggle('is-flipped'); });
+                    card.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-flipped'); }
+                    });
+                });
             })();
             </script>
 
