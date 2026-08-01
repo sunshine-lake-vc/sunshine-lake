@@ -1274,6 +1274,10 @@
         }
         .team-card-quote::before { content: '\201C'; }
         .team-card-quote::after  { content: '\201D'; }
+        /* Partner bios reuse the quote card styling but are prose, not
+           quotes — so drop the decorative curly quotation marks. */
+        .team-card-quote.team-card-bio::before,
+        .team-card-quote.team-card-bio::after { content: none; }
 
         /* Bio link on team cards — bare white chevron tucked beside the
            name, no circle/border. Used to sit at the bottom of the card
