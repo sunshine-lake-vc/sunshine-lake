@@ -3071,11 +3071,13 @@
             flex-direction: column;
         }
         .snapshots-cell--quote .flip-front {
-            /* qcolor-* classes set the flat background (hero water). */
+            /* qcolor-* classes set the flat background (hero water).
+               Top-aligned with a generous top inset so the quote breathes
+               below the upper edge; attribution is pinned to the bottom. */
             background: #0b1275;
             border: 1px solid rgba(242, 216, 49, 0.22);
-            padding: clamp(13px, 1.25vw, 22px);
-            justify-content: flex-end;
+            padding: clamp(18px, 1.6vw, 26px) clamp(16px, 1.4vw, 24px) clamp(15px, 1.3vw, 20px);
+            justify-content: flex-start;
         }
         .snapshots-cell--quote .flip-front .q-mark {
             font-family: 'DomaineDisp', serif;
@@ -3088,17 +3090,19 @@
             font-family: 'DomaineDisp', 'Times New Roman', serif;
             font-weight: 500;
             color: #fff;
-            /* Tightened per Don; per-size overrides below keep the 2×2
-               square a touch larger than the 2×1. */
-            font-size: clamp(0.95rem, 1.25vw, 1.34rem);
-            line-height: 1.2;
-            margin: 0.25em 0 auto;
+            /* Larger so the quote fills the block (less wasted space);
+               per-size overrides below keep 2×2 a touch bigger than 2×1. */
+            font-size: clamp(1.1rem, 1.45vw, 1.6rem);
+            line-height: 1.24;
+            margin: 0.45em 0 0;
         }
-        .snapshots-cell--q21 .flip-front .q { font-size: clamp(0.9rem, 1.12vw, 1.2rem); }
-        .snapshots-cell--q22 .flip-front .q { font-size: clamp(1.05rem, 1.45vw, 1.55rem); }
-        /* Minimalist: no divider rule above the name (per Don). */
+        .snapshots-cell--q21 .flip-front .q { font-size: clamp(1.1rem, 1.4vw, 1.55rem); }
+        .snapshots-cell--q22 .flip-front .q { font-size: clamp(1.2rem, 1.6vw, 1.85rem); }
+        /* Minimalist: no divider rule above the name (per Don). Attribution
+           pinned to the bottom edge. */
         .snapshots-cell--quote .flip-front .attr {
-            margin-top: 10px;
+            margin-top: auto;
+            padding-top: 12px;
         }
         .snapshots-cell--quote .flip-front .attr .n {
             display: block;
@@ -3156,20 +3160,20 @@
             color: #F2D831;
             margin-top: 3px;
         }
-        /* On phones the wall is only 3 cols — a 2×2 quote card still
-           fits (2 of 3 cols). Tighter padding + a smaller quote so the
-           longest testimonials don't overflow the square. */
         @media (max-width: 600px) {
-            /* Phone wall is only 3 cols, so a 2×1 box is tiny and clips.
-               Give quote cards a 2×2 square on mobile — enough room for
-               the text at the reduced font. */
-            .snapshots-cell.snapshots-cell--q21 { grid-row: span 2; aspect-ratio: 1 / 1; }
-            .snapshots-cell--quote .flip-front { padding: 14px; justify-content: center; }
-            .snapshots-cell--quote .flip-front .q-mark { font-size: 34px; }
-            .snapshots-cell--quote .flip-front .q { font-size: clamp(0.9rem, 3.7vw, 1.15rem); line-height: 1.2; margin: 0.3em 0 auto; }
-            .snapshots-cell--quote .flip-front .attr { margin-top: 12px; }
-            .snapshots-cell--quote .flip-front .attr .n { font-size: 0.9rem; }
-            .snapshots-cell--quote .flip-front .attr .c { font-size: 0.62rem; }
+            /* Phone wall is only 3 cols, so a 2-wide quote box leaves a
+               lone column beside it. Make quote cards full-width bands so
+               they always fill the row; shorter quotes get a shorter band. */
+            .snapshots-cell.snapshots-cell--q21 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
+            .snapshots-cell.snapshots-cell--q22 { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 3 / 2; }
+            /* Full-width bands vary in fill, so center the content
+               vertically — short quotes read balanced, not gappy. */
+            .snapshots-cell--quote .flip-front { padding: 18px; justify-content: center; }
+            .snapshots-cell--quote .flip-front .q-mark { font-size: 32px; }
+            .snapshots-cell--quote .flip-front .q { font-size: clamp(1rem, 3.6vw, 1.3rem); line-height: 1.22; margin: 0.35em 0 0; }
+            .snapshots-cell--quote .flip-front .attr { margin-top: 14px; padding-top: 0; }
+            .snapshots-cell--quote .flip-front .attr .n { font-size: 0.95rem; }
+            .snapshots-cell--quote .flip-front .attr .c { font-size: 0.64rem; }
         }
         .snapshots-cell {
             position: relative;
@@ -3419,7 +3423,7 @@
                     // Size: flip cards (need photo room) + the longest
                     // quotes get a 2×2 square; everything else is a small
                     // 2×1 wide box. Keeps boxes as small as the text allows.
-                    var sizeCls = (v.photo || v.q.length > 135) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
+                    var sizeCls = (v.q.length > 132) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
                     // Hero-water colour, cycled across cards.
                     var colorCls = 'qcolor-' + (qColorI++ % 5);
                     var cls = 'snapshots-cell snapshots-cell--quote ' + sizeCls + ' ' + colorCls;
