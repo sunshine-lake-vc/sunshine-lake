@@ -209,10 +209,12 @@
            A soft navy glow keeps the gold from washing out over the
            bright / gold patches of the water animation behind it. */
         .title .title-brand {
-            /* Sky-blue from the hero water (#7accff) distinguishes
-               "Sunshine Lake" from the white rest of the headline.
-               No shadow — kept clean. */
-            color: #7accff;
+            /* Kept white for legibility over the water; emphasized by
+               weight. Uses a real Domaine Display bold if one is added
+               to fonts/ (see the 700 @font-face); otherwise the browser
+               synthesizes it. */
+            color: #fff;
+            font-weight: 700;
         }
 
         /* "Pre-Seed & Seed Fund" — small-caps editorial eyebrow that
