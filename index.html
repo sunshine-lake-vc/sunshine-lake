@@ -3423,7 +3423,10 @@
                     // Size: flip cards (need photo room) + the longest
                     // quotes get a 2×2 square; everything else is a small
                     // 2×1 wide box. Keeps boxes as small as the text allows.
-                    var sizeCls = (v.q.length > 132) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
+                    // Flip cards go 2×2 square so the group photo on the
+                    // back isn't cropped to a letterbox; text-only cards
+                    // size by quote length (short = wide 2×1).
+                    var sizeCls = (v.photo || v.q.length > 132) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
                     // Hero-water colour, cycled across cards.
                     var colorCls = 'qcolor-' + (qColorI++ % 5);
                     var cls = 'snapshots-cell snapshots-cell--quote ' + sizeCls + ' ' + colorCls;
