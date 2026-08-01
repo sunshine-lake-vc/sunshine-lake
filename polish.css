@@ -1244,19 +1244,28 @@ body.mode-tight .content-sticky p {
     position: absolute !important;
     top: 50% !important;
     bottom: auto !important;
-    left: var(--hero-edge-x) !important;
-    right: auto !important;
+    /* Centered on mobile: left:0/right:0 + margin auto centers the
+       block horizontally while the JS-written translateY(-50%) keeps
+       it vertically pinned (X-centering survives the per-frame
+       transform rewrite because it's driven by margins, not transform). */
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     transform: translateY(-50%) !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: center !important;
     width: calc(100% - (var(--hero-edge-x) * 2)) !important;
     max-width: calc(100% - (var(--hero-edge-x) * 2)) !important;
-    text-align: left !important;
+    text-align: center !important;
     padding: 0 !important;
   }
   .hero-card .title {
-    text-align: left !important;
+    text-align: center !important;
+    /* Kill the desktop optical -0.04em left nudge so the centered
+       headline sits truly centered. */
+    margin-left: 0 !important;
     /* Lowered from clamp(2.6-3.8rem) to clamp(2.2-3.2rem) so
        "Forge the Future" fits on a single line on a 390px
        iPhone instead of wrapping to "Forge the" / "Future". */
