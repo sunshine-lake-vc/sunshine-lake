@@ -209,12 +209,10 @@
            A soft navy glow keeps the gold from washing out over the
            bright / gold patches of the water animation behind it. */
         .title .title-brand {
-            /* Sky-blue from the hero water (#7accff) instead of gold —
-               distinguishes "Sunshine Lake" from the white rest of the
-               headline without the gold-on-gold clash. Just a soft glow
-               for separation, no heavy outline. */
+            /* Sky-blue from the hero water (#7accff) distinguishes
+               "Sunshine Lake" from the white rest of the headline.
+               No shadow — kept clean. */
             color: #7accff;
-            text-shadow: 0 1px 14px rgba(6, 12, 40, 0.55), 0 0 3px rgba(6, 12, 40, 0.5);
         }
 
         /* "Pre-Seed & Seed Fund" — small-caps editorial eyebrow that
@@ -3007,16 +3005,21 @@
            .snapshots-cell { aspect-ratio: 1/1 } rule defined below. */
         .snapshots-cell.snapshots-cell--q21 { grid-column: span 2; grid-row: span 1; aspect-ratio: 2 / 1; }
         .snapshots-cell.snapshots-cell--q22 { grid-column: span 2; grid-row: span 2; aspect-ratio: 1 / 1; }
-        /* Colour variance drawn straight from the hero water animation —
-           each card is a different "depth" of the same water: sky-blue
-           #7accff shallows → royal #0032a8 mid → navy #0b1275 troughs.
-           The gold quote-mark + company label carry the sun (#f2d831).
-           White/gold text stays legible on every one. */
-        .snapshots-cell--quote.qcolor-0 .flip-front { background: linear-gradient(158deg, #123a9e 0%, #0b1275 100%); }
-        .snapshots-cell--quote.qcolor-1 .flip-front { background: linear-gradient(158deg, #0b1275 0%, #070c44 100%); }
-        .snapshots-cell--quote.qcolor-2 .flip-front { background: linear-gradient(158deg, #1f66d6 0%, #0032a8 100%); }
-        .snapshots-cell--quote.qcolor-3 .flip-front { background: linear-gradient(158deg, #0032a8 0%, #0b1275 100%); }
-        .snapshots-cell--quote.qcolor-4 .flip-front { background: linear-gradient(158deg, #2e7fdd 0%, #0b3a9e 100%); }
+        /* Flat colours drawn from the hero water animation — royal
+           #0032a8, navy #0b1275, sky-royal, plus the sun #f2d831 as an
+           occasional pop. No gradients: kept flat and minimal. */
+        .snapshots-cell--quote.qcolor-0 .flip-front { background: #0032a8; }  /* royal */
+        .snapshots-cell--quote.qcolor-1 .flip-front { background: #0b1275; }  /* navy */
+        .snapshots-cell--quote.qcolor-2 .flip-front { background: #2f6fd8; }  /* sky-royal */
+        .snapshots-cell--quote.qcolor-3 .flip-front { background: #F2D831; }  /* sun yellow */
+        .snapshots-cell--quote.qcolor-4 .flip-front { background: #0a1a63; }  /* deep indigo */
+        /* Yellow card flips the ink to navy so the quote stays legible. */
+        .snapshots-cell--quote.qcolor-3 .flip-front .q-mark,
+        .snapshots-cell--quote.qcolor-3 .flip-front .q,
+        .snapshots-cell--quote.qcolor-3 .flip-front .attr .n,
+        .snapshots-cell--quote.qcolor-3 .flip-front .attr .c { color: #0b1275; }
+        .snapshots-cell--quote.qcolor-3 .flip-front { border-color: rgba(11, 18, 117, 0.25); }
+        .snapshots-cell--quote.qcolor-3 .flip-front::after { color: rgba(11, 18, 117, 0.55); }
         /* Kill the photo-tile water overlays (caustics + depth tint) on
            the quote card — they'd bleed over the navy quote face. */
         .snapshots-cell--quote::before,
@@ -3062,34 +3065,34 @@
             flex-direction: column;
         }
         .snapshots-cell--quote .flip-front {
-            /* qcolor-* classes set the actual background (hero water). */
-            background: linear-gradient(158deg, #123a9e 0%, #0b1275 100%);
-            border: 1px solid rgba(242, 216, 49, 0.28);
-            padding: clamp(16px, 1.7vw, 30px);
+            /* qcolor-* classes set the flat background (hero water). */
+            background: #0b1275;
+            border: 1px solid rgba(242, 216, 49, 0.22);
+            padding: clamp(13px, 1.25vw, 22px);
             justify-content: flex-end;
         }
         .snapshots-cell--quote .flip-front .q-mark {
             font-family: 'DomaineDisp', serif;
             color: #F2D831;
-            font-size: clamp(30px, 2.8vw, 50px);
+            font-size: clamp(26px, 2.3vw, 42px);
             line-height: 0.4;
-            height: 0.5em;
+            height: 0.42em;
         }
         .snapshots-cell--quote .flip-front .q {
             font-family: 'DomaineDisp', 'Times New Roman', serif;
             font-weight: 500;
             color: #fff;
-            /* Dialed down per Don; per-size overrides below give the 2×2
-               square a slightly larger quote than the 2×1. */
-            font-size: clamp(1.02rem, 1.4vw, 1.5rem);
-            line-height: 1.24;
-            margin: 0.3em 0 auto;
+            /* Tightened per Don; per-size overrides below keep the 2×2
+               square a touch larger than the 2×1. */
+            font-size: clamp(0.95rem, 1.25vw, 1.34rem);
+            line-height: 1.2;
+            margin: 0.25em 0 auto;
         }
-        .snapshots-cell--q21 .flip-front .q { font-size: clamp(0.96rem, 1.25vw, 1.32rem); }
-        .snapshots-cell--q22 .flip-front .q { font-size: clamp(1.14rem, 1.6vw, 1.72rem); }
+        .snapshots-cell--q21 .flip-front .q { font-size: clamp(0.9rem, 1.12vw, 1.2rem); }
+        .snapshots-cell--q22 .flip-front .q { font-size: clamp(1.05rem, 1.45vw, 1.55rem); }
         /* Minimalist: no divider rule above the name (per Don). */
         .snapshots-cell--quote .flip-front .attr {
-            margin-top: 14px;
+            margin-top: 10px;
         }
         .snapshots-cell--quote .flip-front .attr .n {
             display: block;
