@@ -1488,10 +1488,8 @@ body.mode-tight .content-sticky p {
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
   .hero-card .title {
-    /* Softened a bit — still lifts the title off the busy water, but
-       lighter halo. */
-    text-shadow:
-      0 2px 13px rgba(11, 18, 117, 0.38),
-      0 0 22px rgba(0, 0, 0, 0.16);
+    /* No shadow (per Don) — the bold weight carries legibility over the
+       water without a halo. */
+    text-shadow: none;
   }
 }
