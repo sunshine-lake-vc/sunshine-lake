@@ -1488,8 +1488,8 @@ body.mode-tight .content-sticky p {
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
   .hero-card .title {
-    /* No shadow (per Don) — the bold weight carries legibility over the
-       water without a halo. */
-    text-shadow: none;
+    /* Soft navy shadow (matches the desktop .title) for a little more
+       contrast over the busy water — soft, not a hard black halo. */
+    text-shadow: 0 2px 18px rgba(11, 18, 117, 0.45), 0 1px 4px rgba(11, 18, 117, 0.30);
   }
 }
