@@ -1488,8 +1488,10 @@ body.mode-tight .content-sticky p {
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
   .hero-card .title {
+    /* Softened a bit — still lifts the title off the busy water, but
+       lighter halo. */
     text-shadow:
-      0 2px 16px rgba(11, 18, 117, 0.55),
-      0 0 28px rgba(0, 0, 0, 0.25);
+      0 2px 13px rgba(11, 18, 117, 0.38),
+      0 0 22px rgba(0, 0, 0, 0.16);
   }
 }
