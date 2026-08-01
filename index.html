@@ -203,6 +203,19 @@
                (which sits at the same --hero-edge-x with no bearing). */
             margin-left: -0.04em;
         }
+        /* Emphasize the brand name within the headline — the display
+           serif only ships in one weight, so we lift "Sunshine Lake"
+           with the brand gold (the hero sun) rather than a faux bold.
+           A soft navy glow keeps the gold from washing out over the
+           bright / gold patches of the water animation behind it. */
+        .title .title-brand {
+            /* Sky-blue from the hero water (#7accff) instead of gold —
+               distinguishes "Sunshine Lake" from the white rest of the
+               headline without the gold-on-gold clash. Just a soft glow
+               for separation, no heavy outline. */
+            color: #7accff;
+            text-shadow: 0 1px 14px rgba(6, 12, 40, 0.55), 0 0 3px rgba(6, 12, 40, 0.5);
+        }
 
         /* "Pre-Seed & Seed Fund" — small-caps editorial eyebrow that
            sits ABOVE the headline inside .main-content. Pulses softly
@@ -2613,7 +2626,7 @@
                      scroll-down chevron at the bottom. -->
                 <div class="main-content">
                     <span class="hero-tagline" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
-                    <h1 class="title">Sunshine Lake founders<br>forge the future.</h1>
+                    <h1 class="title"><span class="title-brand">Sunshine Lake</span> founders<br>forge the future.</h1>
                 </div>
 
                 <!-- Bottom-center scroll-hint cluster — "Pre-Seed & Seed
@@ -2983,13 +2996,27 @@
               fill the space. Back (hover / tap / focus): the group shot
               of that founder with Don. ── */
         .snapshots-cell--quote {
-            grid-column: span 2;
-            grid-row: span 2;
-            aspect-ratio: 1 / 1;          /* 2 cols + gap ≈ 2 rows + gap → square footprint */
             background: transparent;
             perspective: 1400px;
             cursor: pointer;
         }
+        /* Two box sizes: most quotes are a short, wide 2×1; only the
+           longest get a 2×2 square. Sizing per quote keeps every box as
+           small as its text allows (per Don) and prevents cut-offs. */
+        /* Compound selector so these win the aspect-ratio over the base
+           .snapshots-cell { aspect-ratio: 1/1 } rule defined below. */
+        .snapshots-cell.snapshots-cell--q21 { grid-column: span 2; grid-row: span 1; aspect-ratio: 2 / 1; }
+        .snapshots-cell.snapshots-cell--q22 { grid-column: span 2; grid-row: span 2; aspect-ratio: 1 / 1; }
+        /* Colour variance drawn straight from the hero water animation —
+           each card is a different "depth" of the same water: sky-blue
+           #7accff shallows → royal #0032a8 mid → navy #0b1275 troughs.
+           The gold quote-mark + company label carry the sun (#f2d831).
+           White/gold text stays legible on every one. */
+        .snapshots-cell--quote.qcolor-0 .flip-front { background: linear-gradient(158deg, #123a9e 0%, #0b1275 100%); }
+        .snapshots-cell--quote.qcolor-1 .flip-front { background: linear-gradient(158deg, #0b1275 0%, #070c44 100%); }
+        .snapshots-cell--quote.qcolor-2 .flip-front { background: linear-gradient(158deg, #1f66d6 0%, #0032a8 100%); }
+        .snapshots-cell--quote.qcolor-3 .flip-front { background: linear-gradient(158deg, #0032a8 0%, #0b1275 100%); }
+        .snapshots-cell--quote.qcolor-4 .flip-front { background: linear-gradient(158deg, #2e7fdd 0%, #0b3a9e 100%); }
         /* Kill the photo-tile water overlays (caustics + depth tint) on
            the quote card — they'd bleed over the navy quote face. */
         .snapshots-cell--quote::before,
@@ -3035,15 +3062,16 @@
             flex-direction: column;
         }
         .snapshots-cell--quote .flip-front {
-            background: linear-gradient(158deg, #1b3d7a 0%, #0a1f45 100%);
-            border: 1px solid rgba(242, 216, 49, 0.35);
-            padding: clamp(20px, 2.2vw, 40px);
+            /* qcolor-* classes set the actual background (hero water). */
+            background: linear-gradient(158deg, #123a9e 0%, #0b1275 100%);
+            border: 1px solid rgba(242, 216, 49, 0.28);
+            padding: clamp(16px, 1.7vw, 30px);
             justify-content: flex-end;
         }
         .snapshots-cell--quote .flip-front .q-mark {
             font-family: 'DomaineDisp', serif;
             color: #F2D831;
-            font-size: clamp(40px, 4vw, 72px);
+            font-size: clamp(30px, 2.8vw, 50px);
             line-height: 0.4;
             height: 0.5em;
         }
@@ -3051,16 +3079,17 @@
             font-family: 'DomaineDisp', 'Times New Roman', serif;
             font-weight: 500;
             color: #fff;
-            /* Enlarged to fill the card (per Don) — the front is quote-only,
-               so it can run big. */
-            font-size: clamp(1.35rem, 2.05vw, 2.35rem);
-            line-height: 1.22;
-            margin: 0.35em 0 auto;
+            /* Dialed down per Don; per-size overrides below give the 2×2
+               square a slightly larger quote than the 2×1. */
+            font-size: clamp(1.02rem, 1.4vw, 1.5rem);
+            line-height: 1.24;
+            margin: 0.3em 0 auto;
         }
+        .snapshots-cell--q21 .flip-front .q { font-size: clamp(0.96rem, 1.25vw, 1.32rem); }
+        .snapshots-cell--q22 .flip-front .q { font-size: clamp(1.14rem, 1.6vw, 1.72rem); }
+        /* Minimalist: no divider rule above the name (per Don). */
         .snapshots-cell--quote .flip-front .attr {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.16);
+            margin-top: 14px;
         }
         .snapshots-cell--quote .flip-front .attr .n {
             display: block;
@@ -3122,10 +3151,14 @@
            fits (2 of 3 cols). Tighter padding + a smaller quote so the
            longest testimonials don't overflow the square. */
         @media (max-width: 600px) {
+            /* Phone wall is only 3 cols, so a 2×1 box is tiny and clips.
+               Give quote cards a 2×2 square on mobile — enough room for
+               the text at the reduced font. */
+            .snapshots-cell.snapshots-cell--q21 { grid-row: span 2; aspect-ratio: 1 / 1; }
             .snapshots-cell--quote .flip-front { padding: 14px; justify-content: center; }
             .snapshots-cell--quote .flip-front .q-mark { font-size: 34px; }
-            .snapshots-cell--quote .flip-front .q { font-size: clamp(0.9rem, 3.7vw, 1.2rem); line-height: 1.2; margin: 0.3em 0 auto; }
-            .snapshots-cell--quote .flip-front .attr { margin-top: 12px; padding-top: 10px; }
+            .snapshots-cell--quote .flip-front .q { font-size: clamp(0.9rem, 3.7vw, 1.15rem); line-height: 1.2; margin: 0.3em 0 auto; }
+            .snapshots-cell--quote .flip-front .attr { margin-top: 12px; }
             .snapshots-cell--quote .flip-front .attr .n { font-size: 0.9rem; }
             .snapshots-cell--quote .flip-front .attr .c { font-size: 0.62rem; }
         }
@@ -3311,7 +3344,6 @@
                     { src: 'snap-doc-12.webp', caption: 'Emil Michael' },
                     { src: 'snap-doc-04.webp', caption: 'Esther Wojcicki (Godmother of Silicon Valley)' },
                     { src: 'snap-doc-23.webp', caption: 'David Helgason (Unity Software)' },
-                    { src: 'snap-doc-10.webp', caption: 'Josh Browder' },
                     { src: 'snap-doc-14.webp', caption: 'Mark Kvamme' },
                     { src: 'snap-doc-07.webp', caption: 'Michael Tannenbaum (Figure)' },
                     { src: 'snap-doc-02.webp', caption: 'Henrique Dubugras (Brex)' },
@@ -3371,14 +3403,21 @@
                         + '  <div class="q-mark">&ldquo;</div>'
                         + '  <p class="q">' + v.q + '</p>'
                         + '  <div class="attr"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
-                        + (v.t ? '  <span class="q-tag">' + v.t + '</span>' : '')
                         + '</div>';
                 }
+                var qColorI = 0;
                 function quoteCell(v) {
+                    // Size: flip cards (need photo room) + the longest
+                    // quotes get a 2×2 square; everything else is a small
+                    // 2×1 wide box. Keeps boxes as small as the text allows.
+                    var sizeCls = (v.photo || v.q.length > 135) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
+                    // Hero-water colour, cycled across cards.
+                    var colorCls = 'qcolor-' + (qColorI++ % 5);
+                    var cls = 'snapshots-cell snapshots-cell--quote ' + sizeCls + ' ' + colorCls;
                     if (v.photo) {
                         // Flip card — quote front, group shot on the back.
                         return ''
-                            + '<div class="snapshots-cell snapshots-cell--quote" tabindex="0" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
+                            + '<div class="' + cls + '" tabindex="0" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
                             + '  <div class="flip-inner">'
                             +      frontFace(v)
                             + '    <div class="flip-face flip-back">'
@@ -3390,7 +3429,7 @@
                     }
                     // Static card — no group shot yet, so no flip.
                     return ''
-                        + '<div class="snapshots-cell snapshots-cell--quote snapshots-cell--quote-static" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
+                        + '<div class="' + cls + ' snapshots-cell--quote-static" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
                         +      frontFace(v)
                         + '</div>';
                 }
