@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Testimonials × Photo grid — wireframe options</title>
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face{font-family:'DomaineDisp';src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'),url('fonts/DomaineDisp-Regular.otf') format('opentype');font-weight:400 600;font-display:swap;}
+  :root{--navy:#02041F;--cobalt:#155EE8;--sun:#F2D831;--serif:'DomaineDisp','Times New Roman',serif;--sans:'Segoe UI',system-ui,sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);background:#070c22;color:#fff;padding:0 0 100px}
+  .head{max-width:1180px;margin:0 auto;padding:60px 40px 10px}
+  .head .k{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sun)}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:2.6rem;margin-top:14px}
+  .head p{color:rgba(255,255,255,.7);margin-top:12px;max-width:760px;line-height:1.55}
+
+  .frame{max-width:1180px;margin:44px auto 0;padding:0 40px}
+  .frame > .cap{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .frame .num{width:30px;height:30px;flex:0 0 auto;border-radius:8px;background:var(--sun);color:#0a1740;font-family:var(--serif);font-size:17px;display:flex;align-items:center;justify-content:center}
+  .frame .ttl{font-family:var(--serif);font-size:1.5rem}
+  .frame .desc{color:rgba(255,255,255,.62);font-size:.92rem;margin:2px 0 18px 44px;line-height:1.5;max-width:820px}
+  .frame .pros{font-size:.82rem;color:rgba(255,255,255,.5);margin:12px 0 0 44px}
+  .frame .pros b{color:var(--sun);font-weight:600}
+  .board{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px;background:#0b1130}
+
+  .eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:14px}
+
+  /* schematic tiles */
+  .photo{background:linear-gradient(150deg,#22345f,#182747);border-radius:9px;aspect-ratio:1/1;position:relative;overflow:hidden}
+  .photo::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 30% at 30% 20%,rgba(140,200,255,.18),transparent 60%)}
+  .qtile{background:linear-gradient(158deg,#0f2a63,#0a1a44);border:1px solid rgba(242,216,49,.35);border-radius:9px;padding:16px 18px;display:flex;flex-direction:column;justify-content:center}
+  .qtile .q{font-family:var(--serif);color:#fff;line-height:1.25}
+  .qtile .a{margin-top:auto;padding-top:12px}
+  .qtile .a .n{font-family:var(--serif);font-size:.9rem}
+  .qtile .a .c{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);margin-top:4px}
+
+  /* Approach 1 — stacked */
+  .a1-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .a1-quotes .qtile{min-height:150px}
+  .a1-quotes .qtile .q{font-size:1.15rem}
+  .a1-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:16px}
+
+  /* Approach 2 — quote tiles in the wall (double-wide) */
+  .a2{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:1fr;gap:9px}
+  .a2 .qtile{grid-column:span 2}
+  .a2 .qtile .q{font-size:.95rem}
+  .a2 .qtile .photohalf{}
+
+  /* Approach 3 — photo-backed quote cards (2x2), interspersed */
+  .a3{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:1fr;gap:9px}
+  .a3 .qbig{grid-column:span 2;grid-row:span 2;border-radius:9px;position:relative;overflow:hidden;background:linear-gradient(150deg,#22345f,#101f3e);border:1px solid rgba(242,216,49,.3);display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+  .a3 .qbig::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,40,.15),rgba(6,12,40,.82))}
+  .a3 .qbig .q{position:relative;font-family:var(--serif);font-size:1.15rem;color:#fff;line-height:1.24}
+  .a3 .qbig .a{position:relative;margin-top:12px}
+  .a3 .qbig .a .n{font-family:var(--serif);font-size:.92rem}
+  .a3 .qbig .a .c{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);margin-top:4px}
+  .mark{font-family:var(--serif);color:var(--sun);font-size:2rem;line-height:.4;height:.5em}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="k">Wireframe · pick a direction</div>
+    <h1>Testimonials × the photo grid</h1>
+    <p>Three ways to merge the "In their words" quotes into the snapshot wall so the strong quotes stay <b>big and always visible</b> (no hover to read them). Grey = photo tile, gold-outlined = quote tile.</p>
+  </div>
+
+  <!-- APPROACH 1 -->
+  <div class="frame">
+    <div class="cap"><span class="num">1</span><span class="ttl">Stacked &amp; merged — quotes on top, photo wall beneath</span></div>
+    <div class="desc">One section, one header. A row of large quote cards sits directly on top of the photo wall (shared background, no gap). Quotes are the hero; the photos become the texture underneath. Closest to what's live now, lowest risk.</div>
+    <div class="board">
+      <div class="eyebrow">In their words</div>
+      <div class="a1-quotes">
+        <div class="qtile"><div class="mark">“</div><div class="q">He hustled harder for me than anyone else did.</div><div class="a"><div class="n">Jake Sussman</div><div class="c">Headway</div></div></div>
+        <div class="qtile"><div class="mark">“</div><div class="q">Would I work with Don again? I already did — twice.</div><div class="a"><div class="n">Aaron Bai</div><div class="c">Affiniti</div></div></div>
+        <div class="qtile"><div class="mark">“</div><div class="q">A fantastic partner and ally since our early days.</div><div class="a"><div class="n">Alex Bouaziz</div><div class="c">Deel</div></div></div>
+      </div>
+      <div class="a1-grid" id="a1grid"></div>
+    </div>
+    <div class="pros"><b>Best if:</b> most quote-givers don't have photos. Quotes and photos stay cleanly separated but read as one block. Carousel still works for the quote row.</div>
+  </div>
+
+  <!-- APPROACH 2 -->
+  <div class="frame">
+    <div class="cap"><span class="num">2</span><span class="ttl">Quote tiles in the wall — double-wide, photo + quote</span></div>
+    <div class="desc">A single mosaic. Photo tiles stay 1×1; any person who has a quote gets a <b>double-wide tile</b> — their photo on one side, their quote always visible on the other. Quotes punctuate the photo wall in place.</div>
+    <div class="board">
+      <div class="a2" id="a2grid"></div>
+    </div>
+    <div class="pros"><b>Best if:</b> the quote-giver is the person in the photo. Most integrated look, but needs a photo for each quoted person and careful placement so the grid stays tidy.</div>
+  </div>
+
+  <!-- APPROACH 3 -->
+  <div class="frame">
+    <div class="cap"><span class="num">3</span><span class="ttl">Photo-backed quote cards — big 2×2, magazine style</span></div>
+    <div class="desc">The quote sits over a darkened version of the person's photo as a large 2×2 block, interspersed among the small photo tiles like pull-quotes in a photo spread. Most editorial and dramatic; quote always legible on the image.</div>
+    <div class="board">
+      <div class="a3" id="a3grid"></div>
+    </div>
+    <div class="pros"><b>Best if:</b> we have strong, well-cropped photos of the quoted founders. Highest visual impact; the quote and the face are one unit. Most design/photo work.</div>
+  </div>
+
+<script>
+  function photos(n){var s='';for(var i=0;i<n;i++)s+='<div class="photo"></div>';return s;}
+  document.getElementById('a1grid').innerHTML=photos(24);
+
+  // Approach 2: mixed row of photos + double-wide quote tiles
+  var a2='';
+  var q2=[['It’s rare to find investors who are killers on the business side.','Aaron Bai','Affiniti'],
+          ['He talked to every early hire, no matter where he was.','Lawrence Lin Murata','Slope'],
+          ['He’s been in the trenches when it mattered most.','Michael Tannenbaum','Figure']];
+  var seq=[3,'q',4,'q',5,'q',3];var qi=0;
+  seq.forEach(function(t){ if(t==='q'){var q=q2[qi++%q2.length];a2+='<div class="qtile"><div class="q">“'+q[0]+'”</div><div class="a"><div class="n">'+q[1]+'</div><div class="c">'+q[2]+'</div></div></div>';} else { for(var i=0;i<t;i++)a2+='<div class="photo"></div>';}});
+  document.getElementById('a2grid').innerHTML=a2;
+
+  // Approach 3: photos with 2x2 quote cards interspersed
+  var a3='';
+  a3+=photos(4);
+  a3+='<div class="qbig"><div class="mark">“</div><div class="q">He hustled harder for me than anyone else did.</div><div class="a"><div class="n">Jake Sussman</div><div class="c">Headway</div></div></div>';
+  a3+=photos(6);
+  a3+='<div class="qbig"><div class="mark">“</div><div class="q">A fantastic partner and ally since our early days.</div><div class="a"><div class="n">Alex Bouaziz</div><div class="c">Deel</div></div></div>';
+  a3+=photos(8);
+  document.getElementById('a3grid').innerHTML=a3;
+</script>
+</body>
+</html>
