@@ -28,23 +28,33 @@
             overflow-x: clip;
         }
 
-        /* Back button — mirrors the bio pages so the navigation feels
-           consistent across the secondary surfaces. */
-        .back-btn {
+        /* Fixed top bar with a background fill (Don) so "Back to site"
+           always sits on a solid surface instead of floating over the
+           content as it scrolls under. */
+        .sessions-topbar {
             position: fixed;
-            top: clamp(20px, 3vw, 40px);
-            left: clamp(20px, 3vw, 40px);
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: clamp(14px, 1.8vw, 22px) clamp(20px, 6vw, 64px);
+            background: rgba(9, 30, 96, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             color: #fff;
-            opacity: 0.65;
+            opacity: 0.75;
             text-decoration: none;
             font-size: 13px;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            padding: 8px 0;
             transition: opacity 0.2s ease;
         }
         .back-btn:hover { opacity: 1; }
@@ -146,6 +156,49 @@
             letter-spacing: -0.01em;
         }
 
+        /* Monthly Newsletter — a single honest subscribe panel (Don):
+           one disabled Subscribe with "First issue this fall." rather
+           than three placeholder issue cards for issues that don't
+           exist yet. */
+        .newsletter-panel {
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: clamp(28px, 4vw, 48px);
+            max-width: 620px;
+            text-align: center;
+        }
+        .newsletter-panel-copy {
+            font-family: 'DomaineDisp', 'Times New Roman', serif;
+            font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.82);
+            margin: 0 auto clamp(22px, 3vw, 30px);
+            max-width: 34em;
+        }
+        .newsletter-subscribe {
+            display: inline-block;
+            background: #F2D831;
+            color: #0B1275;
+            border: none;
+            border-radius: 999px;
+            padding: 13px 30px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+        .newsletter-panel-note {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: clamp(14px, 1.8vw, 20px) 0 0;
+        }
         /* Monthly Newsletter — 3-up tile grid with placeholders. */
         .newsletter-grid {
             display: grid;
@@ -305,7 +358,9 @@
     </style>
 </head>
 <body>
-    <a class="back-btn" href="index.html">&larr; Back to site</a>
+    <header class="sessions-topbar">
+        <a class="back-btn" href="index.html">&larr; Back to site</a>
+    </header>
 
     <div class="container">
         <header class="page-header">
@@ -324,36 +379,10 @@
         <!-- ════════ Monthly Newsletter ════════ -->
         <section class="section" aria-label="Monthly Newsletter">
             <h2 class="section-title">Monthly Newsletter</h2>
-            <div class="newsletter-grid">
-                <!-- Placeholder cards. Promote to .is-active and add the
-                     real href when an issue ships. -->
-                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
-                    <span class="newsletter-card-issue">Issue 01</span>
-                    <h3 class="newsletter-card-title">The first dispatch.</h3>
-                    <p class="newsletter-card-summary">A short preview of what we're seeing at the seed stage right now — global founders, sector inflections, the founders we're betting on next.</p>
-                    <div class="newsletter-card-meta">
-                        <span>Coming soon</span>
-                        <span class="newsletter-card-cta">Subscribe</span>
-                    </div>
-                </a>
-                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
-                    <span class="newsletter-card-issue">Issue 02</span>
-                    <h3 class="newsletter-card-title">In the field.</h3>
-                    <p class="newsletter-card-summary">Voices from the founders we're working with, lessons from the last quarter, and a deeper look at one breakout company.</p>
-                    <div class="newsletter-card-meta">
-                        <span>Coming soon</span>
-                        <span class="newsletter-card-cta">Subscribe</span>
-                    </div>
-                </a>
-                <a class="newsletter-card is-coming-soon" href="#" aria-disabled="true">
-                    <span class="newsletter-card-issue">Issue 03</span>
-                    <h3 class="newsletter-card-title">Macro inflections.</h3>
-                    <p class="newsletter-card-summary">Geopolitical, economic, and technological waves the Sunshine Lake aperture is tracking — and what they unlock for early founders.</p>
-                    <div class="newsletter-card-meta">
-                        <span>Coming soon</span>
-                        <span class="newsletter-card-cta">Subscribe</span>
-                    </div>
-                </a>
+            <div class="newsletter-panel">
+                <p class="newsletter-panel-copy">Seed-stage signal, sector inflections, and the founders we&rsquo;re betting on next &mdash; in your inbox once a month.</p>
+                <button class="newsletter-subscribe" type="button" disabled aria-disabled="true">Subscribe</button>
+                <p class="newsletter-panel-note">First issue this fall.</p>
             </div>
         </section>
 
@@ -361,6 +390,14 @@
         <section class="section" aria-label="In the Media">
             <h2 class="section-title">In the Media</h2>
             <div class="media-list">
+                <a class="media-item" href="https://www.jefferies.com/insights/leadership-spotlight/don-stalter-on-backing-founders-who-have-something-to-prove/" target="_blank" rel="noopener">
+                    <div class="media-item-top">
+                        <span class="media-outlet">Jefferies</span>
+                        <span>Leadership Spotlight</span>
+                    </div>
+                    <p class="media-title">Don Stalter on Backing Founders Who Have Something to Prove</p>
+                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
+                </a>
                 <a class="media-item" href="https://www.jefferies.com/insights/boardroom-intelligence/data-moats-infrastructure-and-agents-where-investors-see-ais-next-big-opportunities/" target="_blank" rel="noopener">
                     <div class="media-item-top">
                         <span class="media-outlet">Jefferies</span>
@@ -399,14 +436,6 @@
                         <span>Podcast</span>
                     </div>
                     <p class="media-title">Ep. 103 &mdash; Scaling Up With a Partner at Global Founders Capital</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="media-item" href="https://www.youtube.com/watch?v=H3KFqXTuHdI&t=1s&ab_channel=EpicFoundation" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">Epic Foundation</span>
-                        <span>Podcast</span>
-                    </div>
-                    <p class="media-title">Epic Chat with Don Stalter @ Global Founders Capital</p>
                     <span class="media-arrow" aria-hidden="true">&#8599;</span>
                 </a>
                 <a class="media-item" href="https://www.youtube.com/watch?v=L9tkkB4ng3w" target="_blank" rel="noopener">

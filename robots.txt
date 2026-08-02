@@ -1,0 +1,5 @@
+# Sunshine Lake Capital
+User-agent: *
+Allow: /
+
+Sitemap: https://sunshinelake.vc/sitemap.xml
