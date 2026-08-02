@@ -3076,7 +3076,8 @@
         /* Section header — matches .founders-left-title ("Stories spark
            movements.") so all section titles read at one scale: sentence
            case, white, DomaineDisp serif. */
-        .snapshots-eyebrow{font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:500;font-size:clamp(2.1rem,2.9vw,3.6rem);line-height:1.15;letter-spacing:-.015em;text-transform:none;color:#fff;text-align:left;margin-bottom:clamp(24px,3.5vw,44px)}
+        .snapshots-eyebrow{font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:500;font-size:clamp(2.1rem,2.9vw,3.6rem);line-height:1.15;letter-spacing:-.015em;text-transform:none;color:#fff;text-align:left;margin-bottom:clamp(12px,1.4vw,18px)}
+        .snapshots-sub{font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:400;font-size:clamp(1.05rem,1.35vw,1.5rem);line-height:1.5;color:rgba(255,255,255,0.72);text-align:left;max-width:34em;margin:0 0 clamp(24px,3.5vw,44px) 0}
         .snapshots-wrap .snapshots-section{margin-top:0}
         /* Snapshots grid — tiny tiled photos beneath the case studies.
            6-col on desktop, 4-col on tablet, 3-col on mobile. Each tile
@@ -3296,12 +3297,12 @@
             display: block;
             transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                         filter 0.6s ease;
-            /* At rest: blue monochrome — grayscale → sepia → rotate
-               hue 180° → bump saturation produces a deep cobalt
-               duotone, like the snapshots were printed in cyan ink.
-               The SVG turbulence still warps the photo ON TOP of the
-               monochrome so the surface still moves like water. */
-            filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.4) brightness(0.92) contrast(1.05) url(#snapshotsWaterWarp);
+            /* Photos are pre-baked into a single navy duotone at the
+               file level (images/snapshots/duo/*) — brand navy shadows,
+               cool highlights — so warm/bright shots can no longer break
+               the uniform wall. No colour transform here; the SVG
+               turbulence still warps the surface so it moves like water. */
+            filter: url(#snapshotsWaterWarp);
         }
         /* ::after = water DEPTH tint. Multiply blend so it sits over
            the photo as a cobalt veil — light at the surface, deeper
@@ -3395,21 +3396,22 @@
             .snapshots-cell::before { opacity: 0.55; }
             .snapshots-cell::after { opacity: 0.5; }
             .snapshots-cell img {
-                /* Skip the expensive SVG turbulence on mobile — keep
-                   the monochrome look without the per-frame warp. */
-                filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94) contrast(1.05);
+                /* Skip the expensive SVG turbulence on mobile — the navy
+                   duotone is already baked into the file, so no filter. */
+                filter: none;
             }
         }
         @media (prefers-reduced-motion: reduce) {
             /* Pause the warp AND the caustics for users who opt out. */
-            .snapshots-cell img { filter: grayscale(100%) sepia(100%) hue-rotate(186deg) saturate(2.2) brightness(0.94); }
+            .snapshots-cell img { filter: none; }
             .snapshots-cell::before { animation: none; }
             #snapshotsWaterWarp feTurbulence animate { display: none; }
         }
     </style>
-    <section class="snapshots-wrap" aria-label="In good company">
+    <section class="snapshots-wrap" aria-label="The movement, in their words">
       <div class="snapshots-inner">
-        <div class="snapshots-eyebrow">In good company</div>
+        <div class="snapshots-eyebrow">The movement, in their words.</div>
+        <p class="snapshots-sub">Founders we&rsquo;ve backed. Giants we&rsquo;ve built beside. The people who send us the next ones. You&rsquo;ll find them at the Speakeasy.</p>
             <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
                 <!-- SVG water-warp filter — animated turbulence drives
                      a small displacement map so every photo visibly
@@ -3490,15 +3492,15 @@
                 //    photo↔founder mappings come in.
                 var QUOTES = [
                     { q: 'A fantastic partner and ally to Deel since its early days.', n: 'Alex Bouaziz', c: 'Deel' },
-                    { q: 'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.', n: 'Jake Sussman', c: 'Headway' },
+                    { q: 'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.', n: 'Jake Sussman', c: 'Headway', hero: true },
                     { q: 'With us from day zero — a tremendous supporter through the twists and turns.', n: 'Tarek Mansour', c: 'Kalshi', photo: 'snap-doc-03.webp' },
-                    { q: "It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice.", n: 'Aaron Bai', c: 'Affiniti' },
-                    { q: 'When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.', n: 'Ankit Jain', c: 'Aviator', t: 'SVB' },
+                    { q: "It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did — twice.", n: 'Aaron Bai', c: 'Affiniti', hero: true },
                     { q: "Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.", n: 'Filip Kozera', c: 'Wordware' },
                     { q: "He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again.", n: 'James Ding', c: 'DraftWise' },
                     { q: "He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world.", n: 'Lawrence Lin Murata', c: 'Slope' },
                     { q: "We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would.", n: 'Mark Lawrence', c: 'SpotHero', t: 'Exit' },
                     { q: "He could not have been more supportive through our pivots and challenges. We've relied on Don as an independent point of feedback.", n: 'Max Kauderer', c: 'Yuzu Health' },
+                    { q: 'When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.', n: 'Ankit Jain', c: 'Aviator', t: 'SVB', hero: true },
                     { q: "When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.", n: 'Michael Tannenbaum', c: 'Figure', t: 'SVB', photo: 'snap-doc-07.webp' },
                     { q: 'Don understands that product-market fit is everything at the early stage. You send an email asking to chat, and your phone rings immediately.', n: 'Nick Evans', c: 'Avocado' },
                     { q: "He's been a great sounding board, especially during uncertain moments. We're backed by strong funds — but Don stands out.", n: 'Sean Doherty', c: 'GovDash' },
@@ -3510,7 +3512,7 @@
                 function photoCell(s) {
                     return ''
                         + '<figure class="snapshots-cell">'
-                        + '  <img src="images/snapshots/' + s.src + '" alt="" loading="lazy">'
+                        + '  <img src="images/snapshots/duo/' + s.src + '" alt="" loading="lazy">'
                         + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
                         + '</figure>';
                 }
@@ -3522,7 +3524,7 @@
                         + '  <div class="attr"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
                         + '</div>';
                 }
-                var qColorI = 0;
+                var qNavyI = 0;
                 function quoteCell(v) {
                     // Size: flip cards (need photo room) + the longest
                     // quotes get a 2×2 square; everything else is a small
@@ -3531,8 +3533,19 @@
                     // back isn't cropped to a letterbox; text-only cards
                     // size by quote length (short = wide 2×1).
                     var sizeCls = (v.photo || v.q.length > 132) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
-                    // Hero-water colour, cycled across cards.
-                    var colorCls = 'qcolor-' + (qColorI++ % 5);
+                    // Colour discipline (Don): sun-yellow is reserved for
+                    // the killer quotes only (v.hero) — the SVB save, "I
+                    // already did — twice," "every single round and company
+                    // that I start." Navy is the default; a mid-blue tile
+                    // is sprinkled in sparingly (~1 in 4) to break the field
+                    // without ever crowding out the navy.
+                    var colorCls;
+                    if (v.hero) {
+                        colorCls = 'qcolor-3';                 // sun yellow
+                    } else {
+                        colorCls = (qNavyI % 4 === 2) ? 'qcolor-2' : 'qcolor-1'; // occasional mid-blue, else navy
+                        qNavyI++;
+                    }
                     var cls = 'snapshots-cell snapshots-cell--quote ' + sizeCls + ' ' + colorCls;
                     if (v.photo) {
                         // Flip card — quote front, group shot on the back.
@@ -3541,7 +3554,7 @@
                             + '  <div class="flip-inner">'
                             +      frontFace(v)
                             + '    <div class="flip-face flip-back">'
-                            + '      <img src="images/snapshots/' + v.photo + '" alt="' + v.n + ' with Don" loading="lazy">'
+                            + '      <img src="images/snapshots/duo/' + v.photo + '" alt="' + v.n + ' with Don" loading="lazy">'
                             + '      <div class="flip-back-cap"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
                             + '    </div>'
                             + '  </div>'
