@@ -1376,12 +1376,10 @@
             font-weight: 600;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.72);
-            /* Eyebrow now sits BELOW the headline (per Don's call) —
-               margin moved from bottom to top so the breathing room
-               is between the headline and the label rather than the
-               label and whatever sits above. */
-            margin: clamp(8px, 1vw, 14px) 0 0 0;
+            color: var(--sun, #F2D831);
+            /* Eyebrow opens the section (above the headline), matching
+               the eyebrow+serif-title pairing used across the page. */
+            margin: 0 0 clamp(14px, 1.4vw, 22px) 0;
         }
         .founders-left-title {
             position: relative;
@@ -1396,11 +1394,9 @@
             margin: 0;
             line-height: 1.15;
             letter-spacing: -0.015em;
-            /* Single line on desktop: nowrap forces the headline onto
-               one row, max-width clamps it to a sensible measure, and
-               the inline <br> below is suppressed via display:none. */
-            white-space: nowrap;
-            max-width: min(85vw, 1200px);
+            /* Long editorial headline — wraps to a comfortable measure
+               rather than forcing a single line. */
+            max-width: 15em;
             z-index: 3;
         }
         .founders-left-title br { display: none; }
@@ -1555,6 +1551,24 @@
                this size) so each description reads as a single
                compact paragraph instead of running edge-to-edge. */
             max-width: 36em;
+        }
+        /* Proof figures inside the founder blurb — the numbers and
+           names that carry the weight ($7.5B, $5B, $4B, Opendoor,
+           Great Hill Partners): sun-yellow, semibold, no italics. */
+        .founders-item-desc .proof {
+            color: var(--sun, #F2D831);
+            font-weight: 600;
+            font-style: normal;
+        }
+        /* Country tag under the blurb — small-caps sans label, quiet. */
+        .founders-item-country {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: clamp(0.62rem, 0.72vw, 0.74rem);
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: clamp(10px, 1.1vw, 16px);
         }
 
         /* Toggle visibility between views */
@@ -3013,8 +3027,9 @@
     <!-- Founders scroll-through -->
     <div class="founders-scroll-spacer" id="rd-section-portfolio">
         <div class="founders-left">
-            <h2 class="founders-left-title">Stories spark <br>movements.</h2>
             <p class="founders-left-eyebrow">Sunshine Lake Portfolio</p>
+            <h2 class="founders-left-title">Every blockbuster begins as a story only its founder believes.</h2>
+            <p class="founders-left-intro">We&rsquo;ve backed enough of them to recognize the opening lines.</p>
             <div class="founders-photo-stack" id="foundersPhotoStack">
                 <!-- Photos injected by JS from FOUNDERS_DATA -->
             </div>
@@ -3024,6 +3039,35 @@
             <!-- Items injected by JS from FOUNDERS_DATA -->
         </div>
     </div>
+
+    <!-- Portfolio closer — "…and many more." then the display line -->
+    <section class="portfolio-closer">
+        <p class="portfolio-more">&hellip;and many more.</p>
+        <h2 class="portfolio-closer-line">Stories spark movements.</h2>
+    </section>
+    <style>
+        .portfolio-closer{
+            background:#02041F;
+            text-align:center;
+            padding:clamp(28px,5vw,72px) clamp(20px,5vw,64px) clamp(64px,9vw,120px);
+        }
+        .portfolio-more{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;
+            font-size:clamp(1.1rem,1.5vw,1.6rem);
+            color:rgba(255,255,255,0.55);
+            font-style:italic;
+            margin:0 0 clamp(28px,4vw,56px) 0;
+        }
+        .portfolio-closer-line{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;
+            font-size:clamp(2.6rem,6vw,6rem);
+            font-weight:500;
+            letter-spacing:-0.02em;
+            line-height:1.02;
+            color:#fff;
+            margin:0;
+        }
+    </style>
 
     <!-- ════════ Snapshots photo grid — brought back to the homepage bottom (ported from polish-don.html) ════════ -->
     <style>
@@ -4500,16 +4544,11 @@
         // =======================================
         const FOUNDERS_DATA = [
             // CONTENT:founders
-                { name: "Niek and Titus", company: "Minimal", desc: "From TU Delft, two Dutch founders built Minimal AI to resolve e-commerce support tickets at human-level quality.", photo: 'images/founders/minimal.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/NL.svg', slug: 'minimal-ai' },
-                { name: "Martin & Zoltán", company: "Blurry", desc: "From Slovakia to Imperial, a weekend hobby became Blurry — the backbone for 3D world models.", photo: 'images/founders/blurry.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/GB-UKM.svg', slug: 'blurry' },
-                { name: "Cathy & Windsor", company: "Dedalus Labs", desc: "At Princeton, the founders fought brittle APIs to ship AI agents — so they built Dedalus to make it effortless.", photo: 'images/founders/dedalus.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/FR.svg', slug: 'dedalus-labs' },
-                { name: "Samuel", company: "Duranta", desc: "From Kenya to Stanford, Samuel built a $4B solar company; now Duranta's vision systems help machines see the world.", photo: 'images/founders/duranta.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/BR.svg', slug: 'duranta' },
-                { name: "Thomas", company: "Entire", desc: "From Berlin to GitHub CEO, Thomas Dohmke is building Entire — where humans and AI agents ship software together.", photo: 'images/founders/entire.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/DE.svg', slug: 'entire' },
-                { name: "Thomas & Geoff", company: "FullSeam", desc: "From Oxford to selling TaxProper to Opendoor, Thomas & Geoff built FullSeam to take the grunt work off finance teams.", photo: 'images/founders/fullseam.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/AT.svg', slug: 'fullseam' },
-                { name: "Hyde", company: "Fully Parsed", desc: "Markets move on narratives that go unparsed — so this Harvard founder built Fully Parsed to decode them in real time.", photo: 'images/founders/fullyparsed.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/US.svg', slug: 'fully-parsed' },
-                { name: "Faisal", company: "Pillar", desc: "At Harvard, Faisal saw how hard it is to turn attention into income — so he built Pillar for creators everywhere.", photo: 'images/founders/pillar.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/US.svg', slug: 'pillar' },
-                { name: "Udam & Varun", company: "Stitcher", desc: "From India and Sri Lanka to UW and Apptio, they built Stitcher to bring structure to opaque IT spend.", photo: 'images/founders/stitcher.webp?v=2', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/LK.svg', slug: 'stitcher' },
-                { name: "Hide Morita", company: "Queri", desc: "From Japan, Hide is building Queri — the global fan infrastructure connecting Asian talent with fans worldwide.", photo: 'images/founders/queri.webp', flag: 'https://cdn.jsdelivr.net/gh/Yummygum/flagpack-core@main/svg/l/JP.svg', slug: 'queri' }
+                { name: "Craig O&rsquo;Neill", company: "Argentic", country: "Canada", desc: "Led Versapay as CEO for nine-plus years through a take-private with <b class=\"proof\">Great Hill Partners</b>. Now rebuilding B2B payments for the AI era.", photo: 'images/founders/argentic.webp', slug: 'argentic' },
+                { name: "Geoffrey Tisserand &amp; Anji Ismail", company: "Concord.ai", country: "France", desc: "Helped build Checkr into a <b class=\"proof\">$5B</b> company. Now Concord is reskilling the workforce for AI.", photo: 'images/founders/geoffrey.webp', slug: 'concord-ai' },
+                { name: "Samuel Adeyemo", company: "Duranta", country: "Kenya", desc: "Co-founded Aurora Solar and scaled it to <b class=\"proof\">$4B</b>. Now Duranta builds vision systems for machines in the physical world.", photo: 'images/founders/duranta.webp', slug: 'duranta' },
+                { name: "Thomas Dohmke", company: "Entire", country: "East Germany", desc: "Ran GitHub to <b class=\"proof\">$7.5B</b> and scaled Copilot. Now building the developer platform for the agent era.", photo: 'images/founders/entire.webp', slug: 'entire' },
+                { name: "Dowling, Segal &amp; Coppa", company: "FullSeam", country: "US &middot; Oxford", desc: "Built TaxProper through to an <b class=\"proof\">Opendoor</b> acquisition. Now AI agents for AP, AR, and reconciliation.", photo: 'images/founders/fullseam.webp', slug: 'fullseam' }
             // /CONTENT:founders
         ];
 
@@ -4549,6 +4588,7 @@
                     '<div class="founders-item-company-sub">' + d.company + '</div>' +
                     '<div class="founders-item-detail">' +
                     '<p class="founders-item-desc">' + d.desc + '</p>' +
+                    (d.country ? '<div class="founders-item-country">' + d.country + '</div>' : '') +
                     '</div>';
                 right.appendChild(item);
             });
@@ -4569,6 +4609,7 @@
                         '<div class="founders-item-name">' + d.name + '</div>' +
                         '<div class="founders-item-company-sub">' + d.company + '</div>' +
                         '<p class="founders-item-desc">' + d.desc + '</p>' +
+                        (d.country ? '<div class="founders-item-country">' + d.country + '</div>' : '') +
                     '</div>';
                 mobileOverlay.appendChild(panel);
             });
