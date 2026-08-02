@@ -207,7 +207,16 @@
             /* Soft navy shadow across the whole headline for a little
                more contrast over the water (soft, not a hard black halo). */
             text-shadow: 0 2px 18px rgba(11, 18, 117, 0.45), 0 1px 4px rgba(11, 18, 117, 0.30);
+            /* Two-line brand lockup: each line stays on one row and never
+               rewraps at any viewport (a shrink-to-fit script scales it down
+               on narrow screens). text-size-adjust stops mobile font-boosting. */
+            white-space: nowrap;
+            -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
         }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        .team-card-bio b, .team-card-quote b { font-weight: 600; color: #fff; }
+        .advisors-headline { font-family: 'DomaineDisp','Times New Roman',serif; font-weight: 500; font-size: clamp(1.5rem, 2.4vw, 2.1rem); color: #fff; letter-spacing: -0.01em; margin: 0 0 clamp(22px, 3vw, 36px); }
+        .footer-photo-content-main .cta-preline { font-family: 'DomaineDisp','Times New Roman',serif; font-weight: 500; font-size: clamp(1.35rem, 2.6vw, 2.2rem); line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 clamp(12px, 1.6vw, 20px); color: inherit; opacity: 0.92; max-width: 22ch; }
         /* Emphasize the brand name within the headline — the display
            serif only ships in one weight, so we lift "Sunshine Lake"
            with the brand gold (the hero sun) rather than a faux bold.
@@ -2635,7 +2644,7 @@
                      scroll-down chevron at the bottom. -->
                 <div class="main-content">
                     <span class="hero-tagline" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
-                    <h1 class="title"><span class="title-brand">Sunshine Lake</span> founders<br>forge the future.</h1>
+                    <h1 class="title"><span class="title-brand">Sunshine Lake</span><br>founders forge the future.</h1>
                 </div>
 
                 <!-- Bottom-center scroll-hint cluster — "Pre-Seed & Seed
@@ -2671,8 +2680,8 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">We believe talent is universal and invest in the world&rsquo;s best founders at their breakout moments.</p>
-                <p>Our insights into economic, social, and technological shifts fuel multiple blockbuster companies a decade.</p>
+                <p class="thesis-lede">Critical global systems failed our founders &mdash; they cross the world, have no plan B, and out-iterate everyone to fix them.</p>
+                <p>That&rsquo;s how trillion-dollar businesses start, and how we back blockbusters every decade.</p>
             </div>
 
             <!-- ════════ Market-cycle waves ════════
@@ -2828,7 +2837,7 @@
                                 <a class="team-bio-btn" href="polish-don.html" aria-label="Don Stalter — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Founder, Sunshine Lake</p>
-                            <blockquote class="team-card-quote team-card-bio">Spent nearly a decade as North American Managing Partner at Global Founders Capital. Earlier he co-founded CityDeal (sold to Groupon) and scaled Airbnb across Europe and Asia-Pacific, after starting his career in San Francisco M&amp;A and London private equity.</blockquote>
+                            <blockquote class="team-card-quote team-card-bio">Co-founded CityDeal (acquired by Groupon); scaled Airbnb across Europe and Asia-Pacific in the early days. <b>Has backed founders from first check to unicorn across every major ecosystem.</b></blockquote>
                         </div>
                     </div>
 
@@ -2842,7 +2851,7 @@
                                 <a class="team-bio-btn" href="ivan.html" aria-label="Ivan La Frinere-Sandoval — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner, CFO & COO</p>
-                            <blockquote class="team-card-quote team-card-bio">A Caltech- and Stanford-trained engineer and financier who worked on large-scale clean energy at SolarCity before founding and building multiple Bay Area companies. Runs fund operations, model reviews and sits on the investment committee.</blockquote>
+                            <blockquote class="team-card-quote team-card-bio">Caltech- and Stanford-trained engineer and financier: SolarCity with Kimbal Musk, then his own Bay Area companies. <b>Runs fund operations; investment committee.</b></blockquote>
                         </div>
                     </div>
 
@@ -2856,7 +2865,7 @@
                                 <a class="team-bio-btn" href="suhail.html" aria-label="Suhail Younus — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">Partner</p>
-                            <blockquote class="team-card-quote team-card-bio">Cornell-educated, with a background spanning venture capital, private equity and emerging-technology research. Leads pipeline coverage and deal scoring at Sunshine Lake, from San Francisco.</blockquote>
+                            <blockquote class="team-card-quote team-card-bio">Cornell-educated; venture and emerging-technology research. <b>Runs coverage and deal scoring from San Francisco.</b></blockquote>
                         </div>
                     </div>
 
@@ -2870,7 +2879,7 @@
                                 <a class="team-bio-btn" href="wieger.html" aria-label="Wieger Lamers — Full background"><span>Bio</span><svg class="team-bio-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></a>
                             </div>
                             <p class="team-card-role">EMEA & Platforms Lead</p>
-                            <blockquote class="team-card-quote team-card-bio">Grew up alongside Adyen&rsquo;s rise from a small team to one of Europe&rsquo;s defining IPOs, then built his venture experience at Valia Ventures and Unlock (Antler). Runs EMEA sourcing and platform, from London.</blockquote>
+                            <blockquote class="team-card-quote team-card-bio">Grew up alongside Adyen&rsquo;s rise to one of Europe&rsquo;s defining IPOs; Valia and Antler&rsquo;s Unlock. <b>Runs EMEA sourcing and platform from London.</b></blockquote>
                         </div>
                     </div>
 
@@ -2885,6 +2894,7 @@
                  on desktop, stacked on mobile. Eyebrow matches the
                  OUR TEAM / TOP 1% TRACK RECORD family. -->
             <section class="advisors-band" aria-label="Advisors and Venture Partners">
+                <h3 class="advisors-headline">What our founders draw on.</h3>
                 <div class="bench-grid">
                     <!-- Advisors — external counsel -->
                     <div class="bench-group">
@@ -2893,13 +2903,13 @@
                             <div class="advisor-card">
                                 <div class="advisor-info">
                                     <p class="advisor-name">Esther Wojcicki</p>
-                                    <p class="advisor-bio">Educator, author of <i>How to Raise Successful People</i>, and the "Godmother of Silicon Valley" — deep ties to Google, with a family that built YouTube and 23andMe.</p>
+                                    <p class="advisor-bio">The &ldquo;Godmother of Silicon Valley&rdquo;: educator, author, a family that built YouTube and 23andMe.</p>
                                 </div>
                             </div>
                             <div class="advisor-card">
                                 <div class="advisor-info">
                                     <p class="advisor-name">Mike Franklin</p>
-                                    <p class="advisor-bio">Chairman of Computer Science at UChicago and co-creator of Apache Spark — the engine powering data teams worldwide; a founding advisor at <strong>Databricks</strong>.</p>
+                                    <p class="advisor-bio">Co-creator of Apache Spark, founding advisor at <strong>Databricks</strong>, Chair of Computer Science at UChicago.</p>
                                 </div>
                             </div>
                         </div>
@@ -2911,13 +2921,13 @@
                             <div class="advisor-card">
                                 <div class="advisor-info">
                                     <p class="advisor-name">Andrew Hovelson</p>
-                                    <p class="advisor-bio">NYU Tisch graduate and TV and Broadway veteran who leads narrative and brand storytelling &mdash; most recently coaching the <strong>Wordware</strong> founders to a $30M seed.</p>
+                                    <p class="advisor-bio">Broadway and film actor alongside Glenn Close and Tom Hanks. Leads narrative and storytelling; most recently coached <strong>Wordware</strong>&rsquo;s founders to a $30M seed.</p>
                                 </div>
                             </div>
                             <div class="advisor-card">
                                 <div class="advisor-info">
                                     <p class="advisor-name">Jamie Feaster</p>
-                                    <p class="advisor-bio">Growth operator across adtech, DTC, and B2B marketplaces — a 10th-generation Mexican-Spanish Californian building AI-driven growth systems across the portfolio.</p>
+                                    <p class="advisor-bio">Growth operator across adtech, DTC, and marketplaces; builds AI-driven growth systems across the portfolio.</p>
                                 </div>
                             </div>
                         </div>
@@ -3492,6 +3502,7 @@
             <div class="footer-photo-card" id="footerPhotoCard"></div>
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
+                    <p class="cta-preline">A critical global system failed you. Fixing it is who you are.</p>
                     <h2>Dive in.</h2>
                     <!-- All four destinations as pill capsules sitting in
                          one wrapping row: Submit your pitch (primary), plus
@@ -5239,5 +5250,26 @@
     <!-- Redesign additions (Category Leaders, Strategic Exits + IPOs, From Day Zero, Founder Voices) -->
     <script src="polish.js?v=35" defer></script>
 
+    <!-- Hero wordmark: two locked lines that never rewrap; shrink-to-fit on narrow viewports. -->
+    <script>
+    (function(){
+      var t=document.querySelector('.main-content .title');
+      if(!t) return;
+      function fit(){
+        t.style.fontSize='';
+        var avail=(t.parentElement?t.parentElement.clientWidth:t.clientWidth);
+        if(!avail) return;
+        var sw=t.scrollWidth;
+        if(sw>avail){
+          var base=parseFloat(getComputedStyle(t).fontSize)||40;
+          t.style.fontSize=(base*(avail/sw)*0.99).toFixed(2)+'px';
+        }
+      }
+      if(document.readyState!=='loading') fit(); else document.addEventListener('DOMContentLoaded',fit);
+      window.addEventListener('load',fit);
+      window.addEventListener('resize',function(){clearTimeout(t._ft);t._ft=setTimeout(fit,120);});
+      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+    })();
+    </script>
 </body>
 </html>
