@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunshine Lake Capital</title>
+    <title>Sunshine Lake Capital — Seed VC for Founders Forging the Future</title>
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Sunshine Lake Capital">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Sunshine Lake",
       "legalName": "Sunshine Lake Capital",
+      "alternateName": "Sunshine Lake VC",
       "url": "https://sunshinelake.vc",
       "logo": "https://sunshinelake.vc/images/og-share.png",
-      "description": "Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.",
+      "image": "https://sunshinelake.vc/images/og-share.png",
+      "slogan": "Founders forge the future.",
+      "description": "Sunshine Lake Capital is a Pre-Seed and Seed venture firm backing exceptional founders forged by extreme origins — the ones who cross the world, have no plan B, and out-iterate everyone to fix the critical global systems that failed them.",
+      "knowsAbout": ["Venture capital", "Pre-Seed investing", "Seed investing", "Startups", "Artificial intelligence", "Fintech", "Founders"],
       "founder": {
         "@type": "Person",
         "name": "Don Stalter",
@@ -24,19 +30,24 @@
       ]
     }
     </script>
-    <meta name="description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
-    <meta property="og:title" content="Sunshine Lake Capital">
-    <meta property="og:description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
+    <meta name="description" content="Sunshine Lake Capital is a Pre-Seed and Seed venture firm backing exceptional founders forged by extreme origins — the ones who out-iterate everyone to fix the critical global systems that failed them.">
+    <meta property="og:title" content="Sunshine Lake Capital — Seed VC for Founders Forging the Future">
+    <meta property="og:description" content="A Pre-Seed and Seed venture firm backing exceptional founders forged by extreme origins — the ones who out-iterate everyone to fix the systems that failed them.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sunshinelake.vc">
+    <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://sunshinelake.vc/images/og-share.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sunshine Lake Capital — founders forge the future.">
     <meta property="og:site_name" content="Sunshine Lake Capital">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sunshine Lake Capital">
-    <meta name="twitter:description" content="Sunshine Lake Capital backs exceptional founders forged by extreme origins — Pre-Seed and Seed investments in those who see what others miss.">
+    <meta name="twitter:site" content="@SunshineLakeVC">
+    <meta name="twitter:creator" content="@SunshineLakeVC">
+    <meta name="twitter:title" content="Sunshine Lake Capital — Seed VC for Founders Forging the Future">
+    <meta name="twitter:description" content="A Pre-Seed and Seed venture firm backing exceptional founders forged by extreme origins — the ones who out-iterate everyone to fix the systems that failed them.">
     <meta name="twitter:image" content="https://sunshinelake.vc/images/og-share.png">
+    <meta name="twitter:image:alt" content="Sunshine Lake Capital — founders forge the future.">
     <!-- Browser UI tint on mobile Safari/Chrome (desktop browsers ignore
          theme-color). Sunshine yellow so the bar reads on-brand, not black. -->
     <meta name="theme-color" content="#F2D831">
@@ -2253,6 +2264,17 @@
             margin: 0;
             letter-spacing: 0.06em;
         }
+        /* Quiet LP Portal text link — the pill lives on the hero only,
+           so this carries the destination in the footer. */
+        .footer-lp-link {
+            color: rgba(255, 251, 235, 0.6);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 251, 235, 0.22);
+            padding-bottom: 1px;
+            margin-left: 0.5em;
+            transition: color 0.25s ease, border-color 0.25s ease;
+        }
+        .footer-lp-link:hover { color: #F2D831; border-color: rgba(242, 216, 49, 0.6); }
 
         /* Ewok-head Easter-egg peek button. Sits in normal flow at
            the bottom of the dark abyss, just before the cream card.
@@ -2615,6 +2637,32 @@
             <polyline points="7 7 17 7 17 17"/>
         </svg>
     </a>
+    <style>
+        /* LP pill lives on the hero only (Don) — it fades out once the
+           hero scrolls away; a quiet "LP Portal" text link in the footer
+           carries the destination for the rest of the page. */
+        .rd-lp-login { transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        .rd-lp-login.is-hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+    </style>
+    <script>
+        (function lpPillHeroOnly(){
+            var pill = document.querySelector('.rd-lp-login');
+            if (!pill) return;
+            // The hero is a tall scroll-spacer, so a whole-element
+            // IntersectionObserver ratio is unreliable. Toggle purely on
+            // scroll position instead: the pill lives over the first
+            // viewport (the hero), then fades once the reader scrolls
+            // past ~70% of it. Works with Lenis (which drives native
+            // scroll) and plain scrolling alike.
+            function update(){
+                var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+                pill.classList.toggle('is-hidden', y > window.innerHeight * 0.7);
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        })();
+    </script>
 
     <!-- Sticky side nav — anchor links into each major section -->
     <nav class="rd-sidenav" id="rd-sidenav" aria-label="Section navigation">
@@ -3593,6 +3641,69 @@
             })();
             </script>
 
+    <!-- ════════ The Speakeasy — homepage teaser (wall → Speakeasy → CTA) ════════
+         Background is a placeholder: abyss navy + a warm chandelier glow
+         and a low silhouette band. Swap `--speak-bg` for the bar photo
+         (backs of heads, chandelier) at ~60% dark overlay when it lands. -->
+    <section class="speakeasy-teaser" id="rd-section-speakeasy" aria-label="The Sunshine Lake Speakeasy">
+        <div class="speak-inner">
+            <div class="speak-eyebrow">The Sunshine Lake Speakeasy</div>
+            <h2 class="speak-title">Where founders speak easy.</h2>
+            <p class="speak-body">In the 1920s, a speakeasy was where the people building the future met while the rules caught up. Ours is kept for the obsessed. What&rsquo;s said here stays here.</p>
+            <a class="speak-cta" href="#rd-section-contact">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </section>
+    <style>
+        .speakeasy-teaser{
+            position:relative;
+            overflow:hidden;
+            background:#02041F;
+            padding:clamp(96px,16vh,220px) clamp(20px,5vw,64px);
+            text-align:center;
+            isolation:isolate;
+        }
+        /* Warm chandelier pool from top-center + deep vignette. */
+        .speakeasy-teaser::before{
+            content:'';position:absolute;inset:0;z-index:-2;
+            background:
+                radial-gradient(60% 42% at 50% 4%, rgba(242,216,49,0.20), rgba(242,216,49,0.06) 42%, transparent 72%),
+                radial-gradient(120% 90% at 50% -8%, #123056, #0a1b3e 46%, #050c26 74%, #02041F);
+        }
+        /* Low silhouette band — stands in for the backs-of-heads until
+           the bar photo is dropped in. */
+        .speakeasy-teaser::after{
+            content:'';position:absolute;left:0;right:0;bottom:0;height:34%;z-index:-1;
+            background:linear-gradient(180deg, transparent, rgba(1,3,15,0.55) 55%, #01030B);
+        }
+        .speak-inner{max-width:760px;margin:0 auto}
+        .speak-eyebrow{
+            font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+            font-size:clamp(11px,0.9vw,13px);font-weight:700;letter-spacing:0.24em;
+            text-transform:uppercase;color:var(--sun,#F2D831);margin-bottom:clamp(18px,2.4vw,30px);
+        }
+        .speak-title{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:500;
+            font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:1.04;letter-spacing:-0.02em;
+            color:#fff;margin:0 0 clamp(20px,2.6vw,32px);
+        }
+        .speak-body{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:400;
+            font-size:clamp(1.1rem,1.5vw,1.5rem);line-height:1.55;
+            color:rgba(255,255,255,0.74);margin:0 auto clamp(30px,4vw,48px);max-width:34em;
+        }
+        .speak-cta{
+            display:inline-flex;align-items:center;gap:0.5em;
+            font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+            font-size:clamp(0.9rem,1vw,1.05rem);font-weight:700;letter-spacing:0.02em;
+            color:#0a1740;background:var(--sun,#F2D831);
+            padding:0.85em 1.7em;border-radius:999px;text-decoration:none;
+            transition:transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+            box-shadow:0 10px 30px rgba(242,216,49,0.18);
+        }
+        .speak-cta:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(242,216,49,0.28)}
+        .speak-cta span{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1)}
+        .speak-cta:hover span{transform:translateX(4px)}
+    </style>
 
     </main>
 
@@ -3628,7 +3739,7 @@
                             <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
                             <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
                         </svg>
-                        <p class="footer-signoff-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved.</p>
+                        <p class="footer-signoff-legal">&copy; 2026 Sunshine Lake Capital. All rights reserved. <a class="footer-lp-link" href="lp.html">LP Portal</a></p>
                     </div>
                 </div>
             </div>
