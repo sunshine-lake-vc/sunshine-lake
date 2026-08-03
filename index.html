@@ -232,18 +232,15 @@
         .team-card-bio b, .team-card-quote b { font-weight: 600; color: #fff; }
         .advisors-headline { font-family: 'DomaineDisp','Times New Roman',serif; font-weight: 500; font-size: clamp(1.5rem, 2.4vw, 2.1rem); color: #fff; letter-spacing: -0.01em; margin: 0 0 clamp(22px, 3vw, 36px); }
         .footer-photo-content-main .cta-preline { font-family: 'DomaineDisp','Times New Roman',serif; font-weight: 500; font-size: clamp(1.35rem, 2.6vw, 2.2rem); line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 clamp(12px, 1.6vw, 20px); color: inherit; opacity: 0.92; max-width: 22ch; }
-        /* Emphasize the brand name within the headline — the display
-           serif only ships in one weight, so we lift "Sunshine Lake"
-           with the brand gold (the hero sun) rather than a faux bold.
-           A soft navy glow keeps the gold from washing out over the
-           bright / gold patches of the water animation behind it. */
+        /* "Sunshine Lake" carries the shimmer gleam, but is set at the
+           SAME weight as the rest of the headline. A heavier weight made
+           its (identical) shadow read as bolder, because thicker strokes
+           hold more of the same shadow — so all words share one weight
+           and one shadow, and the brand line no longer looks
+           heavier-shadowed. */
         .title .title-brand {
-            /* "Sunshine Lake" is the brand lockup — heavier than the
-               tagline by WEIGHT only. It inherits the exact same soft
-               shadow as the rest of the headline (no separate shadow or
-               stroke) so all words read uniformly. */
             color: #fff;
-            font-weight: 800;
+            font-weight: inherit;
         }
         /* Wordmark shimmer — a soft warm gleam sweeps across "Sunshine
            Lake" on a slow ~5.5s loop, starting after the fade-up entrance
