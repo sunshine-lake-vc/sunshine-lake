@@ -1488,8 +1488,10 @@ body.mode-tight .content-sticky p {
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 720px) {
   .hero-card .title {
-    /* Soft navy shadow (matches the desktop .title) for a little more
-       contrast over the busy water — soft, not a hard black halo. */
-    text-shadow: 0 2px 18px rgba(11, 18, 117, 0.45), 0 1px 4px rgba(11, 18, 117, 0.30);
+    /* One tight, low-intensity navy shadow shared by every word — a
+       small blur hugs each glyph so it reads the same on the bold
+       "Sunshine Lake" line and the lighter tagline. Matches the desktop
+       .title value. */
+    text-shadow: 0 1px 4px rgba(11, 18, 117, 0.4);
   }
 }
