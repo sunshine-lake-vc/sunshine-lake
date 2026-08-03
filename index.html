@@ -215,10 +215,10 @@
                aligns with the leftmost pixel of the wordmark logo
                (which sits at the same --hero-edge-x with no bearing). */
             margin-left: -0.04em;
-            /* Defined navy shadow for CONTRAST over the busy water — a
-               tight dark edge plus a short navy fall, so the white type
-               reads crisply instead of dissolving into a soft glow. */
-            text-shadow: 0 1px 2px rgba(2, 4, 31, 0.55), 0 2px 9px rgba(11, 18, 117, 0.5);
+            /* One soft navy shadow across EVERY word of the headline
+               (brand line + tagline) so the whole lockup reads uniformly,
+               with no heavier treatment on "Sunshine Lake". */
+            text-shadow: 0 2px 12px rgba(11, 18, 117, 0.4);
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
@@ -238,15 +238,11 @@
            bright / gold patches of the water animation behind it. */
         .title .title-brand {
             /* "Sunshine Lake" is the brand lockup — heavier than the
-               tagline line and set with a light-navy contrast shadow so
-               it lifts off the water. Domaine Display ships one weight,
-               so a hairline white text-stroke (painted under the fill)
-               adds real heft beyond the synthesized 800. */
+               tagline by WEIGHT only. It inherits the exact same soft
+               shadow as the rest of the headline (no separate shadow or
+               stroke) so all words read uniformly. */
             color: #fff;
             font-weight: 800;
-            -webkit-text-stroke: 0.4px #fff;
-            paint-order: stroke fill;
-            text-shadow: 0 1px 2px rgba(2, 4, 31, 0.6), 0 2px 12px rgba(11, 18, 117, 0.55);
         }
         /* Wordmark shimmer — a soft warm gleam sweeps across "Sunshine
            Lake" on a slow ~5.5s loop, starting after the fade-up entrance
@@ -2566,13 +2562,8 @@
                 white-space: normal;
                 font-size: clamp(2.3rem, 9vw, 3.4rem);
                 overflow-wrap: break-word;
-                /* Drop the heavy embossed shadow on mobile — just a
-                   whisper for legibility over the water. */
-                text-shadow: 0 1px 3px rgba(2, 4, 31, 0.28);
-            }
-            .title .title-brand {
-                text-shadow: 0 1px 3px rgba(2, 4, 31, 0.28);
-                -webkit-text-stroke: 0;
+                /* Shadow inherited from the base rule — one soft navy
+                   shadow shared by every word, brand line included. */
             }
             /* Content text section — reflow as single block on mobile */
             .content-sticky p { max-width: 90vw; }
