@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>The Speakeasy — Sunshine Lake Capital</title>
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'DomaineDisp';
+            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
+            font-weight: 400; font-style: normal; font-display: swap;
+        }
+        :root{
+            --abyss:#02041F; --navy:#0B1275; --mid-lake:#0A3DAE; --cobalt:#155EE8;
+            --sun:#F2D831; --serif:'DomaineDisp','Times New Roman',Times,serif;
+            --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+            --ease:cubic-bezier(0.22,1,0.36,1);
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+        body {
+            background:#02041F; color:#fff; font-family:var(--sans);
+            -webkit-font-smoothing:antialiased; overflow-x:clip; min-height:100vh;
+        }
+        a { color:inherit; }
+
+        /* Fixed back-to-site bar (matches Sessions). */
+        .topbar {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            display:flex; align-items:center;
+            padding:clamp(14px,1.8vw,22px) clamp(20px,6vw,64px);
+            background:rgba(3,7,26,0.72);
+            backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(255,255,255,0.10);
+        }
+        .back-btn {
+            display:inline-flex; align-items:center; gap:8px; color:#fff; opacity:0.75;
+            text-decoration:none; font-size:13px; letter-spacing:0.05em; text-transform:uppercase;
+            transition:opacity 0.2s ease;
+        }
+        .back-btn:hover { opacity:1; }
+
+        /* ── Hero ── */
+        .sp-hero {
+            position:relative; overflow:hidden; isolation:isolate;
+            padding:clamp(140px,22vh,260px) clamp(20px,6vw,64px) clamp(80px,12vh,150px);
+            text-align:center;
+        }
+        .sp-hero::before {
+            content:''; position:absolute; inset:0; z-index:-2;
+            background:
+                radial-gradient(58% 40% at 50% 2%, rgba(242,216,49,0.20), rgba(242,216,49,0.05) 44%, transparent 72%),
+                radial-gradient(120% 90% at 50% -8%, #123056, #0a1b3e 46%, #050c26 74%, #02041F);
+        }
+        .sp-hero::after {
+            content:''; position:absolute; left:0; right:0; bottom:0; height:36%; z-index:-1;
+            background:linear-gradient(180deg, transparent, rgba(1,3,15,0.5) 55%, #02041F);
+        }
+        .sp-eyebrow {
+            font-size:clamp(11px,0.9vw,13px); font-weight:700; letter-spacing:0.24em;
+            text-transform:uppercase; color:var(--sun); margin-bottom:clamp(18px,2.4vw,30px);
+        }
+        .sp-title {
+            font-family:var(--serif); font-weight:500;
+            font-size:clamp(2.6rem,6vw,5rem); line-height:1.02; letter-spacing:-0.02em;
+            margin:0 auto clamp(22px,3vw,34px); max-width:14em;
+        }
+        .sp-hero-lede {
+            font-family:var(--serif); font-weight:400;
+            font-size:clamp(1.15rem,1.6vw,1.6rem); line-height:1.5;
+            color:rgba(255,255,255,0.78); max-width:30em; margin:0 auto;
+        }
+        .sp-hero-kicker {
+            font-family:var(--serif); font-style:italic;
+            font-size:clamp(1rem,1.2vw,1.25rem); color:rgba(255,255,255,0.5);
+            margin-top:clamp(22px,2.6vw,32px);
+        }
+
+        /* ── Section scaffold ── */
+        .sp-section { padding:clamp(64px,10vw,132px) clamp(20px,6vw,64px); }
+        .sp-inner { max-width:1120px; margin:0 auto; }
+        .sp-section-eyebrow {
+            font-size:clamp(11px,0.9vw,13px); font-weight:700; letter-spacing:0.24em;
+            text-transform:uppercase; color:var(--sun); margin-bottom:clamp(16px,2vw,24px);
+        }
+        .sp-section-h {
+            font-family:var(--serif); font-weight:500;
+            font-size:clamp(2rem,4vw,3.4rem); line-height:1.08; letter-spacing:-0.015em;
+            color:#fff; margin:0; max-width:16em;
+        }
+        .sp-section-lede {
+            font-family:var(--serif); font-weight:400;
+            font-size:clamp(1.1rem,1.5vw,1.5rem); line-height:1.5;
+            color:rgba(255,255,255,0.75); margin:clamp(18px,2.4vw,28px) 0 0; max-width:32em;
+        }
+
+        /* THE ROOM — three supporting cards. */
+        .sp-room { background:#050b26; }
+        .sp-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,26px); margin-top:clamp(38px,5vw,60px); }
+        .sp-card {
+            background:linear-gradient(158deg, rgba(12,37,96,0.55), rgba(8,26,69,0.55));
+            border:1px solid rgba(255,255,255,0.12); border-radius:16px;
+            padding:clamp(26px,2.6vw,38px);
+        }
+        .sp-card-k {
+            font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+            color:var(--sun); margin-bottom:14px;
+        }
+        .sp-card-body {
+            font-family:var(--serif); font-size:clamp(1rem,1.1vw,1.2rem); line-height:1.55;
+            color:rgba(255,255,255,0.82);
+        }
+        @media (max-width:820px){ .sp-cards { grid-template-columns:1fr; } }
+
+        /* THE ORBIT — network statement + quiet list. */
+        .sp-orbit { background:#02041F; }
+        .sp-orbit-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(28px,5vw,72px); align-items:start; }
+        @media (max-width:880px){ .sp-orbit-grid { grid-template-columns:1fr; } }
+        .sp-orbit-list { list-style:none; margin:clamp(8px,1vw,14px) 0 0; padding:0; }
+        .sp-orbit-list li {
+            font-family:var(--serif); font-size:clamp(1.05rem,1.2vw,1.3rem); line-height:1.5;
+            color:rgba(255,255,255,0.82); padding:clamp(14px,1.6vw,20px) 0;
+            border-bottom:1px solid rgba(255,255,255,0.12); display:flex; gap:14px; align-items:flex-start;
+        }
+        .sp-orbit-list li:last-child { border-bottom:none; }
+        .sp-orbit-list li::before {
+            content:''; flex:0 0 auto; margin-top:0.62em; width:6px; height:6px; border-radius:50%;
+            background:var(--sun);
+        }
+
+        /* THE BREAKOUT 100 — generous whitespace, one line. */
+        .sp-breakout {
+            background:radial-gradient(120% 100% at 50% 0%, #0a1a44 0%, #050d2c 50%, #02041F 100%);
+            text-align:center; padding:clamp(120px,20vh,240px) clamp(20px,6vw,64px);
+        }
+        .sp-breakout .sp-section-eyebrow { margin-bottom:clamp(28px,4vw,44px); }
+        .sp-breakout-line {
+            font-family:var(--serif); font-weight:500;
+            font-size:clamp(2.2rem,5vw,4.4rem); line-height:1.05; letter-spacing:-0.02em;
+            color:#fff; margin:0 auto; max-width:14em;
+        }
+        .sp-breakout-note {
+            font-size:clamp(11px,0.9vw,13px); font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+            color:rgba(255,255,255,0.42); margin-top:clamp(40px,6vw,72px);
+        }
+
+        /* Footer */
+        .sp-footer {
+            background:#02041F; border-top:1px solid rgba(255,255,255,0.10);
+            padding:clamp(44px,6vw,72px) clamp(20px,6vw,64px);
+            display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center; justify-content:center;
+        }
+        .sp-footer a {
+            font-family:var(--sans); font-size:13px; letter-spacing:0.04em; color:rgba(255,255,255,0.6);
+            text-decoration:none; transition:color 0.2s ease;
+        }
+        .sp-footer a:hover { color:var(--sun); }
+        .sp-footer .primary {
+            background:var(--sun); color:#0a1740; font-weight:700; text-transform:uppercase;
+            letter-spacing:0.14em; font-size:11px; padding:12px 22px; border-radius:999px;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <a class="back-btn" href="index.html">&larr; Back to site</a>
+    </header>
+
+    <!-- Hero -->
+    <section class="sp-hero">
+        <div class="sp-eyebrow">The Sunshine Lake Speakeasy</div>
+        <h1 class="sp-title">Where founders speak easy.</h1>
+        <p class="sp-hero-lede">From San Francisco to Athens, we bring an exclusive group together to forge the future.</p>
+        <p class="sp-hero-kicker">What&rsquo;s said here stays here.</p>
+    </section>
+
+    <!-- THE ROOM -->
+    <section class="sp-section sp-room">
+        <div class="sp-inner">
+            <div class="sp-section-eyebrow">The Room</div>
+            <h2 class="sp-section-h">Light and bright: salons and working sessions. Small on purpose.</h2>
+            <div class="sp-cards">
+                <div class="sp-card">
+                    <div class="sp-card-k">In the community</div>
+                    <p class="sp-card-body">Our founders live in the middle of where technology compounds fastest. Embedded, not enclosed.</p>
+                </div>
+                <div class="sp-card">
+                    <div class="sp-card-k">A speakeasy, properly</div>
+                    <p class="sp-card-body">Offsites, unicorn-founder talks, LP salons. A room where the obsessed can be direct, be vulnerable, and solve real problems together.</p>
+                </div>
+                <div class="sp-card">
+                    <div class="sp-card-k">The landing</div>
+                    <p class="sp-card-body">Arriving founders get a soft landing: a desk, visa support, payroll from day one, and the first fifty introductions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ORBIT (was Strategic LPs) -->
+    <section class="sp-section sp-orbit">
+        <div class="sp-inner sp-orbit-grid">
+            <div>
+                <div class="sp-section-eyebrow">The Orbit</div>
+                <h2 class="sp-section-h">The room isn&rsquo;t only founders.</h2>
+                <p class="sp-section-lede">Around every company sits an orbit that goes to work on it: the operators who have built at scale, the unicorn founders who have been where our founders are headed, and the strategic partners who send us the next ones.</p>
+            </div>
+            <ul class="sp-orbit-list">
+                <li>Founders we&rsquo;ve backed, going again.</li>
+                <li>Operators who have scaled the giants.</li>
+                <li>Strategic LPs and partners, embedded in the work.</li>
+                <li>The people who route the best outsiders to us first.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- THE BREAKOUT 100 -->
+    <section class="sp-breakout">
+        <div class="sp-section-eyebrow">The Breakout 100</div>
+        <p class="sp-breakout-line">Most never know until we call.</p>
+        <div class="sp-breakout-note">A standing shortlist of the founders we would back next.</div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="sp-footer">
+        <a class="primary" href="mailto:hello@sunshinelake.vc?subject=The%20Speakeasy">Get in touch &rarr;</a>
+        <a href="index.html">Back to the homepage</a>
+        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
+    </footer>
+</body>
+</html>
