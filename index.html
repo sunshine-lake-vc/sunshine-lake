@@ -57,7 +57,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="polish.css?v=77">
+    <link rel="stylesheet" href="polish.css?v=78">
     <style>
         @font-face {
             font-family: 'DomaineDisp';
@@ -215,10 +215,11 @@
                aligns with the leftmost pixel of the wordmark logo
                (which sits at the same --hero-edge-x with no bearing). */
             margin-left: -0.04em;
-            /* One soft navy shadow across EVERY word of the headline
-               (brand line + tagline) so the whole lockup reads uniformly,
-               with no heavier treatment on "Sunshine Lake". */
-            text-shadow: 0 2px 12px rgba(11, 18, 117, 0.4);
+            /* One tight, low-intensity navy shadow shared by EVERY word.
+               A small blur hugs each glyph so it reads the same on the
+               bold brand line and the lighter tagline (a wide blur got
+               swallowed by the heavier "Sunshine Lake" strokes). */
+            text-shadow: 0 1px 4px rgba(11, 18, 117, 0.4);
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
