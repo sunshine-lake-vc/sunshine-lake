@@ -248,6 +248,51 @@
             paint-order: stroke fill;
             text-shadow: 0 1px 2px rgba(2, 4, 31, 0.6), 0 2px 12px rgba(11, 18, 117, 0.55);
         }
+        /* Wordmark shimmer — a soft warm gleam sweeps across "Sunshine
+           Lake" on a slow ~5.5s loop, starting after the fade-up entrance
+           settles. The base stays solid white; a ::after overlay carries
+           ONLY the gleam (a cream band on an otherwise transparent
+           gradient), so when the band sweeps off there's no gap — the
+           white base shows through cleanly. Guarded by @supports. */
+        @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+            .title .title-brand { position: relative; }
+            .title .title-brand::after {
+                content: attr(data-text);
+                position: absolute;
+                left: 0;
+                top: 0;
+                pointer-events: none;
+                background-image: linear-gradient(105deg, transparent 40%, rgba(255, 233, 143, 0.55) 47%, rgba(255, 241, 176, 0.98) 50%, rgba(255, 233, 143, 0.55) 53%, transparent 60%);
+                background-size: 220% 100%;
+                background-repeat: no-repeat;
+                background-position: 120% 0;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+                -webkit-text-stroke: 0;
+                text-shadow: none;
+                animation: heroShimmer 5.5s ease-in-out 1.9s infinite;
+            }
+        }
+        @keyframes heroShimmer {
+            0%   { background-position: 120% 0; }
+            55%  { background-position: -30% 0; }
+            100% { background-position: -30% 0; }
+        }
+        /* Hero wordmark fade-up entrance — icon mark, then the headline
+           rise + fade in on load in a short stagger. Applied to the inner
+           elements (not .main-content, whose transform is scroll-driven). */
+        @keyframes heroRise {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .logo-img { animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+        .main-content .title { animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both; }
+        @media (prefers-reduced-motion: reduce) {
+            .logo-img, .main-content .title { animation: none; opacity: 1; transform: none; }
+            .title .title-brand::after { animation: none; content: none; }
+        }
 
         /* "Pre-Seed & Seed Fund" — small-caps editorial eyebrow that
            sits ABOVE the headline inside .main-content. Pulses softly
@@ -2730,7 +2775,7 @@
                      scroll-down chevron at the bottom. -->
                 <div class="main-content">
                     <span class="hero-tagline" aria-label="Pre-Seed and Seed Fund">Pre-Seed &amp; Seed Fund</span>
-                    <h1 class="title"><span class="title-brand">Sunshine Lake</span><br>founders forge the future.</h1>
+                    <h1 class="title"><span class="title-brand" data-text="Sunshine Lake">Sunshine Lake</span><br>founders forge the future.</h1>
                 </div>
 
                 <!-- Bottom-center scroll-hint cluster — "Pre-Seed & Seed
