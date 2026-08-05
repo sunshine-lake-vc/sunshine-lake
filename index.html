@@ -565,6 +565,56 @@
             letter-spacing: -0.015em;
             margin: 0 0 clamp(16px, 1.5vw, 26px) 0;
         }
+        /* ── Two-pillar band (Extreme origins · The psychology to see) ──
+           Its own beat between the lede and the payoff line: framed with
+           hairlines, two columns each with a light line-art motif. */
+        .thesis-pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(24px, 4vw, 64px);
+            max-width: 720px;
+            margin: clamp(24px, 3vw, 40px) 0;
+            padding: clamp(26px, 3vw, 40px) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+        }
+        .pillar { display: flex; flex-direction: column; gap: clamp(12px, 1.4vw, 18px); }
+        .pillar-icon { width: clamp(46px, 4.4vw, 64px); height: auto; display: block; }
+        .pillar-text {
+            font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
+            font-size: clamp(1.15rem, 1.5vw, 1.7rem);
+            line-height: 1.22;
+            color: #fff;
+            font-weight: 400;
+            margin: 0;
+            max-width: 15em;
+        }
+        @media (max-width: 600px) {
+            .thesis-pillars { grid-template-columns: 1fr; gap: clamp(22px, 6vw, 30px); }
+        }
+        /* Icon 1 — the spark of extreme origins: rays breathe, core twinkles. */
+        .spark-rays { transform-origin: 32px 32px; animation: sparkBreath 4s ease-in-out infinite; }
+        .spark-core { transform-origin: 32px 32px; animation: sparkTwinkle 4s ease-in-out infinite; }
+        @keyframes sparkBreath { 0%,100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.09); opacity: 1; } }
+        @keyframes sparkTwinkle { 0%,100% { transform: scale(0.9); opacity: 0.8; } 50% { transform: scale(1.12); opacity: 1; } }
+        /* Icon 2 — seeing the shift: the wave draws in, the marked point pulses. */
+        .see-wave { stroke-dasharray: 90; stroke-dashoffset: 90; animation: seeDraw 3.4s var(--ease, cubic-bezier(0.22,1,0.36,1)) infinite; }
+        .see-dot { transform-origin: 34px 20px; animation: seePulse 3.4s ease-in-out infinite; }
+        @keyframes seeDraw {
+            0% { stroke-dashoffset: 90; }
+            45% { stroke-dashoffset: 0; }
+            80%,100% { stroke-dashoffset: 0; }
+        }
+        @keyframes seePulse {
+            0%,40% { transform: scale(0.7); opacity: 0.3; }
+            60% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .spark-rays, .spark-core, .see-wave, .see-dot { animation: none; }
+            .see-wave { stroke-dashoffset: 0; }
+            .spark-core { opacity: 1; } .see-dot { opacity: 1; }
+        }
         /* Closing rhetorical beat on its own line. Color starts white and
            shifts to Sunshine Yellow as the reader scrolls past it
            (driven by JS — see setupThesisCodaShift). The CSS variable
@@ -2800,8 +2850,40 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Critical global systems fail our founders. So they cross the world without a plan B, and out-iterate everyone to fix these systems.</p>
-                <p>That&rsquo;s how trillion-dollar businesses start, and how we back blockbusters every decade.</p>
+                <p class="thesis-lede">Critical global systems are in turmoil. We back the brave founders who cross the world to fix them.</p>
+
+                <!-- Two-pillar band — the two things our founders draw on,
+                     each with a light line-art motif. Framed with hairlines
+                     so it reads as its own beat between the lede and the
+                     payoff line. -->
+                <div class="thesis-pillars" aria-label="What our founders draw on">
+                    <div class="pillar">
+                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <g class="spark-rays" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round">
+                                <line x1="32" y1="4" x2="32" y2="15"/>
+                                <line x1="32" y1="49" x2="32" y2="60"/>
+                                <line x1="4" y1="32" x2="15" y2="32"/>
+                                <line x1="49" y1="32" x2="60" y2="32"/>
+                                <line x1="12.7" y1="12.7" x2="20.5" y2="20.5"/>
+                                <line x1="43.5" y1="43.5" x2="51.3" y2="51.3"/>
+                                <line x1="51.3" y1="12.7" x2="43.5" y2="20.5"/>
+                                <line x1="20.5" y1="43.5" x2="12.7" y2="51.3"/>
+                            </g>
+                            <circle class="spark-core" cx="32" cy="32" r="7" fill="#F2D831"/>
+                        </svg>
+                        <p class="pillar-text">Extreme origins.</p>
+                    </div>
+                    <div class="pillar">
+                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <circle cx="32" cy="32" r="23" stroke="rgba(255,255,255,0.30)" stroke-width="1.4"/>
+                            <path class="see-wave" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                            <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
+                        </svg>
+                        <p class="pillar-text">The psychology to see shifts that others miss.</p>
+                    </div>
+                </div>
+
+                <p>That&rsquo;s how trillion-dollar businesses start and how we back blockbusters every decade.</p>
             </div>
 
             <!-- ════════ Market-cycle waves ════════
