@@ -2625,6 +2625,9 @@
             /* Bump thesis type on mobile so it doesn't sit at the floor */
             .team-thesis .thesis-lede { font-size: clamp(1.75rem, 5.8vw, 2.2rem); }
             .team-thesis p { font-size: clamp(1.35rem, 4.2vw, 1.6rem); }
+            /* Full-width measure on mobile so the lede uses the whole
+               column and drops a line (desktop keeps its 86% measure). */
+            .team-thesis { max-width: 100%; }
             /* team-cards stays horizontal scroll on mobile too — flex: row
                + scroll-snap inherited from base rule. Just tighten card
                width so one card with a peek of the next fits a phone. */
@@ -2850,7 +2853,7 @@
         <div class="team-inner">
             <!-- Thesis, full-width band across the top -->
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Critical global systems are in turmoil. We back the brave founders who cross the world to fix them.</p>
+                <p class="thesis-lede">Critical global systems are in turmoil. We back brave founders who cross the world to fix them.</p>
 
                 <!-- Two-pillar band — the two things our founders draw on,
                      each with a light line-art motif. Framed with hairlines
@@ -3595,9 +3598,8 @@
             #snapshotsWaterWarp feTurbulence animate { display: none; }
         }
     </style>
-    <section class="snapshots-wrap" aria-label="The movement, in their words">
+    <section class="snapshots-wrap" aria-label="In their words">
       <div class="snapshots-inner">
-        <div class="snapshots-eyebrow">The movement, in their words.</div>
         <p class="snapshots-sub">Founders we&rsquo;ve backed. Giants we&rsquo;ve built beside. The people who send us the next ones. You&rsquo;ll find them at the Speakeasy.</p>
             <div class="snapshots-section" aria-label="Sunshine Lake snapshots">
                 <!-- SVG water-warp filter — animated turbulence drives
