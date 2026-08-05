@@ -3183,8 +3183,17 @@
          category + its scale in small yellow text). Replaces the single
          interpunct line that overflowed on mobile; wraps cleanly on any
          width. */
-      .tb-systems-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(12px,1.6vw,24px);margin:8px 0 30px;max-width:860px}
-      .tb-sys{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px}
+      /* Single-line marquee: items drift slowly and the edges fade to
+         transparent, on every viewport. The track is doubled in JS for a
+         seamless loop (translateX -50%); pauses on hover. */
+      .tb-systems-marquee{position:relative;overflow:hidden;margin:8px 0 30px;
+        -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+        mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+      .tb-systems-track{display:flex;width:max-content}
+      .tb-sys{flex:0 0 auto;width:clamp(114px,26vw,150px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px}
+      .tb-systems-marquee.is-ready .tb-systems-track{animation:sysMarquee 38s linear infinite}
+      .tb-systems-marquee.is-ready:hover .tb-systems-track{animation-play-state:paused}
+      @keyframes sysMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
       .tb-sys-icon{width:clamp(32px,3.2vw,42px);height:auto;color:#fff;display:block}
       .tb-sys-dot{animation:sysDot 3.8s ease-in-out infinite}
       @keyframes sysDot{0%,100%{opacity:.5}50%{opacity:1}}
@@ -3195,8 +3204,7 @@
       .tb-sys:nth-child(6) .tb-sys-dot{animation-delay:2.5s}
       .tb-sys-name{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(1rem,1.2vw,1.3rem);color:#fff;line-height:1.05}
       .tb-sys-size{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:clamp(.72rem,.82vw,.88rem);font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:1px;white-space:nowrap}
-      @media(max-width:860px){.tb-systems-grid{grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,28px);max-width:440px}}
-      @media(prefers-reduced-motion:reduce){.tb-sys-dot{animation:none;opacity:1}}
+      @media(prefers-reduced-motion:reduce){.tb-systems-marquee.is-ready .tb-systems-track{animation:none}.tb-sys-dot{animation:none;opacity:1}}
       .tb-heavy{font-weight:600;color:#fff}
       .tb-close{font-family:'DomaineDisp','Times New Roman',serif;font-style:italic;font-size:clamp(1.15rem,1.6vw,1.5rem);color:#eaf1ff;margin:26px 0 0;max-width:720px}
       .tb-spiral{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:min(50%,540px);opacity:.55;pointer-events:none;z-index:1}
@@ -3214,7 +3222,8 @@
         <!-- Band B — critical global systems -->
         <div class="tb-band">
           <div class="tb-eyebrow">Critical global systems</div>
-          <div class="tb-systems-grid" aria-label="Critical global systems and their scale">
+          <div class="tb-systems-marquee" aria-label="Critical global systems and their scale">
+          <div class="tb-systems-track">
             <div class="tb-sys">
               <svg class="tb-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M9 18 H35"/><path d="M29 12 L35 18 L29 24"/>
@@ -3259,6 +3268,18 @@
               <span class="tb-sys-name">Risk</span><span class="tb-sys-size">~$850T</span>
             </div>
           </div>
+          </div>
+          <script>
+            (function(){
+              var m=document.querySelector('.tb-systems-marquee'); if(!m) return;
+              var track=m.querySelector('.tb-systems-track'); if(!track) return;
+              // Duplicate the set once so the -50% loop is seamless.
+              Array.prototype.slice.call(track.children).forEach(function(n){
+                var c=n.cloneNode(true); c.setAttribute('aria-hidden','true'); track.appendChild(c);
+              });
+              m.classList.add('is-ready');
+            })();
+          </script>
           <p class="tb-body">The systems the world can&rsquo;t run a day without, each straining under a shift none was built for. Software reached barely <b class="tb-heavy">0.5%</b> of the <b class="tb-heavy">$115T</b> world economy; AI is racing into the rest. Rebalancing a <b class="tb-heavy">$115T</b> world is the largest opportunity on earth.</p>
           <p class="tb-close">As the world turns, our aperture evolves. We see the next wave through Sunshine Lake founders.</p>
         </div>
