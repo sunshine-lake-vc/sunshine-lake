@@ -3215,7 +3215,7 @@
       .tb-spiral-cap{font-family:'DomaineDisp','Times New Roman',serif;font-size:clamp(1.05rem,1.3vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.78);max-width:620px;margin:10px 0 0}
       .tb-spiral-fig{margin:clamp(16px,2.4vw,28px) 0 0;display:flex;justify-content:flex-start}
       .tb-spiral-fig svg{width:clamp(170px,30vw,240px);height:auto;display:block;overflow:visible}
-      .tb-spiral-path{stroke:rgba(255,255,255,0.72);stroke-width:4.5;fill:none;stroke-linecap:round}
+      .tb-spiral-path{stroke:url(#tbSpiralFade);stroke-width:4.5;fill:none;stroke-linecap:round}
       .tb-spiral-origin{fill:#F2D831}
     </style>
     <section class="thesis-bands" aria-label="Why now">
@@ -3299,6 +3299,14 @@
           <p class="tb-spiral-cap">Growth that keeps its shape and only changes scale. Galaxies, shells, ripples across a lake.</p>
           <div class="tb-spiral-fig" aria-hidden="true">
             <svg viewBox="0 0 600 600">
+              <defs>
+                <radialGradient id="tbSpiralFade" cx="305" cy="300" r="286" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>
+                  <stop offset="0.52" stop-color="#ffffff" stop-opacity="0.72"/>
+                  <stop offset="0.82" stop-color="#ffffff" stop-opacity="0.32"/>
+                  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
               <path class="tb-spiral-path" d="M305.0,300.0 L305.2,300.6 L305.2,301.3 L305.2,302.0 L305.2,302.7 L305.0,303.4 L304.7,304.1 L304.3,304.9 L303.9,305.5 L303.3,306.2 L302.6,306.8 L301.9,307.3 L301.0,307.8 L300.1,308.2 L299.1,308.4 L298.0,308.6 L296.9,308.6 L295.7,308.5 L294.5,308.2 L293.3,307.8 L292.1,307.2 L291.0,306.4 L289.9,305.5 L288.9,304.4 L288.0,303.2 L287.3,301.8 L286.6,300.3 L286.2,298.6 L285.9,296.9 L285.9,295.0 L286.1,293.1 L286.5,291.2 L287.2,289.2 L288.1,287.3 L289.3,285.4 L290.8,283.6 L292.5,282.0 L294.6,280.5 L296.8,279.2 L299.3,278.2 L302.0,277.4 L304.9,277.0 L307.9,276.8 L311.0,277.1 L314.2,277.8 L317.4,278.8 L320.6,280.3 L323.6,282.3 L326.6,284.7 L329.3,287.5 L331.8,290.8 L333.9,294.4 L335.7,298.5 L337.0,302.8 L337.8,307.5 L338.0,312.5 L337.6,317.6 L336.6,322.8 L334.9,328.0 L332.5,333.3 L329.4,338.3 L325.5,343.2 L321.0,347.7 L315.7,351.8 L309.7,355.3 L303.1,358.3 L296.0,360.5 L288.4,361.8 L280.3,362.3 L272.0,361.8 L263.4,360.2 L254.8,357.6 L246.2,353.7 L237.9,348.7 L229.9,342.5 L222.4,335.1 L215.6,326.5 L209.7,316.9 L204.8,306.2 L201.1,294.5 L198.7,282.1 L197.8,268.9 L198.5,255.2 L200.9,241.2 L205.1,227.1 L211.2,213.0 L219.3,199.3 L229.3,186.1 L241.3,173.8 L255.1,162.6 L270.8,152.7 L288.2,144.5 L307.2,138.3 L327.5,134.1 L349.0,132.4 L371.4,133.3 L394.3,137.0 L417.5,143.6 L440.6,153.4 L463.2,166.3 L484.9,182.4 L505.2,201.8 L523.8,224.2 L540.2,249.7 L553.9,278.0 L564.5,308.9 L571.6,342.1 L574.8,377.1"/>
               <circle class="tb-spiral-origin" cx="305" cy="300" r="8"/>
             </svg>
