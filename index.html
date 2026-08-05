@@ -3217,6 +3217,16 @@
       .tb-spiral-fig svg{width:clamp(170px,30vw,240px);height:auto;display:block;overflow:visible}
       .tb-spiral-path{stroke:url(#tbSpiralFade);stroke-width:4.5;fill:none;stroke-linecap:round}
       .tb-spiral-origin{fill:#F2D831}
+      /* Mobile: let the spiral grow larger and its faded tail run off the
+         bottom, behind the next (opaque blue) section — the band lets it
+         spill (overflow visible) and the negative margin pulls the blue
+         section up over the tail. */
+      @media(max-width:600px){
+        .thesis-bands{overflow:visible}
+        .tb-band:last-child{padding-bottom:0}
+        .tb-spiral-fig{margin-bottom:clamp(-120px,-24vw,-70px)}
+        .tb-spiral-fig svg{width:min(80vw,330px)}
+      }
     </style>
     <section class="thesis-bands" aria-label="Why now">
       <div class="tb-inner">
