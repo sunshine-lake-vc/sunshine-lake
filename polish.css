@@ -1495,3 +1495,24 @@ body.mode-tight .content-sticky p {
     text-shadow: 0 1px 4px rgba(11, 18, 117, 0.4);
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   Portfolio = the one LIGHT block in the blue sequence (Don).
+   White background, navy/cobalt type; yellow accents (eyebrow, proof)
+   go cobalt so they read on white; dividers flip to a navy hairline.
+   ════════════════════════════════════════════════════════════════ */
+.founders-scroll-spacer { background: #FFFFFF !important; }
+.founders-scroll-spacer .founders-left-eyebrow { color: #155EE8 !important; }
+.founders-scroll-spacer .founders-left-title,
+.founders-scroll-spacer .founders-item-company,
+.founders-scroll-spacer .founders-item-name { color: #0B1275 !important; }
+.founders-scroll-spacer .founders-left-intro,
+.founders-scroll-spacer .founders-right-subtitle,
+.founders-scroll-spacer .founders-item-desc { color: rgba(11, 18, 117, 0.74) !important; }
+.founders-scroll-spacer .founders-item-founders,
+.founders-scroll-spacer .founders-item-company-sub,
+.founders-scroll-spacer .founders-item-country,
+.founders-scroll-spacer .founders-item-name .from-label { color: rgba(11, 18, 117, 0.55) !important; }
+.founders-scroll-spacer .proof { color: #155EE8 !important; }
+.founders-scroll-spacer .founders-photo-stack { background: rgba(11, 18, 117, 0.05) !important; }
+.founders-scroll-spacer .founders-detailed .founders-item { border-bottom: 1px solid rgba(11, 18, 117, 0.14) !important; }
