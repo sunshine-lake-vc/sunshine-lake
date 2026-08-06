@@ -3722,6 +3722,29 @@
         .quote-card .qc-n{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:600;font-size:.95rem;color:#fff}
         .quote-card .qc-c{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,216,49,.85)}
         @media(max-width:600px){ .quote-strip{grid-template-columns:1fr;gap:12px;margin-top:clamp(32px,8vw,48px)} }
+        /* ── In their words: white quote carousel over a photo carousel ── */
+        .wall-rail{position:relative;overflow:hidden;
+            -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+        .wall-rail--quotes{--dur:95s}
+        .wall-rail--photos{--dur:65s;margin-top:clamp(16px,2vw,30px)}
+        .wall-track{display:flex;gap:clamp(12px,1.2vw,18px);width:max-content;padding:clamp(8px,1vw,14px) 0}
+        .wall-rail.is-ready .wall-track{animation:wallScroll var(--dur,80s) linear infinite}
+        .wall-rail--photos.is-ready .wall-track{animation-direction:reverse}
+        .wall-rail:hover .wall-track{animation-play-state:paused}
+        @keyframes wallScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        .wall-quote{flex:0 0 auto;width:clamp(270px,29vw,350px);background:#fff;border-radius:16px;
+            padding:clamp(24px,2vw,32px);display:flex;flex-direction:column;box-shadow:0 18px 44px rgba(0,0,0,.30);margin:0}
+        .wall-quote .qc-mark{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:2.6rem;line-height:.4;height:.4em;color:#155EE8}
+        .wall-quote .qc-q{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:clamp(1.05rem,1.1vw,1.25rem);line-height:1.42;color:#0b1275;margin:16px 0 0;flex:1 0 auto}
+        .wall-quote .qc-attr{margin-top:clamp(16px,1.6vw,22px);display:flex;flex-direction:column;gap:3px}
+        .wall-quote .qc-n{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:700;font-size:.95rem;color:#0b1275}
+        .wall-quote .qc-c{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#155EE8}
+        .wall-photo{flex:0 0 auto;width:clamp(150px,16vw,205px);aspect-ratio:1/1;border-radius:12px;overflow:hidden;position:relative;margin:0}
+        .wall-photo img{width:100%;height:100%;object-fit:cover;display:block}
+        .wall-photo figcaption{position:absolute;inset:auto 0 0 0;padding:8px 10px;font-size:10px;color:#fff;line-height:1.2;background:linear-gradient(180deg,transparent,rgba(2,4,31,.88));opacity:0;transition:opacity .3s}
+        .wall-photo:hover figcaption{opacity:1}
+        @media(prefers-reduced-motion:reduce){.wall-rail.is-ready .wall-track{animation:none}.wall-rail{overflow-x:auto}}
     </style>
     <section class="snapshots-wrap" aria-label="In their words">
       <div class="snapshots-inner">
@@ -3739,8 +3762,12 @@
                         <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
                     </filter>
                 </svg>
-                <div class="snapshots-grid" id="snapshotsGrid"></div>
-                <div class="quote-strip" id="quoteStrip"></div>
+                <div class="wall-rail wall-rail--quotes" aria-label="In their words">
+                  <div class="wall-track" id="quoteTrack"></div>
+                </div>
+                <div class="wall-rail wall-rail--photos" aria-label="From the room">
+                  <div class="wall-track" id="photoTrack"></div>
+                </div>
             </div>
       </div>
     </section>
@@ -3794,8 +3821,9 @@
                     // the doc photos. To re-add any individual one with
                     // a real caption, append it here.
                 ];
-                var grid = document.getElementById('snapshotsGrid');
-                if (!grid) return;
+                var quoteTrack = document.getElementById('quoteTrack');
+                var photoTrack = document.getElementById('photoTrack');
+                if (!quoteTrack || !photoTrack) return;
 
                 // ── Every testimonial (folded in from the old carousel)
                 //    renders as a 2×2 "double-wide" card woven through the
@@ -3823,43 +3851,34 @@
                     { q: 'He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition.', n: 'Todd Heine', c: 'Legalpad', t: 'Acquired' }
                 ];
 
-                function photoCell(s) {
-                    return ''
-                        + '<figure class="snapshots-cell">'
-                        + '  <img src="images/snapshots/duo/' + s.src + '" alt="" loading="lazy">'
-                        + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
-                        + '</figure>';
-                }
                 function quoteCard(v) {
                     return ''
-                        + '<figure class="quote-card">'
+                        + '<figure class="wall-quote">'
                         + '  <div class="qc-mark">&ldquo;</div>'
                         + '  <p class="qc-q">' + v.q + '</p>'
                         + '  <figcaption class="qc-attr"><span class="qc-n">' + v.n + '</span><span class="qc-c">' + v.c + '</span></figcaption>'
                         + '</figure>';
                 }
-
-                var strip = document.getElementById('quoteStrip');
-                var isMobile = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
-
-                // Photos — one clean, even grid (no quote tiles woven in).
-                if (isMobile) SNAPSHOTS_DATA = SNAPSHOTS_DATA.slice(0, 12);
-                var ph = '';
-                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) ph += photoCell(SNAPSHOTS_DATA[i]);
-                grid.innerHTML = ph;
-
-                // Quotes — their own strip, one uniform card style. On mobile,
-                // a curated eight so it stays short.
-                var quoteList = QUOTES;
-                if (isMobile) {
-                    var keep = ['Jake Sussman','Aaron Bai','Ankit Jain','Alex Bouaziz','Lawrence Lin Murata','James Ding','Michael Tannenbaum','Thomas Dowling'];
-                    quoteList = keep.map(function (n) { return QUOTES.filter(function (q) { return q.n === n; })[0]; }).filter(Boolean);
+                function photoTile(s) {
+                    return ''
+                        + '<figure class="wall-photo">'
+                        + '  <img src="images/snapshots/duo/' + s.src + '" alt="" loading="lazy">'
+                        + '  <figcaption>' + s.caption + '</figcaption>'
+                        + '</figure>';
                 }
-                if (strip) {
-                    var qs = '';
-                    for (var j = 0; j < quoteList.length; j++) qs += quoteCard(quoteList[j]);
-                    strip.innerHTML = qs;
+                // Fill a carousel track, then clone the set once (aria-hidden)
+                // so the -50% marquee loops seamlessly.
+                function fillRail(track, items, render) {
+                    var html = '';
+                    for (var k = 0; k < items.length; k++) html += render(items[k]);
+                    track.innerHTML = html;
+                    Array.prototype.slice.call(track.children).forEach(function (n) {
+                        var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c);
+                    });
+                    if (track.parentNode) track.parentNode.classList.add('is-ready');
                 }
+                fillRail(quoteTrack, QUOTES, quoteCard);
+                fillRail(photoTrack, SNAPSHOTS_DATA, photoTile);
             })();
             </script>
 
@@ -4067,7 +4086,6 @@
             <div class="footer-photo-card" id="footerPhotoCard"></div>
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
-                    <p class="cta-preline">A critical global system failed you. Fixing it is who you are.</p>
                     <h2>Dive in.</h2>
                     <!-- All four destinations as pill capsules sitting in
                          one wrapping row: Submit your pitch (primary), plus
