@@ -4009,7 +4009,28 @@
             <p class="speak-body">From San Francisco to Athens, we bring an exclusive group together to forge the future.</p>
             <a class="speak-cta" href="speakeasy.html">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
         </div>
+        <div class="speak-reel" aria-label="Inside the Speakeasy">
+          <div class="speak-reel-track">
+            <figure><img src="images/speakeasy/room.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/david-talk.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/ppl.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/group.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/speak.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/talk2.jpg" alt="" loading="lazy"></figure>
+            <figure><img src="images/speakeasy/one-on-one.jpg" alt="" loading="lazy"></figure>
+          </div>
+        </div>
     </section>
+    <script>
+      (function(){
+        var reel=document.querySelector('.speak-reel'); if(!reel) return;
+        var track=reel.querySelector('.speak-reel-track'); if(!track) return;
+        Array.prototype.slice.call(track.children).forEach(function(n){
+          var c=n.cloneNode(true); c.setAttribute('aria-hidden','true'); track.appendChild(c);
+        });
+        reel.classList.add('is-ready');
+      })();
+    </script>
     <style>
         .speakeasy-teaser{
             position:relative;
@@ -4075,6 +4096,23 @@
         .speak-cta:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(242,216,49,0.28)}
         .speak-cta span{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1)}
         .speak-cta:hover span{transform:translateX(4px)}
+        /* A slow, edge-faded strip of event photos — a peek inside the room
+           that leads into the full Speakeasy page. Full-bleed within the
+           section; the track is doubled in JS for a seamless loop. */
+        .speak-reel{position:relative;margin:clamp(48px,6vw,84px) calc(-1*clamp(20px,5vw,64px)) 0;overflow:hidden;
+            -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+        .speak-reel-track{display:flex;gap:14px;width:max-content;padding:0 7px}
+        .speak-reel.is-ready .speak-reel-track{animation:speakReel 64s linear infinite}
+        .speak-reel:hover .speak-reel-track{animation-play-state:paused}
+        @keyframes speakReel{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        .speak-reel figure{flex:0 0 auto;margin:0;line-height:0}
+        .speak-reel img{height:clamp(140px,19vw,210px);width:auto;aspect-ratio:3/2;object-fit:cover;
+            border-radius:12px;display:block;box-shadow:0 14px 34px rgba(0,0,0,.34);filter:saturate(.96) brightness(.9)}
+        @media(prefers-reduced-motion:reduce){
+            .speak-reel.is-ready .speak-reel-track{animation:none}
+            .speak-reel{overflow-x:auto;scrollbar-width:none}
+        }
     </style>
 
     </main>
