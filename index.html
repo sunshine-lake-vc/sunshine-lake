@@ -3180,7 +3180,7 @@
       .tb-inner{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,64px);position:relative;z-index:2}
       .tb-band{padding:clamp(58px,8vw,104px) 0;position:relative}
       .tb-band + .tb-band{border-top:1px solid rgba(255,255,255,.08)}
-      .tb-eyebrow{font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#F2D831;margin-bottom:22px}
+      .tb-eyebrow{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:clamp(12px,1vw,14px);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#F2D831;margin-bottom:clamp(14px,1.4vw,22px)}
       .tb-display{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-.02em;margin:0}
       .tb-body{font-size:clamp(1.05rem,1.32vw,1.3rem);line-height:1.62;color:rgba(255,255,255,.8);max-width:760px;margin:22px 0 0}
       /* Critical-global-systems as a stylized icon grid (line-art per
@@ -3226,10 +3226,10 @@
          spill (overflow visible) and the negative margin pulls the blue
          section up over the tail. */
       @media(max-width:600px){
-        .thesis-bands{overflow:visible}
-        .tb-band:last-child{padding-bottom:0}
-        .tb-spiral-fig{margin-bottom:clamp(-120px,-24vw,-70px)}
-        .tb-spiral-fig svg{width:min(80vw,330px)}
+        .thesis-bands--spiral{overflow:visible}
+        .thesis-bands--spiral .tb-band:last-child{padding-bottom:0}
+        .thesis-bands--spiral .tb-spiral-fig{margin-bottom:clamp(-120px,-24vw,-70px)}
+        .thesis-bands--spiral .tb-spiral-fig svg{width:min(80vw,330px)}
       }
     </style>
     <section class="thesis-bands" aria-label="Why now">
@@ -3852,6 +3852,7 @@
                 // scroll. Trim to a tighter, curated set — fewer photos and
                 // six strong quotes with only one yellow — so it reads
                 // balanced and short. Desktop keeps the full wall.
+                var ALL_QUOTES = QUOTES.slice();   // full pool kept for the lingering-viewer rotation below
                 if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
                     SNAPSHOTS_DATA = SNAPSHOTS_DATA.slice(0, 12);
                     var keepMobile = ['Jake Sussman', 'Alex Bouaziz', 'Lawrence Lin Murata', 'James Ding', 'Michael Tannenbaum', 'Thomas Dowling'];
@@ -3881,6 +3882,48 @@
                         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-flipped'); }
                     });
                 });
+
+                // ── Lingering-viewer rotation ──────────────────────────────
+                // On the trimmed mobile wall we cut the quote set down; rotate
+                // the ones we held back into view for anyone who stays, so
+                // every voice still gets surfaced without a longer scroll.
+                // Only plain (non-hero, non-photo) tiles rotate, and a
+                // replacement is always the same size class, so the mosaic
+                // never reflows. On desktop the full set already shows, so
+                // `reserve` is empty and this is a no-op.
+                (function () {
+                    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                    var byName = {};
+                    ALL_QUOTES.forEach(function (q) { byName[q.n] = q; });
+                    var shown = {};
+                    QUOTES.forEach(function (q) { shown[q.n] = 1; });
+                    // Heroes (sun-yellow, killer quotes) and photo flip-cards
+                    // stay out of the pool — only plain navy tiles rotate.
+                    var reserve = ALL_QUOTES.filter(function (q) { return !shown[q.n] && !q.photo && !q.hero; });
+                    var cards = [].slice.call(grid.querySelectorAll('.snapshots-cell--quote-static'))
+                        .filter(function (c) { return !c.classList.contains('qcolor-3'); });
+                    if (!reserve.length || !cards.length) return;
+                    function sizeCls(v) { return v.q.length > 132 ? 'snapshots-cell--q22' : 'snapshots-cell--q21'; }
+                    cards.forEach(function (c) { c.style.transition = 'opacity .55s ease'; });
+                    var turn = 0;
+                    setInterval(function () {
+                        var card = cards[turn % cards.length]; turn++;
+                        var want = card.classList.contains('snapshots-cell--q22') ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
+                        var idx = -1;
+                        for (var j = 0; j < reserve.length; j++) { if (sizeCls(reserve[j]) === want) { idx = j; break; } }
+                        if (idx === -1) return;
+                        var next = reserve.splice(idx, 1)[0];
+                        var oldEl = card.querySelector('.attr .n');
+                        var oldQ = oldEl ? byName[oldEl.textContent] : null;
+                        card.style.opacity = '0';
+                        setTimeout(function () {
+                            card.innerHTML = frontFace(next);
+                            card.setAttribute('aria-label', 'Testimonial from ' + next.n + ', ' + next.c);
+                            card.style.opacity = '1';
+                        }, 560);
+                        if (oldQ && !oldQ.photo) reserve.push(oldQ);
+                    }, 6000);
+                })();
             })();
             </script>
 
@@ -3889,7 +3932,7 @@
          and a low silhouette band. Swap `--speak-bg` for the bar photo
          (backs of heads, chandelier) at ~60% dark overlay when it lands. -->
     <!-- How we find the next ones + spiral — leads into the Speakeasy -->
-    <section class="thesis-bands" aria-label="How we find the next ones">
+    <section class="thesis-bands thesis-bands--spiral" aria-label="How we find the next ones">
       <div class="tb-inner">
                 <!-- Band C — sourcing spiral -->
         <div class="tb-band">
