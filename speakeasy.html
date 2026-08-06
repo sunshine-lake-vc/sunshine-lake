@@ -1,237 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>The Speakeasy — Sunshine Lake Capital</title>
-    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <style>
-        @font-face {
-            font-family: 'DomaineDisp';
-            src: url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype');
-            font-weight: 400; font-style: normal; font-display: swap;
-        }
-        :root{
-            --abyss:#02041F; --navy:#0B1275; --mid-lake:#0A3DAE; --cobalt:#155EE8;
-            --sun:#F2D831; --serif:'DomaineDisp','Times New Roman',Times,serif;
-            --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
-            --ease:cubic-bezier(0.22,1,0.36,1);
-        }
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
-        body {
-            background:#02041F; color:#fff; font-family:var(--sans);
-            -webkit-font-smoothing:antialiased; overflow-x:clip; min-height:100vh;
-        }
-        a { color:inherit; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Speakeasy — Sunshine Lake Capital</title>
+<meta name="description" content="The Sunshine Lake Speakeasy — where founders forged by extreme origins are immersed, and where Speakeasy Sessions open the door.">
+<link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'DomaineDisp';src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'),url('fonts/DomaineDisp-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+:root{--abyss:#02041F;--navy:#0B1275;--cobalt:#155EE8;--sun:#F2D831;--serif:'DomaineDisp','Times New Roman',Times,serif;--sans:'Segoe UI',system-ui,-apple-system,sans-serif;--ease:cubic-bezier(0.22,1,0.36,1);--edge:clamp(24px,8vw,180px)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:#04050e;color:#fff;font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block}
+a{color:var(--sun);text-decoration:none}
+.se-bleed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.se-back{position:fixed;top:clamp(20px,3vw,40px);left:clamp(20px,3vw,40px);z-index:100;display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.se-back:hover{color:#fff}
 
-        /* Fixed back-to-site bar (matches Sessions). */
-        .topbar {
-            position:fixed; top:0; left:0; right:0; z-index:100;
-            display:flex; align-items:center;
-            padding:clamp(14px,1.8vw,22px) clamp(20px,6vw,64px);
-            background:rgba(3,7,26,0.72);
-            backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-            border-bottom:1px solid rgba(255,255,255,0.10);
-        }
-        .back-btn {
-            display:inline-flex; align-items:center; gap:8px; color:#fff; opacity:0.75;
-            text-decoration:none; font-size:13px; letter-spacing:0.05em; text-transform:uppercase;
-            transition:opacity 0.2s ease;
-        }
-        .back-btn:hover { opacity:1; }
+/* ── neon ── */
+.se-neon{position:relative;display:inline-block;line-height:0}
+.se-neon::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:170%;height:460%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(47,107,255,.55),rgba(47,107,255,.16) 46%,transparent 72%);filter:blur(16px);animation:se-haze 5.5s ease-in-out infinite}
+.se-neon svg{position:relative;width:100%;height:auto;filter:drop-shadow(0 0 3px #eaf3ff) drop-shadow(0 0 9px #2f6bff) drop-shadow(0 0 22px #2f6bff) drop-shadow(0 0 55px #2f6bff);animation:se-buzz 6s steps(1,end) infinite}
+@keyframes se-buzz{0%,3.4%,3.8%,7%,42%,42.4%,100%{opacity:1}3.6%,42.2%{opacity:.55}7.2%{opacity:.86}}
+@keyframes se-haze{0%,100%{opacity:.85}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.se-neon svg,.se-neon::before{animation:none}}
 
-        /* ── Hero ── */
-        .sp-hero {
-            position:relative; overflow:hidden; isolation:isolate;
-            padding:clamp(140px,22vh,260px) clamp(20px,6vw,64px) clamp(80px,12vh,150px);
-            text-align:center;
-        }
-        .sp-hero::before {
-            content:''; position:absolute; inset:0; z-index:-2;
-            background:
-                radial-gradient(58% 40% at 50% 2%, rgba(242,216,49,0.20), rgba(242,216,49,0.05) 44%, transparent 72%),
-                radial-gradient(120% 90% at 50% -8%, #123056, #0a1b3e 46%, #050c26 74%, #02041F);
-        }
-        .sp-hero::after {
-            content:''; position:absolute; left:0; right:0; bottom:0; height:36%; z-index:-1;
-            background:linear-gradient(180deg, transparent, rgba(1,3,15,0.5) 55%, #02041F);
-        }
-        .sp-eyebrow {
-            font-size:clamp(11px,0.9vw,13px); font-weight:700; letter-spacing:0.24em;
-            text-transform:uppercase; color:var(--sun); margin-bottom:clamp(18px,2.4vw,30px);
-        }
-        .sp-title {
-            font-family:var(--serif); font-weight:500;
-            font-size:clamp(2.6rem,6vw,5rem); line-height:1.02; letter-spacing:-0.02em;
-            margin:0 auto clamp(22px,3vw,34px); max-width:14em;
-        }
-        .sp-hero-lede {
-            font-family:var(--serif); font-weight:400;
-            font-size:clamp(1.15rem,1.6vw,1.6rem); line-height:1.5;
-            color:rgba(255,255,255,0.78); max-width:30em; margin:0 auto;
-        }
-        .sp-hero-kicker {
-            font-family:var(--serif); font-style:italic;
-            font-size:clamp(1rem,1.2vw,1.25rem); color:rgba(255,255,255,0.5);
-            margin-top:clamp(22px,2.6vw,32px);
-        }
+/* ── hero ── */
+.se-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:120px var(--edge) 90px;text-align:center}
+.se-hero-scrim{position:absolute;inset:0;background:radial-gradient(58% 46% at 50% 42%,rgba(10,20,60,.66),rgba(4,5,14,.22) 62%,transparent 78%),linear-gradient(180deg,rgba(4,5,14,.55),transparent 30%,rgba(4,5,14,.55) 78%,#04050e)}
+.se-hero-inner{position:relative;display:flex;flex-direction:column;align-items:center}
+.se-hero p.se-kicker{font-size:11px;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-bottom:clamp(32px,4.5vw,54px);white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.se-hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.2rem,7vw,6.5rem);line-height:1.02;letter-spacing:-.02em;margin-top:clamp(40px,6vw,72px);text-shadow:0 2px 40px rgba(0,0,0,.6)}
+.se-hero p{font-family:var(--serif);font-size:clamp(1.15rem,1.6vw,1.6rem);line-height:1.5;color:rgba(255,255,255,.85);max-width:640px;margin-top:26px;text-shadow:0 1px 20px rgba(0,0,0,.7)}
 
-        /* ── Section scaffold ── */
-        .sp-section { padding:clamp(64px,10vw,132px) clamp(20px,6vw,64px); }
-        .sp-inner { max-width:1120px; margin:0 auto; }
-        .sp-section-eyebrow {
-            font-size:clamp(11px,0.9vw,13px); font-weight:700; letter-spacing:0.24em;
-            text-transform:uppercase; color:var(--sun); margin-bottom:clamp(16px,2vw,24px);
-        }
-        .sp-section-h {
-            font-family:var(--serif); font-weight:500;
-            font-size:clamp(2rem,4vw,3.4rem); line-height:1.08; letter-spacing:-0.015em;
-            color:#fff; margin:0; max-width:16em;
-        }
-        .sp-section-lede {
-            font-family:var(--serif); font-weight:400;
-            font-size:clamp(1.1rem,1.5vw,1.5rem); line-height:1.5;
-            color:rgba(255,255,255,0.75); margin:clamp(18px,2.4vw,28px) 0 0; max-width:32em;
-        }
+/* ── shared section furniture ── */
+.se-sec{padding:clamp(64px,8vw,120px) var(--edge)}
+.se-inner{max-width:1240px;margin:0 auto}
+.se-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sun);margin-bottom:18px}
+.se-h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,2.9vw,3.6rem);line-height:1.05;letter-spacing:-.01em;margin-bottom:22px}
+.se-lede{font-family:var(--serif);font-size:clamp(1.05rem,1.3vw,1.35rem);line-height:1.6;color:rgba(255,255,255,.74);max-width:56ch}
 
-        /* THE ROOM — three supporting cards. */
-        .sp-room { background:#050b26; }
-        .sp-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,26px); margin-top:clamp(38px,5vw,60px); }
-        .sp-card {
-            background:linear-gradient(158deg, rgba(12,37,96,0.55), rgba(8,26,69,0.55));
-            border:1px solid rgba(255,255,255,0.12); border-radius:16px;
-            padding:clamp(26px,2.6vw,38px);
-        }
-        .sp-card-k {
-            font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
-            color:var(--sun); margin-bottom:14px;
-        }
-        .sp-card-body {
-            font-family:var(--serif); font-size:clamp(1rem,1.1vw,1.2rem); line-height:1.55;
-            color:rgba(255,255,255,0.82);
-        }
-        @media (max-width:820px){ .sp-cards { grid-template-columns:1fr; } }
+/* ── two blocks ── */
+.se-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:clamp(36px,4.5vw,60px)}
+.se-card{background:linear-gradient(158deg,rgba(255,255,255,.1),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.se-pill{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:6px 13px;white-space:nowrap}
+.se-pill--out{border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8)}
+.se-pill--sun{background:var(--sun);color:#0a1740}
+.se-card h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2vw,2rem);line-height:1.15;margin:22px 0 14px}
+.se-card p{font-family:var(--serif);font-size:clamp(1rem,1.15vw,1.2rem);line-height:1.55;color:rgba(255,255,255,.72);margin-bottom:26px}
+.se-card .se-foot{margin-top:auto;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.se-card .se-foot--sun{color:var(--sun)}
 
-        /* THE ORBIT — network statement + quiet list. */
-        .sp-orbit { background:#02041F; }
-        .sp-orbit-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(28px,5vw,72px); align-items:start; }
-        @media (max-width:880px){ .sp-orbit-grid { grid-template-columns:1fr; } }
-        .sp-orbit-list { list-style:none; margin:clamp(8px,1vw,14px) 0 0; padding:0; }
-        .sp-orbit-list li {
-            font-family:var(--serif); font-size:clamp(1.05rem,1.2vw,1.3rem); line-height:1.5;
-            color:rgba(255,255,255,0.82); padding:clamp(14px,1.6vw,20px) 0;
-            border-bottom:1px solid rgba(255,255,255,0.12); display:flex; gap:14px; align-items:flex-start;
-        }
-        .sp-orbit-list li:last-child { border-bottom:none; }
-        .sp-orbit-list li::before {
-            content:''; flex:0 0 auto; margin-top:0.62em; width:6px; height:6px; border-radius:50%;
-            background:var(--sun);
-        }
+/* ── program steps ── */
+.se-program{background:radial-gradient(120% 100% at 50% 0%,#163a86 0%,#0c2560 46%,#060f30 100%)}
+.se-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,22px);margin-top:clamp(40px,5vw,64px)}
+.se-step{border-top:2px solid rgba(242,216,49,.55);padding-top:18px}
+.se-step .n{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--sun)}
+.se-step h4{font-family:var(--serif);font-weight:400;font-size:clamp(1.2rem,1.5vw,1.5rem);margin:12px 0 10px}
+.se-step p{font-family:var(--serif);font-size:1rem;line-height:1.5;color:rgba(255,255,255,.68)}
 
-        /* THE BREAKOUT 100 — generous whitespace, one line. */
-        .sp-breakout {
-            background:radial-gradient(120% 100% at 50% 0%, #0a1a44 0%, #050d2c 50%, #02041F 100%);
-            text-align:center; padding:clamp(120px,20vh,240px) clamp(20px,6vw,64px);
-        }
-        .sp-breakout .sp-section-eyebrow { margin-bottom:clamp(28px,4vw,44px); }
-        .sp-breakout-line {
-            font-family:var(--serif); font-weight:500;
-            font-size:clamp(2.2rem,5vw,4.4rem); line-height:1.05; letter-spacing:-0.02em;
-            color:#fff; margin:0 auto; max-width:14em;
-        }
-        .sp-breakout-note {
-            font-size:clamp(11px,0.9vw,13px); font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
-            color:rgba(255,255,255,0.42); margin-top:clamp(40px,6vw,72px);
-        }
+/* ── sessions ── */
+.se-chips{display:flex;flex-wrap:wrap;gap:10px;margin:clamp(28px,3.5vw,44px) 0 clamp(40px,5vw,64px)}
+.se-chips span{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:8px 16px}
+.se-row{display:flex;align-items:baseline;gap:clamp(16px,3vw,48px);padding:clamp(20px,2.4vw,30px) 0;border-top:1px solid rgba(255,255,255,.16)}
+.se-row:last-of-type{border-bottom:1px solid rgba(255,255,255,.16)}
+.se-row .city{font-family:var(--serif);font-size:clamp(1.7rem,2.6vw,2.6rem);flex:1 1 auto;line-height:1.05}
+.se-row .when{flex:0 0 clamp(140px,18vw,240px);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+.se-row .when.tbd{color:rgba(255,255,255,.45)}
+.se-row .note{flex:1 1 40%;font-family:var(--serif);font-size:1.05rem;color:rgba(255,255,255,.62)}
+.se-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(40px,5vw,64px)}
+.se-cta{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 26px;font-size:14px;font-weight:700;transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.se-cta--primary{background:var(--sun);color:#0a1740}
+.se-cta--primary:hover{background:#FFE85A;transform:translateY(-1px)}
+.se-cta--ghost{border:1.5px solid rgba(242,216,49,.6);color:var(--sun)}
+.se-cta--ghost:hover{background:rgba(242,216,49,.12);border-color:var(--sun);transform:translateY(-1px)}
 
-        /* Footer */
-        .sp-footer {
-            background:#02041F; border-top:1px solid rgba(255,255,255,0.10);
-            padding:clamp(44px,6vw,72px) clamp(20px,6vw,64px);
-            display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center; justify-content:center;
-        }
-        .sp-footer a {
-            font-family:var(--sans); font-size:13px; letter-spacing:0.04em; color:rgba(255,255,255,0.6);
-            text-decoration:none; transition:color 0.2s ease;
-        }
-        .sp-footer a:hover { color:var(--sun); }
-        .sp-footer .primary {
-            background:var(--sun); color:#0a1740; font-weight:700; text-transform:uppercase;
-            letter-spacing:0.14em; font-size:11px; padding:12px 22px; border-radius:999px;
-        }
-    </style>
+/* ── reel ── */
+.se-reel{padding:clamp(56px,7vw,90px) 0}
+.se-reel-head{display:flex;align-items:center;justify-content:space-between;padding:0 var(--edge);margin-bottom:22px}
+.se-reel-head p{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.se-reel-nav{display:flex;gap:8px}
+.se-reel-nav button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.se-reel-nav button:hover{background:var(--sun);border-color:var(--sun);color:#0a1740}
+.se-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--edge);scrollbar-width:none}
+.se-rail::-webkit-scrollbar{display:none}
+.se-rail figure{flex:0 0 clamp(240px,26vw,340px);scroll-snap-align:start}
+.se-rail img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
+.se-rail figcaption{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:10px}
+
+/* ── closer ── */
+.se-closer{position:relative;padding:clamp(90px,11vw,150px) var(--edge);text-align:center;overflow:hidden}
+.se-closer .se-closer-inner{position:relative;display:flex;flex-direction:column;align-items:center}
+.se-closer h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.3;margin-bottom:34px;text-shadow:0 2px 30px rgba(0,0,0,.6)}
+
+@media (max-width:860px){
+  .se-split,.se-steps{grid-template-columns:1fr}
+  .se-row{flex-wrap:wrap;gap:8px}
+  .se-row .when{flex:0 0 auto}
+  .se-row .note{flex:1 1 100%}
+}
+
+/* ── hero "The" + tighter cluster ── */
+.se-hero-the{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1;color:rgba(255,255,255,.9);margin-bottom:clamp(6px,1vw,14px)}
+.se-hero h1{margin-top:clamp(6px,1.4vw,18px)}
+/* ── how-it-works flow diagram ── */
+.se-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:clamp(8px,1.4vw,18px);margin-top:clamp(36px,4.5vw,60px)}
+.se-node{background:linear-gradient(158deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:clamp(22px,2.4vw,34px);display:flex;flex-direction:column}
+.se-node--mid{border-color:rgba(242,216,49,.4);background:linear-gradient(158deg,rgba(242,216,49,.10),rgba(255,255,255,.02))}
+.se-node-tag{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);margin-bottom:14px}
+.se-node h4{font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,1.8vw,1.85rem);line-height:1.1;margin:0 0 12px}
+.se-node p{font-family:var(--serif);font-size:clamp(.98rem,1.05vw,1.15rem);line-height:1.5;color:rgba(255,255,255,.72);margin:0}
+.se-flow-arrow{align-self:center;color:rgba(242,216,49,.7);font-size:clamp(1.5rem,2vw,2.1rem);line-height:1}
+@media(max-width:860px){.se-flow{grid-template-columns:1fr}.se-flow-arrow{justify-self:center;transform:rotate(90deg)}}
+</style>
 </head>
 <body>
-    <header class="topbar">
-        <a class="back-btn" href="index.html">&larr; Back to site</a>
-    </header>
 
-    <!-- Hero -->
-    <section class="sp-hero">
-        <div class="sp-eyebrow">The Sunshine Lake Speakeasy</div>
-        <h1 class="sp-title">Where founders speak easy.</h1>
-        <p class="sp-hero-lede">From San Francisco to Athens, we bring an exclusive group together to forge the future.</p>
-        <p class="sp-hero-kicker">What&rsquo;s said here stays here.</p>
-    </section>
+<a class="se-back" href="index.html">
+  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M12 8H4M8 12l-4-4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Sunshine Lake
+</a>
 
-    <!-- THE ROOM -->
-    <section class="sp-section sp-room">
-        <div class="sp-inner">
-            <div class="sp-section-eyebrow">The Room</div>
-            <h2 class="sp-section-h">Light and bright: salons and working sessions. Small on purpose.</h2>
-            <div class="sp-cards">
-                <div class="sp-card">
-                    <div class="sp-card-k">In the community</div>
-                    <p class="sp-card-body">Our founders live in the middle of where technology compounds fastest. Embedded, not enclosed.</p>
-                </div>
-                <div class="sp-card">
-                    <div class="sp-card-k">A speakeasy, properly</div>
-                    <p class="sp-card-body">Offsites, unicorn-founder talks, LP salons. A room where the obsessed can be direct, be vulnerable, and solve real problems together.</p>
-                </div>
-                <div class="sp-card">
-                    <div class="sp-card-k">The landing</div>
-                    <p class="sp-card-body">Arriving founders get a soft landing: a desk, visa support, payroll from day one, and the first fifty introductions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ══ HERO ══ -->
+<section class="se-hero">
+  <img class="se-bleed" src="images/speakeasy/room.jpg" alt="" style="opacity:.9;filter:saturate(.92) brightness(.82)">
+  <div class="se-hero-scrim"></div>
+  <div class="se-hero-inner">
+    <p class="se-kicker">By invitation &middot; Sunshine Lake</p>
+    <p class="se-hero-the">The</p>
+    <span class="se-neon" style="width:min(364px,70vw)">
+      <svg aria-label="Sunshine Lake" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1626.32 177.05" width="1626" height="177" fill="#eaf3ff" aria-label="Sunshine Lake Capital" role="img">
+                      <g>
+                        <path d="M867.39,37.06c8.72,0,15.29-6.56,15.29-15.06s-6.57-15.06-15.29-15.06-15.29,6.56-15.29,15.06,6.57,15.06,15.29,15.06Z"></path>
+                        <path d="M604.94,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.89,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.33-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"></path>
+                        <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"></path>
+                        <path d="M828.84,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4V0h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"></path>
+                        <path d="M1288.14,128.8c-6.11,12.22-12.88,21.83-21.29,28.39-8.4,6.55-18.48,10.09-31.28,10.09h-36.77V39.36c0-7.62.52-13.64,2.38-18.3,1.83-4.61,4.99-7.95,10.37-10.19l.44-.18v-1.65h-48.63v1.65l.44.18c5.38,2.24,8.54,5.58,10.37,10.19,1.86,4.66,2.38,10.68,2.38,18.3v105.03c0,7.62-.52,13.64-2.38,18.3-1.83,4.61-4.99,7.95-10.37,10.19l-.44.18v1.65h119.08l7.64-46.31h-1.75l-.19.39h0Z"></path>
+                        <path d="M882.02,164.82c-1.82-3.53-2.35-8.4-2.35-16.04V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05h0Z"></path>
+                        <path d="M1409.78,166.36v-1.98l-1.09.68c-1.72,1.08-4.13,1.74-6.56,1.74-4.69,0-8.1-1.55-10.36-4.55-2.3-3.03-3.5-7.65-3.5-13.94,0-7.05.17-14.38.34-22.54.18-8.16.35-17.13.35-27.43,0-13.94-4.58-23.94-13.06-30.44-8.45-6.47-20.66-9.37-35.77-9.37-24.02,0-40.74,13.56-40.74,29.17,0,5.49,1.91,9.91,5.11,12.95,3.18,3.04,7.59,4.65,12.49,4.65,3.47,0,6.64-.9,9.1-2.74,2.48-1.85,4.19-4.62,4.79-8.26l.23-1.38-1.25.63c-.82.41-1.86.62-2.69.62-3.04,0-5.5-1.19-7.21-3.19-1.72-2.02-2.72-4.9-2.72-8.36,0-4.94,1.57-9.47,5.15-12.78,3.59-3.31,9.29-5.48,17.74-5.48,9.28,0,15.77,3.5,19.96,9,4.21,5.53,6.16,13.17,6.16,21.52v12.59l-17,3.13c-13.74,2.54-27.27,5.27-37.36,10.51-5.06,2.62-9.29,5.89-12.25,10.12-2.98,4.23-4.65,9.38-4.65,15.71,0,9.91,3.73,17.3,9.84,22.19,6.09,4.87,14.48,7.21,23.73,7.21,17.75,0,33.24-12.32,38.1-26.82.02.36.03.72.05,1.07.12,2.37.23,4.47.23,4.91v.07c.59,6.24,2.66,11.5,6.25,15.21,3.59,3.72,8.65,5.8,15.06,5.8,9.69,0,17.32-4.26,21.4-10.02l.13-.19h0ZM1365.79,131.64h0c-.46,21.18-14.53,33.08-28.67,33.08-5.45,0-10.16-1.36-13.51-4.49-3.34-3.12-5.44-8.11-5.44-15.61,0-8.02,2.7-14,8.16-18.54,5.5-4.57,13.86-7.72,25.27-9.91l14.63-2.84-.44,18.31h0Z"></path>
+                        <path d="M1505.79,152.28h0l-34.8-45.33,23.41-25.01h0c9.65-10.11,18.33-16.03,31.58-19.23l.54-.13v-1.74h-43.76v1.68l.47.17c4.89,1.78,7.16,5.03,7.16,8.35s-1.27,5.85-3.97,8.77h0l-19.19,20.81h0c-3.31,3.42-6.12,5.38-8.92,6.48-2.8,1.11-5.64,1.4-9.08,1.4h-6.22V0h-36.14v1.65l.44.18c5.46,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-33.76h3.68c1.89,0,3.26.28,4.48.95,1.23.68,2.37,1.8,3.74,3.62h0l28.69,38.17h0c4.17,5.33,7.78,10.54,9.12,16.39l.13.55h41.08v-1.71l-.51-.15c-11.16-3.42-18.91-9.1-27.63-20.57v.02Z"></path>
+                        <path d="M1011.99,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.53-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05v.02Z"></path>
+                        <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"></path>
+                        <path d="M1125.55,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1079.15,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h-.01Z"></path>
+                        <path d="M1623.23,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1576.83,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h0Z"></path>
+                      </g>
+                      <g>
+                        <path d="M131.34,137.7c-5.38-2.93-10.46-5.7-16.57-7.69-6.89-2.25-14.34-3.3-23.44-3.3s-16.55,1.05-23.44,3.3c-6.1,1.99-11.19,4.76-16.57,7.69h0c-6.08,3.31-12.37,6.74-20.53,9.4-9.21,3.01-19.27,4.47-30.78,4.47v25.45c13.44,0,25.34-1.75,36.37-5.36,9.73-3.18,17.4-7.35,23.55-10.71,5.04-2.74,9.01-4.91,13.55-6.39,5.03-1.65,10.71-2.41,17.85-2.41s12.82.77,17.85,2.41c4.54,1.48,8.51,3.65,13.55,6.39,6.48,3.53,13.82,7.53,23.55,10.71,11.04,3.61,22.94,5.36,36.37,5.36v-25.45c-11.51,0-21.58-1.46-30.78-4.47-8.16-2.67-14.45-6.09-20.53-9.4Z"></path>
+                        <polygon points="108.35 67.9 102.65 9.02 80.01 9.02 74.32 67.9 27.88 36 13.61 53.38 51.4 89.26 0 94.11 0 117.11 182.65 117.11 182.66 117.11 182.66 94.11 131.26 89.26 169.06 53.38 154.78 36 108.35 67.9"></polygon>
+                      </g>
+                      <path d="M701.88,119.47c-6.64-5.93-17.14-10.36-32.56-13.96h0c-11.79-2.78-18.64-5.52-22.54-8.9-3.83-3.31-4.9-7.29-4.9-12.85,0-5.15,1.85-9.93,5.4-13.43,3.55-3.49,8.85-5.75,15.87-5.75,18.07,0,31.54,14.69,39.84,33.12l.19.42h1.64v-39.92h-1.76c-2.36,3.77-6.47,6.53-10.52,6.56-3.78.03-7.39-1.5-12.03-3.08-4.6-1.57-10.07-3.16-17.35-3.16-10.07,0-19.72,2.81-26.86,8.24-7.17,5.45-11.79,13.52-11.79,23.94,0,8.82,2.42,16.13,8.28,22.02,5.83,5.86,15.01,10.24,28.37,13.38h0c10.07,2.32,18.12,4.67,23.64,8.1,2.75,1.71,4.85,3.67,6.26,5.99,1.41,2.32,2.16,5.05,2.16,8.35,0,7.09-2.75,12.67-7.16,16.49-4.42,3.83-10.55,5.93-17.35,5.93-20.83,0-34.31-14.9-44.22-38.89l-.18-.44h-1.7v45.39h3.65l.2-.25c2.78-3.24,5.36-5.77,9.41-5.77,1.7,0,3.58.36,5.73.92,2.16.56,4.51,1.3,7.2,2.06,5.35,1.51,11.84,3.04,19.92,3.04,10.87,0,21.49-2.8,29.42-8.55,7.95-5.77,13.16-14.48,13.16-26.17,0-9.41-2.72-16.85-9.41-22.83h-.01Z"></path>
+                      <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"></path>
+                      <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"></path>
+                    </svg>
+    </span>
+    <h1>Speakeasy.</h1>
+    <p>Where founders with a superhuman psychology are immersed &mdash; and the people who have already done it once show up for them.</p>
+  </div>
+</section>
 
-    <!-- THE ORBIT (was Strategic LPs) -->
-    <section class="sp-section sp-orbit">
-        <div class="sp-inner sp-orbit-grid">
-            <div>
-                <div class="sp-section-eyebrow">The Orbit</div>
-                <h2 class="sp-section-h">The room isn&rsquo;t only founders.</h2>
-                <p class="sp-section-lede">Around every company sits an orbit that goes to work on it: the operators who have built at scale, the unicorn founders who have been where our founders are headed, and the strategic partners who send us the next ones.</p>
-            </div>
-            <ul class="sp-orbit-list">
-                <li>Founders we&rsquo;ve backed, going again.</li>
-                <li>Operators who have scaled the giants.</li>
-                <li>Strategic LPs and partners, embedded in the work.</li>
-                <li>The people who route the best outsiders to us first.</li>
-            </ul>
-        </div>
-    </section>
+<!-- ══ WHERE IT HAPPENS ══ -->
+<section class="se-sec" style="background:var(--abyss)">
+  <div class="se-inner">
+    <p class="se-eyebrow">Where it happens</p>
+    <h2 class="se-h2" style="max-width:26ch">The future gets built in rooms before it gets built anywhere else.</h2>
+    <p class="se-lede">A cracked few see the shift first. We put them in a room with the people who saw the last one &mdash; and then we get out of the way.</p>
+    <div class="se-split">
+      <div class="se-card">
+        <span class="se-pill se-pill--out">The Program</span>
+        <h3>For companies inside the universe.</h3>
+        <p>Admitted founders run a focused immersion with the Sunshine Lake bench &mdash; operators, advisors and founders who have built at scale. Every week has a deliverable. Nothing is broadcast.</p>
+        <span class="se-foot">By admission only</span>
+      </div>
+      <div class="se-card">
+        <span class="se-pill se-pill--sun">Speakeasy Sessions</span>
+        <h3>For the founders we have not met yet.</h3>
+        <p>The open edge: a night of talks, live art and a DJ, where founders come to listen and meet the room. Apply to attend. Some of the people in it end up in the portfolio.</p>
+        <span class="se-foot se-foot--sun">Apply to attend</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- THE BREAKOUT 100 -->
-    <section class="sp-breakout">
-        <div class="sp-section-eyebrow">The Breakout 100</div>
-        <p class="sp-breakout-line">Most never know until we call.</p>
-        <div class="sp-breakout-note">A standing shortlist of the founders we would back next.</div>
-    </section>
+<!-- ══ HOW IT WORKS — diagram ══ -->
+<section class="se-sec" style="background:radial-gradient(120% 100% at 50% 0%,#0c2560 0%,#071a44 55%,var(--abyss) 100%)">
+  <div class="se-inner">
+    <p class="se-eyebrow">How the room works</p>
+    <h2 class="se-h2" style="max-width:22ch">One door in. The network compounds behind you.</h2>
+    <div class="se-flow">
+      <div class="se-node">
+        <span class="se-node-tag">The open edge</span>
+        <h4>Speakeasy Sessions</h4>
+        <p>A night of talks, live art and a DJ. Founders come to listen and meet the room. Apply to attend.</p>
+      </div>
+      <div class="se-flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="se-node se-node--mid">
+        <span class="se-node-tag">The immersion</span>
+        <h4>The Room</h4>
+        <p>Admitted founders run a focused program with the bench. Every week ships a deliverable.</p>
+      </div>
+      <div class="se-flow-arrow" aria-hidden="true">&rarr;</div>
+      <div class="se-node">
+        <span class="se-node-tag">The breakout</span>
+        <h4>The Portfolio</h4>
+        <p>Some of the room ends up backed. Alumni stay in it, and it compounds behind the next one.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="sp-footer">
-        <a class="primary" href="mailto:hello@sunshinelake.vc?subject=The%20Speakeasy">Get in touch &rarr;</a>
-        <a href="index.html">Back to the homepage</a>
-        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
-    </footer>
+<!-- ══ THE PROGRAM ══ -->
+<section class="se-sec se-program">
+  <div class="se-inner">
+    <p class="se-eyebrow">The Program &middot; Immersion</p>
+    <h2 class="se-h2" style="max-width:20ch">Momentum, manufactured on purpose.</h2>
+    <p class="se-lede">Technology is a commodity now. Momentum is not. Admitted companies get the network pointed at whatever is currently in their way &mdash; and it stays pointed there until it moves.</p>
+    <div class="se-steps">
+      <div class="se-step"><span class="n">01</span><h4>The bench</h4><p>Operators and advisors who have already solved the thing you are stuck on.</p></div>
+      <div class="se-step"><span class="n">02</span><h4>A weekly deliverable</h4><p>Narrative, pricing, hiring, the raise. One at a time, shipped.</p></div>
+      <div class="se-step"><span class="n">03</span><h4>Warm doors</h4><p>Customers and downstream funds, introduced by people whose word carries.</p></div>
+      <div class="se-step"><span class="n">04</span><h4>The room, again</h4><p>Alumni stay in it. The network compounds behind you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SESSIONS ══ -->
+<section class="se-sec" style="background:var(--abyss)">
+  <div class="se-inner">
+    <p class="se-eyebrow">Speakeasy Sessions &middot; Events</p>
+    <h2 class="se-h2">Some nights, the door opens.</h2>
+    <p class="se-lede">Talks that are short and unrecorded. An artist painting through the night. A DJ in the corner and, by midnight, nobody talking about term sheets. Culture is the point, not the garnish.</p>
+    <div class="se-chips"><span>Talks</span><span>Live art</span><span>DJ sets</span><span>No slides</span><span>No pitching</span></div>
+    <div class="se-row"><div class="city">San Francisco</div><div class="when">YC Demo Day week</div><div class="note">The first one. Talks, live art, and the sign in the window.</div></div>
+    <div class="se-row"><div class="city">Athens</div><div class="when">Autumn</div><div class="note">The first session outside the Bay.</div></div>
+    <div class="se-row"><div class="city">More cities</div><div class="when tbd">To be announced</div><div class="note">We go where the founders already are.</div></div>
+    <div class="se-ctas">
+      <a class="se-cta se-cta--primary" href="mailto:hello@sunshinelake.vc?subject=Speakeasy%20Session">Apply to attend <span aria-hidden="true">&rarr;</span></a>
+      <a class="se-cta se-cta--ghost" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REEL ══ -->
+<section class="se-reel">
+  <div class="se-reel-head">
+    <p>From the sessions</p>
+    <div class="se-reel-nav">
+      <button type="button" aria-label="Previous" data-dir="-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button type="button" aria-label="Next" data-dir="1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+  <div class="se-rail" id="seRail">
+    <figure><img src="images/speakeasy/david-talk.jpg" alt=""><figcaption>On the mic</figcaption></figure>
+    <figure><img src="images/speakeasy/ppl.jpg" alt=""><figcaption>The room fills</figcaption></figure>
+    <figure><img src="images/speakeasy/group.jpg" alt=""><figcaption>Between sets</figcaption></figure>
+    <figure><img src="images/speakeasy/speak.jpg" alt=""><figcaption>At the bar</figcaption></figure>
+    <figure><img src="images/speakeasy/talk2.jpg" alt=""><figcaption>A talk, mid-room</figcaption></figure>
+    <figure><img src="images/speakeasy/one-on-one.jpg" alt=""><figcaption>One-on-one</figcaption></figure>
+    <figure><img src="images/speakeasy/room.jpg" alt=""><figcaption>The sign in the window</figcaption></figure>
+  </div>
+</section>
+
+<!-- ══ CLOSER ══ -->
+<section class="se-closer">
+  <img class="se-bleed" src="images/speakeasy/talk2.jpg" alt="" style="opacity:.5;filter:saturate(.8) brightness(.7)">
+  <div class="se-bleed" style="background:linear-gradient(180deg,rgba(4,5,14,.6),rgba(4,5,14,.35) 45%,#04050e)"></div>
+  <div class="se-closer-inner">
+    <h2>Beneath the surface.</h2>
+    <span class="se-neon" style="width:min(210px,60vw)"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1626.32 177.05" width="1626" height="177" fill="#eaf3ff" aria-label="Sunshine Lake Capital" role="img">
+                      <g>
+                        <path d="M867.39,37.06c8.72,0,15.29-6.56,15.29-15.06s-6.57-15.06-15.29-15.06-15.29,6.56-15.29,15.06,6.57,15.06,15.29,15.06Z"></path>
+                        <path d="M604.94,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.89,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.33-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"></path>
+                        <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"></path>
+                        <path d="M828.84,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.52-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4V0h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05v.02Z"></path>
+                        <path d="M1288.14,128.8c-6.11,12.22-12.88,21.83-21.29,28.39-8.4,6.55-18.48,10.09-31.28,10.09h-36.77V39.36c0-7.62.52-13.64,2.38-18.3,1.83-4.61,4.99-7.95,10.37-10.19l.44-.18v-1.65h-48.63v1.65l.44.18c5.38,2.24,8.54,5.58,10.37,10.19,1.86,4.66,2.38,10.68,2.38,18.3v105.03c0,7.62-.52,13.64-2.38,18.3-1.83,4.61-4.99,7.95-10.37,10.19l-.44.18v1.65h119.08l7.64-46.31h-1.75l-.19.39h0Z"></path>
+                        <path d="M882.02,164.82c-1.82-3.53-2.35-8.4-2.35-16.04V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05h0Z"></path>
+                        <path d="M1409.78,166.36v-1.98l-1.09.68c-1.72,1.08-4.13,1.74-6.56,1.74-4.69,0-8.1-1.55-10.36-4.55-2.3-3.03-3.5-7.65-3.5-13.94,0-7.05.17-14.38.34-22.54.18-8.16.35-17.13.35-27.43,0-13.94-4.58-23.94-13.06-30.44-8.45-6.47-20.66-9.37-35.77-9.37-24.02,0-40.74,13.56-40.74,29.17,0,5.49,1.91,9.91,5.11,12.95,3.18,3.04,7.59,4.65,12.49,4.65,3.47,0,6.64-.9,9.1-2.74,2.48-1.85,4.19-4.62,4.79-8.26l.23-1.38-1.25.63c-.82.41-1.86.62-2.69.62-3.04,0-5.5-1.19-7.21-3.19-1.72-2.02-2.72-4.9-2.72-8.36,0-4.94,1.57-9.47,5.15-12.78,3.59-3.31,9.29-5.48,17.74-5.48,9.28,0,15.77,3.5,19.96,9,4.21,5.53,6.16,13.17,6.16,21.52v12.59l-17,3.13c-13.74,2.54-27.27,5.27-37.36,10.51-5.06,2.62-9.29,5.89-12.25,10.12-2.98,4.23-4.65,9.38-4.65,15.71,0,9.91,3.73,17.3,9.84,22.19,6.09,4.87,14.48,7.21,23.73,7.21,17.75,0,33.24-12.32,38.1-26.82.02.36.03.72.05,1.07.12,2.37.23,4.47.23,4.91v.07c.59,6.24,2.66,11.5,6.25,15.21,3.59,3.72,8.65,5.8,15.06,5.8,9.69,0,17.32-4.26,21.4-10.02l.13-.19h0ZM1365.79,131.64h0c-.46,21.18-14.53,33.08-28.67,33.08-5.45,0-10.16-1.36-13.51-4.49-3.34-3.12-5.44-8.11-5.44-15.61,0-8.02,2.7-14,8.16-18.54,5.5-4.57,13.86-7.72,25.27-9.91l14.63-2.84-.44,18.31h0Z"></path>
+                        <path d="M1505.79,152.28h0l-34.8-45.33,23.41-25.01h0c9.65-10.11,18.33-16.03,31.58-19.23l.54-.13v-1.74h-43.76v1.68l.47.17c4.89,1.78,7.16,5.03,7.16,8.35s-1.27,5.85-3.97,8.77h0l-19.19,20.81h0c-3.31,3.42-6.12,5.38-8.92,6.48-2.8,1.11-5.64,1.4-9.08,1.4h-6.22V0h-36.14v1.65l.44.18c5.46,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v122.85c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-33.76h3.68c1.89,0,3.26.28,4.48.95,1.23.68,2.37,1.8,3.74,3.62h0l28.69,38.17h0c4.17,5.33,7.78,10.54,9.12,16.39l.13.55h41.08v-1.71l-.51-.15c-11.16-3.42-18.91-9.1-27.63-20.57v.02Z"></path>
+                        <path d="M1011.99,164.82c-1.82-3.53-2.35-8.4-2.35-16.04v-49.28c0-13.43-3.74-23.69-10.26-30.59-6.53-6.91-15.75-10.37-26.55-10.37-10.11,0-18.9,3.24-25.94,9.25-6.09,5.2-10.85,12.44-14.06,21.4v-28.34h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v62c0,7.64-.53,12.51-2.35,16.04-1.79,3.48-4.9,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.4-8.05-1.82-3.53-2.35-8.4-2.35-16.04v-34.01c0-13.07,3.33-23.9,8.88-31.45,5.55-7.53,13.32-11.8,22.33-11.8s14.83,3.43,18.53,8.8c3.73,5.41,5.28,12.88,5.28,21.02v47.43c0,7.64-.53,12.51-2.35,16.04-1.8,3.48-4.91,5.77-10.4,8.05l-.44.18v1.65h48.16v-1.65l-.44-.18c-5.49-2.29-8.6-4.58-10.39-8.05v.02Z"></path>
+                        <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"></path>
+                        <path d="M1125.55,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1079.15,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h-.01Z"></path>
+                        <path d="M1623.23,137.96c-6.77,18.23-21.08,26.99-37.84,26.99-12.73,0-22.87-5.33-29.85-14.44-6.89-8.98-10.72-21.69-10.84-36.65h80.97v-.72c0-15.94-3.67-29.6-11.62-39.29-7.96-9.71-20.16-15.33-36.99-15.33-29.57,0-54.62,24.18-54.62,59.25,0,18.67,6.31,33.5,16.41,43.65,10.09,10.15,23.93,15.6,38.91,15.6,12.85,0,23.89-3.51,32.28-10.19,8.36-6.66,14.04-16.42,16.28-28.87h-3.09ZM1576.83,64.59c5.38,0,9.62,1.27,12.96,3.5,3.35,2.23,5.86,5.46,7.71,9.45,3.64,7.84,4.71,18.53,4.76,30.04h-57.05c1.39-26.69,15.91-42.99,31.63-42.99h0Z"></path>
+                      </g>
+                      <g>
+                        <path d="M131.34,137.7c-5.38-2.93-10.46-5.7-16.57-7.69-6.89-2.25-14.34-3.3-23.44-3.3s-16.55,1.05-23.44,3.3c-6.1,1.99-11.19,4.76-16.57,7.69h0c-6.08,3.31-12.37,6.74-20.53,9.4-9.21,3.01-19.27,4.47-30.78,4.47v25.45c13.44,0,25.34-1.75,36.37-5.36,9.73-3.18,17.4-7.35,23.55-10.71,5.04-2.74,9.01-4.91,13.55-6.39,5.03-1.65,10.71-2.41,17.85-2.41s12.82.77,17.85,2.41c4.54,1.48,8.51,3.65,13.55,6.39,6.48,3.53,13.82,7.53,23.55,10.71,11.04,3.61,22.94,5.36,36.37,5.36v-25.45c-11.51,0-21.58-1.46-30.78-4.47-8.16-2.67-14.45-6.09-20.53-9.4Z"></path>
+                        <polygon points="108.35 67.9 102.65 9.02 80.01 9.02 74.32 67.9 27.88 36 13.61 53.38 51.4 89.26 0 94.11 0 117.11 182.65 117.11 182.66 117.11 182.66 94.11 131.26 89.26 169.06 53.38 154.78 36 108.35 67.9"></polygon>
+                      </g>
+                      <path d="M701.88,119.47c-6.64-5.93-17.14-10.36-32.56-13.96h0c-11.79-2.78-18.64-5.52-22.54-8.9-3.83-3.31-4.9-7.29-4.9-12.85,0-5.15,1.85-9.93,5.4-13.43,3.55-3.49,8.85-5.75,15.87-5.75,18.07,0,31.54,14.69,39.84,33.12l.19.42h1.64v-39.92h-1.76c-2.36,3.77-6.47,6.53-10.52,6.56-3.78.03-7.39-1.5-12.03-3.08-4.6-1.57-10.07-3.16-17.35-3.16-10.07,0-19.72,2.81-26.86,8.24-7.17,5.45-11.79,13.52-11.79,23.94,0,8.82,2.42,16.13,8.28,22.02,5.83,5.86,15.01,10.24,28.37,13.38h0c10.07,2.32,18.12,4.67,23.64,8.1,2.75,1.71,4.85,3.67,6.26,5.99,1.41,2.32,2.16,5.05,2.16,8.35,0,7.09-2.75,12.67-7.16,16.49-4.42,3.83-10.55,5.93-17.35,5.93-20.83,0-34.31-14.9-44.22-38.89l-.18-.44h-1.7v45.39h3.65l.2-.25c2.78-3.24,5.36-5.77,9.41-5.77,1.7,0,3.58.36,5.73.92,2.16.56,4.51,1.3,7.2,2.06,5.35,1.51,11.84,3.04,19.92,3.04,10.87,0,21.49-2.8,29.42-8.55,7.95-5.77,13.16-14.48,13.16-26.17,0-9.41-2.72-16.85-9.41-22.83h-.01Z"></path>
+                      <path d="M474.01,165.94c-2.66-3.21-4.09-7.76-4.09-14.84V60.85h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v34.01c0,26.15-14.64,42.78-32.14,42.78-8.43,0-14.1-3.69-17.71-9.25-3.63-5.6-5.18-13.14-5.18-20.81V60.84h-36.13v1.65l.44.18c5.45,2.27,8.89,5.07,10.99,8.85,2.11,3.8,2.92,8.69,2.92,15.24v49.28c0,13.43,3.74,23.69,10.14,30.59,6.4,6.91,15.4,10.38,25.74,10.38s19.53-3.29,26.84-9.51c6.23-5.3,11.06-12.72,14.09-21.96v29.16h38.45v-1.7l-.5-.16c-5.4-1.72-9.4-3.7-12.07-6.92v.02Z"></path>
+                      <path d="M350.66,108.4c-3.3-5.87-7.96-10.35-13.43-13.92-10.9-7.1-25.09-10.6-38.11-14.17h0c-9.95-2.78-19.14-5.87-25.85-10.85-6.66-4.94-10.87-11.73-10.87-22.01,0-10.8,3.92-18.7,9.88-23.9,5.98-5.22,14.07-7.78,22.49-7.78,24.55,0,40.8,18.4,51.17,41.22l.19.42h1.65v-.73l-.02-.4V9.02h-1.96l-.21.25c-3.06,3.53-5.86,7.85-13.11,7.85-1.68,0-3.68-.48-6.1-1.23-2.44-.76-5.12-1.75-8.28-2.78-6.25-2.03-13.97-4.08-23.33-4.08-27.58,0-51.15,17.56-51.15,45.37,0,16.08,6.36,26.18,15.76,33.11,9.34,6.88,21.68,10.61,33.57,14.08,11.14,3.25,21.9,6.29,29.89,11.37,3.98,2.53,7.24,5.55,9.52,9.33,2.27,3.77,3.57,8.34,3.57,14.01,0,11.03-4.03,19.51-10.52,25.23-6.5,5.73-15.51,8.76-25.55,8.76-22.98,0-43.6-16.15-56.26-45.15l-.19-.43h-1.68v52.33h3.6l.21-.22c4.43-4.66,7.93-8.34,14.06-8.34,2.15,0,4.56.51,7.29,1.31,2.74.8,5.72,1.86,9.06,2.94,6.65,2.15,14.54,4.32,23.9,4.32,13.99,0,27.97-3.49,38.48-11.07,10.53-7.59,17.53-19.26,17.53-35.46,0-9.01-1.9-16.23-5.2-22.11h0Z"></path>
+                    </svg></span>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.se-reel-nav button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.getElementById('seRail').scrollBy({ left: Number(b.dataset.dir) * 420, behavior: 'smooth' });
+  });
+});
+</script>
 </body>
 </html>
