@@ -3847,6 +3847,17 @@
                         + '</div>';
                 }
 
+                // Mobile: the mosaic collapses to a single tall column, so
+                // the full set (24 photos + 16 quotes) becomes an endless
+                // scroll. Trim to a tighter, curated set — fewer photos and
+                // six strong quotes with only one yellow — so it reads
+                // balanced and short. Desktop keeps the full wall.
+                if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
+                    SNAPSHOTS_DATA = SNAPSHOTS_DATA.slice(0, 12);
+                    var keepMobile = ['Jake Sussman', 'Alex Bouaziz', 'Lawrence Lin Murata', 'James Ding', 'Michael Tannenbaum', 'Thomas Dowling'];
+                    QUOTES = QUOTES.filter(function (q) { return keepMobile.indexOf(q.n) !== -1; });
+                }
+
                 // Distribute the quote cards evenly through the photo run
                 // so double-wides punctuate the mosaic rather than cluster.
                 var slots = {};
@@ -4946,7 +4957,7 @@
         // =======================================
         const FOUNDERS_DATA = [
             // CONTENT:founders
-                { name: "Geoffrey Tisserand &amp; Anji Ismail", company: "Concord.ai", country: "France", desc: "Helped build Checkr into a <b class=\"proof\">$5B</b> company. Now Concord is reskilling the workforce for AI.", photo: 'images/founders/geoffrey.webp', slug: 'concord-ai' },
+                { name: "Geoffrey Tisserand &amp; Anji Ismail", company: "Concord.ai", country: "France", desc: "Sold his last company, Agora, to <b class=\"proof\">PayScale</b>, and helped build Checkr into a <b class=\"proof\">$5B</b> company. Now Concord is reskilling the workforce for AI.", photo: 'images/founders/geoffrey.webp', slug: 'concord-ai' },
                 { name: "Samuel Adeyemo", company: "Duranta", country: "Kenya", desc: "Co-founded Aurora Solar and scaled it to <b class=\"proof\">$4B</b>. Now Duranta builds vision systems for machines in the physical world.", photo: 'images/founders/duranta.webp', slug: 'duranta' },
                 { name: "Thomas Dohmke", company: "Entire", country: "East Germany", desc: "Ran GitHub to <b class=\"proof\">$7.5B</b> and scaled Copilot. Now building the developer platform for the agent era.", photo: 'images/founders/entire.webp', slug: 'entire' },
                 { name: "Dowling, Segal &amp; Coppa", company: "FullSeam", country: "US &middot; Oxford", desc: "Built TaxProper through to an <b class=\"proof\">Opendoor</b> acquisition. Now AI agents for AP, AR, and reconciliation.", photo: 'images/founders/fullseam.webp', slug: 'fullseam' },
