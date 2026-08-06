@@ -3696,6 +3696,32 @@
             .snapshots-cell::before { animation: none; }
             #snapshotsWaterWarp feTurbulence animate { display: none; }
         }
+        /* ── Quotes strip — pulled out of the photo mosaic into their own
+           band below it; one uniform navy card, no size/colour/flip variance. ── */
+        .quote-strip{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(clamp(250px,26vw,330px),1fr));
+            gap:clamp(12px,1.2vw,18px);
+            margin-top:clamp(40px,5vw,72px);
+        }
+        .quote-card{
+            background:#0b1275;border-radius:14px;
+            padding:clamp(22px,2vw,30px);
+            display:flex;flex-direction:column;margin:0;
+        }
+        .quote-card .qc-mark{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;
+            font-size:2.6rem;line-height:.5;height:.42em;color:rgba(242,216,49,.9);
+        }
+        .quote-card .qc-q{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;
+            font-size:clamp(1.05rem,1.15vw,1.28rem);line-height:1.42;
+            color:#fff;margin:14px 0 0;flex:1 0 auto;
+        }
+        .quote-card .qc-attr{display:flex;flex-direction:column;gap:3px;margin-top:clamp(16px,1.6vw,22px)}
+        .quote-card .qc-n{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:600;font-size:.95rem;color:#fff}
+        .quote-card .qc-c{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,216,49,.85)}
+        @media(max-width:600px){ .quote-strip{grid-template-columns:1fr;gap:12px;margin-top:clamp(32px,8vw,48px)} }
     </style>
     <section class="snapshots-wrap" aria-label="In their words">
       <div class="snapshots-inner">
@@ -3714,6 +3740,7 @@
                     </filter>
                 </svg>
                 <div class="snapshots-grid" id="snapshotsGrid"></div>
+                <div class="quote-strip" id="quoteStrip"></div>
             </div>
       </div>
     </section>
@@ -3803,134 +3830,36 @@
                         + '  <figcaption class="snapshots-cap">' + s.caption + '</figcaption>'
                         + '</figure>';
                 }
-                function frontFace(v) {
+                function quoteCard(v) {
                     return ''
-                        + '<div class="flip-face flip-front">'
-                        + '  <div class="q-mark">&ldquo;</div>'
-                        + '  <p class="q">' + v.q + '</p>'
-                        + '  <div class="attr"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
-                        + '</div>';
-                }
-                var qNavyI = 0;
-                function quoteCell(v) {
-                    // Size: flip cards (need photo room) + the longest
-                    // quotes get a 2×2 square; everything else is a small
-                    // 2×1 wide box. Keeps boxes as small as the text allows.
-                    // Flip cards go 2×2 square so the group photo on the
-                    // back isn't cropped to a letterbox; text-only cards
-                    // size by quote length (short = wide 2×1).
-                    var sizeCls = (v.photo || v.q.length > 132) ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
-                    // Colour discipline (Don): sun-yellow is reserved for
-                    // the killer quotes only (v.hero) — the SVB save, "I
-                    // already did — twice," "every single round and company
-                    // that I start." Navy is the default; a mid-blue tile
-                    // is sprinkled in sparingly (~1 in 4) to break the field
-                    // without ever crowding out the navy.
-                    var colorCls;
-                    if (v.hero) {
-                        colorCls = 'qcolor-3';                 // sun yellow
-                    } else {
-                        colorCls = (qNavyI % 4 === 2) ? 'qcolor-2' : 'qcolor-1'; // occasional mid-blue, else navy
-                        qNavyI++;
-                    }
-                    var cls = 'snapshots-cell snapshots-cell--quote ' + sizeCls + ' ' + colorCls;
-                    if (v.photo) {
-                        // Flip card — quote front, group shot on the back.
-                        return ''
-                            + '<div class="' + cls + '" tabindex="0" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
-                            + '  <div class="flip-inner">'
-                            +      frontFace(v)
-                            + '    <div class="flip-face flip-back">'
-                            + '      <img src="images/snapshots/duo/' + v.photo + '" alt="' + v.n + ' with Don" loading="lazy">'
-                            + '      <div class="flip-back-cap"><span class="n">' + v.n + '</span><span class="c">' + v.c + '</span></div>'
-                            + '    </div>'
-                            + '  </div>'
-                            + '</div>';
-                    }
-                    // Static card — no group shot yet, so no flip.
-                    return ''
-                        + '<div class="' + cls + ' snapshots-cell--quote-static" role="group" aria-label="Testimonial from ' + v.n + ', ' + v.c + '">'
-                        +      frontFace(v)
-                        + '</div>';
+                        + '<figure class="quote-card">'
+                        + '  <div class="qc-mark">&ldquo;</div>'
+                        + '  <p class="qc-q">' + v.q + '</p>'
+                        + '  <figcaption class="qc-attr"><span class="qc-n">' + v.n + '</span><span class="qc-c">' + v.c + '</span></figcaption>'
+                        + '</figure>';
                 }
 
-                // Mobile: the mosaic collapses to a single tall column, so
-                // the full set (24 photos + 16 quotes) becomes an endless
-                // scroll. Trim to a tighter, curated set — fewer photos and
-                // six strong quotes with only one yellow — so it reads
-                // balanced and short. Desktop keeps the full wall.
-                var ALL_QUOTES = QUOTES.slice();   // full pool kept for the lingering-viewer rotation below
-                if (window.matchMedia && window.matchMedia('(max-width: 600px)').matches) {
-                    SNAPSHOTS_DATA = SNAPSHOTS_DATA.slice(0, 12);
-                    var keepMobile = ['Jake Sussman', 'Alex Bouaziz', 'Lawrence Lin Murata', 'James Ding', 'Michael Tannenbaum', 'Thomas Dowling'];
-                    QUOTES = QUOTES.filter(function (q) { return keepMobile.indexOf(q.n) !== -1; });
-                }
+                var strip = document.getElementById('quoteStrip');
+                var isMobile = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
 
-                // Distribute the quote cards evenly through the photo run
-                // so double-wides punctuate the mosaic rather than cluster.
-                var slots = {};
-                for (var k = 0; k < QUOTES.length; k++) {
-                    var pos = Math.round((k + 1) * SNAPSHOTS_DATA.length / (QUOTES.length + 1));
-                    (slots[pos] = slots[pos] || []).push(QUOTES[k]);
-                }
-                var html = '';
-                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) {
-                    html += photoCell(SNAPSHOTS_DATA[i]);
-                    if (slots[i + 1]) slots[i + 1].forEach(function (v) { html += quoteCell(v); });
-                }
-                grid.innerHTML = html;
+                // Photos — one clean, even grid (no quote tiles woven in).
+                if (isMobile) SNAPSHOTS_DATA = SNAPSHOTS_DATA.slice(0, 12);
+                var ph = '';
+                for (var i = 0; i < SNAPSHOTS_DATA.length; i++) ph += photoCell(SNAPSHOTS_DATA[i]);
+                grid.innerHTML = ph;
 
-                // Touch / click flip for the photo-backed cards (hover +
-                // keyboard focus are handled in CSS). Static cards aren't
-                // interactive.
-                [].slice.call(grid.querySelectorAll('.snapshots-cell--quote:not(.snapshots-cell--quote-static)')).forEach(function (card) {
-                    card.addEventListener('click', function () { card.classList.toggle('is-flipped'); });
-                    card.addEventListener('keydown', function (e) {
-                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-flipped'); }
-                    });
-                });
-
-                // ── Lingering-viewer rotation ──────────────────────────────
-                // On the trimmed mobile wall we cut the quote set down; rotate
-                // the ones we held back into view for anyone who stays, so
-                // every voice still gets surfaced without a longer scroll.
-                // Only plain (non-hero, non-photo) tiles rotate, and a
-                // replacement is always the same size class, so the mosaic
-                // never reflows. On desktop the full set already shows, so
-                // `reserve` is empty and this is a no-op.
-                (function () {
-                    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                    var byName = {};
-                    ALL_QUOTES.forEach(function (q) { byName[q.n] = q; });
-                    var shown = {};
-                    QUOTES.forEach(function (q) { shown[q.n] = 1; });
-                    // Heroes (sun-yellow, killer quotes) and photo flip-cards
-                    // stay out of the pool — only plain navy tiles rotate.
-                    var reserve = ALL_QUOTES.filter(function (q) { return !shown[q.n] && !q.photo && !q.hero; });
-                    var cards = [].slice.call(grid.querySelectorAll('.snapshots-cell--quote-static'))
-                        .filter(function (c) { return !c.classList.contains('qcolor-3'); });
-                    if (!reserve.length || !cards.length) return;
-                    function sizeCls(v) { return v.q.length > 132 ? 'snapshots-cell--q22' : 'snapshots-cell--q21'; }
-                    cards.forEach(function (c) { c.style.transition = 'opacity .55s ease'; });
-                    var turn = 0;
-                    setInterval(function () {
-                        var card = cards[turn % cards.length]; turn++;
-                        var want = card.classList.contains('snapshots-cell--q22') ? 'snapshots-cell--q22' : 'snapshots-cell--q21';
-                        var idx = -1;
-                        for (var j = 0; j < reserve.length; j++) { if (sizeCls(reserve[j]) === want) { idx = j; break; } }
-                        if (idx === -1) return;
-                        var next = reserve.splice(idx, 1)[0];
-                        var oldEl = card.querySelector('.attr .n');
-                        var oldQ = oldEl ? byName[oldEl.textContent] : null;
-                        card.style.opacity = '0';
-                        setTimeout(function () {
-                            card.innerHTML = frontFace(next);
-                            card.setAttribute('aria-label', 'Testimonial from ' + next.n + ', ' + next.c);
-                            card.style.opacity = '1';
-                        }, 560);
-                        if (oldQ && !oldQ.photo) reserve.push(oldQ);
-                    }, 6000);
-                })();
+                // Quotes — their own strip, one uniform card style. On mobile,
+                // a curated eight so it stays short.
+                var quoteList = QUOTES;
+                if (isMobile) {
+                    var keep = ['Jake Sussman','Aaron Bai','Ankit Jain','Alex Bouaziz','Lawrence Lin Murata','James Ding','Michael Tannenbaum','Thomas Dowling'];
+                    quoteList = keep.map(function (n) { return QUOTES.filter(function (q) { return q.n === n; })[0]; }).filter(Boolean);
+                }
+                if (strip) {
+                    var qs = '';
+                    for (var j = 0; j < quoteList.length; j++) qs += quoteCard(quoteList[j]);
+                    strip.innerHTML = qs;
+                }
             })();
             </script>
 
