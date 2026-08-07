@@ -1037,13 +1037,14 @@ add({title:'Fund I · Portfolio',track:'core',teaser:true,dark:false,cls:'',html
     <hr class="s-rule">
     <div style="display:flex;flex-direction:column;margin-top:14px;flex:1">
       ${[
-        ['Geoffrey Tisserand &amp; Anji Ismail','Concord.ai','France','Sold Agora to <b style="color:var(--cobalt)">PayScale</b> and helped build Checkr into a <b style="color:var(--cobalt)">$5B</b> company. Now reskilling the workforce for AI.'],
-        ['Samuel Adeyemo','Duranta','Kenya','Co-founded Aurora Solar and scaled it to <b style="color:var(--cobalt)">$4B</b>. Now vision systems for machines in the physical world.'],
-        ['Thomas Dohmke','Entire','East Germany','Ran GitHub to <b style="color:var(--cobalt)">$7.5B</b> and scaled Copilot. Now the developer platform for the agent era.'],
-        ['Dowling, Segal &amp; Coppa','FullSeam','US &middot; Oxford','Built TaxProper through to an <b style="color:var(--cobalt)">Opendoor</b> acquisition. Now AI agents for AP, AR and reconciliation.'],
-        ['Craig O&rsquo;Neill','Argentic','Canada','Led Versapay through a <b style="color:var(--cobalt)">Great Hill</b> take-private. Now rebuilding B2B payments for the AI era.']
-      ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:24px;padding:12px 0;${i<4?'border-bottom:1px solid var(--line)':''};flex:1">
-        <div style="flex:0 0 322px"><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${r[0]}</div><div style="font-size:12.5px;color:var(--cobalt);font-weight:600;margin-top:4px">${r[1]} <span style="color:var(--muted);font-weight:400">&middot; ${r[2]}</span></div></div>
+        ['Geoffrey Tisserand &amp; Anji Ismail','Concord.ai','France','Sold Agora to <b style="color:var(--cobalt)">PayScale</b> and helped build Checkr into a <b style="color:var(--cobalt)">$5B</b> company. Now reskilling the workforce for AI.','geoffrey.webp'],
+        ['Samuel Adeyemo','Duranta','Kenya','Co-founded Aurora Solar and scaled it to <b style="color:var(--cobalt)">$4B</b>. Now vision systems for machines in the physical world.','duranta.webp'],
+        ['Thomas Dohmke','Entire','East Germany','Ran GitHub to <b style="color:var(--cobalt)">$7.5B</b> and scaled Copilot. Now the developer platform for the agent era.','entire.webp'],
+        ['Dowling, Segal &amp; Coppa','FullSeam','US &middot; Oxford','Built TaxProper through to an <b style="color:var(--cobalt)">Opendoor</b> acquisition. Now AI agents for AP, AR and reconciliation.','fullseam.webp'],
+        ['Craig O&rsquo;Neill','Argentic','Canada','Led Versapay through a <b style="color:var(--cobalt)">Great Hill</b> take-private. Now rebuilding B2B payments for the AI era.','argentic.webp']
+      ].map((r,i)=>`<div style="display:flex;align-items:center;gap:18px;padding:11px 0;${i<4?'border-bottom:1px solid var(--line)':''};flex:1">
+        <img src="images/founders/${r[4]}" alt="" style="flex:0 0 46px;width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center 28%;background:#eef3fc">
+        <div style="flex:0 0 300px"><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${r[0]}</div><div style="font-size:12.5px;color:var(--cobalt);font-weight:600;margin-top:4px">${r[1]} <span style="color:var(--muted);font-weight:400">&middot; ${r[2]}</span></div></div>
         <div style="flex:1;font-size:14px;color:var(--ink-2);line-height:1.5">${r[3]}</div>
       </div>`).join('')}
     </div>
