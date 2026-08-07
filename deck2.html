@@ -1068,15 +1068,15 @@ add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
     <div class="eyebrow">Our Thesis</div>
     <h1 class="s-title" style="font-size:38px;max-width:1180px">Critical global systems are in turmoil. We back brave global founders who navigate them.</h1>
     <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.45"><b style="color:var(--cobalt);font-weight:600">Forged by extreme origins</b>, then handed the future.</div>
-    <div style="margin-top:18px;display:flex;gap:28px;flex:1">
+    <div style="margin-top:14px;display:flex;gap:32px;flex:1">
       ${[
-        ['Extreme origins.','They cross the world with no plan B and out-iterate everyone. Outsiders live the global break before the Valley reads it.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.'],
-        ['The psychology to see shifts others miss.','They don\'t enter categories; they imagine them, then build real revenue with no safety net beneath them.','$1T+','the global end markets we underwrite from day one','Our seed first checks now mark at $22B (Kalshi), $2.3B (Headway) and ~$1B (Assured), all public rounds.']
-      ].map((r,i)=>`<div style="flex:1;display:flex;flex-direction:column;${i<1?'border-right:1px solid var(--line);padding-right:28px':''}">
-        <div style="font-family:var(--serif);font-size:27px;color:var(--ink);line-height:1.12">${r[0]}</div>
-        <div style="font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.5;flex:1">${r[1]}</div>
-        <div style="display:flex;align-items:flex-end;gap:20px;margin-top:18px">
-          <div style="flex:0 0 150px"><div style="font-family:var(--serif);font-size:42px;line-height:1;color:var(--cobalt)">${r[2]}</div><div style="font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35">${r[3]}</div></div>
+        ['Extreme origins.','They cross the world with no plan B and out-iterate everyone. Outsiders live the global break before the Valley reads it.','59%','of U.S. unicorns have an immigrant founder (NFAP)','Deel\'s founders couldn\'t get U.S. work visas, so they built the platform the world now hires through. Worth $17.3B.','<svg viewBox="0 0 64 64" fill="none" style="width:58px;height:58px" aria-hidden="true"><g stroke="var(--cobalt)" stroke-width="2.4" stroke-linecap="round"><line x1="32" y1="4" x2="32" y2="15"/><line x1="32" y1="49" x2="32" y2="60"/><line x1="4" y1="32" x2="15" y2="32"/><line x1="49" y1="32" x2="60" y2="32"/><line x1="12.7" y1="12.7" x2="20.5" y2="20.5"/><line x1="43.5" y1="43.5" x2="51.3" y2="51.3"/><line x1="51.3" y1="12.7" x2="43.5" y2="20.5"/><line x1="20.5" y1="43.5" x2="12.7" y2="51.3"/></g><circle cx="32" cy="32" r="7" fill="#b8902a"/></svg>'],
+        ['The psychology to see shifts others miss.','They don\'t enter categories; they imagine them, then build real revenue with no safety net beneath them.','$1T+','the global end markets we underwrite from day one','Our seed first checks now mark at $22B (Kalshi), $2.3B (Headway) and ~$1B (Assured), all public rounds.','<svg viewBox="0 0 64 64" fill="none" style="width:58px;height:58px" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="rgba(21,94,232,0.26)" stroke-width="1.6"/><path d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="var(--cobalt)" stroke-width="2.4" stroke-linecap="round" fill="none"/><circle cx="34" cy="20" r="4.4" fill="#b8902a"/></svg>']
+      ].map((r,i)=>`<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;${i<1?'border-right:1px solid var(--line);padding-right:32px':'padding-left:6px'}">
+        <div>${r[5]}</div>
+        <div><div style="font-family:var(--serif);font-size:28px;color:var(--ink);line-height:1.12">${r[0]}</div><div style="font-size:14px;color:var(--muted);margin-top:10px;line-height:1.55;max-width:30em">${r[1]}</div></div>
+        <div style="display:flex;align-items:flex-end;gap:20px">
+          <div style="flex:0 0 150px"><div style="font-family:var(--serif);font-size:44px;line-height:1;color:var(--cobalt)">${r[2]}</div><div style="font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35">${r[3]}</div></div>
           <div style="flex:1;border-left:3px solid var(--sun);padding-left:16px"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#b8902a">Proof</div><div style="font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.45">${r[4]}</div></div>
         </div>
       </div>`).join('')}
@@ -1115,7 +1115,7 @@ add({title:'Our Edge — The Speakeasy',track:'core',teaser:false,dark:false,cls
     <div style="flex:1;display:flex;align-items:center;margin-top:22px">
     <div style="display:flex;gap:24px;width:100%;align-items:stretch">
       ${[
-        ['An exclusive network','Unicorn founders, category operators and the LPs behind them, opened to every company from day one — the network a first-time founder could never assemble alone.'],
+        ['An exclusive network','Unicorn founders, category operators and the LPs behind them, opened to every company from day one — the network a first-time founder could never assemble alone. Founders like <b style="color:var(--cobalt);font-weight:600">Didier Elzinga</b> (Culture Amp) among them.'],
         ['An accelerated program','A hands-on program that compresses years into weeks: narrative, operating cadence, hiring across borders, and the first fifty introductions.'],
         ['Built for the breakout','We close the gaps that keep good companies small, and turn a first check into the next Deel or Kalshi.']
       ].map((c,i)=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column"><div style="width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;margin-bottom:16px">${i+1}</div><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:12px">${c[1]}</div></div>`).join('')}
