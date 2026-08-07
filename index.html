@@ -49,9 +49,8 @@
     <meta name="twitter:image" content="https://sunshinelake.vc/images/og-share.png">
     <meta name="twitter:image:alt" content="Sunshine Lake Capital — founders forge the future.">
     <!-- Browser UI tint on mobile Safari/Chrome (desktop browsers ignore
-         theme-color). Deep navy so the address bar reads as an extension of
-         the dark site chrome rather than a bright yellow slab. -->
-    <meta name="theme-color" content="#02041F">
+         theme-color). Sunshine yellow so the bar reads on-brand, not black. -->
+    <meta name="theme-color" content="#F2D831">
     <link rel="canonical" href="https://sunshinelake.vc">
     <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -216,11 +215,11 @@
                aligns with the leftmost pixel of the wordmark logo
                (which sits at the same --hero-edge-x with no bearing). */
             margin-left: -0.04em;
-            /* Super-dark-blue headline (Don): a crisp near-white lift so the
-               deep type reads over the darker water without a faded glow. The
-               same shadow rides every word so the two lines match. */
-            color: #0A1560;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
+            /* One tight, low-intensity navy shadow shared by EVERY word.
+               A small blur hugs each glyph so it reads the same on the
+               bold brand line and the lighter tagline (a wide blur got
+               swallowed by the heavier "Sunshine Lake" strokes). */
+            text-shadow: 0 1px 4px rgba(11, 18, 117, 0.4);
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
@@ -239,9 +238,9 @@
            heavier shadow; the lighter value makes the shadow look EVEN
            across every word while the brand text stays bolder. */
         .title .title-brand {
-            color: #0A1560;
+            color: #fff;
             font-weight: 800;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
+            text-shadow: 0 1px 4px rgba(11, 18, 117, 0.22);
         }
         /* Wordmark shimmer — a soft warm gleam sweeps across "Sunshine
            Lake" on a slow ~5.5s loop, starting after the fade-up entrance
