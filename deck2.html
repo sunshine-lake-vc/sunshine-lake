@@ -1570,21 +1570,26 @@ add(sprintSlide({
 
 
 /* NEW — THE SPEAKEASY */
-add({title:'The Speakeasy',track:'appendix',teaser:false,dark:false,cls:'',html:`
-  <div class="s-pad">
-    <div class="eyebrow">The Sunshine Lake Speakeasy · San Francisco</div>
-    <h1 class="s-title">Not a founder house. A speakeasy.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">For fifteen years Don has made a home for international founders in San Francisco. At Sunshine Lake it is the Speakeasy: the network, craft and capital no local fund can hand them.</div>
-    <hr class="s-rule">
-    <div style="display:flex;gap:24px;margin-top:24px;flex:1">
-      ${[
-        ['In the community','San Francisco is where technology compounds fastest. Our founders live in the middle of it: embedded, not enclosed.'],
-        ['A speakeasy, properly','Offsites, unicorn-founder talks, LP salons. A home where "too direct, too deadpan" founders can be vulnerable and solve real problems together.'],
-        ['The landing','Arriving founders get a soft landing: a desk, O-1 visa support, payroll on Deel, and the first fifty intros, before the first check clears.']
-      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:24px 26px"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:14px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6">${c[1]}</div></div>`).join('')}
+add({title:'The Speakeasy',track:'appendix',teaser:false,dark:true,cls:'',html:`
+  <div class="s-pad" style="background:linear-gradient(155deg,#0B1275 0%,#070d33 55%,#02041F 100%);flex-direction:row;gap:46px;align-items:center">
+    <div style="flex:1.02;min-width:0">
+      <div class="eyebrow" style="color:var(--sun);margin-bottom:16px">By invitation · San Francisco to Athens</div>
+      <div style="font-family:var(--serif);font-size:22px;color:rgba(255,255,255,.9);line-height:1">The</div>
+      <div style="font-family:var(--serif);font-weight:500;font-size:42px;line-height:1.05;color:#eaf3ff;margin-top:2px;text-shadow:0 0 4px #eaf3ff,0 0 12px #2f6bff,0 0 26px #2f6bff,0 0 56px rgba(47,107,255,.7)">Sunshine Lake</div>
+      <div style="font-family:var(--serif);font-weight:500;font-size:62px;line-height:1;letter-spacing:-.01em;color:#fff;margin-top:6px">Speakeasy</div>
+      <p style="font-family:var(--serif);font-size:16px;color:rgba(255,255,255,.8);line-height:1.55;margin:22px 0 0;max-width:31em"><b style="color:#fff;font-weight:500">Not a founder house.</b> For fifteen years Don has made a home for international founders in San Francisco &mdash; the network, craft and capital no local fund can hand them.</p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:12px">
+        ${[
+          ['In the community','Embedded in SF where technology compounds &mdash; not enclosed.'],
+          ['A speakeasy, properly','Offsites, unicorn-founder talks and LP salons; a room to be candid.'],
+          ['The landing','A desk, O-1 visa support, payroll on Deel and the first fifty intros &mdash; before the first check clears.']
+        ].map(c=>`<div style="display:flex;gap:12px;align-items:baseline"><span style="flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.45"><b style="color:#fff;font-weight:600">${c[0]}.</b> ${c[1]}</div></div>`).join('')}
+      </div>
     </div>
-    <div class="note" style="margin-top:20px">Shaped alongside our LP community, Accel's founder among them. In person in SF; virtual worldwide.</div>
-  </div>${chrome(false)}`});
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:12px;align-self:stretch">
+      ${['room.jpg','group.jpg','speak.jpg','one-on-one.jpg'].map(src=>`<div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12)"><img src="images/speakeasy/${src}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>`).join('')}
+    </div>
+  </div>${chrome(true)}`});
 
 
 /* NEW — THE LPA AT A GLANCE */
