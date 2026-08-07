@@ -49,8 +49,9 @@
     <meta name="twitter:image" content="https://sunshinelake.vc/images/og-share.png">
     <meta name="twitter:image:alt" content="Sunshine Lake Capital — founders forge the future.">
     <!-- Browser UI tint on mobile Safari/Chrome (desktop browsers ignore
-         theme-color). Sunshine yellow so the bar reads on-brand, not black. -->
-    <meta name="theme-color" content="#F2D831">
+         theme-color). Deep navy so the address bar reads as an extension of
+         the dark site chrome rather than a bright yellow slab. -->
+    <meta name="theme-color" content="#02041F">
     <link rel="canonical" href="https://sunshinelake.vc">
     <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -215,11 +216,11 @@
                aligns with the leftmost pixel of the wordmark logo
                (which sits at the same --hero-edge-x with no bearing). */
             margin-left: -0.04em;
-            /* One tight, low-intensity navy shadow shared by EVERY word.
-               A small blur hugs each glyph so it reads the same on the
-               bold brand line and the lighter tagline (a wide blur got
-               swallowed by the heavier "Sunshine Lake" strokes). */
-            text-shadow: 0 1px 4px rgba(11, 18, 117, 0.4);
+            /* Super-dark-blue headline (Don): a crisp near-white lift so the
+               deep type reads over the darker water without a faded glow. The
+               same shadow rides every word so the two lines match. */
+            color: #0A1560;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
@@ -238,9 +239,9 @@
            heavier shadow; the lighter value makes the shadow look EVEN
            across every word while the brand text stays bolder. */
         .title .title-brand {
-            color: #fff;
+            color: #0A1560;
             font-weight: 800;
-            text-shadow: 0 1px 4px rgba(11, 18, 117, 0.22);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
         }
         /* Wordmark shimmer — a soft warm gleam sweeps across "Sunshine
            Lake" on a slow ~5.5s loop, starting after the fade-up entrance
@@ -3134,6 +3135,54 @@
 
 
 
+    <!-- Thesis — pulled out of Team; sits BEFORE Why-now, opens the macro case -->
+    <style>
+      .thesis-standalone{background:#155EE8;padding:clamp(54px,8vw,110px) clamp(56px,8vw,180px)}
+      .thesis-standalone-inner{max-width:1240px;margin:0 auto}
+      .thesis-standalone .team-thesis{margin:0}
+      @media(max-width:720px){.thesis-standalone{padding:clamp(48px,10vw,72px) clamp(20px,5vw,48px)}}
+    </style>
+    <section class="thesis-standalone" aria-label="Our thesis">
+      <div class="thesis-standalone-inner">
+            <div class="team-thesis" id="rd-section-thesis">
+                <p class="thesis-lede">Critical global systems are in turmoil. We back the brave founders who cross the world to fix them.</p>
+
+                <!-- Two-pillar band — the two things our founders draw on,
+                     each with a light line-art motif. Framed with hairlines
+                     so it reads as its own beat between the lede and the
+                     payoff line. -->
+                <div class="thesis-pillars" aria-label="What our founders draw on">
+                    <div class="pillar">
+                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <g class="spark-rays" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round">
+                                <line x1="32" y1="4" x2="32" y2="15"/>
+                                <line x1="32" y1="49" x2="32" y2="60"/>
+                                <line x1="4" y1="32" x2="15" y2="32"/>
+                                <line x1="49" y1="32" x2="60" y2="32"/>
+                                <line x1="12.7" y1="12.7" x2="20.5" y2="20.5"/>
+                                <line x1="43.5" y1="43.5" x2="51.3" y2="51.3"/>
+                                <line x1="51.3" y1="12.7" x2="43.5" y2="20.5"/>
+                                <line x1="20.5" y1="43.5" x2="12.7" y2="51.3"/>
+                            </g>
+                            <circle class="spark-core" cx="32" cy="32" r="7" fill="#F2D831"/>
+                        </svg>
+                        <p class="pillar-text">Extreme origins.</p>
+                    </div>
+                    <div class="pillar">
+                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <circle cx="32" cy="32" r="23" stroke="rgba(255,255,255,0.30)" stroke-width="1.4"/>
+                            <path class="see-wave" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                            <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
+                        </svg>
+                        <p class="pillar-text">The psychology to see shifts that others miss.</p>
+                    </div>
+                </div>
+
+                <p>That&rsquo;s how trillion-dollar businesses start and how we back blockbusters every decade.</p>
+            </div>
+      </div>
+    </section>
+
     <!-- ════════ Three thesis bands (Don) — philosophy · critical systems · spiral ════════ -->
     <style>
       .thesis-bands{background:linear-gradient(180deg,#0a2158 0%,#061334 42%,#03081d 100%);color:#fff;position:relative;overflow:hidden}
@@ -3264,54 +3313,6 @@
           <p class="tb-body">The systems the world can&rsquo;t run a day without are straining under a shift none was built for. Software reached barely <b class="tb-heavy">0.5%</b> of the <b class="tb-heavy">$115T</b> economy; AI is racing into the rest. Rebalancing it is the largest opportunity on earth.</p>
         </div>
 
-      </div>
-    </section>
-
-    <!-- Thesis — pulled out of Team; sits after Why-now, leads into Portfolio -->
-    <style>
-      .thesis-standalone{background:#155EE8;padding:clamp(54px,8vw,110px) clamp(56px,8vw,180px)}
-      .thesis-standalone-inner{max-width:1240px;margin:0 auto}
-      .thesis-standalone .team-thesis{margin:0}
-      @media(max-width:720px){.thesis-standalone{padding:clamp(48px,10vw,72px) clamp(20px,5vw,48px)}}
-    </style>
-    <section class="thesis-standalone" aria-label="Our thesis">
-      <div class="thesis-standalone-inner">
-            <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Critical global systems are in turmoil. We back the brave founders who cross the world to fix them.</p>
-
-                <!-- Two-pillar band — the two things our founders draw on,
-                     each with a light line-art motif. Framed with hairlines
-                     so it reads as its own beat between the lede and the
-                     payoff line. -->
-                <div class="thesis-pillars" aria-label="What our founders draw on">
-                    <div class="pillar">
-                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                            <g class="spark-rays" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round">
-                                <line x1="32" y1="4" x2="32" y2="15"/>
-                                <line x1="32" y1="49" x2="32" y2="60"/>
-                                <line x1="4" y1="32" x2="15" y2="32"/>
-                                <line x1="49" y1="32" x2="60" y2="32"/>
-                                <line x1="12.7" y1="12.7" x2="20.5" y2="20.5"/>
-                                <line x1="43.5" y1="43.5" x2="51.3" y2="51.3"/>
-                                <line x1="51.3" y1="12.7" x2="43.5" y2="20.5"/>
-                                <line x1="20.5" y1="43.5" x2="12.7" y2="51.3"/>
-                            </g>
-                            <circle class="spark-core" cx="32" cy="32" r="7" fill="#F2D831"/>
-                        </svg>
-                        <p class="pillar-text">Extreme origins.</p>
-                    </div>
-                    <div class="pillar">
-                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                            <circle cx="32" cy="32" r="23" stroke="rgba(255,255,255,0.30)" stroke-width="1.4"/>
-                            <path class="see-wave" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                            <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
-                        </svg>
-                        <p class="pillar-text">The psychology to see shifts that others miss.</p>
-                    </div>
-                </div>
-
-                <p>That&rsquo;s how trillion-dollar businesses start and how we back blockbusters every decade.</p>
-            </div>
       </div>
     </section>
 
