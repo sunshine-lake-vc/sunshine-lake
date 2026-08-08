@@ -221,6 +221,11 @@
                match. */
             color: #0A1560;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
+            /* Thicken the display serif without a bold weight (we have none):
+               a hairline stroke in the same ink fattens every glyph evenly,
+               so "Sunshine Lake founders forge the future" reads heavier. */
+            -webkit-text-stroke: 0.7px #0A1560;
+            text-stroke: 0.7px #0A1560;
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
@@ -3187,7 +3192,7 @@
 
     <!-- ════════ Three thesis bands (Don) — philosophy · critical systems · spiral ════════ -->
     <style>
-      .thesis-bands{background:linear-gradient(180deg,#0a2158 0%,#061334 42%,#03081d 100%);color:#fff;position:relative;overflow:hidden}
+      .thesis-bands{background:#0a2158;color:#fff;position:relative;overflow:hidden}
       .tb-inner{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,64px);position:relative;z-index:2}
       .tb-band{padding:clamp(30px,4.5vw,56px) 0;position:relative}
       .tb-band + .tb-band{}
