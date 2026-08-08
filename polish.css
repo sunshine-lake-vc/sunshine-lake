@@ -896,7 +896,7 @@ body.mode-tight .content-sticky,
    above (team + voices) and fade into Mid Lake over the first 320px
    so there's no hard edge — the seam between voices and Portfolio
    was rendering as a visible dark band on mobile. */
-.founders-scroll-spacer  { background: linear-gradient(180deg, #155EE8 0px, #0A3DAE 320px) !important; }
+.founders-scroll-spacer  { background: #155EE8 !important; }
 .founders-scroll-spacer img,
 .founders-scroll-spacer .founders-photo-stack img { filter: none !important; }
 .rd-zone                 { background: #050838 !important; }
