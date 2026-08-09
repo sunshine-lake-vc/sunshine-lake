@@ -2891,7 +2891,7 @@
                             <path class="see-wave" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
                             <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
                         </svg>
-                        <p class="pillar-text">Seeing shifts first.</p>
+                        <p class="pillar-text">Psychology to see shifts first.</p>
                     </div>
                 </div>
 
@@ -3231,10 +3231,14 @@
          sun-yellow origin) and sitting under the Band C close text. It
          draws in — spiralling out from the origin — when scrolled into
          view (see the script below the band). */
-      .tb-spiral-title{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(1.3rem,1.9vw,1.75rem);color:#fff;letter-spacing:-.01em;margin:clamp(28px,4vw,44px) 0 0}
-      .tb-spiral-cap{font-family:'DomaineDisp','Times New Roman',serif;font-size:clamp(1.05rem,1.3vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.78);max-width:620px;margin:10px 0 0}
+      /* Supporting text = secondary/footnote, not core copy: small + muted. */
+      .tb-spiral-title{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(0.95rem,1.05vw,1.1rem);color:rgba(255,255,255,.55);letter-spacing:0;margin:clamp(28px,4vw,44px) 0 0}
+      .tb-spiral-cap{font-family:'DomaineDisp','Times New Roman',serif;font-style:italic;font-size:clamp(0.82rem,0.9vw,0.92rem);line-height:1.5;color:rgba(255,255,255,.42);max-width:460px;margin:6px 0 0}
       .tb-spiral-fig{margin:clamp(16px,2.4vw,28px) 0 0;display:flex;justify-content:flex-start}
-      .tb-spiral-fig svg{width:clamp(170px,30vw,240px);height:auto;display:block;overflow:visible}
+      /* The figure draws in on scroll (JS), then spins endlessly. */
+      .tb-spiral-fig svg{width:clamp(170px,30vw,240px);height:auto;display:block;overflow:visible;transform-origin:50% 50%;animation:tbSpiralSpin 36s linear infinite}
+      @keyframes tbSpiralSpin{to{transform:rotate(360deg)}}
+      @media(prefers-reduced-motion:reduce){.tb-spiral-fig svg{animation:none}}
       .tb-spiral-path{stroke:url(#tbSpiralFade);stroke-width:4.5;fill:none;stroke-linecap:round}
       .tb-spiral-origin{fill:#F2D831}
       /* Mobile: let the spiral grow larger and its faded tail run off the
