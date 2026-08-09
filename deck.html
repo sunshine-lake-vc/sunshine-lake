@@ -108,6 +108,9 @@ body{
 @keyframes seeDraw{0%{stroke-dashoffset:90;}45%{stroke-dashoffset:0;}80%,100%{stroke-dashoffset:0;}}
 @keyframes seePulse{0%,40%{transform:scale(.7);opacity:.3;}60%{transform:scale(1.15);opacity:1;}100%{transform:scale(1);opacity:.9;}}
 @media(prefers-reduced-motion:reduce){.spark-rays,.spark-core,.see-wave,.see-dot{animation:none;}.see-wave{stroke-dashoffset:0;}.spark-core,.see-dot{opacity:1;}}
+.deck-spiral{transform-origin:50% 50%;animation:deckSpiralSpin 36s linear infinite;}
+@keyframes deckSpiralSpin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.deck-spiral{animation:none;}}
 
 /* ---------- cover (abyss hero) ---------- */
 .cover{background:
@@ -619,6 +622,7 @@ table.tbl.tall td.co{font-size:20px;}
   .spark-rays,.spark-core,.see-wave,.see-dot{animation:none !important;}
   .see-wave{stroke-dashoffset:0 !important;}
   .spark-rays,.spark-core,.see-dot{opacity:1 !important;}
+  .deck-spiral{animation:none !important;transform:none !important;}
 }
 </style>
 </head>
@@ -1051,8 +1055,8 @@ add({title:'Fund I · Portfolio',track:'core',teaser:true,dark:false,cls:'',html
     <hr class="s-rule">
     <div style="display:flex;flex-direction:column;margin-top:14px;flex:1">
       ${[
-        ['Geoffrey Tisserand &amp; Anji Ismail','Concord.ai','France','Sold Agora to <b style="color:var(--cobalt)">PayScale</b> and helped build Checkr into a <b style="color:var(--cobalt)">$5B</b> company. Now reskilling the workforce for AI.','geoffrey.webp'],
         ['Samuel Adeyemo','Duranta','Kenya','Co-founded Aurora Solar and scaled it to <b style="color:var(--cobalt)">$4B</b>. Now vision systems for machines in the physical world.','duranta.webp'],
+        ['Geoffrey Tisserand &amp; Anji Ismail','Concord.ai','France','Sold Agora to <b style="color:var(--cobalt)">PayScale</b> and helped build Checkr into a <b style="color:var(--cobalt)">$5B</b> company. Now reskilling the workforce for AI.','geoffrey.webp'],
         ['Thomas Dohmke','Entire','East Germany','Ran GitHub to <b style="color:var(--cobalt)">$7.5B</b> and scaled Copilot. Now the developer platform for the agent era.','entire.webp'],
         ['Dowling, Segal &amp; Coppa','FullSeam','US &middot; Oxford','Built TaxProper through to an <b style="color:var(--cobalt)">Opendoor</b> acquisition. Now AI agents for AP, AR and reconciliation.','fullseam.webp'],
         ['Craig O&rsquo;Neill','Argentic','Canada','Led Versapay through a <b style="color:var(--cobalt)">Great Hill</b> take-private. Now rebuilding B2B payments for the AI era.','argentic.webp']
@@ -1172,7 +1176,7 @@ add({title:'Technology expires faster than ever',track:'core',teaser:true,dark:t
         </div>
       </div>
       <div style="flex:0 0 300px;display:flex;justify-content:center">
-        <svg viewBox="0 0 600 600" style="width:300px;height:auto;overflow:visible" aria-hidden="true">
+        <svg class="deck-spiral" viewBox="0 0 600 600" style="width:300px;height:auto;overflow:visible" aria-hidden="true">
           <defs><radialGradient id="deckSpiralFade" cx="300" cy="300" r="300" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="#ffffff" stop-opacity="0.8"/><stop offset="0.42" stop-color="#ffffff" stop-opacity="0.72"/><stop offset="0.7" stop-color="#ffffff" stop-opacity="0.34"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
           </radialGradient></defs>
