@@ -220,12 +220,14 @@
                faded glow. The same shadow rides every word so the two lines
                match. */
             color: #0A1560;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
-            /* Thicken the display serif without a bold weight (we have none):
-               a hairline stroke in the same ink fattens every glyph evenly,
-               so "Sunshine Lake founders forge the future" reads heavier. */
-            -webkit-text-stroke: 0.7px #0A1560;
-            text-stroke: 0.7px #0A1560;
+            /* Crisp white outline instead of a soft blue glow: paint-order
+               draws the stroke BEHIND the fill, so the dark-blue letters keep
+               a full body and gain a clean white edge (the "Sunshine Lake"
+               white), sharp against the water — and read heavier too. */
+            paint-order: stroke fill;
+            -webkit-text-stroke: 1.3px #ffffff;
+            text-stroke: 1.3px #ffffff;
+            text-shadow: 0 1px 2px rgba(2, 4, 31, 0.35);
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
@@ -2862,7 +2864,7 @@
     <section class="thesis-standalone" aria-label="Our thesis">
       <div class="thesis-standalone-inner">
             <div class="team-thesis" id="rd-section-thesis">
-                <p class="thesis-lede">Critical global systems are constantly expiring and being rebuilt. We back brave founders who navigate them.</p>
+                <p class="thesis-lede">Critical global systems are constantly expiring. We back founders who rebuild them.</p>
 
                 <!-- Two-pillar band — the two things our founders draw on,
                      each with a light line-art motif. Framed with hairlines
@@ -2883,7 +2885,7 @@
                             </g>
                             <circle class="spark-core" cx="32" cy="32" r="7" fill="#F2D831"/>
                         </svg>
-                        <p class="pillar-text">Extreme origins.</p>
+                        <p class="pillar-text">Forged by extreme origins.</p>
                     </div>
                     <div class="pillar">
                         <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -2891,11 +2893,11 @@
                             <path class="see-wave" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
                             <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
                         </svg>
-                        <p class="pillar-text">The psychology to see shifts that others miss.</p>
+                        <p class="pillar-text">Seeing shifts first.</p>
                     </div>
                 </div>
 
-                <p>That&rsquo;s how trillion-dollar businesses start and how we back blockbusters every decade.</p>
+                <p>That&rsquo;s how trillion-dollar blockbusters begin.</p>
             </div>
       </div>
     </section>
