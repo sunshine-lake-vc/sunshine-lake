@@ -220,14 +220,12 @@
                faded glow. The same shadow rides every word so the two lines
                match. */
             color: #0A1560;
-            /* Crisp white outline instead of a soft blue glow: paint-order
-               draws the stroke BEHIND the fill, so the dark-blue letters keep
-               a full body and gain a clean white edge (the "Sunshine Lake"
-               white), sharp against the water — and read heavier too. */
-            paint-order: stroke fill;
-            -webkit-text-stroke: 1.3px #ffffff;
-            text-stroke: 1.3px #ffffff;
-            text-shadow: 0 1px 2px rgba(2, 4, 31, 0.35);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55), 0 0 1px rgba(255, 255, 255, 0.75);
+            /* Thicken the display serif without a bold weight (we have none):
+               a hairline stroke in the same ink fattens every glyph evenly,
+               so "Sunshine Lake founders forge the future" reads heavier. */
+            -webkit-text-stroke: 0.7px #0A1560;
+            text-stroke: 0.7px #0A1560;
             /* Two-line brand lockup: each line stays on one row and never
                rewraps at any viewport (a shrink-to-fit script scales it down
                on narrow screens). text-size-adjust stops mobile font-boosting.
