@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F2D831">
-<title>Sunshine Lake — Fund I</title>
+<title>Sunshine Lake, Fund I</title>
 <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
 <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -638,7 +638,7 @@ table.tbl.tall td.co{font-size:20px;}
       <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
     </svg>
     <h1>Sunshine Lake</h1>
-    <p>Fund&nbsp;I investor presentation. Strictly confidential — please enter your email and the access password to continue.</p>
+    <p>Fund&nbsp;I investor presentation. Strictly confidential, please enter your email and the access password to continue.</p>
     <form id="gateForm" autocomplete="off">
       <label for="gm">Your email</label>
       <input id="gm" type="email" required autofocus placeholder="you@firm.com" autocomplete="email">
@@ -794,7 +794,7 @@ const CASES=[
   sourced:'Our global founder network surfaced Joshua early.',
   backed:'A British founder (London → US) with a viral consumer-rights product and real traction.',
   built:'We shaped the viral launch and demand gen, built the brand, and backed Joshua across multiple rounds.',
-  endMarket:'Red tape — every country',
+  endMarket:'Red tape, every country',
   metrics:[['First Check','Seed · Feb 2019'],['Current Mark','$230mm post-money'],['Status','Partially realized']],
   insight:'DoNotPay paid cash dividends from a profitable business, returning capital before any IPO.'},
  {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
@@ -805,8 +805,8 @@ const CASES=[
   sourced:'The Brex product-alumni network surfaced Andy.',
   backed:'We backed an engineering-led founder from China with deep empathy for the pain.',
   built:'We aligned the roadmap with the market, guided M&amp;A strategy, and coached the team to a Brex acquisition.',
-  endMarket:'Office of the CFO — global',
-  metrics:[['Checks','Seed · Dec 2019 → Apr 2022'],['Exit','Acquired by Brex — 2021'],['Status','Fully realized']],
+  endMarket:'Office of the CFO, global',
+  metrics:[['Checks','Seed · Dec 2019 → Apr 2022'],['Exit','Acquired by Brex, 2021'],['Status','Fully realized']],
   insight:'Pry: a clean, fully-realized exit. Startup finance is universally broken, and founders need clarity.'}
 ];
 
@@ -820,7 +820,7 @@ function teamCardsHTML(){
   return TEAM.map(t=>`<div class="tm">${avatar(t)}<div class="nm">${t.nm}</div>${t.na?`<div class="na">${t.na}</div>`:''}<div class="rl">${t.rl}</div><div class="pe">${t.pe}</div>${t.ow?`<div class="pe" style="color:var(--cobalt);margin-top:4px">${t.ow}</div>`:''}</div>`).join('');
 }
 function vectorsHTML(){
-  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b> <span>— ${a[1]}</span></div>`).join('')}</div>`).join('');
+  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b><span>, ${a[1]}</span></div>`).join('')}</div>`).join('');
 }
 function trackRowsHTML(){
   return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="mult">${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
@@ -943,7 +943,7 @@ function caseSlide(c){
   const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}"${c.logoImg.includes('-mono')?'':' style="filter:grayscale(1)"'}>`:`<span class="cs-logo">${c.logo}</span>`;
   const rows=[['Scout',c.sourced],['Select',c.lived],['Secure',c.backed],['Support',c.built]];
   const kpis=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
-  return {title:`Case Study — ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
+  return {title:`Case Study, ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
    <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
      <div class="cs-top">
        <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
@@ -1005,7 +1005,7 @@ add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
 
 
 /* 2 — GP: DON STALTER + THE ARC */
-add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'Don Stalter, GP',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad" style="padding-top:46px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:36px">
       <div style="flex:1">
@@ -1030,12 +1030,12 @@ add({title:'Don Stalter — GP',track:'core',teaser:true,dark:false,cls:'',html:
       ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
     </div>
     <div style="margin-top:auto;padding-top:14px;padding-bottom:22px;text-align:center">
-      <div style="font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2);line-height:1.4;max-width:1120px;margin:0 auto"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b> — decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b> — unicorns. All from first checks he sourced and led.</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2);line-height:1.4;max-width:1120px;margin:0 auto"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b>, decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b>, unicorns. All from first checks he sourced and led.</div>
     </div>
   </div>${chrome(false)}`});
 
 
-add({title:'The Record — Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
+add({title:'The Record, Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Record · Funds I &amp; II <span style="margin-left:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a;border:1px solid #e6cf8f;border-radius:999px;padding:3px 10px;vertical-align:middle">Track record</span></div>
     <h1 class="s-title">First checks into today's giants.</h1>
@@ -1116,10 +1116,10 @@ add({title:'The Evidence',track:'core',teaser:false,dark:false,cls:'',html:`
     <hr class="s-rule">
     <div style="display:flex;flex-direction:column;gap:0;margin-top:8px;flex:1">
       ${[
-        ['~80%','Immigrants start companies at ~80% higher rates than the native-born, at every firm size, and are net job creators, not takers.','Azoulay, Jones, Kim &amp; Miranda — American Economic Review: Insights (2022)'],
+        ['~80%','Immigrants start companies at ~80% higher rates than the native-born, at every firm size, and are net job creators, not takers.','Azoulay, Jones, Kim &amp; Miranda, American Economic Review: Insights (2022)'],
         ['45%','of Fortune 500 companies were founded by immigrants or their children, from Apple and Google to Nvidia and Tesla.','National Foundation for American Policy'],
-        ['+','Living across cultures measurably increases creative problem-solving: multicultural experience builds the cognitive flexibility that invention requires.','Maddux &amp; Galinsky — Journal of Personality and Social Psychology (2009), replicated across the literature'],
-        ['39%','Top-quartile culturally diverse teams are 39% more likely to outperform on profitability.','McKinsey &amp; Company — Diversity Wins']
+        ['+','Living across cultures measurably increases creative problem-solving: multicultural experience builds the cognitive flexibility that invention requires.','Maddux &amp; Galinsky, Journal of Personality and Social Psychology (2009), replicated across the literature'],
+        ['39%','Top-quartile culturally diverse teams are 39% more likely to outperform on profitability.','McKinsey &amp; Company, Diversity Wins']
       ].map((r,i)=>`<div style="display:flex;align-items:center;gap:28px;padding:15px 0;${i<3?'border-bottom:1px solid var(--line)':''};flex:1">
         <div style="flex:0 0 130px;font-family:var(--serif);font-size:40px;color:var(--cobalt);line-height:1;text-align:center">${r[0]}</div>
         <div style="flex:1"><div style="font-size:15px;color:var(--ink);line-height:1.45">${r[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:5px;font-style:italic">${r[2]}</div></div>
@@ -1129,16 +1129,16 @@ add({title:'The Evidence',track:'core',teaser:false,dark:false,cls:'',html:`
   </div>${chrome(false)}`});
 
 /* NEW — OUR EDGE · THE SPEAKEASY (early "edge" beat; fuller Speakeasy stays in appendix) */
-add({title:'Our Edge — The Speakeasy',track:'core',teaser:false,dark:false,cls:'',html:`
+add({title:'Our Edge, The Speakeasy',track:'core',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">Our Edge · The Speakeasy</div>
     <h1 class="s-title">The edge isn't the thesis. It's the Speakeasy.</h1>
-    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1110px;line-height:1.42">Anyone can write a thesis; few have backed the giants. Our unfair advantage is the <b style="color:var(--cobalt);font-weight:600">Speakeasy</b> — an invitation-only program where a network of unicorn founders, operators and LPs goes to work on each company, turning first checks into breakouts.</div>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1110px;line-height:1.42">Anyone can write a thesis; few have backed the giants. Our unfair advantage is the <b style="color:var(--cobalt);font-weight:600">Speakeasy</b>, an invitation-only program where a network of unicorn founders, operators and LPs goes to work on each company, turning first checks into breakouts.</div>
     <hr class="s-rule" style="margin-top:14px">
     <div style="flex:1;display:flex;align-items:center;margin-top:22px">
     <div style="display:flex;gap:24px;width:100%;align-items:stretch">
       ${[
-        ['An exclusive network','Unicorn founders, category operators and the LPs behind them, opened to every company from day one — the network a first-time founder could never assemble alone. Founders like <b style="color:var(--cobalt);font-weight:600">Didier Elzinga</b> (Culture Amp) among them.'],
+        ['An exclusive network','Unicorn founders, category operators and the LPs behind them, opened to every company from day one, the network a first-time founder could never assemble alone. Founders like <b style="color:var(--cobalt);font-weight:600">Didier Elzinga</b> (Culture Amp) among them.'],
         ['An accelerated program','A hands-on program that compresses years into weeks: narrative, operating cadence, hiring across borders, and the first fifty introductions.'],
         ['Built for the breakout','We close the gaps that keep good companies small, and turn a first check into the next Deel or Kalshi.']
       ].map((c,i)=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column"><div style="width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;margin-bottom:16px">${i+1}</div><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:12px">${c[1]}</div></div>`).join('')}
@@ -1221,7 +1221,7 @@ add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html
     <div class="eyebrow">Who Runs the System</div>
     <h1 class="s-title" style="font-size:40px">International and multicultural, by design.</h1>
     <div class="team-row" style="margin:16px 0 16px">${teamCardsHTML()}</div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;text-align:center">The bench — operators who made the same journey, matched to every stage</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;text-align:center">The bench, operators who made the same journey, matched to every stage</div>
     <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
     <div style="margin:14px 0 0 32px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:18px;color:#fff">
       <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPAC Member</span>
@@ -1240,7 +1240,7 @@ add({title:'How We Get There First',track:'core',teaser:true,dark:false,cls:'',h
       ${[
         ['First-50 Alumni','The next wave works inside the last. We track the first fifty of Deel, Kalshi, Headway and Assured, from their own cap tables, and get the first call when one steps out.','pills:Deel → FirstWork|Brex → PermitFlow|Headway → Marble'],
         ['Home-Market Winners','The strongest signal: already won once, somewhere harder. Founders who built real revenue in constrained home markets and relocate to go global, surfaced through a founder diaspora fifteen years dense.',''],
-        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b> — we host their demo days; their presidents keep sourcing as alumni.',''],
+        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b>, we host their demo days; their presidents keep sourcing as alumni.',''],
         ['The Speakeasy Door','Inbound, engineered: O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.',''],
         ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate.','']
       ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:11px 0;border-top:1px solid var(--line)"><div style="flex:0 0 210px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1"><div style="font-size:13.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div>${r[2].startsWith('pills:')?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${r[2].slice(6).split('|').map(p=>`<span style="font-size:11.5px;font-weight:600;color:var(--cobalt);background:#eef3fd;border-radius:999px;padding:4px 11px">${p}</span>`).join('')}<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:2px">unicorn founders refer, pre-incorporation</span></div>`:''}</div></div>`).join('')}
@@ -1262,7 +1262,7 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
     <div style="display:flex;gap:24px;margin-top:22px;flex:1">
       ${[
         ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We install the operating rhythm, weekly roles, KPIs and review cadence, and coach the pace until it holds under pressure. The habits that separate a fast company from a frantic one.',''],
-        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into the narrative that closes customers, key hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach — on Broadway with Glenn Close'],
+        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into the narrative that closes customers, key hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach, on Broadway with Glenn Close'],
         ['Sleeves rolled up','We build alongside the founder, not from the sideline: pipelines opened, executives recruited, M&amp;A run, board work done. By a GP who co-founded a company sold to Groupon and drove Airbnb\'s early international growth, where long-term stays are now nearly 1 in 5 nights booked. The unglamorous work that compounds.','']
       ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.62;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:140px;border-radius:10px;background:#dfe5f2 center 18%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:''}</div>`).join('')}
     </div>
@@ -1270,7 +1270,7 @@ add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',ht
       <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
       <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune, Oct 2025 · condensed). Global founders already live at that frontier; we fund them as the wave crests.</div>
     </div>
-    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?" — Top of Mind #146 (March 2026).</div>
+    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?", Top of Mind #146 (March 2026).</div>
   </div>${chrome(false)}`});
 
 
@@ -1376,8 +1376,8 @@ add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
     <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
     <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
     <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
-      <div class="rf past" style="justify-content:center"><div class="yr">2017–19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm · GFC</b></div><div class="sz">Deel &amp; Headway first checks</div></div>
-      <div class="rf past" style="justify-content:center"><div class="yr">2019–22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm · GFC</b></div><div class="sz">Kalshi &amp; Assured first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2017-19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm · GFC</b></div><div class="sz">Deel &amp; Headway first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019-22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm · GFC</b></div><div class="sz">Kalshi &amp; Assured first checks</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
       <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
@@ -1416,11 +1416,11 @@ add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls
 add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
   <div class="s-pad">
     <div class="eyebrow">The Capital Stack</div>
-    <h1 class="s-title">Early-stage focus — Pre-seed &amp; seed.</h1>
+    <h1 class="s-title">Early-stage focus, Pre-seed &amp; seed.</h1>
     <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">We enter at the first check and own the highest-multiple rung of the stack. Later capital pays up for de-risking.</div>
     <div style="display:flex;gap:12px;flex:1;margin-top:18px">
       <div style="flex:0 0 92px;display:flex;align-items:stretch;gap:6px">
-        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5–7yr return potential</div>
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5-7yr return potential</div>
         <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:30px 0 50px;text-align:right;font-family:var(--serif)">
           <div style="font-size:22px;color:var(--cobalt)">50×</div><div style="font-size:19px;color:var(--ink)">10×</div><div style="font-size:16px;color:var(--muted)">5×</div><div style="font-size:15px;color:var(--muted)">2×</div>
         </div>
@@ -1436,7 +1436,7 @@ add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',h
               ['Friends &amp; family',1,3,false],
               ['Accelerators',2,4,false],
               ['Angels',3,5,false],
-              ['Sunshine Lake — first checks',1,6,true],
+              ['Sunshine Lake, first checks',1,6,true],
               ['Early &amp; late-stage venture',6,9,false],
               ['Late-stage growth',9,11,false],
               ['Public equity markets',10,12,false]
@@ -1468,13 +1468,13 @@ add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:
     <hr class="s-rule">
     <div class="dd-row">
       ${[
-        ['Step 1','Founder assessment','2–6 hrs','<ul><li>Breakout story, scored 1–5.</li><li>Are these the best founders in the world for this problem?</li><li>Score global ambition, theme, domain, execution.</li></ul>'],
-        ['Step 2','Market &amp; model','6–18 hrs','<ul><li>Market sizing and model.</li><li>Data room and cap table.</li><li>Benchmark vs comps; product roadmap.</li></ul>'],
+        ['Step 1','Founder assessment','2-6 hrs','<ul><li>Breakout story, scored 1-5.</li><li>Are these the best founders in the world for this problem?</li><li>Score global ambition, theme, domain, execution.</li></ul>'],
+        ['Step 2','Market &amp; model','6-18 hrs','<ul><li>Market sizing and model.</li><li>Data room and cap table.</li><li>Benchmark vs comps; product roadmap.</li></ul>'],
         ['Step 3','Reflection &amp; decision','18+ hrs','<ul><li>Internal alignment and conviction.</li><li>SWOT and competitive positioning.</li><li>3 ecosystem intros (customers &amp; operators).</li></ul>'],
-        ['Step 4','Closing push','24–72 hrs','<ul><li>Thematic alignment session.</li><li>Support via customer &amp; talent intros.</li><li>Financial &amp; ops guidance.</li></ul>']
+        ['Step 4','Closing push','24-72 hrs','<ul><li>Thematic alignment session.</li><li>Support via customer &amp; talent intros.</li><li>Financial &amp; ops guidance.</li></ul>']
       ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
     </div>
-    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">Scored 1–5 across five axes. 20/25 advances, then the 7-week Acceleration begins.</div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">Scored 1-5 across five axes. 20/25 advances, then the 7-week Acceleration begins.</div>
   </div>${chrome(false)}`});
 
 
@@ -1488,19 +1488,19 @@ add({title:'Speakeasy Program',track:'appendix',teaser:false,dark:false,cls:'',h
     <hr class="s-rule">
     <div style="display:flex;gap:16px;margin-top:22px;flex:1;align-items:stretch">
       ${[
-        ['Weeks 1–2','Storytelling','#155EE8','#0B3FA8','#eef3fd','A fundable narrative &amp; pitch deck',[
+        ['Weeks 1-2','Storytelling','#155EE8','#0B3FA8','#eef3fd','A fundable narrative &amp; pitch deck',[
           ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Narrative & positioning','The arc: problem, why-now, why-you.'],
           ['<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.1V17h6v-1.4c0-.8.2-1.4 1-2.1A6 6 0 0 0 12 3z"/>','Investor psychology','What makes a partner lean in.'],
           ['<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>','10-minute talk track','Delivery, pacing, the demo moment.'],
           ['<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/>','Fundraising assets','Deck, memo, data-backed story.']
         ]],
-        ['Weeks 3–4','Execution','#BE922A','#8f6d15','#f8f0dd','An operating plan &amp; financial model',[
+        ['Weeks 3-4','Execution','#BE922A','#8f6d15','#f8f0dd','An operating plan &amp; financial model',[
           ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org design & cadence','Roles, rhythm, weekly KPIs.'],
           ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring plan','The first ten hires across borders.'],
           ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','Financial model','Unit economics and a defensible plan.'],
           ['<circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/>','Ops systems','Tooling and metrics that scale.']
         ]],
-        ['Weeks 5–6','Domain','#2f9d6f','#1f7a54','#e9f6f0','A live network &amp; advisor bench',[
+        ['Weeks 5-6','Domain','#2f9d6f','#1f7a54','#e9f6f0','A live network &amp; advisor bench',[
           ['<path d="M9 12a3 3 0 0 1 3-3h2.5a3 3 0 0 1 0 6M15 12a3 3 0 0 1-3 3H9.5a3 3 0 0 1 0-6"/>','Warm intros & hiring','Customers, key hires, partners.'],
           ['<path d="M12 3c2.8 1 4.5 3.8 4.5 7.5L15 14H9l-1.5-3.5C7.5 6.8 9.2 4 12 3z"/><circle cx="12" cy="9" r="1.3"/><path d="M9.5 16l-2 4M14.5 16l2 4"/>','BD & GTM strategy','Positioning to pipeline.'],
           ['<path d="M12 3l7 3v5c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/>','Competitive moat','Where you win, why it holds.'],
@@ -1546,19 +1546,19 @@ function sprintSlide(o){
   </div>${chrome(false)}`};
 }
 add(sprintSlide({
-  title:'The Sprint · Weeks 1–2', n:1, weeks:'Weeks 1–2', phase:'Storytelling',
+  title:'The Sprint · Weeks 1-2', n:1, weeks:'Weeks 1-2', phase:'Storytelling',
   colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
   h:'The narrative gap is the cheapest alpha we own.',
   sub:'Echo-chamber founders are native in hype; outsiders under-sell world-class work. We close that gap first.',
   cols:[
     ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
     ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy) and Frank Langella (The Father). NYU Tisch. He coached Wordware to its $30mm seed.'],
-    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1–2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
+    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1-2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
   ],
   foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 3–4', n:2, weeks:'Weeks 3–4', phase:'Execution',
+  title:'The Sprint · Weeks 3-4', n:2, weeks:'Weeks 3-4', phase:'Execution',
   colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'An operating plan &amp; financial model',
   h:'Operating momentum, installed.',
   sub:'The people who ran the machines install the machinery.',
@@ -1570,7 +1570,7 @@ add(sprintSlide({
   foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
 }));
 add(sprintSlide({
-  title:'The Sprint · Weeks 5–6', n:3, weeks:'Weeks 5–6', phase:'Domain',
+  title:'The Sprint · Weeks 5-6', n:3, weeks:'Weeks 5-6', phase:'Domain',
   colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'A live network &amp; advisor bench',
   h:'The network goes to work.',
   sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
@@ -1627,7 +1627,7 @@ add({title:'LP Co-Investment Proof',track:'appendix',teaser:false,dark:false,cls
     <div style="display:flex;gap:30px;margin-top:26px;flex:1">
       ${[
         ['Fieldguide','Marked up 1.6×','AI for the $6T professional-services economy · Jin Chang (Korea)','$700mm Series C','Goldman-led · Feb 2026','<b style="color:var(--ink);font-weight:600">Offered to existing LPs at a 25% discount to the last round.</b> Already marked up to 1.6× after investment.* Bessemer sits on the board.','#2f9d6f'],
-        ['Deel','IPO on horizon','Payroll for the world\'s workforce, tens of $T · Shuo &amp; Alex','$17.3B','post-money · $1.5B+ ARR, held at cost and growing fast','<b style="color:var(--ink);font-weight:600">A discount to intrinsic value</b> — the same price as the 2025 Series E, though substantial growth has occurred since. On the cap table: Ribbit · a16z · Coatue.','#155EE8']
+        ['Deel','IPO on horizon','Payroll for the world\'s workforce, tens of $T · Shuo &amp; Alex','$17.3B','post-money · $1.5B+ ARR, held at cost and growing fast','<b style="color:var(--ink);font-weight:600">A discount to intrinsic value</b>, the same price as the 2025 Series E, though substantial growth has occurred since. On the cap table: Ribbit · a16z · Coatue.','#155EE8']
       ].map(c=>`<div style="flex:1;background:#fafbfe;border:1px solid var(--line);border-radius:16px;padding:30px 34px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:var(--serif);font-size:36px;color:var(--ink)">${c[0]}</div><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:${c[6]};border-radius:999px;padding:7px 16px">${c[1]}</div></div><div style="font-size:14px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:14px">${c[2]}</div><div style="margin-top:auto;padding-top:22px"><div style="font-family:var(--serif);font-size:52px;color:${c[6]};line-height:1">${c[3]}</div><div style="font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.5">${c[4]}</div><div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.45">${c[5]}</div></div></div>`).join('')}
     </div>
     <div class="note" style="margin-top:14px">*Fieldguide markup based on subsequent secondary transactions.</div>
@@ -1673,7 +1673,7 @@ add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:
     <div class="eyebrow" style="color:var(--sun)">The Definition</div>
     <div class="dn-word">Sunshine Lake</div>
     <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span>;</span> a far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
-    <div class="cite">— Star Wars: Ewoks #9</div>
+    <div class="cite">Star Wars: Ewoks #9</div>
   </div><span class="s-conf">Strictly Confidential</span>`});
 
 
