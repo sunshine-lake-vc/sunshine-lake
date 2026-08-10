@@ -576,9 +576,9 @@
            hairlines, two columns each with a light line-art motif. */
         .thesis-pillars {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(24px, 4vw, 64px);
-            max-width: 720px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: clamp(22px, 3vw, 48px);
+            max-width: 1040px;
             margin: clamp(24px, 3vw, 40px) 0;
             padding: clamp(26px, 3vw, 40px) 0;
         }
@@ -614,8 +614,11 @@
             60% { transform: scale(1.15); opacity: 1; }
             100% { transform: scale(1); opacity: 0.9; }
         }
+        /* Icon 3 — building a better world: the globe slowly turns. */
+        .world-spin { transform-origin: 32px 32px; animation: worldSpin 14s linear infinite; }
+        @keyframes worldSpin { to { transform: rotate(360deg); } }
         @media (prefers-reduced-motion: reduce) {
-            .spark-rays, .spark-core, .see-wave, .see-dot { animation: none; }
+            .spark-rays, .spark-core, .see-wave, .see-dot, .world-spin { animation: none; }
             .see-wave { stroke-dashoffset: 0; }
             .spark-core { opacity: 1; } .see-dot { opacity: 1; }
         }
@@ -2892,6 +2895,15 @@
                             <circle class="see-dot" cx="34" cy="20" r="4.2" fill="#F2D831"/>
                         </svg>
                         <p class="pillar-text">Psychology to see shifts first.</p>
+                    </div>
+                    <div class="pillar">
+                        <svg class="pillar-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <circle cx="32" cy="32" r="23" stroke="rgba(255,255,255,0.30)" stroke-width="1.4"/>
+                            <line x1="9" y1="32" x2="55" y2="32" stroke="rgba(255,255,255,0.55)" stroke-width="1.6"/>
+                            <ellipse class="world-spin" cx="32" cy="32" rx="10.5" ry="23" stroke="rgba(255,255,255,0.92)" stroke-width="2.2" fill="none"/>
+                            <circle class="world-core" cx="32" cy="32" r="4.6" fill="#F2D831"/>
+                        </svg>
+                        <p class="pillar-text">Compelled to build a better world.</p>
                     </div>
                 </div>
 
