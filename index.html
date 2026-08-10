@@ -2335,8 +2335,21 @@
         @media (max-width: 768px) {
             .footer-photo-content-main { align-items: center; text-align: center; }
             .footer-photo-content-main h2 { text-align: center; }
-            .footer-cta-row { justify-content: center; }
-            .footer-contact { justify-content: center; }
+            /* Stack the two main CTAs as equal full-width pills so they
+               read as a tidy pair instead of a ragged wrap; the social
+               links sit inline just beneath them. */
+            .footer-cta-row {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 12px;
+            }
+            .footer-cta {
+                width: 100%;
+                max-width: 340px;
+                justify-content: center;
+            }
+            .footer-contact { justify-content: center; margin-top: 16px; }
         }
         /* Sign-off row — used to live inside the dark footer as
            .footer-bottom but moved into the white .sl-definition-bar
@@ -4108,9 +4121,10 @@
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
                     <h2>Dive in.</h2>
-                    <!-- All four destinations as pill capsules sitting in
-                         one wrapping row: Submit your pitch (primary), plus
-                         Sessions, LinkedIn and X as outlined companions. -->
+                    <!-- Two real destinations as the primary/secondary
+                         CTAs, then LinkedIn and X as a smaller, subdued
+                         social row beneath so they read as companions,
+                         not co-equal actions. -->
                     <div class="footer-cta-row">
                         <a class="footer-cta footer-cta--primary" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">
                             Submit your pitch <span aria-hidden="true">&rarr;</span>
@@ -4118,8 +4132,10 @@
                         <a class="footer-cta footer-cta--secondary" href="sessions.html">
                             Read the latest Sessions <span aria-hidden="true">&rarr;</span>
                         </a>
-                        <a class="footer-cta footer-cta--secondary" href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
-                        <a class="footer-cta footer-cta--secondary" href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
+                    </div>
+                    <div class="footer-contact">
+                        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
                     </div>
                     <!-- Sign-off (logo + ©) moved OUT of the cream
                          definition card into the dark abyss above it
