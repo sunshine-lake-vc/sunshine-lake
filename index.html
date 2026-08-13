@@ -1003,6 +1003,19 @@
             transform: translateY(-2px);
         }
         .advisor-info { min-width: 0; }
+        /* Per-card role eyebrow — hidden on desktop (the group labels
+           carry it); shown on mobile where the two groups collapse into
+           one carousel and the sub-labels are dropped. */
+        .advisor-role {
+            display: none;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 clamp(10px, 1.2vw, 14px) 0;
+        }
         .advisor-name {
             font-family: 'DomaineDisp', 'Times New Roman', Times, serif;
             font-size: clamp(1.3rem, 1.6vw, 1.8rem);
@@ -1045,6 +1058,11 @@
            all four cards into a tall column. Each group is one slide
            at ~84vw so the next peeks at the edge. */
         @media (max-width: 900px) {
+            /* Collapse the two labeled groups into ONE swipeable
+               carousel of individual advisor cards. display:contents
+               flattens the group/cards wrappers so each .advisor-card
+               becomes a direct scroll-snap slide; the sub-labels drop
+               and each card carries its own role eyebrow instead. */
             .bench-grid {
                 display: flex;
                 flex-direction: row;
@@ -1055,13 +1073,15 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
-                /* full-bleed within the section so a slide can sit
-                   flush to the left edge with the next peeking right */
                 padding-bottom: 4px;
             }
             .bench-grid::-webkit-scrollbar { display: none; }
-            .bench-group {
-                flex: 0 0 84vw;
+            .bench-group,
+            .bench-cards { display: contents; }
+            .bench-group-label { display: none; }
+            .advisor-role { display: block; }
+            .advisor-card {
+                flex: 0 0 80vw;
                 scroll-snap-align: start;
             }
         }
@@ -3146,12 +3166,14 @@
                         <div class="bench-cards">
                             <div class="advisor-card">
                                 <div class="advisor-info">
+                                    <p class="advisor-role">Advisor</p>
                                     <p class="advisor-name">Esther Wojcicki</p>
                                     <p class="advisor-bio">The &ldquo;Godmother of Silicon Valley&rdquo;: educator, author, a family that built YouTube and 23andMe.</p>
                                 </div>
                             </div>
                             <div class="advisor-card">
                                 <div class="advisor-info">
+                                    <p class="advisor-role">Advisor</p>
                                     <p class="advisor-name">Mike Franklin</p>
                                     <p class="advisor-bio">Co-creator of Apache Spark, founding advisor at <strong>Databricks</strong>, Chair of Computer Science at UChicago.</p>
                                 </div>
@@ -3164,12 +3186,14 @@
                         <div class="bench-cards">
                             <div class="advisor-card">
                                 <div class="advisor-info">
+                                    <p class="advisor-role">Venture Partner</p>
                                     <p class="advisor-name">Andrew Hovelson</p>
                                     <p class="advisor-bio">Broadway and film actor alongside Glenn Close and Tom Hanks. Leads narrative and storytelling; most recently coached <strong>Wordware</strong>&rsquo;s founders to a $30M seed.</p>
                                 </div>
                             </div>
                             <div class="advisor-card">
                                 <div class="advisor-info">
+                                    <p class="advisor-role">Venture Partner</p>
                                     <p class="advisor-name">Jamie Feaster</p>
                                     <p class="advisor-bio">Growth operator across adtech, DTC, and marketplaces; builds AI-driven growth systems across the portfolio.</p>
                                 </div>
