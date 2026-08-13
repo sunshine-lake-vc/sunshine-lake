@@ -4027,6 +4027,7 @@
             <a class="speak-cta" href="speakeasy.html">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
         </div>
         <div class="speak-reel" aria-label="Inside the Speakeasy">
+          <button class="speak-reel-arrow speak-reel-prev" type="button" aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
           <div class="speak-reel-track">
             <figure><img src="images/speakeasy/room.jpg" alt="" loading="lazy"></figure>
             <figure><img src="images/speakeasy/david-talk.jpg" alt="" loading="lazy"></figure>
@@ -4036,16 +4037,25 @@
             <figure><img src="images/speakeasy/talk2.jpg" alt="" loading="lazy"></figure>
             <figure><img src="images/speakeasy/one-on-one.jpg" alt="" loading="lazy"></figure>
           </div>
+          <button class="speak-reel-arrow speak-reel-next" type="button" aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
     </section>
     <script>
       (function(){
         var reel=document.querySelector('.speak-reel'); if(!reel) return;
         var track=reel.querySelector('.speak-reel-track'); if(!track) return;
-        Array.prototype.slice.call(track.children).forEach(function(n){
-          var c=n.cloneNode(true); c.setAttribute('aria-hidden','true'); track.appendChild(c);
-        });
-        reel.classList.add('is-ready');
+        var prev=reel.querySelector('.speak-reel-prev'), next=reel.querySelector('.speak-reel-next');
+        function page(){ return Math.max(track.clientWidth*0.8, 240); }
+        function update(){
+          var max=track.scrollWidth-track.clientWidth-2;
+          if(prev) prev.disabled=track.scrollLeft<=2;
+          if(next) next.disabled=track.scrollLeft>=max;
+        }
+        if(prev) prev.addEventListener('click',function(){track.scrollBy({left:-page(),behavior:'smooth'});});
+        if(next) next.addEventListener('click',function(){track.scrollBy({left:page(),behavior:'smooth'});});
+        track.addEventListener('scroll',update,{passive:true});
+        window.addEventListener('resize',update);
+        update();
       })();
     </script>
     <style>
@@ -4121,20 +4131,30 @@
         /* A slow, edge-faded strip of event photos — a peek inside the room
            that leads into the full Speakeasy page. Full-bleed within the
            section; the track is doubled in JS for a seamless loop. */
-        .speak-reel{position:relative;margin:clamp(48px,6vw,84px) calc(-1*clamp(20px,5vw,64px)) 0;overflow:hidden;
-            -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-            mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-        .speak-reel-track{display:flex;gap:14px;width:max-content;padding:0 7px}
-        .speak-reel.is-ready .speak-reel-track{animation:speakReel 64s linear infinite}
-        .speak-reel:hover .speak-reel-track{animation-play-state:paused}
-        @keyframes speakReel{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-        .speak-reel figure{flex:0 0 auto;margin:0;line-height:0}
-        .speak-reel img{height:clamp(140px,19vw,210px);width:auto;aspect-ratio:3/2;object-fit:cover;
-            border-radius:12px;display:block;box-shadow:0 14px 34px rgba(0,0,0,.34);filter:saturate(.96) brightness(.9)}
-        @media(prefers-reduced-motion:reduce){
-            .speak-reel.is-ready .speak-reel-track{animation:none}
-            .speak-reel{overflow-x:auto;scrollbar-width:none}
-        }
+        /* Clean swipeable carousel: scroll-snapping photo tiles with
+           small chevron arrows on each side. No edge fade; softer,
+           lighter photo treatment. */
+        .speak-reel{position:relative;margin:clamp(40px,5vw,72px) calc(-1*clamp(20px,5vw,64px)) 0}
+        .speak-reel-track{display:flex;gap:16px;padding:18px clamp(20px,5vw,64px);
+            overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;
+            -webkit-overflow-scrolling:touch;scrollbar-width:none}
+        .speak-reel-track::-webkit-scrollbar{display:none}
+        .speak-reel figure{flex:0 0 auto;margin:0;line-height:0;scroll-snap-align:start}
+        .speak-reel img{height:clamp(150px,20vw,220px);width:auto;aspect-ratio:3/2;object-fit:cover;
+            border-radius:14px;display:block;border:1px solid rgba(255,255,255,0.10);
+            box-shadow:0 16px 38px rgba(0,0,0,.30);filter:brightness(1.06) contrast(0.9) saturate(1.05)}
+        .speak-reel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+            width:clamp(38px,3.4vw,46px);height:clamp(38px,3.4vw,46px);border-radius:50%;padding:0;
+            display:flex;align-items:center;justify-content:center;cursor:pointer;
+            border:1px solid rgba(255,255,255,0.28);background:rgba(4,8,28,0.6);
+            -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#eaf3ff;
+            transition:background .25s ease,border-color .25s ease,opacity .25s ease}
+        .speak-reel-arrow:hover{background:rgba(4,8,28,0.9);border-color:rgba(242,216,49,0.6);color:#fff}
+        .speak-reel-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+        .speak-reel-prev{left:clamp(10px,2.5vw,28px)}
+        .speak-reel-next{right:clamp(10px,2.5vw,28px)}
+        .speak-reel-arrow[disabled]{opacity:.28;cursor:default}
+        @media(prefers-reduced-motion:reduce){.speak-reel-track{scroll-behavior:auto}}
     </style>
 
     </main>
