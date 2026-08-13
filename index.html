@@ -3288,15 +3288,19 @@
       @media(prefers-reduced-motion:reduce){.tb-spiral-fig svg{animation:none}}
       .tb-spiral-path{stroke:url(#tbSpiralFade);stroke-width:5.5;fill:none;stroke-linecap:round}
       .tb-spiral-origin{fill:#F2D831}
-      /* Mobile: let the spiral grow larger and its faded tail run off the
-         bottom, behind the next (opaque blue) section — the band lets it
-         spill (overflow visible) and the negative margin pulls the blue
-         section up over the tail. */
+      /* Mobile: lay the spiral beside its caption (two columns) rather
+         than stacking it below, so the beat takes far less vertical
+         space on a phone. */
       @media(max-width:600px){
-        .thesis-bands--spiral{overflow:visible}
-        .thesis-bands--spiral .tb-band:last-child{padding-bottom:0}
-        .thesis-bands--spiral .tb-spiral-fig{margin-bottom:clamp(-120px,-24vw,-70px)}
-        .thesis-bands--spiral .tb-spiral-fig svg{width:min(80vw,330px)}
+        .tb-band--spiral{
+          display:flex;
+          align-items:center;
+          gap:clamp(14px,4vw,26px);
+        }
+        .tb-band--spiral .tb-spiral-copy{flex:1 1 auto;min-width:0}
+        .tb-band--spiral .tb-spiral-title{margin-top:0}
+        .tb-band--spiral .tb-spiral-fig{flex:0 0 42%;margin-top:0;justify-content:center}
+        .tb-band--spiral .tb-spiral-fig svg{width:100%;max-width:190px}
       }
     </style>
     <section class="thesis-bands" aria-label="Why now">
@@ -3373,9 +3377,11 @@
         </div>
 
         <!-- Evolve — the logarithmic spiral (after the systems band) -->
-        <div class="tb-band">
-          <p class="tb-spiral-title">The logarithmic spiral</p>
-          <p class="tb-spiral-cap">Balance through constant change.</p>
+        <div class="tb-band tb-band--spiral">
+          <div class="tb-spiral-copy">
+            <p class="tb-spiral-title">The logarithmic spiral</p>
+            <p class="tb-spiral-cap">Balance through constant change.</p>
+          </div>
           <div class="tb-spiral-fig" aria-hidden="true">
             <svg viewBox="0 0 600 600">
               <defs>
