@@ -3808,34 +3808,34 @@
         @media(max-width:600px){ .quote-strip{grid-template-columns:1fr;gap:12px;margin-top:clamp(32px,8vw,48px)} }
         /* ── In their words: white quote carousel over a photo carousel ── */
         .wall-rail{position:relative}
-        .wall-rail--photos{margin-top:clamp(16px,2vw,30px)}
-        .wall-track{display:flex;gap:clamp(12px,1.2vw,18px);overflow-x:auto;
-            scroll-snap-type:x proximity;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
-            scrollbar-width:none;padding:16px clamp(8px,2vw,20px)}
+        .wall-track{display:flex;gap:clamp(12px,1.2vw,18px)}
         .wall-track::-webkit-scrollbar{display:none}
-        .wall-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;
-            width:clamp(34px,3vw,42px);height:clamp(34px,3vw,42px);border-radius:50%;padding:0;
-            display:flex;align-items:center;justify-content:center;cursor:pointer;
-            border:1px solid rgba(255,255,255,0.28);background:rgba(4,8,28,0.6);
-            -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#eaf3ff;
-            transition:background .25s ease,border-color .25s ease,opacity .25s ease}
-        .wall-arrow:hover{background:rgba(4,8,28,0.9);border-color:rgba(242,216,49,0.6);color:#fff}
-        .wall-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-        .wall-prev{left:clamp(2px,0.8vw,10px)}
-        .wall-next{right:clamp(2px,0.8vw,10px)}
-        .wall-arrow[disabled]{opacity:.28;cursor:default}
-        .wall-quote{flex:0 0 auto;scroll-snap-align:start;width:clamp(228px,22vw,288px);background:#fff;border-radius:14px;
-            padding:clamp(15px,1.3vw,21px);display:flex;flex-direction:column;box-shadow:0 14px 34px rgba(0,0,0,.28);margin:0}
+        /* PHOTOS: soft continuous auto-scroll marquee, subtle edge softening. */
+        .wall-rail--photos{overflow:hidden;margin-top:clamp(16px,2vw,30px);
+            -webkit-mask-image:linear-gradient(90deg,transparent,#000 2.5%,#000 97.5%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 2.5%,#000 97.5%,transparent)}
+        .wall-rail--photos .wall-track{width:max-content;padding:8px 0}
+        .wall-rail--photos.is-ready .wall-track{animation:wallScroll 65s linear infinite}
+        .wall-rail--photos:hover .wall-track{animation-play-state:paused}
+        @keyframes wallScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        /* QUOTES: centered tile auto-snapping to the next every 4s; the
+           active card sits full-size, neighbours peek dimmed. */
+        .wall-rail--quotes .wall-track{overflow-x:auto;scroll-snap-type:x mandatory;
+            scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+            padding:20px calc(50% - clamp(118px,12vw,150px))}
+        .wall-quote{flex:0 0 auto;scroll-snap-align:center;width:clamp(236px,24vw,300px);background:#fff;border-radius:14px;
+            padding:clamp(15px,1.3vw,21px);display:flex;flex-direction:column;box-shadow:0 14px 34px rgba(0,0,0,.28);margin:0;opacity:.38;transform:scale(.93);transition:opacity .5s ease,transform .5s ease}
+        .wall-quote.is-active{opacity:1;transform:scale(1)}
         .wall-quote .qc-mark{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:2.05rem;line-height:.4;height:.3em;color:#155EE8}
         .wall-quote .qc-q{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:clamp(.96rem,.98vw,1.1rem);line-height:1.34;color:#0b1275;margin:9px 0 0;flex:1 0 auto}
         .wall-quote .qc-attr{margin-top:clamp(9px,.9vw,13px);display:flex;flex-direction:column;gap:2px}
         .wall-quote .qc-n{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:700;font-size:.88rem;color:#0b1275}
         .wall-quote .qc-c{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#155EE8}
-        .wall-photo{flex:0 0 auto;scroll-snap-align:start;width:clamp(150px,16vw,205px);aspect-ratio:1/1;border-radius:12px;overflow:hidden;position:relative;margin:0}
+        .wall-photo{flex:0 0 auto;width:clamp(150px,16vw,205px);aspect-ratio:1/1;border-radius:12px;overflow:hidden;position:relative;margin:0}
         .wall-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(1.15) contrast(0.85) saturate(1.05)}
         .wall-photo figcaption{position:absolute;inset:auto 0 0 0;padding:8px 10px;font-size:10px;color:#fff;line-height:1.2;background:linear-gradient(180deg,transparent,rgba(2,4,31,.88));opacity:0;transition:opacity .3s}
         .wall-photo:hover figcaption{opacity:1}
-        @media(prefers-reduced-motion:reduce){.wall-track{scroll-behavior:auto}}
+        @media(prefers-reduced-motion:reduce){.wall-rail--photos.is-ready .wall-track{animation:none}.wall-rail--quotes .wall-track{scroll-behavior:auto}}
     </style>
     <section class="snapshots-wrap" aria-label="In their words">
       <div class="snapshots-inner">
@@ -3854,14 +3854,10 @@
                     </filter>
                 </svg>
                 <div class="wall-rail wall-rail--quotes" aria-label="In their words">
-                  <button class="wall-arrow wall-prev" type="button" aria-label="Previous quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
                   <div class="wall-track" id="quoteTrack"></div>
-                  <button class="wall-arrow wall-next" type="button" aria-label="Next quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
                 </div>
                 <div class="wall-rail wall-rail--photos" aria-label="From the room">
-                  <button class="wall-arrow wall-prev" type="button" aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
                   <div class="wall-track" id="photoTrack"></div>
-                  <button class="wall-arrow wall-next" type="button" aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
                 </div>
             </div>
       </div>
@@ -3964,30 +3960,49 @@
                 }
                 // Fill a carousel track, then clone the set once (aria-hidden)
                 // so the -50% marquee loops seamlessly.
-                function initCarousel(rail, track) {
-                    if (!rail) return;
-                    var prev = rail.querySelector('.wall-prev'), next = rail.querySelector('.wall-next');
-                    function page(){ return Math.max(track.clientWidth * 0.85, 240); }
-                    function update(){
-                        var max = track.scrollWidth - track.clientWidth - 2;
-                        if (prev) prev.disabled = track.scrollLeft <= 2;
-                        if (next) next.disabled = track.scrollLeft >= max;
-                    }
-                    if (prev) prev.addEventListener('click', function(){ track.scrollBy({left:-page(),behavior:'smooth'}); });
-                    if (next) next.addEventListener('click', function(){ track.scrollBy({left:page(),behavior:'smooth'}); });
-                    track.addEventListener('scroll', update, {passive:true});
-                    window.addEventListener('resize', update);
-                    window.addEventListener('load', update);
-                    update();
-                }
-                function fillRail(track, items, render) {
+                function fillTrack(track, items, render) {
                     var html = '';
                     for (var k = 0; k < items.length; k++) html += render(items[k]);
                     track.innerHTML = html;
-                    initCarousel(track.parentNode, track);
                 }
-                fillRail(quoteTrack, QUOTES, quoteCard);
-                fillRail(photoTrack, SNAPSHOTS_DATA, photoTile);
+                // Photos: soft continuous auto-scroll. Clone the set once so
+                // the -50% marquee loops seamlessly.
+                fillTrack(photoTrack, SNAPSHOTS_DATA, photoTile);
+                Array.prototype.slice.call(photoTrack.children).forEach(function (n) {
+                    var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); photoTrack.appendChild(c);
+                });
+                if (photoTrack.parentNode) photoTrack.parentNode.classList.add('is-ready');
+                // Quotes: centered tile that auto-advances (snaps) every 4s.
+                fillTrack(quoteTrack, QUOTES, quoteCard);
+                (function () {
+                    var rail = quoteTrack.parentNode, track = quoteTrack, cards = track.children;
+                    if (!cards.length) return;
+                    var current = 0, lock = false, timer = null, started = false, st;
+                    function mark(i) { for (var k = 0; k < cards.length; k++) cards[k].classList.toggle('is-active', k === i); }
+                    function nearest() {
+                        var tr = track.getBoundingClientRect(), mid = tr.left + tr.width / 2, best = 0, bd = Infinity;
+                        for (var k = 0; k < cards.length; k++) {
+                            var r = cards[k].getBoundingClientRect(), cc = r.left + r.width / 2, d = Math.abs(cc - mid);
+                            if (d < bd) { bd = d; best = k; }
+                        }
+                        return best;
+                    }
+                    function show(i) {
+                        current = (i % cards.length + cards.length) % cards.length;
+                        mark(current); lock = true;
+                        cards[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        setTimeout(function () { lock = false; }, 650);
+                    }
+                    track.addEventListener('scroll', function () { if (lock) return; clearTimeout(st); st = setTimeout(function () { current = nearest(); mark(current); }, 120); }, { passive: true });
+                    function tick() { show(current + 1); }
+                    function start() { if (started) return; started = true; show(cards.length > 1 ? 1 : 0); timer = setInterval(tick, 4000); }
+                    if ('IntersectionObserver' in window) {
+                        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) start(); }); }, { threshold: 0.25 });
+                        io.observe(rail);
+                    } else { start(); }
+                    rail.addEventListener('pointerenter', function () { if (timer) clearInterval(timer); });
+                    rail.addEventListener('pointerleave', function () { if (started) { if (timer) clearInterval(timer); timer = setInterval(tick, 4000); } });
+                })();
             })();
             </script>
 
