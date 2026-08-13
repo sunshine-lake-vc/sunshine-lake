@@ -3292,6 +3292,10 @@
          than stacking it below, so the beat takes far less vertical
          space on a phone. */
       @media(max-width:600px){
+        /* Tighten the band-to-band rhythm on phones so the beat reads as
+           one block instead of floating islands (esp. the payoff -> spiral
+           gap). Internal icon spacing is left alone. */
+        .thesis-bands .tb-band{padding-top:clamp(14px,4vw,22px);padding-bottom:clamp(14px,4vw,22px)}
         .tb-band--spiral{
           display:flex;
           align-items:center;
@@ -3827,6 +3831,7 @@
             padding:clamp(15px,1.3vw,21px);display:flex;flex-direction:column;box-shadow:0 14px 34px rgba(0,0,0,.28);margin:0;opacity:.38;transform:scale(.93);transition:opacity .5s ease,transform .5s ease}
         .wall-quote.is-active{opacity:1;transform:scale(1)}
         .wall-quote .qc-mark{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:2.05rem;line-height:.4;height:.3em;color:#155EE8}
+        @media(max-width:600px){ .wall-quote .qc-mark{margin-top:6px} }
         .wall-quote .qc-q{font-family:'DomaineDisp','Times New Roman',Times,serif;font-size:clamp(.96rem,.98vw,1.1rem);line-height:1.34;color:#0b1275;margin:9px 0 0;flex:1 0 auto}
         .wall-quote .qc-attr{margin-top:clamp(9px,.9vw,13px);display:flex;flex-direction:column;gap:2px}
         .wall-quote .qc-n{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;font-weight:700;font-size:.88rem;color:#0b1275}
