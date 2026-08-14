@@ -3994,21 +3994,36 @@
                         }
                         return best;
                     }
+                    // Center by scrolling ONLY the carousel's own track
+                    // (horizontal). Never use scrollIntoView here: it also
+                    // scrolls the page vertically, which would yank the reader
+                    // back to this section from elsewhere on the page.
+                    function center(i) {
+                        var c = cards[i]; if (!c) return;
+                        var cr = c.getBoundingClientRect(), tr = track.getBoundingClientRect();
+                        track.scrollBy({ left: (cr.left + cr.width / 2) - (tr.left + tr.width / 2), behavior: 'smooth' });
+                    }
                     function show(i) {
                         current = (i % cards.length + cards.length) % cards.length;
-                        mark(current); lock = true;
-                        cards[current].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        mark(current); lock = true; center(current);
                         setTimeout(function () { lock = false; }, 650);
                     }
                     track.addEventListener('scroll', function () { if (lock) return; clearTimeout(st); st = setTimeout(function () { current = nearest(); mark(current); }, 120); }, { passive: true });
                     function tick() { show(current + 1); }
-                    function start() { if (started) return; started = true; show(cards.length > 1 ? 1 : 0); timer = setInterval(tick, 4000); }
+                    function startTimer() { if (!timer) timer = setInterval(tick, 4000); }
+                    function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
                     if ('IntersectionObserver' in window) {
-                        var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) start(); }); }, { threshold: 0.25 });
+                        // Only auto-advance while the section is on screen.
+                        var io = new IntersectionObserver(function (entries) {
+                            entries.forEach(function (e) {
+                                if (e.isIntersecting) { if (!started) { started = true; show(cards.length > 1 ? 1 : 0); } startTimer(); }
+                                else { stopTimer(); }
+                            });
+                        }, { threshold: 0.2 });
                         io.observe(rail);
-                    } else { start(); }
-                    rail.addEventListener('pointerenter', function () { if (timer) clearInterval(timer); });
-                    rail.addEventListener('pointerleave', function () { if (started) { if (timer) clearInterval(timer); timer = setInterval(tick, 4000); } });
+                    } else { show(cards.length > 1 ? 1 : 0); startTimer(); }
+                    rail.addEventListener('pointerenter', stopTimer);
+                    rail.addEventListener('pointerleave', function () { if (started) startTimer(); });
                 })();
             })();
             </script>
