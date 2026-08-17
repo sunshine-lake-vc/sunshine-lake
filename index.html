@@ -4188,44 +4188,40 @@
     </style>
 
     <!-- ════════ Balance coda ════════
-         A small, quiet closing note before the sign-off. A waterline mark,
-         a sun-toned sky over a cobalt lake (Sunshine Lake), stands in for
-         the idea that systems are torn down and rebuilt at once: the tide
-         floods up, the sky reclaims it, then the two settle level, on a
-         loop. Balance found, lost, and found again. -->
+         A small, quiet closing note before the sign-off. A waterline mark
+         drawn in the same thin line-art language as the three founder
+         pillar icons (circle outline + white line + a yellow dot accent):
+         a lake surface that floods up, is reclaimed, then settles level,
+         on a loop, with the sun dot riding the balance point. Balance
+         found, lost, and found again. -->
     <section class="balance-coda" aria-label="What we back">
         <span class="balance-mark" role="img" aria-label="Balance">
-            <!-- The waterline (a wave path) rises and falls in a loop: the
-                 cobalt lake floods up, the sunshine sky reclaims it, then
-                 the line settles level and holds before the tide turns
-                 again. The wave and its surface glint share one timeline;
-                 a reduced-motion guard below strips the animation to a
+            <!-- The waterline (a wave path, clipped to the circle) rises
+                 and falls in a loop: it floods up, is reclaimed, then
+                 settles level and holds before the tide turns again. The
+                 yellow dot rides the line's center (the balance point). A
+                 reduced-motion guard below strips the animation to a
                  static, level waterline. -->
             <svg class="balance-yy" viewBox="0 0 200 200" aria-hidden="true">
-                <defs><clipPath id="slLakeClip"><circle cx="100" cy="100" r="99"/></clipPath></defs>
-                <circle cx="100" cy="100" r="99" fill="#F2D831"/>
+                <defs><clipPath id="slLakeClip"><circle cx="100" cy="100" r="62"/></clipPath></defs>
+                <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"/>
                 <g clip-path="url(#slLakeClip)">
-                    <path fill="#155EE8" d="M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z">
+                    <path fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="3" stroke-linecap="round" d="M30,100 C 65,92 135,108 170,100">
                         <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
                             keyTimes="0; 0.28; 0.6; 0.82; 1"
                             keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                            values="M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z;
-                                    M1,80 C 50,66 150,94 199,80 L199,199 L1,199 Z;
-                                    M1,122 C 50,136 150,108 199,122 L199,199 L1,199 Z;
-                                    M1,100 C 50,95 150,105 199,100 L199,199 L1,199 Z;
-                                    M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z"/>
-                    </path>
-                    <path fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" d="M1,100 C 50,92 150,108 199,100">
-                        <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
-                            keyTimes="0; 0.28; 0.6; 0.82; 1"
-                            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                            values="M1,100 C 50,92 150,108 199,100;
-                                    M1,80 C 50,66 150,94 199,80;
-                                    M1,122 C 50,136 150,108 199,122;
-                                    M1,100 C 50,95 150,105 199,100;
-                                    M1,100 C 50,92 150,108 199,100"/>
+                            values="M30,100 C 65,92 135,108 170,100;
+                                    M30,82 C 65,70 135,94 170,82;
+                                    M30,118 C 65,130 135,106 170,118;
+                                    M30,100 C 65,95 135,105 170,100;
+                                    M30,100 C 65,92 135,108 170,100"/>
                     </path>
                 </g>
+                <circle r="9" fill="#F2D831" cx="100" cy="100">
+                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline"
+                        keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+                        values="100; 82; 118; 100; 100"/>
+                </circle>
             </svg>
         </span>
         <p class="balance-copy">Technology is accelerating the destruction and rebuilding of systems. We back founders who bring <em>balance</em>.</p>
@@ -4237,9 +4233,8 @@
             text-align:center;
         }
         .balance-mark{
-            display:block;width:clamp(78px,9vw,116px);margin:0 auto clamp(24px,3vw,38px);
+            display:block;width:clamp(112px,13vw,168px);margin:0 auto clamp(24px,3vw,38px);
             line-height:0;
-            filter:drop-shadow(0 10px 30px rgba(21,94,232,0.28));
         }
         .balance-mark svg{width:100%;height:auto;display:block}
         .balance-copy{
