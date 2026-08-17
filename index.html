@@ -2895,7 +2895,7 @@
       .thesis-standalone .team-thesis{margin:0}
       @media(max-width:720px){.thesis-standalone{padding:clamp(48px,10vw,72px) clamp(20px,5vw,48px)}}
       .thesis-standalone .tb-systems-marquee{margin:clamp(26px,3.6vw,44px) 0 0}
-      .team-thesis .founders-label{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;letter-spacing:-.01em;color:#fff;margin:clamp(30px,4.5vw,52px) 0 clamp(22px,2.8vw,34px)}
+      .team-thesis .founders-label{font-family:'DomaineDisp','Times New Roman',serif;font-weight:500;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;letter-spacing:-.01em;color:#fff;margin:clamp(42px,5.6vw,66px) 0 clamp(14px,1.9vw,24px)}
     </style>
     <section class="thesis-standalone" aria-label="Our thesis">
       <div class="thesis-standalone-inner">
@@ -4027,7 +4027,7 @@
                 </svg>
             </span>
             <h2 class="speak-title">Speakeasy</h2>
-            <p class="speak-body">From San Francisco to Athens, we bring an exclusive group together to forge the future.</p>
+            <p class="speak-body">Invite-only gatherings of the top minds in tech globally.</p>
             <a class="speak-cta" href="speakeasy.html">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
         </div>
         <div class="speak-reel" aria-label="Inside the Speakeasy">
@@ -4194,11 +4194,34 @@
          founders we back are the ones who keep that in balance. -->
     <section class="balance-coda" aria-label="What we back">
         <span class="balance-mark" role="img" aria-label="Balance">
-            <svg viewBox="0 0 200 200" aria-hidden="true">
+            <!-- The dividing S-curve (and both dots) morph in a loop: blue
+                 overtakes yellow, yellow overtakes blue, then the two settle
+                 back to a held balance before the push-pull begins again.
+                 Both small arcs stay perfect semicircles at every frame
+                 (radius = half the chord), so the circle never breaks.
+                 SMIL keeps the path + dots locked to the same timeline; a
+                 reduced-motion guard below strips the animation to a static
+                 balanced mark. -->
+            <svg class="balance-yy" viewBox="0 0 200 200" aria-hidden="true">
                 <circle cx="100" cy="100" r="99" fill="#F2D831"/>
-                <path d="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z" fill="#155EE8"/>
-                <circle cx="100" cy="50.5" r="15" fill="#F2D831"/>
-                <circle cx="100" cy="149.5" r="15" fill="#155EE8"/>
+                <path fill="#155EE8" d="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z">
+                    <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+                        keyTimes="0; 0.28; 0.6; 0.82; 1"
+                        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+                        values="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z;
+                                M100,1 a99,99 0 0 1 0,198 a42,42 0 0 1 0,-84 a57,57 0 0 0 0,-114z;
+                                M100,1 a99,99 0 0 1 0,198 a57,57 0 0 1 0,-114 a42,42 0 0 0 0,-84z;
+                                M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z;
+                                M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z"/>
+                </path>
+                <circle cx="100" cy="50.5" r="15" fill="#155EE8">
+                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="50.5; 58; 43; 50.5; 50.5"/>
+                    <animate attributeName="r"  dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="15; 17.3; 12.7; 15; 15"/>
+                </circle>
+                <circle cx="100" cy="149.5" r="15" fill="#F2D831">
+                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="149.5; 157; 142; 149.5; 149.5"/>
+                    <animate attributeName="r"  dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="15; 12.7; 17.3; 15; 15"/>
+                </circle>
             </svg>
         </span>
         <p class="balance-copy">Technology is accelerating the destruction and rebuilding of systems. We back founders who bring <em>balance</em>.</p>
@@ -4214,16 +4237,25 @@
             line-height:0;
             filter:drop-shadow(0 10px 30px rgba(21,94,232,0.28));
         }
-        .balance-mark svg{width:100%;height:auto;display:block;animation:balanceSpin 44s linear infinite}
-        @keyframes balanceSpin{to{transform:rotate(360deg)}}
+        .balance-mark svg{width:100%;height:auto;display:block}
         .balance-copy{
             font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:400;
             font-size:clamp(1.15rem,2vw,1.75rem);line-height:1.5;letter-spacing:-0.01em;
             color:rgba(255,255,255,0.86);max-width:22em;margin:0 auto;
         }
         .balance-copy em{font-style:italic;color:#F2D831}
-        @media(prefers-reduced-motion:reduce){.balance-mark svg{animation:none}}
     </style>
+    <script>
+      // Reduced-motion: strip the SMIL boundary morph so the mark holds
+      // a static, balanced yin/yang. Removing the <animate> nodes leaves
+      // each element at its base (balanced) attributes.
+      (function(){
+        if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+          var yy=document.querySelector('.balance-yy');
+          if(yy) yy.querySelectorAll('animate').forEach(function(a){ a.parentNode.removeChild(a); });
+        }
+      })();
+    </script>
 
     </main>
 
