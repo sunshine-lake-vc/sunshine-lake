@@ -4187,6 +4187,44 @@
         @media(prefers-reduced-motion:reduce){.speak-reel-track{scroll-behavior:auto}}
     </style>
 
+    <!-- ════════ Balance coda ════════
+         A small, quiet closing note before the sign-off. A yin/yang mark
+         (the two brand tones held in balance) stands in for the idea that
+         systems are being torn down and rebuilt at once, and that the
+         founders we back are the ones who keep that in balance. -->
+    <section class="balance-coda" aria-label="What we back">
+        <span class="balance-mark" role="img" aria-label="Balance">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+                <circle cx="100" cy="100" r="99" fill="#F2D831"/>
+                <path d="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z" fill="#155EE8"/>
+                <circle cx="100" cy="50.5" r="15" fill="#F2D831"/>
+                <circle cx="100" cy="149.5" r="15" fill="#155EE8"/>
+            </svg>
+        </span>
+        <p class="balance-copy">Technology is accelerating the destruction and rebuilding of systems. We back founders who bring <em>balance</em>.</p>
+    </section>
+    <style>
+        .balance-coda{
+            background:#02041F;
+            padding:clamp(56px,9vh,116px) clamp(24px,5vw,64px);
+            text-align:center;
+        }
+        .balance-mark{
+            display:block;width:clamp(78px,9vw,116px);margin:0 auto clamp(24px,3vw,38px);
+            line-height:0;
+            filter:drop-shadow(0 10px 30px rgba(21,94,232,0.28));
+        }
+        .balance-mark svg{width:100%;height:auto;display:block;animation:balanceSpin 44s linear infinite}
+        @keyframes balanceSpin{to{transform:rotate(360deg)}}
+        .balance-copy{
+            font-family:'DomaineDisp','Times New Roman',Times,serif;font-weight:400;
+            font-size:clamp(1.15rem,2vw,1.75rem);line-height:1.5;letter-spacing:-0.01em;
+            color:rgba(255,255,255,0.86);max-width:22em;margin:0 auto;
+        }
+        .balance-copy em{font-style:italic;color:#F2D831}
+        @media(prefers-reduced-motion:reduce){.balance-mark svg{animation:none}}
+    </style>
+
     </main>
 
     <!-- Footer (photo grid removed from here — moved to polish-don.html
