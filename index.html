@@ -4206,21 +4206,26 @@
                 <defs><clipPath id="slLakeClip"><circle cx="100" cy="100" r="62"/></clipPath></defs>
                 <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"/>
                 <g clip-path="url(#slLakeClip)">
-                    <path fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="3" stroke-linecap="round" d="M30,100 C 65,92 135,108 170,100">
-                        <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
-                            keyTimes="0; 0.28; 0.6; 0.82; 1"
-                            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                            values="M30,100 C 65,92 135,108 170,100;
-                                    M30,82 C 65,70 135,94 170,82;
-                                    M30,118 C 65,130 135,106 170,118;
-                                    M30,100 C 65,95 135,105 170,100;
-                                    M30,100 C 65,92 135,108 170,100"/>
-                    </path>
+                    <!-- Outer group tips the whole surface (the balance push-pull);
+                         inner group drifts it sideways one wavelength on a loop, so
+                         the line always reads as moving water. -->
+                    <g>
+                        <animateTransform attributeName="transform" type="translate" additive="sum" dur="8s" repeatCount="indefinite" calcMode="spline"
+                            keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+                            values="0 0; 0 -16; 0 16; 0 0; 0 0"/>
+                        <g>
+                            <animateTransform attributeName="transform" type="translate" additive="sum" dur="3.6s" repeatCount="indefinite" values="0 0; -70 0"/>
+                            <path fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="3" stroke-linecap="round"
+                                d="M-70,100 Q -52.5,94 -35,100 T 0,100 T 35,100 T 70,100 T 105,100 T 140,100 T 175,100 T 210,100 T 245,100 T 280,100"/>
+                        </g>
+                    </g>
                 </g>
                 <circle r="9" fill="#F2D831" cx="100" cy="100">
-                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline"
+                    <animate attributeName="cy" dur="8s" repeatCount="indefinite" calcMode="spline"
                         keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                        values="100; 82; 118; 100; 100"/>
+                        values="100; 84; 116; 100; 100"/>
+                    <animate attributeName="r" dur="4.5s" repeatCount="indefinite" calcMode="spline"
+                        keyTimes="0; 0.5; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1" values="9; 10.5; 9"/>
                 </circle>
             </svg>
         </span>
@@ -4245,13 +4250,13 @@
         .balance-copy em{font-style:italic;color:#F2D831}
     </style>
     <script>
-      // Reduced-motion: strip the SMIL boundary morph so the mark holds
-      // a static, balanced yin/yang. Removing the <animate> nodes leaves
-      // each element at its base (balanced) attributes.
+      // Reduced-motion: strip the waterline's tip, drift, and dot
+      // animations so the mark holds a static, level waterline. Removing
+      // the SMIL nodes leaves each element at its base attributes.
       (function(){
         if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
           var yy=document.querySelector('.balance-yy');
-          if(yy) yy.querySelectorAll('animate').forEach(function(a){ a.parentNode.removeChild(a); });
+          if(yy) yy.querySelectorAll('animate, animateTransform').forEach(function(a){ a.parentNode.removeChild(a); });
         }
       })();
     </script>
@@ -4291,11 +4296,17 @@
          A simple ewok-head SVG silhouette pokes up from the bottom of
          the page. Clicking it reveals the cream dictionary card with
          a Yoshi's-Island-style stitched-fabric tear-up animation.
-         Replaces the old floating "ewoks-in-boat" cursor. -->
+         Replaces the old floating "ewoks-in-boat" cursor.
+         TEMPORARILY REMOVED (per Jamie) to clean up the page tail. The
+         reveal JS below guards for a missing button, and the definition
+         card stays dormant/hidden with no trigger. To restore, un-comment
+         the button below.
     <button class="ewok-peek" id="ewokPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="slDefinitionBar">
         <img class="ewok-peek-img" src="images/logos/ewok-spear.png?v=1" alt="" aria-hidden="true">
         <span class="ewok-peek-label">Look closer</span>
     </button>
+    -->
+    <!-- end ewok-peek (temporarily removed) -->
 
     <!-- ════════ Sunshine Lake definition card ════════
          Cream paper card revealed by clicking the ewok-head silhouette
