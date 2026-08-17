@@ -4043,6 +4043,23 @@
           </div>
           <button class="speak-reel-arrow speak-reel-next" type="button" aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
+        <!-- Page-level action CTAs (moved here from the footer). The two
+             yellow pills are the site's actionable destinations; the
+             LinkedIn/X row sits beneath as smaller companion links. -->
+        <div class="speak-actions">
+            <div class="footer-cta-row">
+                <a class="footer-cta footer-cta--primary" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">
+                    Submit your pitch <span aria-hidden="true">&rarr;</span>
+                </a>
+                <a class="footer-cta footer-cta--secondary" href="sessions.html">
+                    Read the latest Sessions <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+            <div class="footer-contact">
+                <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
+            </div>
+        </div>
     </section>
     <script>
       (function(){
@@ -4132,6 +4149,15 @@
         .speak-cta:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(242,216,49,0.28)}
         .speak-cta span{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1)}
         .speak-cta:hover span{transform:translateX(4px)}
+        /* Action CTAs relocated from the footer — centered beneath the
+           photo reel so the page closes on one consolidated call-to-action. */
+        .speak-actions{
+            position:relative;z-index:1;max-width:760px;
+            margin:clamp(40px,5vw,64px) auto 0;padding:0 clamp(20px,4vw,40px);
+            display:flex;flex-direction:column;align-items:center;
+        }
+        .speak-actions .footer-cta-row{justify-content:center;margin-bottom:clamp(14px,1.8vw,22px)}
+        .speak-actions .footer-contact{justify-content:center;margin-top:0}
         /* A slow, edge-faded strip of event photos — a peek inside the room
            that leads into the full Speakeasy page. Full-bleed within the
            section; the track is doubled in JS for a seamless loop. */
@@ -4171,23 +4197,11 @@
             <div class="footer-photo-card" id="footerPhotoCard"></div>
             <div class="footer-photo-content">
                 <div class="footer-photo-content-main">
-                    <h2>Dive in.</h2>
-                    <!-- Two real destinations as the primary/secondary
-                         CTAs, then LinkedIn and X as a smaller, subdued
-                         social row beneath so they read as companions,
-                         not co-equal actions. -->
-                    <div class="footer-cta-row">
-                        <a class="footer-cta footer-cta--primary" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">
-                            Submit your pitch <span aria-hidden="true">&rarr;</span>
-                        </a>
-                        <a class="footer-cta footer-cta--secondary" href="sessions.html">
-                            Read the latest Sessions <span aria-hidden="true">&rarr;</span>
-                        </a>
-                    </div>
-                    <div class="footer-contact">
-                        <a href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
-                    </div>
+                    <!-- The action CTAs (Submit your pitch, Sessions,
+                         LinkedIn, X) now live in the Speakeasy teaser
+                         section above so the page closes on a single
+                         consolidated call-to-action. The footer keeps
+                         only the sign-off (logo + © + LP Portal). -->
                     <!-- Sign-off (logo + ©) moved OUT of the cream
                          definition card into the dark abyss above it
                          (per Don) so the © line lands before the
