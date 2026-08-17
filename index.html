@@ -4188,40 +4188,44 @@
     </style>
 
     <!-- ════════ Balance coda ════════
-         A small, quiet closing note before the sign-off. A yin/yang mark
-         (the two brand tones held in balance) stands in for the idea that
-         systems are being torn down and rebuilt at once, and that the
-         founders we back are the ones who keep that in balance. -->
+         A small, quiet closing note before the sign-off. A waterline mark,
+         a sun-toned sky over a cobalt lake (Sunshine Lake), stands in for
+         the idea that systems are torn down and rebuilt at once: the tide
+         floods up, the sky reclaims it, then the two settle level, on a
+         loop. Balance found, lost, and found again. -->
     <section class="balance-coda" aria-label="What we back">
         <span class="balance-mark" role="img" aria-label="Balance">
-            <!-- The dividing S-curve (and both dots) morph in a loop: blue
-                 overtakes yellow, yellow overtakes blue, then the two settle
-                 back to a held balance before the push-pull begins again.
-                 Both small arcs stay perfect semicircles at every frame
-                 (radius = half the chord), so the circle never breaks.
-                 SMIL keeps the path + dots locked to the same timeline; a
-                 reduced-motion guard below strips the animation to a static
-                 balanced mark. -->
+            <!-- The waterline (a wave path) rises and falls in a loop: the
+                 cobalt lake floods up, the sunshine sky reclaims it, then
+                 the line settles level and holds before the tide turns
+                 again. The wave and its surface glint share one timeline;
+                 a reduced-motion guard below strips the animation to a
+                 static, level waterline. -->
             <svg class="balance-yy" viewBox="0 0 200 200" aria-hidden="true">
+                <defs><clipPath id="slLakeClip"><circle cx="100" cy="100" r="99"/></clipPath></defs>
                 <circle cx="100" cy="100" r="99" fill="#F2D831"/>
-                <path fill="#155EE8" d="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z">
-                    <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
-                        keyTimes="0; 0.28; 0.6; 0.82; 1"
-                        keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                        values="M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z;
-                                M100,1 a99,99 0 0 1 0,198 a42,42 0 0 1 0,-84 a57,57 0 0 0 0,-114z;
-                                M100,1 a99,99 0 0 1 0,198 a57,57 0 0 1 0,-114 a42,42 0 0 0 0,-84z;
-                                M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z;
-                                M100,1 a99,99 0 0 1 0,198 a49.5,49.5 0 0 1 0,-99 a49.5,49.5 0 0 0 0,-99z"/>
-                </path>
-                <circle cx="100" cy="50.5" r="15" fill="#155EE8">
-                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="50.5; 58; 43; 50.5; 50.5"/>
-                    <animate attributeName="r"  dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="15; 17.3; 12.7; 15; 15"/>
-                </circle>
-                <circle cx="100" cy="149.5" r="15" fill="#F2D831">
-                    <animate attributeName="cy" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="149.5; 157; 142; 149.5; 149.5"/>
-                    <animate attributeName="r"  dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="15; 12.7; 17.3; 15; 15"/>
-                </circle>
+                <g clip-path="url(#slLakeClip)">
+                    <path fill="#155EE8" d="M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z">
+                        <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+                            keyTimes="0; 0.28; 0.6; 0.82; 1"
+                            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+                            values="M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z;
+                                    M1,80 C 50,66 150,94 199,80 L199,199 L1,199 Z;
+                                    M1,122 C 50,136 150,108 199,122 L199,199 L1,199 Z;
+                                    M1,100 C 50,95 150,105 199,100 L199,199 L1,199 Z;
+                                    M1,100 C 50,92 150,108 199,100 L199,199 L1,199 Z"/>
+                    </path>
+                    <path fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" d="M1,100 C 50,92 150,108 199,100">
+                        <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+                            keyTimes="0; 0.28; 0.6; 0.82; 1"
+                            keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+                            values="M1,100 C 50,92 150,108 199,100;
+                                    M1,80 C 50,66 150,94 199,80;
+                                    M1,122 C 50,136 150,108 199,122;
+                                    M1,100 C 50,95 150,105 199,100;
+                                    M1,100 C 50,92 150,108 199,100"/>
+                    </path>
+                </g>
             </svg>
         </span>
         <p class="balance-copy">Technology is accelerating the destruction and rebuilding of systems. We back founders who bring <em>balance</em>.</p>
