@@ -100,7 +100,7 @@
         /* Feathered radial scrim behind the centered lockup for white-type legibility */
         .hero-scrim{
             position:absolute;inset:0;z-index:1;pointer-events:none;
-            background:radial-gradient(58% 46% at 50% 50%, rgba(3,7,28,0.42) 0%, rgba(3,7,28,0.22) 42%, rgba(3,7,28,0) 72%);
+            background:radial-gradient(60% 48% at 50% 50%, rgba(3,7,28,0.56) 0%, rgba(3,7,28,0.34) 42%, rgba(3,7,28,0) 74%);
         }
         .hero-corner{position:absolute;z-index:3;top:clamp(22px,3vw,40px)}
         .hero-logo{left:clamp(22px,4vw,56px);width:clamp(34px,3.4vw,46px);height:auto}
@@ -120,7 +120,7 @@
         .hero-wordmark{
             font-family:var(--serif);font-weight:400;
             font-size:clamp(52px,9vw,136px);line-height:.98;letter-spacing:-.02em;
-            margin:0;color:#fff;text-shadow:0 2px 40px rgba(3,7,28,.28);
+            margin:0;color:#fff;text-shadow:0 2px 44px rgba(3,7,28,.42);
         }
         .hero-tagline{
             font-family:var(--serif);font-weight:400;
@@ -131,11 +131,12 @@
         .hero-anchor{
             position:absolute;z-index:2;left:50%;bottom:clamp(26px,3.4vw,44px);
             transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;
-            gap:clamp(14px,1.6vw,20px);
+            gap:clamp(14px,1.6vw,20px);width:100%;padding:0 16px;
         }
         .hero-anchor-label{
             font-family:var(--sans);font-size:clamp(12px,1vw,13px);font-weight:700;
             letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.82);
+            white-space:nowrap;
         }
         .hero-chevron{
             background:none;border:0;padding:6px;cursor:pointer;color:rgba(255,255,255,.85);
@@ -146,6 +147,13 @@
         @media(prefers-reduced-motion:reduce){.hero-chevron{animation:none}}
         @media(max-width:768px){
             .hero-lockup{transform:translate(-50%,-50%)}
+        }
+        /* Keep "Global Pre-Seed & Seed Fund" on one line on the narrowest phones */
+        @media(max-width:420px){
+            .hero-anchor-label{font-size:11px;letter-spacing:.14em}
+        }
+        @media(max-width:340px){
+            .hero-anchor-label{font-size:10px;letter-spacing:.1em}
         }
     </style>
 </head>
@@ -200,6 +208,17 @@
         .thesis-sys-icon .dot{fill:var(--yellow)}
         .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
         .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
+        /* Mobile: swipeable carousel of the system medallions (full-bleed) */
+        @media(max-width:640px){
+            .thesis-icons{
+                flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:30px;
+                scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+                margin-inline:calc(-1 * clamp(22px,6vw,64px));
+                padding:4px clamp(22px,6vw,64px) 12px;
+            }
+            .thesis-icons::-webkit-scrollbar{display:none}
+            .thesis-sys{flex:0 0 auto;min-width:84px;scroll-snap-align:center}
+        }
         .thesis-note{
             font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.4vw,19px);
             color:#6C77A6;margin:0 auto clamp(40px,5.5vw,72px);max-width:44ch;line-height:1.5;
@@ -435,8 +454,8 @@
                         <p class="pf-blurb">Co-founded Aurora Solar and scaled it to <span class="pf-amt">$4B</span>. Now building foundation vision models that let machines understand the physical world.</p>
                         <p class="pf-tag">Kenya <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/geoffrey.webp">
-                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"></div>
+                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2">
+                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"></div>
                         <h3 class="pf-name">Geoffrey Tisserand &amp; Anji Ismail</h3>
                         <p class="pf-company">Concord.ai</p>
                         <p class="pf-blurb">Sold Agora to PayScale; helped build Checkr into a <span class="pf-amt">$5B</span> company. Now reskilling the global workforce for the AI era.</p>
@@ -496,8 +515,8 @@
         .tm-traits{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px);max-width:840px;margin:0 auto clamp(48px,6vw,80px)}
         .tm-trait{padding-top:16px;border-top:2px solid var(--gold-deco);text-align:center}
         .tm-trait span{font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.5rem);color:var(--yellow)}
-        .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:start}
-        .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(22px,2vw,30px);display:flex;flex-direction:column;height:clamp(250px,21vw,290px)}
+        .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
+        .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column}
         .tm-card.tm-lit{background:#fff;border-color:#fff}
         .tm-quote-mark{font-family:var(--serif);font-size:2.4rem;line-height:.6;color:var(--yellow);margin:0 0 14px}
         .tm-card.tm-lit .tm-quote-mark{color:var(--gold-ink)}
