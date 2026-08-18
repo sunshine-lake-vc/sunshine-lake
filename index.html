@@ -344,7 +344,6 @@
         .adv-item{margin:0 0 12px}
         .adv-item:last-child{margin-bottom:0}
         .adv-name{font-family:var(--serif);font-size:1.02rem;color:var(--navy-ink);display:block;line-height:1.15}
-        .adv-name::before{content:"— ";color:var(--gold-ink)}
         .adv-desc{font-family:var(--sans);font-size:13px;line-height:1.45;color:#3A4680;margin:2px 0 0}
         @media(max-width:1080px){
             .team-grid{grid-template-columns:repeat(2,1fr)}
@@ -745,15 +744,21 @@
         @keyframes eggBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         @media(prefers-reduced-motion:reduce){.egg-peek img{animation:none}}
         .egg-peek.is-hidden{opacity:0;pointer-events:none;height:0;padding:0;margin:0;overflow:hidden}
-        .egg-def{max-height:0;opacity:0;overflow:hidden;transition:max-height .85s cubic-bezier(.22,1,.36,1),opacity .6s ease}
+        .egg-def{max-height:0;opacity:0;overflow:hidden;transition:max-height .8s cubic-bezier(.22,1,.36,1),opacity .55s ease}
         .egg-def.is-open{opacity:1}
         .egg-card{
-            max-width:640px;margin:clamp(20px,3vw,40px) auto 0;text-align:left;
-            display:flex;gap:clamp(18px,3vw,32px);align-items:center;
+            max-width:600px;margin:clamp(16px,2.6vw,34px) auto 0;text-align:left;
+            display:flex;gap:clamp(14px,2.6vw,28px);align-items:center;
             background:rgba(255,255,255,.04);border:1px solid rgba(201,164,63,.28);
-            border-radius:18px;padding:clamp(24px,3vw,40px);
+            border-radius:18px;padding:clamp(18px,2.4vw,30px) clamp(20px,2.6vw,34px) 0;
         }
-        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;opacity:.95}
+        /* Ewoks riding a wave (same rolling wave as the section separators) */
+        .egg-ewoks{position:relative;flex:0 0 auto;width:clamp(120px,15vw,168px);align-self:flex-end}
+        .egg-mark{width:100%;height:auto;display:block;position:relative;z-index:1;opacity:.97}
+        .egg-wave{position:absolute;left:-16%;width:132%;bottom:2%;height:44%;z-index:0;overflow:visible;pointer-events:none}
+        .egg-wave .bk{fill:#4E74EE;opacity:.5}
+        .egg-wave .fr{fill:#2B50E2}
+        .egg-entry{padding:clamp(6px,1vw,10px) 0 clamp(18px,2.4vw,30px)}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
         .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
@@ -762,7 +767,12 @@
         .egg-sense em{color:var(--yellow);font-style:italic}
         .egg-etym{font-family:var(--sans);font-size:13px;color:var(--white-dim);margin:0}
         .egg-etym i{font-style:italic}
-        @media(max-width:560px){.egg-card{flex-direction:column;text-align:center}.egg-sense,.egg-etym{text-align:center}}
+        @media(max-width:560px){
+            .egg-card{flex-direction:column;text-align:center;padding:clamp(16px,4vw,26px) clamp(16px,4vw,26px) 0;align-items:center}
+            .egg-sense,.egg-etym{text-align:center}
+            .egg-ewoks{width:clamp(130px,42vw,180px);align-self:center}
+            .egg-entry{padding-top:2px}
+        }
     </style>
     <section class="egg" aria-label="Look closer">
         <button class="egg-peek" id="eggPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="eggDef">
@@ -771,7 +781,23 @@
         </button>
         <div class="egg-def" id="eggDef">
             <div class="egg-card">
-                <img class="egg-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
+                <div class="egg-ewoks" aria-hidden="true">
+                    <svg class="egg-wave" viewBox="0 0 200 60" preserveAspectRatio="none">
+                        <path class="bk" d="M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z">
+                            <animate attributeName="d" dur="11s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                                values="M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z;
+                                        M0,20 C40,36 70,40 100,26 C130,14 160,16 200,32 L200,60 L0,60 Z;
+                                        M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z"/>
+                        </path>
+                        <path class="fr" d="M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z">
+                            <animate attributeName="d" dur="8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                                values="M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z;
+                                        M0,36 C35,22 70,22 100,36 C130,48 165,46 200,32 L200,60 L0,60 Z;
+                                        M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z"/>
+                        </path>
+                    </svg>
+                    <img class="egg-mark" src="images/logos/ewoks.webp" alt="">
+                </div>
                 <div class="egg-entry">
                     <p class="egg-headword"><strong>Sun&middot;shine Lake</strong> <span class="egg-pron">\ &#712;s&#652;n&#643;a&#618;n le&#618;k \</span> <em class="egg-pos">noun</em></p>
                     <p class="egg-sense">A far away location where rare entrepreneurial beings are <em>forged by extreme origins</em>.</p>
@@ -791,9 +817,15 @@
             peek.classList.add('is-hidden');
             setTimeout(function(){
                 def.style.maxHeight='none';
-                if(window._lenis && typeof window._lenis.scrollTo==='function') window._lenis.scrollTo(def,{offset:-80,duration:1.1});
-                else def.scrollIntoView({behavior:'smooth',block:'center'});
-            }, 880);
+                var card=def.querySelector('.egg-card');
+                var ch=card.offsetHeight, vh=window.innerHeight;
+                var docH=document.documentElement.scrollHeight;
+                // If the card fits, scroll to the page bottom so the whole box shows;
+                // otherwise bring its top just under the viewport top.
+                var target = (ch <= vh - 40) ? docH : (window.scrollY + card.getBoundingClientRect().top - 24);
+                if(window._lenis && typeof window._lenis.scrollTo==='function') window._lenis.scrollTo(target,{duration:1.0});
+                else window.scrollTo({top:target,behavior:'smooth'});
+            }, 780);
         });
       })();
     </script>
