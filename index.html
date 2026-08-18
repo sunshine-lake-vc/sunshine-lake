@@ -195,17 +195,25 @@
             margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
         }
         .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
-        /* Two-tone line-art medallions (matching the old founder pillars):
-           a dark navy ground so the white line motif + yellow dot pop. */
+        /* Clean line-art icons: blue line + gold dot on white, each with a
+           subtle idle animation (in the spirit of the old founder pillars). */
         .thesis-sys-icon{
-            width:clamp(54px,5vw,64px);height:clamp(54px,5vw,64px);border-radius:50%;
-            background:var(--navy-ink);display:flex;align-items:center;justify-content:center;
-            box-shadow:0 10px 26px rgba(30,42,120,.20);
+            width:clamp(46px,4.8vw,58px);height:clamp(46px,4.8vw,58px);
+            display:flex;align-items:center;justify-content:center;
         }
-        .thesis-sys-icon svg{width:66%;height:66%;display:block}
-        .thesis-sys-icon .ln{stroke:rgba(255,255,255,.92);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-        .thesis-sys-icon .ring{stroke:rgba(255,255,255,.28);stroke-width:1.4;fill:none}
-        .thesis-sys-icon .dot{fill:var(--yellow)}
+        .thesis-sys-icon svg{width:100%;height:100%;display:block;overflow:visible}
+        .thesis-sys-icon .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+        .thesis-sys-icon .ring{stroke:rgba(43,80,226,.32);stroke-width:1.6;fill:none}
+        .thesis-sys-icon .dot{fill:var(--gold-ink);transform-box:fill-box;transform-origin:center;animation:slDotPulse 3.4s ease-in-out infinite}
+        @keyframes slDotPulse{0%,100%{opacity:.5;transform:scale(.82)}50%{opacity:1;transform:scale(1)}}
+        @keyframes slSpin{to{transform:rotate(360deg)}}
+        .thesis-sys:nth-child(2) .dot{animation-delay:.5s}
+        .thesis-sys:nth-child(3) .dot{animation-delay:1s}
+        .thesis-sys:nth-child(4) .dot{animation-delay:1.5s}
+        .thesis-sys:nth-child(5) .dot{animation-delay:2s}
+        .thesis-sys:nth-child(6) .dot{animation-delay:2.5s}
+        .thesis-sys-icon .rays{transform-box:fill-box;transform-origin:center;animation:slSpin 30s linear infinite}
+        @media(prefers-reduced-motion:reduce){.thesis-sys-icon .dot,.thesis-sys-icon .rays{animation:none}}
         .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
         .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
         /* Mobile: swipeable carousel of the system medallions (full-bleed) */
@@ -229,11 +237,13 @@
         .balance-dial{display:flex;align-items:center;justify-content:center;gap:0;margin:clamp(44px,6vw,84px) auto 0;max-width:640px}
         .balance-dial .rule{height:1px;flex:1;background:linear-gradient(90deg,rgba(30,42,120,0) 0%,rgba(30,42,120,.35) 100%)}
         .balance-dial .rule.right{background:linear-gradient(90deg,rgba(30,42,120,.35) 0%,rgba(30,42,120,0) 100%)}
-        .balance-dial .dial{flex:0 0 auto;margin:0 16px;width:clamp(48px,4.4vw,58px);height:clamp(48px,4.4vw,58px);border-radius:50%;background:var(--navy-ink);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(30,42,120,.20)}
-        .balance-dial .dial svg{width:64%;height:64%;display:block}
-        .balance-dial .dial .ln{stroke:rgba(255,255,255,.92);stroke-width:2.2;stroke-linecap:round;fill:none}
-        .balance-dial .dial .ring{stroke:rgba(255,255,255,.28);stroke-width:1.6;fill:none}
-        .balance-dial .dial .dot{fill:var(--yellow)}
+        .balance-dial .dial{flex:0 0 auto;margin:0 16px;width:clamp(44px,4.2vw,54px);height:clamp(44px,4.2vw,54px);display:flex;align-items:center;justify-content:center}
+        .balance-dial .dial svg{width:100%;height:100%;display:block;overflow:visible}
+        .balance-dial .dial .ring{stroke:rgba(43,80,226,.35);stroke-width:1.8;fill:none}
+        .balance-dial .dial .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;fill:none;transform-box:fill-box;transform-origin:center;animation:slTilt 5s ease-in-out infinite}
+        .balance-dial .dial .dot{fill:var(--gold-ink)}
+        @keyframes slTilt{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+        @media(prefers-reduced-motion:reduce){.balance-dial .dial .ln{animation:none}}
         @media(max-width:520px){.thesis-sys{min-width:74px}}
     </style>
     <section class="thesis" id="section-thesis" aria-label="Our thesis">
@@ -253,7 +263,7 @@
                 <div class="thesis-sys">
                     <span class="thesis-sys-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <g class="ln"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
+                            <g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
                             <circle class="dot" cx="32" cy="32" r="6.5"/>
                         </svg>
                     </span>
@@ -513,7 +523,7 @@
         .tm-h2{color:#fff;margin:0 auto}
         .tm-sub{font-family:var(--serif);font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--white-soft);margin:clamp(14px,1.6vw,20px) auto 0;max-width:46ch}
         .tm-traits{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px);max-width:840px;margin:0 auto clamp(48px,6vw,80px)}
-        .tm-trait{padding-top:16px;border-top:2px solid var(--gold-deco);text-align:center}
+        .tm-trait{text-align:center}
         .tm-trait span{font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.5rem);color:var(--yellow)}
         .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
         .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column}
