@@ -430,24 +430,8 @@
         .pf-h2{color:#fff}
         .pf-body{display:grid;grid-template-columns:0.78fr 1.22fr;gap:clamp(30px,5vw,72px);align-items:start}
         .pf-photo-col{position:sticky;top:clamp(80px,14vh,140px)}
-        .pf-photo,.pf-row-photo{position:relative}
         .pf-photo{width:100%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(3,7,28,.32)}
         .pf-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .4s ease}
-        /* Subtle water wash + caption overlay on the founder photos */
-        .pf-water{position:absolute;inset:0;pointer-events:none;z-index:1;
-            background:linear-gradient(180deg,rgba(43,80,226,.12) 0%,rgba(3,7,28,0) 26%,rgba(3,7,28,.06) 58%,rgba(3,7,28,.62) 100%);}
-        .pf-water::before{content:"";position:absolute;inset:-25%;
-            background:radial-gradient(55% 34% at 32% 22%,rgba(122,204,255,.20),transparent 60%),radial-gradient(50% 30% at 74% 60%,rgba(122,204,255,.12),transparent 62%);
-            animation:pfWater 11s ease-in-out infinite alternate;}
-        @keyframes pfWater{0%{transform:translate(0,0) scale(1)}100%{transform:translate(5%,3%) scale(1.06)}}
-        @media(prefers-reduced-motion:reduce){.pf-water::before{animation:none}}
-        .pf-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:left;
-            padding:clamp(14px,1.6vw,22px);color:#fff;}
-        .pf-cap-co{display:block;font-family:var(--serif);font-size:clamp(1.1rem,1.5vw,1.5rem);line-height:1.05;text-shadow:0 2px 14px rgba(3,7,28,.5)}
-        .pf-cap-meta{display:block;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.85);
-            max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease,opacity .35s ease,margin-top .35s ease;}
-        .pf-photo:hover .pf-cap-meta,.pf-photo:focus-within .pf-cap-meta,
-        .pf-row-photo:hover .pf-cap-meta,.pf-row-photo.is-tapped .pf-cap-meta{max-height:44px;opacity:1;margin-top:6px}
         .pf-list{display:flex;flex-direction:column}
         .pf-row{padding:clamp(22px,2.6vw,34px) 0;border-top:1px solid rgba(255,255,255,.16);opacity:.55;transition:opacity .35s ease;cursor:default}
         .pf-row:first-child{border-top:0}
@@ -477,41 +461,39 @@
                 <div class="pf-photo-col" aria-hidden="true">
                     <div class="pf-photo">
                         <img id="pfPhoto" src="images/founders/duranta.webp" alt="">
-                        <div class="pf-water"></div>
-                        <div class="pf-cap"><span class="pf-cap-co" id="pfCapCo">Duranta</span><span class="pf-cap-meta" id="pfCapMeta">Samuel Adeyemo &middot; Kenya &middot; Work</span></div>
                     </div>
                 </div>
                 <div class="pf-list" id="pfList">
-                    <article class="pf-row is-active" data-photo="images/founders/duranta.webp" data-co="Duranta" data-meta="Samuel Adeyemo &middot; Kenya &middot; Work">
-                        <div class="pf-row-photo"><img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Duranta</span><span class="pf-cap-meta">Samuel Adeyemo &middot; Kenya &middot; Work</span></div></div>
+                    <article class="pf-row is-active" data-photo="images/founders/duranta.webp">
+                        <div class="pf-row-photo"><img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy"></div>
                         <h3 class="pf-name">Samuel Adeyemo</h3>
                         <p class="pf-company">Duranta</p>
                         <p class="pf-blurb">Co-founded Aurora Solar and scaled it to <span class="pf-amt">$4B</span>. Now building foundation vision models that let machines understand the physical world.</p>
                         <p class="pf-tag">Kenya <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2" data-co="Concord.ai" data-meta="Tisserand &amp; Ismail &middot; France &middot; Work">
-                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Concord.ai</span><span class="pf-cap-meta">Tisserand &amp; Ismail &middot; France &middot; Work</span></div></div>
+                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2">
+                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"></div>
                         <h3 class="pf-name">Geoffrey Tisserand &amp; Anji Ismail</h3>
                         <p class="pf-company">Concord.ai</p>
                         <p class="pf-blurb">Sold Agora to PayScale; helped build Checkr into a <span class="pf-amt">$5B</span> company. Now reskilling the global workforce for the AI era.</p>
                         <p class="pf-tag">France <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/thomas.webp" data-co="Entire" data-meta="Thomas Dohmke &middot; Germany &middot; Work">
-                        <div class="pf-row-photo"><img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Entire</span><span class="pf-cap-meta">Thomas Dohmke &middot; Germany &middot; Work</span></div></div>
+                    <article class="pf-row" data-photo="images/founders/thomas.webp">
+                        <div class="pf-row-photo"><img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy"></div>
                         <h3 class="pf-name">Thomas Dohmke</h3>
                         <p class="pf-company">Entire</p>
                         <p class="pf-blurb">Ran GitHub to <span class="pf-amt">$7.5B</span> and scaled Copilot. Now building the trust layer for the agent era, so the world can verify what machines build.</p>
                         <p class="pf-tag">Germany <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/fullseam.webp" data-co="FullSeam" data-meta="Dowling, Segal &amp; Coppa &middot; US &middot; Money">
-                        <div class="pf-row-photo"><img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">FullSeam</span><span class="pf-cap-meta">Dowling, Segal &amp; Coppa &middot; US &middot; Money</span></div></div>
+                    <article class="pf-row" data-photo="images/founders/fullseam.webp">
+                        <div class="pf-row-photo"><img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy"></div>
                         <h3 class="pf-name">Dowling, Segal &amp; Coppa</h3>
                         <p class="pf-company">FullSeam</p>
                         <p class="pf-blurb">Built TaxProper through to an Opendoor acquisition. Now an AI teammate for finance teams: AP, AR, and reconciliation.</p>
                         <p class="pf-tag">US <span class="sys">&middot; Money</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/argentic.webp" data-co="Argentic" data-meta="Craig O&rsquo;Neill &middot; Canada &middot; Money">
-                        <div class="pf-row-photo"><img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Argentic</span><span class="pf-cap-meta">Craig O&rsquo;Neill &middot; Canada &middot; Money</span></div></div>
+                    <article class="pf-row" data-photo="images/founders/argentic.webp">
+                        <div class="pf-row-photo"><img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy"></div>
                         <h3 class="pf-name">Craig O'Neill</h3>
                         <p class="pf-company">Argentic</p>
                         <p class="pf-blurb">Led Versapay for nine-plus years through a take-private with Great Hill Partners. Now rebuilding B2B payments for the AI era.</p>
@@ -525,12 +507,6 @@
     (function(){
         var rows=[].slice.call(document.querySelectorAll('#pfList .pf-row'));
         var photo=document.getElementById('pfPhoto');
-        var capCo=document.getElementById('pfCapCo'), capMeta=document.getElementById('pfCapMeta');
-        // Mobile: tap a founder photo to reveal its meta line
-        rows.forEach(function(r){
-            var rp=r.querySelector('.pf-row-photo');
-            if(rp) rp.addEventListener('click', function(){ rp.classList.toggle('is-tapped'); });
-        });
         if(!rows.length||!photo) return;
         if(window.matchMedia('(max-width:900px)').matches) return; // mobile stacks, no swap
         var io=new IntersectionObserver(function(entries){
@@ -539,8 +515,6 @@
                     rows.forEach(function(r){ r.classList.toggle('is-active', r===e.target); });
                     var src=e.target.getAttribute('data-photo');
                     if(src && photo.getAttribute('src')!==src) photo.setAttribute('src', src);
-                    if(capCo) capCo.innerHTML=e.target.getAttribute('data-co')||'';
-                    if(capMeta) capMeta.innerHTML=e.target.getAttribute('data-meta')||'';
                 }
             });
         },{rootMargin:'-45% 0px -45% 0px', threshold:0});
@@ -598,7 +572,11 @@
         .tm-card.tm-lit .tm-co{color:var(--blue-royal)}
         .tm-strip{display:flex;gap:12px;overflow-x:auto;margin-top:clamp(40px,5vw,68px);padding-bottom:6px;scrollbar-width:none}
         .tm-strip::-webkit-scrollbar{display:none}
-        .tm-strip img{height:clamp(120px,14vw,180px);width:auto;border-radius:12px;flex:0 0 auto;object-fit:cover;opacity:.9}
+        .tm-shot{position:relative;flex:0 0 auto;height:clamp(120px,14vw,180px);border-radius:12px;overflow:hidden;margin:0;cursor:pointer;background:rgba(255,255,255,.06)}
+        .tm-shot img{display:block;height:100%;width:auto;object-fit:cover;opacity:.9;transition:opacity .3s ease,transform .5s ease}
+        .tm-cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:26px 12px 10px;font-family:var(--sans);font-size:12px;font-weight:600;line-height:1.3;letter-spacing:.01em;color:#fff;text-align:left;background:linear-gradient(180deg,rgba(3,7,28,0) 0%,rgba(3,7,28,.82) 78%);opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+        .tm-shot:hover img,.tm-shot.is-tapped img{opacity:1;transform:scale(1.04)}
+        .tm-shot:hover .tm-cap,.tm-shot.is-tapped .tm-cap{opacity:1;transform:translateY(0)}
         @media(max-width:900px){.tm-cards{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:560px){.tm-cards{grid-template-columns:1fr}.tm-traits{grid-template-columns:1fr;gap:22px}}
     </style>
@@ -663,16 +641,40 @@
                     <p class="tm-name">Filip Kozera</p><p class="tm-co">Wordware</p>
                 </article>
             </div>
-            <div class="tm-strip" aria-label="Founders and moments">
-                <img src="images/snapshots/snap-1.webp" alt="" loading="lazy">
-                <img src="images/snapshots/snap-4.webp" alt="" loading="lazy">
-                <img src="images/snapshots/snap-7.webp" alt="" loading="lazy">
-                <img src="images/snapshots/snap-10.webp" alt="" loading="lazy">
-                <img src="images/snapshots/snap-13.webp" alt="" loading="lazy">
-                <img src="images/snapshots/snap-16.webp" alt="" loading="lazy">
+            <div class="tm-strip" id="tmStrip" aria-label="Founders and moments">
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-03.webp" alt="Alex Bouaziz (Deel), Don, and Tarek Mansour (Kalshi)" loading="lazy"><figcaption class="tm-cap">Alex Bouaziz (Deel), Don, &amp; Tarek Mansour (Kalshi)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-11.webp" alt="Brian Chesky (Airbnb)" loading="lazy"><figcaption class="tm-cap">Brian Chesky (Airbnb)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-06.webp" alt="Garry Tan (YC)" loading="lazy"><figcaption class="tm-cap">Garry Tan (YC)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-22.webp" alt="Evan Spiegel (Snap)" loading="lazy"><figcaption class="tm-cap">Evan Spiegel (Snap)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-05.webp" alt="Mark Cuban" loading="lazy"><figcaption class="tm-cap">Mark Cuban</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-26.webp" alt="Thomas Dohmke (GitHub)" loading="lazy"><figcaption class="tm-cap">Thomas Dohmke (GitHub)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-08.webp" alt="Ben Silbermann (Pinterest)" loading="lazy"><figcaption class="tm-cap">Ben Silbermann (Pinterest)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-02.webp" alt="Henrique Dubugras (Brex)" loading="lazy"><figcaption class="tm-cap">Henrique Dubugras (Brex)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-04.webp" alt="Esther Wojcicki (Godmother of Silicon Valley)" loading="lazy"><figcaption class="tm-cap">Esther Wojcicki (Godmother of Silicon Valley)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-25.webp" alt="Lip-Bu Tan (Intel CEO)" loading="lazy"><figcaption class="tm-cap">Lip-Bu Tan (Intel CEO)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-13.webp" alt="Julien Bek (Sequoia)" loading="lazy"><figcaption class="tm-cap">Julien Bek (Sequoia)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-23.webp" alt="David Helgason (Unity Software)" loading="lazy"><figcaption class="tm-cap">David Helgason (Unity Software)</figcaption></figure>
             </div>
         </div>
     </section>
+    <script>
+    (function(){
+        var strip=document.getElementById('tmStrip');
+        if(!strip) return;
+        var shots=[].slice.call(strip.querySelectorAll('.tm-shot'));
+        shots.forEach(function(s){
+            s.addEventListener('click', function(e){
+                e.stopPropagation();
+                var open=s.classList.contains('is-tapped');
+                shots.forEach(function(o){ o.classList.remove('is-tapped'); });
+                if(!open) s.classList.add('is-tapped');
+            });
+        });
+        document.addEventListener('click', function(){
+            shots.forEach(function(o){ o.classList.remove('is-tapped'); });
+        });
+    })();
+    </script>
 
     <!-- ==================== SPEAKEASY (near-black, the closing act — glow lives here only) ==================== -->
     <style>
