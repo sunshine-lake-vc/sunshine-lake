@@ -4188,45 +4188,34 @@
     </style>
 
     <!-- ════════ Balance coda ════════
-         A small, quiet closing note before the sign-off. A waterline mark
-         drawn in the same thin line-art language as the three founder
-         pillar icons (circle outline + white line + a yellow dot accent):
-         a lake surface that floods up, is reclaimed, then settles level,
-         on a loop, with the sun dot riding the balance point. Balance
-         found, lost, and found again. -->
+         A small, quiet closing note before the sign-off. A balance-scale
+         mark drawn in the same thin line-art language as the three founder
+         pillar icons (circle outline + white strokes + a yellow dot): the
+         beam tips one way (destruction), tips the other (rebuilding), then
+         settles level (balance), on a loop, pivoting on the sun dot. The
+         meaning maps straight to the copy below it. -->
     <section class="balance-coda" aria-label="What we back">
         <span class="balance-mark" role="img" aria-label="Balance">
-            <!-- The waterline (a wave path, clipped to the circle) rises
-                 and falls in a loop: it floods up, is reclaimed, then
-                 settles level and holds before the tide turns again. The
-                 yellow dot rides the line's center (the balance point). A
+            <!-- The beam + pans rotate about the pivot (the yellow dot):
+                 tip one way, tip the other, then settle level and hold
+                 before it turns again. The fulcrum + foot are static. A
                  reduced-motion guard below strips the animation to a
-                 static, level waterline. -->
+                 static, level balance. -->
             <svg class="balance-yy" viewBox="0 0 200 200" aria-hidden="true">
-                <defs><clipPath id="slLakeClip"><circle cx="100" cy="100" r="62"/></clipPath></defs>
                 <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"/>
-                <g clip-path="url(#slLakeClip)">
-                    <!-- Outer group tips the whole surface (the balance push-pull);
-                         inner group drifts it sideways one wavelength on a loop, so
-                         the line always reads as moving water. -->
-                    <g>
-                        <animateTransform attributeName="transform" type="translate" additive="sum" dur="8s" repeatCount="indefinite" calcMode="spline"
-                            keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                            values="0 0; 0 -16; 0 16; 0 0; 0 0"/>
-                        <g>
-                            <animateTransform attributeName="transform" type="translate" additive="sum" dur="3.6s" repeatCount="indefinite" values="0 0; -70 0"/>
-                            <path fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="3" stroke-linecap="round"
-                                d="M-70,100 Q -52.5,94 -35,100 T 0,100 T 35,100 T 70,100 T 105,100 T 140,100 T 175,100 T 210,100 T 245,100 T 280,100"/>
-                        </g>
-                    </g>
-                </g>
-                <circle r="9" fill="#F2D831" cx="100" cy="100">
-                    <animate attributeName="cy" dur="8s" repeatCount="indefinite" calcMode="spline"
+                <!-- fulcrum stand (static): apex under the pivot, base foot -->
+                <path d="M100,97 L110,124 L90,124 Z" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2.4" stroke-linejoin="round"/>
+                <line x1="82" y1="124" x2="118" y2="124" stroke="rgba(255,255,255,0.55)" stroke-width="2.4" stroke-linecap="round"/>
+                <!-- balancing beam + pans, rotating about the pivot (100,95) -->
+                <g>
+                    <animateTransform attributeName="transform" type="rotate" dur="7s" repeatCount="indefinite" calcMode="spline"
                         keyTimes="0; 0.28; 0.6; 0.82; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
-                        values="100; 84; 116; 100; 100"/>
-                    <animate attributeName="r" dur="4.5s" repeatCount="indefinite" calcMode="spline"
-                        keyTimes="0; 0.5; 1" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1" values="9; 10.5; 9"/>
-                </circle>
+                        values="0 100 95; 11 100 95; -11 100 95; 0 100 95; 0 100 95"/>
+                    <line x1="52" y1="95" x2="148" y2="95" stroke="rgba(255,255,255,0.92)" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M44,95 L52,107 L60,95" fill="none" stroke="rgba(255,255,255,0.82)" stroke-width="2.2" stroke-linejoin="round"/>
+                    <path d="M140,95 L148,107 L156,95" fill="none" stroke="rgba(255,255,255,0.82)" stroke-width="2.2" stroke-linejoin="round"/>
+                </g>
+                <circle cx="100" cy="95" r="7.5" fill="#F2D831"/>
             </svg>
         </span>
         <p class="balance-copy">Technology is accelerating the destruction and rebuilding of systems. We back founders who bring <em>balance</em>.</p>
