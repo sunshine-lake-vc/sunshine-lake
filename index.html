@@ -559,17 +559,22 @@
         .tm-trait-icon .flicker{transform-box:fill-box;transform-origin:bottom center;animation:slFlicker 2.2s ease-in-out infinite}
         .tm-trait-icon .beat{transform-box:fill-box;transform-origin:center;animation:slBeat 2.6s ease-in-out infinite}
         @media(prefers-reduced-motion:reduce){.tm-trait-icon .dot,.tm-trait-icon .flicker,.tm-trait-icon .beat{animation:none}}
-        .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
-        .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column}
+        .tm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
+        .tm-card{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column;height:clamp(248px,20vw,288px)}
         .tm-card.tm-lit{background:#fff;border-color:#fff}
+        .tm-card-body{display:flex;flex-direction:column;flex:1;min-height:0;transition:opacity .55s ease}
+        .tm-card.is-swapping .tm-card-body{opacity:0}
         .tm-quote-mark{font-family:var(--serif);font-size:2.4rem;line-height:.6;color:var(--yellow);margin:0 0 14px}
         .tm-card.tm-lit .tm-quote-mark{color:var(--gold-ink)}
-        .tm-quote{font-family:var(--serif);font-size:clamp(1rem,1.15vw,1.15rem);line-height:1.42;color:var(--white-soft);margin:0 0 20px;flex:1}
+        .tm-quote{font-family:var(--serif);font-size:clamp(1rem,1.12vw,1.14rem);line-height:1.4;color:var(--white-soft);margin:0 0 18px;flex:1;overflow:hidden}
         .tm-card.tm-lit .tm-quote{color:var(--navy-ink)}
         .tm-name{font-family:var(--sans);font-size:14px;font-weight:700;color:#fff;margin:0}
         .tm-card.tm-lit .tm-name{color:var(--navy-ink)}
         .tm-co{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--white-dim);margin:3px 0 0}
         .tm-card.tm-lit .tm-co{color:var(--blue-royal)}
+        .tm-dots{display:flex;justify-content:center;gap:7px;margin-top:clamp(20px,2vw,28px)}
+        .tm-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.24);cursor:pointer;transition:background .3s ease,transform .3s ease}
+        .tm-dots button.is-on{background:var(--yellow);transform:scale(1.25)}
         .tm-strip{display:flex;gap:12px;overflow-x:auto;margin-top:clamp(40px,5vw,68px);padding-bottom:6px;scrollbar-width:none}
         .tm-strip::-webkit-scrollbar{display:none}
         .tm-shot{position:relative;flex:0 0 auto;height:clamp(120px,14vw,180px);border-radius:12px;overflow:hidden;margin:0;cursor:pointer;background:rgba(255,255,255,.06)}
@@ -577,8 +582,12 @@
         .tm-cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:26px 12px 10px;font-family:var(--sans);font-size:12px;font-weight:600;line-height:1.3;letter-spacing:.01em;color:#fff;text-align:left;background:linear-gradient(180deg,rgba(3,7,28,0) 0%,rgba(3,7,28,.82) 78%);opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
         .tm-shot:hover img,.tm-shot.is-tapped img{opacity:1;transform:scale(1.04)}
         .tm-shot:hover .tm-cap,.tm-shot.is-tapped .tm-cap{opacity:1;transform:translateY(0)}
-        @media(max-width:900px){.tm-cards{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:560px){.tm-cards{grid-template-columns:1fr}.tm-traits{grid-template-columns:1fr;gap:22px}}
+        @media(max-width:620px){
+            .tm-cards{grid-template-columns:1fr}
+            .tm-card{height:auto;min-height:clamp(210px,52vw,250px)}
+            .tm-card:nth-child(n+2){display:none}
+            .tm-traits{grid-template-columns:1fr;gap:22px}
+        }
     </style>
     <section class="tm" id="section-testimonials" aria-label="What founders say">
         <div class="tm-inner">
@@ -619,28 +628,30 @@
                     <span>Benevolent.</span>
                 </div>
             </div>
-            <div class="tm-cards">
+            <div class="tm-cards" id="tmCards">
                 <article class="tm-card">
-                    <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
-                    <p class="tm-quote">He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.</p>
-                    <p class="tm-name">Jake Sussman</p><p class="tm-co">Headway</p>
+                    <div class="tm-card-body">
+                        <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
+                        <p class="tm-quote">He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.</p>
+                        <p class="tm-name">Jake Sussman</p><p class="tm-co">Headway</p>
+                    </div>
                 </article>
                 <article class="tm-card tm-lit">
-                    <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
-                    <p class="tm-quote">With us from day zero, a tremendous supporter through the twists and turns.</p>
-                    <p class="tm-name">Tarek Mansour</p><p class="tm-co">Kalshi</p>
+                    <div class="tm-card-body">
+                        <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
+                        <p class="tm-quote">It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did, twice.</p>
+                        <p class="tm-name">Aaron Bai</p><p class="tm-co">Affiniti</p>
+                    </div>
                 </article>
                 <article class="tm-card">
-                    <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
-                    <p class="tm-quote">It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did, twice.</p>
-                    <p class="tm-name">Aaron Bai</p><p class="tm-co">Affiniti</p>
-                </article>
-                <article class="tm-card">
-                    <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
-                    <p class="tm-quote">Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.</p>
-                    <p class="tm-name">Filip Kozera</p><p class="tm-co">Wordware</p>
+                    <div class="tm-card-body">
+                        <p class="tm-quote-mark" aria-hidden="true">&ldquo;</p>
+                        <p class="tm-quote">Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.</p>
+                        <p class="tm-name">Filip Kozera</p><p class="tm-co">Wordware</p>
+                    </div>
                 </article>
             </div>
+            <div class="tm-dots" id="tmDots" aria-hidden="true"></div>
             <div class="tm-strip" id="tmStrip" aria-label="Founders and moments">
                 <figure class="tm-shot"><img src="images/snapshots/snap-doc-03.webp" alt="Alex Bouaziz (Deel), Don, and Tarek Mansour (Kalshi)" loading="lazy"><figcaption class="tm-cap">Alex Bouaziz (Deel), Don, &amp; Tarek Mansour (Kalshi)</figcaption></figure>
                 <figure class="tm-shot"><img src="images/snapshots/snap-doc-11.webp" alt="Brian Chesky (Airbnb)" loading="lazy"><figcaption class="tm-cap">Brian Chesky (Airbnb)</figcaption></figure>
@@ -673,6 +684,77 @@
         document.addEventListener('click', function(){
             shots.forEach(function(o){ o.classList.remove('is-tapped'); });
         });
+    })();
+    </script>
+    <script>
+    // Rotating founder testimonials: 3 shown, the full set cycles through in place.
+    (function(){
+        var wrap=document.getElementById('tmCards');
+        var dotsWrap=document.getElementById('tmDots');
+        if(!wrap) return;
+        var cards=[].slice.call(wrap.querySelectorAll('.tm-card'));
+        if(!cards.length) return;
+        var Q=[
+            {q:'He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.', n:'Jake Sussman', c:'Headway'},
+            {q:"It's rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did, twice.", n:'Aaron Bai', c:'Affiniti'},
+            {q:"Don has this incredible ability to believe in you more than you believe in yourself. I'd totally work with Don again.", n:'Filip Kozera', c:'Wordware'},
+            {q:'With us from day zero, a tremendous supporter through the twists and turns.', n:'Tarek Mansour', c:'Kalshi'},
+            {q:"He intro'd two of the top law firms in the world. If I were starting another company, I would absolutely take funding from Don again.", n:'James Ding', c:'DraftWise'},
+            {q:"He hustles harder than any investor I've met. He talked to every early hire, no matter where he was in the world.", n:'Lawrence Lin Murata', c:'Slope'},
+            {q:"We've worked through different levers to accelerate growth and optimize the P&L. If I could take money from Don again, I absolutely would.", n:'Mark Lawrence', c:'SpotHero'},
+            {q:'He could not have been more supportive through our pivots. We rely on Don for independent feedback.', n:'Max Kauderer', c:'Yuzu Health'},
+            {q:'When SVB was crashing, Don was the first one to call and give us a heads-up. That saved us from a bad situation.', n:'Ankit Jain', c:'Aviator'},
+            {q:"When the SVB situation unfolded, Don helped pull his entire portfolio away. He's been in the trenches.", n:'Michael Tannenbaum', c:'Figure'},
+            {q:'Don understands product-market fit is everything early. You email to chat, and your phone rings immediately.', n:'Nick Evans', c:'Avocado'},
+            {q:"He's been a great sounding board, especially during uncertain moments. We're backed by strong funds, but Don stands out.", n:'Sean Doherty', c:'GovDash'},
+            {q:'He came down hard on expense control and pushed me. I credit Don for pushing me to stay focused on what really mattered.', n:'Thiago Da Costa', c:'Datagrid'},
+            {q:"From day one to TaxProper's acquisition, Don was more than an investor. He's a rare one who makes your business better.", n:'Thomas Dowling', c:'TaxProper'},
+            {q:'He stayed engaged throughout the life of our business and was absolutely critical in helping us achieve a successful acquisition.', n:'Todd Heine', c:'Legalpad'}
+        ];
+        var per=cards.length;
+        var pages=Math.ceil(Q.length/per);
+        var page=0;
+        var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+        function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+        function render(card,q){
+            var body=card.querySelector('.tm-card-body');
+            body.innerHTML='<p class="tm-quote-mark" aria-hidden="true">“</p>'+
+                '<p class="tm-quote">'+esc(q.q)+'</p>'+
+                '<p class="tm-name">'+esc(q.n)+'</p><p class="tm-co">'+esc(q.c)+'</p>';
+        }
+        var dots=[];
+        if(dotsWrap){
+            for(var i=0;i<pages;i++){
+                (function(idx){
+                    var b=document.createElement('button');
+                    b.type='button';
+                    b.setAttribute('aria-label','Show testimonial set '+(idx+1));
+                    b.addEventListener('click',function(){ go(idx,true); });
+                    dotsWrap.appendChild(b); dots.push(b);
+                })(i);
+            }
+        }
+        function setDots(){ dots.forEach(function(d,i){ d.classList.toggle('is-on',i===page); }); }
+        function go(p,user){
+            page=((p%pages)+pages)%pages;
+            cards.forEach(function(card,ci){
+                setTimeout(function(){
+                    card.classList.add('is-swapping');
+                    setTimeout(function(){
+                        render(card,Q[(page*per+ci)%Q.length]);
+                        card.classList.remove('is-swapping');
+                    },560);
+                },ci*110);
+            });
+            setDots();
+            if(user) restart();
+        }
+        var timer=null, INTERVAL=5600;
+        function restart(){ if(timer){clearInterval(timer);timer=null;} if(reduce) return; timer=setInterval(function(){ go(page+1); },INTERVAL); }
+        setDots();
+        wrap.addEventListener('mouseenter',function(){ if(timer){clearInterval(timer);timer=null;} });
+        wrap.addEventListener('mouseleave',restart);
+        restart();
     })();
     </script>
 
