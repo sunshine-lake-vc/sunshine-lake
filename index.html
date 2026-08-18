@@ -190,10 +190,20 @@
         .thesis{background:#ffffff;color:var(--navy-ink);padding:clamp(72px,11vw,150px) clamp(22px,6vw,64px) clamp(36px,5vw,64px);text-align:center}
         .thesis-inner{max-width:1080px;margin:0 auto}
         .thesis-h2{color:var(--navy-ink);max-width:32ch;margin:0 auto;text-wrap:balance}
-        .thesis-icons{
-            display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,3.4vw,54px);
+        /* Desktop: a slow marquee of the systems, edges fading to white */
+        .thesis-marquee{
+            position:relative;overflow:hidden;
             margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
+            -webkit-mask-image:linear-gradient(90deg,transparent 0%,#fff 12%,#fff 88%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0%,#fff 12%,#fff 88%,transparent 100%);
         }
+        .thesis-icons{
+            display:flex;flex-wrap:nowrap;justify-content:flex-start;width:max-content;
+            gap:clamp(28px,4vw,60px);margin:0;
+        }
+        .thesis-marquee.is-ready .thesis-icons{animation:thesisMarquee 48s linear infinite}
+        .thesis-marquee.is-ready:hover .thesis-icons{animation-play-state:paused}
+        @keyframes thesisMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
         .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
         /* Clean line-art icons: blue line + gold dot on white, each with a
            subtle idle animation (in the spirit of the old founder pillars). */
@@ -216,15 +226,15 @@
         @media(prefers-reduced-motion:reduce){.thesis-sys-icon .dot,.thesis-sys-icon .rays{animation:none}}
         .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
         .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
-        /* Mobile: swipeable carousel of the system medallions (full-bleed) */
+        /* Mobile: swipeable carousel of the system medallions (full-bleed, no auto-scroll) */
         @media(max-width:640px){
-            .thesis-icons{
-                flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:30px;
-                scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+            .thesis-marquee{
+                overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
                 margin-inline:calc(-1 * clamp(22px,6vw,64px));
-                padding:4px clamp(22px,6vw,64px) 12px;
             }
-            .thesis-icons::-webkit-scrollbar{display:none}
+            .thesis-marquee::-webkit-scrollbar{display:none}
+            .thesis-marquee.is-ready .thesis-icons{animation:none}
+            .thesis-icons{gap:30px;padding:4px clamp(22px,6vw,64px) 12px}
             .thesis-sys{flex:0 0 auto;min-width:84px;scroll-snap-align:center}
         }
         .thesis-note{
@@ -250,6 +260,7 @@
         <div class="thesis-inner">
             <h2 class="section-display thesis-h2">Our founders rebuild critical global systems that failed them.</h2>
 
+            <div class="thesis-marquee">
             <div class="thesis-icons" aria-label="Critical global systems and their scale">
                 <div class="thesis-sys">
                     <span class="thesis-sys-icon">
@@ -308,6 +319,7 @@
                     <span class="thesis-sys-name">Work</span><span class="thesis-sys-stat">$65T/yr earned</span>
                 </div>
             </div>
+            </div>
 
             <p class="section-display thesis-payoff">They bring the world into <em>balance</em>.</p>
 
@@ -324,6 +336,20 @@
             </div>
         </div>
     </section>
+    <script>
+    // Desktop: seamless slow marquee of the critical-systems row (duplicate the
+    // track so translateX(-50%) loops without a seam). Mobile keeps manual swipe.
+    (function(){
+        var mq=document.querySelector('.thesis-marquee');
+        var track=mq&&mq.querySelector('.thesis-icons');
+        if(!track) return;
+        if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+        if(window.matchMedia('(max-width:640px)').matches) return;
+        var kids=[].slice.call(track.children);
+        kids.forEach(function(k){ var c=k.cloneNode(true); c.setAttribute('aria-hidden','true'); track.appendChild(c); });
+        mq.classList.add('is-ready');
+    })();
+    </script>
 
     <!-- ==================== TEAM (white fading into light blue) ==================== -->
     <style>
@@ -425,9 +451,9 @@
     <style>
         .pf{background:var(--blue-royal);color:#fff;padding:clamp(64px,9vw,120px) clamp(22px,5vw,64px) clamp(72px,10vw,140px)}
         .pf-inner{max-width:1200px;margin:0 auto}
-        .pf-head{text-align:center;margin:0 auto clamp(48px,6vw,80px);max-width:22ch}
+        .pf-head{text-align:center;margin:0 auto clamp(48px,6vw,80px);max-width:560px}
         .pf-eyebrow{color:var(--yellow);margin:0 0 clamp(14px,1.6vw,20px)}
-        .pf-h2{color:#fff}
+        .pf-h2{color:#fff;text-wrap:balance}
         .pf-body{display:grid;grid-template-columns:0.78fr 1.22fr;gap:clamp(30px,5vw,72px);align-items:start}
         .pf-photo-col{position:sticky;top:clamp(80px,14vh,140px)}
         .pf-photo{width:100%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(3,7,28,.32)}
@@ -840,7 +866,10 @@
             background:rgba(255,255,255,.04);border:1px solid rgba(201,164,63,.28);
             border-radius:18px;padding:clamp(20px,2.6vw,34px);
         }
-        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;opacity:.95}
+        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;
+            background:radial-gradient(120% 120% at 50% 30%,#fbfcff 0%,#eef1fb 100%);
+            border:1px solid rgba(201,164,63,.45);border-radius:14px;
+            padding:clamp(9px,1.1vw,13px);box-shadow:0 8px 22px rgba(0,0,0,.34)}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
         .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
