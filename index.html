@@ -192,13 +192,7 @@
         .thesis-h2{color:var(--navy-ink);max-width:20ch;margin:0 auto}
         .thesis-icons{
             display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,3.4vw,54px);
-            margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);position:relative;
-        }
-        /* Subtle interdependence: a faint thread the systems sit on, with the
-           dot-pulse rippling left to right across it. */
-        .thesis-icons::before{
-            content:"";position:absolute;left:7%;right:7%;top:clamp(22px,2.4vw,29px);height:1px;
-            background:linear-gradient(90deg,transparent,rgba(43,80,226,.22) 12%,rgba(43,80,226,.22) 88%,transparent);
+            margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
         }
         .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
         /* Clean line-art icons: blue line + gold dot on white, each with a
@@ -231,7 +225,6 @@
                 padding:4px clamp(22px,6vw,64px) 12px;
             }
             .thesis-icons::-webkit-scrollbar{display:none}
-            .thesis-icons::before{display:none}
             .thesis-sys{flex:0 0 auto;min-width:84px;scroll-snap-align:center}
         }
         .thesis-note{
@@ -584,9 +577,11 @@
         .tm-trait-icon .dot{fill:var(--yellow);transform-box:fill-box;transform-origin:center;animation:slDotPulse 3.4s ease-in-out infinite}
         .tm-trait:nth-child(2) .dot{animation-delay:.7s}
         .tm-trait:nth-child(3) .dot{animation-delay:1.4s}
-        .tm-trait-icon .rays{transform-box:fill-box;transform-origin:center;animation:slSpin 32s linear infinite}
-        .tm-trait-icon .orbit{transform-box:fill-box;transform-origin:center;animation:slSpin 26s linear infinite}
-        @media(prefers-reduced-motion:reduce){.tm-trait-icon .dot,.tm-trait-icon .rays,.tm-trait-icon .orbit{animation:none}}
+        @keyframes slFlicker{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(1.07) translateY(-0.8px)}}
+        @keyframes slBeat{0%,100%{transform:scale(1)}22%{transform:scale(1.09)}40%{transform:scale(1)}62%{transform:scale(1.05)}}
+        .tm-trait-icon .flicker{transform-box:fill-box;transform-origin:bottom center;animation:slFlicker 2.2s ease-in-out infinite}
+        .tm-trait-icon .beat{transform-box:fill-box;transform-origin:center;animation:slBeat 2.6s ease-in-out infinite}
+        @media(prefers-reduced-motion:reduce){.tm-trait-icon .dot,.tm-trait-icon .flicker,.tm-trait-icon .beat{animation:none}}
         .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
         .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column}
         .tm-card.tm-lit{background:#fff;border-color:#fff}
@@ -612,31 +607,32 @@
             </div>
             <div class="tm-traits">
                 <div class="tm-trait">
+                    <!-- Forged by extreme origins -> a flame (forged in fire) -->
                     <span class="tm-trait-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
-                            <circle class="dot" cx="32" cy="32" r="6.5"/>
+                            <path class="ln flicker" d="M32 6 C 35 20, 47 26, 44 40 C 43 49, 38 55, 32 55 C 26 55, 20 49, 20 41 C 20 33, 27 31, 29 23 C 30 18, 31 13, 32 6 Z"/>
+                            <circle class="dot" cx="32" cy="44" r="4.4"/>
                         </svg>
                     </span>
                     <span>Forged by extreme origins.</span>
                 </div>
                 <div class="tm-trait">
+                    <!-- Prescient -> an eye (foresight) -->
                     <span class="tm-trait-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <circle class="ring" cx="32" cy="32" r="23"/>
-                            <path class="ln" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34"/>
-                            <circle class="dot" cx="34" cy="20" r="4.4"/>
+                            <path class="ln" d="M7 32 C 18 17, 46 17, 57 32 C 46 47, 18 47, 7 32 Z"/>
+                            <circle class="ln" cx="32" cy="32" r="8.5"/>
+                            <circle class="dot" cx="32" cy="32" r="4.2"/>
                         </svg>
                     </span>
                     <span>Prescient.</span>
                 </div>
                 <div class="tm-trait">
+                    <!-- Benevolent -> a heart (goodwill) -->
                     <span class="tm-trait-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <circle class="ring" cx="32" cy="32" r="23"/>
-                            <line class="ln" x1="9" y1="32" x2="55" y2="32" style="opacity:.6"/>
-                            <ellipse class="ln orbit" cx="32" cy="32" rx="10.5" ry="23"/>
-                            <circle class="dot" cx="32" cy="32" r="4.8"/>
+                            <path class="ln beat" d="M32 52 C 11 37, 13 20, 24 17 C 30 15.4, 32 20, 32 24 C 32 20, 34 15.4, 40 17 C 51 20, 53 37, 32 52 Z"/>
+                            <circle class="dot" cx="32" cy="29" r="4"/>
                         </svg>
                     </span>
                     <span>Benevolent.</span>
