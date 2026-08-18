@@ -192,7 +192,13 @@
         .thesis-h2{color:var(--navy-ink);max-width:20ch;margin:0 auto}
         .thesis-icons{
             display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,3.4vw,54px);
-            margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
+            margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);position:relative;
+        }
+        /* Subtle interdependence: a faint thread the systems sit on, with the
+           dot-pulse rippling left to right across it. */
+        .thesis-icons::before{
+            content:"";position:absolute;left:7%;right:7%;top:clamp(22px,2.4vw,29px);height:1px;
+            background:linear-gradient(90deg,transparent,rgba(43,80,226,.22) 12%,rgba(43,80,226,.22) 88%,transparent);
         }
         .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
         /* Clean line-art icons: blue line + gold dot on white, each with a
@@ -225,6 +231,7 @@
                 padding:4px clamp(22px,6vw,64px) 12px;
             }
             .thesis-icons::-webkit-scrollbar{display:none}
+            .thesis-icons::before{display:none}
             .thesis-sys{flex:0 0 auto;min-width:84px;scroll-snap-align:center}
         }
         .thesis-note{
@@ -331,7 +338,7 @@
         .team-inner{max-width:1280px;margin:0 auto;text-align:center}
         .team-eyebrow{color:var(--gold-ink);margin:0 0 clamp(14px,1.6vw,20px)}
         .team-lead{color:var(--navy-ink);max-width:22ch;margin:0 auto clamp(44px,5.5vw,72px)}
-        .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,1.8vw,26px);text-align:left}
+        .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,1.8vw,26px);text-align:left;max-width:1120px;margin-inline:auto}
         .team-card{display:flex;flex-direction:column}
         .team-photo{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#B9C6E8;box-shadow:0 10px 30px rgba(30,42,120,.14)}
         .team-photo img{width:100%;height:100%;object-fit:cover}
@@ -351,11 +358,13 @@
             .team-name{min-height:0}
             .team-card.advisors{grid-column:1 / -1}
         }
-        @media(max-width:560px){ .team-grid{grid-template-columns:1fr} }
+        @media(max-width:560px){ .team-grid{grid-template-columns:1fr} .team-photo{max-width:76%;margin-inline:auto} }
         /* Wave divider: light blue lapping down into royal blue.
            The area above the wave path must be the team's ending light-blue
            (not the body background), so the divider carries that color. */
         .wave-divider{display:block;width:100%;height:clamp(48px,7vw,110px);margin:0;background:var(--blue-light);color:var(--blue-royal);vertical-align:top}
+        /* Same wave, other color pairings for the rest of the section seams */
+        .wave-divider.to-navy{background:var(--blue-royal);color:var(--navy-night)}
     </style>
     <section class="team" id="section-team" aria-label="Our team">
         <div class="team-inner">
@@ -423,10 +432,26 @@
         .pf-head{text-align:center;margin:0 auto clamp(48px,6vw,80px);max-width:22ch}
         .pf-eyebrow{color:var(--yellow);margin:0 0 clamp(14px,1.6vw,20px)}
         .pf-h2{color:#fff}
-        .pf-body{display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(30px,5vw,72px);align-items:start}
+        .pf-body{display:grid;grid-template-columns:0.78fr 1.22fr;gap:clamp(30px,5vw,72px);align-items:start}
         .pf-photo-col{position:sticky;top:clamp(80px,14vh,140px)}
+        .pf-photo,.pf-row-photo{position:relative}
         .pf-photo{width:100%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(3,7,28,.32)}
         .pf-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .4s ease}
+        /* Subtle water wash + caption overlay on the founder photos */
+        .pf-water{position:absolute;inset:0;pointer-events:none;z-index:1;
+            background:linear-gradient(180deg,rgba(43,80,226,.12) 0%,rgba(3,7,28,0) 26%,rgba(3,7,28,.06) 58%,rgba(3,7,28,.62) 100%);}
+        .pf-water::before{content:"";position:absolute;inset:-25%;
+            background:radial-gradient(55% 34% at 32% 22%,rgba(122,204,255,.20),transparent 60%),radial-gradient(50% 30% at 74% 60%,rgba(122,204,255,.12),transparent 62%);
+            animation:pfWater 11s ease-in-out infinite alternate;}
+        @keyframes pfWater{0%{transform:translate(0,0) scale(1)}100%{transform:translate(5%,3%) scale(1.06)}}
+        @media(prefers-reduced-motion:reduce){.pf-water::before{animation:none}}
+        .pf-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:left;
+            padding:clamp(14px,1.6vw,22px);color:#fff;}
+        .pf-cap-co{display:block;font-family:var(--serif);font-size:clamp(1.1rem,1.5vw,1.5rem);line-height:1.05;text-shadow:0 2px 14px rgba(3,7,28,.5)}
+        .pf-cap-meta{display:block;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.85);
+            max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease,opacity .35s ease,margin-top .35s ease;}
+        .pf-photo:hover .pf-cap-meta,.pf-photo:focus-within .pf-cap-meta,
+        .pf-row-photo:hover .pf-cap-meta,.pf-row-photo.is-tapped .pf-cap-meta{max-height:44px;opacity:1;margin-top:6px}
         .pf-list{display:flex;flex-direction:column}
         .pf-row{padding:clamp(22px,2.6vw,34px) 0;border-top:1px solid rgba(255,255,255,.16);opacity:.55;transition:opacity .35s ease;cursor:default}
         .pf-row:first-child{border-top:0}
@@ -442,7 +467,7 @@
             .pf-body{grid-template-columns:1fr;gap:0}
             .pf-photo-col{display:none}
             .pf-row{opacity:1;border-top:1px solid rgba(255,255,255,.16);padding:clamp(26px,7vw,40px) 0}
-            .pf-row-photo{display:block;width:100%;aspect-ratio:1/1;max-height:420px;border-radius:14px;overflow:hidden;margin:0 0 18px;background:rgba(255,255,255,.08)}
+            .pf-row-photo{display:block;width:100%;max-width:82%;aspect-ratio:1/1;max-height:360px;border-radius:14px;overflow:hidden;margin:0 0 18px;background:rgba(255,255,255,.08)}
             .pf-row-photo img{width:100%;height:100%;object-fit:cover}
         }
     </style>
@@ -454,39 +479,43 @@
             </div>
             <div class="pf-body">
                 <div class="pf-photo-col" aria-hidden="true">
-                    <div class="pf-photo"><img id="pfPhoto" src="images/founders/duranta.webp" alt=""></div>
+                    <div class="pf-photo">
+                        <img id="pfPhoto" src="images/founders/duranta.webp" alt="">
+                        <div class="pf-water"></div>
+                        <div class="pf-cap"><span class="pf-cap-co" id="pfCapCo">Duranta</span><span class="pf-cap-meta" id="pfCapMeta">Samuel Adeyemo &middot; Kenya &middot; Work</span></div>
+                    </div>
                 </div>
                 <div class="pf-list" id="pfList">
-                    <article class="pf-row is-active" data-photo="images/founders/duranta.webp">
-                        <div class="pf-row-photo"><img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy"></div>
+                    <article class="pf-row is-active" data-photo="images/founders/duranta.webp" data-co="Duranta" data-meta="Samuel Adeyemo &middot; Kenya &middot; Work">
+                        <div class="pf-row-photo"><img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Duranta</span><span class="pf-cap-meta">Samuel Adeyemo &middot; Kenya &middot; Work</span></div></div>
                         <h3 class="pf-name">Samuel Adeyemo</h3>
                         <p class="pf-company">Duranta</p>
                         <p class="pf-blurb">Co-founded Aurora Solar and scaled it to <span class="pf-amt">$4B</span>. Now building foundation vision models that let machines understand the physical world.</p>
                         <p class="pf-tag">Kenya <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2">
-                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"></div>
+                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2" data-co="Concord.ai" data-meta="Tisserand &amp; Ismail &middot; France &middot; Work">
+                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Concord.ai</span><span class="pf-cap-meta">Tisserand &amp; Ismail &middot; France &middot; Work</span></div></div>
                         <h3 class="pf-name">Geoffrey Tisserand &amp; Anji Ismail</h3>
                         <p class="pf-company">Concord.ai</p>
                         <p class="pf-blurb">Sold Agora to PayScale; helped build Checkr into a <span class="pf-amt">$5B</span> company. Now reskilling the global workforce for the AI era.</p>
                         <p class="pf-tag">France <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/thomas.webp">
-                        <div class="pf-row-photo"><img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy"></div>
+                    <article class="pf-row" data-photo="images/founders/thomas.webp" data-co="Entire" data-meta="Thomas Dohmke &middot; Germany &middot; Work">
+                        <div class="pf-row-photo"><img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Entire</span><span class="pf-cap-meta">Thomas Dohmke &middot; Germany &middot; Work</span></div></div>
                         <h3 class="pf-name">Thomas Dohmke</h3>
                         <p class="pf-company">Entire</p>
                         <p class="pf-blurb">Ran GitHub to <span class="pf-amt">$7.5B</span> and scaled Copilot. Now building the trust layer for the agent era, so the world can verify what machines build.</p>
                         <p class="pf-tag">Germany <span class="sys">&middot; Work</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/fullseam.webp">
-                        <div class="pf-row-photo"><img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy"></div>
+                    <article class="pf-row" data-photo="images/founders/fullseam.webp" data-co="FullSeam" data-meta="Dowling, Segal &amp; Coppa &middot; US &middot; Money">
+                        <div class="pf-row-photo"><img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">FullSeam</span><span class="pf-cap-meta">Dowling, Segal &amp; Coppa &middot; US &middot; Money</span></div></div>
                         <h3 class="pf-name">Dowling, Segal &amp; Coppa</h3>
                         <p class="pf-company">FullSeam</p>
                         <p class="pf-blurb">Built TaxProper through to an Opendoor acquisition. Now an AI teammate for finance teams: AP, AR, and reconciliation.</p>
                         <p class="pf-tag">US <span class="sys">&middot; Money</span></p>
                     </article>
-                    <article class="pf-row" data-photo="images/founders/argentic.webp">
-                        <div class="pf-row-photo"><img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy"></div>
+                    <article class="pf-row" data-photo="images/founders/argentic.webp" data-co="Argentic" data-meta="Craig O&rsquo;Neill &middot; Canada &middot; Money">
+                        <div class="pf-row-photo"><img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy"><div class="pf-water"></div><div class="pf-cap"><span class="pf-cap-co">Argentic</span><span class="pf-cap-meta">Craig O&rsquo;Neill &middot; Canada &middot; Money</span></div></div>
                         <h3 class="pf-name">Craig O'Neill</h3>
                         <p class="pf-company">Argentic</p>
                         <p class="pf-blurb">Led Versapay for nine-plus years through a take-private with Great Hill Partners. Now rebuilding B2B payments for the AI era.</p>
@@ -500,6 +529,12 @@
     (function(){
         var rows=[].slice.call(document.querySelectorAll('#pfList .pf-row'));
         var photo=document.getElementById('pfPhoto');
+        var capCo=document.getElementById('pfCapCo'), capMeta=document.getElementById('pfCapMeta');
+        // Mobile: tap a founder photo to reveal its meta line
+        rows.forEach(function(r){
+            var rp=r.querySelector('.pf-row-photo');
+            if(rp) rp.addEventListener('click', function(){ rp.classList.toggle('is-tapped'); });
+        });
         if(!rows.length||!photo) return;
         if(window.matchMedia('(max-width:900px)').matches) return; // mobile stacks, no swap
         var io=new IntersectionObserver(function(entries){
@@ -508,12 +543,29 @@
                     rows.forEach(function(r){ r.classList.toggle('is-active', r===e.target); });
                     var src=e.target.getAttribute('data-photo');
                     if(src && photo.getAttribute('src')!==src) photo.setAttribute('src', src);
+                    if(capCo) capCo.innerHTML=e.target.getAttribute('data-co')||'';
+                    if(capMeta) capMeta.innerHTML=e.target.getAttribute('data-meta')||'';
                 }
             });
         },{rootMargin:'-45% 0px -45% 0px', threshold:0});
         rows.forEach(function(r){ io.observe(r); });
     })();
     </script>
+
+    <svg class="wave-divider to-navy" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="currentColor" opacity=".45" d="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="13s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z;
+                        M0,44 C300,74 560,78 720,50 C900,26 1160,30 1440,58 L1440,110 L0,110 Z;
+                        M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z"/>
+        </path>
+        <path fill="currentColor" d="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z;
+                        M0,54 C240,28 480,30 720,54 C960,84 1200,82 1440,46 L1440,110 L0,110 Z;
+                        M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z"/>
+        </path>
+    </svg>
 
     <!-- ==================== TESTIMONIALS (dark navy) ==================== -->
     <style>
@@ -523,8 +575,18 @@
         .tm-h2{color:#fff;margin:0 auto}
         .tm-sub{font-family:var(--serif);font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--white-soft);margin:clamp(14px,1.6vw,20px) auto 0;max-width:46ch}
         .tm-traits{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,48px);max-width:840px;margin:0 auto clamp(48px,6vw,80px)}
-        .tm-trait{text-align:center}
+        .tm-trait{text-align:center;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.4vw,18px)}
         .tm-trait span{font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.5rem);color:var(--yellow)}
+        .tm-trait-icon{width:clamp(44px,4.2vw,56px);height:clamp(44px,4.2vw,56px);display:flex;align-items:center;justify-content:center}
+        .tm-trait-icon svg{width:100%;height:100%;display:block;overflow:visible}
+        .tm-trait-icon .ln{stroke:rgba(255,255,255,.9);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+        .tm-trait-icon .ring{stroke:rgba(255,255,255,.28);stroke-width:1.5;fill:none}
+        .tm-trait-icon .dot{fill:var(--yellow);transform-box:fill-box;transform-origin:center;animation:slDotPulse 3.4s ease-in-out infinite}
+        .tm-trait:nth-child(2) .dot{animation-delay:.7s}
+        .tm-trait:nth-child(3) .dot{animation-delay:1.4s}
+        .tm-trait-icon .rays{transform-box:fill-box;transform-origin:center;animation:slSpin 32s linear infinite}
+        .tm-trait-icon .orbit{transform-box:fill-box;transform-origin:center;animation:slSpin 26s linear infinite}
+        @media(prefers-reduced-motion:reduce){.tm-trait-icon .dot,.tm-trait-icon .rays,.tm-trait-icon .orbit{animation:none}}
         .tm-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
         .tm-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column}
         .tm-card.tm-lit{background:#fff;border-color:#fff}
@@ -549,9 +611,36 @@
                 <p class="tm-sub">Machines make their visions real, and the old obsolete, faster than ever.</p>
             </div>
             <div class="tm-traits">
-                <div class="tm-trait"><span>Forged by extreme origins.</span></div>
-                <div class="tm-trait"><span>Prescient.</span></div>
-                <div class="tm-trait"><span>Benevolent.</span></div>
+                <div class="tm-trait">
+                    <span class="tm-trait-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
+                            <circle class="dot" cx="32" cy="32" r="6.5"/>
+                        </svg>
+                    </span>
+                    <span>Forged by extreme origins.</span>
+                </div>
+                <div class="tm-trait">
+                    <span class="tm-trait-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <circle class="ring" cx="32" cy="32" r="23"/>
+                            <path class="ln" d="M9 42 C 20 42, 22 20, 34 20 C 44 20, 45 34, 55 34"/>
+                            <circle class="dot" cx="34" cy="20" r="4.4"/>
+                        </svg>
+                    </span>
+                    <span>Prescient.</span>
+                </div>
+                <div class="tm-trait">
+                    <span class="tm-trait-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <circle class="ring" cx="32" cy="32" r="23"/>
+                            <line class="ln" x1="9" y1="32" x2="55" y2="32" style="opacity:.6"/>
+                            <ellipse class="ln orbit" cx="32" cy="32" rx="10.5" ry="23"/>
+                            <circle class="dot" cx="32" cy="32" r="4.8"/>
+                        </svg>
+                    </span>
+                    <span>Benevolent.</span>
+                </div>
             </div>
             <div class="tm-cards">
                 <article class="tm-card">
@@ -626,7 +715,7 @@
         </div>
         <p class="eyebrow sp-eyebrow">By Invitation</p>
         <h2 class="sp-title">The Sunshine Lake Speakeasy</h2>
-        <p class="sp-sub">Where unicorn founders, Midas Listers, and world-class operators mentor the next generation of builders.</p>
+        <p class="sp-sub">Where unicorn founders, Midas Listers, and world class, super human operators mentor the next generation of builders.</p>
         <div class="sp-ctas">
             <a class="sp-cta solid" href="speakeasy.html">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
             <a class="sp-cta outline" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch <span aria-hidden="true">&rarr;</span></a>
