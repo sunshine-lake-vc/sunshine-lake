@@ -186,9 +186,18 @@
             display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,3.4vw,54px);
             margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
         }
-        .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:88px}
-        .thesis-sys-icon{width:34px;height:34px;color:var(--navy-ink)}
-        .thesis-sys-icon .dot{fill:var(--gold-ink)}
+        .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
+        /* Two-tone line-art medallions (matching the old founder pillars):
+           a dark navy ground so the white line motif + yellow dot pop. */
+        .thesis-sys-icon{
+            width:clamp(54px,5vw,64px);height:clamp(54px,5vw,64px);border-radius:50%;
+            background:var(--navy-ink);display:flex;align-items:center;justify-content:center;
+            box-shadow:0 10px 26px rgba(30,42,120,.20);
+        }
+        .thesis-sys-icon svg{width:66%;height:66%;display:block}
+        .thesis-sys-icon .ln{stroke:rgba(255,255,255,.92);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+        .thesis-sys-icon .ring{stroke:rgba(255,255,255,.28);stroke-width:1.4;fill:none}
+        .thesis-sys-icon .dot{fill:var(--yellow)}
         .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
         .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
         .thesis-note{
@@ -201,7 +210,11 @@
         .balance-dial{display:flex;align-items:center;justify-content:center;gap:0;margin:clamp(44px,6vw,84px) auto 0;max-width:640px}
         .balance-dial .rule{height:1px;flex:1;background:linear-gradient(90deg,rgba(30,42,120,0) 0%,rgba(30,42,120,.35) 100%)}
         .balance-dial .rule.right{background:linear-gradient(90deg,rgba(30,42,120,.35) 0%,rgba(30,42,120,0) 100%)}
-        .balance-dial .dial{flex:0 0 auto;margin:0 16px;width:34px;height:34px}
+        .balance-dial .dial{flex:0 0 auto;margin:0 16px;width:clamp(48px,4.4vw,58px);height:clamp(48px,4.4vw,58px);border-radius:50%;background:var(--navy-ink);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(30,42,120,.20)}
+        .balance-dial .dial svg{width:64%;height:64%;display:block}
+        .balance-dial .dial .ln{stroke:rgba(255,255,255,.92);stroke-width:2.2;stroke-linecap:round;fill:none}
+        .balance-dial .dial .ring{stroke:rgba(255,255,255,.28);stroke-width:1.6;fill:none}
+        .balance-dial .dial .dot{fill:var(--yellow)}
         @media(max-width:520px){.thesis-sys{min-width:74px}}
     </style>
     <section class="thesis" id="section-thesis" aria-label="Our thesis">
@@ -210,46 +223,59 @@
 
             <div class="thesis-icons" aria-label="Critical global systems and their scale">
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M24 35 C 10 25, 11 15, 18 13 C 22 12, 24 15, 24 18 C 24 15, 26 12, 30 13 C 37 15, 38 25, 24 35 Z"/>
-                        <circle class="dot" cx="24" cy="21" r="2.4" stroke="none"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path class="ln" d="M32 47 C 12 33, 14 20, 24 17 C 29.5 15.5, 32 20, 32 24 C 32 20, 34.5 15.5, 40 17 C 50 20, 52 33, 32 47 Z"/>
+                            <circle class="dot" cx="32" cy="26" r="3.4"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Care</span><span class="thesis-sys-stat">$10T/yr spent</span>
                 </div>
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M26 6 L14 27 H22 L20 42 L34 21 H26 L28 6 Z"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <g class="ln"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
+                            <circle class="dot" cx="32" cy="32" r="6.5"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Energy</span><span class="thesis-sys-stat">$3.4T/yr invested</span>
                 </div>
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="8" y="15" width="32" height="18" rx="2.5"/>
-                        <circle class="dot" cx="24" cy="24" r="3.2" stroke="none"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <circle class="ln" cx="32" cy="32" r="18"/>
+                            <circle class="dot" cx="32" cy="32" r="4.4"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Money</span><span class="thesis-sys-stat">$1,800T/yr moved</span>
                 </div>
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M24 6 L38 12 V23 C38 32, 31 39, 24 42 C17 39, 10 32, 10 23 V12 Z"/>
-                        <circle class="dot" cx="24" cy="23" r="2.6" stroke="none"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path class="ln" d="M32 8 L50 16 V30 C50 42, 41 51, 32 56 C23 51, 14 42, 14 30 V16 Z"/>
+                            <circle class="dot" cx="32" cy="31" r="3.6"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Risk</span><span class="thesis-sys-stat">$7.7T/yr in premiums</span>
                 </div>
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M9 18 H35"/><path d="M29 12 L35 18 L29 24"/>
-                        <path d="M39 30 H13"/><path d="M19 24 L13 30 L19 36"/>
-                        <circle class="dot" cx="24" cy="24" r="2.4" stroke="none"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path class="ln" d="M12 24 H40"/><path class="ln" d="M33 17 L40 24 L33 31"/>
+                            <path class="ln" d="M52 40 H24"/><path class="ln" d="M31 33 L24 40 L31 47"/>
+                            <circle class="dot" cx="32" cy="32" r="3"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Trade</span><span class="thesis-sys-stat">$35T/yr traded</span>
                 </div>
                 <div class="thesis-sys">
-                    <svg class="thesis-sys-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="8" y="17" width="32" height="21" rx="2.5"/>
-                        <path d="M18 17 v-3 a2 2 0 0 1 2 -2 h8 a2 2 0 0 1 2 2 v3"/>
-                        <circle class="dot" cx="24" cy="27.5" r="2.4" stroke="none"/>
-                    </svg>
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <rect class="ln" x="11" y="23" width="42" height="28" rx="3.5"/>
+                            <path class="ln" d="M24 23 v-4 a2.5 2.5 0 0 1 2.5 -2.5 h11 a2.5 2.5 0 0 1 2.5 2.5 v4"/>
+                            <circle class="dot" cx="32" cy="37" r="3.4"/>
+                        </svg>
+                    </span>
                     <span class="thesis-sys-name">Work</span><span class="thesis-sys-stat">$65T/yr earned</span>
                 </div>
             </div>
@@ -258,11 +284,13 @@
 
             <div class="balance-dial" aria-hidden="true">
                 <span class="rule left"></span>
-                <svg class="dial" viewBox="0 0 48 48" fill="none" stroke="var(--navy-ink)" stroke-width="1.6" stroke-linecap="round">
-                    <circle cx="24" cy="24" r="16" opacity=".55"/>
-                    <path d="M24 24 L34 18" opacity=".7"/>
-                    <circle cx="24" cy="24" r="3" fill="var(--gold-ink)" stroke="none"/>
-                </svg>
+                <span class="dial">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <circle class="ring" cx="32" cy="32" r="19"/>
+                        <path class="ln" d="M16 32 H48"/>
+                        <circle class="dot" cx="32" cy="32" r="3.6"/>
+                    </svg>
+                </span>
                 <span class="rule right"></span>
             </div>
         </div>
@@ -341,7 +369,22 @@
         </div>
     </section>
     <svg class="wave-divider" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
-        <path fill="currentColor" d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,110 L0,110 Z"/>
+        <!-- Back swell (lighter) and front wave gently roll on offset timers,
+             so the seam laps like water. Reduced-motion guard below stills them. -->
+        <path fill="currentColor" opacity=".45" d="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="13s" repeatCount="indefinite" calcMode="spline"
+                keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z;
+                        M0,44 C300,74 560,78 720,50 C900,26 1160,30 1440,58 L1440,110 L0,110 Z;
+                        M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z"/>
+        </path>
+        <path fill="currentColor" d="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+                keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z;
+                        M0,54 C240,28 480,30 720,54 C960,84 1200,82 1440,46 L1440,110 L0,110 Z;
+                        M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z"/>
+        </path>
     </svg>
 
     <!-- ==================== PORTFOLIO (royal blue) ==================== -->
@@ -572,6 +615,74 @@
             <figure><img src="images/speakeasy/one-on-one.jpg" alt="" loading="lazy"></figure>
         </div>
     </section>
+
+    <!-- ==================== Easter egg (restyled for the new site) ====================
+         A quiet "Look closer" ewok pokes up at the very bottom on the same
+         near-black ground as the Speakeasy. Clicking it reveals the Sunshine
+         Lake dictionary card, restyled dark (gold + white-soft, DomaineDisp)
+         to match the new site instead of the old cream card. -->
+    <style>
+        .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(30px,5vw,64px);overflow:hidden}
+        .egg-peek{display:inline-flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 14px;color:var(--gold-deco);transition:transform .3s ease,color .25s ease}
+        .egg-peek:hover{transform:translateY(-4px);color:var(--yellow)}
+        .egg-peek img{width:clamp(48px,6vw,72px);height:auto;opacity:.85;animation:eggBob 4.5s ease-in-out infinite}
+        .egg-peek:hover img{opacity:1}
+        .egg-peek-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+        @keyframes eggBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        @media(prefers-reduced-motion:reduce){.egg-peek img{animation:none}}
+        .egg-peek.is-hidden{opacity:0;pointer-events:none;height:0;padding:0;margin:0;overflow:hidden}
+        .egg-def{max-height:0;opacity:0;overflow:hidden;transition:max-height .85s cubic-bezier(.22,1,.36,1),opacity .6s ease}
+        .egg-def.is-open{opacity:1}
+        .egg-card{
+            max-width:640px;margin:clamp(20px,3vw,40px) auto 0;text-align:left;
+            display:flex;gap:clamp(18px,3vw,32px);align-items:center;
+            background:rgba(255,255,255,.04);border:1px solid rgba(201,164,63,.28);
+            border-radius:18px;padding:clamp(24px,3vw,40px);
+        }
+        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;opacity:.95}
+        .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
+        .egg-headword strong{font-weight:400}
+        .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
+        .egg-pos{font-family:var(--serif);font-style:italic;color:var(--gold-deco);font-size:.72em}
+        .egg-sense{font-family:var(--sans);font-size:clamp(15px,1.2vw,17px);line-height:1.55;color:var(--white-soft);margin:0 0 10px}
+        .egg-sense em{color:var(--yellow);font-style:italic}
+        .egg-etym{font-family:var(--sans);font-size:13px;color:var(--white-dim);margin:0}
+        .egg-etym i{font-style:italic}
+        @media(max-width:560px){.egg-card{flex-direction:column;text-align:center}.egg-sense,.egg-etym{text-align:center}}
+    </style>
+    <section class="egg" aria-label="Look closer">
+        <button class="egg-peek" id="eggPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="eggDef">
+            <img src="images/logos/ewok-spear.png?v=1" alt="" aria-hidden="true">
+            <span class="egg-peek-label">Look closer</span>
+        </button>
+        <div class="egg-def" id="eggDef">
+            <div class="egg-card">
+                <img class="egg-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
+                <div class="egg-entry">
+                    <p class="egg-headword"><strong>Sun&middot;shine Lake</strong> <span class="egg-pron">\ &#712;s&#652;n&#643;a&#618;n le&#618;k \</span> <em class="egg-pos">noun</em></p>
+                    <p class="egg-sense">A far away location where rare entrepreneurial beings are <em>forged by extreme origins</em>.</p>
+                    <p class="egg-etym">Origin: <i>Star Wars: Ewoks #9</i>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+      (function(){
+        var peek=document.getElementById('eggPeek'), def=document.getElementById('eggDef');
+        if(!peek||!def) return;
+        peek.addEventListener('click', function(){
+            def.classList.add('is-open');
+            def.style.maxHeight = def.scrollHeight + 'px';
+            peek.setAttribute('aria-expanded','true');
+            peek.classList.add('is-hidden');
+            setTimeout(function(){
+                def.style.maxHeight='none';
+                if(window._lenis && typeof window._lenis.scrollTo==='function') window._lenis.scrollTo(def,{offset:-80,duration:1.1});
+                else def.scrollIntoView({behavior:'smooth',block:'center'});
+            }, 880);
+        });
+      })();
+    </script>
 
 
     <!-- ==================== WebGL water shader ==================== -->
