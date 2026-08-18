@@ -215,6 +215,8 @@
         .thesis-sys-icon .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
         .thesis-sys-icon .ring{stroke:rgba(43,80,226,.32);stroke-width:1.6;fill:none}
         .thesis-sys-icon .dot{fill:var(--gold-ink);transform-box:fill-box;transform-origin:center;animation:slDotPulse 3.4s ease-in-out infinite}
+        .thesis-sys-icon .dsign{stroke:var(--gold-ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;fill:none;animation:slGlow 3.4s ease-in-out infinite}
+        @keyframes slGlow{0%,100%{opacity:.6}50%{opacity:1}}
         @keyframes slDotPulse{0%,100%{opacity:.5;transform:scale(.82)}50%{opacity:1;transform:scale(1)}}
         @keyframes slSpin{to{transform:rotate(360deg)}}
         .thesis-sys:nth-child(2) .dot{animation-delay:.5s}
@@ -223,7 +225,7 @@
         .thesis-sys:nth-child(5) .dot{animation-delay:2s}
         .thesis-sys:nth-child(6) .dot{animation-delay:2.5s}
         .thesis-sys-icon .rays{transform-box:fill-box;transform-origin:center;animation:slSpin 30s linear infinite}
-        @media(prefers-reduced-motion:reduce){.thesis-sys-icon .dot,.thesis-sys-icon .rays{animation:none}}
+        @media(prefers-reduced-motion:reduce){.thesis-sys-icon .dot,.thesis-sys-icon .rays,.thesis-sys-icon .dsign{animation:none}}
         .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
         .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
         /* Mobile: swipeable carousel of the system medallions (full-bleed, no auto-scroll) */
@@ -284,7 +286,8 @@
                     <span class="thesis-sys-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
                             <circle class="ln" cx="32" cy="32" r="18"/>
-                            <circle class="dot" cx="32" cy="32" r="4.4"/>
+                            <path class="dsign" d="M38 25 C 34 21, 26 22, 26 27 C 26 32, 38 32, 38 37 C 38 42, 30 43, 26 39"/>
+                            <path class="dsign" d="M32 18 V46"/>
                         </svg>
                     </span>
                     <span class="thesis-sys-name">Money</span><span class="thesis-sys-stat">$1,800T/yr moved</span>
