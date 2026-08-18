@@ -354,12 +354,13 @@
         /* Wave divider: light blue lapping down into royal blue.
            The area above the wave path must be the team's ending light-blue
            (not the body background), so the divider carries that color. */
-        /* margin-bottom:-1px overlaps the next section so no subpixel seam of the
-           wave's background color can peek out as a thin line on the dark side
-           (the following section paints over the overlapped pixel). */
-        .wave-divider{display:block;width:100%;height:clamp(48px,7vw,110px);margin:0 0 -1px;background:var(--blue-light);color:var(--blue-royal);vertical-align:top}
+        /* The background is a gradient that ENDS in the destination color at the
+           bottom, so any subpixel row the wave paths don't cover matches the next
+           section instead of showing the source color as a stray line. */
+        .wave-divider{display:block;width:100%;height:clamp(48px,7vw,110px);margin:0 0 -1px;vertical-align:top;
+            color:var(--blue-royal);background:linear-gradient(180deg,var(--blue-light) 0%,var(--blue-light) 52%,var(--blue-royal) 100%)}
         /* Same wave, other color pairings for the rest of the section seams */
-        .wave-divider.to-navy{background:var(--blue-royal);color:var(--navy-night)}
+        .wave-divider.to-navy{color:var(--navy-night);background:linear-gradient(180deg,var(--blue-royal) 0%,var(--blue-royal) 52%,var(--navy-night) 100%)}
     </style>
     <section class="team" id="section-team" aria-label="Our team">
         <div class="team-inner">
