@@ -354,7 +354,10 @@
         /* Wave divider: light blue lapping down into royal blue.
            The area above the wave path must be the team's ending light-blue
            (not the body background), so the divider carries that color. */
-        .wave-divider{display:block;width:100%;height:clamp(48px,7vw,110px);margin:0;background:var(--blue-light);color:var(--blue-royal);vertical-align:top}
+        /* margin-bottom:-1px overlaps the next section so no subpixel seam of the
+           wave's background color can peek out as a thin line on the dark side
+           (the following section paints over the overlapped pixel). */
+        .wave-divider{display:block;width:100%;height:clamp(48px,7vw,110px);margin:0 0 -1px;background:var(--blue-light);color:var(--blue-royal);vertical-align:top}
         /* Same wave, other color pairings for the rest of the section seams */
         .wave-divider.to-navy{background:var(--blue-royal);color:var(--navy-night)}
     </style>
@@ -609,8 +612,8 @@
                     <!-- Forged by extreme origins -> a flame (forged in fire) -->
                     <span class="tm-trait-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <path class="ln flicker" d="M32 6 C 35 20, 47 26, 44 40 C 43 49, 38 55, 32 55 C 26 55, 20 49, 20 41 C 20 33, 27 31, 29 23 C 30 18, 31 13, 32 6 Z"/>
-                            <circle class="dot" cx="32" cy="44" r="4.4"/>
+                            <path class="ln flicker" d="M32 4 C 34 18, 45 24, 44 38 C 43 48, 38 55, 32 55 C 25 55, 19 48, 20 40 C 21 33, 26 32, 26 25 C 29 29, 33 27, 32 22 C 31 16, 31 10, 32 4 Z"/>
+                            <circle class="dot" cx="32" cy="45" r="4.2"/>
                         </svg>
                     </span>
                     <span>Forged by extreme origins.</span>
@@ -630,8 +633,8 @@
                     <!-- Benevolent -> a heart (goodwill) -->
                     <span class="tm-trait-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <path class="ln beat" d="M32 52 C 11 37, 13 20, 24 17 C 30 15.4, 32 20, 32 24 C 32 20, 34 15.4, 40 17 C 51 20, 53 37, 32 52 Z"/>
-                            <circle class="dot" cx="32" cy="29" r="4"/>
+                            <path class="ln beat" d="M32 51 C 12 37, 14 20, 25 20 C 30 20, 32 24, 32 28 C 32 24, 34 20, 39 20 C 50 20, 52 37, 32 51 Z"/>
+                            <circle class="dot" cx="32" cy="31" r="4"/>
                         </svg>
                     </span>
                     <span>Benevolent.</span>
@@ -748,17 +751,11 @@
         .egg-def.is-open{opacity:1}
         .egg-card{
             max-width:600px;margin:clamp(16px,2.6vw,34px) auto 0;text-align:left;
-            display:flex;gap:clamp(14px,2.6vw,28px);align-items:center;
+            display:flex;gap:clamp(16px,3vw,30px);align-items:center;
             background:rgba(255,255,255,.04);border:1px solid rgba(201,164,63,.28);
-            border-radius:18px;padding:clamp(18px,2.4vw,30px) clamp(20px,2.6vw,34px) 0;
+            border-radius:18px;padding:clamp(20px,2.6vw,34px);
         }
-        /* Ewoks riding a wave (same rolling wave as the section separators) */
-        .egg-ewoks{position:relative;flex:0 0 auto;width:clamp(120px,15vw,168px);align-self:flex-end}
-        .egg-mark{width:100%;height:auto;display:block;position:relative;z-index:1;opacity:.97}
-        .egg-wave{position:absolute;left:-16%;width:132%;bottom:2%;height:44%;z-index:0;overflow:visible;pointer-events:none}
-        .egg-wave .bk{fill:#4E74EE;opacity:.5}
-        .egg-wave .fr{fill:#2B50E2}
-        .egg-entry{padding:clamp(6px,1vw,10px) 0 clamp(18px,2.4vw,30px)}
+        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;opacity:.95}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
         .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
@@ -768,10 +765,8 @@
         .egg-etym{font-family:var(--sans);font-size:13px;color:var(--white-dim);margin:0}
         .egg-etym i{font-style:italic}
         @media(max-width:560px){
-            .egg-card{flex-direction:column;text-align:center;padding:clamp(16px,4vw,26px) clamp(16px,4vw,26px) 0;align-items:center}
+            .egg-card{flex-direction:column;text-align:center;align-items:center}
             .egg-sense,.egg-etym{text-align:center}
-            .egg-ewoks{width:clamp(130px,42vw,180px);align-self:center}
-            .egg-entry{padding-top:2px}
         }
     </style>
     <section class="egg" aria-label="Look closer">
@@ -781,23 +776,7 @@
         </button>
         <div class="egg-def" id="eggDef">
             <div class="egg-card">
-                <div class="egg-ewoks" aria-hidden="true">
-                    <svg class="egg-wave" viewBox="0 0 200 60" preserveAspectRatio="none">
-                        <path class="bk" d="M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z">
-                            <animate attributeName="d" dur="11s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                                values="M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z;
-                                        M0,20 C40,36 70,40 100,26 C130,14 160,16 200,32 L200,60 L0,60 Z;
-                                        M0,26 C40,12 70,16 100,28 C130,40 160,42 200,24 L200,60 L0,60 Z"/>
-                        </path>
-                        <path class="fr" d="M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z">
-                            <animate attributeName="d" dur="8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
-                                values="M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z;
-                                        M0,36 C35,22 70,22 100,36 C130,48 165,46 200,32 L200,60 L0,60 Z;
-                                        M0,32 C35,48 70,48 100,34 C130,20 165,20 200,32 L200,60 L0,60 Z"/>
-                        </path>
-                    </svg>
-                    <img class="egg-mark" src="images/logos/ewoks.webp" alt="">
-                </div>
+                <img class="egg-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
                 <div class="egg-entry">
                     <p class="egg-headword"><strong>Sun&middot;shine Lake</strong> <span class="egg-pron">\ &#712;s&#652;n&#643;a&#618;n le&#618;k \</span> <em class="egg-pos">noun</em></p>
                     <p class="egg-sense">A far away location where rare entrepreneurial beings are <em>forged by extreme origins</em>.</p>
