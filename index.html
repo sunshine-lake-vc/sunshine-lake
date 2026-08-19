@@ -193,11 +193,21 @@
         /* Balance circle: the six systems ring a thin gold circle, with the
            payoff and the aggregate flow sitting at the center. */
         .balance-circle{position:relative;width:100%;max-width:clamp(300px,76vw,560px);margin:clamp(28px,4vw,54px) auto 0;aspect-ratio:1/1}
-        .bc-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.6}
-        .bc-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center}
+        /* Wireframe globe behind the ring: meridians + parallels, kept faint */
+        .bc-globe{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+        .bc-globe .grid{stroke:var(--blue-light);stroke-width:1;fill:none;opacity:.9}
+        .bc-globe .axis{stroke:var(--blue-light);stroke-width:1;opacity:.55}
+        .bc-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.75;z-index:1}
+        /* A gold marker that slowly orbits the ring */
+        .bc-orbit{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);z-index:2;pointer-events:none;animation:bcOrbit 22s linear infinite}
+        .bc-orbit-dot{position:absolute;left:50%;top:0;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--gold-ink);box-shadow:0 0 0 5px rgba(184,134,11,.12)}
+        @keyframes bcOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+        @media(prefers-reduced-motion:reduce){.bc-orbit{animation:none}}
+        .bc-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center;z-index:3}
+        .bc-center::before{content:'';position:absolute;inset:-22% -14%;background:radial-gradient(ellipse at center,#fff 52%,rgba(255,255,255,0) 100%);z-index:-1}
         .bc-center .thesis-payoff{margin:0;font-size:clamp(21px,3.4vw,40px)}
         .bc-flow{font-family:var(--sans);font-weight:700;font-size:clamp(11px,1.05vw,14px);letter-spacing:.02em;color:var(--gold-ink);margin:clamp(10px,1.4vw,18px) 0 0;text-wrap:balance}
-        .bc-node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;width:max-content}
+        .bc-node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;width:max-content;z-index:4}
         .bc-money {left:50%;   top:10%}
         .bc-trade {left:84.6%; top:30%}
         .bc-work  {left:84.6%; top:70%}
@@ -239,7 +249,16 @@
             <h2 class="section-display thesis-h2">Our founders rebuild critical global systems that failed them.</h2>
 
             <div class="balance-circle" aria-label="The critical global systems these founders rebuild">
+                <svg class="bc-globe" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+                    <ellipse class="grid" cx="100" cy="100" rx="27" ry="80"/>
+                    <ellipse class="grid" cx="100" cy="100" rx="55" ry="80"/>
+                    <ellipse class="grid" cx="100" cy="100" rx="80" ry="27"/>
+                    <ellipse class="grid" cx="100" cy="100" rx="80" ry="55"/>
+                    <line class="axis" x1="100" y1="20" x2="100" y2="180"/>
+                    <line class="axis" x1="20" y1="100" x2="180" y2="100"/>
+                </svg>
                 <span class="bc-ring" aria-hidden="true"></span>
+                <span class="bc-orbit" aria-hidden="true"><span class="bc-orbit-dot"></span></span>
                 <div class="bc-center">
                     <p class="section-display thesis-payoff">They bring the world into <em>balance</em>.</p>
                     <p class="bc-flow">$250T+ a year flows through them</p>
