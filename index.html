@@ -213,12 +213,14 @@
         .bc-risk  {left:50%;   top:90%}
         .bc-care  {left:15.4%; top:70%}
         .bc-energy{left:15.4%; top:30%}
-        /* Clean line-art icons: blue line + gold accent, each with a subtle
-           idle animation. The white chip masks the ring where an icon sits. */
+        /* Clean line-art icons: single blue, each with a subtle idle animation.
+           A soft radial knockout hugs the icon so it clears the sphere lines
+           without a hard square chip around it. */
         .thesis-sys-icon{
             width:clamp(40px,4.4vw,54px);height:clamp(40px,4.4vw,54px);
             display:flex;align-items:center;justify-content:center;
-            background:#fff;border-radius:14px;padding:5px;box-sizing:content-box;
+            background:radial-gradient(circle,#fff 48%,rgba(255,255,255,.9) 62%,rgba(255,255,255,0) 76%);
+            padding:7px;box-sizing:content-box;
         }
         .thesis-sys-icon svg{width:100%;height:100%;display:block;overflow:visible}
         .thesis-sys-icon .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
