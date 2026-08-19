@@ -333,26 +333,25 @@
         .team-inner{max-width:1280px;margin:0 auto;text-align:center}
         .team-eyebrow{color:var(--gold-ink);margin:0 0 clamp(14px,1.6vw,20px)}
         .team-lead{color:var(--navy-ink);max-width:22ch;margin:0 auto clamp(44px,5.5vw,72px)}
-        .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(16px,1.8vw,26px);text-align:left;max-width:1120px;margin-inline:auto}
-        .team-card{display:flex;flex-direction:column}
+        .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,30px);max-width:1000px;margin-inline:auto}
+        .team-card{display:flex;flex-direction:column;align-items:center;text-align:center}
         .team-photo{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#B9C6E8;box-shadow:0 10px 30px rgba(30,42,120,.14)}
         .team-photo img{width:100%;height:100%;object-fit:cover}
-        .team-name{font-family:var(--serif);font-size:clamp(1.15rem,1.5vw,1.4rem);line-height:1.12;color:var(--navy-ink);margin:16px 0 0;min-height:2.5em;display:flex;align-items:flex-start}
+        .team-name{font-family:var(--serif);font-size:clamp(1.15rem,1.5vw,1.4rem);line-height:1.12;color:var(--navy-ink);margin:16px 0 0;min-height:2.4em;display:flex;align-items:flex-start;justify-content:center}
         .team-role{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:2px 0 10px}
         .team-bio{font-family:var(--sans);font-size:clamp(14px,0.95vw,15px);line-height:1.55;color:#3A4680;margin:0}
-        /* Advisors tinted no-photo card */
-        .team-card.advisors{background:rgba(30,42,120,.06);border:1px solid rgba(30,42,120,.1);border-radius:14px;padding:clamp(18px,1.6vw,24px)}
-        .adv-title{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#6C77A6;margin:0 0 14px}
-        .adv-item{margin:0 0 12px}
-        .adv-item:last-child{margin-bottom:0}
-        .adv-name{font-family:var(--serif);font-size:1.02rem;color:var(--navy-ink);display:block;line-height:1.15}
-        .adv-desc{font-family:var(--sans);font-size:13px;line-height:1.45;color:#3A4680;margin:2px 0 0}
+        /* Advisors & venture partners: a centered strip below the team, one line each */
+        .team-advisors{max-width:880px;margin:clamp(30px,4vw,52px) auto 0;text-align:center}
+        .adv-title{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#6C77A6;margin:0 0 clamp(14px,1.6vw,20px)}
+        .adv-row{margin:0 0 9px;line-height:1.4}
+        .adv-row:last-child{margin-bottom:0}
+        .adv-name{font-family:var(--serif);font-size:1.05rem;color:var(--navy-ink)}
+        .adv-desc{font-family:var(--sans);font-size:14px;color:#3A4680;margin-left:.5em}
         @media(max-width:1080px){
             .team-grid{grid-template-columns:repeat(2,1fr)}
             .team-name{min-height:0}
-            .team-card.advisors{grid-column:1 / -1}
         }
-        @media(max-width:560px){ .team-grid{grid-template-columns:1fr} .team-photo{max-width:76%;margin:0 auto 0 0} }
+        @media(max-width:560px){ .team-grid{grid-template-columns:1fr} .team-photo{max-width:76%;margin:0 auto} .adv-desc{display:block;margin-left:0} }
         /* Wave divider: light blue lapping down into royal blue.
            The area above the wave path must be the team's ending light-blue
            (not the body background), so the divider carries that color. */
@@ -373,19 +372,19 @@
                     <div class="team-photo"><img src="images/team/don.webp" alt="Don Stalter" loading="lazy"></div>
                     <h3 class="team-name">Don Stalter</h3>
                     <p class="team-role">Founder</p>
-                    <p class="team-bio">Co-founded CityDeal (acquired by Groupon); scaled Airbnb across Europe and Asia-Pacific in its earliest days. First checks into numerous decacorns with trillion-dollar potential.</p>
+                    <p class="team-bio">Scaled Airbnb across EU and APAC in its earliest days, after CityDeal's sale to Groupon. First checks into numerous decacorns.</p>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval" loading="lazy"></div>
                     <h3 class="team-name">Ivan La Frinere-Sandoval</h3>
                     <p class="team-role">Partner, CFO &amp; COO</p>
-                    <p class="team-bio">Caltech- and Stanford-trained engineer and financier: SolarCity with Kimbal Musk, then his own Bay Area companies. Runs fund operations and the investment committee.</p>
+                    <p class="team-bio">Caltech- and Stanford-trained; SolarCity with Kimbal Musk, then his own Bay Area companies. Runs fund operations and the investment committee.</p>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/suhail.webp" alt="Suhail Younus" loading="lazy"></div>
                     <h3 class="team-name">Suhail Younus</h3>
                     <p class="team-role">Partner</p>
-                    <p class="team-bio">Runs Sunshine Lake's global coverage engine: sourcing, tracking, and scoring thousands of startups a year. Cornell-trained in venture and frontier technologies.</p>
+                    <p class="team-bio">Runs the global coverage engine, sourcing and scoring thousands of startups a year. Cornell-trained in venture and frontier technologies.</p>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/wieger.webp" alt="Wieger Lamers" loading="lazy"></div>
@@ -393,13 +392,13 @@
                     <p class="team-role">Platform Lead</p>
                     <p class="team-bio">Came up inside Adyen's rise to one of Europe's defining IPOs, then Valia and Antler's Unlock. Runs EMEA sourcing and platform from London.</p>
                 </article>
-                <article class="team-card advisors">
-                    <p class="adv-title">Advisors &amp; Venture Partners</p>
-                    <div class="adv-item"><span class="adv-name">Esther Wojcicki</span><p class="adv-desc">Godmother of Silicon Valley. The family behind YouTube and 23andMe.</p></div>
-                    <div class="adv-item"><span class="adv-name">Mike Franklin</span><p class="adv-desc">Co-creator of Apache Spark. Founding advisor, Databricks.</p></div>
-                    <div class="adv-item"><span class="adv-name">Andrew Hovelson</span><p class="adv-desc">Broadway actor alongside Tom Hanks and Glenn Close.</p></div>
-                    <div class="adv-item"><span class="adv-name">Jamie Feaster</span><p class="adv-desc">Unicorn founder. Raised from Craft Ventures, Snoop Dogg, and top VCs.</p></div>
-                </article>
+            </div>
+            <div class="team-advisors">
+                <p class="adv-title">Advisors &amp; Venture Partners</p>
+                <p class="adv-row"><span class="adv-name">Esther Wojcicki</span><span class="adv-desc">Godmother of Silicon Valley; the family behind YouTube and 23andMe.</span></p>
+                <p class="adv-row"><span class="adv-name">Mike Franklin</span><span class="adv-desc">Co-creator of Apache Spark and founding advisor at Databricks.</span></p>
+                <p class="adv-row"><span class="adv-name">Andrew Hovelson</span><span class="adv-desc">Broadway actor alongside Tom Hanks and Glenn Close.</span></p>
+                <p class="adv-row"><span class="adv-name">Jamie Feaster</span><span class="adv-desc">Unicorn founder, backed by Craft Ventures, Snoop Dogg, and top VCs.</span></p>
             </div>
         </div>
     </section>
