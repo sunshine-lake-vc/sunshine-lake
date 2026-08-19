@@ -190,26 +190,26 @@
         .thesis{background:#ffffff;color:var(--navy-ink);padding:clamp(72px,11vw,150px) clamp(22px,6vw,64px) clamp(36px,5vw,64px);text-align:center}
         .thesis-inner{max-width:1080px;margin:0 auto}
         .thesis-h2{color:var(--navy-ink);max-width:32ch;margin:0 auto;text-wrap:balance}
-        /* Desktop: a slow marquee of the systems, edges fading to white */
-        .thesis-marquee{
-            position:relative;overflow:hidden;
-            margin:clamp(40px,5vw,70px) auto clamp(46px,6vw,78px);
-            -webkit-mask-image:linear-gradient(90deg,transparent 0%,#fff 12%,#fff 88%,transparent 100%);
-            mask-image:linear-gradient(90deg,transparent 0%,#fff 12%,#fff 88%,transparent 100%);
-        }
-        .thesis-icons{
-            display:flex;flex-wrap:nowrap;justify-content:flex-start;width:max-content;
-            gap:clamp(28px,4vw,60px);margin:0;
-        }
-        .thesis-marquee.is-ready .thesis-icons{animation:thesisMarquee 48s linear infinite}
-        .thesis-marquee.is-ready:hover .thesis-icons{animation-play-state:paused}
-        @keyframes thesisMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-        .thesis-sys{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:88px}
-        /* Clean line-art icons: blue line + gold dot on white, each with a
-           subtle idle animation (in the spirit of the old founder pillars). */
+        /* Balance circle: the six systems ring a thin gold circle, with the
+           payoff and the aggregate flow sitting at the center. */
+        .balance-circle{position:relative;width:100%;max-width:clamp(300px,76vw,560px);margin:clamp(28px,4vw,54px) auto 0;aspect-ratio:1/1}
+        .bc-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.6}
+        .bc-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center}
+        .bc-center .thesis-payoff{margin:0;font-size:clamp(21px,3.4vw,40px)}
+        .bc-flow{font-family:var(--sans);font-weight:700;font-size:clamp(11px,1.05vw,14px);letter-spacing:.02em;color:var(--gold-ink);margin:clamp(10px,1.4vw,18px) 0 0;text-wrap:balance}
+        .bc-node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:7px;width:max-content}
+        .bc-money {left:50%;   top:10%}
+        .bc-trade {left:84.6%; top:30%}
+        .bc-work  {left:84.6%; top:70%}
+        .bc-risk  {left:50%;   top:90%}
+        .bc-care  {left:15.4%; top:70%}
+        .bc-energy{left:15.4%; top:30%}
+        /* Clean line-art icons: blue line + gold accent, each with a subtle
+           idle animation. The white chip masks the ring where an icon sits. */
         .thesis-sys-icon{
-            width:clamp(46px,4.8vw,58px);height:clamp(46px,4.8vw,58px);
+            width:clamp(40px,4.4vw,54px);height:clamp(40px,4.4vw,54px);
             display:flex;align-items:center;justify-content:center;
+            background:#fff;border-radius:14px;padding:5px;box-sizing:content-box;
         }
         .thesis-sys-icon svg{width:100%;height:100%;display:block;overflow:visible}
         .thesis-sys-icon .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
@@ -219,70 +219,32 @@
         @keyframes slGlow{0%,100%{opacity:.6}50%{opacity:1}}
         @keyframes slDotPulse{0%,100%{opacity:.5;transform:scale(.82)}50%{opacity:1;transform:scale(1)}}
         @keyframes slSpin{to{transform:rotate(360deg)}}
-        .thesis-sys:nth-child(2) .dot{animation-delay:.5s}
-        .thesis-sys:nth-child(3) .dot{animation-delay:1s}
-        .thesis-sys:nth-child(4) .dot{animation-delay:1.5s}
-        .thesis-sys:nth-child(5) .dot{animation-delay:2s}
-        .thesis-sys:nth-child(6) .dot{animation-delay:2.5s}
+        .bc-trade .dot{animation-delay:.5s}
+        .bc-work .dot{animation-delay:1s}
+        .bc-risk .dot{animation-delay:1.5s}
+        .bc-care .dot{animation-delay:2s}
+        .bc-energy .dot{animation-delay:2.5s}
         .thesis-sys-icon .rays{transform-box:fill-box;transform-origin:center;animation:slSpin 30s linear infinite}
         @media(prefers-reduced-motion:reduce){.thesis-sys-icon .dot,.thesis-sys-icon .rays,.thesis-sys-icon .dsign{animation:none}}
-        .thesis-sys-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.3rem);color:var(--navy-ink);line-height:1}
-        .thesis-sys-stat{font-family:var(--sans);font-size:clamp(12px,0.95vw,13px);font-weight:700;letter-spacing:.03em;color:var(--gold-ink)}
-        /* Mobile: swipeable carousel of the system medallions (full-bleed, no auto-scroll) */
-        @media(max-width:640px){
-            .thesis-marquee{
-                overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-                margin-inline:calc(-1 * clamp(22px,6vw,64px));
-            }
-            .thesis-marquee::-webkit-scrollbar{display:none}
-            .thesis-marquee.is-ready .thesis-icons{animation:none}
-            .thesis-icons{gap:30px;padding:4px clamp(22px,6vw,64px) 12px}
-            .thesis-sys{flex:0 0 auto;min-width:84px;scroll-snap-align:center}
-        }
-        .thesis-note{
-            font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.4vw,19px);
-            color:#6C77A6;margin:0 auto clamp(40px,5.5vw,72px);max-width:44ch;line-height:1.5;
-        }
-        .thesis-payoff{color:var(--navy-ink);margin:0 auto;max-width:40ch;text-wrap:balance}
+        .thesis-sys-name{font-family:var(--serif);font-size:clamp(1rem,1.5vw,1.3rem);color:var(--navy-ink);line-height:1}
+        .thesis-payoff{color:var(--navy-ink);text-wrap:balance}
         .thesis-payoff em{font-style:normal;color:var(--gold-ink)}
-        /* Balance-dial divider: hairlines fading in from both sides to a small dial mark with a gold center dot */
-        .balance-dial{display:flex;align-items:center;justify-content:center;gap:0;margin:clamp(44px,6vw,84px) auto 0;max-width:640px}
-        .balance-dial .rule{height:1px;flex:1;background:linear-gradient(90deg,rgba(30,42,120,0) 0%,rgba(30,42,120,.35) 100%)}
-        .balance-dial .rule.right{background:linear-gradient(90deg,rgba(30,42,120,.35) 0%,rgba(30,42,120,0) 100%)}
-        .balance-dial .dial{flex:0 0 auto;margin:0 16px;width:clamp(44px,4.2vw,54px);height:clamp(44px,4.2vw,54px);display:flex;align-items:center;justify-content:center}
-        .balance-dial .dial svg{width:100%;height:100%;display:block;overflow:visible}
-        .balance-dial .dial .ring{stroke:rgba(43,80,226,.35);stroke-width:1.8;fill:none}
-        .balance-dial .dial .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;fill:none;transform-box:fill-box;transform-origin:center;animation:slTilt 5s ease-in-out infinite}
-        .balance-dial .dial .dot{fill:var(--gold-ink)}
-        @keyframes slTilt{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-        @media(prefers-reduced-motion:reduce){.balance-dial .dial .ln{animation:none}}
-        @media(max-width:520px){.thesis-sys{min-width:74px}}
+        @media(max-width:560px){
+            .bc-center{width:66%}
+            .thesis-sys-name{font-size:clamp(.86rem,3.6vw,1.05rem)}
+        }
     </style>
     <section class="thesis" id="section-thesis" aria-label="Our thesis">
         <div class="thesis-inner">
             <h2 class="section-display thesis-h2">Our founders rebuild critical global systems that failed them.</h2>
 
-            <div class="thesis-marquee">
-            <div class="thesis-icons" aria-label="Critical global systems and their scale">
-                <div class="thesis-sys">
-                    <span class="thesis-sys-icon">
-                        <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <path class="ln" d="M32 47 C 12 33, 14 20, 24 17 C 29.5 15.5, 32 20, 32 24 C 32 20, 34.5 15.5, 40 17 C 50 20, 52 33, 32 47 Z"/>
-                            <circle class="dot" cx="32" cy="26" r="3.4"/>
-                        </svg>
-                    </span>
-                    <span class="thesis-sys-name">Care</span><span class="thesis-sys-stat">$10T/yr spent</span>
+            <div class="balance-circle" aria-label="The critical global systems these founders rebuild">
+                <span class="bc-ring" aria-hidden="true"></span>
+                <div class="bc-center">
+                    <p class="section-display thesis-payoff">They bring the world into <em>balance</em>.</p>
+                    <p class="bc-flow">$250T+ a year flows through them</p>
                 </div>
-                <div class="thesis-sys">
-                    <span class="thesis-sys-icon">
-                        <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
-                            <circle class="dot" cx="32" cy="32" r="6.5"/>
-                        </svg>
-                    </span>
-                    <span class="thesis-sys-name">Energy</span><span class="thesis-sys-stat">$3.4T/yr invested</span>
-                </div>
-                <div class="thesis-sys">
+                <div class="bc-node bc-money">
                     <span class="thesis-sys-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
                             <circle class="ln" cx="32" cy="32" r="18"/>
@@ -290,18 +252,9 @@
                             <path class="dsign" d="M32 18 V46"/>
                         </svg>
                     </span>
-                    <span class="thesis-sys-name">Money</span><span class="thesis-sys-stat">$1,800T/yr moved</span>
+                    <span class="thesis-sys-name">Money</span>
                 </div>
-                <div class="thesis-sys">
-                    <span class="thesis-sys-icon">
-                        <svg viewBox="0 0 64 64" aria-hidden="true">
-                            <path class="ln" d="M32 8 L50 16 V30 C50 42, 41 51, 32 56 C23 51, 14 42, 14 30 V16 Z"/>
-                            <circle class="dot" cx="32" cy="31" r="3.6"/>
-                        </svg>
-                    </span>
-                    <span class="thesis-sys-name">Risk</span><span class="thesis-sys-stat">$7.7T/yr in premiums</span>
-                </div>
-                <div class="thesis-sys">
+                <div class="bc-node bc-trade">
                     <span class="thesis-sys-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
                             <path class="ln" d="M12 24 H40"/><path class="ln" d="M33 17 L40 24 L33 31"/>
@@ -309,9 +262,9 @@
                             <circle class="dot" cx="32" cy="32" r="3"/>
                         </svg>
                     </span>
-                    <span class="thesis-sys-name">Trade</span><span class="thesis-sys-stat">$35T/yr traded</span>
+                    <span class="thesis-sys-name">Trade</span>
                 </div>
-                <div class="thesis-sys">
+                <div class="bc-node bc-work">
                     <span class="thesis-sys-icon">
                         <svg viewBox="0 0 64 64" aria-hidden="true">
                             <rect class="ln" x="11" y="23" width="42" height="28" rx="3.5"/>
@@ -319,40 +272,38 @@
                             <circle class="dot" cx="32" cy="37" r="3.4"/>
                         </svg>
                     </span>
-                    <span class="thesis-sys-name">Work</span><span class="thesis-sys-stat">$65T/yr earned</span>
+                    <span class="thesis-sys-name">Work</span>
                 </div>
-            </div>
-            </div>
-
-            <p class="section-display thesis-payoff">They bring the world into <em>balance</em>.</p>
-
-            <div class="balance-dial" aria-hidden="true">
-                <span class="rule left"></span>
-                <span class="dial">
-                    <svg viewBox="0 0 64 64" aria-hidden="true">
-                        <circle class="ring" cx="32" cy="32" r="19"/>
-                        <path class="ln" d="M16 32 H48"/>
-                        <circle class="dot" cx="32" cy="32" r="3.6"/>
-                    </svg>
-                </span>
-                <span class="rule right"></span>
+                <div class="bc-node bc-risk">
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path class="ln" d="M32 8 L50 16 V30 C50 42, 41 51, 32 56 C23 51, 14 42, 14 30 V16 Z"/>
+                            <circle class="dot" cx="32" cy="31" r="3.6"/>
+                        </svg>
+                    </span>
+                    <span class="thesis-sys-name">Risk</span>
+                </div>
+                <div class="bc-node bc-care">
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path class="ln" d="M32 47 C 12 33, 14 20, 24 17 C 29.5 15.5, 32 20, 32 24 C 32 20, 34.5 15.5, 40 17 C 50 20, 52 33, 32 47 Z"/>
+                            <circle class="dot" cx="32" cy="26" r="3.4"/>
+                        </svg>
+                    </span>
+                    <span class="thesis-sys-name">Care</span>
+                </div>
+                <div class="bc-node bc-energy">
+                    <span class="thesis-sys-icon">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g>
+                            <circle class="dot" cx="32" cy="32" r="6.5"/>
+                        </svg>
+                    </span>
+                    <span class="thesis-sys-name">Energy</span>
+                </div>
             </div>
         </div>
     </section>
-    <script>
-    // Desktop: seamless slow marquee of the critical-systems row (duplicate the
-    // track so translateX(-50%) loops without a seam). Mobile keeps manual swipe.
-    (function(){
-        var mq=document.querySelector('.thesis-marquee');
-        var track=mq&&mq.querySelector('.thesis-icons');
-        if(!track) return;
-        if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-        if(window.matchMedia('(max-width:640px)').matches) return;
-        var kids=[].slice.call(track.children);
-        kids.forEach(function(k){ var c=k.cloneNode(true); c.setAttribute('aria-hidden','true'); track.appendChild(c); });
-        mq.classList.add('is-ready');
-    })();
-    </script>
 
     <!-- ==================== TEAM (white fading into light blue) ==================== -->
     <style>
