@@ -36,7 +36,7 @@
     <meta name="twitter:site" content="@SunshineLakeVC">
     <meta name="twitter:title" content="Sunshine Lake, founders forge the future.">
     <meta name="twitter:image" content="https://sunshinelake.vc/images/og-share.png">
-    <meta name="theme-color" content="#F2D831">
+    <meta name="theme-color" content="#F2C94C">
     <link rel="canonical" href="https://sunshinelake.vc">
     <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -196,19 +196,19 @@
         /* Water ripple behind the ring: concentric rings expand and fade from
            the center, echoing the hero water. */
         .bc-ripple{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-        .bc-ripple circle{fill:none;stroke:var(--gold-deco);stroke-width:1.1;transform-box:fill-box;transform-origin:center;opacity:0;animation:bcRipple 13s linear infinite}
+        .bc-ripple circle{fill:none;stroke:var(--gold-ink);stroke-width:1.1;transform-box:fill-box;transform-origin:center;opacity:0;animation:bcRipple 13s linear infinite}
         .bc-ripple circle:nth-child(2){animation-delay:3.25s}
         .bc-ripple circle:nth-child(3){animation-delay:6.5s}
         .bc-ripple circle:nth-child(4){animation-delay:9.75s}
         @keyframes bcRipple{0%{transform:scale(.04);opacity:0}9%{opacity:.5}78%{opacity:.28}100%{transform:scale(1);opacity:0}}
         @media(prefers-reduced-motion:reduce){
-            .bc-ripple circle{animation:none;opacity:.3;stroke:var(--gold-deco)}
+            .bc-ripple circle{animation:none;opacity:.3;stroke:var(--gold-ink)}
             .bc-ripple circle:nth-child(1){transform:scale(1)}
             .bc-ripple circle:nth-child(2){transform:scale(.72)}
             .bc-ripple circle:nth-child(3){transform:scale(.46)}
             .bc-ripple circle:nth-child(4){transform:scale(.24)}
         }
-        .bc-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.75;z-index:1}
+        .bc-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-ink);border-radius:50%;opacity:.75;z-index:1}
         .bc-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center;z-index:3}
         .bc-center::before{content:'';position:absolute;inset:-16% -10%;background:radial-gradient(ellipse at center,#fff 38%,rgba(255,255,255,0) 80%);z-index:-1}
         .bc-center .thesis-payoff{margin:0;font-size:clamp(21px,3.4vw,40px)}

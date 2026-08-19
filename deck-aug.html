@@ -616,12 +616,12 @@ table.tbl.tall td.co{font-size:20px;}
 /* ---------- balance circle (ported from the site thesis) ---------- */
 .bcx{position:relative;width:430px;height:430px;margin:0 auto}
 .bcx-ripple{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.bcx-ripple circle{fill:none;stroke:var(--gold-deco);stroke-width:1.1;transform-box:fill-box;transform-origin:center;opacity:0;animation:bcxRipple 13s linear infinite}
+.bcx-ripple circle{fill:none;stroke:var(--gold-ink);stroke-width:1.1;transform-box:fill-box;transform-origin:center;opacity:0;animation:bcxRipple 13s linear infinite}
 .bcx-ripple circle:nth-child(2){animation-delay:3.25s}
 .bcx-ripple circle:nth-child(3){animation-delay:6.5s}
 .bcx-ripple circle:nth-child(4){animation-delay:9.75s}
 @keyframes bcxRipple{0%{transform:scale(.04);opacity:0}9%{opacity:.5}78%{opacity:.28}100%{transform:scale(1);opacity:0}}
-.bcx-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.75;z-index:1}
+.bcx-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-ink);border-radius:50%;opacity:.75;z-index:1}
 .bcx-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center;z-index:3}
 .bcx-center::before{content:'';position:absolute;inset:-18% -12%;background:radial-gradient(ellipse at center,#fff 40%,rgba(255,255,255,0) 80%);z-index:-1}
 .bcx-payoff{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.12;color:var(--navy-ink);margin:0}
@@ -643,7 +643,7 @@ table.tbl.tall td.co{font-size:20px;}
 @keyframes bcxSpin{to{transform:rotate(360deg)}}
 .bcx-name{font-family:var(--serif);font-size:18px;color:var(--navy-ink);line-height:1}
 .bcx-fig{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--gold-ink)}
-@media(prefers-reduced-motion:reduce),print{.bcx-ripple circle{animation:none;opacity:.3}.bcx-ripple circle:nth-child(1){transform:scale(1)}.bcx-ripple circle:nth-child(2){transform:scale(.72)}.bcx-ripple circle:nth-child(3){transform:scale(.46)}.bcx-ripple circle:nth-child(4){transform:scale(.24)}.bcx-ic .dot,.bcx-ic .rays{animation:none}}
+@media(prefers-reduced-motion:reduce),print{.bcx-ripple circle{animation:none;opacity:.3;stroke:var(--gold-ink)}.bcx-ripple circle:nth-child(1){transform:scale(1)}.bcx-ripple circle:nth-child(2){transform:scale(.72)}.bcx-ripple circle:nth-child(3){transform:scale(.46)}.bcx-ripple circle:nth-child(4){transform:scale(.24)}.bcx-ic .dot,.bcx-ic .rays{animation:none}}
 
 /* ---------- print ---------- */
 @media print{
