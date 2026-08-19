@@ -350,6 +350,11 @@
         .adv-row:last-child{margin-bottom:0}
         .adv-name{font-family:var(--serif);font-size:1.05rem;color:var(--navy-ink)}
         .adv-desc{font-family:var(--sans);font-size:14px;color:#3A4680;margin-left:.5em}
+        /* Closing statement in the light-blue base of the team section */
+        .team-statement{max-width:900px;margin:clamp(48px,7vw,92px) auto 0;text-align:center}
+        .team-statement-lead{color:var(--navy-ink);text-wrap:balance;margin:0}
+        .team-statement-lead em{font-style:normal;color:var(--gold-ink)}
+        .team-statement-q{font-family:var(--serif);font-style:italic;font-size:clamp(18px,1.9vw,25px);line-height:1.35;color:#3A4680;max-width:34ch;margin:clamp(16px,2vw,24px) auto 0}
         @media(max-width:1080px){
             .team-grid{grid-template-columns:repeat(2,1fr)}
             .team-name{min-height:0}
@@ -402,6 +407,10 @@
                 <p class="adv-row"><span class="adv-name">Mike Franklin</span><span class="adv-desc">Co-creator of Apache Spark and founding advisor at Databricks.</span></p>
                 <p class="adv-row"><span class="adv-name">Andrew Hovelson</span><span class="adv-desc">Broadway actor alongside Tom Hanks and Glenn Close.</span></p>
                 <p class="adv-row"><span class="adv-name">Jamie Feaster</span><span class="adv-desc">Unicorn founder, backed by Craft Ventures, Snoop Dogg, and top VCs.</span></p>
+            </div>
+            <div class="team-statement">
+                <p class="section-display team-statement-lead">Because our founders rebuild critical global systems, <em>Sunshine Lake</em> backs multiple blockbuster startups every decade.</p>
+                <p class="team-statement-q">What better time to build than when the world needs it most?</p>
             </div>
         </div>
     </section>
