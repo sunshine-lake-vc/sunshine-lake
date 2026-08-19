@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2D831">
+<title>Sunshine Lake, Fund I</title>
+<link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+<link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* ============================================================
+   SUNSHINE LAKE — Fund I deck
+   Single-file HTML deck. Keyboard ◄ ► to page.
+   Password-gated (separate from the LP portal). Print
+   to PDF via the Export button (each slide → one landscape page).
+   Design: white content slides, cobalt section breaks, abyss
+   hero cover. Mirrors the site design system, polished up.
+   ============================================================ */
+@font-face{
+  font-family:'DomaineDisp';
+  src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'),
+      url('fonts/DomaineDisp-Regular.otf') format('opentype');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+:root{
+  /* Remapped to the redesigned site palette (index.html). Legacy token names
+     are kept so existing var() references inherit the new look. */
+  --cobalt:#2B50E2; --mid-lake:#2140C8; --navy:#1E2A78; --abyss:#030512;
+  --sun:#F2C94C; --sun-soft:#F5D547; --cream:#FFFBEB; --pill:#F6ECC0;
+  --light-blue:#19BDE8;
+  --ink:#1E2A78; --ink-2:#1d2a4d; --muted:#5a6685; --line:#e7eaf3;
+  --teal:#2ed9c3; --green:#81e77a; --coral:#f68d6c;
+  /* Site tokens (new names) */
+  --blue-royal:#2B50E2; --blue-light:#C9D8F5; --navy-ink:#1E2A78;
+  --navy-night:#0A0D2E; --near-black:#030512; --yellow:#F2C94C; --yellow-hi:#F5D547;
+  --gold-ink:#B8860B; --gold-deco:#C9A43F; --white-soft:#E8ECFA; --white-dim:#AAB6E8;
+  --serif:'DomaineDisp','Times New Roman',serif;
+  --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
+  --stageW:1280px; --stageH:720px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  background:#0e1330;
+  font-family:var(--sans);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+
+/* ---------- password gate ---------- */
+#gate{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(180deg,#155EE8 0%,#0A3DAE 55%,#0032A8 100%);
+}
+.gate-card{
+  width:100%;max-width:440px;
+  background:rgba(255,255,255,.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.14);border-radius:20px;
+  padding:clamp(30px,5vw,52px);color:#fff;
+}
+.gate-card svg{width:38px;height:auto;display:block;margin:0 0 24px;fill:#fff;}
+.gate-card h1{font-family:var(--serif);font-weight:400;font-size:2.3rem;line-height:1.05;margin:0 0 12px;}
+.gate-card p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:rgba(255,255,255,.78);margin:0 0 26px;}
+.gate-card label{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58);margin-bottom:6px;}
+.gate-card input{
+  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:10px;padding:14px 16px;color:#fff;font:inherit;font-size:15px;
+}
+.gate-card input:focus{outline:none;border-color:rgba(242,216,49,.6);background:rgba(255,255,255,.1);}
+.gate-card button{
+  width:100%;margin-top:14px;background:var(--sun);color:var(--navy);border:none;border-radius:999px;
+  padding:14px 22px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.gate-card button:hover{background:#F7DF47;transform:translateY(-1px);}
+.gate-err{color:var(--sun);font-size:13px;margin-top:12px;min-height:18px;opacity:0;transition:opacity .2s;}
+.gate-err.show{opacity:1;}
+
+/* ---------- deck shell ---------- */
+#deck{position:fixed;inset:0;display:none;align-items:center;justify-content:center;}
+#deck.ready{display:flex;}
+.stage{
+  position:relative;width:var(--stageW);height:var(--stageH);
+  transform-origin:center center;flex:0 0 auto;
+}
+.slide{
+  position:absolute;inset:0;width:var(--stageW);height:var(--stageH);
+  background:#fff;overflow:hidden;
+  opacity:0;visibility:hidden;
+  display:flex;flex-direction:column;
+}
+.slide.active{opacity:1;visibility:visible;}
+.slide.hide-in-mode{display:none !important;}
+
+/* slide chrome */
+.s-pad{padding:64px 72px 56px;flex:1;display:flex;flex-direction:column;min-height:0;}
+.s-mark{position:absolute;left:40px;bottom:30px;width:34px;height:auto;opacity:.9;}
+.s-conf{position:absolute;right:44px;bottom:32px;font-size:11px;letter-spacing:.04em;color:#9aa3bd;}
+.slide.dark .s-conf{color:rgba(255,255,255,.5);}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px;}
+.s-title{font-family:var(--serif);font-weight:400;color:var(--ink);line-height:1.04;letter-spacing:-.01em;font-size:46px;}
+.s-sub{font-family:var(--serif);font-size:23px;color:var(--mid-lake);margin-top:14px;line-height:1.25;}
+.s-rule{height:2px;background:linear-gradient(90deg,var(--cobalt),transparent);margin:22px 0 0;border:0;}
+/* Thesis pillar icon animations (ported from the site hero pillars) */
+.spark-rays{transform-origin:32px 32px;animation:sparkBreath 4s ease-in-out infinite;}
+.spark-core{transform-origin:32px 32px;animation:sparkTwinkle 4s ease-in-out infinite;}
+@keyframes sparkBreath{0%,100%{transform:scale(1);opacity:.85;}50%{transform:scale(1.09);opacity:1;}}
+@keyframes sparkTwinkle{0%,100%{transform:scale(.9);opacity:.8;}50%{transform:scale(1.12);opacity:1;}}
+.see-wave{stroke-dasharray:90;stroke-dashoffset:90;animation:seeDraw 3.4s cubic-bezier(0.22,1,0.36,1) infinite;}
+.see-dot{transform-origin:34px 20px;animation:seePulse 3.4s ease-in-out infinite;}
+@keyframes seeDraw{0%{stroke-dashoffset:90;}45%{stroke-dashoffset:0;}80%,100%{stroke-dashoffset:0;}}
+@keyframes seePulse{0%,40%{transform:scale(.7);opacity:.3;}60%{transform:scale(1.15);opacity:1;}100%{transform:scale(1);opacity:.9;}}
+@media(prefers-reduced-motion:reduce){.spark-rays,.spark-core,.see-wave,.see-dot{animation:none;}.see-wave{stroke-dashoffset:0;}.spark-core,.see-dot{opacity:1;}}
+.deck-spiral{transform-origin:50% 50%;animation:deckSpiralSpin 12s linear infinite;}
+@keyframes deckSpiralSpin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.deck-spiral{animation:none;}}
+.world-spin{transform-origin:32px 32px;animation:deckSpiralSpin 14s linear infinite;}
+@media(prefers-reduced-motion:reduce){.world-spin{animation:none;}}
+
+/* ---------- cover (abyss hero) ---------- */
+.cover{background:
+  radial-gradient(48% 42% at 18% 26%, rgba(242,216,49,.62), transparent 62%),
+  radial-gradient(46% 50% at 78% 20%, rgba(25,189,232,.5), transparent 60%),
+  radial-gradient(70% 70% at 64% 82%, rgba(21,94,232,.65), transparent 62%),
+  radial-gradient(46% 46% at 28% 80%, rgba(242,216,49,.42), transparent 56%),
+  radial-gradient(40% 40% at 90% 65%, rgba(129,231,122,.28), transparent 60%),
+  linear-gradient(140deg,#1c44b8 0%,#0a3dae 55%,#0b1275 100%);}
+.cover .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
+.cover h1{font-family:var(--serif);font-weight:400;color:#fff;font-size:96px;line-height:1.04;letter-spacing:-.015em;text-shadow:0 2px 30px rgba(2,4,31,.28);width:100%;}
+.cover-logo{position:absolute;top:50px;left:72px;display:flex;align-items:center;gap:18px;color:#fff;font-family:var(--serif);font-size:46px;z-index:2;}
+.cover-logo svg{width:72px;fill:#fff;}
+.cover .meta{position:absolute;left:72px;bottom:74px;z-index:2;}
+.cover .meta .lead{font-weight:700;color:#fff;font-size:18px;letter-spacing:.02em;}
+.cover .meta .ln{color:rgba(255,255,255,.8);font-size:16px;margin-top:6px;}
+.cover .meta .ln.dim{color:rgba(255,255,255,.55);}
+.cover .s-conf{color:rgba(255,255,255,.65);}
+.cover-band{position:absolute;top:54px;right:64px;z-index:3;
+  background:linear-gradient(180deg,#F7DF47,#F2D831);color:var(--navy);
+  font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.07em;text-transform:uppercase;
+  padding:12px 24px;border-radius:999px;box-shadow:0 6px 20px rgba(2,4,31,.32);}
+.spark{position:absolute;pointer-events:none;will-change:transform,opacity;animation:twinkle 2.6s ease-in-out infinite;background:
+   radial-gradient(closest-side,rgba(255,233,150,.95),rgba(255,210,80,0) 70%);}
+@keyframes twinkle{0%,100%{opacity:.28;transform:scale(.6);}50%{opacity:1;transform:scale(1);}}
+@media (prefers-reduced-motion:reduce){.spark{animation:none;}}
+.spark::before,.spark::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+   background:linear-gradient(var(--sun),rgba(242,216,49,0));}
+.spark::before{width:1.5px;height:100%;}
+.spark::after{width:100%;height:1.5px;background:linear-gradient(90deg,rgba(242,216,49,0),var(--sun),rgba(242,216,49,0));}
+
+/* ---------- navy section break (formal, ICONIQ-restrained) ---------- */
+.section{background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%);}
+.section .s-pad{justify-content:center;}
+.section .sec-no{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--sun);letter-spacing:.34em;text-transform:uppercase;margin-bottom:24px;}
+.section h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:66px;line-height:1.05;letter-spacing:.015em;}
+.section h2::after{content:"";display:block;width:60px;height:2px;background:var(--sun);margin:28px 0 0;}
+.section p{font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.74);max-width:700px;line-height:1.4;margin-top:26px;}
+.section .s-mark{opacity:1;}
+
+/* ---------- navy statement slide ---------- */
+.statement{background:linear-gradient(155deg,#1a6bff 0%,#155EE8 45%,#0A3DAE 100%);}
+.statement .s-pad{justify-content:center;align-items:flex-start;}
+.statement .eyebrow{color:var(--sun);}
+.statement .sline{font-family:var(--serif);color:#fff;font-size:50px;line-height:1.16;letter-spacing:-.01em;max-width:1080px;}
+.statement .sline.sub{color:rgba(255,255,255,.84);margin-top:26px;font-size:29px;line-height:1.32;max-width:860px;}
+.statement .sline .forged{color:var(--sun);font-weight:400;}
+.statement .s-mark{opacity:1;}
+/* thesis "trades a founder makes" */
+.trades{margin-top:28px;display:flex;flex-direction:column;gap:13px;max-width:1040px;}
+.trade{display:flex;align-items:baseline;gap:20px;font-family:var(--serif);border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:13px;}
+.trade:last-child{border-bottom:0;}
+.trade .gave{flex:0 0 340px;color:rgba(255,255,255,.6);font-size:21px;}
+.trade .ar{color:var(--sun);font-size:19px;flex:0 0 auto;}
+.trade .got{color:#fff;font-size:24px;}
+.trade-close{margin-top:26px;font-family:var(--serif);font-size:23px;color:rgba(255,255,255,.92);max-width:1040px;line-height:1.4;}
+.trade-close b{color:var(--sun);font-weight:400;}
+/* ---------- archetype: cross-border founder (navy statement + grid) ---------- */
+.statement .arch-lead{font-family:var(--serif);font-size:21px;line-height:1.4;color:rgba(255,255,255,.86);max-width:1040px;margin-top:16px;}
+.statement .arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;margin-top:30px;}
+.arch-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:15px 16px;}
+.arch-card .ac-ic{display:block;height:26px;margin-bottom:10px;}
+.arch-card .ac-ic svg{width:26px;height:26px;stroke:var(--sun);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.arch-card .ac-h{font-family:var(--serif);font-size:19px;color:var(--sun);line-height:1.12;}
+.arch-card .ac-d{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.36;}
+
+/* ---------- boom (headline numbers) ---------- */
+.boom{background:radial-gradient(120% 130% at 20% 0%,#1a3fb0 0%,#0a2a82 45%,#02041F 100%);}
+.boom .s-pad{justify-content:center;}
+.boom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 24px;margin:18px 0 22px;}
+.boom .bstat{text-align:center;}
+.boom .bn{font-family:var(--serif);font-size:78px;line-height:.95;color:#fff;letter-spacing:-.01em;}
+.boom .bstat:nth-child(1) .bn,.boom .bstat:nth-child(5) .bn{color:var(--sun);}
+.boom .bl{font-size:13.5px;color:#b6bee0;margin-top:8px;letter-spacing:.01em;}
+.boom-foot{text-align:center;font-family:var(--serif);font-size:23px;color:#eaeeff;line-height:1.35;max-width:1000px;margin:0 auto;}
+.boom-foot b{color:var(--sun);font-weight:400;}
+
+/* ---------- ecosystem network ---------- */
+.ecosystem{background:radial-gradient(120% 120% at 70% 30%,#13183d,#02041F);}
+.eco-node{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--serif);color:#fff;line-height:1.15;padding:10px;}
+.eco-center{background:radial-gradient(circle at 38% 32%,#2f74ff,#155EE8 70%);box-shadow:0 0 0 8px rgba(21,94,232,.16);}
+.eco-sat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);}
+.eco-sat .ec-n{font-size:18px;} .eco-sat .ec-s{font-size:12px;color:#aeb6da;font-family:var(--sans);margin-top:3px;}
+
+/* ===== merged SSSS engine — Version A (content-rich colorful boxes) ===== */
+.eng-flow{display:flex;gap:14px;flex:1;align-items:stretch;margin-top:16px;}
+.eng-card{flex:1;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line);}
+.eng-top{display:flex;align-items:center;gap:9px;padding:11px 14px;color:#fff;}
+.eng-card.s1 .eng-top{background:#155EE8;}.eng-card.s2 .eng-top{background:#BE922A;}.eng-card.s3 .eng-top{background:#2f9d6f;}.eng-card.s4 .eng-top{background:#0A3DAE;}
+.eng-num{width:23px;height:23px;border-radius:50%;background:rgba(255,255,255,.25);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 23px;}
+.eng-name{font-family:var(--serif);font-size:22px;}
+.eng-verb{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:2px 7px;align-self:center;}
+.eng-stat{margin-left:auto;font-family:var(--serif);font-size:20px;}
+.eng-body{flex:1;padding:13px 14px;display:flex;flex-direction:column;gap:9px;}
+.eng-card.s1 .eng-body{background:#eff4fd;}.eng-card.s2 .eng-body{background:#fdf8ea;}.eng-card.s3 .eng-body{background:#ecf6f0;}.eng-card.s4 .eng-body{background:#eef3fc;}
+.eng-def{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.eng-row{font-size:12.5px;color:var(--ink-2);line-height:1.4;}
+.eng-row b{color:var(--ink);font-weight:600;}
+.eng-q{font-size:12px;color:var(--ink-2);line-height:1.38;}
+.eng-foot{margin-top:auto;padding-top:8px;font-family:var(--serif);font-size:16px;}
+.eng-card.s1 .eng-foot{color:#155EE8;}.eng-card.s2 .eng-foot{color:#b8902a;}.eng-card.s3 .eng-foot{color:#2f9d6f;}.eng-card.s4 .eng-foot{color:#0A3DAE;}
+.eng-card .checklist{margin:0;gap:7px;}
+.eng-card .ck{font-size:13px;}
+.eng-card .ck-box{width:19px;height:19px;flex:0 0 19px;}
+.eng-card .ck-score{font-size:16px;}
+.eng-net{margin-top:12px;text-align:center;font-size:13.5px;color:var(--mid-lake);font-family:var(--serif);}
+/* engine as a funnel — cards taper in height; Select shows a live scorecard */
+.eng-funnel{align-items:center;gap:6px;}
+.eng-arrow{flex:0 0 auto;align-self:center;display:flex;}
+.eng-arrow svg{width:22px;height:22px;stroke:#9aa6c8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.eng-row.ic-row{display:flex;gap:8px;align-items:flex-start;}
+.eng-row .row-ic{flex:0 0 auto;margin-top:1px;}
+.eng-row .row-ic svg{width:17px;height:17px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block;}
+.eng-card.s1 .row-ic svg{stroke:#155EE8;}
+.eng-card.s4 .row-ic svg{stroke:#0A3DAE;}
+.eng-example{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;box-shadow:0 4px 14px rgba(11,18,117,.06);}
+.eng-example .ex-h{font-family:var(--sans);font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--ink);display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.eng-example .ex-tag{font-size:8.5px;font-weight:700;letter-spacing:.08em;color:#b8902a;background:#fdf8ea;border-radius:999px;padding:3px 7px;text-transform:uppercase;}
+
+/* ===== merged SSSS engine — Version B (abstract flywheel) ===== */
+.fw-wrap{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:4px;}
+.fw-stage{position:relative;width:780px;height:450px;flex:0 0 auto;}
+.fw-svg{position:absolute;inset:0;width:100%;height:100%;}
+.fw-node{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;box-shadow:0 10px 28px rgba(2,4,31,.20);z-index:2;}
+.fw-node .fn{font-family:var(--serif);font-size:23px;line-height:1;}
+.fw-node .fs{font-family:var(--serif);font-size:15px;opacity:.92;margin-top:4px;}
+.fw-node .fe{font-size:10px;text-transform:uppercase;letter-spacing:.16em;margin-top:6px;opacity:.85;}
+.fw-node.s1{background:radial-gradient(circle at 38% 32%,#3f78ff,#155EE8);}
+.fw-node.s2{background:radial-gradient(circle at 38% 32%,#e3b441,#BE922A);}
+.fw-node.s3{background:radial-gradient(circle at 38% 32%,#46b487,#2f9d6f);}
+.fw-node.s4{background:radial-gradient(circle at 38% 32%,#33a9d6,#1488c4);}
+.fw-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:172px;height:172px;border-radius:50%;background:#0B1275;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:3;}
+.fw-hub b{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.05;}
+.fw-hub span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);margin-top:7px;}
+.fw-net{margin-top:12px;text-align:center;font-size:16px;color:var(--mid-lake);font-family:var(--serif);}
+.fw-detail{display:flex;flex-wrap:nowrap;justify-content:center;gap:32px;margin-top:12px;font-size:13px;color:var(--muted);font-family:var(--sans);}
+.fw-detail span{white-space:nowrap;}
+.fw-detail b{font-weight:700;}
+.fw-detail .d1 b{color:#155EE8;}.fw-detail .d2 b{color:#BE922A;}.fw-detail .d3 b{color:#2f9d6f;}.fw-detail .d4 b{color:#1488c4;}
+.fw-ellipse{animation:fw-flow 2.6s linear infinite;}
+@keyframes fw-flow{to{stroke-dashoffset:-140;}}
+@media (prefers-reduced-motion:reduce){.fw-ellipse{animation:none;}}
+/* ===== aperture rubric (Option 1) ===== */
+.ap-grid{display:flex;gap:22px;flex:1;margin-top:18px;align-items:flex-start;}
+.ap-col{flex:1;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+.ap-head{padding:12px 16px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-family:var(--sans);}
+.ap-col.e .ap-head{background:#0A3DAE;}.ap-col.s .ap-head{background:#2f9d6f;}.ap-col.t .ap-head{background:#155EE8;}
+.ap-body{flex:1;padding:16px;display:flex;flex-direction:column;}
+.ap-col.e .ap-body{background:#eef3fc;}.ap-col.s .ap-body{background:#ecf6f0;}.ap-col.t .ap-body{background:#eff4fd;}
+.ap-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.ap-infl{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12;}
+.ap-arrow{color:#aab6d4;font-size:20px;margin:12px 0;}
+.ap-open{font-size:14px;color:var(--ink-2);line-height:1.42;}
+.ap-ex{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px;}
+.ap-ex span{font-size:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink-2);}
+
+/* ===== inflection timeline (Option 2) ===== */
+.tl{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:8px;}
+.tl-line{position:absolute;left:11%;right:11%;top:7px;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 70%,var(--sun));}
+.tl-cols{display:flex;gap:16px;position:relative;}
+.tl-col{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
+.tl-yr{font-family:var(--serif);font-size:21px;color:var(--cobalt);margin-top:16px;}
+.tl-shift{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+.tl-infl{font-size:15.5px;color:var(--ink);margin-top:10px;line-height:1.3;font-weight:600;max-width:230px;}
+.tl-co{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.55;}
+.tl-col.future .tl-dot{background:var(--sun);box-shadow:0 0 0 2px var(--sun);}
+.tl-col.future .tl-yr{color:#b8902a;}
+.tl-q{font-family:var(--serif);font-size:46px;color:var(--sun);line-height:1;margin-top:6px;}
+
+/* ---------- generic layout helpers ---------- */
+.grow{flex:1;min-height:0;}
+.cols{display:flex;gap:34px;}
+.col{flex:1;}
+.center{display:flex;align-items:center;justify-content:center;text-align:center;}
+.lede{font-family:var(--serif);font-size:26px;line-height:1.35;color:var(--ink-2);}
+.note{font-size:11px;line-height:1.45;color:#9aa3bd;max-width:880px;}
+.gross-note{position:absolute;left:0;right:0;bottom:32px;text-align:center;font-size:9.5px;line-height:1.3;letter-spacing:.02em;color:#9aa3bd;z-index:4;pointer-events:none;padding:0 210px;}
+.slide.dark .gross-note{color:rgba(255,255,255,.5);}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt);}
+
+/* thesis */
+.thesis-lines{display:flex;flex-direction:column;gap:22px;margin-top:8px;}
+.thesis-lines .tl{font-family:var(--serif);font-size:27px;line-height:1.3;color:var(--ink-2);}
+.thesis-lines .tl b{color:var(--cobalt);font-weight:400;}
+.follow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:auto;align-items:center;}
+.follow .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9aa3bd;width:100%;margin-bottom:2px;}
+.follow span{font-family:var(--serif);font-size:18px;color:#7a84a6;}
+
+/* problem space columns */
+.prob{display:flex;gap:30px;margin-top:30px;flex:1;}
+.prob .pc{flex:1;border-top:2px solid var(--line);padding-top:18px;}
+.prob .prob-shift{font-size:12px;line-height:1.4;color:var(--cobalt);font-weight:600;text-align:center;min-height:50px;margin-bottom:6px;}
+.prob .prob-shift b{color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:3px;}
+.prob h3{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);margin-bottom:18px;text-align:center;}
+.prob ul{list-style:none;display:flex;flex-direction:column;gap:16px;}
+.prob li{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.prob li .co{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;}
+.prob li .se{font-size:13px;color:var(--muted);margin-top:2px;}
+.prob-foot{font-family:var(--serif);font-size:24px;text-align:center;color:var(--mid-lake);margin-top:24px;}
+
+/* GP credibility */
+.gp{display:flex;gap:34px;flex:1;min-height:0;}
+.gp .photo{width:250px;flex:0 0 250px;border-radius:6px;background:#dfe4f2 center/cover no-repeat;}
+.gp .tiers{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.gp .tier{display:flex;align-items:center;gap:22px;padding:10px 0;border-bottom:1px solid var(--line);}
+.gp .tier .val{width:200px;flex:0 0 200px;font-weight:700;color:var(--cobalt);font-size:20px;letter-spacing:.01em;line-height:1.2;}
+.gp .tier .val.op{color:var(--ink);}
+.gp .tier .cos{font-family:var(--serif);font-size:19px;color:var(--ink-2);line-height:1.3;}
+.quote-lg{font-family:var(--serif);font-size:27px;line-height:1.18;color:var(--ink);}
+/* statement verified-track-record stats */
+.stmt-tr{margin-top:42px;}
+.stmt-lbl{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px;}
+.stmt-stats{display:flex;gap:60px;}
+.stmt-stats .ssn{font-family:var(--serif);font-size:58px;line-height:1;color:#fff;}
+.stmt-stats .ssl{font-size:14px;color:rgba(255,255,255,.72);margin-top:8px;letter-spacing:.02em;}
+/* GP credibility — track-record-style table */
+.gp-track{width:100%;border-collapse:collapse;}
+.gp-track th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.02em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.gp-track td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.gp-track td.tk{font-family:var(--serif);font-size:18px;color:var(--cobalt);width:230px;}
+.gp-track td.tk.op{color:var(--ink);}
+.gp-track td.tv{font-family:var(--serif);font-size:18px;color:var(--ink-2);}
+.gp-track .cos{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:flex-start;}
+.gp-track .cos .sub{display:block;font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-top:2px;}
+/* GP "the arc" timeline */
+.arc{display:flex;gap:10px;position:relative;min-height:206px;align-items:center;}
+.arc::before{content:"";position:absolute;left:7px;right:7px;top:50%;height:2px;background:linear-gradient(90deg,#cdd6ee,#155EE8 88%,var(--sun));}
+.arc-node{flex:1;position:relative;height:100%;}
+.arc-dot{position:absolute;top:50%;left:0;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--cobalt);border:3px solid #fff;box-shadow:0 0 0 2px var(--cobalt);}
+.arc-node:last-child .arc-dot{background:var(--sun);box-shadow:0 0 0 2px var(--sun);}
+.arc-c{position:absolute;left:0;right:8px;}
+.arc-node:nth-child(odd) .arc-c{bottom:calc(50% + 15px);}
+.arc-node:nth-child(even) .arc-c{top:calc(50% + 15px);}
+.arc-t{font-family:var(--serif);font-size:17px;color:var(--ink);line-height:1.14;}
+.arc-d{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.32;}
+
+/* unicorn valuation ladder */
+.uni-wrap{display:flex;gap:30px;flex:1;align-items:stretch;margin-top:8px;min-height:0;}
+.uni-chart{flex:2.5;min-width:0;display:flex;align-items:center;}
+.uni-chart svg{width:100%;height:100%;}
+.uni-box{flex:1;align-self:center;background:linear-gradient(160deg,#F7DF47,#F2D831);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 26px;color:var(--navy);box-shadow:0 12px 34px rgba(2,4,31,.18);}
+.uni-box .ub-top{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(11,18,117,.6);}
+.uni-box .ub-n{font-family:var(--serif);font-size:74px;line-height:.95;margin-top:8px;}
+.uni-box .ub-x{font-family:var(--serif);font-size:60px;line-height:.95;}
+.uni-box .ub-l{font-family:var(--serif);font-size:17px;color:rgba(11,18,117,.82);margin-top:4px;}
+.uni-box .ub-rule{width:54px;height:2px;background:rgba(11,18,117,.25);margin:14px 0;}
+.quote-sub{font-family:var(--serif);font-style:normal;font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:14px;max-width:1100px;}
+.quote-sub b{font-style:normal;color:var(--cobalt);font-weight:600;}
+
+/* tables */
+table.tbl{width:100%;border-collapse:collapse;font-size:15px;}
+table.tbl th{font-weight:600;color:var(--muted);text-align:right;padding:10px 10px;border-bottom:2px solid var(--line);font-size:12px;letter-spacing:.02em;}
+table.tbl th:first-child,table.tbl td:first-child{text-align:left;}
+table.tbl td{padding:13px 10px;text-align:right;border-bottom:1px solid var(--line);color:var(--ink-2);}
+table.tbl td.co{font-family:var(--serif);font-size:18px;color:var(--ink);}
+table.tbl td.pos{color:#1f9d6b;font-weight:600;}
+table.tbl td.mult{color:var(--cobalt);font-weight:700;}
+table.tbl.tall td{padding:24px 10px;}
+table.tbl.tall td.co{font-size:20px;}
+.tr-callout{margin:auto 0 24px;background:linear-gradient(150deg,#1a6bff,#0a3dae);border-radius:14px;padding:18px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:28px;}
+.trc-funds{display:flex;align-items:center;gap:28px;}
+.trc-amt{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sun);margin-bottom:5px;}
+.trc-nums{display:flex;align-items:baseline;gap:8px;}
+.trc-n{font-family:var(--serif);font-size:46px;line-height:1;color:#fff;}
+.trc-u{font-size:14.5px;color:#cfd9ff;}
+.trc-dot{color:rgba(255,255,255,.35);margin:0 2px;font-size:20px;}
+.trc-div{width:1px;height:56px;background:rgba(255,255,255,.2);}
+.trc-quality{display:flex;flex-direction:column;gap:7px;text-align:right;font-size:15.5px;color:#cfd9ff;}
+.trc-quality b{font-family:var(--serif);font-size:22px;color:var(--sun);font-weight:400;margin-right:4px;}
+
+/* team */
+.team-row{display:flex;gap:26px;margin:14px 0 22px;}
+.tm{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;background:#fafbfe;border:1px solid var(--line);border-radius:16px;padding:24px 20px 22px;}
+.tm .av{width:118px;height:138px;border-radius:14px;background:#e7ebf6 center/cover no-repeat;border:1px solid var(--line);margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;color:var(--cobalt);}
+/* shared rounded-corner portrait (GP) */
+.gp-portrait{width:170px;height:206px;border-radius:16px;background:#e7ebf6 center/cover no-repeat;border:1px solid var(--line);}
+.tm .nm{font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.18;min-height:1.4em;display:flex;align-items:center;justify-content:center;text-align:center;}
+.tm .na{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
+.tm .rl{font-size:15px;color:var(--cobalt);font-weight:600;margin-top:7px;line-height:1.35;min-height:1.4em;display:flex;align-items:center;justify-content:center;}
+.tm .pe{font-size:13px;color:var(--muted);font-weight:400;margin-top:7px;letter-spacing:.01em;line-height:1.35;}
+.vectors{display:flex;gap:22px;flex:1;}
+.vec{flex:1;background:#f6f8fd;border-radius:12px;padding:18px 20px 20px;display:flex;flex-direction:column;}
+.vec:nth-child(2){background:#eef3fc;}
+.vec:nth-child(3){background:#e7eefb;}
+.vec .vn{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.vec .dot{width:24px;height:24px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.vec:nth-child(1) .dot{background:#5b8def;}
+.vec:nth-child(2) .dot{background:#2f6fea;}
+.vec:nth-child(3) .dot{background:#0A3DAE;}
+.vec h4{font-size:15px;color:var(--ink);}
+.vec .ph{font-size:12px;color:var(--muted);margin:3px 0 10px;}
+.vec .ad{font-size:13px;color:var(--ink-2);padding:10px 0;border-top:1px solid rgba(0,0,0,.06);}
+.vec .ad b{font-weight:600;}
+.vec .ad span{color:var(--muted);}
+
+/* engine (scout/select/secure/support) */
+.engine-nav{display:flex;align-items:center;gap:8px;margin:6px 0 26px;}
+.en{display:flex;align-items:center;gap:10px;}
+.en .num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;}
+.en .nm{font-family:var(--serif);font-size:22px;color:#b9c0d6;}
+.en.on .nm{color:var(--ink);}
+.en .num{background:#c7cee2;}
+.en.on:nth-child(1) .num{background:var(--cobalt);} .en.on:nth-child(1) .nm{color:var(--cobalt);}
+.en-line{flex:1;height:1px;background:var(--line);}
+.duo{display:flex;gap:26px;flex:1;}
+.panel{position:relative;flex:1;border-radius:16px;padding:32px 36px;display:flex;flex-direction:column;}
+.panel.blue{background:linear-gradient(165deg,#eef3fc,#e6eefb);} .panel.gold{background:linear-gradient(165deg,#fdf8ea,#faf1d8);}
+.panel.green{background:linear-gradient(165deg,#eef4fb,#e6eefb);} .panel.sky{background:linear-gradient(165deg,#eef6fb,#e6f1f8);}
+.panel .pnum{position:absolute;top:26px;right:28px;width:50px;height:50px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:25px;color:var(--cobalt);box-shadow:0 3px 16px rgba(11,18,117,.1);}
+.panel.gold .pnum{color:#b8902a;}
+.panel h3{font-family:var(--serif);font-size:29px;font-weight:400;color:var(--ink);}
+.panel .big{font-size:18px;color:var(--ink-2);margin:8px 0 20px;line-height:1.35;}
+.panel .row{font-size:15px;color:var(--ink-2);padding:9px 0;line-height:1.48;}
+.panel .row b{font-weight:600;color:var(--ink);}
+.panel .score{margin-top:auto;font-weight:600;color:var(--cobalt);font-size:15px;}
+.panel .hl{margin-top:auto;padding-top:18px;border-top:1px solid rgba(11,18,117,.08);}
+.panel .hl b{font-family:var(--serif);font-size:28px;color:var(--cobalt);font-weight:400;}
+.panel.gold .hl b{color:#b8902a;}
+.panel .hl span{font-size:13px;color:var(--muted);display:block;margin-top:3px;}
+.checklist{display:flex;flex-direction:column;gap:9px;margin:12px 0 4px;}
+.ck{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--ink-2);}
+.ck-box{width:21px;height:21px;flex:0 0 21px;border-radius:5px;background:#b8902a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.ck-label{flex:1;}
+.ck-score{font-family:var(--serif);font-size:19px;color:#b8902a;}
+
+/* needs-art working marker (corner) */
+.needs-art{position:absolute;top:18px;right:18px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#b4530c;background:#fff5e6;border:1px dashed #e09a3e;border-radius:999px;padding:5px 11px;}
+.needs-art::before{content:"";width:7px;height:7px;border-radius:50%;background:#e88c1a;}
+.slide.dark .needs-art{color:#ffd98a;background:rgba(255,180,60,.12);border-color:rgba(255,190,90,.5);}
+.slide.dark .needs-art::before{background:var(--sun);}
+
+/* case study */
+.cs-logo-img{height:42px;width:auto;max-width:240px;object-fit:contain;}
+.cs-shift{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);margin-top:7px;}
+.cs-pill{align-self:flex-start;background:var(--cobalt);color:#fff;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:11px 28px;}
+.cs-pill.gold{background:var(--sun);color:var(--navy);}
+.cs-alert{display:inline-block;background:#eef3fd;color:var(--cobalt);border:1px solid #cfddf7;font-size:13.5px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:8px 17px;margin-top:12px;}
+.cs-photo-col{flex:0 0 340px;align-self:stretch;border-radius:14px;background:#e3e8f4 center/cover no-repeat;border:1px solid var(--line);position:relative;overflow:hidden;min-height:230px;}
+.cs-fn{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;background:linear-gradient(transparent,rgba(11,18,117,.82));color:#fff;font-weight:600;font-size:17px;line-height:1.2;}
+.cs-banner{height:42px;flex:0 0 42px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:15px;letter-spacing:.02em;}
+.cs-banner.realized{background:#28336b;} .cs-banner.liquid{background:#28336b;}
+.cs-body{flex:1;display:flex;flex-direction:column;padding:30px 56px 0;min-height:0;}
+.cs-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+.cs-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px;}
+.cs-logo{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+.cs-story{font-family:var(--serif);font-weight:400;font-size:29.5px;line-height:1.18;color:var(--ink);margin:14px 0 18px;white-space:nowrap;}
+.cs-grid{display:flex;gap:34px;flex:1;min-height:0;align-items:stretch;}
+.cs-mid{flex:1.5;display:flex;flex-direction:column;min-height:0;}
+.cs-sector{background:#eef3fc;border-radius:10px;padding:12px 16px;font-size:14.5px;color:var(--ink-2);margin-bottom:14px;}
+.cs-steps{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;}
+.cs-steps .st{display:flex;gap:16px;padding:6px 0;font-size:14px;color:var(--ink-2);line-height:1.4;}
+.cs-steps .st .k{flex:0 0 82px;font-weight:700;letter-spacing:.06em;color:var(--cobalt);font-size:12.5px;padding-top:1px;}
+.cs-right{flex:1;border-left:1px solid var(--line);padding-left:34px;display:flex;flex-direction:column;justify-content:space-evenly;}
+.cs-metric{padding:8px 0;border-bottom:1px solid var(--line);}
+.cs-metric:last-child{border-bottom:none;}
+.cs-metric .ml{font-size:12.5px;color:var(--muted);}
+.cs-metric .mv{font-family:var(--serif);font-size:29px;color:var(--ink);line-height:1.1;margin-top:2px;}
+.cs-metric .msub{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.32;margin-top:3px;}
+.cs-metric .msub:first-of-type{margin-top:5px;}
+.cs-metric.hot .ml{color:#3f9d6f;} .cs-metric.hot .mv{color:#3f9d6f;}
+.cs-insight{border-top:1px solid var(--line);padding:14px 56px 20px;}
+.slide:has(.cs-insight) .s-mark{display:none;}
+.cs-insight .kk{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--light-blue);}
+.cs-insight .tx{font-family:var(--serif);font-size:19px;color:var(--ink);margin-top:4px;max-width:1040px;line-height:1.25;}
+
+/* fund terms */
+.terms{display:flex;gap:48px;flex:1;}
+.terms .big-num{font-family:var(--serif);font-size:92px;color:var(--ink);line-height:.9;}
+.terms .big-lbl{font-weight:700;font-size:15px;color:var(--ink-2);margin-top:6px;}
+.terms .rows{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.terms .tr{display:flex;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);}
+.terms .tr .k{flex:0 0 220px;font-weight:700;color:var(--ink);font-size:15px;}
+.terms .tr .v{color:var(--ink-2);font-size:15px;}
+.terms-foot{font-family:var(--serif);font-size:20px;color:var(--mid-lake);margin-top:20px;}
+
+/* generic def list / KV grid */
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:24px;}
+.kv .k{font-weight:700;color:var(--ink);font-size:15px;}
+.kv .v{color:var(--ink-2);font-size:14px;margin-top:3px;line-height:1.4;}
+
+/* roadmap */
+.road{display:flex;gap:14px;margin:22px 0 16px;}
+.rf{flex:1;border-radius:12px;padding:20px 18px;text-align:center;display:flex;flex-direction:column;}
+.rf.past{background:#f1f2f6;} .rf.future{background:#fdf9ec;}
+.rf .yr{font-family:var(--serif);font-size:21px;color:var(--cobalt);}
+.rf .nm{font-family:var(--serif);font-size:20px;color:var(--ink);margin:2px 0 14px;}
+.rf .sz{font-size:13px;color:var(--ink-2);padding:8px 0;border-top:1px solid rgba(0,0,0,.07);}
+.rf .sz b{font-weight:700;}
+
+/* benchmarking two tables */
+.bm{display:flex;gap:40px;flex:1;}
+.bm .lead-col{flex:0 0 320px;}
+.bm table{font-size:13.5px;}
+.bm .hl{background:#eaf1fb;}
+
+/* LP grid */
+.lp-grid{display:grid;grid-template-columns:repeat(5,1fr);column-gap:20px;row-gap:16px;margin-top:30px;align-content:flex-start;}
+.lp-h{grid-column:span 3;font-family:var(--serif);font-size:25px;color:var(--ink);border-bottom:2px solid var(--line);padding-bottom:10px;}
+.lpc .nm{font-size:16px;color:var(--ink);font-weight:600;}
+.lpc .og{font-size:13px;color:var(--muted);margin-top:3px;}
+.lpc .ann{font-size:11px;color:#9aa3bd;}
+.lpc .lp-logo{height:44px;margin-top:8px;display:flex;align-items:center;}
+.lpc .lp-logo img{max-width:150px;width:auto;object-fit:contain;display:block;}
+.lpc .lp-midas{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#b8902a;margin-top:6px;}
+
+/* closing */
+.closing{background:#0c1024;}
+.closing .s-pad{justify-content:center;align-items:center;text-align:center;}
+.closing h2{font-family:var(--serif);font-weight:400;color:#fff;font-size:62px;}
+.closing p{color:#aeb6da;font-size:20px;margin-top:18px;}
+.closing .cta{margin-top:30px;color:var(--sun);font-size:18px;font-family:var(--serif);}
+
+/* definition */
+.defn{background:radial-gradient(120% 120% at 25% 30%,#1a1d44,#02041F);}
+.defn .s-pad{justify-content:center;align-items:flex-start;text-align:left;}
+.defn .dn-word{font-family:var(--serif);color:#fff;font-size:78px;line-height:1;letter-spacing:-.015em;}
+.defn .dn-def{color:#d8def5;font-size:36px;font-family:var(--serif);line-height:1.32;max-width:1060px;margin-top:22px;}
+.defn .dn-def .dn-pron{color:#aeb6da;}
+.defn .dn-def .pos{color:var(--sun);font-style:italic;}
+.defn .dn-def b{color:#fff;font-weight:400;border-bottom:3px solid var(--sun);padding-bottom:2px;}
+.defn .cite{font-family:var(--serif);font-style:italic;color:#8b93bd;font-size:21px;margin-top:28px;}
+
+/* disclaimer */
+.disc .s-pad{padding:54px 72px;}
+.disc .cols{gap:30px;}
+.disc p{font-size:10.5px;line-height:1.5;color:#7a84a6;margin-bottom:12px;}
+
+/* venture partner strip (team slide) */
+.vp-strip{display:flex;gap:32px;margin-top:16px;border-top:1px solid var(--line);padding-top:14px;}
+.vp-line{flex:1;font-size:13px;color:var(--ink-2);line-height:1.5;}
+.vp-line b{color:var(--ink);}
+.vp-lbl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);background:#eef3fc;border-radius:4px;padding:2px 7px;margin-right:7px;vertical-align:middle;}
+
+/* due-diligence columns */
+.dd-row{display:flex;flex:1;margin-top:24px;align-items:stretch;}
+.dd-col{flex:1;display:flex;flex-direction:column;background:#f8faff;border:1px solid var(--line);border-radius:14px;padding:24px 22px;}
+.dd-arrow{display:flex;align-items:center;color:#aebfe6;font-size:26px;padding:0 8px;}
+.dd-title{font-family:var(--serif);font-size:23px;color:var(--ink);margin:5px 0 10px;line-height:1.1;}
+.dd-chip{display:inline-block;align-self:flex-start;background:#eef3fc;color:var(--cobalt);font-size:11px;font-weight:700;border-radius:999px;padding:4px 12px;margin-bottom:18px;}
+.dd-h{font-size:14px;font-weight:700;color:var(--ink);margin:11px 0 5px;}
+.dd-col ul{list-style:none;margin:0;}
+.dd-col ul{display:flex;flex-direction:column;gap:14px;flex:1;justify-content:center;}
+.dd-col li{position:relative;padding-left:17px;font-size:15.5px;color:var(--ink-2);line-height:1.5;}
+.dd-col li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--cobalt);}
+.dd-flag{margin-top:auto;padding-top:14px;color:var(--cobalt);font-weight:600;font-size:13.5px;line-height:1.45;}
+
+/* donut legend */
+.dl{margin-top:16px;display:inline-block;text-align:left;}
+.dl-row{display:flex;align-items:center;gap:9px;padding:3.5px 0;font-size:13px;color:var(--ink-2);}
+.dl-sw{width:11px;height:11px;border-radius:3px;flex:0 0 11px;}
+.dl-lb{flex:1;white-space:nowrap;}
+.dl-pct{font-weight:700;color:var(--ink);}
+/* world map legend */
+.wm-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 16px;margin-top:16px;}
+.wm-legend span{font-size:12.5px;color:var(--muted);}
+.wm-legend b{color:var(--cobalt);font-weight:700;}
+
+/* ---------- top control bar ---------- */
+#bar{
+  position:fixed;top:0;left:0;right:0;height:46px;z-index:60;
+  display:flex;align-items:center;gap:18px;padding:0 18px;
+  background:rgba(8,10,30,.66);backdrop-filter:blur(8px);
+  color:#cfd6f5;font-size:12px;opacity:0;transition:opacity .25s;pointer-events:none;
+}
+#bar.show{opacity:1;pointer-events:auto;}
+#bar .brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:15px;color:#fff;}
+#bar .brand svg{width:20px;fill:#fff;}
+#bar .spacer{flex:1;}
+#bar .seg{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:3px;}
+#bar .seg button{background:none;border:none;color:#aeb6da;font:inherit;font-weight:600;padding:5px 14px;border-radius:999px;cursor:pointer;letter-spacing:.04em;}
+#bar .seg button.on{background:var(--sun);color:var(--navy);}
+#bar .btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:600;padding:6px 14px;border-radius:999px;cursor:pointer;}
+#bar .btn:hover{background:rgba(255,255,255,.2);}
+#bar .count{font-variant-numeric:tabular-nums;color:#aeb6da;min-width:54px;text-align:center;}
+#bar .ttl{color:#fff;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* progress dots */
+#progress{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:6px;opacity:0;transition:opacity .25s;}
+#progress.show{opacity:.85;}
+#progress .pd{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:background .2s,transform .2s;}
+#progress .pd.on{background:var(--sun);transform:scale(1.25);}
+#progress .pd.sec{background:rgba(255,255,255,.5);border-radius:1px;width:8px;}
+
+/* click nav zones */
+.navzone{position:fixed;top:46px;bottom:0;width:14%;z-index:40;cursor:pointer;}
+.navzone.left{left:0;} .navzone.right{right:0;}
+
+/* hint */
+#hint{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);z-index:55;color:#aeb6da;font-size:12px;letter-spacing:.04em;background:rgba(8,10,30,.6);padding:7px 16px;border-radius:999px;transition:opacity .5s;}
+
+/* ---------- balance circle (ported from the site thesis) ---------- */
+.bcx{position:relative;width:430px;height:430px;margin:0 auto}
+.bcx-ripple{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.bcx-ripple circle{fill:none;stroke:var(--gold-deco);stroke-width:1.1;transform-box:fill-box;transform-origin:center;opacity:0;animation:bcxRipple 13s linear infinite}
+.bcx-ripple circle:nth-child(2){animation-delay:3.25s}
+.bcx-ripple circle:nth-child(3){animation-delay:6.5s}
+.bcx-ripple circle:nth-child(4){animation-delay:9.75s}
+@keyframes bcxRipple{0%{transform:scale(.04);opacity:0}9%{opacity:.5}78%{opacity:.28}100%{transform:scale(1);opacity:0}}
+.bcx-ring{position:absolute;left:50%;top:50%;width:80%;height:80%;transform:translate(-50%,-50%);border:1px solid var(--gold-deco);border-radius:50%;opacity:.75;z-index:1}
+.bcx-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;text-align:center;z-index:3}
+.bcx-center::before{content:'';position:absolute;inset:-18% -12%;background:radial-gradient(ellipse at center,#fff 40%,rgba(255,255,255,0) 80%);z-index:-1}
+.bcx-payoff{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.12;color:var(--navy-ink);margin:0}
+.bcx-payoff em{font-style:normal;color:var(--gold-ink)}
+.bcx-node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px;width:max-content;z-index:4}
+.bcx-money {left:50%;   top:10%}
+.bcx-trade {left:84.6%; top:30%}
+.bcx-work  {left:84.6%; top:70%}
+.bcx-risk  {left:50%;   top:90%}
+.bcx-care  {left:15.4%; top:70%}
+.bcx-energy{left:15.4%; top:30%}
+.bcx-ic{width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#fff 40%,rgba(255,255,255,.9) 54%,rgba(255,255,255,0) 66%);padding:5px;box-sizing:content-box}
+.bcx-ic svg{width:100%;height:100%;display:block;overflow:visible}
+.bcx-ic .ln{stroke:var(--blue-royal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.bcx-ic .dot{fill:var(--blue-royal);transform-box:fill-box;transform-origin:center;animation:bcxPulse 3.4s ease-in-out infinite}
+.bcx-ic .dsign{stroke:var(--blue-royal);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.bcx-ic .rays{transform-box:fill-box;transform-origin:center;animation:bcxSpin 30s linear infinite}
+@keyframes bcxPulse{0%,100%{opacity:.5;transform:scale(.82)}50%{opacity:1;transform:scale(1)}}
+@keyframes bcxSpin{to{transform:rotate(360deg)}}
+.bcx-name{font-family:var(--serif);font-size:18px;color:var(--navy-ink);line-height:1}
+.bcx-fig{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--gold-ink)}
+@media(prefers-reduced-motion:reduce),print{.bcx-ripple circle{animation:none;opacity:.3}.bcx-ripple circle:nth-child(1){transform:scale(1)}.bcx-ripple circle:nth-child(2){transform:scale(.72)}.bcx-ripple circle:nth-child(3){transform:scale(.46)}.bcx-ripple circle:nth-child(4){transform:scale(.24)}.bcx-ic .dot,.bcx-ic .rays{animation:none}}
+
+/* ---------- print ---------- */
+@media print{
+  @page{size:1280px 720px;margin:0;}
+  html,body{overflow:visible;background:#fff;}
+  #bar,#progress,.navzone,#hint,#gate{display:none !important;}
+  #deck{position:static;display:block;}
+  .stage{position:static;width:1280px;height:auto;transform:none !important;}
+  .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;
+    page-break-before:always;break-before:page;page-break-after:auto;break-after:auto;display:flex !important;}
+  .slide.print-skip{display:none !important;}
+  .slide.print-start{page-break-before:avoid !important;break-before:avoid !important;}
+  .slide.dark,.cover,.section,.closing,.defn,.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none !important;text-shadow:none !important;}
+  /* Freeze pillar-icon animations in their 'on' state for a clean PDF export */
+  .spark-rays,.spark-core,.see-wave,.see-dot{animation:none !important;}
+  .see-wave{stroke-dashoffset:0 !important;}
+  .spark-rays,.spark-core,.see-dot{opacity:1 !important;}
+  .deck-spiral,.world-spin{animation:none !important;transform:none !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div id="gate">
+  <div class="gate-card">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.94 375.26" aria-hidden="true">
+      <path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/>
+      <polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/>
+    </svg>
+    <h1>Sunshine Lake</h1>
+    <p>Fund&nbsp;I investor presentation. Strictly confidential, please enter your email and the access password to continue.</p>
+    <form id="gateForm" autocomplete="off">
+      <label for="gm">Your email</label>
+      <input id="gm" type="email" required autofocus placeholder="you@firm.com" autocomplete="email">
+      <label for="gp" style="margin-top:16px">Password</label>
+      <input id="gp" type="password" required>
+      <button type="submit">Enter</button>
+      <div class="gate-err" id="ge">Please check your email and password.</div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<div id="bar">
+  <div class="brand">
+    <svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>
+    Sunshine Lake
+  </div>
+  <span class="ttl" id="barTitle"></span>
+  <div class="spacer"></div>
+  <span class="count" id="count">1 / 1</span>
+  <a class="btn" href="/ja" style="text-decoration:none" title="日本語版">日本語</a>
+  <button class="btn" id="exportBtn">Export PDF</button>
+</div>
+
+<div class="navzone left" id="navLeft"></div>
+<div class="navzone right" id="navRight"></div>
+
+<!-- ============ DECK ============ -->
+<div id="deck">
+  <div class="stage" id="stage"><!-- slides injected here --></div>
+</div>
+
+<div id="progress"></div>
+<div id="hint">Use ← → to navigate · press F for fullscreen</div>
+<div id="wm" style="position:fixed;inset:0;pointer-events:none;z-index:60;background-repeat:repeat;display:none"></div>
+
+<script>
+/* ============================================================
+   PASSWORD GATE  (separate from the LP portal password)
+   Deck password: "forge"
+   Rotate:  printf '%s' 'new-pw' | shasum -a 256
+   …then replace DECK_HASH below.
+   ============================================================ */
+const DECK_HASH='71b41d6dd48dc58eba8f5cf9edf30fef6597fdf285a521bb8fcbad4b3d50887d';
+/* Internal password "ewok" — unlocks WITHOUT the email watermark (clean PDF export).
+   Any @sunshinelake.vc email also unlocks clean. Rotate via: printf '%s' 'new-pw' | shasum -a 256 */
+const CLEAN_HASH='8e83635d4cba5a262b09c1900b06b8190d677faa2b9de53ef23401dc157f6ac7';
+const CLEAN_DOMAIN='@sunshinelake.vc';
+/* ============================================================
+   VIEWER TRACKING
+   Set LOG_ENDPOINT to a URL that accepts a JSON POST to record
+   who opens the deck (e.g. a Formspree form endpoint like
+   'https://formspree.io/f/xxxxxxx', or a Google Apps Script
+   web-app URL). Leave '' to skip logging — the email watermark
+   still applies. Best-effort; never blocks the viewer.
+   ============================================================ */
+const LOG_ENDPOINT='';
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+const gate=document.getElementById('gate'),gf=document.getElementById('gateForm'),gpw=document.getElementById('gp'),gm=document.getElementById('gm'),ge=document.getElementById('ge');
+function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+function applyWatermark(email){
+  if(!email)return;
+  const svg="<svg xmlns='http://www.w3.org/2000/svg' width='440' height='300'>"
+    +"<text x='30' y='150' transform='rotate(-30 220 150)' fill='rgba(120,128,158,0.13)' "
+    +"font-family='Segoe UI, Helvetica, Arial, sans-serif' font-size='17' font-weight='600'>"
+    +email.replace(/[<>&]/g,'')+"</text></svg>";
+  const wm=document.getElementById('wm');
+  wm.style.backgroundImage="url(\"data:image/svg+xml;utf8,"+encodeURIComponent(svg)+"\")";
+  wm.style.display='block';
+}
+function logView(email){
+  if(!LOG_ENDPOINT)return;
+  try{fetch(LOG_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,deck:'Sunshine Lake Fund I',ts:new Date().toISOString(),ua:navigator.userAgent,ref:document.referrer||''})}).catch(function(){});}catch(e){}
+}
+function unlock(){gate.style.display='none';document.getElementById('deck').classList.add('ready');if(sessionStorage.getItem('slDeckClean')!=='1'){applyWatermark(sessionStorage.getItem('slDeckEmail'));}boot();}
+gf.addEventListener('submit',async e=>{e.preventDefault();ge.classList.remove('show');const email=(gm.value||'').trim();const h=await sha256(gpw.value);const pwOK=(h===DECK_HASH||h===CLEAN_HASH);if(validEmail(email)&&pwOK){const clean=(h===CLEAN_HASH)||email.toLowerCase().endsWith(CLEAN_DOMAIN);sessionStorage.setItem('slDeckAuth','1');sessionStorage.setItem('slDeckEmail',email);sessionStorage.setItem('slDeckClean',clean?'1':'0');if(!clean){logView(email);}unlock();}else{ge.classList.add('show');gpw.value='';if(!validEmail(email)){gm.focus();}else{gpw.focus();}}});
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const MARK='<svg viewBox="0 0 394.94 375.26" aria-hidden="true"><path d="M283.99,287.4c-11.64-6.34-22.62-12.32-35.83-16.63-14.9-4.87-31.01-7.14-50.69-7.14s-35.78,2.27-50.69,7.14c-13.2,4.31-24.19,10.3-35.83,16.63h0c-13.15,7.16-26.74,14.56-44.39,20.33C46.66,314.23,24.88,317.4,0,317.4v55.03c29.05,0,54.78-3.79,78.65-11.59,21.05-6.88,37.61-15.9,50.92-23.15,10.89-5.93,19.49-10.61,29.3-13.82,10.88-3.56,23.15-5.21,38.6-5.21s27.72,1.66,38.6,5.21c9.81,3.2,18.41,7.89,29.29,13.82,14.01,7.63,29.88,16.27,50.93,23.15,23.87,7.8,49.59,11.59,78.65,11.59v-55.03c-24.88,0-46.65-3.16-66.56-9.67-17.65-5.77-31.25-13.17-44.4-20.33h.01Z"/><polygon points="394.94 185.67 283.81 175.18 365.53 97.6 334.66 60.03 234.26 129 221.95 1.69 172.99 1.69 160.68 129 60.28 60.03 29.41 97.6 111.13 175.18 0 185.67 0 235.4 .03 235.4 0 235.41 150.39 235.41 150.39 235.43 174.59 235.43 174.74 235.57 174.86 235.43 185.44 235.43 197.49 235.43 220.08 235.43 220.2 235.57 220.35 235.43 244.56 235.43 244.55 235.41 394.94 235.41 394.91 235.4 394.94 235.4 394.94 185.67"/></svg>';
+function chrome(dark,noConf){return (dark?'<svg class="s-mark" style="fill:#fff" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>':'<svg class="s-mark" style="fill:#155EE8" viewBox="0 0 394.94 375.26">'+MARK.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'')+'</svg>')+(noConf?'':'<span class="s-conf">Strictly Confidential</span>');}
+
+const GROSSNOTE='<div class="gross-note">Note: TVPI, DPI and IRR shown on a gross basis, before deducting fees and expenses.</div>';
+const TEAM=[
+ {nm:'Ivan La Frinere-Sandoval',fl:'🇲🇽',na:'Mexican-American · California',rl:'Partner, CFO & COO',pe:'SolarCity · GFC · Stanford & Caltech',ow:'Owns: fund ops, reporting & model reviews',img:'images/team/ivan.webp'},
+ {nm:'Suhail Younus',fl:'🇦🇫',na:'Afghan-American · NYC',rl:'Partner',pe:'Private equity · Cornell',ow:'Owns: pipeline coverage & deal scoring',img:'images/team/suhail.webp'},
+ {nm:'Wieger Lamers',fl:'🇳🇱',na:'Dutch · EMEA',rl:'EMEA & Platforms Lead',pe:'Adyen · ESCP (Paris)',ow:'Owns: EMEA sourcing quota & platform',img:'images/team/wieger.webp'}
+];
+const VECTORS=[
+ {n:'1',t:'Idea → company',p:'Founding',ad:[['Prof. Mike Franklin','Databricks early advisor','🇺🇸']]},
+ {n:'2',t:'Product → market fit',p:'PMF',ad:[['Andrew Hovelson','Broadway · storytelling coach','🇺🇸']]},
+ {n:'3',t:'Scale → durability',p:'Scale',ad:[['Jamie Feaster','serial growth operator','🇺🇸']]}
+];
+const TRACK=[
+ ['Assured','Technological · AI','Seed · Dec 2019','~$1B','Bloomberg · Mar 2025','Iconiq · Kleiner Perkins'],
+ ['Deel','Economic · global work','Seed · Dec 2019','$17.3B','Series E · Oct 2025','Ribbit · a16z · Coatue'],
+ ['Headway','Social · mental health','Seed · Sep 2018','$2.3B','Series D · Jul 2024','Spark · a16z · Thrive'],
+ ['Kalshi','Economic · reg. markets','Seed · Apr 2019','~$22B*','Series F · May 2026','Coatue · Sequoia · a16z']
+];
+const CASES=[
+ {key:'kalshi',logo:'Kalshi',logoImg:'images/cases/kalshi-mono.webp',teaser:true,alert:'~$40B round reported (FT)',
+  theme:'Economic Theme · Regulated Markets',origin:'Lebanon &amp; Brazil → San Francisco · 2019',
+  headline:'At Goldman, Tarek saw the world overpay to hedge Brexit, so they built the market for the event itself.',
+  founders:'Tarek Mansour &amp; Luana Lopes Lara',
+  lived:'Tarek grew up in Lebanon; Luana, from Brazil, trained at the Bolshoi in Russia. They met in MIT\'s international crowd.',
+  sourced:'Top MIT engineers connected us, and we leaned in despite the regulatory overhang.',
+  backed:'Two global citizens on a global-first $136B exchange. Risk wasn\'t abstract to them; it was home.',
+  built:'We shared regulatory research through the CFTC fight. Kalshi sued and won, legalizing its own category.',
+  endMarket:'~$850T risk transfer (BIS)',
+  metrics:[['First Check','Seed · Apr 2019'],['Current Mark','~$22B · Series F 2026*']],
+  footnote:'*Reported round talks at ~$40B (FT, June 2026). Polymarket paid $112mm for a CFTC license; Robinhood distributes Kalshi contracts.',
+  insight:'Kalshi created a federally regulated asset class. Incumbents now pay nine figures just to enter it.'},
+ {key:'assured',logo:'Assured',logoImg:'images/cases/assured-mono.webp',
+  theme:'Technological Theme · AI',origin:'US → global → US · 2019',
+  headline:'Justin and Theo saw insurance claims break the same way in every country, and rebuilt them with AI.',
+  founders:'Justin &amp; Theo',
+  lived:'Global citizens sizing for the world: claims are broken everywhere, not just in the US.',
+  sourced:'A founder we backed, DoNotPay\'s, sent them to us pre-seed.',
+  backed:'Two Stanford serial builders, Theo an international grand-prize coder, on a $30B+ worldwide market.',
+  built:'We led the syndicate, protected the cap table, and opened customer pipelines and ecosystem support.',
+  endMarket:'$7.6T insurance premiums',
+  metrics:[['1st / 2nd Check','Seed · Dec 2019 · Dec 2020'],['Current Mark','~$1B (Bloomberg, 2025)'],['Backed by','Iconiq · Kleiner Perkins'],['We led','The seed syndicate']],
+  insight:'Assured: lived-experience grit for the multi-year cycles of a $7.6T-premium industry (Swiss Re, 2024).'},
+ {key:'deel',logo:'Deel.',logoImg:'images/cases/deel-mono.webp',teaser:true,
+  theme:'Economic Theme · Global Work',origin:'China &amp; Israel → San Francisco · 2019',
+  headline:'Same work, same MIT degree: $300K in the Valley, $30K back home. So they rebuilt how the world hires.',
+  founders:'Shuo Wang &amp; Alex Bouaziz',
+  lived:'Blocked by America\'s visa wall at MIT, they lived the global-work problem they now solve.',
+  sourced:'A UChicago founder in our YC network flagged them pre-launch.',
+  backed:'We backed Shuo from China and Alex from Israel on the $525B global-payroll wedge.',
+  built:'5 hires, 12 partners, a COO recruited, and we drove the Legalpad acquisition.',
+  endMarket:'$55T+ world labour income',
+  metrics:[['First Check','Seed · Dec 2019'],['Current Mark','$17.3B · Series E 2025'],['Status','IPO filing reported']],
+  insight:'Deel lived the moment and built the fix: 150+ countries, where tens of trillions in wages flow (ILO).'},
+ {key:'headway',logo:'Headway',logoImg:'images/cases/headway-mono.webp',
+  theme:'Social Theme · Mental Health',origin:'US → Europe → US · 2018',
+  headline:'Andrew and Jake fixed the reason no therapist takes insurance, and unlocked a $1T market.',
+  founders:'Andrew &amp; Jake',
+  lived:'Globally-minded builders with an international bench (Dutch CFO &amp; CTO). Access is a worldwide crisis.',
+  sourced:'NYC angels who passed on the round still sent Andrew our way.',
+  backed:'Global citizens on a $240B market. The US was the beachhead, not the boundary.',
+  built:'A syndicate with One Medical\'s founder; HelloFresh\'s CMO for demand gen; 10+ introductions and hires.',
+  endMarket:'~$10T global healthcare (WHO)',
+  metrics:[['First Check','Pre-seed · Sep 2018'],['Current Mark','$2.3B · Series D 2024'],['Also on cap table','a16z · Thrive · Accel']],
+  insight:'Mental illness costs ~$1T a year in lost productivity (WHO). Headway built the access model the world will copy.'},
+ {key:'donotpay',logo:'DoNotPay',logoImg:'images/cases/donotpay-logo.webp',
+  theme:'Technological Theme · Automation',origin:'London → San Francisco · 2019',
+  headline:'Buried in parking tickets as a London teenager, Joshua built the robot lawyer to beat the system.',
+  founders:'Joshua Browder',
+  lived:'A London teenager buried in parking tickets. He lived the red tape, then crossed over to automate it.',
+  sourced:'Our global founder network surfaced Joshua early.',
+  backed:'A British founder (London → US) with a viral consumer-rights product and real traction.',
+  built:'We shaped the viral launch and demand gen, built the brand, and backed Joshua across multiple rounds.',
+  endMarket:'Red tape, every country',
+  metrics:[['First Check','Seed · Feb 2019'],['Current Mark','$230mm post-money'],['Status','Partially realized']],
+  insight:'DoNotPay paid cash dividends from a profitable business, returning capital before any IPO.'},
+ {key:'pry',logo:'Pry',logoImg:'images/cases/pry-logo.webp',
+  theme:'Technological Theme · AI Productivity',origin:'China → San Francisco · 2019',
+  headline:'Andy hated how founders modeled their finances, rebuilt it, and Brex bought the answer.',
+  founders:'Andy Su',
+  lived:'An immigrant engineer who lived the founder-finance pain. A universal problem, not a Valley one.',
+  sourced:'The Brex product-alumni network surfaced Andy.',
+  backed:'We backed an engineering-led founder from China with deep empathy for the pain.',
+  built:'We aligned the roadmap with the market, guided M&amp;A strategy, and coached the team to a Brex acquisition.',
+  endMarket:'Office of the CFO, global',
+  metrics:[['Checks','Seed · Dec 2019 → Apr 2022'],['Exit','Acquired by Brex, 2021'],['Status','Fully realized']],
+  insight:'Pry: a clean, fully-realized exit. Startup finance is universally broken, and founders need clarity.'}
+];
+
+/* ============================================================
+   SLIDE BUILDERS  (return {title, track, teaser, dark, html})
+   track: core | appendix   teaser: include in teaser mode
+   ============================================================ */
+function avatar(t){return t.img?`<div class="av" style="background-image:url('${t.img}')"></div>`:`<div class="av">${t.nm.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>`;}
+
+function teamCardsHTML(){
+  return TEAM.map(t=>`<div class="tm">${avatar(t)}<div class="nm">${t.nm}</div>${t.na?`<div class="na">${t.na}</div>`:''}<div class="rl">${t.rl}</div><div class="pe">${t.pe}</div>${t.ow?`<div class="pe" style="color:var(--cobalt);margin-top:4px">${t.ow}</div>`:''}</div>`).join('');
+}
+function vectorsHTML(){
+  return VECTORS.map(v=>`<div class="vec"><div class="vn"><span class="dot">${v.n}</span><h4>${v.t}</h4></div>${v.ad.map(a=>`<div class="ad"><b>${a[0]}</b><span>, ${a[1]}</span></div>`).join('')}</div>`).join('');
+}
+function trackRowsHTML(){
+  return TRACK.map(r=>`<tr><td class="co">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="mult">${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+}
+function needsArt(label){return `<span class="needs-art">Needs art · ${label}</span>`;}
+
+/* unicorn valuation ladder — log scale $0.5B → $100B
+   t: 'op' operated/advised/founded (grey) · 'uni' unicorn highlight · '' normal */
+function uniScale(){
+  const top=24, bot=492, vmin=0.45, vmax=100, axisX=92;
+  const L=v=>Math.log10(v);
+  const yOf=v=>bot-(L(v)-L(vmin))/(L(vmax)-L(vmin))*(bot-top);
+  const ticks=[0.5,1,5,20,100];
+  const A=150, B=450, C=735, D=1000;
+  const items=[
+    {n:'Airbnb',v:80,s:'operated · $80B',x:A,t:'op'},
+    {n:'Handy',v:55,s:'advised',x:C,t:'op'},
+    {n:'Kalshi',v:22,s:'$22B · Series F',x:A,t:'uni',badge:'Reported at ~$40B (FT) · 2× in 2 months'},
+    {n:'Deel',v:17.3,s:'$17.3B · IPO filing rptd',x:C,t:'uni'},
+    {n:'Assured',v:1,s:'~$1B · 2025',x:590,t:'uni'},
+    {n:'Checkr',v:4.3,s:'$5B · angel',x:A,t:''},
+    {n:'Brex / Capital One',v:5,s:'sold · $5B',x:D,t:''},
+    {n:'Headway',v:2.3,s:'$2.3B · Series D',x:B,t:'uni'},
+    {n:'Fundamental.tech',v:1.5,s:'$1.5B · angel',x:C,t:''},
+    {n:'SpotHero',v:1.12,s:'sold · $1B',x:D,t:''},
+    {n:'Fieldguide',v:0.78,s:'$700mm',x:A,t:''},
+    {n:'Federato',v:0.7,s:'$700mm',x:B,t:''},
+    {n:'Yuzu Health',v:0.62,s:'$700mm · angel',x:C,t:''},
+    {n:'CityDeal',v:0.5,s:'co-founded → Groupon ($200mm+)',x:D,t:'op'}
+  ];
+  let s=`<svg viewBox="0 0 1280 520" preserveAspectRatio="xMidYMid meet" font-family="Segoe UI,sans-serif" style="width:100%;height:100%">`;
+  s+=`<line x1="${axisX}" y1="${top-6}" x2="${axisX}" y2="${bot+6}" stroke="#cdd6ee" stroke-width="2"/>`;
+  ticks.forEach(t=>{const y=yOf(t);const lb=t>=1?'$'+t+'B':'$'+(t*1000)+'M';
+    s+=`<line x1="${axisX-7}" y1="${y}" x2="${axisX}" y2="${y}" stroke="#cdd6ee" stroke-width="2"/>`;
+    s+=`<text x="${axisX-13}" y="${y+5}" text-anchor="end" font-size="16" fill="#7a84a6">${lb}</text>`;});
+  items.forEach(c=>{const y=yOf(c.v);
+    const dot=c.t==='op'?'#b6bdcf':'#155EE8';
+    const nameFill=c.t==='op'?'#9aa1b6':'#0B1275';
+    const subFill=c.t==='op'?'#aab0c2':'#155EE8';
+    const wt=c.t==='uni'?'700':'400';
+    s+=`<line x1="${axisX}" y1="${y}" x2="${c.x-12}" y2="${y}" stroke="#dbe3f3" stroke-width="1.5" stroke-dasharray="2 4"/>`;
+    s+=`<circle cx="${c.x}" cy="${y}" r="${c.t==='op'?6:7}" fill="${dot}"/>`;
+    s+=`<text x="${c.x+15}" y="${y-4}" font-size="23" font-family="DomaineDisp,Times New Roman,serif" font-weight="${wt}" fill="${nameFill}">${c.n}</text>`;
+    s+=`<text x="${c.x+15}" y="${y+21}" font-size="18" font-weight="700" fill="${subFill}">${c.s}</text>`;
+    if(c.badge){const bw=330,bh=38,bx=c.x+168,by=y-19;
+      s+=`<path d="M${bx} ${y} L${bx+14} ${y-9} L${bx+14} ${y+9} Z" fill="#F2D831"/>`;
+      s+=`<rect x="${bx+12}" y="${by}" width="${bw}" height="${bh}" rx="19" fill="#F2D831"/>`;
+      s+=`<text x="${bx+12+bw/2}" y="${by+25}" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0B1275">${c.badge}</text>`;}});
+  s+=`</svg>`;
+  return s;
+}
+
+/* SVG donut from [{label,pct,color}] */
+function donut(segs,r,sw,center){
+  r=r||78; sw=sw||30; const pad=4, cx=r+sw/2+pad, vb=cx*2, C=2*Math.PI*r; let off=0;
+  const arcs=segs.map(s=>{const dash=s.pct/100*C;
+    const a=`<circle cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-linecap="butt" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cx})"/>`;
+    off+=dash; return a;}).join('');
+  const ctr=center?`<text x="${cx}" y="${cx}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vb} ${vb}" width="100%" style="max-width:${vb}px;display:block;margin:0 auto">${arcs}${ctr}</svg>`;
+}
+function donutLegend(segs){return `<div class="dl">`+segs.map(s=>`<div class="dl-row"><span class="dl-sw" style="background:${s.color}"></span><span class="dl-lb">${s.label}</span><span class="dl-pct">${s.pct}%</span></div>`).join('')+`</div>`;}
+/* donut with callout labels around the ring (no separate legend) */
+function donutLabeled(segs,center){
+  const r=66, sw=26, vbW=440, vbH=240, cx=220, cy=120;
+  const C=2*Math.PI*r, ringOuter=r+sw/2; let off=0, cum=0, arcs='', pts=[];
+  segs.forEach(s=>{const dash=s.pct/100*C;
+    arcs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-dasharray="${dash.toFixed(2)} ${(C-dash).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})"/>`;
+    const mid=(cum+s.pct/2)/100, ang=-Math.PI/2+mid*2*Math.PI;
+    pts.push({s,px:cx+Math.cos(ang)*ringOuter,py:cy+Math.sin(ang)*ringOuter,side:Math.cos(ang)>=0?1:-1});
+    cum+=s.pct; off+=dash;});
+  const minGap=18, topY=14, botY=vbH-12;
+  [-1,1].forEach(side=>{const arr=pts.filter(p=>p.side===side).sort((a,b)=>a.py-b.py);
+    arr.forEach(p=>p.ly=p.py);
+    for(let i=1;i<arr.length;i++) if(arr[i].ly-arr[i-1].ly<minGap) arr[i].ly=arr[i-1].ly+minGap;
+    if(arr.length){const over=arr[arr.length-1].ly-botY; if(over>0) arr.forEach(p=>p.ly-=over);
+      const under=topY-arr[0].ly; if(under>0) arr.forEach(p=>p.ly+=under);}});
+  let labels='';
+  pts.forEach(p=>{const outX=cx+p.side*(ringOuter+11), textX=cx+p.side*(ringOuter+15);
+    const anchor=p.side>0?'start':'end';
+    labels+=`<polyline points="${p.px.toFixed(1)},${p.py.toFixed(1)} ${outX.toFixed(1)},${p.ly.toFixed(1)}" fill="none" stroke="#c5cee2" stroke-width="1.3"/>`;
+    labels+=`<text x="${textX.toFixed(1)}" y="${(p.ly+4).toFixed(1)}" text-anchor="${anchor}" font-size="14.5" fill="#39456a">${p.s.label} <tspan font-weight="700" fill="#0B1275">${p.s.pct}%</tspan></text>`;});
+  const ctr=center?`<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" font-family="Segoe UI,sans-serif" font-size="23" font-weight="700" fill="#0B1275">${center}</text>`:'';
+  return `<svg viewBox="0 0 ${vbW} ${vbH}" width="100%" style="display:block;margin:0 auto" font-family="Segoe UI,sans-serif">${arcs}${labels}${ctr}</svg>`;
+}
+
+/* world bubble map over real grey map (positions matched to original) */
+/* [name, count, x%, y%, labelX% , labelY%]  — labelX null => label inside bubble */
+const WORLD=[
+ ['India',90,68,54,null,null],['Israel',52,58,40,null,null],['Canada',42,20,34,null,null],
+ ['UK',31,46,30,null,null],['China',27,76,43,null,null],['Germany',18,51,31,null,null],
+ ['France',17,48,35,null,null],['Russia',14,74,25,null,null],['Ukraine',12,56,31,null,null],
+ ['Taiwan',12,83,52,null,null],['Ireland',10,43,31,null,null],['Belgium',9,49,27,null,null],
+ ['Brazil',9,35,58,null,null],['Iran',9,63,40,null,null],['Australia',8,82,66,null,null],
+ ['Netherlands',7,50,28,53,18],['New Zealand',6,91,73,90,66],['Denmark',5,52,24,52,13],
+ ['Italy',5,51,37,49,46],['Poland',5,53,30,56,46],['Romania',5,55,33,56,79],
+ ['South Africa',5,55,67,55,73],['Argentina',5,31,79,30,87],['Portugal',4,45,37,43,43],
+ ['Lebanon',4,60,40,63,21],['Sweden',3,53,23,57,21],['Pakistan',3,64,45,64,69],
+ ['Japan',3,86,40,90,45],['Greece',2,54,38,52,62],['Turkey',2,59,36,66,21],
+ ['Uzbekistan',2,67,33,69,32],['Guatemala',2,22,50,22,56],['Others',29,null,null,95,40]
+];
+function worldMap(){
+  const W=1000,H=500, rOf=c=>Math.max(11,Math.sqrt(c)*8.2);
+  const els=WORLD.map(c=>{
+    const [name,n,x,y,lx,ly]=c, X=x==null?null:x/100*W, Y=y==null?null:y/100*H, r=rOf(n);
+    if(lx===null){ // big bubble, label inside
+      return `<circle cx="${X}" cy="${Y}" r="${r}" fill="rgba(47,116,255,.92)"/>`+
+        `<text x="${X}" y="${Y-r*0.32}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.42,15).toFixed(0)}" font-weight="600" fill="#fff">${name}</text>`+
+        `<text x="${X}" y="${Y+r*0.42}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="${Math.min(r*0.6,22).toFixed(0)}" font-weight="700" fill="#fff">${n}</text>`;
+    }
+    const LX=lx/100*W, LY=ly/100*H;
+    const dot=X==null?'':`<line x1="${X}" y1="${Y}" x2="${LX}" y2="${LY}" stroke="#9bb6e8" stroke-width="1"/><circle cx="${X}" cy="${Y}" r="${Math.max(3,r*0.7).toFixed(0)}" fill="rgba(47,116,255,.85)"/>`;
+    return dot+`<text x="${LX}" y="${LY-1}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#1d3a8a">${name}</text>`+
+      `<text x="${LX}" y="${LY+12}" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" font-weight="700" fill="#155EE8">${n}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%">${els}</svg>`;
+}
+
+function caseSlide(c){
+  const logo=c.logoImg?`<img class="cs-logo-img" src="${c.logoImg}?v=2" alt="${c.logo}"${c.logoImg.includes('-mono')?'':' style="filter:grayscale(1)"'}>`:`<span class="cs-logo">${c.logo}</span>`;
+  const rows=[['Scout',c.sourced],['Select',c.lived],['Secure',c.backed],['Support',c.built]];
+  const kpis=[['Global End Market',c.endMarket,'em']].concat(c.metrics.map(m=>[m[0],m[1],m[2]||'']));
+  return {title:`Case Study, ${c.logo}`,track:'appendix',teaser:!!c.teaser,dark:false,cls:'',html:`
+   <div class="cs-body" style="padding:26px 56px 0;display:flex;flex-direction:column">
+     <div class="cs-top">
+       <div><span class="cs-tag">★ Breakout Founder Story</span><div class="cs-shift">${c.theme}</div></div>
+       <div style="align-self:center;text-align:center">${c.alert?`<span class="cs-alert" style="margin-top:0">↑ ${c.alert}</span>`:''}</div>
+       <div style="text-align:right">${logo}<div style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mid-lake);margin-top:6px">${c.origin}</div></div>
+     </div>
+     <h1 class="cs-story" style="white-space:normal;margin:16px 0 0;font-size:31px;line-height:1.12;max-width:1130px">${c.headline}</h1>
+     <div style="flex:1;display:flex;align-items:center;gap:36px;margin:16px 0 0;min-height:0">
+       <div style="flex:0 0 248px">
+         <div style="width:248px;height:248px;border-radius:16px;border:1px solid var(--line);background:#e3e8f4 center/cover no-repeat;background-image:url('images/cases/${c.key}.webp')"></div>
+         <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:9px;font-family:var(--serif)">${c.founders}</div>
+       </div>
+       <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+         ${rows.map((r,i)=>`<div style="display:flex;gap:22px;align-items:baseline;padding:16px 0;${i<rows.length-1?'border-bottom:1px solid var(--line)':''}"><div style="flex:0 0 84px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)">${r[0]}</div><div style="flex:1;font-size:15px;color:var(--ink-2);line-height:1.45">${r[1]}</div></div>`).join('')}
+       </div>
+     </div>
+     <div style="display:grid;grid-template-columns:repeat(${kpis.length},1fr);margin-top:14px;margin-bottom:10px">
+       ${kpis.map((m,i)=>`<div style="padding:2px 20px;${i?'border-left:1px solid var(--line)':''}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">${m[0]}</div><div style="font-family:var(--serif);font-size:${m[2]==='em'?'18px':'19px'};line-height:1.2;margin-top:6px;color:${m[2]==='em'?'var(--cobalt)':'var(--ink)'}">${m[1]}</div></div>`).join('')}
+     </div>
+     <div class="note" style="margin-top:9px;font-size:10.5px;text-align:right;min-height:14px">${c.footnote||''}</div>
+   </div>
+   <div class="cs-insight"><div class="kk">World-Class Insight</div><div class="tx">${c.insight}</div></div>
+   ${chrome(false)}`};
+}
+
+const SLIDES=[];
+function add(o){SLIDES.push(o);}
+
+/* 1 — COVER */
+add({title:'Cover',track:'core',teaser:true,dark:true,cls:'cover',html:`
+  <div class="cover-logo">${MARK}</div>
+  <div class="cover-band">Global Pre-Seed &amp; Seed · Fund&nbsp;I · $50mm Target · 5% GP Commit</div>
+  <div class="s-pad">
+    <h1>Sunshine Lake founders<br>forge the future.</h1>
+  </div>
+  <div class="meta">
+    <div class="ln">Donald Stalter</div>
+  </div>
+  <span class="s-conf">Strictly Confidential</span>`});
+
+
+/* NEW — WHY NOW (outsiders) */
+add({title:'Why Now',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:36px">
+    <div class="eyebrow">Why Now</div>
+    <h1 class="s-title" style="font-size:36px">Billion- and trillion-dollar industries are built by outsiders.</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;flex:1">
+      ${[
+        ['China → US → Taiwan · 1987','Morris Chang','Founder, TSMC (at 55)','~$2.2T','chang','MC'],
+        ['Taiwan → US · 1993','Jensen Huang','Founder &amp; CEO, Nvidia','~$4.7T','huang','JH'],
+        ['Soviet Union → US · 1998','Sergey Brin','Co-founder, Google','~$4.4T','brin','SB'],
+        ['South Africa → US · 2002','Elon Musk','Founder, SpaceX &amp; Tesla','~$3.4T','musk','EM'],
+        ['Brazil → US → Singapore · 2004','Eduardo Saverin','Co-founder, Meta','~$1.5T','saverin','ES'],
+        ['USSR → Israel → Canada · 2015','Ilya Sutskever','Co-founder, OpenAI · Founder, SSI','~$1T*','sutskever','IS']
+      ].map(f=>`<div style="flex:0 0 calc(33.333% - 11px);min-width:0;background:#f6f8fd;border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:stretch"><div style="flex:1;min-width:0;display:flex;flex-direction:column"><div style="font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--cobalt)">${f[0]}</div><div style="font-family:var(--serif);font-size:23px;color:var(--ink);margin-top:8px;line-height:1.05">${f[1]}</div><div style="font-size:12px;color:var(--muted);margin-top:3px">${f[2]}</div><div class="why-cap" data-cap="${f[3]}" style="font-family:var(--serif);font-size:31px;color:var(--cobalt);margin-top:auto;padding-top:8px">${f[3]}</div></div><div style="flex:0 0 106px;align-self:center;margin-right:24px;position:relative;top:2px;width:106px;height:106px;border-radius:50%;background:#ccd4e4;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:32px;color:#5a6685">${f[5]}</span><img src="images/whynow/${f[4]}.webp?v=1" alt="" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)"></div></div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px">Public market caps &amp; reported valuations, July 2026; years mark company founding. *OpenAI IPO ~$1T per press reports. Immigrants found companies at ~80% higher rates, at every firm size (AER: Insights, 2022).</div>
+  </div>${chrome(false)}`});
+
+
+/* 2 — GP: DON STALTER + THE ARC */
+add({title:'Don Stalter, GP',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:46px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:36px">
+      <div style="flex:1">
+        <div class="eyebrow">Founder &amp; General Partner</div>
+        <h1 class="s-title" style="font-size:54px">Don Stalter</h1>
+        <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);margin-top:8px;line-height:1.35">Has backed <b style="color:var(--cobalt);font-weight:600">ten companies that reached $1B+</b>.</div>
+      </div>
+      <div style="flex:0 0 auto;margin-right:40px">
+        <div class="gp-portrait" style="background-image:url('images/team/don.webp')"></div>
+      </div>
+    </div>
+    <div class="eyebrow" style="margin:26px 0 6px">The Arc</div>
+    <div class="arc">
+      ${[
+        ['Schooled abroad','Interdisciplinary and multilingual'],
+        ['UChicago','Economics, with honors'],
+        ['Bulge-bracket investment banking &amp; PE','CS M&amp;A (San Francisco) · Jefferies growth spinout (London)'],
+        ['CityDeal','Co-founded; sold to Groupon · built its international offices'],
+        ['Airbnb','very early days · international growth · long-term stays, now ~1 in 5 nights booked'],
+        ['Global Founders Capital','Led North America'],
+        ['Sunshine Lake','A Silicon Valley hub for international founders']
+      ].map(a=>`<div class="arc-node"><div class="arc-dot"></div><div class="arc-c"><div class="arc-t">${a[0]}</div><div class="arc-d">${a[1]}</div></div></div>`).join('')}
+    </div>
+    <div style="margin-top:auto;padding-top:14px;padding-bottom:22px;text-align:center">
+      <div style="font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2);line-height:1.4;max-width:1120px;margin:0 auto"><b style="color:var(--cobalt);font-style:normal">Deel · Kalshi</b>, decacorns · <b style="color:var(--cobalt);font-style:normal">Headway · Assured</b>, unicorns. All from first checks he sourced and led.</div>
+    </div>
+  </div>${chrome(false)}`});
+
+
+add({title:'The Record, Funds I & II',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Record · Funds I &amp; II <span style="margin-left:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a;border:1px solid #e6cf8f;border-radius:999px;padding:3px 10px;vertical-align:middle">Track record</span></div>
+    <h1 class="s-title">First checks into today's giants.</h1>
+    <hr class="s-rule">
+    <table class="tbl tall" style="margin-top:26px">
+      <thead><tr><th>Company</th><th>Theme</th><th>First Check</th><th>Latest Public Mark</th><th>Round · Date</th><th>Follow-on investors</th></tr></thead>
+      <tbody>${trackRowsHTML()}</tbody>
+    </table>
+    <div style="text-align:center;margin-top:20px;font-size:15px;color:var(--ink-2)"><b style="color:var(--cobalt);letter-spacing:.06em;text-transform:uppercase;font-size:12px;font-weight:700">$5B+ follow-on capital behind them</b></div>
+    <div class="note" style="margin-top:14px;text-align:center">Company marks shown are public rounds and press reports. *Kalshi: reported round talks at ~$40B (FT, June 2026). Funds I &amp; II: Don's institutional portfolio; Statement of Work letter available in diligence.</div>
+  </div>${chrome(false)}`});
+
+
+/* 3 — TRACK RECORD LADDER (before Sunshine Lake) */
+add({title:'Track Record · Before Sunshine Lake',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Before Sunshine Lake</div>
+    <h1 class="s-title">Founded, operated, and invested in</h1>
+    <div style="flex:1;min-height:0;margin-top:14px;display:flex">${uniScale()}</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--mid-lake);text-align:center;margin-top:2px">From SF, NYC and LA to Europe, LATAM and APAC, a sourcing machine run on weekly quotas, rebuilt at Sunshine Lake.</div>
+    <div class="note" style="margin-top:8px;text-align:center;max-width:none">All company marks are public rounds &amp; press reports · *Kalshi at ~$22B; reported talks at ~$40B (FT). SpotHero price per SEC filing (Crain's, May 2026).</div>
+  </div>${chrome(false)}`});
+
+
+/* 4 — OUR THESIS (three truths) */
+add({title:'Our Thesis',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:30px;align-items:center;text-align:center">
+    <div class="eyebrow">Our Thesis</div>
+    <h1 class="s-title" style="font-size:38px;max-width:920px;margin:6px auto 0">Our founders rebuild critical global systems that failed them.</h1>
+    <div class="bcx" style="margin-top:14px">
+      <svg class="bcx-ripple" viewBox="0 0 200 200" fill="none" aria-hidden="true"><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="80"/></svg>
+      <span class="bcx-ring" aria-hidden="true"></span>
+      <div class="bcx-center"><p class="bcx-payoff">They bring the world into <em>balance</em>.</p></div>
+      <div class="bcx-node bcx-money"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ln" cx="32" cy="32" r="18"/><path class="dsign" d="M38 25 C 34 21, 26 22, 26 27 C 26 32, 38 32, 38 37 C 38 42, 30 43, 26 39"/><path class="dsign" d="M32 18 V46"/></svg></span><span class="bcx-name">Money</span><span class="bcx-fig">$1,800T/yr</span></div>
+      <div class="bcx-node bcx-trade"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><path class="ln" d="M12 24 H40"/><path class="ln" d="M33 17 L40 24 L33 31"/><path class="ln" d="M52 40 H24"/><path class="ln" d="M31 33 L24 40 L31 47"/><circle class="dot" cx="32" cy="32" r="3"/></svg></span><span class="bcx-name">Trade</span><span class="bcx-fig">$35T/yr</span></div>
+      <div class="bcx-node bcx-work"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><rect class="ln" x="11" y="23" width="42" height="28" rx="3.5"/><path class="ln" d="M24 23 v-4 a2.5 2.5 0 0 1 2.5 -2.5 h11 a2.5 2.5 0 0 1 2.5 2.5 v4"/><circle class="dot" cx="32" cy="37" r="3.4"/></svg></span><span class="bcx-name">Work</span><span class="bcx-fig">$65T/yr</span></div>
+      <div class="bcx-node bcx-risk"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><path class="ln" d="M32 8 L50 16 V30 C50 42, 41 51, 32 56 C23 51, 14 42, 14 30 V16 Z"/><circle class="dot" cx="32" cy="31" r="3.6"/></svg></span><span class="bcx-name">Risk</span><span class="bcx-fig">$7.7T/yr</span></div>
+      <div class="bcx-node bcx-care"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><path class="ln" d="M32 47 C 12 33, 14 20, 24 17 C 29.5 15.5, 32 20, 32 24 C 32 20, 34.5 15.5, 40 17 C 50 20, 52 33, 32 47 Z"/><circle class="dot" cx="32" cy="26" r="3.4"/></svg></span><span class="bcx-name">Care</span><span class="bcx-fig">$10T/yr</span></div>
+      <div class="bcx-node bcx-energy"><span class="bcx-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><g class="ln rays"><line x1="32" y1="8" x2="32" y2="17"/><line x1="32" y1="47" x2="32" y2="56"/><line x1="8" y1="32" x2="17" y2="32"/><line x1="47" y1="32" x2="56" y2="32"/><line x1="15" y1="15" x2="21.4" y2="21.4"/><line x1="42.6" y1="42.6" x2="49" y2="49"/><line x1="49" y1="15" x2="42.6" y2="21.4"/><line x1="21.4" y1="42.6" x2="15" y2="49"/></g><circle class="dot" cx="32" cy="32" r="6.5"/></svg></span><span class="bcx-name">Energy</span><span class="bcx-fig">$3.4T/yr</span></div>
+    </div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — FUND I · CURRENT PORTFOLIO (from the site; tagged vs. the track record) */
+add({title:'Fund I · Portfolio',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Fund I · Portfolio <span style="margin-left:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);border:1px solid #b9cdf7;border-radius:999px;padding:3px 10px;vertical-align:middle">Current portfolio</span></div>
+    <h1 class="s-title">Every blockbuster begins as a founder&rsquo;s story.</h1>
+    <hr class="s-rule">
+    <div style="display:flex;flex-direction:column;margin-top:14px;flex:1">
+      ${[
+        ['Samuel Adeyemo','Duranta','Kenya','Co-founded Aurora Solar and scaled it to <b style="color:var(--cobalt)">$4B</b>. Now vision systems for machines in the physical world.','duranta.webp'],
+        ['Geoffrey Tisserand &amp; Anji Ismail','Concord.ai','France','Sold Agora to <b style="color:var(--cobalt)">PayScale</b> and helped build Checkr into a <b style="color:var(--cobalt)">$5B</b> company. Now reskilling the workforce for AI.','geoffrey.webp'],
+        ['Thomas Dohmke','Entire','East Germany','Ran GitHub to <b style="color:var(--cobalt)">$7.5B</b> and scaled Copilot. Now the developer platform for the agent era.','entire.webp'],
+        ['Dowling, Segal &amp; Coppa','FullSeam','US &middot; Oxford','Built TaxProper through to an <b style="color:var(--cobalt)">Opendoor</b> acquisition. Now AI agents for AP, AR and reconciliation.','fullseam.webp'],
+        ['Craig O&rsquo;Neill','Argentic','Canada','Led Versapay through a <b style="color:var(--cobalt)">Great Hill</b> take-private. Now rebuilding B2B payments for the AI era.','argentic.webp']
+      ].map((r,i)=>`<div style="display:flex;align-items:center;gap:18px;padding:11px 0;${i<4?'border-bottom:1px solid var(--line)':''};flex:1">
+        <img src="images/founders/${r[4]}" alt="" style="flex:0 0 46px;width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center 28%;background:#eef3fc">
+        <div style="flex:0 0 300px"><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${r[0]}</div><div style="font-size:12.5px;color:var(--cobalt);font-weight:600;margin-top:4px">${r[1]} <span style="color:var(--muted);font-weight:400">&middot; ${r[2]}</span></div></div>
+        <div style="flex:1;font-size:14px;color:var(--ink-2);line-height:1.5">${r[3]}</div>
+      </div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">Repeat founders, forged by extreme origins, building the next giants with us from the first check.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — FOUNDERS' PSYCHOLOGY (from the site testimonials section) */
+add({title:'Our Founders’ Psychology',track:'core',teaser:true,dark:true,cls:'',html:`
+  <div class="s-pad" style="background:linear-gradient(160deg,#0A0D2E 0%,#0A0D2E 60%,#070920 100%);align-items:center;text-align:center;padding-top:34px">
+    <div class="eyebrow" style="color:var(--yellow)">What founders say</div>
+    <h1 class="s-title" style="color:#fff;font-size:40px;max-width:1000px;margin:6px auto 0">Our founders&rsquo; psychology sparks movements.</h1>
+    <p style="font-family:var(--serif);font-size:16px;color:var(--white-soft);margin:10px auto 0;max-width:760px;line-height:1.45">Machines make their visions real, and the old obsolete, faster than ever.</p>
+    <div style="display:flex;justify-content:center;gap:64px;margin:22px auto 0">
+      ${[
+        ['Forged by extreme origins.','<path d="M32 5 C 41 18, 46 27, 46 39 C 46 49, 40 58, 32 58 C 24 58, 18 49, 18 39 C 18 27, 23 18, 32 5 Z" stroke="rgba(255,255,255,.9)" stroke-width="2.4" fill="none" stroke-linejoin="round"/><path d="M32 33 C 36 38, 38 42, 38 46 C 38 50, 35 53, 32 53 C 29 53, 26 50, 26 46 C 26 42, 28 38, 32 33 Z" fill="var(--yellow)"/>'],
+        ['Prescient.','<path d="M7 32 C 18 17, 46 17, 57 32 C 46 47, 18 47, 7 32 Z" stroke="rgba(255,255,255,.9)" stroke-width="2.4" fill="none" stroke-linejoin="round"/><circle cx="32" cy="32" r="8.5" stroke="rgba(255,255,255,.9)" stroke-width="2.4" fill="none"/><circle cx="32" cy="32" r="4.2" fill="var(--yellow)"/>'],
+        ['Benevolent.','<path d="M32 51 C 12 37, 14 20, 25 20 C 30 20, 32 24, 32 28 C 32 24, 34 20, 39 20 C 50 20, 52 37, 32 51 Z" stroke="rgba(255,255,255,.9)" stroke-width="2.4" fill="none" stroke-linejoin="round"/><circle cx="32" cy="31" r="4" fill="var(--yellow)"/>']
+      ].map(t=>`<div style="display:flex;flex-direction:column;align-items:center;gap:12px"><svg viewBox="0 0 64 64" style="width:44px;height:44px" aria-hidden="true">${t[1]}</svg><div style="font-family:var(--serif);font-size:20px;color:var(--yellow)">${t[0]}</div></div>`).join('')}
+    </div>
+    <div style="display:flex;gap:18px;margin-top:30px;width:100%;max-width:1120px">
+      ${[
+        ['He hustled harder for me than anyone else did. I want him to be part of every single round and company that I start.','Jake Sussman','Headway',false],
+        ['It\'s rare to find investors who are killers on the business side. Would I work with Don again? The answer is I already did, twice.','Aaron Bai','Affiniti',true],
+        ['With us from day zero, a tremendous supporter through the twists and turns.','Tarek Mansour','Kalshi',false]
+      ].map(q=>`<article style="flex:1;background:${q[3]?'#fff':'rgba(255,255,255,.05)'};border:1px solid ${q[3]?'#fff':'rgba(255,255,255,.1)'};border-radius:16px;padding:22px 22px;display:flex;flex-direction:column;text-align:left">
+        <div style="font-family:var(--serif);font-size:34px;line-height:.6;color:${q[3]?'var(--gold-ink)':'var(--yellow)'}">&ldquo;</div>
+        <p style="font-family:var(--serif);font-size:15px;line-height:1.42;color:${q[3]?'var(--navy-ink)':'var(--white-soft)'};margin:14px 0 18px;flex:1">${q[0]}</p>
+        <div style="font-family:var(--sans);font-size:13px;font-weight:700;color:${q[3]?'var(--navy-ink)':'#fff'}">${q[1]}</div>
+        <div style="font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:${q[3]?'var(--blue-royal)':'var(--white-dim)'};margin-top:3px">${q[2]}</div>
+      </article>`).join('')}
+    </div>
+  </div>${chrome(true)}`});
+
+
+/* NEW — OUR EDGE · THE SPEAKEASY (early "edge" beat; fuller Speakeasy stays in appendix) */
+add({title:'Our Edge, The Speakeasy',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Our Edge · The Speakeasy</div>
+    <h1 class="s-title">The edge isn't the thesis. It's the Speakeasy.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1110px;line-height:1.42">Anyone can write a thesis; few have backed the giants. Our unfair advantage is the <b style="color:var(--cobalt);font-weight:600">Speakeasy</b>, an invitation-only program where a network of unicorn founders, operators and LPs goes to work on each company, turning first checks into breakouts.</div>
+    <hr class="s-rule" style="margin-top:14px">
+    <div style="flex:1;display:flex;align-items:center;margin-top:22px">
+    <div style="display:flex;gap:24px;width:100%;align-items:stretch">
+      ${[
+        ['An exclusive network','Unicorn founders, category operators and the LPs behind them, opened to every company from day one, the network a first-time founder could never assemble alone. Founders like <b style="color:var(--cobalt);font-weight:600">Didier Elzinga</b> (Culture Amp) among them.'],
+        ['An accelerated program','A hands-on program that compresses years into weeks: narrative, operating cadence, hiring across borders, and the first fifty introductions.'],
+        ['Built for the breakout','We close the gaps that keep good companies small, and turn a first check into the next Deel or Kalshi.']
+      ].map((c,i)=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:28px 26px;display:flex;flex-direction:column"><div style="width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;margin-bottom:16px">${i+1}</div><div style="font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.12">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.6;margin-top:12px">${c[1]}</div></div>`).join('')}
+    </div>
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:20px">The idea and the record get us the meeting. The Speakeasy is why founders choose us, and why they compound.</div>
+  </div>${chrome(false)}`});
+
+/* 9 — WHERE WE INVEST */
+add({title:'Where Breakout Moments Come From',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Where Breakout Moments Come From</div>
+    <h1 class="s-title">Three lenses. A new opening every few years.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px;max-width:1120px;line-height:1.4">For fifteen years Don has backed economic, social and technological change before the market named it. The founders below are ours, one in each lens.</div>
+    <hr class="s-rule" style="margin-top:12px">
+    <div style="display:flex;gap:24px;margin-top:20px;flex:1">
+      ${[
+        ['Economic','Tariffs and re-shoring re-route $35T of trade, so freight itself gets rebuilt: rail, air, sea. <span style="color:var(--muted)">UNCTAD, 2025</span>','e',[['Cedar','Rail freight'],['MightyFly','Autonomous air cargo'],['Navier','Maritime']]],
+        ['Social','By 2050, 2.1B people will be over 60, and depression and anxiety cost $1T a year. Care access becomes software. <span style="color:var(--muted)">WHO</span>','s',[['Centaur Labs','Medical data'],['Headway','Therapy through insurance'],['Yuzu Health','Benefits']]],
+        ['Technological','AI puts up to $4.4T a year of expert work in play: contracts, inspection and permits become software. <span style="color:var(--muted)">McKinsey</span>','t',[['DraftWise','Legal contracts'],['Overview','Factory inspection'],['PermitFlow','Construction permits']]]
+      ].map(c=>`<div class="ap-col ${c[2]}"><div class="ap-head">${c[0]}</div><div class="ap-body"><div style="font-size:14px;color:var(--ink-2);line-height:1.5">${c[1]}</div><div style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--cobalt);margin-top:20px">Founders we&rsquo;ve backed</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:18px">${c[3].map(co=>`<div><div style="font-family:var(--serif);font-size:23px;color:var(--ink)">${co[0]}</div><div style="font-size:13px;color:var(--muted);margin-top:2px">${co[1]}</div></div>`).join('')}</div></div></div>`).join('')}
+    </div>
+    <div style="text-align:center;margin-top:20px;font-family:var(--serif);font-size:18px;color:var(--mid-lake)"><span style="background:var(--sun);color:var(--navy);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 14px;margin-right:12px">What's next</span>Energy transition · space logistics · sovereign compute.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — WHY NOW · EXPIRE & EVOLVE + logarithmic spiral (from the site) */
+
+/* NEW — THE MAP · END MARKETS */
+add({title:'The Map · End Markets',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:36px">
+    <div class="eyebrow">The Map · End Markets</div>
+    <h1 class="s-title" style="font-size:40px">Ahead of the curve, on purpose.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">SaaS is still under 0.5% of the <b style="color:var(--cobalt);font-weight:600">~$115T</b> world economy: the prize is everything software hasn't reached.*</div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;flex:1">
+      ${[
+        ['Supply chain &amp; logistics','Now','Tariffs and sanctions re-route trade; founders rebuild rail, air and sea.','$35T global trade (UNCTAD, 2025)','Cedar · MightyFly · Navier'],
+        ['Applied AI &amp; expert work','Now','Software absorbs professional services: legal, factory, permits.','up to $4.4T a year (McKinsey)','DraftWise · Overview · PermitFlow'],
+        ['Robotics &amp; physical AI','Next','Foundation models leave the screen; machines take on the physical work of the real economy.','$15T+ physical labour (ILO)','Actively sourcing'],
+        ['Energy transition','Next','While the world stares at oil, founders quietly rebuild the grid.','$3.3T a year invested (IEA, 2025)','Actively sourcing'],
+        ['Space logistics','Next','Launch costs collapse; the orbital economy needs delivery and infrastructure.','~$1.8T by 2035 (WEF · McKinsey)','Actively sourcing'],
+        ['Sovereign compute','Next','Every nation wants its own AI stack; compute becomes strategic infrastructure.','$1T+ AI capex by 2030 (est.)','Actively sourcing']
+      ].map(t=>`<div style="flex:0 0 calc(33.333% - 11px);border:1px solid var(--line);border-radius:12px;padding:15px 18px;display:flex;flex-direction:column;${t[1]==='Next'?'background:#fdfbf3':''}"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:var(--serif);font-size:18px;color:var(--ink);line-height:1.1">${t[0]}</div><span style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${t[1]==='Next'?'#b8902a':'#2f9d6f'};border:1px solid ${t[1]==='Next'?'#e6cf8f':'#a9dcc4'};border-radius:999px;padding:2px 8px">${t[1]}</span></div><div style="font-size:12.5px;color:var(--ink-2);margin-top:8px;line-height:1.4;flex:1">${t[2]}</div><div style="font-size:12.5px;font-weight:600;color:var(--cobalt);margin-top:10px">${t[3]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${t[4]}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:16px">We map the breaks before the market names the category, then back the outsider who lived them.</div>
+    <div class="note" style="margin-top:8px">*SaaS spend ~$400B (Gartner) vs ~$115T world GDP (IMF). Also on the watchlist: longevity · defense tech · climate adaptation.</div>
+  </div>${chrome(false)}`});
+
+
+/* (Who We Back merged into Our Thesis; Opportunity/Why-Global redistributed to Why Now + The Evidence) */
+
+
+/* 8 — TEAM + ADVISORS */
+add({title:'Team &amp; Advisors',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding:30px 72px 34px">
+    <div class="eyebrow">Who Runs the System</div>
+    <h1 class="s-title" style="font-size:40px">International and multicultural, by design.</h1>
+    <div class="team-row" style="margin:16px 0 16px">${teamCardsHTML()}</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;text-align:center">The bench, operators who made the same journey, matched to every stage</div>
+    <div class="vectors" style="margin-left:32px;flex:0 0 auto">${vectorsHTML()}</div>
+    <div style="margin:14px 0 0 32px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:18px;color:#fff">
+      <span style="flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">LPAC Member</span>
+      <span style="font-size:15px;line-height:1.3"><b style="font-weight:700">Nate Mitchell</b> · Managing Director, Teachers' Venture Growth · Ontario Teachers' Pension Plan</span>
+    </div>
+  </div>${chrome(false,true)}`});
+
+
+/* 10 — SOURCING (consolidated: engine + aperture + scout proof) */
+add({title:'How We Get There First',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:34px">
+    <div class="eyebrow">Sourcing · How We Get There First</div>
+    <h1 class="s-title" style="font-size:38px">5,000 sourced. 500 scored. 30 backed.</h1>
+    <div class="s-sub" style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1120px;line-height:1.4">Fifteen years of dense founder networks, run as five named channels, each with an owner, a weekly quota, and comp on results.</div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:10px">
+      ${[
+        ['First-50 Alumni','The next wave works inside the last. We track the first fifty of Deel, Kalshi, Headway and Assured, from their own cap tables, and get the first call when one steps out.','pills:Deel → FirstWork|Brex → PermitFlow|Headway → Marble'],
+        ['Home-Market Winners','The strongest signal: already won once, somewhere harder. Founders who built real revenue in constrained home markets and relocate to go global, surfaced through a founder diaspora fifteen years dense.',''],
+        ['Campus Nations','International student societies at <b style="color:var(--ink)">MIT · Stanford · ETH · IIT · Waterloo · UChicago · Caltech</b>, we host their demo days; their presidents keep sourcing as alumni.',''],
+        ['The Speakeasy Door','Inbound, engineered: O-1 support, payroll on Deel from day one, first-fifty introductions. The best outsiders route themselves to us before any fund courts them.',''],
+        ['The Visa List','The O-1 is a pre-screen for extraordinary outsiders, run by the government. Immigration counsel and visa sponsors flag founders months before they incorporate.','']
+      ].map((r,i)=>`<div style="display:flex;align-items:baseline;gap:26px;padding:11px 0;border-top:1px solid var(--line)"><div style="flex:0 0 210px"><div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">0${i+1}</div><div style="font-family:var(--serif);font-size:20px;color:var(--cobalt);line-height:1.1;margin-top:3px">${r[0]}</div></div><div style="flex:1"><div style="font-size:13.5px;color:var(--ink-2);line-height:1.5">${r[1]}</div>${r[2].startsWith('pills:')?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${r[2].slice(6).split('|').map(p=>`<span style="font-size:11.5px;font-weight:600;color:var(--cobalt);background:#eef3fd;border-radius:999px;padding:4px 11px">${p}</span>`).join('')}<span style="font-size:11px;color:var(--muted);align-self:center;margin-left:2px">unicorn founders refer, pre-incorporation</span></div>`:''}</div></div>`).join('')}
+    </div>
+    <div style="margin-top:12px;background:#0B1275;border-radius:12px;padding:12px 22px;display:flex;align-items:center;gap:20px;color:#fff">
+      <div style="flex:0 0 auto"><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)">The Sunshine Lake Speakeasy</div><div style="font-size:12.5px;color:rgba(255,255,255,.7);margin-top:2px">San Francisco · virtual worldwide</div></div>
+      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.35">One system, and every turn compounds: sourcing events run here; a 100+ operator discovery program feeds the top. Seen first, never auctioned: in Kalshi, Deel and Headway at seed, years before Coatue, Ribbit and Spark arrived.</div>
+    </div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — HOW WE HELP (momentum) */
+add({title:'After the First Check',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:38px">
+    <div class="eyebrow">After the First Check</div>
+    <h1 class="s-title" style="font-size:40px">AI just made technology a commodity. Momentum isn't.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1050px;line-height:1.4">As the cost of writing code collapses, the ambition of what gets built expands.* Winners out-operate.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:24px;margin-top:22px;flex:1">
+      ${[
+        ['Operational momentum','Ship, sell and hire faster than the market can copy. Product cycles now compress from years to quarters, and international founders already run this way. We install the operating rhythm, weekly roles, KPIs and review cadence, and coach the pace until it holds under pressure. The habits that separate a fast company from a frantic one.',''],
+        ['Story → mission → business','Lived stories become missions; missions become durable revenue. Our Broadway veteran turns founder truth into the narrative that closes customers, key hires and rounds.','photo:images/team/andrew-hovelson.webp|Andrew Hovelson, our narrative coach, on Broadway with Glenn Close'],
+        ['Sleeves rolled up','We build alongside the founder, not from the sideline: pipelines opened, executives recruited, M&amp;A run, board work done. By a GP who co-founded a company sold to Groupon and drove Airbnb\'s early international growth, where long-term stays are now nearly 1 in 5 nights booked. The unglamorous work that compounds.','']
+      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:14px;padding:22px 24px;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt);margin-bottom:12px">${c[0]}</div><div style="font-size:14.5px;color:var(--ink-2);line-height:1.62;flex:1">${c[1]}</div>${c[2].startsWith('photo:')?`<div style="margin-top:14px"><div style="width:100%;height:140px;border-radius:10px;background:#dfe5f2 center 18%/cover no-repeat;background-image:url('${c[2].slice(6).split('|')[0]}')"></div><div style="font-size:10.5px;color:var(--muted);margin-top:7px;font-family:var(--serif);font-style:italic;line-height:1.3">${c[2].split('|')[1]}</div></div>`:''}</div>`).join('')}
+    </div>
+    <div style="margin-top:20px;border-left:3px solid var(--sun);padding-left:20px">
+      <div style="font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink);line-height:1.3">"Live right at that frontier and move with the cresting wave."</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:6px">Brad Lightcap · OpenAI, on what separates founders now (Fortune, Oct 2025 · condensed). Global founders already live at that frontier; we fund them as the wave crests.</div>
+    </div>
+    <div class="note" style="margin-top:10px">*Goldman Sachs, "Will AI Eat Software?", Top of Mind #146 (March 2026).</div>
+  </div>${chrome(false)}`});
+
+
+/* 11 — FUND OVERVIEW */
+add({title:'Fund I · $50mm',track:'core',teaser:true,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Fund I · $50mm</div>
+    <h1 class="s-title" style="font-size:42px">Concentrated by design. Strictly seed.</h1>
+    <div class="s-sub" style="font-size:17px;color:var(--mid-lake);margin-top:8px">The arithmetic: $1mm first checks, 5% ownership, 30 companies. One breakout returns the fund.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:28px;margin-top:26px;flex:1">
+      ${[
+        ['Construction',[['30 core','pre-seed &amp; seed only'],['$1mm first checks','5% target ownership'],['75%+ core','incl. dedicated &amp; discretionary reserves'],['20% other non-initial checks','cannonball follow ons, network &amp; power-law checks'],['5% discovery','']]],
+        ['Economics',[['2.5% mgmt','stepping to 1.5%'],['20% carry',''],['5% GP commit',''],['10-year term','(+2)']]],
+        ['Status',[['First close complete',''],['Actively deploying',''],['Expected ~80% deployed','over 3.5 years; reserves in the final 1.5']]]
+      ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:18px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:20px">${c[1].map(r=>`<div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.15">${r[0]}</div>${r[1]?`<div style="font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4">${r[1]}</div>`:''}</div>`).join('')}</div></div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:20px">Preliminary and subject to change. Not an offer to sell, or a solicitation of an offer to buy, any security.</div>
+  </div>${chrome(false)}`});
+
+
+/* 12 — PORTFOLIO CONSTRUCTION */
+const PC1=[{label:'Core: initial checks',pct:65,color:'#2657e8'},{label:'Core: dedicated reserves',pct:10,color:'#4f86ea'},{label:'Cannonball follow-ons (into core)',pct:10,color:'#7cc24f'},{label:'Network',pct:5,color:'#f2a03c'},{label:'Power law',pct:5,color:'#d9772e'},{label:'Discovery',pct:5,color:'#F2D831'}];
+add({title:'Portfolio Construction',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">$50mm · Target Portfolio Construction</div>
+    <h1 class="s-title" style="font-size:38px">Strategic capital deployment.</h1>
+    <div class="cols" style="margin-top:30px;align-items:center;gap:80px;flex:1">
+      <div style="flex:0 0 300px;position:relative;display:flex;justify-content:center">
+        ${donut(PC1,120,40,'')}
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);line-height:1.15">
+          <div style="font-size:25px;color:var(--ink);font-weight:700">75%+ core</div>
+          <div style="font-size:13.5px;color:var(--muted);margin-top:5px">20% other non-initial</div>
+          <div style="font-size:13.5px;color:var(--muted)">5% discovery</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+        ${PC1.map(s=>`<div style="display:flex;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="width:16px;height:16px;border-radius:4px;flex:0 0 16px;background:${s.color}"></span><span style="flex:1;font-size:17px;color:var(--ink-2)">${s.label}</span><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink)">${s.pct}%</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="note">All values are targets. There can be no assurance such targets will be reached.</div>
+  </div>${chrome(false)}`});
+
+
+/* 13 — ASSET POSITIONING */
+add({title:'Return Architecture',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Return Architecture</div>
+    <h1 class="s-title">Every exit path.</h1>
+    <hr class="s-rule">
+    <div style="display:flex;gap:24px;margin-top:26px;flex:1">
+      ${[
+        ['Multiples','#155EE8','A 5% stake in one $1B outcome returns the fund; a $5B outcome returns it five times over.','Kalshi re-rated from our seed to a $22B public round; Headway from seed to $2.3B.'],
+        ['Early DPI','#2f9d6f','Secondaries and founder dividends return principal early, without surrendering the upside.','Multiple secondaries have been taken over time.'],
+        ['Co-investment','#b8902a','LPs invest alongside our breakouts, fee- and carry-light.','We already syndicated Deel and Fieldguide allocations to LPs.']
+      ].map(c=>`<div style="flex:1;border:1px solid var(--line);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;text-align:center"><div style="font-family:var(--serif);font-size:28px;color:${c[1]};line-height:1.12">${c[0]}</div><div style="font-size:18.5px;color:var(--ink-2);line-height:1.5;margin-top:22px;flex:1;display:flex;align-items:center;justify-content:center">${c[2]}</div><div style="margin-top:18px;border-top:2px solid ${c[1]};padding-top:16px"><div style="font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${c[1]}">Proof</div><div style="font-size:15px;color:var(--ink);margin-top:6px;line-height:1.45">${c[3]}</div></div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:20px">We back sectors incumbents must acquire into, and we know how the process runs.</div>
+  </div>${chrome(false)}`});
+
+
+/* LP CO-INVESTMENT PROGRAM */
+add({title:'LP Co-Investment Program',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">LP Co-Investment Program</div>
+    <h1 class="s-title">We open our breakouts to our LPs.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px;max-width:1080px;line-height:1.4">With the growth judgment of a serial entrepreneur and operator who has sat on 10+ boards, including exited SpotHero (to Uber).</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:30px;margin-top:30px;flex:1">
+      ${[
+        ['Exclusive co-investment opportunities','When one of our breakouts raises, we offer our LPs the co-investment first, into names brand funds cannot reach early. The next Deels and Kalshis, open to those who backed us before anyone else.'],
+        ['Aligned economics','Reduced fees and carry, reserved for Fund I LPs. We earn when you earn, the same alignment that drives the fund itself, with full transparency on every co-investment.'],
+        ['Full transparency','The same investment memos, data and post-close monitoring the fund runs on, shared with participating LPs in real time. You see what we see, when we see it.']
+      ].map(c=>`<div style="flex:1;background:#f6f8fd;border-radius:16px;padding:30px 28px;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:25px;color:var(--cobalt);line-height:1.12">${c[0]}</div><div style="height:2px;background:var(--line);margin:16px 0 18px"></div><div style="font-size:17px;color:var(--ink-2);line-height:1.65">${c[1]}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:19px;color:var(--mid-lake);text-align:center;margin-top:20px">Already syndicated to our LPs: <b style="font-weight:400;color:var(--cobalt)">Deel</b> and <b style="font-weight:400;color:var(--cobalt)">Fieldguide</b>, with more in the pipeline.</div>
+  </div>${chrome(false)}`});
+
+
+/* 14 — OUR LPs (text) */
+add({title:'Our Limited Partners',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Who Stands Behind It</div>
+    <h1 class="s-title">Backed by the people who build, fund and support.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">A global LP base.</div>
+    <div style="display:flex;gap:34px;margin-top:26px">
+      ${[
+        ['Founders &amp; operators',[['David Helgason','Unity founder (IPO) · Europe','helgason'],['Ola Doudin','BitOasis, sold to Coinbase · MENA','doudin'],['Ryota Matsuzaki','Rakuten exec (IPO) · APAC','matsuzaki'],['Siggi Hilmarsson','Siggi\'s (innovative CPG brand) · Europe','siggi'],['Thiago da Costa','Lagoa, sold to Autodesk · LATAM','thiago']]],
+        ['Leading VCs',[['Anish Acharya','a16z','anish'],['Arthur Patterson','Accel Partners founder · Midas List','arthur'],['Garry Tan','Y Combinator · Midas List','garry'],['Lucas Swisher','Coatue · Midas List','lucas'],['Wesley Chan','FPV · Midas List','wesley']]],
+        ['Hedge funds &amp; PE',[['Francesco Rivera','Hudson River Trading','rivera'],['Mickey Arabelovic','ex-Sequoia · Telescope Partners founder','mickey'],['Nic Ingram','EQT · Hong Kong','ingram'],['Rohan Kodialam','Citadel','rohan'],['Shawn O\'Neill','Silver Lake','shawn']]],
+        ['Institutions &amp; fund-of-funds',[['Breaker Cove','ex-Googler fund of funds'],['Cambridge Associates','Institutional advisor'],['JIMCO','Jameel family office · followed on from GFC'],['RSJ','fund of funds · Eastern Europe'],['Taplow Blue','fund of funds · Western Europe']]]
+      ].map(col=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-family:var(--serif);font-size:18px;color:var(--cobalt);margin-bottom:18px;min-height:2.4em">${col[0]}</div><div style="display:flex;flex-direction:column;gap:16px">${col[1].map(p=>{const av=p.length>2?`<div style="flex:0 0 auto;width:40px;height:40px;border-radius:50%;overflow:hidden;background:#eef1f7"><img src="images/lp/people/${p[2]}.webp" alt="${p[0]}" style="width:100%;height:100%;object-fit:cover"></div>`:'';return `<div style="display:flex;align-items:center;gap:12px">${av}<div><div style="font-size:15px;font-weight:600;color:var(--ink)">${p[0]}</div><div style="font-size:12.5px;color:var(--muted);margin-top:3px">${p[1]}</div></div></div>`;}).join('')}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:17px;color:var(--mid-lake);text-align:center;margin-top:auto;padding-top:14px">Our LPs help us win: the people who fund, scale and support the next trillion-dollar outsiders.</div>
+    <div class="note" style="margin-top:10px;padding-bottom:14px">The insiders re-upped: JIMCO and several Global Founders Capital partners followed Don to Sunshine Lake.</div>
+  </div>${chrome(false)}`});
+
+
+/* 15 — EARNING THE RIGHT TO SCALE */
+add({title:'The Franchise',track:'core',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Franchise</div>
+    <h1 class="s-title" style="font-size:42px">Two funds of proof. A 50-year franchise ahead.</h1>
+    <div style="display:flex;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)"><span style="flex:2">◂ Proof</span><span style="flex:3;text-align:right">The Plan ▸</span></div>
+    <div class="road" style="margin-top:14px;min-height:300px;align-items:stretch">
+      <div class="rf past" style="justify-content:center"><div class="yr">2017-19</div><div class="nm">Fund I*</div><div class="sz"><b>$23mm · GFC</b></div><div class="sz">Deel &amp; Headway first checks</div></div>
+      <div class="rf past" style="justify-content:center"><div class="yr">2019-22</div><div class="nm">Fund II*</div><div class="sz"><b>$37mm · GFC</b></div><div class="sz">Kalshi &amp; Assured first checks</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2025</div><div class="nm">Sunshine Lake I</div><div class="sz"><b>$50mm</b></div><div class="sz">30 core · pre-seed &amp; seed</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2028</div><div class="nm">Sunshine Lake II</div><div class="sz"><b>$75mm</b></div><div class="sz">45 core · same early focus</div></div>
+      <div class="rf future" style="justify-content:center"><div class="yr">2031</div><div class="nm">Sunshine Lake III</div><div class="sz"><b>$100mm</b></div><div class="sz">60 core · multi-vertical</div></div>
+    </div>
+    <div style="font-family:var(--serif);font-size:20px;color:var(--mid-lake);text-align:center;margin-top:26px">Sunshine Lake is a Fund I on paper, and a Fund III in evidence. Priced like the former, de-risked like the latter.</div>
+    <div class="note" style="margin-top:12px;text-align:center">*Funds I &amp; II: Don's institutional portfolio; Statement of Work letter available in diligence. Fund II &amp; III are targets.</div>
+  </div>${chrome(false)}`});
+
+
+/* ===== APPENDIX ===== */
+add({title:'Appendix',track:'appendix',teaser:false,dark:true,cls:'section',html:`
+  <div class="s-pad"><div class="sec-no">&nbsp;</div><h2>Appendix</h2></div>${chrome(true)}`});
+
+
+/* Moved to appendix: site removed the 'Technology is accelerating change' section */
+add({title:'Technology is accelerating change',track:'appendix',teaser:false,dark:true,cls:'',html:`
+  <div class="s-pad" style="justify-content:space-between;background:linear-gradient(160deg,#0B1275 0%,#050833 55%,#02041F 100%)">
+    <div>
+      <div class="eyebrow" style="color:var(--sun)">Why Now &middot; Expire &amp; Evolve</div>
+      <h1 class="s-title" style="color:#fff;font-size:46px;max-width:1040px">Technology is accelerating change.</h1>
+      <p style="font-family:var(--serif);font-size:18px;color:rgba(255,255,255,.82);line-height:1.5;margin:14px 0 0;max-width:900px">Steve Jobs called death &ldquo;life&rsquo;s change agent,&rdquo; the old clearing out for the new. Technology follows the same cycle, only faster.</p>
+    </div>
+    <div>
+      <div class="eyebrow" style="color:var(--sun);margin-bottom:14px">Critical global systems</div>
+      <p style="font-family:var(--serif);font-size:18px;color:rgba(255,255,255,.82);line-height:1.5;margin:0 0 18px;max-width:1040px">The systems the world can&rsquo;t run a day without were built for another era. Software has reached barely <b style="color:#fff;font-weight:600">0.5%</b> of the <b style="color:#fff;font-weight:600">$115T</b> economy.</p>
+      <div style="display:flex;justify-content:space-between;gap:10px;max-width:1120px">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18 H35"/><path d="M29 12 L35 18 L29 24"/><path d="M39 30 H13"/><path d="M19 24 L13 30 L19 36"/><circle cx="24" cy="24" r="2.4" fill="#F2D831" stroke="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Trade</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">$35T</div></div></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="15" width="32" height="18" rx="2.5"/><circle cx="24" cy="24" r="3.4" fill="#F2D831" stroke="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Money</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">$125T+</div></div></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 35 C 10 25, 11 15, 18 13 C 22 12, 24 15, 24 18 C 24 15, 26 12, 30 13 C 37 15, 38 25, 24 35 Z"/><circle cx="24" cy="21" r="2.4" fill="#F2D831" stroke="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Care</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">~$10T</div></div></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="17" width="32" height="21" rx="2.5"/><path d="M18 17 v-3 a2 2 0 0 1 2 -2 h8 a2 2 0 0 1 2 2 v3"/><circle cx="24" cy="27.5" r="2.4" fill="#F2D831" stroke="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Work</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">$55T+</div></div></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#F2D831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6 L14 27 H22 L20 42 L34 21 H26 L28 6 Z" fill="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Energy</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">$3.3T/yr</div></div></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6 L38 12 V23 C38 32, 31 39, 24 42 C17 39, 10 32, 10 23 V12 Z"/><circle cx="24" cy="23" r="2.6" fill="#F2D831" stroke="none"/></svg><div><div style="font-family:var(--serif);font-size:18px;color:#fff;line-height:1.05">Risk</div><div style="font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;color:#F2D831;margin-top:3px">~$850T</div></div></div>
+      </div>
+      <p style="font-family:var(--serif);font-size:22px;color:#fff;line-height:1.2;margin:18px 0 0;max-width:1040px">Rebuilding them is the largest opportunity on earth.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:26px">
+      <svg class="deck-spiral" viewBox="0 0 600 600" style="width:118px;height:auto;overflow:visible;flex:0 0 auto" aria-hidden="true">
+          <defs><radialGradient id="deckSpiralFade" cx="300" cy="300" r="300" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.8"/><stop offset="0.42" stop-color="#ffffff" stop-opacity="0.72"/><stop offset="0.7" stop-color="#ffffff" stop-opacity="0.34"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+          </radialGradient></defs>
+          <path d="M300.0,296.3 L299.5,296.2 L299.1,296.2 L298.6,296.3 L298.1,296.4 L297.7,296.6 L297.2,296.8 L296.7,297.1 L296.3,297.4 L296.0,297.8 L295.6,298.3 L295.3,298.8 L295.1,299.4 L295.0,299.9 L294.9,300.6 L294.8,301.2 L294.9,301.9 L295.1,302.5 L295.3,303.2 L295.6,303.8 L296.0,304.4 L296.4,305.0 L297.0,305.5 L297.6,305.9 L298.3,306.3 L299.1,306.7 L299.9,306.9 L300.7,307.0 L301.6,307.1 L302.5,307.0 L303.4,306.8 L304.2,306.5 L305.1,306.1 L305.9,305.6 L306.7,304.9 L307.4,304.2 L308.1,303.3 L308.6,302.4 L309.1,301.4 L309.4,300.3 L309.6,299.2 L309.7,298.0 L309.6,296.7 L309.3,295.5 L308.9,294.3 L308.4,293.1 L307.7,292.0 L306.8,290.9 L305.8,289.9 L304.7,289.0 L303.4,288.2 L302.0,287.6 L300.6,287.2 L299.0,286.9 L297.4,286.8 L295.7,286.9 L294.0,287.2 L292.3,287.7 L290.7,288.4 L289.1,289.4 L287.6,290.5 L286.3,291.9 L285.0,293.4 L284.0,295.2 L283.1,297.0 L282.5,299.1 L282.1,301.2 L281.9,303.4 L282.0,305.7 L282.4,308.0 L283.1,310.3 L284.1,312.5 L285.3,314.7 L286.9,316.7 L288.7,318.6 L290.8,320.3 L293.1,321.8 L295.7,323.0 L298.4,323.9 L301.4,324.5 L304.4,324.8 L307.5,324.7 L310.7,324.2 L313.8,323.3 L316.9,322.0 L319.9,320.3 L322.7,318.2 L325.3,315.7 L327.6,312.9 L329.7,309.7 L331.4,306.2 L332.7,302.5 L333.5,298.5 L333.9,294.4 L333.8,290.1 L333.2,285.8 L332.0,281.5 L330.3,277.3 L328.0,273.2 L325.2,269.3 L321.8,265.7 L318.0,262.4 L313.7,259.6 L309.0,257.2 L303.9,255.4 L298.5,254.2 L292.8,253.6 L287.0,253.7 L281.1,254.5 L275.2,256.0 L269.4,258.3 L263.8,261.4 L258.4,265.2 L253.4,269.7 L248.9,274.9 L245.0,280.7 L241.7,287.1 L239.1,294.1 L237.4,301.4 L236.5,309.1 L236.5,317.1 L237.5,325.1 L239.6,333.2 L242.6,341.2 L246.7,348.9 L251.8,356.3 L257.9,363.2 L264.9,369.4 L272.8,374.9 L281.6,379.5 L291.0,383.1 L301.0,385.6 L311.5,386.9 L322.4,387.0 L333.4,385.7 L344.5,383.0 L355.4,379.0 L366.1,373.5 L376.2,366.7 L385.7,358.5 L394.3,348.9 L401.9,338.2 L408.3,326.4 L413.4,313.5 L416.9,299.9 L418.9,285.5 L419.1,270.7 L417.5,255.6 L414.1,240.4 L408.7,225.4 L401.4,210.8 L392.2,196.9 L381.1,183.8 L368.2,171.9 L353.7,161.4 L337.6,152.5 L320.1,145.4 L301.5,140.3 L282.0,137.4 L261.7,136.8 L241.1,138.8 L220.3,143.3 L199.7,150.4 L179.7,160.1 L160.5,172.5 L142.5,187.5 L126.0,204.9 L111.4,224.6 L99.0,246.5 L89.0,270.2 L81.8,295.6 L77.6,322.2 L76.5,349.9 L78.9,378.1 L84.7,406.6 L94.1,434.8 L107.2,462.3 L123.8,488.7 L144.0,513.5 L167.5,536.2 L194.2,556.5 L223.9,573.8 L256.2,587.7 L290.7,598.0" style="stroke:url(#deckSpiralFade);stroke-width:5.5;fill:none;stroke-linecap:round"/>
+          <circle cx="300" cy="300" r="6.5" fill="#F2D831"/>
+        </svg>
+      <div>
+        <div style="font-family:var(--serif);font-size:20px;color:#fff">The logarithmic spiral</div>
+        <div style="font-family:var(--serif);font-size:14px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.5">Balance through constant change.</div>
+      </div>
+    </div>
+  </div>${chrome(true)}`});
+
+
+/* UNICORN TABLE */
+
+
+/* BENCHMARKING */
+add({title:'The Market’s Verdict',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Validation · The Market's Verdict</div>
+    <h1 class="s-title">Every first check was re-priced upward, by the best.</h1>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:16px">
+      ${[
+        ['Kalshi','Seed · Apr 2019','#155EE8',[['Sequoia','Series A · ’21'],['YC Growth','$750m'],['Paradigm','$2B · Series C ’25'],['$11B','Paradigm · Dec ’25'],['$22B','Coatue · May ’26'],['IPO?','~$40B talks (FT)']]],
+        ['Deel','Seed · Dec 2019','#155EE8',[['a16z','Series A · ’20'],['Spark','Series B'],['YC Growth','Series C'],['$17.3B','Ribbit · a16z · Coatue · Oct ’25'],['IPO?','filing reported']]],
+        ['Headway','Pre-seed · Sep 2018','#2f9d6f',[['Accel','Seed'],['a16z','Series A'],['a16z','~$750m'],['$2.3B','Spark · Series D ’24']]],
+        ['Assured','Seed · Dec 2019','#BE922A',[['Costanoa','Series A'],['Kleiner · Iconiq','Series B'],['~$1B','Bloomberg · Mar ’25']]]
+      ].map(r=>`<div style="display:flex;align-items:center;gap:24px;padding:23px 0;border-top:1px solid var(--line)"><div style="flex:0 0 162px"><div style="font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1.05">${r[0]}</div><div style="font-size:12px;color:var(--muted);margin-top:4px">${r[1]}</div></div><div style="flex:1;display:flex;align-items:center;flex-wrap:wrap;gap:8px">${r[3].map((st,i)=>`${i>0?`<span style="color:#c2cbe0;font-size:17px">→</span>`:''}<div style="display:flex;flex-direction:column;padding:9px 16px;border-radius:10px;background:${i===r[3].length-1?r[2]+'15':'#f4f6fb'}"><span style="font-family:var(--serif);font-size:17px;font-weight:700;color:${i===r[3].length-1?r[2]:'var(--ink)'};line-height:1.1">${st[0]}</span><span style="font-size:11px;color:var(--muted);margin-top:2px">${st[1]}</span></div>`).join('')}</div></div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px;text-align:center">All rounds and valuations per public announcements and press reports.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — THE CAPITAL STACK (early-stage focus) */
+add({title:'The Capital Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">The Capital Stack</div>
+    <h1 class="s-title">Early-stage focus, Pre-seed &amp; seed.</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:8px">We enter at the first check and own the highest-multiple rung of the stack. Later capital pays up for de-risking.</div>
+    <div style="display:flex;gap:12px;flex:1;margin-top:18px">
+      <div style="flex:0 0 92px;display:flex;align-items:stretch;gap:6px">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:30px 0 46px">5-7yr return potential</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:30px 0 50px;text-align:right;font-family:var(--serif)">
+          <div style="font-size:22px;color:var(--cobalt)">50×</div><div style="font-size:19px;color:var(--ink)">10×</div><div style="font-size:16px;color:var(--muted)">5×</div><div style="font-size:15px;color:var(--muted)">2×</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px">
+          ${[['Pre-Seed',1,3,'#0B1275'],['Seed',4,6,'#155EE8'],['Venture',7,9,'#5a8de8'],['Growth',10,12,'#a9c2ee']].map(s=>`<div style="grid-column:${s[1]}/${s[2]+1};background:${s[3]};color:${s[3]==='#a9c2ee'?'var(--navy)':'#fff'};text-align:center;padding:7px;border-radius:7px;font-weight:700;font-size:13px;letter-spacing:.04em">${s[0]}</div>`).join('')}
+        </div>
+        <div style="position:relative;flex:1;margin-top:10px">
+          <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);pointer-events:none"><div style="grid-column:1/7;background:rgba(21,94,232,.08);border:1.5px dashed rgba(21,94,232,.5);border-radius:10px"></div></div>
+          <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-evenly;padding:8px 0">
+            ${[
+              ['Friends &amp; family',1,3,false],
+              ['Accelerators',2,4,false],
+              ['Angels',3,5,false],
+              ['Sunshine Lake, first checks',1,6,true],
+              ['Early &amp; late-stage venture',6,9,false],
+              ['Late-stage growth',9,11,false],
+              ['Public equity markets',10,12,false]
+            ].map(v=>`<div style="display:grid;grid-template-columns:repeat(12,1fr)"><div style="grid-column:${v[1]}/${v[2]+1};height:${v[3]?'32px':'24px'};background:${v[3]?'#0B1275':'#eef1f7'};border:1px solid ${v[3]?'#0B1275':'var(--line)'};${v[3]?'border-left:5px solid #F2D831;':''}border-radius:999px;display:flex;align-items:center;padding:0 14px;font-size:${v[3]?'13px':'12.5px'};font-weight:${v[3]?'700':'600'};color:${v[3]?'#fff':'var(--ink-2)'};white-space:nowrap;overflow:hidden">${v[0]}</div></div>`).join('')}
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:8px;border-top:1px solid var(--line);padding-top:8px">
+          ${['$50k','$100k','$250k','$500k','$1M','$2M','$5M','$10M','$20M','$50M','$100M','$200M'].map(l=>`<div style="text-align:center;font-size:10.5px;color:var(--muted)">${l}</div>`).join('')}
+        </div>
+        <div style="text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:5px">Average raise</div>
+      </div>
+    </div>
+    <div style="font-family:var(--serif);font-size:16.5px;color:var(--mid-lake);text-align:center;margin-top:14px">One 5% first check into a breakout returns the fund. Every later round pays up for the certainty we underwrite first.</div>
+  </div>${chrome(false)}`});
+
+
+/* (The Opportunity Ahead $15.7T and Why Global Founders Win $5.0T removed; redistributed to Why Now + The Evidence.) */
+
+/* CASE STUDIES (data-driven) */
+CASES.forEach(c=>add(caseSlide(c)));
+
+
+/* DUE DILIGENCE */
+add({title:'Due Diligence Process',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">How We Decide</div>
+    <h1 class="s-title">A high-conviction diligence process.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Every axis maps to the thesis: story, ambition, theme, domain, execution.</div>
+    <hr class="s-rule">
+    <div class="dd-row">
+      ${[
+        ['Step 1','Founder assessment','2-6 hrs','<ul><li>Breakout story, scored 1-5.</li><li>Are these the best founders in the world for this problem?</li><li>Score global ambition, theme, domain, execution.</li></ul>'],
+        ['Step 2','Market &amp; model','6-18 hrs','<ul><li>Market sizing and model.</li><li>Data room and cap table.</li><li>Benchmark vs comps; product roadmap.</li></ul>'],
+        ['Step 3','Reflection &amp; decision','18+ hrs','<ul><li>Internal alignment and conviction.</li><li>SWOT and competitive positioning.</li><li>3 ecosystem intros (customers &amp; operators).</li></ul>'],
+        ['Step 4','Closing push','24-72 hrs','<ul><li>Thematic alignment session.</li><li>Support via customer &amp; talent intros.</li><li>Financial &amp; ops guidance.</li></ul>']
+      ].map((s,i)=>`${i?'<div class="dd-arrow">›</div>':''}<div class="dd-col"><div class="kicker">${s[0]}</div><div class="dd-title">${s[1]}</div><div class="dd-chip">${s[2]}</div>${s[3]}</div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:14px">Scored 1-5 across five axes. 20/25 advances, then the 7-week Acceleration begins.</div>
+  </div>${chrome(false)}`});
+
+
+/* SUPPORT — 7-WEEK ACCELERATION */
+add({title:'Speakeasy Program',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Support · Sunshine Lake Speakeasy Program</div>
+    <h1 class="s-title">A 7-week sprint. Every week, a deliverable.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">Sunshine Lake matches operators with founders on a bespoke and rotating basis to create the best outcomes possible.</div>
+
+    <hr class="s-rule">
+    <div style="display:flex;gap:16px;margin-top:22px;flex:1;align-items:stretch">
+      ${[
+        ['Weeks 1-2','Storytelling','#155EE8','#0B3FA8','#eef3fd','A fundable narrative &amp; pitch deck',[
+          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Narrative & positioning','The arc: problem, why-now, why-you.'],
+          ['<path d="M9.5 18h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.3 1 2.1V17h6v-1.4c0-.8.2-1.4 1-2.1A6 6 0 0 0 12 3z"/>','Investor psychology','What makes a partner lean in.'],
+          ['<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/>','10-minute talk track','Delivery, pacing, the demo moment.'],
+          ['<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/>','Fundraising assets','Deck, memo, data-backed story.']
+        ]],
+        ['Weeks 3-4','Execution','#BE922A','#8f6d15','#f8f0dd','An operating plan &amp; financial model',[
+          ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org design & cadence','Roles, rhythm, weekly KPIs.'],
+          ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring plan','The first ten hires across borders.'],
+          ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','Financial model','Unit economics and a defensible plan.'],
+          ['<circle cx="12" cy="12" r="3"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/>','Ops systems','Tooling and metrics that scale.']
+        ]],
+        ['Weeks 5-6','Domain','#2f9d6f','#1f7a54','#e9f6f0','A live network &amp; advisor bench',[
+          ['<path d="M9 12a3 3 0 0 1 3-3h2.5a3 3 0 0 1 0 6M15 12a3 3 0 0 1-3 3H9.5a3 3 0 0 1 0-6"/>','Warm intros & hiring','Customers, key hires, partners.'],
+          ['<path d="M12 3c2.8 1 4.5 3.8 4.5 7.5L15 14H9l-1.5-3.5C7.5 6.8 9.2 4 12 3z"/><circle cx="12" cy="9" r="1.3"/><path d="M9.5 16l-2 4M14.5 16l2 4"/>','BD & GTM strategy','Positioning to pipeline.'],
+          ['<path d="M12 3l7 3v5c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6z"/>','Competitive moat','Where you win, why it holds.'],
+          ['<circle cx="8" cy="9" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.2M21.5 20a5 5 0 0 0-4-4.9"/>','Board & advisor bench','Operators matched to your stage.']
+        ]],
+        ['Week 7','Raise-readiness','#0A3DAE','#06266e','#eaeff8','A Series A-ready data room',[
+          ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','Series A forecasting','Milestones that clear the bar.'],
+          ['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/>','Round strategy','Target list, timing, and process.'],
+          ['<path d="M3 6h6l2 2h10v11H3z"/>','Diligence-ready','Data room and clean cap table.'],
+          ['<path d="M4 5h16v11H9l-4 3v-3H4z"/>','Investor intros','Warm paths to the right leads.']
+        ]]
+      ].map((w,i)=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.07)"><div style="background:linear-gradient(135deg,${w[2]},${w[3]});color:#fff;padding:14px 16px 12px;display:flex;align-items:center;gap:11px"><span style="flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px">${i+1}</span><div><div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85">${w[0]}</div><div style="font-family:var(--serif);font-size:22px;margin-top:1px;line-height:1.05">${w[1]}</div></div></div><div style="flex:1;background:#f8faff;padding:16px 15px;display:flex;flex-direction:column;justify-content:center;gap:17px">${w[6].map(b=>`<div style="display:flex;gap:10px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:1px;color:${w[2]}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${b[0]}</svg></span><div><div style="font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.25">${b[1]}</div><div style="font-size:11px;color:var(--muted);margin-top:1px;line-height:1.3">${b[2]}</div></div></div>`).join('')}</div><div style="background:${w[4]};padding:11px 15px 12px;border-top:2px solid ${w[2]}"><div style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${w[2]}">Deliverable</div><div style="font-family:var(--serif);font-size:14px;color:var(--ink);margin-top:3px;line-height:1.25">${w[5]}</div></div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">The sprint earns more than readiness: the relationship that wins follow-ons and co-invest allocations.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — THE SPRINT DEEP-DIVES (weeks 1-2, 3-4, 5-6, 7) — styled to match the top-level 7-week sprint */
+function sprintSlide(o){
+  const ac=o.colors[0], dk=o.colors[1], lt=o.colors[2];
+  return {title:o.title,track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad" style="padding-top:34px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <span style="flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,${ac},${dk});color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;box-shadow:0 6px 16px ${ac}44">${o.n}</span>
+      <div style="display:flex;align-items:baseline;gap:14px">
+        <span style="font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${ac}">The Sprint · ${o.weeks}</span>
+        <span style="width:1px;height:15px;background:var(--line);transform:translateY(2px)"></span>
+        <span style="font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1">${o.phase}</span>
+      </div>
+      <span style="margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px">Example case</span>
+    </div>
+    <h1 class="s-title" style="font-size:37px;margin-top:14px">${o.h}</h1>
+    <div style="font-size:15px;color:var(--mid-lake);margin-top:7px;max-width:1090px;line-height:1.4">${o.sub}</div>
+    <div style="flex:1;display:flex;align-items:center;margin-top:22px">
+    <div style="display:flex;gap:20px;width:100%;align-items:stretch">
+      ${o.cols.map(c=>`<div style="flex:1;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 22px rgba(11,18,117,.06)"><div style="height:4px;background:linear-gradient(135deg,${ac},${dk})"></div><div style="flex:1;background:#f8faff;padding:26px 26px;display:flex;flex-direction:column;justify-content:center"><div style="width:50px;height:50px;border-radius:14px;background:${lt};display:flex;align-items:center;justify-content:center;color:${ac};margin-bottom:20px"><svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${c[0]}</svg></div><div style="font-family:var(--serif);font-size:20px;color:${ac};line-height:1.12">${c[1]}</div><div style="font-size:14px;color:var(--ink-2);line-height:1.55;margin-top:12px">${c[2]}</div></div></div>`).join('')}
+    </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
+      <div style="flex:0 0 auto;background:${lt};border-radius:10px;padding:10px 16px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:${ac}">Deliverable</span> &nbsp;<span style="font-family:var(--serif);font-size:14.5px;color:var(--ink)">${o.deliverable}</span></div>
+      <div style="flex:1;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--mid-lake)">${o.foot}</div>
+    </div>
+  </div>${chrome(false)}`};
+}
+add(sprintSlide({
+  title:'The Sprint · Weeks 1-2', n:1, weeks:'Weeks 1-2', phase:'Storytelling',
+  colors:['#155EE8','#0B3FA8','#eef3fd'], deliverable:'A fundable narrative &amp; pitch deck',
+  h:'Developing a world-class narrative.',
+  sub:'Outsiders do world-class work, then undersell it. We fix that first.',
+  cols:[
+    ['<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9a4 4 0 0 1 0 6"/>','The gap','Second-language pitching, modesty norms, deadpan delivery: the traits that make outsiders great builders make them under-tell the story. The market misprices them twice.'],
+    ['<circle cx="12" cy="8" r="3.6"/><path d="M6 21a6 6 0 0 1 12 0"/>','The coach','Andrew Hovelson: Broadway with Tom Hanks (Lucky Guy) and Frank Langella (The Father). NYU Tisch. He coached Wordware to its $30mm seed.'],
+    ['<circle cx="12" cy="13" r="8"/><path d="M12 13V8.5M9.5 2.5h5M18.6 6.4l1.4-1.4"/>','The craft','Weeks 1-2 of the sprint: narrative arc, investor psychology, the 10-minute talk track, written, rehearsed and staged at the Speakeasy until it lands.']
+  ],
+  foot:'Story becomes mission; mission becomes revenue, and the round follows the story.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Weeks 3-4', n:2, weeks:'Weeks 3-4', phase:'Execution',
+  colors:['#BE922A','#8f6d15','#f8f0dd'], deliverable:'An operating plan &amp; financial model',
+  h:'Operating momentum, installed.',
+  sub:'The people who ran the machines install the machinery.',
+  cols:[
+    ['<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v3M6 16v-2h12v2"/>','Org &amp; cadence','Don installs the weekly operating rhythm: roles, KPIs, review cadence, the way he ran teams of hundreds.'],
+    ['<path d="M3 21h18"/><rect x="5" y="11" width="3" height="7"/><rect x="10.5" y="7" width="3" height="11"/><rect x="16" y="13" width="3" height="5"/>','The model','Ivan (CFO &amp; COO) rebuilds the financial model until it survives Series A diligence: unit economics, burn, the double-down case.'],
+    ['<circle cx="9" cy="8" r="3.3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M18 8v6M21 11h-6"/>','Global hiring','A Deel co-founder maps the first ten hires across borders, and the company runs payroll on Deel from day one.']
+  ],
+  foot:'Founders leave week 4 with an operating plan investors can audit, and a cadence they can keep.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Weeks 5-6', n:3, weeks:'Weeks 5-6', phase:'Domain',
+  colors:['#2f9d6f','#1f7a54','#e9f6f0'], deliverable:'A live network &amp; advisor bench',
+  h:'The network goes to work.',
+  sub:'No fixed curriculum: unicorn founders, LPs and category veterans, matched and rotated to each company\'s bespoke needs.',
+  cols:[
+    ['<path d="M5 21h14M7 21V4h8v17M15 4l3 2v15M12 12h.01"/>','Customer doors','Warm paths to first customers and partners from Don\'s pipeline and Jamie\'s growth playbooks, positioning tuned until it converts to pipeline.'],
+    ['<circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.6 8.4l3 7.6M16.4 8.4l-3 7.6M8.2 7h7.6"/>','Domain councils','Rotating sessions with the operators and LPs who built the category, matched to each company: dev tools, consumer, fintech, data &amp; AI.'],
+    ['<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>','Regional doors','Market entry through the fund\'s own map: Japan &amp; APAC, EMEA and MENA, opened company by company.']
+  ],
+  foot:'By week 6, every company has named customers in pipeline, and an advisor bench of its own.'
+}));
+add(sprintSlide({
+  title:'The Sprint · Week 7', n:4, weeks:'Week 7', phase:'Fundraising Readiness',
+  colors:['#0A3DAE','#06266e','#eaeff8'], deliverable:'A Series A-ready data room',
+  h:'Ready to raise, long before they raise.',
+  sub:'Companies don\'t fundraise in week 7. They leave ready, and the round comes when the numbers do.',
+  cols:[
+    ['<path d="M3 21h18"/><path d="M5 15l4.5-4.5 3.5 3L20 6"/><path d="M20 10V6h-4"/>','The plan','Don sets milestones, pricing logic and the target list with multistage discipline; Ivan ships the diligence pack to the standard our own LPs receive.'],
+    ['<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/>','Stacking the cap table','We add founder-angels to the round: many are LPs in top-tier venture funds, many are our Sunshine Lake LPs, so the next lead hears about the company from inside its own LP base.'],
+    ['<rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8 20h8"/>','Demo night at the Speakeasy','Our Broadway veteran stages the 10-minute talk track; the cohort pitches unicorn founders and select LPs, relationships that mature into the round, months later.']
+  ],
+  foot:'When the milestone hits, the round assembles itself, that\'s why 43% graduate seed-to-A.'
+}));
+
+
+/* NEW — THE SPEAKEASY */
+add({title:'The Speakeasy',track:'appendix',teaser:false,dark:true,cls:'',html:`
+  <div class="s-pad" style="background:linear-gradient(155deg,#0B1275 0%,#070d33 55%,#02041F 100%);flex-direction:row;gap:46px;align-items:center">
+    <div style="flex:1.02;min-width:0">
+      <div class="eyebrow" style="color:var(--sun);margin-bottom:16px">By invitation · San Francisco to Athens</div>
+      <div style="font-family:var(--serif);font-size:22px;color:rgba(255,255,255,.9);line-height:1">The</div>
+      <div style="font-family:var(--serif);font-weight:500;font-size:42px;line-height:1.05;color:#eaf3ff;margin-top:2px;text-shadow:0 0 4px #eaf3ff,0 0 12px #2f6bff,0 0 26px #2f6bff,0 0 56px rgba(47,107,255,.7)">Sunshine Lake</div>
+      <div style="font-family:var(--serif);font-weight:500;font-size:62px;line-height:1;letter-spacing:-.01em;color:#fff;margin-top:6px">Speakeasy</div>
+      <p style="font-family:var(--serif);font-size:16px;color:rgba(255,255,255,.8);line-height:1.55;margin:22px 0 0;max-width:31em"><b style="color:#fff;font-weight:500">Not a founder house.</b> For fifteen years Don has made a home for international founders in San Francisco, the network, craft and capital no local fund can hand them.</p>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:12px">
+        ${[
+          ['In the community','Embedded in SF where technology compounds, not enclosed.'],
+          ['A speakeasy, properly','Offsites, unicorn-founder talks and LP salons; a room to be candid.'],
+          ['The landing','A desk, O-1 visa support, payroll on Deel and the first fifty intros, before the first check clears.']
+        ].map(c=>`<div style="display:flex;gap:12px;align-items:baseline"><span style="flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.45"><b style="color:#fff;font-weight:600">${c[0]}.</b> ${c[1]}</div></div>`).join('')}
+      </div>
+    </div>
+    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:12px;align-self:stretch">
+      ${['room.jpg','group.jpg','speak.jpg','one-on-one.jpg'].map(src=>`<div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12)"><img src="images/speakeasy/${src}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>`).join('')}
+    </div>
+  </div>${chrome(true)}`});
+
+
+/* LP CO-INVESTMENT PROOF */
+add({title:'LP Co-Investment Proof',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Co-Investment · Proof</div>
+    <h1 class="s-title">Our co-invests are compounding.</h1>
+    <hr class="s-rule">
+    <div style="display:flex;gap:30px;margin-top:26px;flex:1">
+      ${[
+        ['Fieldguide','Marked up 1.6×','AI for the $6T professional-services economy · Jin Chang (Korea)','$700mm Series C','Goldman-led · Feb 2026','<b style="color:var(--ink);font-weight:600">Offered to existing LPs at a 25% discount to the last round.</b> Already marked up to 1.6× after investment.* Bessemer sits on the board.','#2f9d6f'],
+        ['Deel','IPO on horizon','Payroll for the world\'s workforce, tens of $T · Shuo &amp; Alex','$17.3B','post-money · $1.5B+ ARR, held at cost and growing fast','<b style="color:var(--ink);font-weight:600">A discount to intrinsic value</b>, the same price as the 2025 Series E, though substantial growth has occurred since. On the cap table: Ribbit · a16z · Coatue.','#155EE8']
+      ].map(c=>`<div style="flex:1;background:#fafbfe;border:1px solid var(--line);border-radius:16px;padding:30px 34px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:var(--serif);font-size:36px;color:var(--ink)">${c[0]}</div><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:${c[6]};border-radius:999px;padding:7px 16px">${c[1]}</div></div><div style="font-size:14px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:14px">${c[2]}</div><div style="margin-top:auto;padding-top:22px"><div style="font-family:var(--serif);font-size:52px;color:${c[6]};line-height:1">${c[3]}</div><div style="font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.5">${c[4]}</div><div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.45">${c[5]}</div></div></div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px">*Fieldguide markup based on subsequent secondary transactions.</div>
+  </div>${chrome(false)}`});
+
+
+/* NEW — THE LPA AT A GLANCE */
+add({title:'LPA at a Glance',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Appendix · The LPA at a Glance</div>
+    <h1 class="s-title">Institutional terms, already signed.</h1>
+    <div style="font-size:15.5px;color:var(--mid-lake);margin-top:8px">A summary of the executed LPA. The full document sits in the data room.</div>
+    <hr class="s-rule">
+    <div style="display:flex;gap:40px;margin-top:26px;flex:1">
+      ${[
+        ['Economics',['2.5% management fee, stepping down 0.20%/yr to a 1.5% floor','20% carried interest · 80/20 split after return of LP capital','GP clawback provision']],
+        ['Governance',['Key Person clause tied to the Principal\'s time and effort','LP Advisory Committee with oversight of critical decisions','≤20% of commitments in any single company']],
+        ['Mechanics',['10-year term · two one-year extensions with Advisory Committee consent','5-year investment period from final close','Recycling permitted · expected ~80% deployed over 3.5 years; reserves in the final 1.5']]
+      ].map(c=>`<div style="flex:1;display:flex;flex-direction:column"><div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:20px">${c[0]}</div><div style="display:flex;flex-direction:column;gap:22px">${c[1].map(it=>`<div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:0 0 auto;margin-top:7px;width:6px;height:6px;border-radius:50%;background:var(--sun)"></span><div style="font-size:14.5px;color:var(--ink);line-height:1.5">${it}</div></div>`).join('')}</div></div>`).join('')}
+    </div>
+    <div class="note" style="margin-top:14px;text-align:center">A summary only, the LPA governs. Full signed documents in the data room.</div>
+  </div>${chrome(false)}`});
+
+
+/* BACK OFFICE / STACK */
+add({title:'Back Office &amp; Tech Stack',track:'appendix',teaser:false,dark:false,cls:'',html:`
+  <div class="s-pad">
+    <div class="eyebrow">Institutional from day one</div>
+    <h1 class="s-title">A best-in-class back office.</h1>
+    <div style="display:flex;gap:20px;margin-top:36px">
+      ${[['Fund counsel','Morrison Foerster'],['Deal counsel','Cooley'],['Fund admin','Vector'],['Audit','Sensiba'],['Banking','Citizens']].map(c=>`<div style="flex:1;background:#fdf3df;border-radius:12px;padding:22px 16px;text-align:center"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b8902a">${c[0]}</div><div style="font-family:var(--serif);font-size:21px;color:var(--ink);margin-top:10px">${c[1]}</div></div>`).join('')}
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:space-evenly;margin-top:14px">
+      ${[['The data room','LPA · audited financials · CFO &amp; founder references · attribution letter · press kit'],['Systems of record','Airtable · Notion · Affinity (CRM) · Vector (fund admin) · Deel (HR &amp; compliance)'],['AI &amp; tooling','OpenAI · Anthropic · Grok · AWS · Python · Zapier'],['Collaboration','Gmail · Google Drive · Slack · Zoom · LinkedIn']].map(r=>`<div style="display:flex;align-items:center;gap:30px;padding:18px 0;border-bottom:1px solid var(--line)"><div style="flex:0 0 230px;font-family:var(--serif);font-size:20px;color:var(--ink)">${r[0]}</div><div style="flex:1;font-size:16px;color:var(--ink-2)">${r[1]}</div></div>`).join('')}
+    </div>
+    <div style="font-family:var(--serif);font-size:18px;color:var(--mid-lake);text-align:center;margin-top:18px">LPs frequently note Sunshine Lake operates with the maturity of a Fund II.</div>
+  </div>${chrome(false)}`});
+
+
+/* DEFINITION */
+add({title:'Definition',track:'appendix',teaser:false,dark:true,cls:'defn',html:`
+  <div class="s-pad">
+    <div class="eyebrow" style="color:var(--sun)">The Definition</div>
+    <div class="dn-word">Sunshine Lake</div>
+    <div class="dn-def"><span class="dn-pron">/ˈsʌnʃaɪn leɪk/ · <span class="pos">noun</span>;</span> a far-away place where rare entrepreneurial beings are <b>forged by extreme origins</b>.</div>
+    <div class="cite">Star Wars: Ewoks #9</div>
+  </div><span class="s-conf">Strictly Confidential</span>`});
+
+
+/* DISCLAIMER */
+add({title:'Disclaimer',track:'appendix',teaser:false,dark:false,cls:'disc',html:`
+  <div class="s-pad">
+    <h1 class="s-title" style="font-size:40px;margin-bottom:18px">Disclaimer</h1>
+    <div class="cols">
+      <div class="col"><p>This presentation contains selected information about Sunshine Lake ("Adviser") and its affiliates and certain funds the Adviser manages or plans to manage. It is furnished solely for informational purposes for use in preliminary discussions. It is not, and is not intended to be, an offer to sell, or a solicitation of an offer to purchase, any securities or interest in any fund.</p><p>This presentation contains information as of the date on the cover and is subject to change. It should not be assumed to be complete. Information relating to third-party companies has been provided by such companies or sourced from publicly available information; no representation is made as to its accuracy or completeness.</p></div>
+      <div class="col"><p>The information is based in part on past performance and certain assumptions about future growth. These assumptions have inherent limitations and will be affected by changes in structure, criteria, or assets. Actual performance may differ substantially.</p><p>Certain information constitutes "forward-looking statements." Due to various risks and uncertainties, actual events or results may differ materially. The contents are not to be construed as legal, regulatory, business, accounting, or tax advice. Any performance-related figures, where provided, are gross of fees and expenses unless otherwise noted; company valuations reflect publicly reported financing rounds and press reports and are not indicative of fund performance.</p></div>
+      <div class="col"><p>This presentation is confidential. Any reproduction or distribution, in whole or in part, without the prior written consent of the Adviser is prohibited. By receiving it, you acknowledge and agree that it is confidential, non-public, and/or proprietary information.</p><p>The distribution of this presentation in certain jurisdictions may be restricted by law. You should inform yourself as to the legal requirements and tax consequences of an investment within the countries of your citizenship, residence, domicile, and place of business.</p><p>References to San Francisco describe the location of the Sunshine Lake Speakeasy, a community venue, and the firm's network; they do not indicate the residence of any individual or the principal office of the Adviser. The Adviser's personnel are distributed across multiple states and countries.</p></div>
+    </div>
+  </div>${chrome(false)}`});
+
+
+/* ============================================================
+   RENDER + NAVIGATION
+   ============================================================ */
+const stage=document.getElementById('stage');
+SLIDES.forEach((s,i)=>{
+  const el=document.createElement('section');
+  el.className='slide '+(s.cls||'')+(s.dark?' dark':'');
+  el.dataset.track=s.track; el.dataset.teaser=s.teaser?'1':'0'; el.dataset.idx=i;
+  el.innerHTML=s.html;
+  stage.appendChild(el);
+});
+const slideEls=[...stage.querySelectorAll('.slide')];
+
+let mode='full', order=[], cur=0;
+function rebuildOrder(){
+  order=SLIDES.map((s,i)=>i).filter(i=> mode==='full' ? true : SLIDES[i].teaser);
+  slideEls.forEach((el,i)=>el.classList.toggle('hide-in-mode', !order.includes(i)));
+  buildProgress();
+}
+function show(posInOrder){
+  cur=Math.max(0,Math.min(order.length-1,posInOrder));
+  const idx=order[cur];
+  slideEls.forEach((el,i)=>el.classList.toggle('active', i===idx));
+  document.getElementById('count').textContent=`${cur+1} / ${order.length}`;
+  document.getElementById('barTitle').textContent=SLIDES[idx].title.replace(/&amp;/g,'&');
+  [...document.querySelectorAll('#progress .pd')].forEach((d,i)=>d.classList.toggle('on',i===cur));
+  location.hash=idx;
+  if(SLIDES[idx].title==='Why Now') runWhyCountUp(slideEls[idx]);
+}
+function runWhyCountUp(slide){
+  if(!slide) return;
+  const caps=[...slide.querySelectorAll('.why-cap')];
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  caps.forEach((el,i)=>{
+    const raw=el.getAttribute('data-cap')||el.textContent;
+    const m=raw.match(/^(\D*)([\d.]+)(.*)$/);
+    if(!m||reduce){el.textContent=raw;return;}
+    const pre=m[1], target=parseFloat(m[2]), suf=m[3], dec=(m[2].split('.')[1]||'').length;
+    const dur=440, start=performance.now()+i*(dur+70);
+    el.textContent=pre+(0).toFixed(dec)+suf;
+    (function frame(now){
+      const t=Math.min(1,Math.max(0,(now-start)/dur)), e=1-Math.pow(1-t,3);
+      el.textContent=t<=0?pre+(0).toFixed(dec)+suf:pre+(target*e).toFixed(dec)+suf;
+      if(t<1) requestAnimationFrame(frame); else el.textContent=raw;
+    })(performance.now());
+  });
+}
+function next(){show(cur+1);} function prev(){show(cur-1);}
+function buildProgress(){
+  const p=document.getElementById('progress'); p.innerHTML='';
+  order.forEach((idx,i)=>{const d=document.createElement('div');d.className='pd'+(SLIDES[idx].cls==='section'?' sec':'');d.onclick=()=>show(i);p.appendChild(d);});
+}
+
+/* scale stage to viewport */
+function fit(){
+  const pad=58;
+  const sw=(innerWidth)/1280, sh=(innerHeight-pad)/720;
+  stage.style.transform=`scale(${Math.min(sw,sh)})`;
+}
+addEventListener('resize',fit);
+
+/* controls */
+document.getElementById('navRight').onclick=next;
+document.getElementById('navLeft').onclick=prev;
+document.getElementById('exportBtn').onclick=()=>{
+  // print only slides in the current mode
+  slideEls.forEach((el,i)=>el.classList.toggle('print-skip',!order.includes(i)));
+  // break BEFORE each slide (not after) so there is no trailing blank page; first printed slide gets no break-before
+  const firstIdx=order[0];
+  slideEls.forEach((el,i)=>el.classList.toggle('print-start',i===firstIdx));
+  window.print();
+};
+addEventListener('keydown',e=>{
+  if(document.getElementById('gate').style.display==='none'){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(order.length-1);}
+    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  }
+});
+
+/* show chrome on mouse move */
+let hideTimer;
+function flashChrome(){
+  document.getElementById('bar').classList.add('show');
+  document.getElementById('progress').classList.add('show');
+  clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>{document.getElementById('bar').classList.remove('show');document.getElementById('progress').classList.remove('show');},2600);
+}
+addEventListener('mousemove',flashChrome);
+
+/* touch swipe navigation (mobile) */
+let tsx=0,tsy=0,tst=0;
+addEventListener('touchstart',e=>{const t=e.changedTouches[0];tsx=t.clientX;tsy=t.clientY;tst=Date.now();},{passive:true});
+addEventListener('touchend',e=>{
+  if(document.getElementById('gate').style.display!=='none')return;
+  const t=e.changedTouches[0],dx=t.clientX-tsx,dy=t.clientY-tsy;
+  if(Date.now()-tst<800 && Math.abs(dx)>48 && Math.abs(dx)>Math.abs(dy)*1.4){ dx<0?next():prev(); }
+},{passive:true});
+
+/* sparkle starfield on the cover */
+function sparkles(){
+  const cover=stage.querySelector('.cover'); if(!cover)return;
+  const pts=[[78,12,16],[86,8,11],[82,30,22],[68,46,14],[71,54,11],[91,58,10],[18,8,12],[8,30,14],[24,72,12],[88,80,10],[40,84,12],[60,16,9]];
+  pts.forEach((p,i)=>{const s=document.createElement('div');s.className='spark';s.style.cssText=`left:${p[0]}%;top:${p[1]}%;width:${p[2]}px;height:${p[2]}px;animation-delay:${(i*0.43).toFixed(2)}s;animation-duration:${(2.2+(i%4)*0.45).toFixed(2)}s;`;cover.appendChild(s);});
+}
+
+let booted=false;
+function boot(){
+  if(booted)return; booted=true;
+  sparkles();
+  rebuildOrder();
+  const h=parseInt(location.hash.replace('#',''));
+  const startPos=(!isNaN(h)&&order.includes(h))?order.indexOf(h):0;
+  show(startPos);
+  fit(); flashChrome();
+  setTimeout(()=>{const el=document.getElementById('hint');if(el)el.style.opacity='0';setTimeout(()=>el&&el.remove(),600);},4200);
+}
+
+/* auto-unlock if already authed this session (runs last, after all vars/fns are defined) */
+if(sessionStorage.getItem('slDeckAuth')==='1'){unlock();}
+</script>
+</body>
+</html>
