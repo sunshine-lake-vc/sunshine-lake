@@ -820,33 +820,43 @@
             transition:opacity .4s ease,background .45s ease,visibility 0s .45s}
         .egg-def.is-open{opacity:1;visibility:visible;background:rgba(3,5,18,.74);
             transition:opacity .4s ease,background .45s ease}
+        /* The whole card is shimmering water (echoes the hero shader): a blue
+           water gradient with animated caustic highlights drifting across it. */
         .egg-card{
-            position:relative;max-width:600px;width:100%;text-align:left;
+            position:relative;overflow:hidden;isolation:isolate;
+            max-width:600px;width:100%;text-align:left;
             display:flex;gap:clamp(16px,3vw,30px);align-items:center;
-            background:#0a0d24;border:1px solid rgba(201,164,63,.42);
+            background:
+              radial-gradient(70% 100% at 20% 34%, #4784d4 0%, rgba(71,132,212,0) 58%),
+              linear-gradient(180deg,#295fac 0%,#184390 46%,#0b2258 100%);
+            border:1px solid rgba(255,255,255,.16);
             border-radius:18px;padding:clamp(22px,2.8vw,36px);
             box-shadow:0 30px 90px rgba(0,0,0,.55);
             transform:scale(.9);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s ease}
+        .egg-card::before{content:'';position:absolute;inset:-12%;z-index:0;pointer-events:none;
+            background:
+              radial-gradient(ellipse 55% 30% at 26% 20%, rgba(226,244,255,.5), transparent 60%),
+              radial-gradient(ellipse 46% 24% at 74% 62%, rgba(255,255,255,.4), transparent 62%),
+              radial-gradient(ellipse 40% 22% at 18% 82%, rgba(190,225,250,.42), transparent 62%),
+              radial-gradient(ellipse 30% 16% at 64% 28%, rgba(255,244,205,.34), transparent 64%);
+            mix-blend-mode:screen;animation:eggWater 8s ease-in-out infinite alternate}
+        @keyframes eggWater{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-5%,3%) scale(1.07)}100%{transform:translate(4%,-2%) scale(1.04)}}
+        .egg-card > *{position:relative;z-index:1}
+        @media(prefers-reduced-motion:reduce){.egg-card::before{animation:none}}
         .egg-def.is-open .egg-card{transform:scale(1);opacity:1}
         .egg-close{position:absolute;top:10px;right:12px;width:30px;height:30px;border:0;background:none;
-            color:var(--white-dim);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:color .2s ease}
+            color:rgba(255,255,255,.8);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:color .2s ease}
         .egg-close:hover{color:#fff}
-        /* No white tile: the boat sits on a water backdrop drawn from the hero
-           shader palette (warm sun glint over sky-blue-to-deep-blue water). */
-        .egg-mark{width:clamp(132px,24vw,188px);height:auto;flex:0 0 auto;box-sizing:content-box;
-            background:
-              radial-gradient(78% 52% at 50% 6%, rgba(255,246,209,.92) 0%, rgba(255,246,209,0) 58%),
-              radial-gradient(60% 40% at 22% 30%, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 60%),
-              linear-gradient(180deg,#c6e3f8 0%,#7cb0e8 38%,#3f74cf 72%,#234f9e 100%);
-            border-radius:16px;padding:clamp(13px,1.6vw,20px);
-            box-shadow:0 12px 30px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.16)}
+        /* No tile: the boat floats directly on the card's water */
+        .egg-mark{width:clamp(150px,28vw,210px);height:auto;flex:0 0 auto;
+            filter:drop-shadow(0 6px 12px rgba(0,12,44,.45))}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
-        .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
-        .egg-pos{font-family:var(--serif);font-style:italic;color:var(--gold-deco);font-size:.72em}
-        .egg-sense{font-family:var(--sans);font-size:clamp(15px,1.2vw,17px);line-height:1.55;color:var(--white-soft);margin:0 0 10px}
+        .egg-pron{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.74);font-size:.72em}
+        .egg-pos{font-family:var(--serif);font-style:italic;color:var(--yellow);font-size:.72em}
+        .egg-sense{font-family:var(--sans);font-size:clamp(15px,1.2vw,17px);line-height:1.55;color:#eef3fc;margin:0 0 10px}
         .egg-sense em{color:var(--yellow);font-style:italic}
-        .egg-etym{font-family:var(--sans);font-size:13px;color:var(--white-dim);margin:0}
+        .egg-etym{font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.72);margin:0}
         .egg-etym i{font-style:italic}
         @media(max-width:560px){
             .egg-card{flex-direction:column;text-align:center;align-items:center}
