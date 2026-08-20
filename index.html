@@ -800,7 +800,7 @@
          Lake dictionary card, restyled dark (gold + white-soft, DomaineDisp)
          to match the new site instead of the old cream card. -->
     <style>
-        .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(64px,12vw,120px);margin-top:clamp(-48px,-4vw,-24px);position:relative;z-index:1;overflow:hidden}
+        .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(40px,6vw,72px);margin-top:clamp(-48px,-4vw,-24px);position:relative;z-index:1;overflow:hidden}
         .egg-peek{display:inline-flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 14px;color:var(--gold-deco);transition:transform .3s ease,color .25s ease}
         .egg-peek:hover{transform:translateY(-4px);color:var(--yellow)}
         .egg-peek img{width:clamp(48px,6vw,72px);height:auto;opacity:.85;animation:eggBob 4.5s ease-in-out infinite}
@@ -809,14 +809,23 @@
         @keyframes eggBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         @media(prefers-reduced-motion:reduce){.egg-peek img{animation:none}}
         .egg-peek.is-hidden{opacity:0;pointer-events:none;height:0;padding:0;margin:0;overflow:hidden}
-        .egg-def{max-height:0;opacity:0;overflow:hidden;transform:translateY(-10px);transform-origin:top center;transition:max-height .8s cubic-bezier(.22,1,.36,1),opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
-        .egg-def.is-open{opacity:1;transform:translateY(0)}
+        /* Revealed as a centered popover so it can never open off-screen */
+        .egg-def{position:fixed;inset:0;z-index:220;display:flex;align-items:center;justify-content:center;
+            padding:clamp(18px,5vw,40px);background:rgba(3,5,18,0);opacity:0;visibility:hidden;
+            transition:opacity .4s ease,background .45s ease,visibility 0s .45s}
+        .egg-def.is-open{opacity:1;visibility:visible;background:rgba(3,5,18,.74);
+            transition:opacity .4s ease,background .45s ease}
         .egg-card{
-            max-width:600px;margin:clamp(16px,2.6vw,34px) auto 0;text-align:left;
+            position:relative;max-width:600px;width:100%;text-align:left;
             display:flex;gap:clamp(16px,3vw,30px);align-items:center;
-            background:rgba(255,255,255,.04);border:1px solid rgba(201,164,63,.28);
-            border-radius:18px;padding:clamp(20px,2.6vw,34px);
-        }
+            background:#0a0d24;border:1px solid rgba(201,164,63,.42);
+            border-radius:18px;padding:clamp(22px,2.8vw,36px);
+            box-shadow:0 30px 90px rgba(0,0,0,.55);
+            transform:scale(.9);opacity:0;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s ease}
+        .egg-def.is-open .egg-card{transform:scale(1);opacity:1}
+        .egg-close{position:absolute;top:10px;right:12px;width:30px;height:30px;border:0;background:none;
+            color:var(--white-dim);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:color .2s ease}
+        .egg-close:hover{color:#fff}
         .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;
             background:radial-gradient(120% 120% at 50% 30%,#fbfcff 0%,#eef1fb 100%);
             border:1px solid rgba(201,164,63,.45);border-radius:14px;
@@ -839,8 +848,9 @@
             <img src="images/logos/ewok-spear.png?v=1" alt="" aria-hidden="true">
             <span class="egg-peek-label">Look closer</span>
         </button>
-        <div class="egg-def" id="eggDef">
+        <div class="egg-def" id="eggDef" role="dialog" aria-modal="true" aria-label="Sunshine Lake, defined">
             <div class="egg-card">
+                <button class="egg-close" id="eggClose" type="button" aria-label="Close">&times;</button>
                 <img class="egg-mark" src="images/logos/ewoks.webp" alt="" aria-hidden="true">
                 <div class="egg-entry">
                     <p class="egg-headword"><strong>Sun&middot;shine Lake</strong> <span class="egg-pron">\ &#712;s&#652;n&#643;a&#618;n le&#618;k \</span> <em class="egg-pos">noun</em></p>
@@ -852,27 +862,15 @@
     </section>
     <script>
       (function(){
-        var peek=document.getElementById('eggPeek'), def=document.getElementById('eggDef');
+        var peek=document.getElementById('eggPeek'), def=document.getElementById('eggDef'), closeBtn=document.getElementById('eggClose');
         if(!peek||!def) return;
-        peek.addEventListener('click', function(){
-            // Card grows out of where "Look closer" sat, then a gentle scroll
-            // brings it fully into view (centered if it fits) so it never opens
-            // off-screen at the page bottom.
-            def.classList.add('is-open');
-            def.style.maxHeight = def.scrollHeight + 'px';
-            peek.setAttribute('aria-expanded','true');
-            peek.classList.add('is-hidden');
-            setTimeout(function(){
-                def.style.maxHeight='none';
-                var card=def.querySelector('.egg-card'); if(!card) return;
-                var vh=window.innerHeight, ch=card.offsetHeight;
-                var top=window.scrollY + card.getBoundingClientRect().top;
-                var pad = (ch < vh - 48) ? (vh - ch)/2 : 24; // center if it fits, else top-align
-                var target = Math.max(0, top - pad);
-                if(window._lenis && typeof window._lenis.scrollTo==='function') window._lenis.scrollTo(target,{duration:0.9});
-                else window.scrollTo({top:target,behavior:'smooth'});
-            }, 260);
-        });
+        // Reveal as a centered popover so it is always in view, never off-screen.
+        function openEgg(){ def.classList.add('is-open'); peek.setAttribute('aria-expanded','true'); }
+        function closeEgg(){ def.classList.remove('is-open'); peek.setAttribute('aria-expanded','false'); }
+        peek.addEventListener('click', openEgg);
+        if(closeBtn) closeBtn.addEventListener('click', closeEgg);
+        def.addEventListener('click', function(e){ if(e.target===def) closeEgg(); });
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape' && def.classList.contains('is-open')) closeEgg(); });
       })();
     </script>
 
