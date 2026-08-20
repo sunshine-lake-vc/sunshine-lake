@@ -831,10 +831,15 @@
         .egg-close{position:absolute;top:10px;right:12px;width:30px;height:30px;border:0;background:none;
             color:var(--white-dim);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:color .2s ease}
         .egg-close:hover{color:#fff}
-        .egg-mark{width:clamp(72px,10vw,120px);height:auto;flex:0 0 auto;
-            background:radial-gradient(120% 120% at 50% 30%,#fbfcff 0%,#eef1fb 100%);
-            border:1px solid rgba(201,164,63,.45);border-radius:14px;
-            padding:clamp(9px,1.1vw,13px);box-shadow:0 8px 22px rgba(0,0,0,.34)}
+        /* No white tile: the boat sits on a water backdrop drawn from the hero
+           shader palette (warm sun glint over sky-blue-to-deep-blue water). */
+        .egg-mark{width:clamp(132px,24vw,188px);height:auto;flex:0 0 auto;box-sizing:content-box;
+            background:
+              radial-gradient(78% 52% at 50% 6%, rgba(255,246,209,.92) 0%, rgba(255,246,209,0) 58%),
+              radial-gradient(60% 40% at 22% 30%, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 60%),
+              linear-gradient(180deg,#c6e3f8 0%,#7cb0e8 38%,#3f74cf 72%,#234f9e 100%);
+            border-radius:16px;padding:clamp(13px,1.6vw,20px);
+            box-shadow:0 12px 30px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.16)}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
         .egg-pron{font-family:var(--serif);font-style:italic;color:var(--white-dim);font-size:.72em}
