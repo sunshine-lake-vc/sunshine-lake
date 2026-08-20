@@ -350,7 +350,7 @@
         .team-bio-link{display:inline-block;margin-top:8px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid rgba(184,134,11,.45);transition:color .25s ease,border-color .25s ease}
         .team-bio-link:hover{color:var(--blue-royal);border-color:var(--blue-royal)}
         /* Heartbeat pulse on "beating heart" in the team headline */
-        .beat-heart{display:inline-block;transform-origin:center;animation:beatPulse 2.6s ease-in-out infinite}
+        .beat-heart{display:inline-block;margin:0 .06em;transform-origin:center;animation:beatPulse 2.6s ease-in-out infinite}
         @keyframes beatPulse{0%,100%{transform:scale(1)}10%{transform:scale(1.06)}20%{transform:scale(1)}30%{transform:scale(1.035)}42%{transform:scale(1)}}
         @media(prefers-reduced-motion:reduce){.beat-heart{animation:none}}
         /* Advisors & venture partners as a rubric: bordered cells in a grid */
@@ -386,7 +386,7 @@
     </style>
     <section class="team" id="section-team" aria-label="Our team">
         <div class="team-inner">
-            <h2 class="section-display team-lead">We connect global founders to the <span class="beat-heart">beating heart</span> of Silicon Valley.</h2>
+            <h2 class="section-display team-lead">We connect them to the <span class="beat-heart">beating heart</span> of Silicon Valley.</h2>
 
             <div class="team-grid">
                 <article class="team-card">
@@ -591,7 +591,7 @@
     <style>
         .tm{background:var(--navy-night);color:#fff;padding:clamp(72px,10vw,140px) clamp(22px,5vw,64px) clamp(56px,7vw,96px)}
         .tm-inner{max-width:1200px;margin:0 auto}
-        .tm-closer{font-family:var(--serif);font-size:clamp(20px,2.6vw,34px);line-height:1.22;color:#fff;text-align:center;max-width:24ch;margin:clamp(44px,5.5vw,76px) auto 0;text-wrap:balance}
+        .tm-closer{font-family:var(--serif);font-size:clamp(18px,2.35vw,30px);line-height:1.22;color:#fff;text-align:center;max-width:none;white-space:nowrap;margin:clamp(44px,5.5vw,76px) auto 0}
         .tm-head{text-align:center;margin:0 auto clamp(40px,5vw,66px);max-width:60ch}
         .tm-h2{color:#fff;margin:0 auto}
         .tm-sub{font-family:var(--serif);font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:var(--white-soft);margin:clamp(14px,1.6vw,20px) auto 0;max-width:46ch}
@@ -628,13 +628,14 @@
             .tm-card:not(.tm-lit){display:none}
             .tm-traits{flex-direction:column;gap:9px}
             .tm-dot{display:none}
+            .tm-closer{white-space:normal;max-width:22ch;text-wrap:balance;font-size:clamp(21px,5.8vw,28px)}
         }
     </style>
     <section class="tm" id="section-testimonials" aria-label="What founders say">
         <div class="tm-inner">
             <div class="tm-head">
                 <h2 class="section-display tm-h2">A founder psychology that sparks movements.</h2>
-                <p class="tm-sub">Machines make their visions real faster than ever.</p>
+                <p class="tm-sub">Machines make their visions a reality, faster than ever.</p>
             </div>
             <div class="tm-traits">
                 <span class="tm-trait">Extreme origins</span>
