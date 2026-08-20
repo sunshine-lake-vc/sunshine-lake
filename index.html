@@ -373,6 +373,7 @@
             color:var(--blue-royal);background:linear-gradient(180deg,var(--blue-light) 0%,var(--blue-light) 52%,var(--blue-royal) 100%)}
         /* Same wave, other color pairings for the rest of the section seams */
         .wave-divider.to-navy{color:var(--navy-night);background:linear-gradient(180deg,var(--blue-royal) 0%,var(--blue-royal) 52%,var(--navy-night) 100%)}
+        .wave-divider.to-black{color:var(--near-black);background:linear-gradient(180deg,var(--navy-night) 0%,var(--navy-night) 52%,var(--near-black) 100%)}
     </style>
     <section class="team" id="section-team" aria-label="Our team">
         <div class="team-inner">
@@ -738,15 +739,10 @@
     <!-- ==================== SPEAKEASY (near-black, the closing act — glow lives here only) ==================== -->
     <style>
         .sp{
-            background:linear-gradient(180deg,var(--navy-night) 0%,var(--near-black) 34%,var(--near-black) 100%);
-            color:#fff;text-align:center;padding:clamp(20px,3vw,40px) clamp(22px,5vw,64px) clamp(24px,3.5vw,44px);
+            background:var(--near-black);
+            color:#fff;text-align:center;padding:clamp(8px,1.4vw,20px) clamp(22px,5vw,64px) clamp(24px,3.5vw,44px);
             position:relative;isolation:isolate;overflow:hidden;
         }
-        .sp-deco{display:flex;align-items:center;justify-content:center;gap:14px;max-width:520px;margin:0 auto clamp(40px,6vw,72px);color:var(--gold-deco)}
-        .sp-deco .h{height:1px;flex:1;background:linear-gradient(90deg,rgba(201,164,63,0) 0%,rgba(201,164,63,.7) 100%)}
-        .sp-deco .h.r{background:linear-gradient(90deg,rgba(201,164,63,.7) 0%,rgba(201,164,63,0) 100%)}
-        .sp-deco .dot{width:3px;height:3px;border-radius:50%;background:var(--gold-deco)}
-        .sp-deco svg{width:22px;height:22px;flex:0 0 auto}
         .sp-eyebrow{color:var(--yellow);margin:0 0 clamp(18px,2vw,26px);text-shadow:0 0 20px rgba(242,201,76,.45)}
         .sp-title{
             font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,72px);line-height:1.04;
@@ -767,12 +763,21 @@
         .sp-strip figure{margin:0;flex:0 0 auto}
         .sp-strip img{height:clamp(150px,18vw,240px);width:auto;border-radius:14px;object-fit:cover;opacity:.92;filter:var(--photo-warm-bright)}
     </style>
+    <svg class="wave-divider to-black" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="currentColor" opacity=".45" d="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="13s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z;
+                        M0,44 C300,74 560,78 720,50 C900,26 1160,30 1440,58 L1440,110 L0,110 Z;
+                        M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z"/>
+        </path>
+        <path fill="currentColor" d="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z">
+            <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"
+                values="M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z;
+                        M0,54 C240,28 480,30 720,54 C960,84 1200,82 1440,46 L1440,110 L0,110 Z;
+                        M0,48 C240,86 480,86 720,56 C960,26 1200,26 1440,52 L1440,110 L0,110 Z"/>
+        </path>
+    </svg>
     <section class="sp" id="section-speakeasy" aria-label="The Sunshine Lake Speakeasy">
-        <div class="sp-deco" aria-hidden="true">
-            <span class="h"></span><span class="dot"></span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3 L20 12 L12 21 L4 12 Z"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>
-            <span class="dot"></span><span class="h r"></span>
-        </div>
         <p class="eyebrow sp-eyebrow">By Invitation</p>
         <h2 class="sp-title">The Sunshine Lake Speakeasy</h2>
         <p class="sp-sub">Where unicorn founders, Midas Listers, and world class, super human operators mentor the next generation of builders.</p>
