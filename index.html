@@ -808,11 +808,15 @@
         .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(40px,6vw,72px);margin-top:clamp(-48px,-4vw,-24px);position:relative;z-index:1;overflow:hidden}
         .egg-peek{display:inline-flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 14px;color:var(--gold-deco);transition:transform .3s ease,color .25s ease}
         .egg-peek:hover{transform:translateY(-4px);color:var(--yellow)}
-        .egg-peek img{width:clamp(48px,6vw,72px);height:auto;opacity:.85;animation:eggBob 4.5s ease-in-out infinite}
-        .egg-peek:hover img{opacity:1}
+        /* Recolor the solid-black silhouette to gold via a mask so it reads on
+           the near-black ground (it was invisible as a plain dark PNG). */
+        .egg-ewok{display:block;width:clamp(52px,6.5vw,76px);height:auto;
+            filter:brightness(0) invert(78%) sepia(64%) saturate(430%) hue-rotate(357deg) brightness(94%);
+            opacity:.92;animation:eggBob 4.5s ease-in-out infinite}
+        .egg-peek:hover .egg-ewok{opacity:1;filter:brightness(0) invert(85%) sepia(72%) saturate(520%) hue-rotate(357deg) brightness(1)}
         .egg-peek-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
         @keyframes eggBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-        @media(prefers-reduced-motion:reduce){.egg-peek img{animation:none}}
+        @media(prefers-reduced-motion:reduce){.egg-ewok{animation:none}}
         .egg-peek.is-hidden{opacity:0;pointer-events:none;height:0;padding:0;margin:0;overflow:hidden}
         /* Revealed as a centered popover so it can never open off-screen */
         .egg-def{position:fixed;inset:0;z-index:220;display:flex;align-items:center;justify-content:center;
@@ -865,7 +869,7 @@
     </style>
     <section class="egg" aria-label="Look closer">
         <button class="egg-peek" id="eggPeek" type="button" aria-label="What is Sunshine Lake?" aria-expanded="false" aria-controls="eggDef">
-            <img src="images/logos/ewok-spear.png?v=1" alt="" aria-hidden="true">
+            <img class="egg-ewok" src="images/logos/ewok-spear.png?v=1" alt="" aria-hidden="true">
             <span class="egg-peek-label">Look closer</span>
         </button>
         <div class="egg-def" id="eggDef" role="dialog" aria-modal="true" aria-label="Sunshine Lake, defined">
