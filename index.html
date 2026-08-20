@@ -339,7 +339,7 @@
     <style>
         .team{background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,var(--blue-light) 100%);color:var(--navy-ink);padding:clamp(32px,4.5vw,56px) clamp(22px,5vw,64px) clamp(20px,5vw,60px)}
         .team-inner{max-width:1280px;margin:0 auto;text-align:center}
-        .team-lead{color:var(--navy-ink);max-width:22ch;margin:0 auto clamp(44px,5.5vw,72px)}
+        .team-lead{color:var(--navy-ink);max-width:20ch;margin:0 auto clamp(44px,5.5vw,72px);text-wrap:balance}
         .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,30px);max-width:1000px;margin-inline:auto}
         .team-card{display:flex;flex-direction:column;align-items:center;text-align:center}
         .team-photo{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#B9C6E8;box-shadow:0 10px 30px rgba(30,42,120,.14)}
@@ -367,7 +367,7 @@
         @media(max-width:560px){
             .team-grid{grid-template-columns:1fr} .team-photo{max-width:76%;margin:0 auto}
             .adv-grid{grid-template-columns:1fr}
-            .adv-cell{border-left:0;border-top:1px solid rgba(30,42,120,.13)}
+            .adv-cell:nth-child(n){border-left:0;border-top:1px solid rgba(30,42,120,.22)}
             .adv-cell:first-child{border-top:0}
         }
         /* Wave divider: light blue lapping down into royal blue.
@@ -434,6 +434,18 @@
                 <figure class="tm-shot"><img src="images/snapshots/snap-doc-25.webp" alt="Lip-Bu Tan (Intel CEO)" loading="lazy"><figcaption class="tm-cap">Lip-Bu Tan (Intel CEO)</figcaption></figure>
                 <figure class="tm-shot"><img src="images/snapshots/snap-doc-13.webp" alt="Julien Bek (Sequoia)" loading="lazy"><figcaption class="tm-cap">Julien Bek (Sequoia)</figcaption></figure>
                 <figure class="tm-shot"><img src="images/snapshots/snap-doc-23.webp" alt="David Helgason (Unity Software)" loading="lazy"><figcaption class="tm-cap">David Helgason (Unity Software)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-07.webp" alt="Michael Tannenbaum (Figure)" loading="lazy"><figcaption class="tm-cap">Michael Tannenbaum (Figure)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-18.webp" alt="Shardul Shah (Index Ventures)" loading="lazy"><figcaption class="tm-cap">Shardul Shah (Index Ventures)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-17.webp" alt="Jeremy Levine (Underdog)" loading="lazy"><figcaption class="tm-cap">Jeremy Levine (Underdog)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-24.webp" alt="Jeannette zu Furstenberg (General Catalyst)" loading="lazy"><figcaption class="tm-cap">Jeannette zu F&uuml;rstenberg (General Catalyst)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-19.webp" alt="Oliver Samwer (Global Entrepreneur)" loading="lazy"><figcaption class="tm-cap">Oliver Samwer (Global Entrepreneur)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-14.webp" alt="Mark Kvamme" loading="lazy"><figcaption class="tm-cap">Mark Kvamme</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-12.webp" alt="Emil Michael" loading="lazy"><figcaption class="tm-cap">Emil Michael</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-01.webp" alt="Carsten Maschmeyer (German Shark Tank)" loading="lazy"><figcaption class="tm-cap">Carsten Maschmeyer (German Shark Tank)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-15.webp" alt="Dan Perez (Hinge Health)" loading="lazy"><figcaption class="tm-cap">Dan Perez (Hinge Health)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-09.webp" alt="Nicolas Dessaigne (YC)" loading="lazy"><figcaption class="tm-cap">Nicolas Dessaigne (YC)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-20.webp" alt="Francis Thumpasery (PermitFlow)" loading="lazy"><figcaption class="tm-cap">Francis Thumpasery (PermitFlow)</figcaption></figure>
+                <figure class="tm-shot"><img src="images/snapshots/snap-doc-21.webp" alt="Justin Lewis-Weber (Assured)" loading="lazy"><figcaption class="tm-cap">Justin Lewis-Weber (Assured)</figcaption></figure>
             </div>
         </div>
     </section>
@@ -584,13 +596,13 @@
         .tm-trait{font-family:var(--serif);font-size:clamp(1.1rem,1.5vw,1.4rem);color:var(--yellow);white-space:nowrap}
         .tm-dot{width:4px;height:4px;border-radius:50%;background:rgba(242,201,76,.5);flex:0 0 auto}
         .tm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
-        .tm-card{position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(18px,1.6vw,24px);display:flex;flex-direction:column;height:clamp(248px,20vw,288px)}
-        .tm-card.tm-lit{background:#fff;border-color:#fff}
+        .tm-card{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(245,213,71,.22);border-radius:16px;padding:clamp(22px,1.9vw,30px);display:flex;flex-direction:column;height:clamp(272px,22vw,320px);box-shadow:0 0 0 1px rgba(245,213,71,.08),0 0 34px rgba(245,213,71,.1)}
+        .tm-card.tm-lit{background:#fff;border-color:rgba(245,213,71,.9);box-shadow:0 0 0 1px rgba(245,213,71,.55),0 22px 60px -20px rgba(245,213,71,.5),0 0 46px rgba(245,213,71,.32),0 0 90px rgba(245,213,71,.2)}
         .tm-card-body{display:flex;flex-direction:column;flex:1;min-height:0;transition:opacity .55s ease}
         .tm-card.is-swapping .tm-card-body{opacity:0}
-        .tm-quote-mark{font-family:var(--serif);font-size:2.4rem;line-height:.6;color:var(--yellow);margin:0 0 14px}
-        .tm-card.tm-lit .tm-quote-mark{color:var(--gold-ink)}
-        .tm-quote{font-family:var(--serif);font-size:clamp(1rem,1.12vw,1.14rem);line-height:1.4;color:var(--white-soft);margin:0 0 18px;flex:1;overflow:hidden}
+        .tm-quote-mark{font-family:var(--serif);font-size:2.8rem;line-height:.6;color:var(--yellow-hi);margin:0 0 14px;text-shadow:0 0 20px rgba(245,213,71,.4)}
+        .tm-card.tm-lit .tm-quote-mark{color:var(--gold-ink);text-shadow:none}
+        .tm-quote{font-family:var(--serif);font-size:clamp(1.1rem,1.4vw,1.35rem);line-height:1.42;color:#fff;margin:0 0 18px;flex:1;overflow:hidden}
         .tm-card.tm-lit .tm-quote{color:var(--navy-ink)}
         .tm-name{font-family:var(--sans);font-size:14px;font-weight:700;color:#fff;margin:0}
         .tm-card.tm-lit .tm-name{color:var(--navy-ink)}
@@ -609,15 +621,16 @@
         @media(max-width:620px){
             .tm-cards{grid-template-columns:1fr}
             .tm-card{height:auto;min-height:clamp(210px,52vw,250px)}
-            .tm-card:nth-child(n+2){display:none}
-            .tm-traits{gap:12px 18px}
+            .tm-card:not(.tm-lit){display:none}
+            .tm-traits{flex-direction:column;gap:9px}
+            .tm-dot{display:none}
         }
     </style>
     <section class="tm" id="section-testimonials" aria-label="What founders say">
         <div class="tm-inner">
             <div class="tm-head">
                 <h2 class="section-display tm-h2">Our founders share the psychology that sparks movements.</h2>
-                <p class="tm-sub">Machines make their visions real faster than ever, and the old obsolete.</p>
+                <p class="tm-sub">Machines make their visions real faster than ever.</p>
             </div>
             <div class="tm-traits">
                 <span class="tm-trait">Forged by extreme origins</span>
