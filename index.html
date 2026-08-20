@@ -68,8 +68,8 @@
             --serif:'DomaineDisp','Times New Roman',Times,serif;
             --sans:'Segoe UI',system-ui,-apple-system,sans-serif;
             /* Warm "speakeasy" photo grade, shared across founder/team/event photos */
-            --photo-warm:saturate(1.04) contrast(1.07) sepia(.2) brightness(.97) hue-rotate(-6deg);
-            --photo-warm-bright:saturate(1.05) contrast(1.04) sepia(.14) brightness(1.1) hue-rotate(-6deg);
+            --photo-warm:saturate(1.09) contrast(1.06) sepia(.07) brightness(.99) hue-rotate(-4deg);
+            --photo-warm-bright:saturate(1.08) contrast(1.03) sepia(.05) brightness(1.1) hue-rotate(-4deg);
         }
 
         *, *::before, *::after { box-sizing: border-box; }
@@ -197,7 +197,7 @@
         .thesis-h2{color:var(--navy-ink);max-width:32ch;margin:0 auto;text-wrap:balance}
         /* Balance circle: the six systems ring a thin gold circle, with the
            payoff and the aggregate flow sitting at the center. */
-        .balance-circle{position:relative;width:100%;max-width:clamp(286px,68vw,500px);margin:clamp(28px,4vw,54px) auto 0;aspect-ratio:1/1}
+        .balance-circle{position:relative;width:100%;max-width:clamp(260px,58vw,430px);margin:clamp(28px,4vw,54px) auto 0;aspect-ratio:1/1}
         /* Water ripple behind the ring: concentric rings expand and fade from
            the center, echoing the hero water. */
         .bc-ripple{position:absolute;inset:0;width:100%;height:100%;z-index:0}
@@ -354,8 +354,8 @@
         /* Advisors & venture partners as a rubric: bordered cells in a grid */
         .team-advisors{max-width:820px;margin:clamp(30px,4vw,52px) auto 0}
         .adv-title{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-faint);text-align:center;margin:0 0 clamp(16px,1.8vw,22px)}
-        .adv-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(30,42,120,.2);border-radius:16px;overflow:hidden}
-        .adv-cell{text-align:left;padding:clamp(16px,1.9vw,24px) clamp(18px,2vw,26px);border-top:1px solid rgba(30,42,120,.13);border-left:1px solid rgba(30,42,120,.13)}
+        .adv-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(30,42,120,.22);border-radius:16px;overflow:hidden}
+        .adv-cell{text-align:left;padding:clamp(16px,1.9vw,24px) clamp(18px,2vw,26px);border-top:1px solid rgba(30,42,120,.22);border-left:1px solid rgba(30,42,120,.22)}
         .adv-cell:nth-child(-n+2){border-top:0}
         .adv-cell:nth-child(odd){border-left:0}
         .adv-name{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--navy-ink);display:block;line-height:1.15}
