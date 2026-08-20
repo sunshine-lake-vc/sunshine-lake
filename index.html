@@ -800,7 +800,7 @@
          Lake dictionary card, restyled dark (gold + white-soft, DomaineDisp)
          to match the new site instead of the old cream card. -->
     <style>
-        .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(36px,5vw,64px);margin-top:clamp(-48px,-4vw,-24px);position:relative;z-index:1;overflow:hidden}
+        .egg{background:var(--near-black);text-align:center;padding:0 clamp(22px,5vw,64px) clamp(64px,12vw,120px);margin-top:clamp(-48px,-4vw,-24px);position:relative;z-index:1;overflow:hidden}
         .egg-peek{display:inline-flex;flex-direction:column;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:8px 14px;color:var(--gold-deco);transition:transform .3s ease,color .25s ease}
         .egg-peek:hover{transform:translateY(-4px);color:var(--yellow)}
         .egg-peek img{width:clamp(48px,6vw,72px);height:auto;opacity:.85;animation:eggBob 4.5s ease-in-out infinite}
@@ -855,12 +855,23 @@
         var peek=document.getElementById('eggPeek'), def=document.getElementById('eggDef');
         if(!peek||!def) return;
         peek.addEventListener('click', function(){
-            // The card grows in place from where "Look closer" sat; no page jump.
+            // Card grows out of where "Look closer" sat, then a gentle scroll
+            // brings it fully into view (centered if it fits) so it never opens
+            // off-screen at the page bottom.
             def.classList.add('is-open');
             def.style.maxHeight = def.scrollHeight + 'px';
             peek.setAttribute('aria-expanded','true');
             peek.classList.add('is-hidden');
-            setTimeout(function(){ def.style.maxHeight='none'; }, 820);
+            setTimeout(function(){
+                def.style.maxHeight='none';
+                var card=def.querySelector('.egg-card'); if(!card) return;
+                var vh=window.innerHeight, ch=card.offsetHeight;
+                var top=window.scrollY + card.getBoundingClientRect().top;
+                var pad = (ch < vh - 48) ? (vh - ch)/2 : 24; // center if it fits, else top-align
+                var target = Math.max(0, top - pad);
+                if(window._lenis && typeof window._lenis.scrollTo==='function') window._lenis.scrollTo(target,{duration:0.9});
+                else window.scrollTo({top:target,behavior:'smooth'});
+            }, 260);
         });
       })();
     </script>
