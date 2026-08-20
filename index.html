@@ -851,9 +851,12 @@
         .egg-close{position:absolute;top:10px;right:12px;width:30px;height:30px;border:0;background:none;
             color:rgba(255,255,255,.8);font-size:22px;line-height:1;cursor:pointer;border-radius:50%;transition:color .2s ease}
         .egg-close:hover{color:#fff}
-        /* No tile: the boat floats directly on the card's water */
+        /* No tile: the boat floats directly on the card's water, rocking gently */
         .egg-mark{width:clamp(150px,28vw,210px);height:auto;flex:0 0 auto;
-            filter:drop-shadow(0 6px 12px rgba(0,12,44,.45))}
+            filter:drop-shadow(0 6px 12px rgba(0,12,44,.45));
+            transform-origin:50% 74%;animation:eggRock 4.8s ease-in-out infinite}
+        @keyframes eggRock{0%,100%{transform:rotate(-1.7deg) translateY(0)}50%{transform:rotate(1.7deg) translateY(-2px)}}
+        @media(prefers-reduced-motion:reduce){.egg-mark{animation:none}}
         .egg-headword{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2rem);color:#fff;margin:0 0 6px;line-height:1.1}
         .egg-headword strong{font-weight:400}
         .egg-pron{font-family:var(--serif);font-style:italic;color:rgba(255,255,255,.74);font-size:.72em}
