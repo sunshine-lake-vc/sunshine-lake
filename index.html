@@ -192,7 +192,7 @@
 
     <!-- ==================== THESIS (white, centered — the hero cutout lands here) ==================== -->
     <style>
-        .thesis{background:#ffffff;color:var(--navy-ink);padding:clamp(72px,11vw,150px) clamp(22px,6vw,64px) clamp(24px,3.2vw,44px);text-align:center}
+        .thesis{background:#ffffff;color:var(--navy-ink);padding:clamp(72px,11vw,150px) clamp(22px,6vw,64px) clamp(12px,1.8vw,28px);text-align:center}
         .thesis-inner{max-width:1080px;margin:0 auto}
         .thesis-h2{color:var(--navy-ink);max-width:32ch;margin:0 auto;text-wrap:balance}
         /* Balance circle: the six systems ring a thin gold circle, with the
@@ -337,9 +337,9 @@
 
     <!-- ==================== TEAM (white fading into light blue) ==================== -->
     <style>
-        .team{background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,var(--blue-light) 100%);color:var(--navy-ink);padding:clamp(22px,3.2vw,42px) clamp(22px,5vw,64px) clamp(20px,5vw,60px)}
+        .team{background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,var(--blue-light) 100%);color:var(--navy-ink);padding:clamp(8px,1.4vw,22px) clamp(22px,5vw,64px) clamp(20px,5vw,60px)}
         .team-inner{max-width:1280px;margin:0 auto;text-align:center}
-        .team-lead{color:var(--navy-ink);max-width:20ch;margin:0 auto clamp(44px,5.5vw,72px);text-wrap:balance}
+        .team-lead{color:var(--navy-ink);max-width:none;margin:0 auto clamp(30px,4vw,58px)}
         .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,30px);max-width:1000px;margin-inline:auto}
         .team-card{display:flex;flex-direction:column;align-items:center;text-align:center}
         .team-photo{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#B9C6E8;box-shadow:0 10px 30px rgba(30,42,120,.14)}
@@ -347,10 +347,11 @@
         .team-name{font-family:var(--serif);font-size:clamp(1.15rem,1.5vw,1.4rem);line-height:1.12;color:var(--navy-ink);margin:16px 0 0;min-height:2.4em;display:flex;align-items:flex-start;justify-content:center}
         .team-role{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin:2px 0 10px}
         .team-bio{font-family:var(--sans);font-size:clamp(14px,0.95vw,15px);line-height:1.55;color:var(--navy-muted);margin:0}
-        .team-bio-link{display:inline-block;margin-top:8px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid rgba(184,134,11,.45);transition:color .25s ease,border-color .25s ease}
+        .team-links{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 16px;margin-top:auto;padding-top:14px}
+        .team-bio-link{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--gold-ink);text-decoration:none;border-bottom:1px solid rgba(184,134,11,.45);transition:color .25s ease,border-color .25s ease}
         .team-bio-link:hover{color:var(--blue-royal);border-color:var(--blue-royal)}
         /* Heartbeat pulse on "beating heart" in the team headline */
-        .beat-heart{display:inline-block;margin:0 .06em;transform-origin:center;animation:beatPulse 2.6s ease-in-out infinite}
+        .beat-heart{display:inline-block;margin:0 .13em;transform-origin:center;animation:beatPulse 2.6s ease-in-out infinite}
         @keyframes beatPulse{0%,100%{transform:scale(1)}10%{transform:scale(1.06)}20%{transform:scale(1)}30%{transform:scale(1.035)}42%{transform:scale(1)}}
         @media(prefers-reduced-motion:reduce){.beat-heart{animation:none}}
         /* Advisors & venture partners as a rubric: bordered cells in a grid */
@@ -367,6 +368,7 @@
             .team-name{min-height:0}
         }
         @media(max-width:560px){
+            .team-lead{font-size:clamp(19px,5vw,24px)}
             .team-grid{grid-template-columns:1fr} .team-photo{max-width:76%;margin:0 auto}
             .adv-grid{grid-template-columns:1fr}
             .adv-cell:nth-child(n){border-left:0;border-top:1px solid rgba(30,42,120,.22)}
@@ -386,7 +388,7 @@
     </style>
     <section class="team" id="section-team" aria-label="Our team">
         <div class="team-inner">
-            <h2 class="section-display team-lead">We connect them to the <span class="beat-heart">beating heart</span> of Silicon Valley.</h2>
+            <h2 class="section-display team-lead">We connect them to the<br><span class="beat-heart">beating heart</span> of Silicon Valley.</h2>
 
             <div class="team-grid">
                 <article class="team-card">
@@ -394,25 +396,37 @@
                     <h3 class="team-name">Don Stalter</h3>
                     <p class="team-role">Founder</p>
                     <p class="team-bio">Bulge-bracket PE and M&amp;A, then scaled Airbnb across EU and APAC after selling CityDeal to Groupon. First checks into numerous decacorns.</p>
-                    <a class="team-bio-link" href="https://www.jefferies.com/insights/leadership-spotlight/don-stalter-on-backing-founders-who-have-something-to-prove/" target="_blank" rel="noopener">Hear the latest from Don &rarr;</a>
+                    <div class="team-links">
+                        <a class="team-bio-link" href="https://linkedin.com/in/donstalter" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+                        <a class="team-bio-link" href="https://www.jefferies.com/insights/leadership-spotlight/don-stalter-on-backing-founders-who-have-something-to-prove/" target="_blank" rel="noopener">Hear the latest &#8599;</a>
+                    </div>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/ivan.webp" alt="Ivan La Frinere-Sandoval" loading="lazy"></div>
                     <h3 class="team-name">Ivan La Frinere-Sandoval</h3>
                     <p class="team-role">Partner, CFO &amp; COO</p>
                     <p class="team-bio">Caltech- and Stanford-trained; SolarCity with Kimbal Musk, then his own Bay Area companies. Runs fund operations and the investment committee.</p>
+                    <div class="team-links">
+                        <a class="team-bio-link" href="https://www.linkedin.com/in/gridparity/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+                    </div>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/suhail.webp" alt="Suhail Younus" loading="lazy"></div>
                     <h3 class="team-name">Suhail Younus</h3>
                     <p class="team-role">Partner</p>
-                    <p class="team-bio">Runs the global coverage engine, sourcing and scoring thousands of startups a year. Cornell-trained in venture and frontier technologies.</p>
+                    <p class="team-bio">Runs the global coverage engine, sourcing and scoring thousands of startups every year. Cornell-trained in venture capital and frontier technologies.</p>
+                    <div class="team-links">
+                        <a class="team-bio-link" href="https://linkedin.com/in/suhailyounus" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+                    </div>
                 </article>
                 <article class="team-card">
                     <div class="team-photo"><img src="images/team/wieger.webp" alt="Wieger Lamers" loading="lazy"></div>
                     <h3 class="team-name">Wieger Lamers</h3>
                     <p class="team-role">Platform Lead</p>
-                    <p class="team-bio">Came up inside Adyen's rise to one of Europe's defining IPOs. Runs EMEA sourcing and platform from London.</p>
+                    <p class="team-bio">Came up inside Adyen's rise to one of Europe's defining IPOs. Runs EMEA sourcing and the platform team from London, close to founders building across the region.</p>
+                    <div class="team-links">
+                        <a class="team-bio-link" href="https://www.linkedin.com/in/wiegerlamers/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+                    </div>
                 </article>
             </div>
             <div class="team-advisors">
