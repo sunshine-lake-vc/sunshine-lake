@@ -494,31 +494,28 @@
     <style>
         .pf{background:var(--blue-royal);color:#fff;padding:clamp(64px,9vw,120px) clamp(22px,5vw,64px) clamp(72px,10vw,140px)}
         .pf-inner{max-width:1200px;margin:0 auto}
-        .pf-head{text-align:center;margin:0 auto clamp(48px,6vw,80px);max-width:560px}
+        .pf-head{text-align:center;margin:0 auto clamp(40px,5vw,68px);max-width:560px}
         .pf-eyebrow{color:var(--yellow);margin:0 0 clamp(14px,1.6vw,20px)}
         .pf-h2{color:#fff;text-wrap:balance}
-        .pf-body{display:grid;grid-template-columns:0.78fr 1.22fr;gap:clamp(30px,5vw,72px);align-items:start}
-        .pf-photo-col{position:sticky;top:clamp(80px,14vh,140px)}
-        .pf-photo{width:100%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(3,7,28,.32)}
-        .pf-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;filter:var(--photo-warm)}
-        .pf-list{display:flex;flex-direction:column}
-        .pf-row{padding:clamp(22px,2.6vw,34px) 0;border-top:1px solid rgba(255,255,255,.16);opacity:.55;transition:opacity .35s ease;cursor:default}
-        .pf-row:first-child{border-top:0}
-        .pf-row.is-active{opacity:1}
-        .pf-row-photo{display:none}
-        .pf-name{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3vw,40px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0}
-        .pf-company{font-family:var(--serif);font-size:clamp(1.05rem,1.4vw,1.35rem);color:rgba(255,255,255,.62);margin:4px 0 0}
-        .pf-blurb{font-family:var(--sans);font-size:clamp(15px,1.15vw,18px);line-height:1.55;color:var(--white-soft);margin:16px 0 0;max-width:46ch}
-        .pf-amt{color:var(--yellow);font-weight:600}
-        .pf-tag{margin:16px 0 0;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-        .pf-tag .sys{color:var(--yellow)}
-        @media(max-width:900px){
-            .pf-body{grid-template-columns:1fr;gap:0}
-            .pf-photo-col{display:none}
-            .pf-row{opacity:1;border-top:1px solid rgba(255,255,255,.16);padding:clamp(26px,7vw,40px) 0}
-            .pf-row-photo{display:block;width:100%;max-width:82%;aspect-ratio:1/1;max-height:360px;border-radius:14px;overflow:hidden;margin:0 0 18px;background:rgba(255,255,255,.08)}
-            .pf-row-photo img{width:100%;height:100%;object-fit:cover;filter:var(--photo-warm)}
-        }
+        /* Founder cards in a row: photo with name + company under it. On hover the
+           card lifts slightly and a yellow panel reveals the story. */
+        .pf-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.5vw,22px)}
+        .pf-card{position:relative;text-align:left}
+        .pf-card-media{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.08);box-shadow:0 14px 34px rgba(3,7,28,.3);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease}
+        .pf-card-media img{width:100%;height:100%;object-fit:cover;filter:var(--photo-warm)}
+        /* Yellow reveal panel (navy text = the site's yellow/navy pairing) */
+        .pf-card-reveal{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(15px,1.3vw,20px);background:var(--yellow);opacity:0;transition:opacity .38s ease}
+        .pf-card-blurb{font-family:var(--sans);font-size:clamp(12.5px,.92vw,15px);line-height:1.42;color:var(--navy-ink);margin:0}
+        .pf-card-blurb .pf-amt{color:var(--blue-royal);font-weight:700}
+        .pf-card-tag{margin:auto 0 0;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(30,42,120,.72)}
+        .pf-card-tag .sys{color:var(--blue-royal)}
+        .pf-card-name{font-family:var(--serif);font-weight:400;font-size:clamp(1.02rem,1.35vw,1.32rem);line-height:1.12;letter-spacing:-.01em;color:#fff;margin:14px 0 0}
+        .pf-card-co{font-family:var(--serif);font-size:clamp(.9rem,1.1vw,1.08rem);color:var(--blue-light);margin:3px 0 0}
+        .pf-card:hover .pf-card-media,.pf-card:focus-within .pf-card-media,.pf-card.is-tapped .pf-card-media{transform:scale(1.045);box-shadow:0 26px 60px rgba(3,7,28,.46)}
+        .pf-card:hover .pf-card-reveal,.pf-card:focus-within .pf-card-reveal,.pf-card.is-tapped .pf-card-reveal{opacity:1}
+        @media(max-width:1080px){.pf-grid{grid-template-columns:repeat(3,1fr)}}
+        @media(max-width:640px){.pf-grid{grid-template-columns:repeat(2,1fr);gap:clamp(16px,4vw,22px)}}
+        @media(max-width:400px){.pf-grid{grid-template-columns:1fr;gap:clamp(22px,7vw,34px)}}
     </style>
     <section class="pf" id="section-portfolio" aria-label="Portfolio">
         <div class="pf-inner">
@@ -526,70 +523,65 @@
                 <p class="eyebrow pf-eyebrow">Sunshine Lake Portfolio</p>
                 <h2 class="section-display pf-h2">Every blockbuster begins as a founder's story.</h2>
             </div>
-            <div class="pf-body">
-                <div class="pf-photo-col" aria-hidden="true">
-                    <div class="pf-photo">
-                        <img id="pfPhoto" src="images/founders/duranta.webp" alt="">
+            <div class="pf-grid">
+                <article class="pf-card" tabindex="0">
+                    <div class="pf-card-media">
+                        <img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy">
+                        <div class="pf-card-reveal">
+                            <p class="pf-card-blurb">Co-founded Aurora Solar and scaled it to <span class="pf-amt">$4B</span>. Now building foundation vision models that let machines understand the physical world.</p>
+                            <p class="pf-card-tag">Kenya <span class="sys">&middot; Work</span></p>
+                        </div>
                     </div>
-                </div>
-                <div class="pf-list" id="pfList">
-                    <article class="pf-row is-active" data-photo="images/founders/duranta.webp">
-                        <div class="pf-row-photo"><img src="images/founders/duranta.webp" alt="Samuel Adeyemo, Duranta" loading="lazy"></div>
-                        <h3 class="pf-name">Samuel Adeyemo</h3>
-                        <p class="pf-company">Duranta</p>
-                        <p class="pf-blurb">Co-founded Aurora Solar and scaled it to <span class="pf-amt">$4B</span>. Now building foundation vision models that let machines understand the physical world.</p>
-                        <p class="pf-tag">Kenya <span class="sys">&middot; Work</span></p>
-                    </article>
-                    <article class="pf-row" data-photo="images/founders/geoffrey.webp?v=2">
-                        <div class="pf-row-photo"><img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy"></div>
-                        <h3 class="pf-name">Geoffrey Tisserand &amp; Anji Ismail</h3>
-                        <p class="pf-company">Concord.ai</p>
-                        <p class="pf-blurb">Sold Agora to PayScale; helped build Checkr into a <span class="pf-amt">$5B</span> company. Now reskilling the global workforce for the AI era.</p>
-                        <p class="pf-tag">France <span class="sys">&middot; Work</span></p>
-                    </article>
-                    <article class="pf-row" data-photo="images/founders/thomas.webp">
-                        <div class="pf-row-photo"><img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy"></div>
-                        <h3 class="pf-name">Thomas Dohmke</h3>
-                        <p class="pf-company">Entire</p>
-                        <p class="pf-blurb">Ran GitHub to <span class="pf-amt">$7.5B</span> and scaled Copilot. Now building the trust layer for the agent era, so the world can verify what machines build.</p>
-                        <p class="pf-tag">Germany <span class="sys">&middot; Work</span></p>
-                    </article>
-                    <article class="pf-row" data-photo="images/founders/fullseam.webp">
-                        <div class="pf-row-photo"><img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy"></div>
-                        <h3 class="pf-name">Dowling, Segal &amp; Coppa</h3>
-                        <p class="pf-company">FullSeam</p>
-                        <p class="pf-blurb">Built TaxProper through to an Opendoor acquisition. Now an AI teammate for finance teams: AP, AR, and reconciliation.</p>
-                        <p class="pf-tag">US <span class="sys">&middot; Money</span></p>
-                    </article>
-                    <article class="pf-row" data-photo="images/founders/argentic.webp">
-                        <div class="pf-row-photo"><img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy"></div>
-                        <h3 class="pf-name">Craig O'Neill</h3>
-                        <p class="pf-company">Argentic</p>
-                        <p class="pf-blurb">Led Versapay for nine-plus years through a take-private with Great Hill Partners. Now rebuilding B2B payments for the AI era.</p>
-                        <p class="pf-tag">Canada <span class="sys">&middot; Money</span></p>
-                    </article>
-                </div>
+                    <h3 class="pf-card-name">Samuel Adeyemo</h3>
+                    <p class="pf-card-co">Duranta</p>
+                </article>
+                <article class="pf-card" tabindex="0">
+                    <div class="pf-card-media">
+                        <img src="images/founders/geoffrey.webp?v=2" alt="Geoffrey Tisserand and Anji Ismail, Concord.ai" loading="lazy">
+                        <div class="pf-card-reveal">
+                            <p class="pf-card-blurb">Sold Agora to PayScale; helped build Checkr into a <span class="pf-amt">$5B</span> company. Now reskilling the global workforce for the AI era.</p>
+                            <p class="pf-card-tag">France <span class="sys">&middot; Work</span></p>
+                        </div>
+                    </div>
+                    <h3 class="pf-card-name">Geoffrey Tisserand &amp; Anji Ismail</h3>
+                    <p class="pf-card-co">Concord.ai</p>
+                </article>
+                <article class="pf-card" tabindex="0">
+                    <div class="pf-card-media">
+                        <img src="images/founders/thomas.webp" alt="Thomas Dohmke, Entire" loading="lazy">
+                        <div class="pf-card-reveal">
+                            <p class="pf-card-blurb">Ran GitHub to <span class="pf-amt">$7.5B</span> and scaled Copilot. Now building the trust layer for the agent era, so the world can verify what machines build.</p>
+                            <p class="pf-card-tag">Germany <span class="sys">&middot; Work</span></p>
+                        </div>
+                    </div>
+                    <h3 class="pf-card-name">Thomas Dohmke</h3>
+                    <p class="pf-card-co">Entire</p>
+                </article>
+                <article class="pf-card" tabindex="0">
+                    <div class="pf-card-media">
+                        <img src="images/founders/fullseam.webp" alt="Dowling, Segal and Coppa, FullSeam" loading="lazy">
+                        <div class="pf-card-reveal">
+                            <p class="pf-card-blurb">Built TaxProper through to an Opendoor acquisition. Now an AI teammate for finance teams: AP, AR, and reconciliation.</p>
+                            <p class="pf-card-tag">US <span class="sys">&middot; Money</span></p>
+                        </div>
+                    </div>
+                    <h3 class="pf-card-name">Dowling, Segal &amp; Coppa</h3>
+                    <p class="pf-card-co">FullSeam</p>
+                </article>
+                <article class="pf-card" tabindex="0">
+                    <div class="pf-card-media">
+                        <img src="images/founders/argentic.webp" alt="Craig O'Neill, Argentic" loading="lazy">
+                        <div class="pf-card-reveal">
+                            <p class="pf-card-blurb">Led Versapay for nine-plus years through a take-private with Great Hill Partners. Now rebuilding B2B payments for the AI era.</p>
+                            <p class="pf-card-tag">Canada <span class="sys">&middot; Money</span></p>
+                        </div>
+                    </div>
+                    <h3 class="pf-card-name">Craig O'Neill</h3>
+                    <p class="pf-card-co">Argentic</p>
+                </article>
             </div>
         </div>
     </section>
-    <script>
-    (function(){
-        var rows=[].slice.call(document.querySelectorAll('#pfList .pf-row'));
-        var photo=document.getElementById('pfPhoto');
-        if(!rows.length||!photo) return;
-        if(window.matchMedia('(max-width:900px)').matches) return; // mobile stacks, no swap
-        var io=new IntersectionObserver(function(entries){
-            entries.forEach(function(e){
-                if(e.isIntersecting){
-                    rows.forEach(function(r){ r.classList.toggle('is-active', r===e.target); });
-                    var src=e.target.getAttribute('data-photo');
-                    if(src && photo.getAttribute('src')!==src) photo.setAttribute('src', src);
-                }
-            });
-        },{rootMargin:'-45% 0px -45% 0px', threshold:0});
-        rows.forEach(function(r){ io.observe(r); });
-    })();
-    </script>
 
     <svg class="wave-divider to-navy" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
         <path fill="currentColor" opacity=".45" d="M0,52 C300,24 560,30 720,52 C900,76 1160,80 1440,50 L1440,110 L0,110 Z">
@@ -713,6 +705,24 @@
         });
         document.addEventListener('click', function(){
             shots.forEach(function(o){ o.classList.remove('is-tapped'); });
+        });
+    })();
+    </script>
+    <script>
+    // Portfolio cards: tap toggles the yellow story reveal on touch (mirrors the moments grid)
+    (function(){
+        var cards=[].slice.call(document.querySelectorAll('.pf-grid .pf-card'));
+        if(!cards.length) return;
+        cards.forEach(function(c){
+            c.addEventListener('click', function(e){
+                e.stopPropagation();
+                var open=c.classList.contains('is-tapped');
+                cards.forEach(function(o){ o.classList.remove('is-tapped'); });
+                if(!open) c.classList.add('is-tapped');
+            });
+        });
+        document.addEventListener('click', function(){
+            cards.forEach(function(o){ o.classList.remove('is-tapped'); });
         });
     })();
     </script>
