@@ -854,6 +854,8 @@
         .sp-cta.outline:hover{border-color:var(--yellow);background:rgba(242,201,76,.1);transform:translateY(-2px)}
         .sp-pill{display:inline-flex;align-items:center;padding:11px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.24);color:rgba(255,255,255,.82);text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:color .25s ease,border-color .25s ease,background .25s ease}
         .sp-pill:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+        .sp-div{flex:0 0 auto;width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 clamp(4px,.6vw,10px)}
+        @media(max-width:560px){.sp-div{display:none}}
         .sp-strip{display:flex;gap:14px;overflow-x:auto;margin-top:clamp(48px,6vw,84px);padding-bottom:6px;scrollbar-width:none}
         .sp-strip::-webkit-scrollbar{display:none}
         .sp-strip figure{margin:0;flex:0 0 auto}
@@ -881,6 +883,7 @@
             <a class="sp-cta solid" href="speakeasy.html">Enter the Speakeasy <span aria-hidden="true">&rarr;</span></a>
             <a class="sp-cta outline" href="mailto:hello@sunshinelake.vc?subject=Pitch%20deck%20-%20[your%20company]">Submit your pitch <span aria-hidden="true">&rarr;</span></a>
             <a class="sp-cta outline" href="sessions.html">Read the latest Sessions <span aria-hidden="true">&rarr;</span></a>
+            <span class="sp-div" aria-hidden="true"></span>
             <a class="sp-pill" href="https://www.linkedin.com/company/sunshine-lake" target="_blank" rel="noopener">LinkedIn</a>
             <a class="sp-pill" href="https://x.com/SunshineLakeVC" target="_blank" rel="noopener">X</a>
         </div>
