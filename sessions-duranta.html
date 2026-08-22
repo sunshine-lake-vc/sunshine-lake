@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Never Went Outside &mdash; Sunshine Lake Sessions</title>
+    <meta name="description" content="Why we backed Duranta: software has touched about half a percent of the economy. Samuel Adeyemo keeps going where it hasn't.">
+    <link rel="canonical" href="https://sunshinelake.vc/sessions-duranta.html">
+    <link rel="icon" type="image/svg+xml" href="favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="preload" href="fonts/DomaineDisp-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face { font-family:'DomaineDisp'; src:url('fonts/DomaineDisp-Regular.woff2') format('woff2'), url('fonts/DomaineDisp-Regular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+        *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+        body{ background:linear-gradient(180deg,#155EE8 0%,#0A3DAE 55%,#02041F 100%); background-attachment:fixed; min-height:100vh; color:#fff; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+        .sessions-topbar{ position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; padding:clamp(14px,1.8vw,22px) clamp(20px,6vw,64px); background:rgba(9,30,96,.72); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.12); }
+        .back-btn{ display:inline-flex; align-items:center; gap:8px; color:#fff; opacity:.75; text-decoration:none; font-size:13px; letter-spacing:.05em; text-transform:uppercase; transition:opacity .2s ease; }
+        .back-btn:hover{ opacity:1; }
+        .article{ max-width:720px; margin:0 auto; padding:clamp(96px,12vw,168px) clamp(24px,6vw,48px) clamp(64px,8vw,120px); }
+        .art-eyebrow{ font-size:clamp(12px,1vw,13px); font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:#FFF1B6; opacity:.85; margin-bottom:clamp(16px,2vw,26px); }
+        .art-title{ font-family:'DomaineDisp','Times New Roman',Times,serif; font-size:clamp(2.1rem,4.4vw,3.4rem); font-weight:500; line-height:1.08; letter-spacing:-.015em; color:#fff; }
+        .art-meta{ display:flex; flex-wrap:wrap; gap:8px 18px; align-items:baseline; margin-top:clamp(18px,2vw,26px); padding-bottom:clamp(26px,3vw,40px); border-bottom:1px solid rgba(255,255,255,.14); }
+        .art-tag{ font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.62); }
+        .art-date{ font-size:12px; letter-spacing:.06em; color:rgba(255,255,255,.5); }
+        .art-body{ margin-top:clamp(30px,3.4vw,46px); }
+        .art-body p{ font-size:clamp(1.04rem,1.15vw,1.19rem); line-height:1.78; color:rgba(255,255,255,.84); margin:0 0 1.35em; }
+        .art-body p strong{ color:#fff; font-weight:600; }
+        .art-body em{ font-style:italic; color:#fff; }
+        .art-h2{ font-family:'DomaineDisp','Times New Roman',Times,serif; font-size:clamp(1.4rem,2.1vw,1.85rem); font-weight:500; color:#FFF1B6; line-height:1.2; margin:clamp(34px,4vw,52px) 0 clamp(14px,1.4vw,20px); }
+        .art-fine{ margin-top:clamp(40px,4.6vw,60px); padding-top:clamp(22px,2.4vw,32px); border-top:1px solid rgba(255,255,255,.14); font-family:'DomaineDisp','Times New Roman',Times,serif; font-style:italic; font-size:clamp(.95rem,1vw,1.08rem); line-height:1.6; color:rgba(255,255,255,.62); }
+        .art-nav{ margin-top:clamp(48px,6vw,80px); padding-top:clamp(26px,3vw,40px); border-top:1px solid rgba(255,255,255,.12); display:flex; flex-wrap:wrap; gap:clamp(16px,2vw,32px); }
+        .art-nav a{ font-size:clamp(.85rem,1vw,1rem); color:rgba(255,255,255,.62); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.16); padding:4px 2px; transition:color .2s ease,border-color .2s ease; }
+        .art-nav a:hover{ color:#fff; border-bottom-color:rgba(255,255,255,.5); }
+        .art-nav .primary{ color:#FFF1B6; border-bottom-color:rgba(255,241,182,.4); }
+    </style>
+</head>
+<body>
+    <header class="sessions-topbar">
+        <a class="back-btn" href="sessions.html">&larr; Sessions</a>
+    </header>
+    <article class="article">
+        <p class="art-eyebrow">Sunshine Lake Sessions &middot; No. 04</p>
+        <h1 class="art-title">Software Never Went Outside</h1>
+        <div class="art-meta">
+            <span class="art-tag">The real economy &middot; Duranta</span>
+            <span class="art-date">August 22, 2026</span>
+        </div>
+        <div class="art-body">
+            <p>Global software spending is roughly $400 billion a year. World GDP is roughly $115 trillion. Software has touched about half of one percent of the economy.</p>
+            <p>That number is the most important line in our thesis, and it is the one people nod at without absorbing. The nodding version is: <em>there&rsquo;s plenty of room left.</em> The real version is more uncomfortable. It says the last twenty-five years of this industry, the entire SaaS era, every category we consider mature, the whole body of received wisdom about how software companies get built and sold, was conducted inside a rounding error. We spent a generation optimising the funnel for a sliver.</p>
+            <p>The rest of the economy is outside. Often literally outside: crews in trucks, work performed in weather, machines operating in the physical world, businesses run by people who have never bought software with a credit card and have no intention of starting.</p>
+
+            <h2 class="art-h2">The founder who keeps going where the software isn&rsquo;t</h2>
+            <p>Samuel Adeyemo has now done this three times, in industries nobody in venture was looking at.</p>
+            <p>He started at JPMorgan, managing investments in the bank&rsquo;s Chief Investment Office. He left to co-found <em>Vituo Technologies</em>, a solar EPC installing commercial photovoltaic systems in emerging markets, a business whose successor continues in African renewables today. Then, as a graduate student at Stanford, he and Christopher Hopper spent seven months designing a single solar array and two weeks installing it. Seven months, because no tool existed; they cobbled it together from whatever was at hand.</p>
+            <p>That asymmetry became <em>Aurora Solar</em>, the design and sales platform the solar industry now runs on, with a performance simulation engine validated by the National Renewable Energy Laboratory, scaled to billions in value. He holds a BA in economics from Chicago, and both an MBA and an MSc in engineering from Stanford.</p>
+            <p>He is now doing it again with <em>Duranta</em>.</p>
+            <p>Look at the shape of that career: finance, to solar construction in emerging markets, to solar software, to the physical work of the real economy. There is no prestige gradient in it anywhere. Every move is <em>toward</em> the least-served work and away from wherever capital had already crowded. That is not a coincidence and it is not modesty. It is a repeatable method for finding markets where the first credible product wins by default.</p>
+
+            <h2 class="art-h2">Why the unglamorous market is now the good one</h2>
+            <p>Three things changed, and they changed at once.</p>
+            <p><strong>The buyer finally moved.</strong> For twenty years, software adoption in labour-heavy sectors stalled against simple arithmetic: a person was cheaper than a licence. AI broke that arithmetic. Systems that are always on, that handle the scheduling and the quoting and the follow-up and the exception cases, flipped the comparison in industries where it never previously penciled. Operators who would only ever have engaged a startup through an innovation programme are now buying with the main checkbook, because their competitors are compounding advantage and they can feel it.</p>
+            <p><strong>The cost of building collapsed.</strong> A vertical with tens of thousands of mid-sized businesses and no incumbent used to be uninvestable at seed, the engineering cost of serving it properly exceeded what the market would pay. That gap has narrowed to where a small team can serve it well.</p>
+            <p><strong>Nobody is competing for it.</strong> Capital in this cycle is flowing toward the substrate (models, compute, foundational infrastructure) where the cheques are enormous, the outcomes binary, and founder ownership gets ground down across a decade of milestone financings. Meanwhile the physical economy is still running on clipboards, group texts and consumer apps that were never built for a business.</p>
+
+            <h2 class="art-h2">The pattern we underwrite</h2>
+            <p>Duranta is not a story about any one vertical. It is the clearest illustration of what our thesis actually claims.</p>
+            <p>The claim is not that internationally formed or unconventional founders are inherently better people. It is that founders shaped outside the consensus environment are systematically pointed somewhere else, at work the people writing the market maps have never done and cannot see. Adeyemo built physical systems in hard markets before he built software for them. He knows what a crew&rsquo;s day looks like from the inside. That knowledge is not available at any price to a founder who assembled the idea from a consulting chart.</p>
+            <p>Half of one percent. Everything that matters is still outside.</p>
+        </div>
+        <p class="art-fine">Sunshine Lake is a pre-seed and seed fund backing forged founders rebuilding critical global systems. Duranta is a Fund I portfolio company. Software spend estimate per Gartner; world GDP per IMF.</p>
+        <nav class="art-nav">
+            <a class="primary" href="sessions.html">&larr; All Sessions</a>
+            <a href="sessions-fullseam.html">First: FullSeam &rarr;</a>
+        </nav>
+    </article>
+</body>
+</html>
