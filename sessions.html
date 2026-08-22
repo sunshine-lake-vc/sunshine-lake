@@ -355,6 +355,20 @@
             color: #fff;
             border-bottom-color: rgba(255, 255, 255, 0.5);
         }
+
+        /* Sessions index: 4-up card grid reusing the newsletter-card look. */
+        .sessions-grid { grid-template-columns: repeat(4, 1fr); }
+        .media-subhead {
+            font-size: clamp(11px, 0.9vw, 12.5px);
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin: clamp(28px, 3vw, 40px) 0 clamp(10px, 1.2vw, 16px);
+        }
+        .media-subhead:first-child { margin-top: 0; }
+        @media (max-width: 1000px) { .sessions-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .sessions-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -373,16 +387,51 @@
                  <div class="page-title-row"> and adding the ripple
                  markup beside it. -->
 
-            <p class="page-intro">Our monthly read on the founders, ideas, and inflections we're watching, plus interviews and pieces from across the broader Sunshine Lake universe.</p>
+            <p class="page-intro">Our read on the founders, ideas, and inflections we're watching, plus interviews and pieces from across the broader Sunshine Lake universe.</p>
         </header>
 
-        <!-- ════════ Monthly Newsletter ════════ -->
-        <section class="section" aria-label="Monthly Newsletter">
-            <h2 class="section-title">Monthly Newsletter</h2>
+        <!-- ════════ Sessions ════════ -->
+        <section class="section" aria-label="Sessions">
+            <h2 class="section-title">Sessions</h2>
+            <div class="newsletter-grid sessions-grid">
+                <a class="newsletter-card is-active" href="sessions-duranta.html">
+                    <span class="newsletter-card-issue">No. 04 &middot; The real economy</span>
+                    <h3 class="newsletter-card-title">Software Never Went Outside</h3>
+                    <p class="newsletter-card-summary">Software has touched about half a percent of the economy. Samuel Adeyemo keeps going where it hasn&rsquo;t.</p>
+                    <div class="newsletter-card-meta"><span>Duranta</span><span>Aug 22, 2026</span></div>
+                    <span class="newsletter-card-cta">Read &rarr;</span>
+                </a>
+                <a class="newsletter-card is-active" href="sessions-entire.html">
+                    <span class="newsletter-card-issue">No. 03 &middot; Enterprise rebuild</span>
+                    <h3 class="newsletter-card-title">Machines Are the Primary Producers Now</h3>
+                    <p class="newsletter-card-summary">Thomas Dohmke ran GitHub. Now he&rsquo;s building the system of record for the era where machines write the code.</p>
+                    <div class="newsletter-card-meta"><span>Entire</span><span>Aug 15, 2026</span></div>
+                    <span class="newsletter-card-cta">Read &rarr;</span>
+                </a>
+                <a class="newsletter-card is-active" href="sessions-argentic.html">
+                    <span class="newsletter-card-issue">No. 02 &middot; Applied AI</span>
+                    <h3 class="newsletter-card-title">He Built the Network. Now He&rsquo;s Going Back.</h3>
+                    <p class="newsletter-card-summary">Craig O&rsquo;Neill built the AR network. He&rsquo;s back for the exceptions software could route but never resolve.</p>
+                    <div class="newsletter-card-meta"><span>Argentic</span><span>Aug 8, 2026</span></div>
+                    <span class="newsletter-card-cta">Read &rarr;</span>
+                </a>
+                <a class="newsletter-card is-active" href="sessions-fullseam.html">
+                    <span class="newsletter-card-issue">No. 01 &middot; Applied AI</span>
+                    <h3 class="newsletter-card-title">The Software Kept the Records. It Never Did the Work.</h3>
+                    <p class="newsletter-card-summary">The back office is the first trillion dollars of expert work AI will actually do. Why we backed FullSeam.</p>
+                    <div class="newsletter-card-meta"><span>FullSeam</span><span>Aug 1, 2026</span></div>
+                    <span class="newsletter-card-cta">Read &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ════════ Newsletter ════════ -->
+        <section class="section" aria-label="Newsletter">
+            <h2 class="section-title">Get new Sessions by email</h2>
             <div class="newsletter-panel">
-                <p class="newsletter-panel-copy">Seed-stage signal, sector inflections, and the founders we&rsquo;re betting on next. In your inbox once a month.</p>
+                <p class="newsletter-panel-copy">Seed-stage signal, sector inflections, and the founders we&rsquo;re betting on next, straight to your inbox.</p>
                 <button class="newsletter-subscribe" type="button" disabled aria-disabled="true">Subscribe</button>
-                <p class="newsletter-panel-note">First issue this fall.</p>
+                <p class="newsletter-panel-note">We send these when we publish, not on a schedule.</p>
             </div>
         </section>
 
@@ -390,10 +439,11 @@
         <section class="section" aria-label="In the Media">
             <h2 class="section-title">In the Media</h2>
             <div class="media-list">
+                <p class="media-subhead">Recent</p>
                 <a class="media-item" href="https://www.jefferies.com/insights/leadership-spotlight/don-stalter-on-backing-founders-who-have-something-to-prove/" target="_blank" rel="noopener">
                     <div class="media-item-top">
                         <span class="media-outlet">Jefferies</span>
-                        <span>Leadership Spotlight</span>
+                        <span>Leadership Spotlight &middot; 2026</span>
                     </div>
                     <p class="media-title">Don Stalter on Backing Founders Who Have Something to Prove</p>
                     <span class="media-arrow" aria-hidden="true">&#8599;</span>
@@ -401,63 +451,24 @@
                 <a class="media-item" href="https://www.jefferies.com/insights/boardroom-intelligence/data-moats-infrastructure-and-agents-where-investors-see-ais-next-big-opportunities/" target="_blank" rel="noopener">
                     <div class="media-item-top">
                         <span class="media-outlet">Jefferies</span>
-                        <span>Article</span>
+                        <span>Article &middot; 2025</span>
                     </div>
                     <p class="media-title">Data Moats, Infrastructure and Agents: Where Investors See AI's Next Big Opportunities</p>
                     <span class="media-arrow" aria-hidden="true">&#8599;</span>
                 </a>
-                <a class="media-item" href="https://www.youtube.com/watch?v=cUryiZ6bafc" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">YouTube</span>
-                        <span>Interview</span>
-                    </div>
-                    <p class="media-title">Don Stalter &mdash; Interview</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="media-item" href="https://therideshareguy.com/rsg080-don-stalter-on-the-on-demand-economy-vs-the-sharing-economy/" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">RideShareGuy</span>
-                        <span>Podcast</span>
-                    </div>
-                    <p class="media-title">On Demand vs. the Sharing Economy</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="media-item" href="https://investorconnect.org/donald-stalter-of-global-founders-capital/" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">Investor Connect</span>
-                        <span>Podcast</span>
-                    </div>
-                    <p class="media-title">Donald Stalter of Global Founders Capital</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="media-item" href="https://open.spotify.com/episode/2yw5mquHWs5CwV75EyJPOA" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">Scaleup Valley</span>
-                        <span>Podcast</span>
-                    </div>
-                    <p class="media-title">Ep. 103 &mdash; Scaling Up With a Partner at Global Founders Capital</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="media-item" href="https://www.youtube.com/watch?v=L9tkkB4ng3w" target="_blank" rel="noopener">
-                    <div class="media-item-top">
-                        <span class="media-outlet">Cheddar Now</span>
-                        <span>Interview</span>
-                    </div>
-                    <p class="media-title">Investing Platform Robinhood Expected to Launch its Own IPO</p>
-                    <span class="media-arrow" aria-hidden="true">&#8599;</span>
-                </a>
+                <p class="media-subhead">Archive</p>
                 <a class="media-item" href="https://ventureunlocked.substack.com/p/global-founders-capitals-don-stalter" target="_blank" rel="noopener">
                     <div class="media-item-top">
                         <span class="media-outlet">Venture Unlocked</span>
-                        <span>Podcast</span>
+                        <span>Podcast &middot; 2021</span>
                     </div>
-                    <p class="media-title">Global Founders Capital's Don Stalter</p>
+                    <p class="media-title">Don Stalter on backing founders around the world</p>
                     <span class="media-arrow" aria-hidden="true">&#8599;</span>
                 </a>
                 <a class="media-item" href="https://open.spotify.com/episode/3UsHfInCci61rPbzb5KpLe" target="_blank" rel="noopener">
                     <div class="media-item-top">
                         <span class="media-outlet">Paradigm Shift</span>
-                        <span>Podcast</span>
+                        <span>Podcast &middot; 2022</span>
                     </div>
                     <p class="media-title">Opportunities in Marketplaces, Future of Work, and Fintech</p>
                     <span class="media-arrow" aria-hidden="true">&#8599;</span>
